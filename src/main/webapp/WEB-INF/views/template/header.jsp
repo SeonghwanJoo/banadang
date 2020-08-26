@@ -18,7 +18,7 @@
   <c:if test="${!empty user_id}">
    <a href="#myPage.do">마이페이지</a>
    <a href="#recruit.do">팀원 모집</a>
-   <a href="#logout.do">로그 아웃</a>
+   <a href="${pageContext.request.contextPath}/member/logout.do">로그 아웃</a>
   </c:if>
   <a href="javascript:void(0);" class="icon" onclick="openNav()">
     <i class="fa fa-bars"></i>
@@ -31,6 +31,8 @@
 
 </div>
 <script>
+var rest_api="0646bcb11e5b9bbdb24fc9153f7693ae";
+
 function openNav() {
   document.getElementById("myNav").style.width = "70%";
   document.body.style.backgroundColor = "rgba(0,0,0,0.4)";

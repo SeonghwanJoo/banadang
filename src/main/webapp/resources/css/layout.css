@@ -61,7 +61,7 @@
   display: none;
 }
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 990px) {
   .topnav a:not(:first-child) {display: none;}
   .topnav a.icon {
     float: left;
@@ -82,7 +82,7 @@
   background-color: rgb(0,0,0); /* Black fallback color */
   background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
   overflow-x: hidden; /* Disable horizontal scroll */
-  transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+  transition: 0.2s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
 }
 
 /* Position the content inside the overlay */
@@ -102,6 +102,7 @@
   color: #818181;
   display: block; /* Display block instead of inline */
   transition: 0.3s; /* Transition effects on hover (color) */
+  overflow: hidden;
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -127,6 +128,68 @@
   }
 }
 /* ((((((((((((((((((((((sidebar-end))))))))))))))))))*/
+/* ((((((((((((((((((((((carousel-start))))))))))))))))))*/
+ .carousel-inner{
+ 	height:400px;
+ }
+ .carousel-inner img {
+	width: 100%;
+	height:100%
+ }
+/* ((((((((((((((((((((((carousel-end))))))))))))))))))*/
+.login{
+	width:100%;
+	margin: 100px auto;
+	text-align: center;
+}
+.login_btn{
+	margin: 0 auto;
+}
+/* Style buttons */
+.btn_write {
+	background-color: #7cb342; /* Blue background */
+	border: none; /* Remove borders */
+	color: white; /* White text */
+	padding: 6px 8px; /* Some padding */
+	font-size: 16px; /* Set a font size */
+	cursor: pointer; /* Mouse pointer on hover */
+ 	margin: auto 10px;
+ 	float:right;
+}
 
+/* Darker background on mouse-over */
+.btn_write:hover {
+	background-color: #ccff90;
+}
+.title-btw{
+ 	margin: 10px 10px;
+	position: absolute;
+ 	font-size: 16px; /* Set a font size */
+}
+.match-head{
+	height:30px;
+	margin-bottom:15px;
+}
+.end{
+	clear:both;
+}
+.match-list{
+	list-style: none;
+	margin:0;
+	padding:0;
+}
+.match{
+	padding:0;
+}
 
+.vote_btn{
+	float:left;
+	width: 33%;
+	border: none;
+	background-color: #4CAF50;
+	padding: 14px 28px;
+	font-size: 16px;
+	cursor: pointer;
+	text-align: center;
+}
 
