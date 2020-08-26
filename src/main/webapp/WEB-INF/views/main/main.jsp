@@ -50,7 +50,7 @@
 <c:if test="${not empty user_id }">
 <div class="match-head">
 	<span class="title-btw">Coming matches</span>
-	<button class="btn_write">
+	<button class="btn_write" onclick="location.href='${pageContext.request.contextPath}/match/write.do'">
 		<span>매치 작성</span> <span class="material-icons">create</span>
 	</button>
 	<br class="end">

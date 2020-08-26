@@ -18,6 +18,7 @@
 	
 	<context:component-scan base-package="kr.spring.main.controller" />
 	<context:component-scan base-package="kr.spring.member.controller" />
+	<context:component-scan base-package="kr.spring.match.controller" />
 	
 	<!-- 메시지 처리 -->
 	<beans:bean id="messageSource"
@@ -34,6 +35,7 @@
 		<beans:property name="definitions">
 			<beans:list>
 				<beans:value>/WEB-INF/tiles-def/main.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/match.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>

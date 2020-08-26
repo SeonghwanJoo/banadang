@@ -10,6 +10,7 @@ public class MainController {
 	public ModelAndView process() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main");
+		mav.addObject("title", "BANADANG");
 		return mav; 
 	}
 }
