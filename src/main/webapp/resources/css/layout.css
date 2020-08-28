@@ -126,16 +126,22 @@
     top: 15px;
     right: 35px;
   }
+  body{
+  	overflow:hidden;
+  }
 }
 /* ((((((((((((((((((((((sidebar-end))))))))))))))))))*/
 /* ((((((((((((((((((((((carousel-start))))))))))))))))))*/
- .carousel-inner{
- 	height:400px;
- }
- .carousel-inner img {
-	width: 100%;
-	height:100%
- }
+  /* Make the image fully responsive */
+  .carousel-inner img {
+    width: 100%;
+    height: 400px;
+  }
+  .carousel-indicators{
+  	position: relative;
+    top: 370px;
+	display: hidden;
+  }
 /* ((((((((((((((((((((((carousel-end))))))))))))))))))*/
 .login{
 	width:100%;
@@ -154,6 +160,7 @@
 	font-size: 16px; /* Set a font size */
 	cursor: pointer; /* Mouse pointer on hover */
  	margin: auto 10px;
+ 	border-radius:5%;
  	float:right;
 }
 
@@ -192,4 +199,89 @@
 	cursor: pointer;
 	text-align: center;
 }
+.btn-group{
+	margin:2px auto;
+}
+/*(((((autocomplete))))))))*/
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 68%;
+  left: -2%;
+  right: 0;
+  width: 88%;
+  margin: 0px auto;
+}
 
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+  background-color: #e9e9e9; 
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+/*form*/
+* {box-sizing: border-box;}
+
+/* Style the input container */
+.input-container {
+  display: flex;
+  width: 90%;
+  margin: 5px auto;
+  text-align: center;
+}
+.input-container1 {
+  display: flex;
+  width: 90%;
+  margin: 5px auto;
+  text-align: center;
+}
+
+/* Style the form icons */
+.icon {
+  padding: 10px;
+  background: dodgerblue;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
+
+/* Style the input fields */
+.input-field {
+  width: 90%;
+  padding: 10px;
+  outline: none;
+}
+
+.input-field:focus {
+  border: 2px solid dodgerblue;
+}
+
+/* Set a style for the submit button */
+.btn {
+  background-color: dodgerblue;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btn:hover {
+  opacity: 1;
+}

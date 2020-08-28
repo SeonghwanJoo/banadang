@@ -32,17 +32,15 @@
 
 </div>
 <script>
-var rest_api="0646bcb11e5b9bbdb24fc9153f7693ae";
-
-function openNav() {
-  document.getElementById("myNav").style.width = "70%";
-  document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-}
-
-function closeNav() {
-  document.getElementById("myNav").style.width = "0%";
-  document.body.style.backgroundColor = "white";
-}
+	function openNav() {
+	  document.getElementById("myNav").style.width = "70%";
+	  document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+	}
+	
+	function closeNav() {
+	  document.getElementById("myNav").style.width = "0%";
+	  document.body.style.backgroundColor = "white";
+	}
 </script>
 
 
