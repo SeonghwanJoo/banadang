@@ -1,154 +1,148 @@
-
 /* Add a black background color to the top navigation */
 .topnav {
-  position: relative;
-  overflow: hidden;
+	position: relative;
+	overflow: hidden;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
-  float: left;
-  color: #689f38 ;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+	float: left;
+	color: #689f38;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
 }
 
 /* Change the color of links on hover */
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+	background-color: #ddd;
+	color: black;
 }
 
 /* Add a color to the active/current link */
 .topnav a.active {
-	color: #689f38 ;	
+	color: #689f38;
 }
 
 /* Centered section inside the top navigation */
 .topnav-centered a {
-  float: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Russo One', sans-serif;
-  font-size:20px;
+	float: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-family: 'Russo One', sans-serif;
+	font-size: 20px;
 }
 
 /* Right-aligned section inside the top navigation */
 .topnav-right {
-  float: right;
+	float: right;
 }
 
-/* Responsive navigation menu - display links on top of each other instead of next to each other (for mobile devices) */
-/*@media screen and (max-width: 600px) {
-  .topnav a, .topnav-right {
-    float: none;
-    display: block;
-  }
 
-  .topnav-centered a {
-    position: relative;
-    top: 0;
-    left: 0;
-    transform: none;
-  }
-}*/
 /* Hide the link that should open and close the topnav on small screens */
-.topnav .icon{
-  display: none;
+.topnav .icon {
+	display: none;
 }
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
 @media screen and (max-width: 990px) {
-  .topnav a:not(:first-child) {display: none;}
-  .topnav a.icon {
-    float: left;
-    display: block;
-    font-size: 30px;
-  }
+	.topnav a.icon {
+		float: left;
+		display: block;
+		font-size: 30px;
+	}
+	.topnav .headerLink {
+		display: none;
+	}
 }
 /* ((((((((((((((((((((((sidebar-start))))))))))))))))))*/
 /* The Overlay (background) */
 .overlay {
-  /* Height & width depends on how you want to reveal the overlay (see JS below) */   
-  height: 100%;
-  width: 0;
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  background-color: rgb(0,0,0); /* Black fallback color */
-  background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
-  overflow-x: hidden; /* Disable horizontal scroll */
-  transition: 0.2s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+	/* Height & width depends on how you want to reveal the overlay (see JS below) */
+	height: 100%;
+	width: 0;
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	background-color: rgb(0, 0, 0); /* Black fallback color */
+	background-color: rgba(0, 0, 0, 0.9); /* Black w/opacity */
+	overflow-x: hidden; /* Disable horizontal scroll */
+	transition: 0.2s;
+	/* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
 }
 
 /* Position the content inside the overlay */
 .overlay-content {
-  position: relative;
-  top: 25%; /* 25% from the top */
-  width: 100%; /* 100% width */
-  text-align: center; /* Centered text/links */
-  margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+	position: relative;
+	top: 25%; /* 25% from the top */
+	width: 100%; /* 100% width */
+	text-align: center; /* Centered text/links */
+	margin-top: 30px;
+	/* 30px top margin to avoid conflict with the close button on smaller screens */
 }
 
 /* The navigation links inside the overlay */
 .overlay a {
-  padding: 8px;
-  text-decoration: none;
-  font-size: 36px;
-  color: #818181;
-  display: block; /* Display block instead of inline */
-  transition: 0.3s; /* Transition effects on hover (color) */
-  overflow: hidden;
+	padding: 8px;
+	text-decoration: none;
+	font-size: 36px;
+	color: #818181;
+	display: block; /* Display block instead of inline */
+	transition: 0.3s; /* Transition effects on hover (color) */
+	overflow: hidden;
 }
 
 /* When you mouse over the navigation links, change their color */
 .overlay a:hover, .overlay a:focus {
-  color: #f1f1f1;
+	color: #f1f1f1;
 }
 
 /* Position the close button (top right corner) */
 .overlay .closebtn {
-  position: absolute;
-  top: 20px;
-  right: 45px;
-  font-size: 60px;
+	position: absolute;
+	top: 20px;
+	right: 45px;
+	font-size: 60px;
 }
 
 /* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
 @media screen and (max-height: 450px) {
-  .overlay a {font-size: 20px}
-  .overlay .closebtn {
-    font-size: 40px;
-    top: 15px;
-    right: 35px;
-  }
-  body{
-  	overflow:hidden;
-  }
+	.overlay a {
+		font-size: 20px
+	}
+	.overlay .closebtn {
+		font-size: 40px;
+		top: 15px;
+		right: 35px;
+	}
+	body {
+		overflow: hidden;
+	}
 }
 /* ((((((((((((((((((((((sidebar-end))))))))))))))))))*/
 /* ((((((((((((((((((((((carousel-start))))))))))))))))))*/
-  /* Make the image fully responsive */
-  .carousel-inner img {
-    width: 100%;
-    height: 400px;
-  }
-  .carousel-indicators{
-  	position: relative;
-    top: 370px;
+/* Make the image fully responsive */
+.carousel-inner img {
+	width: 100%;
+	height: 400px;
+}
+
+.carousel-indicators {
+	position: relative;
+	top: 370px;
 	display: hidden;
-  }
+}
 /* ((((((((((((((((((((((carousel-end))))))))))))))))))*/
-.login{
-	width:100%;
+.login {
+	width: 100%;
 	margin: 100px auto;
 	text-align: center;
 }
-.login_btn{
+
+.login_btn {
 	margin: 0 auto;
 }
 /* Style buttons */
@@ -159,38 +153,43 @@
 	padding: 6px 8px; /* Some padding */
 	font-size: 16px; /* Set a font size */
 	cursor: pointer; /* Mouse pointer on hover */
- 	margin: auto 10px;
- 	border-radius:5%;
- 	float:right;
+	margin: auto 10px;
+	border-radius: 5%;
+	float: right;
 }
 
 /* Darker background on mouse-over */
 .btn_write:hover {
 	background-color: #ccff90;
 }
-.title-btw{
- 	margin: 10px 10px;
+
+.title-btw {
+	margin: 10px 10px;
 	position: absolute;
- 	font-size: 16px; /* Set a font size */
-}
-.match-head{
-	height:30px;
-	margin-bottom:15px;
-}
-.end{
-	clear:both;
-}
-.match-list{
-	list-style: none;
-	margin:0;
-	padding:0;
-}
-.match{
-	padding:0;
+	font-size: 16px; /* Set a font size */
 }
 
-.vote_btn{
-	float:left;
+.match-head {
+	height: 30px;
+	margin-bottom: 15px;
+}
+
+.end {
+	clear: both;
+}
+
+.match-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.match {
+	padding: 0;
+}
+
+.vote_btn {
+	float: left;
 	width: 33%;
 	border: none;
 	background-color: #4CAF50;
@@ -199,43 +198,46 @@
 	cursor: pointer;
 	text-align: center;
 }
-.btn-group{
-	margin:2px auto;
+
+.btn-group {
+	margin: 2px auto;
 }
 /*(((((autocomplete))))))))*/
 .autocomplete-items {
-  position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
-  z-index: 99;
-  /*position the autocomplete items to be the same width as the container:*/
-  top: 68%;
-  left: -2%;
-  right: 0;
-  width: 88%;
-  margin: 0px auto;
+	position: absolute;
+	border: 1px solid #d4d4d4;
+	border-bottom: none;
+	border-top: none;
+	z-index: 99;
+	/*position the autocomplete items to be the same width as the container:*/
+	top: 68%;
+	left: -2%;
+	right: 0;
+	width: 88%;
+	margin: 0px auto;
 }
 
 .autocomplete-items div {
-  padding: 10px;
-  cursor: pointer;
-  background-color: #fff; 
-  border-bottom: 1px solid #d4d4d4; 
+	padding: 10px;
+	cursor: pointer;
+	background-color: #fff;
+	border-bottom: 1px solid #d4d4d4;
 }
 
 /*when hovering an item:*/
 .autocomplete-items div:hover {
-  background-color: #e9e9e9; 
+	background-color: #e9e9e9;
 }
 
 /*when navigating through the items using the arrow keys:*/
 .autocomplete-active {
-  background-color: DodgerBlue !important; 
-  color: #ffffff; 
+	background-color: DodgerBlue !important;
+	color: #ffffff;
 }
 /*form*/
-* {box-sizing: border-box;}
+* {
+	box-sizing: border-box;
+}
 
 /* Style the input container */
 .input-container {
@@ -247,34 +249,92 @@
 
 /* Style the form icons */
 .icon {
-  padding: 10px;
-  background: dodgerblue;
-  color: white;
-  min-width: 50px;
-  text-align: center;
+	padding: 10px;
+	background: dodgerblue;
+	color: white;
+	min-width: 50px;
+	text-align: center;
 }
 
 /* Style the input fields */
 .input-field {
-  width: 100%;
-  padding: 10px;
+	width: 100%;
+	padding: 10px;
 }
 
 .input-field:focus {
-  border: 2px solid dodgerblue;
+	border: 2px solid dodgerblue;
 }
 
 /* Set a style for the submit button */
 .btn {
-  background-color: dodgerblue;
-  color: white;
-  padding: 15px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
+	background-color: dodgerblue;
+	color: white;
+	padding: 15px 20px;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	opacity: 0.9;
 }
 
 .btn:hover {
-  opacity: 1;
+	opacity: 1;
+}
+/* modal */
+/* The Modal (background) */
+.modals {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 50px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modals-content {
+	background-color: #fefefe;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+}
+
+/* The Close Button */
+.close {
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.modals-content input[type="text"] {
+	padding: 10px;
+	font-size: 17px;
+	border: 1px solid grey;
+	float: left;
+	width: 80%;
+	background: #f1f1f1;
+}
+.modals-content button {
+	float: left;
+	width: 20%;
+	padding: 10px;
+	background: #2196F3;
+	color: white;
+	font-size: 17px;
+	border: 1px solid grey;
+	border-left: none; /* Prevent double borders */
+	cursor: pointer;
 }

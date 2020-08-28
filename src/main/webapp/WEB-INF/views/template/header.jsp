@@ -13,8 +13,8 @@
   <!-- Use any element to open/show the overlay navigation menu -->
   <!-- <span style="color:#689f38; font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span> -->
   <c:if test="${empty user_id }">
-  <a href="#login.do">회원가입</a>
-  <a href="#login.do">로그인</a>
+  <a class="headerLink" href="#login.do">회원가입</a>
+  <a class="headerLink" href="#login.do">로그인</a>
   </c:if>
   <c:if test="${!empty user_id}">
    <a href="#myPage.do">마이페이지</a>
