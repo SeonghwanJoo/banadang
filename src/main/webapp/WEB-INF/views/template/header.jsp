@@ -17,9 +17,9 @@
   <a class="headerLink" href="#login.do">로그인</a>
   </c:if>
   <c:if test="${!empty user_id}">
-   <a href="#myPage.do">마이페이지</a>
-   <a href="#recruit.do">팀원 모집</a>
-   <a href="${pageContext.request.contextPath}/member/logout.do">로그 아웃</a>
+   <a class="headerLink" href="#myPage.do">마이페이지</a>
+   <a class="headerLink" href="#recruit.do">팀원 모집</a>
+   <a class="headerLink" href="${pageContext.request.contextPath}/member/logout.do">로그 아웃</a>
   </c:if>
   <a href="javascript:void(0);" class="icon" onclick="openNav()">
     <i class="fa fa-bars"></i>
