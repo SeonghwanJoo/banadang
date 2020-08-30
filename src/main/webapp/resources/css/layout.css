@@ -1,3 +1,4 @@
+
 /* Add a black background color to the top navigation */
 .topnav {
 	position: relative;
@@ -52,6 +53,7 @@
 		float: left;
 		display: block;
 		font-size: 30px;
+		background:none;
 	}
 	.topnav .headerLink {
 		display: none;
@@ -147,11 +149,11 @@
 }
 /* Style buttons */
 .btn_write {
-	background-color: #7cb342; /* Blue background */
+	background-color: white; /* Blue background */
 	border: none; /* Remove borders */
-	color: white; /* White text */
+	color: bfbfbf; /* bfbfbf text */
 	padding: 6px 8px; /* Some padding */
-	font-size: 16px; /* Set a font size */
+	font-size: 1rem; /* Set a font size */
 	cursor: pointer; /* Mouse pointer on hover */
 	margin: auto 10px;
 	border-radius: 5%;
@@ -166,7 +168,7 @@
 .title-btw {
 	margin: 10px 10px;
 	position: absolute;
-	font-size: 16px; /* Set a font size */
+	font-size: 1rem; /* Set a font size */
 }
 
 .match-head {
@@ -193,9 +195,9 @@
 	float: left;
 	width: 33%;
 	border: none;
-	background-color: #4CAF50;
+	background-color: white;
 	padding: 14px 28px;
-	font-size: 16px;
+	font-size: 1rem;
 	cursor: pointer;
 	text-align: center;
 }
@@ -203,6 +205,17 @@
 .btn-group {
 	margin: 2px auto;
 }
+.radio{
+	background-color: #f1f8e9 !important;
+	color: #948B82 !important;
+	border: none !important;
+}
+.radio.focus, .radio:focus,.radio.active{
+	background-color: #aed581 !important;
+	color:#343a40 !important;
+	box-shadow:1px 1px transparent!important;
+}
+
 /*(((((autocomplete))))))))*/
 .autocomplete-items {
 	position: absolute;
@@ -251,26 +264,30 @@
 /* Style the form icons */
 .icon {
 	padding: 10px;
-	background: dodgerblue;
-	color: white;
+	background: white;
+	color: bfbfbf;
 	min-width: 50px;
 	text-align: center;
 }
 
 /* Style the input fields */
 .input-field {
+	border:none;
+	background-color:white;
 	width: 100%;
 	padding: 10px;
 }
 
-.input-field:focus {
-	border: 2px solid dodgerblue;
+
+.time{
+	color: #948B82;
 }
+
 
 /* Set a style for the submit button */
 .btn {
-	background-color: dodgerblue;
-	color: white;
+	background-color: #fafafa;
+	color: bfbfbf;
 	padding: 15px 20px;
 	border: none;
 	cursor: pointer;
@@ -280,6 +297,16 @@
 
 .btn:hover {
 	opacity: 1;
+}
+#match_detail{
+	height:150px;
+	resize:none;
+}
+#match_detail:focus{
+	outline:none;
+}
+input[type=text]:focus{
+	outline: none;
 }
 /* modal */
 /* The Modal (background) */
@@ -323,23 +350,24 @@
 .modals-content input[type="text"] {
 	padding: 10px;
 	font-size: 17px;
-	border: 1px solid grey;
+	border: none;
 	float: left;
 	width: 80%;
+	border: 1px solid grey;
 	background: #f1f1f1;
 }
 .modals-content button {
 	float: left;
 	width: 20%;
 	padding: 10px;
-	background: #2196F3;
-	color: white;
-	font-size: 17px;
+	background: white;
+	color: bfbfbf;
+	font-size: 1rem;
 	border: 1px solid grey;
 	border-left: none; /* Prevent double borders */
 	cursor: pointer;
 }
-#search{
+#search_modal{
 	padding-right:0px;
 	padding-left:0px;
 }
@@ -348,7 +376,7 @@
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 .map_wrap {position:relative;width:100%;height:500px;}
 #menu_wrap {margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);font-size:12px;border-radius: 10px;}
-.bg_white {background:#fff;}
+.bg_bfbfbf {background:#fff;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
 #menu_wrap .option{text-align: center;}
 #menu_wrap .option p {margin:10px 0;}  
