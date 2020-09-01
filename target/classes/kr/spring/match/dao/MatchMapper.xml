@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper  namespace="kr.spring.match.dao.MatchMapper">
+	<insert id="insertMatch" parameterType="matchVO">
+		insert into match
+			(match_num,id,type,home,away,address,match_date,start_time,end_time,match_detail)
+		values
+			(match_seq.nextval,#{id},#{type},#{home},#{away},#{address},#{match_date},#{start_time},#{end_time},
+		<if test="match_detail != ''">
+			#{match_detail})
+		</if>
+		<if test="match_detail == ''">
+			'')
+		</if>
+		
+	</insert>
+</mapper>
