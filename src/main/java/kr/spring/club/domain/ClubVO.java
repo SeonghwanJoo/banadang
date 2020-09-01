@@ -1,5 +1,7 @@
 package kr.spring.club.domain;
 
+import java.util.Arrays;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class ClubVO {
@@ -53,5 +55,11 @@ public class ClubVO {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
+	@Override
+	public String toString() {
+		return "ClubVO [club_num=" + club_num + ", id=" + id + ", club_loc=" + club_loc + ", club_name=" + club_name
+				+ ", club_detail=" + club_detail + ", upload=" + upload + ", image=" + Arrays.toString(image) + "]";
+	}
+	
 	
 }

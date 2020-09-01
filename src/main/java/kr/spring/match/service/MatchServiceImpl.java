@@ -1,5 +1,7 @@
 package kr.spring.match.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -19,6 +21,13 @@ public class MatchServiceImpl implements MatchService {
 		
 		matchMapper.insertMatch(matchVO);
 		
+	}
+
+
+	@Override
+	public List<MatchVO> selectMyMatch(String club_num) {
+		
+		return matchMapper.selectMyMatch(club_num);
 	}
 
 }

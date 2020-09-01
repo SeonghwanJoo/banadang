@@ -59,32 +59,59 @@
 <c:if test="${not empty match_list }">
 <c:forEach var="match" items="${match_list}">
 	<ul class="match-list">
-		<li class="match">${match.start_time }~${match.end_time }
-			${match.address} ${match.type}<br> ${match.home_name }(${match.home_perform}/${match.home_manner})
-			vs. ${match.away_name }(${match.away_perform}/${match.away_manner})
-			참석 <span class="vote-rating">
-				<span style="width:${home_attend}/${home_voted}%"></span>
-			</span><br>
-			불참 <span class="vote-rating">
-				<span style="width:${home_absent}/${home_voted}%"></span>
-			</span><br>
-			미정 <span class="vote-rating">
-				<span style="width:${home_undefined}/${home_undefined}%"></span>
-			</span><br>
-			<div class="row">
-				<div class="btn-group btn-group-toggle col-sm-12"
-					data-toggle="buttons">
-					<label class="btn btn-light active"> <input type="radio"
-						name="vote" id="attend" value="1"> 참석
-					</label> <label class="btn btn-light"> <input type="radio"
-						name="vote" id="absent" value="2"> 불참
-					</label> <label class="btn btn-light"> <input type="radio"
-						name="vote" id="undefined" value="3"> 미정
-					</label>
-				</div>
-			</div>
-		</li>
-	</ul>
+				<li class="match">
+					<div class="match-info">
+						<span class="match-item">${match.match_date}</span>
+						<span class="match-item">${match.start_time }~${match.end_time }</span>
+						<span class="match-item">${match.address}</span>
+						<span class="match-item">
+							<c:if test="${match.type==1 }">축구</c:if>
+							<c:if test="${match.type==2 }">풋살</c:if>
+						</span>
+					</div>
+					<div class="match-info">
+						<span class="match-item">
+							
+						</span>
+					</div>
+					<div class="row">
+						<span class="vote-rating">
+							<span class="voted" style="width:<%-- ${home_attend}/${home_voted}--%>50%">
+								<span class="vote-label">참석</span>
+							</span>
+							<span class="person material-icons">person</span>
+						</span>
+					</div>
+					<div class="row">
+						<span class="vote-rating">
+							<span class="voted" style="width:<%-- ${home_absent}/${home_voted}--%>30%">
+								<span class="vote-label">불참</span>
+							</span>
+							<span class="person material-icons">person</span>
+						</span>
+					</div>
+					<div class="row">
+						<span class="vote-rating">
+							<span class="voted" style="width:<%-- ${home_undefined}/${home_undefined}--%>20%">
+								<span class="vote-label">미정</span> 
+							</span>
+							<span class="person material-icons">person</span>
+						</span>
+					</div>
+					<div class="row">
+						<div class="btn-group btn-group-toggle col-sm-12"
+							data-toggle="buttons">
+							<label class="radio btn"> <input class="radio"
+								type="radio" name="vote" id="attend" value="1"> 참석
+							</label> <label class="radio btn"> <input type="radio"
+								name="vote" id="absent" value="2"> 불참
+							</label> <label class="radio btn"> <input type="radio"
+								name="vote" id="undefined" value="3"> 미정
+							</label>
+						</div>
+					</div>
+				</li>
+			</ul>
 </c:forEach>
 </c:if>
 </c:if>

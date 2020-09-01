@@ -2,13 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div class="row">
 	<form:form class="col s12" action="write.do" commandName="matchVO" autocomplete="off">
 		<input type="hidden" name="id" value="${user_id }">
 		<div class="row" id="top_wrap">
 			<div class="fixed_top">
-				<span class="material-icons" id="cancel" onclick="goBack()">close</span>
+				<a href="#" onclick="history.go(-1); return false;">
+				<span class="material-icons" id="cancel" onclick="goBack();">close</span>
+				</a>
 				<div class="topnav-centered">
 					<a href="#home" class="active">${title }</a>
 				</div>
@@ -34,16 +37,24 @@
 			</div>
 		</div>
 		<hr>
-		<%--<c:if test="${empty myTeam.length>1 }"> 소속팀이 2개 이상일때 홈팀 선택 옵션 추가 
+		<c:if test="${fn:length(myTeam)>1}">
 		<div class="row">
 			<div class="input-container col">
-				<i class="fa fa-users icon"></i> <input class="input-field"
-					type="text" placeholder="우리팀명 선택" name="away" id="away">
+				<i class="fa fa-users icon"></i> <select class="time input-field" name="home">
+					<option value="">우리팀 선택</option>
+					<c:forEach items="${myTeam }" var="myTeam">
+					<option value="${myTeam.club_num}">${myTeam.club_name }</option>
+					</c:forEach>
+				</select>
 			</div>
-		</div>	
-		</c:if>--%>
-		<%-- 옵션으로 마이팀 선택 --%>
-		<input type="hidden" name="home" value="${myTeam }">
+		</div>
+		<hr>
+		</c:if>
+		<c:if test="${fn:length(myTeam)==1}">
+		<c:forEach items="${myTeam }" var="myTeam">
+		<input type="hidden" name="home" value="${myTeam.club_num}">
+		</c:forEach>
+		</c:if>
 		<input type="hidden" name="away" id="away">
 		<div class="row">
 			<div class="autocomplete input-container col">
@@ -69,7 +80,7 @@
 		<div class="row">
 			<div class="input-container col">
 				<i class="far fa-clock icon"></i> <select class="time input-field" name="start_time">
-					<option value="">경기 시작 시간 선택</option>
+					<option value="">시작 시간 선택</option>
 					<option value="06:00">06:00</option>
 					<option value="06:30">06:30</option>
 					<option value="07:00">07:00</option>
@@ -224,7 +235,7 @@ $( function() {
 	});
 	
 	function goBack(){
-		window.history.go(-1);
+		history.go(-1);
 	}
 
 	search_btn.onclick=function(){
@@ -516,7 +527,7 @@ $( function() {
 		});
 
 		/*datepicker-end*/
-		function autocomplete(inp, arr,clubs_num) {
+		function autocomplete(inp, arr,clubs_num,clubs_loc) {
 			/*the autocomplete function takes two arguments,
 			the text field element and an array of possible autocompleted values:*/
 			var currentFocus;
@@ -569,6 +580,7 @@ $( function() {
 												.toUpperCase().indexOf(
 														val.toUpperCase())
 												+ val.length);
+										b.innerHTML += "<span class='club_loc'>"+clubs_loc[i]+"</span>"
 										/*insert a input field that will hold the current array item's value:*/
 										b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
 										b.innerHTML += "<input type='hidden' value='" + clubs_num[i] + "'>";
@@ -658,14 +670,17 @@ $( function() {
 		/*An array containing all the country names in the world:*/
 		let clubs_name = new Array();
 		let clubs_num = new Array();
+		let clubs_loc = new Array();
 		<c:forEach items="${list}" var="clubs">
 			clubs_name.push("${clubs.club_name}");
 			clubs_num.push("${clubs.club_num}");
+			clubs_loc.push("${clubs.club_loc}");
 		</c:forEach>
 		console.log(clubs_name);
 		console.log(clubs_num);
+		console.log(clubs_loc);
 
 		/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocompleawayalues:*/
-		autocomplete(document.getElementById("away_name"), clubs_name,clubs_num);
+		autocomplete(document.getElementById("away_name"), clubs_name,clubs_num,clubs_loc);
 	});
 </script>

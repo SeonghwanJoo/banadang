@@ -27,4 +27,10 @@ public class ClubServiceImpl implements ClubService {
 		return clubMapper.selectAllClubs();
 	}
 
+	@Override
+	public List<String> selectMyClubs_num(String id) {
+		
+		return clubMapper.selectMyClubs_num(id);
+	}
+
 }

@@ -217,18 +217,39 @@
 }
 
 .match {
-	padding: 0;
+	padding: 0 auto;
+}
+.match-info{
+	margin: 0 auto;
+	width:99%;
+}
+.match-item{
+	margin-right:30px;
 }
 
-.vote_btn {
-	float: left;
-	width: 33%;
-	border: none;
-	background-color: white;
-	padding: 14px 28px;
-	font-size: 1rem;
-	cursor: pointer;
-	text-align: center;
+.vote-rating { width:96%;
+margin:5px auto; }
+.vote-rating, .voted{
+	display:inline-block; 
+	height:35px;
+	overflow:hidden; 
+	background-color:#f2f2f2;
+	vertical-align: middle;
+}
+.vote-rating .voted {
+	background-color:#aed581;
+}
+.vote-label{
+	padding:5px;
+	margin-right:10px;
+	display:inline-block;
+}
+.vote-rating .person{
+	float:right;
+	padding:5px;
+	color:#bfbfbf;
+	display:inline-block;
+	font-size:25px;
 }
 
 .btn-group {
@@ -266,6 +287,10 @@
 	background-color: #fff;
 	border-bottom: 1px solid #d4d4d4;
 }
+.club_loc{
+	padding-left: 30px;
+	font-size: 14px;
+}
 
 /*when hovering an item:*/
 .autocomplete-items div:hover {
@@ -294,7 +319,7 @@
 .icon {
 	padding: 10px;
 	background: white;
-	color: bfbfbf;
+	color: #bfbfbf;
 	min-width: 50px;
 	text-align: center;
 }
@@ -334,7 +359,7 @@
 #match_detail:focus{
 	outline:none;
 }
-input[type=text]:focus{
+input[type=text]:focus, select:focus{
 	outline: none;
 }
 /* modal */
@@ -465,6 +490,9 @@ input[type=text]:focus{
 #cancel{
 	float:left;
 	margin:2px;
+}
+#top_wrap .fixed_top a{
+	color: #000000;
 }
 #submit{
 	float:right !important;
