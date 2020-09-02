@@ -66,6 +66,30 @@ public class MatchVO {
 	public void setMatch_detail(String match_detail) {
 		this.match_detail = match_detail;
 	}
+	public String getVote_num() {
+		return vote_num;
+	}
+	public void setVote_num(String vote_num) {
+		this.vote_num = vote_num;
+	}
+	public String getClub_num() {
+		return club_num;
+	}
+	public void setClub_num(String club_num) {
+		this.club_num = club_num;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	private int match_num;
 	private String id;
 	private int type;
@@ -76,11 +100,21 @@ public class MatchVO {
 	private String start_time;
 	private String end_time;
 	private String match_detail;
+	private String vote_num;
+	private String club_num;
+	private int status;
+	private int count;
+
 	@Override
 	public String toString() {
 		return "MatchVO [match_num=" + match_num + ", id=" + id + ", type=" + type + ", home=" + home + ", away=" + away
 				+ ", address=" + address + ", match_date=" + match_date + ", start_time=" + start_time + ", end_time="
-				+ end_time + ", match_detail=" + match_detail + "]";
+				+ end_time + ", match_detail=" + match_detail + ", vote_num=" + vote_num + ", club_num=" + club_num
+				+ ", status=" + status + "]";
 	}
+
+
+	
+	
 	
 }

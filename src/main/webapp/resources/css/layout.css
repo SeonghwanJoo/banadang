@@ -223,8 +223,9 @@
 	margin: 0 auto;
 	width:99%;
 }
-.match-item{
-	margin-right:30px;
+.team-info{
+	padding: 0 auto;
+	text-align: center;
 }
 
 .vote-rating { width:96%;
@@ -237,7 +238,7 @@ margin:5px auto; }
 	vertical-align: middle;
 }
 .vote-rating .voted {
-	background-color:#aed581;
+	background-color:#bfbfbf;
 }
 .vote-label{
 	padding:5px;
@@ -250,6 +251,14 @@ margin:5px auto; }
 	color:#bfbfbf;
 	display:inline-block;
 	font-size:25px;
+}
+.vote_num{
+	float:right;
+	display:inline-block;
+	padding:5px;
+	margin-right:5px;
+	color:#7f7f7f;
+	font-size:inherit;
 }
 
 .btn-group {
@@ -465,9 +474,11 @@ input[type=text]:focus, select:focus{
   display: block;
   width:100%;
   border: 1px solid #d4d4d4;
-  padding: 14px 28px;
+  margin-top:5px;
+  padding: 4px 28px;
   font-size: 16px;
   cursor: pointer;
+  background-color:#FFFFFF;
   text-align: center;
 }
 .from-to{
@@ -513,6 +524,10 @@ input[type=text]:focus, select:focus{
     overflow: hidden; 
     border-style: inset;
     border-width: 1px;	
+}
+#btn-group{
+	padding-right: 0px;
+	padding-left: 0px;
 }
 
 

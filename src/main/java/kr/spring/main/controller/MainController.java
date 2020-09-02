@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.club.service.ClubService;
@@ -50,5 +51,15 @@ public class MainController {
 		
 		
 		return mav; 
+	}
+	@RequestMapping("/main/voteForm.do")
+	public ModelAndView vote(@RequestParam int match_num ) {
+		
+		ModelAndView mav = new ModelAndView();
+		MatchVO match=matchService.selectMatchByMatch_num(match_num);
+		mav.setViewName("vote");
+		mav.addObject("match",match);
+		mav.addObject("title","경기 투표");
+		return mav;
 	}
 }

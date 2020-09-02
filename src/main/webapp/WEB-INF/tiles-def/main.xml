@@ -11,6 +11,12 @@
        <put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
        <put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
     </definition>
+    <definition name="vote" extends="main">
+       <put-attribute name="title" value="매치 투표"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/main/vote.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
 </tiles-definitions>
 
 

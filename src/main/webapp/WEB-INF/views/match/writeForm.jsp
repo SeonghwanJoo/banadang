@@ -193,8 +193,9 @@
 			</div>
 		</div>
 		<hr>
-
 	</form:form>
+</div>
+
 <!-- The Modal -->
 <div id="myModals" class="modals">
  <!-- Modal content -->
@@ -213,7 +214,7 @@
 </div>
 
 </div>
-</div>
+
 
 
 

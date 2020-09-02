@@ -50,71 +50,87 @@
 </div>
 <c:if test="${not empty user_id }">
 <div class="match-head">
-		<span class="title-btw">Coming matches</span>
+		<span class="title-btw">경기 일정</span>
 		<button class="btn_write" onclick="location.href='${pageContext.request.contextPath}/match/writeForm.do'">
 			<span>매치 작성</span> <span class="material-icons">create</span>
 		</button>
-		<br class="end">
 </div>
+<hr>
 <c:if test="${not empty match_list }">
 <c:forEach var="match" items="${match_list}">
 	<ul class="match-list">
-				<li class="match">
-					<div class="match-info">
-						<span class="match-item">${match.match_date}</span>
-						<span class="match-item">${match.start_time }~${match.end_time }</span>
-						<span class="match-item">${match.address}</span>
-						<span class="match-item">
-							<c:if test="${match.type==1 }">축구</c:if>
-							<c:if test="${match.type==2 }">풋살</c:if>
+		<li class="match">
+			<div class="match-info">
+				<span class="match-item">${match.match_date}</span>
+				<span class="match-item">${match.start_time }~${match.end_time }</span>
+				<span class="match-item">${match.address}</span>
+				<span class="match-item">
+					<c:if test="${match.type==1 }">축구</c:if>
+					<c:if test="${match.type==2 }">풋살</c:if>
+				</span>
+			</div>
+			<hr>
+			<div class="match-info">
+				<div class="row">
+					<div class="team-info col">
+						중마 FC<br>
+						매너:2.5
+						<span class="star-wrap">
+						<span class="star-rating">
+							<span style="width:50%"></span>
+						</span>
+						</span><br>
+						실력:2.5
+						<span class="star-rating">
+							<span style="width:50%"></span>
 						</span>
 					</div>
-					<div class="match-info">
-						<span class="match-item">
-							
+					<span class="from-to">VS</span>
+					<div class="team-info col">
+						중마 FC<br>매너:2.5
+						<span class="star-wrap">
+						<span class="star-rating">
+							<span style="width:50%"></span>
+						</span>
+						</span><br>
+						실력:2.5
+						<span class="star-rating">
+							<span style="width:50%"></span>
 						</span>
 					</div>
-					<div class="row">
-						<span class="vote-rating">
-							<span class="voted" style="width:<%-- ${home_attend}/${home_voted}--%>50%">
-								<span class="vote-label">참석</span>
-							</span>
-							<span class="person material-icons">person</span>
-						</span>
-					</div>
-					<div class="row">
-						<span class="vote-rating">
-							<span class="voted" style="width:<%-- ${home_absent}/${home_voted}--%>30%">
-								<span class="vote-label">불참</span>
-							</span>
-							<span class="person material-icons">person</span>
-						</span>
-					</div>
-					<div class="row">
-						<span class="vote-rating">
-							<span class="voted" style="width:<%-- ${home_undefined}/${home_undefined}--%>20%">
-								<span class="vote-label">미정</span> 
-							</span>
-							<span class="person material-icons">person</span>
-						</span>
-					</div>
-					<div class="row">
-						<div class="btn-group btn-group-toggle col-sm-12"
-							data-toggle="buttons">
-							<label class="radio btn"> <input class="radio"
-								type="radio" name="vote" id="attend" value="1"> 참석
-							</label> <label class="radio btn"> <input type="radio"
-								name="vote" id="absent" value="2"> 불참
-							</label> <label class="radio btn"> <input type="radio"
-								name="vote" id="undefined" value="3"> 미정
-							</label>
-						</div>
-					</div>
-				</li>
+				</div>
+			</div>
+			<div class="row">
+				<span class="vote-rating">
+					<span class="voted" style="width:<%-- ${home_attend}/${home_voted}--%>50%">
+						<span class="vote-label">참석</span>
+					</span>
+					<span class="person material-icons">person</span>
+				</span>
+			</div>
+			<div class="row">
+				<span class="vote-rating">
+					<span class="voted" style="width:<%-- ${home_absent}/${home_voted}--%>30%">
+						<span class="vote-label">불참</span>
+					</span>
+					<span class="person material-icons">person</span>
+				</span>
+			</div>
+			<div class="row">
+				<span class="vote-rating">
+					<span class="voted" style="width:<%-- ${home_undefined}/${home_undefined}--%>20%">
+						<span class="vote-label">미정</span> 
+					</span>
+					<span class="person material-icons">person</span>
+				</span>
+			</div>
+			<button class="block" onclick="location.href='voteForm.do?match_num=${match.match_num}'">투표하기</button>
+		</li>
 			</ul>
 </c:forEach>
 </c:if>
 </c:if>
+
 
 
 
