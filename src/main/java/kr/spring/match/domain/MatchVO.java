@@ -1,9 +1,34 @@
 package kr.spring.match.domain;
 
 import java.sql.Date;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class MatchVO {
-	
+	public void setMax() {
+		Integer arr[]= {attend,not_attend,undefined};
+		Arrays.sort(arr,Collections.reverseOrder());
+		this.max = arr[0];
+	}
+
+	public int getAttend() {
+		return attend;
+	}
+	public void setAttend(int attend) {
+		this.attend = attend;
+	}
+	public int getNot_attend() {
+		return not_attend;
+	}
+	public void setNot_attend(int not_attend) {
+		this.not_attend = not_attend;
+	}
+	public int getUndefined() {
+		return undefined;
+	}
+	public void setUndefined(int undefined) {
+		this.undefined = undefined;
+	}
 	public int getMatch_num() {
 		return match_num;
 	}
@@ -40,7 +65,6 @@ public class MatchVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
 	public Date getMatch_date() {
 		return match_date;
 	}
@@ -57,7 +81,6 @@ public class MatchVO {
 		return end_time;
 	}
 	public void setEnd_time(String end_time) {
-
 		this.end_time = end_time;
 	}
 	public String getMatch_detail() {
@@ -90,6 +113,67 @@ public class MatchVO {
 	public void setCount(int count) {
 		this.count = count;
 	}
+	public String getHome_name() {
+		return home_name;
+	}
+	public void setHome_name(String home_name) {
+		this.home_name = home_name;
+	}
+	public double getHome_manner() {
+		return home_manner;
+	}
+	public void setHome_manner(double home_manner) {
+		this.home_manner = home_manner;
+	}
+	public double getHome_perform() {
+		return home_perform;
+	}
+	public void setHome_perform(double home_perform) {
+		this.home_perform = home_perform;
+	}
+	public String getAway_name() {
+		return away_name;
+	}
+	public void setAway_name(String away_name) {
+		this.away_name = away_name;
+	}
+	public double getAway_manner() {
+		return away_manner;
+	}
+	public void setAway_manner(double away_manner) {
+		this.away_manner = away_manner;
+	}
+	public double getAway_perform() {
+		return away_perform;
+	}
+	public void setAway_perform(double away_perform) {
+		this.away_perform = away_perform;
+	}
+	public double getPerform() {
+		return perform;
+	}
+	public void setPerform(double perform) {
+		this.perform = perform;
+	}
+	public double getManner() {
+		return manner;
+	}
+	public void setManner(double manner) {
+		this.manner = manner;
+	}
+	public String getClub_name() {
+		return club_name;
+	}
+	public void setClub_name(String club_name) {
+		this.club_name = club_name;
+	}
+	public int getMax() {
+		return max;
+	}
+
+	private int attend;
+	private int not_attend;
+	private int undefined;
 	private int match_num;
 	private String id;
 	private int type;
@@ -104,17 +188,26 @@ public class MatchVO {
 	private String club_num;
 	private int status;
 	private int count;
-
+	private int max;
+	private String home_name;
+	private double home_manner;
+	private double home_perform;
+	private String away_name;
+	private double away_manner;
+	private double away_perform;
+	private double perform;
+	private double manner;
+	private String club_name;
 	@Override
 	public String toString() {
-		return "MatchVO [match_num=" + match_num + ", id=" + id + ", type=" + type + ", home=" + home + ", away=" + away
-				+ ", address=" + address + ", match_date=" + match_date + ", start_time=" + start_time + ", end_time="
-				+ end_time + ", match_detail=" + match_detail + ", vote_num=" + vote_num + ", club_num=" + club_num
-				+ ", status=" + status + "]";
+		return "MatchVO [attend=" + attend + ", not_attend=" + not_attend + ", undefined=" + undefined + ", match_num="
+				+ match_num + ", id=" + id + ", type=" + type + ", home=" + home + ", away=" + away + ", address="
+				+ address + ", match_date=" + match_date + ", start_time=" + start_time + ", end_time=" + end_time
+				+ ", match_detail=" + match_detail + ", vote_num=" + vote_num + ", club_num=" + club_num + ", status="
+				+ status + ", count=" + count + ", max=" + max + ", home_name=" + home_name + ", home_manner="
+				+ home_manner + ", home_perform=" + home_perform + ", away_name=" + away_name + ", away_manner="
+				+ away_manner + ", away_perform=" + away_perform + ", perform=" + perform + ", manner=" + manner
+				+ ", club_name=" + club_name + "]";
 	}
 
-
-	
-	
-	
 }

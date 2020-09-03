@@ -21,7 +21,7 @@ public interface MatchMapper {
 	public MatchVO selectMatchByMatch_num(int match_num);
 	
 	@Select("select * from match_vote where id=#{id} and match_num=#{match_num}")
-	public String selectMyVoteStatus(MatchVO matchVO);
+	public MatchVO selectMyVoteStatus(MatchVO matchVO);
 	
 	@Insert("insert into match_vote (vote_num,match_num,id,club_num,status) values (vote_seq.nextval,#{match_num},#{id},#{club_num},#{status})")
 	public void insertVoteStatus(MatchVO matchVO);
@@ -31,5 +31,7 @@ public interface MatchMapper {
 	
 	@Select("select status,count(*) as count from match_vote where match_num=${match_num} and club_num=#{club_num} group by status")
 	public ArrayList<MatchVO> selectVoteStatusByGroup(MatchVO matchVO);
+	
+	public List<MatchVO> selectAverageRating(MatchVO matchVO);
 
 }

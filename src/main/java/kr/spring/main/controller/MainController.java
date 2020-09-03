@@ -38,10 +38,52 @@ public class MainController {
 			//내 아이디가 소속된 클럽 번호를 받는다
 			List<String> clubs_num=clubService.selectMyClubs_num(user_id);
 			logger.info("<<<clubs_num>>> : " +clubs_num );
-			//내가 소속한 클럽번호로  클럽 번호가 있는 match를 받는다.
+			//내가 소속한 클럽번호로  match table에 클럽 번호가 있는 match를 받는다
 			List<MatchVO> matchVO=new ArrayList<MatchVO>();
+			List<MatchVO> vote_status=new ArrayList<MatchVO>();
+			List<MatchVO> clubs_rating=new ArrayList<MatchVO>();
 			for(String club_num : clubs_num) {
 				matchVO.addAll(matchService.selectMyMatch(club_num));
+				
+				
+				for(MatchVO match : matchVO) {
+					match.setClub_num(club_num);
+					//matchVO에 해당 경기,해당 팀의 투표 현황을 받는다
+					vote_status=matchService.selectVoteStatusByGroup(match);
+					logger.info("<<<<<match>>>> : "+match);
+					for(MatchVO vote_result: vote_status) {
+						if(vote_result.getStatus()==1) {
+							match.setAttend(vote_result.getCount());
+						}
+						if(vote_result.getStatus()==2) {
+							match.setNot_attend(vote_result.getCount());
+						}
+						if(vote_result.getStatus()==3) {
+							match.setUndefined(vote_result.getCount());
+						}
+						match.setMax();
+						logger.info("<<<max>>> : "+match.getMax());
+					}
+					
+					clubs_rating=matchService.selectAverageRating(match);
+					logger.info("<<<clubs_rating>>>> : "+clubs_rating);
+					logger.info("<<<final match_justbefore rating setting>>>> : "+match);
+					for(MatchVO club_rating:clubs_rating) {
+						if(match.getHome().equals(club_rating.getClub_num())) {
+							match.setHome_manner(Math.round(club_rating.getManner()*10)/10.0);
+							match.setHome_name(club_rating.getClub_name());
+							match.setHome_perform(Math.round(club_rating.getPerform()*10)/10.0);
+							logger.info("<<<final match 1>>>> : "+match);
+						}
+						if(match.getAway().equals(club_rating.getClub_num())) {
+							match.setAway_manner(Math.round(club_rating.getManner()*10)/10.0);
+							match.setAway_name(club_rating.getClub_name());
+							match.setAway_perform(Math.round(club_rating.getPerform()*10)/10.0);
+							logger.info("<<<final match 2>>>> : "+match);
+						}
+					}
+					logger.info("<<<final match>>>> : "+match);
+				}
 			}
 			mav.addObject("match_list",matchVO);
 		}
@@ -49,14 +91,55 @@ public class MainController {
 		mav.setViewName("main");
 		mav.addObject("title", "BANADANG");
 		
-		
 		return mav; 
 	}
 	@RequestMapping("/main/voteForm.do")
-	public ModelAndView vote(@RequestParam int match_num ) {
+	public ModelAndView vote(@RequestParam int match_num,
+							 @RequestParam String club_num,
+							 HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
+		List<MatchVO> vote_status=new ArrayList<MatchVO>();
+		List<MatchVO> clubs_rating=new ArrayList<MatchVO>();
+		String user_id=(String)session.getAttribute("user_id");
 		MatchVO match=matchService.selectMatchByMatch_num(match_num);
+		match.setId(user_id);
+		match.setClub_num(club_num);
+		MatchVO myVote=matchService.selectMyVoteStatus(match);
+		if(myVote!=null) {
+			mav.addObject("myVote",myVote.getStatus());
+		}
+		vote_status=matchService.selectVoteStatusByGroup(match);
+		for(MatchVO vote_result: vote_status) {
+			if(vote_result.getStatus()==1) {
+				match.setAttend(vote_result.getCount());
+			}
+			if(vote_result.getStatus()==2) {
+				match.setNot_attend(vote_result.getCount());
+			}
+			if(vote_result.getStatus()==3) {
+				match.setUndefined(vote_result.getCount());
+			}
+			match.setMax();
+			logger.info("<<<max>>> : "+match.getMax());
+		}
+		clubs_rating=matchService.selectAverageRating(match);
+		logger.info("<<<clubs_rating>>>> : "+clubs_rating);
+		logger.info("<<<final match_justbefore rating setting>>>> : "+match);
+		for(MatchVO club_rating:clubs_rating) {
+			if(match.getHome().equals(club_rating.getClub_num())) {
+				match.setHome_manner(Math.round(club_rating.getManner()*10)/10.0);
+				match.setHome_name(club_rating.getClub_name());
+				match.setHome_perform(Math.round(club_rating.getPerform()*10)/10.0);
+			}
+			if(match.getAway().equals(club_rating.getClub_num())) {
+				match.setAway_manner(Math.round(club_rating.getManner()*10)/10.0);
+				match.setAway_name(club_rating.getClub_name());
+				match.setAway_perform(Math.round(club_rating.getPerform()*10)/10.0);
+			}
+		}
+		
+		
 		mav.setViewName("vote");
 		mav.addObject("match",match);
 		mav.addObject("title","경기 투표");

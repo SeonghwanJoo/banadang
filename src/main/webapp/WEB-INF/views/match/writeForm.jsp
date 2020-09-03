@@ -43,6 +43,7 @@
 				<i class="fa fa-users icon"></i> <select class="time input-field" name="home">
 					<option value="">우리팀 선택</option>
 					<c:forEach items="${myTeam }" var="myTeam">
+					${myTeam.club_num}/${myTeam.club_name }
 					<option value="${myTeam.club_num}">${myTeam.club_name }</option>
 					</c:forEach>
 				</select>

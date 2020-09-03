@@ -37,7 +37,7 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public String selectMyVoteStatus(MatchVO matchVO) {
+	public MatchVO selectMyVoteStatus(MatchVO matchVO) {
 		return matchMapper.selectMyVoteStatus(matchVO);
 	}
 
@@ -55,6 +55,12 @@ public class MatchServiceImpl implements MatchService {
 	public ArrayList<MatchVO> selectVoteStatusByGroup(MatchVO matchVO) {
 		
 		return matchMapper.selectVoteStatusByGroup(matchVO);
+	}
+
+	@Override
+	public List<MatchVO> selectAverageRating(MatchVO matchVO) {
+		
+		return matchMapper.selectAverageRating(matchVO);
 	}
 
 }

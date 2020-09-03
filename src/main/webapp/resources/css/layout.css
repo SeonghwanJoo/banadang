@@ -2,17 +2,25 @@
 	.fixed_top{
 		width:94%;
 	}
+	.vote-label{
+		width:450px;
+	}
 	
 }
 @media screen and (min-width:577px) and (max-width: 768px) {
 	.fixed_top{
 		width:522px;
 	}
-	
+	.vote-label{
+		width:500px;
+	}
 }
 @media screen and (min-width:769px) and (max-width: 992px) {
 	.fixed_top{
 		width:702px;
+	}
+	.vote-label{
+		width:682px;
 	}
 	
 }
@@ -20,11 +28,17 @@
 	.fixed_top{
 		width:942px;
 	}
+	.vote-label{
+		width:922px;
+	}
 	
 }
 @media screen and (min-width: 1200px) {
 	.fixed_top{
 		width:1130px;
+	}
+	.vote-label{
+		width:1110px;
 	}
 	
 }
@@ -233,7 +247,6 @@ margin:5px auto; }
 .vote-rating, .voted{
 	display:inline-block; 
 	height:35px;
-	overflow:hidden; 
 	background-color:#f2f2f2;
 	vertical-align: middle;
 }
@@ -243,22 +256,31 @@ margin:5px auto; }
 .vote-label{
 	padding:5px;
 	margin-right:10px;
-	display:inline-block;
+	display:inline-flex;
 }
 .vote-rating .person{
-	float:right;
-	padding:5px;
 	color:#bfbfbf;
-	display:inline-block;
 	font-size:25px;
 }
+.row{
+	position:relative;
+	
+}
+.sign{
+	display:none;
+	margin-left:5px;
+}
+.person{
+	position:absolute;
+	top:10px;
+	right:45px;
+}
 .vote_num{
-	float:right;
-	display:inline-block;
-	padding:5px;
-	margin-right:5px;
 	color:#7f7f7f;
 	font-size:inherit;
+	position:absolute;
+	top:10px;
+	right:30px;
 }
 
 .btn-group {
@@ -529,7 +551,66 @@ input[type=text]:focus, select:focus{
 	padding-right: 0px;
 	padding-left: 0px;
 }
+/* 토글 스위치 */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
 
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 
 
 
