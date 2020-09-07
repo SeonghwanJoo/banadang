@@ -503,6 +503,10 @@ input[type=text]:focus, select:focus{
   background-color:#FFFFFF;
   text-align: center;
 }
+.row .block-btn{
+	padding-right:8px;
+	padding-left:8px;
+}
 .from-to{
 	padding-top: 1rem;
 }
@@ -552,6 +556,7 @@ input[type=text]:focus, select:focus{
 	padding-left: 0px;
 }
 /* 토글 스위치 */
+
 .switch {
   position: relative;
   display: inline-block;

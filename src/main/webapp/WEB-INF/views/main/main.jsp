@@ -185,7 +185,15 @@
 					<span class="person material-icons">person</span>
 				</span>
 			</div>
+			<c:if test="${match.home!=match.away && match.home==match.club_num}">
+			<button class="block" onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }'">${match.home_name } 투표하기</button>
+			</c:if>
+			<c:if test="${match.home!=match.away && match.away==match.club_num}">
+			<button class="block" onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }'">${match.away_name } 투표하기</button>
+			</c:if>
+			<c:if test="${match.home==match.away}">
 			<button class="block" onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }'">투표하기</button>
+			</c:if>
 		</li>
 		<hr>
 		<br>

@@ -14,10 +14,10 @@
 		</if>
 	</insert>
 	<select id="selectAverageRating" parameterType="matchVO" resultType="matchVO">
-		select a.club_num,a.club_name,b.perform,b.manner from (select club_num, club_name from club) a 
+		select a.club_num,a.club_name,b.perform,b.manner from (select club_num, club_name from club where club_num=#{home} or club_num=#{away} ) a 
 	    left outer join
 	    (select club_num, avg(perform) as perform, avg(manner) as manner
-			 from club_rating where club_num=#{home} or club_num=#{away} group by club_num) b
+			 from club_rating group by club_num) b
              on a.club_num=b.club_num
 	</select>
 </mapper>

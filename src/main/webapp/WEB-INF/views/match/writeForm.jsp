@@ -455,7 +455,7 @@ $( function() {
 		}
 	
 		 // 검색결과 목록의 자식 Element를 제거하는 함수입니다
-		function removeAllChildNods(el) {   
+		function removeAllChildNods(el) { 
 		    while (el.hasChildNodes()) {
 		        el.removeChild (el.lastChild);
 		    }
@@ -555,6 +555,7 @@ $( function() {
 								/*append the DIV element as a child of the autocomplete container:*/
 								this.parentNode.appendChild(a);
 								a.appendChild(c);
+								document.getElementById('away').value=val;
 								/*for each item in the array...*/
 								for (i = 0; i < arr.length; i++) {
 									/*check if the item starts with the same letters as the text field value:*/
