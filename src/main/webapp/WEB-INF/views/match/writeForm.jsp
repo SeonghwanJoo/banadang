@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div class="row">
-	<form:form class="col s12" action="write.do" commandName="matchVO" autocomplete="off">
+	<form:form class="col s12" id="form" action="write.do" commandName="matchVO" autocomplete="off">
 		<input type="hidden" name="id" value="${user_id }">
 		<div class="row" id="top_wrap">
 			<div class="fixed_top">
@@ -21,26 +21,28 @@
 		<div class="row" id="write_body">
 			<div class="btn-group btn-group-toggle col-sm-12" data-toggle="buttons">
 				<label class="radio btn">
-					<input type="radio" class="radio_inp" name="type" id="soccer" value="1"> 축구
+					<input type="radio" class="soc_fut" name="type" id="soccer" value="1"> 축구
 				</label>
 				<label class="radio btn">
-					<input type="radio" class="radio_inp" name="type" id="futsal" value="2"> 풋살
+					<input type="radio" class="soc_fut" name="type" id="futsal" value="2"> 풋살
 				</label>
+				<input type="hidden" id="type" name="type">
 			</div>
 			<div class="btn-group btn-group-toggle col-sm-12" data-toggle="buttons">
 				<label class="radio btn">
-					<input type="radio" class="radio_inp" name="opponent" id="exist" value="1"> 상대팀 있음
+					<input type="radio" class="opponent" name="opponent" id="exist" value="1"> 상대팀 있음
 				</label>
 				<label class="radio btn">
-					<input type="radio" class="radio_inp"name="opponent" id="non-exist" value="2"> 상대팀 초청
+					<input type="radio" class="opponent"name="opponent" id="non-exist" value="2"> 상대팀 초청
 				</label>
 			</div>
 		</div>
-		<hr>
+		<div class="row"><div class="col"><span class="msg" id="type_msg"></span></div></div>
+		<hr class="hr">
 		<c:if test="${fn:length(myTeam)>1}">
 		<div class="row">
 			<div class="input-container col">
-				<i class="fa fa-users icon"></i> <select class="time input-field" name="home">
+				<i class="fa fa-users icon"></i> <select class="time input-field" id="home" name="home">
 					<option value="">우리팀 선택</option>
 					<c:forEach items="${myTeam }" var="myTeam">
 					${myTeam.club_num}/${myTeam.club_name }
@@ -49,12 +51,11 @@
 				</select>
 			</div>
 		</div>
-		<hr>
+		<div class="row"><div class="col"><span class="msg"  id="home_msg"></span></div></div>
+		<hr class="hr">
 		</c:if>
 		<c:if test="${fn:length(myTeam)==1}">
-		<c:forEach items="${myTeam }" var="myTeam">
-		<input type="hidden" name="home" value="${myTeam.club_num}">
-		</c:forEach>
+		<input type="hidden" id="home" name="home" value="${myTeam.club_num}">
 		</c:if>
 		<input type="hidden" name="away" id="away">
 		<div class="row">
@@ -63,24 +64,27 @@
 					type="text" placeholder="상대팀명 입력 (목록에서 선택)" name="away_name" id="away_name">
 			</div>
 		</div>
-		<hr>
+		<div class="row"><div class="col"><span class="msg" id="away_msg"></span></div></div>
+		<hr class="hr">
 		<div class="row">
 			<div class="autocomplete input-container col">
 				<i class="fas fa-map-marked-alt icon"></i> <input class="input-field"
-					type="text" name="address" placeholder="경기 장소 지도 검색" id="search">
+					type="text" name="address" id="address" placeholder="경기 장소 지도 검색">
 			</div>
 		</div>
-		<hr>
+		<div class="row"><div class="col"><span class="msg" id="address_msg"></span></div></div>
+		<hr class="hr">
 		<div class="row">
 			<div class="input-container col">
 				<i class="fas fa-calendar-alt icon"></i> <input class="input-field"
 					type="text" id="datepicker" placeholder="경기 날짜 선택" name="match_date">
 			</div>
 		</div>
-		<hr>
+		<div class="row"><div class="col"><span class="msg" id="date_msg"></span></div></div>
+		<hr class="hr">
 		<div class="row">
 			<div class="input-container col">
-				<i class="far fa-clock icon"></i> <select class="time input-field" name="start_time">
+				<i class="far fa-clock icon"></i> <select class="time input-field" id="start_time" name="start_time">
 					<option value="">시작 시간 선택</option>
 					<option value="06:00">06:00</option>
 					<option value="06:30">06:30</option>
@@ -134,7 +138,7 @@
 			</div>
 			<span class="from-to">~</span>
 			<div class="input-container col">
-				<i class="far fa-clock icon"></i> <select class="time input-field" name="end_time">
+				<i class="far fa-clock icon"></i> <select class="time input-field" id="end_time" name="end_time">
 					<option class="placeholder" value="">종료 시간 선택</option>
 					<option value="06:00">06:00</option>
 					<option value="06:30">06:30</option>
@@ -187,13 +191,15 @@
 				</select>
 			</div>
 		</div>
-		<hr>
+		<div class="row"><div class="col"><span class="msg" id="start_msg"></span></div></div>
+		<div class="row"><div class="col"><span class="msg" id="end_msg"></span></div></div>
+		<hr class="hr">
 		<div class="row">
 			<div class="text input-container col">
 				<textarea class="input-field" id="match_detail" name="match_detail" placeholder="추가적으로 공유할 내용이 있으면 입력해주세요.(매너/실력은 자동 계산되어 보여집니다)"></textarea>
 			</div>
 		</div>
-		<hr>
+		<hr class="hr">
 	</form:form>
 </div>
 
@@ -224,6 +230,62 @@
 <script>
 $( function() {
 	
+	$('#soccer').click(function(){
+		$('#type_msg').text('');
+		$('#type').val(1);
+	});
+	$('#futsal').click(function(){
+		$('#type_msg').text('');
+		$('#type').val(2);
+	});
+	$('#home').click(function(){
+		$('#home_msg').text('');
+	});
+	$('#address').click(function(){
+		$('#address_msg').text('');
+	});
+	$('#datepicker').click(function(){
+		$('#date_msg').text('');
+	});
+	$('#start_time').click(function(){
+		$('#start_msg').text('');
+	});
+	$('#end_time').click(function(){
+		$('#end_msg').text('');
+	});
+	
+	$('#form').submit(function(){
+		
+		if($('#type').val()==''){
+			$('#type_msg').css('color','red').text('축구/풋살을 선택해주세요');
+			return false;
+		}
+		if($('#home').val()==''){
+			$('#home_msg').css('color','red').text('우리팀을 선택해주세요');
+			return false;
+		}
+		if(!$('#away').val().replace(/^\s+|\s+$/g, '')){
+			$('#away_msg').css('color','red').text('상대팀을 입력해주세요');
+			return false;
+		}
+		if(!$('#address').val().replace(/^\s+|\s+$/g, '')){
+			$('#address_msg').css('color','red').text('경기장소를  입력해주세요');
+			return false;
+		}
+		if($('#datepicker').val()==''){
+			$('#date_msg').css('color','red').text('경기 날짜를  선택해주세요');
+			return false;
+		}
+		if($('#start_time').val()==''){
+			$('#start_msg').css('color','red').text('경기 시작 시간을  선택해주세요');
+			return false;
+		}
+		if($('#end_time').val()==''){
+			$('#end_msg').css('color','red').text('경기 종료 시간을  선택해주세요');
+			return false;
+		}
+	});
+	
 	var input=document.getElementById('keyword');
 	// Execute a function when the user releases a key on the keyboard
 	input.addEventListener("keyup", function(event) {
@@ -248,7 +310,7 @@ $( function() {
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = {
 		        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-		        level: 3 // 지도의 확대 레벨
+		        level: 3, // 지도의 확대 레벨
 		    };  
 	
 		// 지도를 생성합니다    
@@ -272,9 +334,13 @@ $( function() {
 		        alert('키워드를 입력해주세요!');
 		        return false;
 		    }
+		    var options ={
+		    		size:5
+		    		
+		    }
 	
 		    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-		    ps.keywordSearch( keyword, placesSearchCB); 
+		    ps.keywordSearch( keyword, placesSearchCB,options); 
 		}
 	
 		// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
@@ -377,7 +443,7 @@ $( function() {
 		    el.className = 'item';
 		    el.id='item'+index;
 		    el.onclick=function(){
-		    	document.getElementById('search').value=places.place_name;
+		    	document.getElementById('address').value=places.place_name;
 		  		modal.style.display = "none";
 		    };
 	
@@ -424,7 +490,7 @@ $( function() {
 		        paginationEl.removeChild (paginationEl.lastChild);
 		    }
 	
-		    for (i=1; i<=pagination.last; i++) {
+		    for (i=1; i<=3; i++) {
 		        var el = document.createElement('a');
 		        el.href = "#";
 		        el.innerHTML = i;
@@ -469,13 +535,13 @@ $( function() {
 	var modal = document.getElementById("myModals");
 
 	// Get the button that opens the modal
-	var search = document.getElementById("search");
+	var address = document.getElementById("address");
 
 	// Get the <span> element that closes the modal
 	var span = document.getElementsByClassName("close")[0];
 
 	// When the user clicks the button, open the modal 
-	search.onclick = function() {
+	address.onclick = function() {
 	  modal.style.display = "block";
 	}
 
@@ -541,6 +607,7 @@ $( function() {
 								var a, b, i, val = this.value;
 								/*close any already open lists of autocompleted values*/
 								closeAllLists();
+								$('#away_msg').text('');
 								if (!val) {
 									return false;
 								}

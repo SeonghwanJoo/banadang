@@ -17,11 +17,17 @@ public interface MatchMapper {
 	@Select("select match_num,id,type,home,away,start_time,end_time,address,match_detail,match_date,#{club_num} club_num from match where home=#{club_num} or away=#{club_num} and match_date>sysdate-1 order by match_date")
 	public List<MatchVO> selectMyMatch(String club_num);
 	
+	@Select("select match_num,id,type,home,away,start_time,end_time,address,match_detail,match_date,#{club_num} club_num from match where home=#{club_num} or away=#{club_num} and match_date<sysdate-1 order by match_date")
+	public List<MatchVO> selectMyPastMatch(String club_num);
+	
 	@Select("select * from match where match_num=#{match_num}")
 	public MatchVO selectMatchByMatch_num(int match_num);
 	
-	@Select("select * from match_vote where id=#{id} and match_num=#{match_num} and club_num=#{club_num}")
-	public MatchVO selectMyVoteStatus(MatchVO matchVO);
+	@Select("select status from match_vote where id=#{id} and match_num=#{match_num} and club_num=#{club_num}")
+	public Integer selectMyVoteStatus(MatchVO matchVO);
+	
+	@Select("select vote_num from match_vote where id=#{id} and match_num=#{match_num} and club_num=#{club_num}")
+	public String selectMyVoteNum(MatchVO matchVO);
 	
 	@Insert("insert into match_vote (vote_num,match_num,id,club_num,status) values (vote_seq.nextval,#{match_num},#{id},#{club_num},#{status})")
 	public void insertVoteStatus(MatchVO matchVO);

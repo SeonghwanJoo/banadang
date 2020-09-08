@@ -176,12 +176,19 @@ public class MatchVO {
 	private int undefined;
 	private int match_num;
 	private String id;
+	//
 	private int type;
+	//
 	private String home;
+	//
 	private String away;
+	//
 	private String address;
+	//
 	private Date match_date;
+	//
 	private String start_time;
+	//
 	private String end_time;
 	private String match_detail;
 	private String vote_num;

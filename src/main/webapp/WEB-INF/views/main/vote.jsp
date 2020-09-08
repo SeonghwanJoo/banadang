@@ -4,7 +4,7 @@
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
 		<a href="#" onclick="location.href='main.do'">
-		<span class="material-icons" id="cancel" onclick="goBack();">close</span>
+		<span class="material-icons" id="chevron_left">chevron_left</span>
 		</a>
 		<div class="topnav-centered">
 			<a href="#home" class="active">${title }</a>
@@ -181,6 +181,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function(){
+		function goBack(){
+			history.go(-1);
+		}
 		
 		if( ${myVote ==  1}){
 			$('#attend_sign').css('display','inline-block');

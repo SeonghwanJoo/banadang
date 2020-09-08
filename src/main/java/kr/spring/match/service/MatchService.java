@@ -9,8 +9,10 @@ import kr.spring.match.domain.MatchVO;
 public interface MatchService {
 	public void insertMatch(MatchVO matchVO);
 	public List<MatchVO> selectMyMatch(String club_num);
+	public List<MatchVO> selectMyPastMatch(String club_num);
 	public MatchVO selectMatchByMatch_num(int match_num);
-	public MatchVO selectMyVoteStatus(MatchVO matchVO);
+	public Integer selectMyVoteStatus(MatchVO matchVO);
+	public String selectMyVoteNum(MatchVO matchVO);
 	public void insertVoteStatus(MatchVO matchVO);
 	public void updateVoteStatus(MatchVO matchVO);
 	public ArrayList<MatchVO> selectVoteStatusByGroup(MatchVO matchVO);

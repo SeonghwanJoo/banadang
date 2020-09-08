@@ -216,6 +216,7 @@
 
 .match-head {
 	height: 30px;
+	width: 100%;
 	margin-top:10px;
 	margin-bottom: 15px;
 }
@@ -229,6 +230,11 @@
 	margin: 0;
 	padding: 0;
 }
+.match-item{
+	font-weight:bold;
+	padding-right:1rem;
+	padding-left:1rem;
+}
 
 .match {
 	padding: 0 auto;
@@ -240,6 +246,7 @@
 .team-info{
 	padding: 0 auto;
 	text-align: center;
+	color:#7a7a7a;
 }
 
 .vote-rating { width:96%;
@@ -400,6 +407,7 @@ input[type=text]:focus, select:focus{
 	position: fixed; /* Stay in place */
 	z-index: 1; /* Sit on top */
 	padding-top: 50px; /* Location of the box */
+	padding-bottom:50px;
 	left: 0;
 	top: 0;
 	width: 100%; /* Full width */
@@ -524,9 +532,10 @@ input[type=text]:focus, select:focus{
   padding-top:5px;
   padding-bottom:5px;
 }
-#cancel{
+#cancel, #chevron_left{
 	float:left;
 	margin:2px;
+	font-size:30px;
 }
 #top_wrap .fixed_top a{
 	color: #000000;
@@ -616,7 +625,18 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-
+.msg{
+	margin-left:60px;
+	font-size:12px;
+}
+.hr{
+	margin-top:0.2rem;
+	margin-bottom:0.2rem;
+}
+.container{
+	padding-right:8px !important;
+	padding-left:8px !important;
+}
 
 
 

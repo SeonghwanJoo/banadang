@@ -40,9 +40,9 @@ public class MainAjaxController {
 		matchVO.setClub_num(club_num);
 		matchVO.setStatus(status);
 		//해당 매치에 해당 아이디로 투표 결과가 있는지 확인
-		MatchVO myVote=matchService.selectMyVoteStatus(matchVO);
+		String myVote=matchService.selectMyVoteNum(matchVO);
 		if(myVote!=null) {
-			matchVO.setVote_num(myVote.getVote_num());
+			matchVO.setVote_num(myVote);
 			matchService.updateVoteStatus(matchVO);
 		}else if(myVote==null) {
 			matchService.insertVoteStatus(matchVO);
