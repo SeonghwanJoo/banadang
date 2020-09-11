@@ -11,6 +11,11 @@
        <put-attribute name="body" value="/WEB-INF/views/match/writeForm.jsp"/>
        <put-attribute name="footer" value=""/>
     </definition>
+    <definition name="invite_match" extends="main">
+       <put-attribute name="title" value="경기 매치"/> 
+       <put-attribute name="body" value="/WEB-INF/views/match/invite_match.jsp"/>
+       <put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

@@ -71,4 +71,51 @@ public class MainAjaxController {
 		
 		return map;
 	}
+	
+	@RequestMapping("main/rating.do")
+	@ResponseBody
+	public Map<String,String> postRating(@RequestParam String id,
+									     @RequestParam int match_num,
+									     @RequestParam String club_num, //참석할 팀의 클럽 번호
+									     @RequestParam double manner,
+									     @RequestParam double perform,
+									     @RequestParam String rating_detail){
+		Map<String,String> map=new HashMap<String,String>();
+		MatchVO match=new MatchVO();
+		match.setId(id);
+		match.setMatch_num(match_num);
+		match.setClub_num(club_num);
+		match.setManner(manner);
+		match.setPerform(perform);
+		match.setRating_detail(rating_detail);
+		//해당 매치에 해당 클럽에 아이디로 평가가 있는지 확인
+		Integer clubrating_num=matchService.selectMyRating(match);
+		if(clubrating_num!=null) {
+			match.setClubrating_num(clubrating_num);
+			matchService.updateRating(match);
+			map.put("result", "updated");
+		}else if(clubrating_num==null) {
+			matchService.insertRating(match);
+			map.put("result", "inserted");
+		}
+		logger.info("map",map);
+		return map;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

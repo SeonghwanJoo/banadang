@@ -8,6 +8,20 @@ public class MemberVO {
 	private String email;
 	private String age_range;
 	private String id;
+	private String club_num;
+	public String getClub_num() {
+		return club_num;
+	}
+	public void setClub_num(String club_num) {
+		this.club_num = club_num;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	private Integer status=0;
 	public String getNickname() {
 		return nickname;
 	}
@@ -47,7 +61,8 @@ public class MemberVO {
 	@Override
 	public String toString() {
 		return "MemberVO [nickname=" + nickname + ", profile_image=" + profile_image + ", thumbnail_image="
-				+ thumbnail_image + ", email=" + email + ", age_range=" + age_range + ", id=" + id + "]";
+				+ thumbnail_image + ", email=" + email + ", age_range=" + age_range + ", id=" + id + ", club_num="
+				+ club_num + ", status=" + status + "]";
 	}
 	
 	

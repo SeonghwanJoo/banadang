@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.club.service.ClubService;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
+import kr.spring.member.domain.MemberVO;
 
 @Controller
 public class MainController {
@@ -157,6 +158,12 @@ public class MainController {
 				logger.info("<<<max>>> : "+match.getMax());
 			}
 			clubs_rating=matchService.selectAverageRating(match);
+			match.setHome_manner(0.0);
+			match.setHome_name(match.getHome()+"(미등록팀)");
+			match.setHome_perform(0.0);
+			match.setAway_manner(0.0);
+			match.setAway_name(match.getAway()+"(미등록팀)");
+			match.setAway_perform(0.0);
 			logger.info("<<<clubs_rating>>>> : "+clubs_rating);
 			logger.info("<<<final match_justbefore rating setting>>>> : "+match);
 			for(MatchVO club_rating:clubs_rating) {
@@ -175,7 +182,97 @@ public class MainController {
 		}
 		
 		mav.setViewName("vote");
-		mav.addObject("title","경기 투표");
+		mav.addObject("title","경기 참불 투표");
+		return mav;
+	}
+	
+	@RequestMapping("/main/ratingForm.do")
+	public ModelAndView rating(@RequestParam int match_num,
+							 @RequestParam String club_num,
+							 HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		List<MatchVO> clubs_rating=new ArrayList<MatchVO>();
+		String user_id=(String)session.getAttribute("user_id");
+		if(user_id!=null) {
+			MatchVO match=matchService.selectMatchByMatch_num(match_num);
+			match.setId(user_id);
+			match.setClub_num(club_num);
+			
+			clubs_rating=matchService.selectAverageRating(match);
+			match.setHome_manner(0.0);
+			match.setHome_name(match.getHome()+"(미등록팀)");
+			match.setHome_perform(0.0);
+			match.setAway_manner(0.0);
+			match.setAway_name(match.getAway()+"(미등록팀)");
+			match.setAway_perform(0.0);
+			logger.info("<<<clubs_rating>>>> : "+clubs_rating);
+			logger.info("<<<final match_justbefore rating setting>>>> : "+match);
+			for(MatchVO club_rating:clubs_rating) {
+				if(match.getHome().equals(club_rating.getClub_num())) {
+					match.setHome_manner(Math.round(club_rating.getManner()*10)/10.0);
+					match.setHome_name(club_rating.getClub_name());
+					match.setHome_perform(Math.round(club_rating.getPerform()*10)/10.0);
+				}
+				if(match.getAway().equals(club_rating.getClub_num())) {
+					match.setAway_manner(Math.round(club_rating.getManner()*10)/10.0);
+					match.setAway_name(club_rating.getClub_name());
+					match.setAway_perform(Math.round(club_rating.getPerform()*10)/10.0);
+				}
+			}
+			mav.addObject("match",match);
+		}
+		mav.setViewName("rating");
+		mav.addObject("title","상대팀 평가");
+		return mav;
+	}
+	@RequestMapping("/main/vote_detail.do")
+	public ModelAndView vote_detail(@RequestParam String club_num,
+									@RequestParam Integer match_num,
+									@RequestParam String home_name,
+									@RequestParam String away_name) {
+		ModelAndView mav = new ModelAndView();
+		MatchVO match=new MatchVO();
+		match.setClub_num(club_num);
+		match.setMatch_num(match_num);
+		match.setHome_name(home_name);
+		match.setAway_name(away_name);
+		List<MemberVO> members=new ArrayList<MemberVO> ();
+		List<MemberVO> atdance=new ArrayList<MemberVO> ();
+		List<MemberVO> no_atdance=new ArrayList<MemberVO> ();
+		List<MemberVO> undefined_atdance=new ArrayList<MemberVO> ();
+		List<MemberVO> not_voted=new ArrayList<MemberVO> ();
+		//해당 매치의 해당 클럽의 참석자,불참자,미정자 테이블
+		//클럽의 전체 회원 명단을 받는다
+		//전체 회원의 닉네임과 프로필 사진을 받기 위해 mem_detail과 조인한다
+		members=matchService.selectVote_detail(match);
+		logger.info("<<members>> : "+members);
+		int i=0;
+		for(MemberVO member:members) {
+			i++;
+			logger.info("<<count>> : "+i);
+			if(member.getStatus()==1) {
+				logger.info("<<member>> : 1"+member);
+				atdance.add(member);
+			}
+			else if(member.getStatus()==2) {
+				logger.info("<<member>> : 2"+member);
+				no_atdance.add(member);
+			}
+			else if(member.getStatus()==3) {
+				logger.info("<<member>> : 3"+member);
+				undefined_atdance.add(member);
+			}
+			else if(member.getStatus()==0) {not_voted.add(member);}
+		}
+		
+		mav.addObject("atdance", atdance);
+		mav.addObject("no_atdance", no_atdance);
+		mav.addObject("undefined_atdance", undefined_atdance);
+		mav.addObject("not_voted", not_voted);
+		mav.addObject("match", match);
+		mav.setViewName("vote_detail");
+		
+		
 		return mav;
 	}
 }

@@ -48,6 +48,24 @@
 		<beans:property name="order" value="1"/>  
 	</beans:bean>
 	
+	
+	<interceptors>
+		<!-- 로그인 여부 체크 -->
+		<interceptor>
+			<mapping path="/main/voteForm.do"/>
+			<mapping path="/main/ratingForm.do"/>
+			<mapping path="/main/vote_detail.do"/>
+			<beans:bean 
+			class="kr.spring.interceptor.LoginCheckInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/main/voteForm.do"/>
+			<beans:bean 
+			class="kr.spring.interceptor.PostInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
+
 	<!-- 파일다운로드 및 이미지 표시 -->
 	<beans:bean
 	  class="org.springframework.web.servlet.view.BeanNameViewResolver"

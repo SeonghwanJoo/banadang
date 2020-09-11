@@ -20,6 +20,7 @@ import kr.spring.club.domain.ClubVO;
 import kr.spring.club.service.ClubService;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
+import kr.spring.util.LocationDistance;
 
 @Controller
 public class MatchController {
@@ -49,6 +50,7 @@ public class MatchController {
 		for(ClubVO club : list) {
 			logger.info("<<<<List>>>> : "+ club);
 		}
+		logger.info("<<<myTeam>>>:"+myTeam);
 		
 		
 		mav.setViewName("writeForm");
@@ -66,5 +68,17 @@ public class MatchController {
 		matchService.insertMatch(matchVO);
 		
 		return "redirect:/main/main.do";
+	}
+	@RequestMapping("/match/match_toInvite.do")
+	public ModelAndView inviteList() {
+		
+		ModelAndView mav=new ModelAndView();
+		List<MatchVO> matchVO=matchService.selectMatchToInvite();
+		
+		mav.setViewName("invite_match");
+		mav.addObject("title","경기 매치");
+		mav.addObject("matchVO", matchVO);
+		
+		return mav;
 	}
 }

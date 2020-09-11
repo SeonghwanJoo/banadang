@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.spring.match.domain.MatchVO;
+import kr.spring.member.domain.MemberVO;
 
 public interface MatchService {
 	public void insertMatch(MatchVO matchVO);
@@ -17,4 +18,9 @@ public interface MatchService {
 	public void updateVoteStatus(MatchVO matchVO);
 	public ArrayList<MatchVO> selectVoteStatusByGroup(MatchVO matchVO);
 	public List<MatchVO> selectAverageRating(MatchVO matchVO);
+	public Integer selectMyRating(MatchVO match);
+	public void insertRating(MatchVO match);
+	public void updateRating(MatchVO match);
+	public List<MemberVO> selectVote_detail(MatchVO match);
+	public List<MatchVO> selectMatchToInvite();
 }

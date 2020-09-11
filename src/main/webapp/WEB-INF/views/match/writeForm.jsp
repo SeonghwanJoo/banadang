@@ -20,7 +20,7 @@
 		</div>
 		<div class="row" id="write_body">
 			<div class="btn-group btn-group-toggle col-sm-12" data-toggle="buttons">
-				<label class="radio btn">
+				<label class="radio btn" id="soc_label">
 					<input type="radio" class="soc_fut" name="type" id="soccer" value="1"> 축구
 				</label>
 				<label class="radio btn">
@@ -45,7 +45,6 @@
 				<i class="fa fa-users icon"></i> <select class="time input-field" id="home" name="home">
 					<option value="">우리팀 선택</option>
 					<c:forEach items="${myTeam }" var="myTeam">
-					${myTeam.club_num}/${myTeam.club_name }
 					<option value="${myTeam.club_num}">${myTeam.club_name }</option>
 					</c:forEach>
 				</select>
@@ -55,22 +54,28 @@
 		<hr class="hr">
 		</c:if>
 		<c:if test="${fn:length(myTeam)==1}">
+		<c:forEach items="${myTeam }" var="myTeam">
 		<input type="hidden" id="home" name="home" value="${myTeam.club_num}">
+		</c:forEach>
 		</c:if>
 		<input type="hidden" name="away" id="away">
-		<div class="row">
-			<div class="autocomplete input-container col">
-				<i class="fa fa-users icon"></i> <input class="input-field"
-					type="text" placeholder="상대팀명 입력 (목록에서 선택)" name="away_name" id="away_name">
+		<div id="away-wrapper">
+			<div class="row">
+				<div class="autocomplete input-container col">
+					<i class="fa fa-users icon"></i> <input class="input-field"
+						type="text" placeholder="상대팀명 입력 (목록에서 선택)" name="away_name" id="away_name">
+				</div>
 			</div>
-		</div>
 		<div class="row"><div class="col"><span class="msg" id="away_msg"></span></div></div>
 		<hr class="hr">
+		</div>
 		<div class="row">
 			<div class="autocomplete input-container col">
 				<i class="fas fa-map-marked-alt icon"></i> <input class="input-field"
 					type="text" name="address" id="address" placeholder="경기 장소 지도 검색">
 			</div>
+			<input type="hidden" name="address_x" id="address_x">
+			<input type="hidden" name="address_y" id="address_y">
 		</div>
 		<div class="row"><div class="col"><span class="msg" id="address_msg"></span></div></div>
 		<hr class="hr">
@@ -194,6 +199,13 @@
 		<div class="row"><div class="col"><span class="msg" id="start_msg"></span></div></div>
 		<div class="row"><div class="col"><span class="msg" id="end_msg"></span></div></div>
 		<hr class="hr">
+		<div class="row" id="cost-wrapper" style="display:none">
+			<div class="autocomplete input-container col">
+				<i class="fas fa-won-sign"></i> <input class="input-field"
+					type="text" name="cost" id="cost" placeholder="구장 비용">
+			</div>
+		<hr class="hr">
+		</div>
 		<div class="row">
 			<div class="text input-container col">
 				<textarea class="input-field" id="match_detail" name="match_detail" placeholder="추가적으로 공유할 내용이 있으면 입력해주세요.(매너/실력은 자동 계산되어 보여집니다)"></textarea>
@@ -205,9 +217,9 @@
 
 <!-- The Modal -->
 <div id="myModals" class="modals">
- <!-- Modal content -->
-<div class="modals-content">
-    <span class="close">&times;</span>
+	<!-- Modal content -->
+	<div class="modals-content">
+	    <span class="close">&times;</span>
 		<div class="input-container col" id="search_modal">
 			<input type="text" placeholder="장소 키워드 입력" name="search" class="searchBar" id="keyword">
 	  		<button class="search_btn" id="search_btn"><i class="fa fa-search"></i></button>
@@ -218,18 +230,23 @@
 	        <ul id="placesList"></ul>
 	        <div id="pagination"></div>
         </div>
+	</div>
 </div>
-
-</div>
-
-
-
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $( function() {
-	
+	$('#exist').click(function(){
+		$('#away-wrapper').css('display','block');
+		$('#cost-wrapper').css('display','none');
+	});
+	$('#non-exist').click(function(){
+		$('#away-wrapper').css('display','none');
+		$('#cost-wrapper').css('display','block');
+		$('#away').val('모집중');
+		
+	});
 	$('#soccer').click(function(){
 		$('#type_msg').text('');
 		$('#type').val(1);
@@ -298,10 +315,6 @@ $( function() {
 	  }
 	});
 	
-	function goBack(){
-		history.go(-1);
-	}
-
 	search_btn.onclick=function(){
 		
 		// 마커를 담을 배열입니다
@@ -367,7 +380,7 @@ $( function() {
 		    }
 		}
 	
-		// 검색 결과 목록과 마커를 표출하는 함수입니다
+		// 검색 결과 목록과 마커를 표출하는 함수입니다(data>places)
 		function displayPlaces(places) {
 	
 		    var listEl = document.getElementById('placesList'), 
@@ -444,7 +457,10 @@ $( function() {
 		    el.id='item'+index;
 		    el.onclick=function(){
 		    	document.getElementById('address').value=places.place_name;
+		    	document.getElementById('address_x').value=places.x;
+		    	document.getElementById('address_y').value=places.y;
 		  		modal.style.display = "none";
+		  		console.log("<<places x,y>>"+places.x+", "+places.y);
 		    };
 	
 		    return el;

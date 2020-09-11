@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.match.domain.MatchVO;
+import kr.spring.member.domain.MemberVO;
 
 public interface MatchMapper {
 	
@@ -17,7 +18,7 @@ public interface MatchMapper {
 	@Select("select match_num,id,type,home,away,start_time,end_time,address,match_detail,match_date,#{club_num} club_num from match where home=#{club_num} or away=#{club_num} and match_date>sysdate-1 order by match_date")
 	public List<MatchVO> selectMyMatch(String club_num);
 	
-	@Select("select match_num,id,type,home,away,start_time,end_time,address,match_detail,match_date,#{club_num} club_num from match where home=#{club_num} or away=#{club_num} and match_date<sysdate-1 order by match_date")
+	@Select("select * from (select match_num,id,type,home,away,start_time,end_time,address,match_detail,match_date,#{club_num} club_num from match where home=#{club_num} or away=#{club_num}) where match_date <sysdate-1 and match_date>sysdate-14")
 	public List<MatchVO> selectMyPastMatch(String club_num);
 	
 	@Select("select * from match where match_num=#{match_num}")
@@ -39,5 +40,13 @@ public interface MatchMapper {
 	public ArrayList<MatchVO> selectVoteStatusByGroup(MatchVO matchVO);
 	
 	public List<MatchVO> selectAverageRating(MatchVO matchVO);
+	
+	@Select("select clubrating_num from club_rating where id=#{id} and match_num=#{match_num} and club_num=#{club_num}")
+	public Integer selectMyRating(MatchVO match);
+	
+	public void insertRating(MatchVO match);
+	public void updateRating(MatchVO match);
+	public List<MemberVO> selectVote_detail(MatchVO match);
+	public List<MatchVO> selectMatchToInvite();
 
 }

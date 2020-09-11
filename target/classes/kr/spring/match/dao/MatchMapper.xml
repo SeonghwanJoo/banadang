@@ -3,13 +3,19 @@
 <mapper  namespace="kr.spring.match.dao.MatchMapper">
 	<insert id="insertMatch" parameterType="matchVO">
 		insert into match
-			(match_num,id,type,home,away,address,match_date,start_time,end_time,match_detail)
+			(match_num,id,type,home,away,address,address_x,address_y,match_date,start_time,end_time,match_detail,cost)
 		values
-			(match_seq.nextval,#{id},#{type},#{home},#{away},#{address},#{match_date},#{start_time},#{end_time},
+			(match_seq.nextval,#{id},#{type},#{home},#{away},#{address},#{address_x},#{address_y},#{match_date},#{start_time},#{end_time},
 		<if test="match_detail != ''">
-			#{match_detail})
+			#{match_detail},
 		</if>
 		<if test="match_detail == ''">
+			'',
+		</if>
+		<if test="cost != ''">
+			#{cost})
+		</if>
+		<if test="cost == ''">
 			'')
 		</if>
 	</insert>
@@ -20,4 +26,36 @@
 			 from club_rating group by club_num) b
              on a.club_num=b.club_num
 	</select>
+	<select id="insertRating" parameterType="matchVO">
+		insert into club_rating
+			(clubrating_num,match_num,id,club_num,perform,manner,rating_detail)
+		values
+			(clubrating_seq.nextval,#{match_num},#{id},#{club_num},#{perform},#{manner},
+		<if test="rating_detail !=''">
+			#{rating_detail})
+		</if>
+		<if test="rating_detail ==''">
+			'')
+		</if>
+	</select>
+	<select id="updateRating" parameterType="matchVO">
+		update club_rating set manner=#{manner},perform=#{perform}
+		<if test="rating_detail !=''">
+			rating_detail=#{rating_detail}
+		</if>
+		where clubrating_num=#{clubrating_num}
+	</select>
+	<select id="selectVote_detail" parameterType="matchVO" resultType="memberVO">
+		select a.club_num,a.id,a.nickname,a.thumbnail_image,a.profile_image,b.status from
+			(select * from match_vote where club_num=#{club_num} and match_num=#{match_num})b right outer join 
+    		(select c.club_num club_num,c.id,m.nickname,m.thumbnail_image,m.profile_image from member_detail m join club_join c on m.id=c.id where c.club_num=#{club_num})
+    		a on b.id=a.id
+	</select>
+		<select id="selectMatchToInvite" resultType="matchVO">
+		select * from 
+				(select * from (select * from match where match_date>sysdate-1 and away='모집중')a join club b on a.home=b.club_num) d
+				join
+				(select avg(manner),avg(perform),club_num from club_rating group by club_num) e on d.club_num=e.club_num
+	</select>
+	
 </mapper>

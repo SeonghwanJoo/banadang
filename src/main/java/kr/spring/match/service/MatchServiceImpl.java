@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import kr.spring.match.dao.MatchMapper;
 import kr.spring.match.domain.MatchVO;
+import kr.spring.member.domain.MemberVO;
 
 @Service("matchService")
 public class MatchServiceImpl implements MatchService {
@@ -72,6 +73,35 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	public List<MatchVO> selectMyPastMatch(String club_num) {
 		return matchMapper.selectMyPastMatch(club_num);
+	}
+
+	@Override
+	public Integer selectMyRating(MatchVO match) {
+		return matchMapper.selectMyRating(match);
+	}
+
+	@Override
+	public void insertRating(MatchVO match) {
+		matchMapper.insertRating(match);
+		
+	}
+
+	@Override
+	public void updateRating(MatchVO match) {
+		matchMapper.updateRating(match);
+		
+	}
+
+	@Override
+	public List<MemberVO> selectVote_detail(MatchVO match) {
+		
+		return matchMapper.selectVote_detail(match);
+	}
+
+	@Override
+	public List<MatchVO> selectMatchToInvite() {
+		
+		return matchMapper.selectMatchToInvite();
 	}
 
 }

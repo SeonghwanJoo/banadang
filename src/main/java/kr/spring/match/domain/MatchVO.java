@@ -170,27 +170,62 @@ public class MatchVO {
 	public int getMax() {
 		return max;
 	}
+	public String getRating_detail() {
+		return rating_detail;
+	}
 
+	public void setRating_detail(String rating_detail) {
+		this.rating_detail = rating_detail;
+	}
+	public int getClubrating_num() {
+		return clubrating_num;
+	}
+
+	public void setClubrating_num(int clubrating_num) {
+		this.clubrating_num = clubrating_num;
+	}
+	public void setMax(int max) {
+		this.max = max;
+	}
+	public String getCost() {
+		return cost;
+	}
+
+	public void setCost(String cost) {
+		this.cost = cost;
+	}
+	public double getAddress_x() {
+		return address_x;
+	}
+
+	public void setAddress_x(double address_x) {
+		this.address_x = address_x;
+	}
+
+	public double getAddress_y() {
+		return address_y;
+	}
+
+	public void setAddress_y(double address_y) {
+		this.address_y = address_y;
+	}
+	private String cost;
 	private int attend;
 	private int not_attend;
 	private int undefined;
 	private int match_num;
 	private String id;
-	//
 	private int type;
-	//
 	private String home;
-	//
 	private String away;
-	//
 	private String address;
-	//
+	private double address_x;
+	private double address_y;
 	private Date match_date;
-	//
 	private String start_time;
-	//
 	private String end_time;
 	private String match_detail;
+	private String rating_detail;
 	private String vote_num;
 	private String club_num;
 	private int status;
@@ -205,16 +240,23 @@ public class MatchVO {
 	private double perform;
 	private double manner;
 	private String club_name;
+	private int clubrating_num;
+	
 	@Override
 	public String toString() {
-		return "MatchVO [attend=" + attend + ", not_attend=" + not_attend + ", undefined=" + undefined + ", match_num="
-				+ match_num + ", id=" + id + ", type=" + type + ", home=" + home + ", away=" + away + ", address="
-				+ address + ", match_date=" + match_date + ", start_time=" + start_time + ", end_time=" + end_time
-				+ ", match_detail=" + match_detail + ", vote_num=" + vote_num + ", club_num=" + club_num + ", status="
-				+ status + ", count=" + count + ", max=" + max + ", home_name=" + home_name + ", home_manner="
-				+ home_manner + ", home_perform=" + home_perform + ", away_name=" + away_name + ", away_manner="
-				+ away_manner + ", away_perform=" + away_perform + ", perform=" + perform + ", manner=" + manner
-				+ ", club_name=" + club_name + "]";
+		return "MatchVO [cost=" + cost + ", attend=" + attend + ", not_attend=" + not_attend + ", undefined="
+				+ undefined + ", match_num=" + match_num + ", id=" + id + ", type=" + type + ", home=" + home
+				+ ", away=" + away + ", address=" + address + ", match_date=" + match_date + ", start_time="
+				+ start_time + ", end_time=" + end_time + ", match_detail=" + match_detail + ", rating_detail="
+				+ rating_detail + ", vote_num=" + vote_num + ", club_num=" + club_num + ", status=" + status
+				+ ", count=" + count + ", max=" + max + ", home_name=" + home_name + ", home_manner=" + home_manner
+				+ ", home_perform=" + home_perform + ", away_name=" + away_name + ", away_manner=" + away_manner
+				+ ", away_perform=" + away_perform + ", perform=" + perform + ", manner=" + manner + ", club_name="
+				+ club_name + ", clubrating_num=" + clubrating_num + "]";
 	}
+	
+
+	
+
 
 }

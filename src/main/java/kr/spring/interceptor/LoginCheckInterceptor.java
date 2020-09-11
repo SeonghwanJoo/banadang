@@ -26,7 +26,7 @@ public class LoginCheckInterceptor
 		if(session.getAttribute("user_id")==null) {
 			//로그인이 되어 있지 않기 때문에 로그인 폼 호출
 			response.sendRedirect(
-			request.getContextPath()+"/member/login.do");
+			request.getContextPath()+"/main/main.do");
 			return false;
 		}
 		

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
-		<a href="#" onclick="location.href='main.do'">
+		<a href="${pageContext.request.contextPath }/main/main.do" >
 		<span class="material-icons" id="chevron_left">chevron_left</span>
 		</a>
 		<div class="topnav-centered">
@@ -175,34 +175,49 @@
 				<input class="vote" type="radio" name="vote" id="undefined" value="3"> 미정
 			</label>
 		</div>
+		<div class="total_wrapper">
+			<a href="vote_detail.do?
+				club_num=${match.club_num }&match_num=${match.match_num}&home_name=${match.home_name}&away_name=${match.away_name}"
+				onclick="location.reload(true)">
+			<span class="total_person material-icons">person</span>
+			<span id="total" class="total">${match.attend+match.not_attend+match.undefined}</span><span class="unit"> 명 투표 </span>
+			<i class="total fas fa-chevron-right"></i>
+			</a>
+		</div>
 	</li>
 </ul>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function(){
-		function goBack(){
-			history.go(-1);
-		}
 		
-		if( ${myVote ==  1}){
+		
+		$('.radio').removeClass(' focus');
+		$('.radio').removeClass(' active');
+		if( ${myVote == 1}){
 			$('#attend_sign').css('display','inline-block');
 			$('#not_attend_sign').css('display','none');
 			$('#undefined_sign').css('display','none');
+			$('#attend_btn').addClass(' focus active');
 		} else if(${myVote == 2}){
 			$('#attend_sign').css('display','none');
 			$('#not_attend_sign').css('display','inline-block');
 			$('#undefined_sign').css('display','none');
+			$('#not_attend_btn').addClass(' focus active');
 		} else if(${myVote == 3}){
 			$('#attend_sign').css('display','none');
 			$('#not_attend_sign').css('display','none');
 			$('#undefined_sign').css('display','inline-block');
+			$('#undefined_btn').addClass(' focus active');
 		} else if (${empty myVote}){
 			$('#attend_sign').css('display','none');
 			$('#not_attend_sign').css('display','none');
 			$('#undefined_sign').css('display','none');
 		}
 		$('.vote').click(function(){
+			$('.radio').removeClass(' focus');
+			$('.radio').removeClass(' active');
+			
 			if( $(this).val() ==  1){
 				$('#attend_sign').css('display','inline-block');
 				$('#not_attend_sign').css('display','none');
@@ -241,16 +256,19 @@
 						$('#num_attend').text(data.attend);
 						$('#num_nattend').text(data.not_attend);
 						$('#num_undefined').text(data.undefined);
+						$('#total').text(total);
 						var max=Math.max(data.attend,data.not_attend,data.undefined);
 						if (max==data.attend){
 							$('#attend').css('background-color','#66bb6a');
 							$('#not_attend').css('background-color','#bfbfbf');
 							$('#undefined').css('background-color','#bfbfbf');
-						}else if(max==data.not_attend){
+						}
+						if(max==data.not_attend){
 							$('#attend').css('background-color','#bfbfbf');
 							$('#not_attend').css('background-color','#66bb6a');
 							$('#undefined').css('background-color','#bfbfbf')
-						}else if(max==data.undefined){
+						}
+						if(max==data.undefined){
 							$('#attend').css('background-color','#bfbfbf');
 							$('#not_attend').css('background-color','#bfbfbf');
 							$('#undefined').css('background-color','#66bb6a');
