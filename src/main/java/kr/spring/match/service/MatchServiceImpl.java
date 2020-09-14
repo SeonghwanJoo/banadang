@@ -104,4 +104,10 @@ public class MatchServiceImpl implements MatchService {
 		return matchMapper.selectMatchToInvite();
 	}
 
+	@Override
+	public MatchVO selectMatchToInviteByMatch_num(Integer match_num) {
+
+		return matchMapper.selectMatchToInviteByMatch_num(match_num);
+	}
+
 }

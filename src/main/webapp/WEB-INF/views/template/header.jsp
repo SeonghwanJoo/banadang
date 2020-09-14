@@ -27,7 +27,9 @@
 
   <!-- Right-aligned links -->
   <div class="topnav-right">
-    <a href="#about">About</a>
+    <a href="${pageContext.request.contextPath }/match/writeForm.do">
+    	<i class="fas fa-edit"></i>
+    </a>
   </div>
 
 </div>

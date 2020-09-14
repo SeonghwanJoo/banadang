@@ -51,11 +51,17 @@
     		(select c.club_num club_num,c.id,m.nickname,m.thumbnail_image,m.profile_image from member_detail m join club_join c on m.id=c.id where c.club_num=#{club_num})
     		a on b.id=a.id
 	</select>
-		<select id="selectMatchToInvite" resultType="matchVO">
+	<select id="selectMatchToInvite" resultType="matchVO">
 		select * from 
 				(select * from (select * from match where match_date>sysdate-1 and away='모집중')a join club b on a.home=b.club_num) d
 				join
-				(select avg(manner),avg(perform),club_num from club_rating group by club_num) e on d.club_num=e.club_num
+				(select avg(manner) manner,avg(perform) perform,club_num from club_rating group by club_num) e on d.club_num=e.club_num order by d.match_date
+	</select>
+	<select id="selectMatchToInviteByMatch_num" parameterType="Integer" resultType="matchVO">
+		select * from 
+				(select * from (select * from match where match_num=#{match_num})a join club b on a.home=b.club_num) d
+				join
+				(select avg(manner) manner,avg(perform) perform,club_num,count(*) count from club_rating group by club_num) e on d.club_num=e.club_num
 	</select>
 	
 </mapper>

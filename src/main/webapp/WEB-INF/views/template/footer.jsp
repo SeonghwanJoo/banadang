@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:if test="${!empty user_id }">
 <div class="row blank_div"> </div>
 <div class="row">
 	<div class="bottom_menu">
@@ -31,8 +33,11 @@
 		</div>
 	</div>
 </div>
+</c:if>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+
 	$(function(){
 		if(${title eq 'BANADANG'}){
 			$('.main').css('color','black');

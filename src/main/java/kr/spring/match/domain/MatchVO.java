@@ -153,13 +153,13 @@ public class MatchVO {
 		return perform;
 	}
 	public void setPerform(double perform) {
-		this.perform = perform;
+		this.perform = Math.round(perform*10)/10.0;;
 	}
 	public double getManner() {
 		return manner;
 	}
 	public void setManner(double manner) {
-		this.manner = manner;
+		this.manner = Math.round(manner*10)/10.0;
 	}
 	public String getClub_name() {
 		return club_name;
@@ -209,6 +209,28 @@ public class MatchVO {
 	public void setAddress_y(double address_y) {
 		this.address_y = address_y;
 	}
+	public String getClub_color() {
+		return club_color;
+	}
+
+	public void setClub_color(String club_color) {
+		this.club_color = club_color;
+	}
+	public byte[] getClub_img() {
+		return club_img;
+	}
+
+	public void setClub_img(byte[] club_img) {
+		this.club_img = club_img;
+	}
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
 	private String cost;
 	private int attend;
 	private int not_attend;
@@ -241,21 +263,25 @@ public class MatchVO {
 	private double manner;
 	private String club_name;
 	private int clubrating_num;
+	private byte[] club_img;
+	private String club_color;
+	private double distance;
 	
+
 	@Override
 	public String toString() {
 		return "MatchVO [cost=" + cost + ", attend=" + attend + ", not_attend=" + not_attend + ", undefined="
 				+ undefined + ", match_num=" + match_num + ", id=" + id + ", type=" + type + ", home=" + home
-				+ ", away=" + away + ", address=" + address + ", match_date=" + match_date + ", start_time="
-				+ start_time + ", end_time=" + end_time + ", match_detail=" + match_detail + ", rating_detail="
-				+ rating_detail + ", vote_num=" + vote_num + ", club_num=" + club_num + ", status=" + status
-				+ ", count=" + count + ", max=" + max + ", home_name=" + home_name + ", home_manner=" + home_manner
-				+ ", home_perform=" + home_perform + ", away_name=" + away_name + ", away_manner=" + away_manner
-				+ ", away_perform=" + away_perform + ", perform=" + perform + ", manner=" + manner + ", club_name="
-				+ club_name + ", clubrating_num=" + clubrating_num + "]";
+				+ ", away=" + away + ", address=" + address + ", address_x=" + address_x + ", address_y=" + address_y
+				+ ", match_date=" + match_date + ", start_time=" + start_time + ", end_time=" + end_time
+				+ ", match_detail=" + match_detail + ", rating_detail=" + rating_detail + ", vote_num=" + vote_num
+				+ ", club_num=" + club_num + ", status=" + status + ", count=" + count + ", max=" + max + ", home_name="
+				+ home_name + ", home_manner=" + home_manner + ", home_perform=" + home_perform + ", away_name="
+				+ away_name + ", away_manner=" + away_manner + ", away_perform=" + away_perform + ", perform=" + perform
+				+ ", manner=" + manner + ", club_name=" + club_name + ", clubrating_num=" + clubrating_num
+				+ ", club_color=" + club_color + "]";
 	}
 	
-
 	
 
 

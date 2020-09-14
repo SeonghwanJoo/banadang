@@ -78,6 +78,20 @@ public class MatchController {
 		mav.setViewName("invite_match");
 		mav.addObject("title","경기 매치");
 		mav.addObject("matchVO", matchVO);
+		logger.info("<<<matchVO>>>"+matchVO);
+		
+		return mav;
+	}
+	@RequestMapping("/match/invite_detail.do")
+	public ModelAndView inviteDetail(@RequestParam Integer match_num) {
+		
+		ModelAndView mav=new ModelAndView();
+		MatchVO match=matchService.selectMatchToInviteByMatch_num(match_num);
+		
+		mav.setViewName("invite_detail");
+		mav.addObject("title","경기 신청");
+		mav.addObject("match", match);
+		logger.info("<<<matchVO>>>"+match);
 		
 		return mav;
 	}

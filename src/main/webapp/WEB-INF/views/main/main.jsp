@@ -91,13 +91,13 @@
 				<span class="from-to">VS</span>
 				<div class="team-info col">
 					${match.away_name}<br>
-					매너 : ${match.away_manner*2}/10
+					매너 : ${match.away_manner*2}
 					<span class="star-wrap">
 					<span class="star-rating">
 						<span style="width:${match.away_manner*20}%"></span>
 					</span>
 					</span><br>
-					실력 : ${match.away_perform*2}/10
+					실력 : ${match.away_perform*2}
 					<span class="star-rating">
 						<span style="width:${match.away_perform*20}%"></span>
 					</span>

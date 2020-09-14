@@ -13,8 +13,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 .star-rating { width:100px;position:relative;top:3px; text-align: left; }
 .star-rating,.star-rating span {
-	
 	display:inline-block; height:19px; overflow:hidden; background:url('${pageContext.request.contextPath}/resources/images/star1.png')no-repeat;
+	margin-right:0.4rem;
 }
 .star-rating span{ background-position:left bottom; line-height:0; vertical-align:top; }
 

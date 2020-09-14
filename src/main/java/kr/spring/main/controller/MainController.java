@@ -84,14 +84,14 @@ public class MainController {
 				
 				for(MatchVO club_rating:clubs_rating) {
 					if(match.getHome().equals(club_rating.getClub_num())) {
-						match.setHome_manner(Math.round(club_rating.getManner()*10)/10.0);
+						match.setHome_manner(club_rating.getManner());
 						match.setHome_name(club_rating.getClub_name());
-						match.setHome_perform(Math.round(club_rating.getPerform()*10)/10.0);
+						match.setHome_perform(club_rating.getPerform());
 					}
 					if(match.getAway().equals(club_rating.getClub_num())) {
-						match.setAway_manner(Math.round(club_rating.getManner()*10)/10.0);
+						match.setAway_manner(club_rating.getManner());
 						match.setAway_name(club_rating.getClub_name());
-						match.setAway_perform(Math.round(club_rating.getPerform()*10)/10.0);
+						match.setAway_perform(club_rating.getPerform());
 					}
 				}
 			}
@@ -106,14 +106,14 @@ public class MainController {
 				match.setAway_perform(0.0);
 				for(MatchVO past_rating:past_ratings) {
 					if(match.getHome().equals(past_rating.getClub_num())) {
-						match.setHome_manner(Math.round(past_rating.getManner()*10)/10.0);
+						match.setHome_manner(past_rating.getManner());
 						match.setHome_name(past_rating.getClub_name());
-						match.setHome_perform(Math.round(past_rating.getPerform()*10)/10.0);
+						match.setHome_perform(past_rating.getPerform());
 					}
 					if(match.getAway().equals(past_rating.getClub_num())) {
-						match.setAway_manner(Math.round(past_rating.getManner()*10)/10.0);
+						match.setAway_manner(past_rating.getManner());
 						match.setAway_name(past_rating.getClub_name());
-						match.setAway_perform(Math.round(past_rating.getPerform()*10)/10.0);
+						match.setAway_perform(past_rating.getPerform());
 					}
 				}
 			}
@@ -168,14 +168,14 @@ public class MainController {
 			logger.info("<<<final match_justbefore rating setting>>>> : "+match);
 			for(MatchVO club_rating:clubs_rating) {
 				if(match.getHome().equals(club_rating.getClub_num())) {
-					match.setHome_manner(Math.round(club_rating.getManner()*10)/10.0);
+					match.setHome_manner(club_rating.getManner());
 					match.setHome_name(club_rating.getClub_name());
-					match.setHome_perform(Math.round(club_rating.getPerform()*10)/10.0);
+					match.setHome_perform(club_rating.getPerform());
 				}
 				if(match.getAway().equals(club_rating.getClub_num())) {
-					match.setAway_manner(Math.round(club_rating.getManner()*10)/10.0);
+					match.setAway_manner(club_rating.getManner());
 					match.setAway_name(club_rating.getClub_name());
-					match.setAway_perform(Math.round(club_rating.getPerform()*10)/10.0);
+					match.setAway_perform(club_rating.getPerform());
 				}
 			}
 			mav.addObject("match",match);

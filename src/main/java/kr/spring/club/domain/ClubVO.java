@@ -12,7 +12,8 @@ public class ClubVO {
 	private String club_name;
 	private String club_detail;
 	private MultipartFile upload;
-	private byte[] image;
+	private byte[] club_img;
+	private String club_color;
 	public String getClub_num() {
 		return club_num;
 	}
@@ -49,17 +50,26 @@ public class ClubVO {
 	public void setUpload(MultipartFile upload) {
 		this.upload = upload;
 	}
-	public byte[] getImage() {
-		return image;
+	public byte[] getClub_img() {
+		return club_img;
 	}
-	public void setImage(byte[] image) {
-		this.image = image;
+	public void setClub_img(byte[] club_img) {
+		this.club_img = club_img;
+	}
+	public String getClub_color() {
+		return club_color;
+	}
+	public void setClub_color(String club_color) {
+		this.club_color = club_color;
 	}
 	@Override
 	public String toString() {
 		return "ClubVO [club_num=" + club_num + ", id=" + id + ", club_loc=" + club_loc + ", club_name=" + club_name
-				+ ", club_detail=" + club_detail + ", upload=" + upload + ", image=" + Arrays.toString(image) + "]";
+				+ ", club_detail=" + club_detail + ", upload=" + upload + ", club_img=" + Arrays.toString(club_img)
+				+ ", club_color=" + club_color + "]";
 	}
 	
 	
 }
+	
+	
