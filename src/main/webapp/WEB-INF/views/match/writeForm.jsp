@@ -10,7 +10,7 @@
 		<div class="row" id="top_wrap">
 			<div class="fixed_top">
 				<a href="#" onclick="history.go(-1); return false;">
-				<span class="material-icons" id="cancel" onclick="goBack();">close</span>
+				<span class="material-icons" id="cancel">close</span>
 				</a>
 				<div class="topnav-centered">
 					<a href="#home" class="active">${title }</a>
@@ -39,13 +39,13 @@
 		</div>
 		<div class="row"><div class="col"><span class="msg" id="type_msg"></span></div></div>
 		<hr class="hr">
-		<c:if test="${fn:length(myTeam)>1}">
+		<c:if test="${fn:length(myClubs)>1}">
 		<div class="row">
 			<div class="input-container col">
 				<i class="fa fa-users icon"></i> <select class="time input-field" id="home" name="home">
 					<option value="">우리팀 선택</option>
-					<c:forEach items="${myTeam }" var="myTeam">
-					<option value="${myTeam.club_num}">${myTeam.club_name }</option>
+					<c:forEach items="${myClubs }" var="myClub">
+					<option value="${myClub.club_num}">${myClub.club_name }</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -53,9 +53,9 @@
 		<div class="row"><div class="col"><span class="msg"  id="home_msg"></span></div></div>
 		<hr class="hr">
 		</c:if>
-		<c:if test="${fn:length(myTeam)==1}">
-		<c:forEach items="${myTeam }" var="myTeam">
-		<input type="hidden" id="home" name="home" value="${myTeam.club_num}">
+		<c:if test="${fn:length(myClubs)==1}">
+		<c:forEach items="${myClubs }" var="myClub">
+		<input type="hidden" id="home" name="home" value="${myClub.club_num}">
 		</c:forEach>
 		</c:if>
 		<input type="hidden" name="away" id="away">
@@ -208,7 +208,7 @@
 		</div>
 		<div class="row">
 			<div class="text input-container col">
-				<textarea class="input-field" id="match_detail" name="match_detail" placeholder="추가적으로 공유할 내용이 있으면 입력해주세요.(매너/실력은 자동 계산되어 보여집니다)"></textarea>
+				<textarea class="detail input-field" id="match_detail" name="match_detail" placeholder="추가적으로 공유할 내용이 있으면 입력해주세요.(매너/실력은 자동 계산되어 보여집니다)"></textarea>
 			</div>
 		</div>
 		<hr class="hr">

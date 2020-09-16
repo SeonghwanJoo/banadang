@@ -27,12 +27,13 @@
 
   <!-- Right-aligned links -->
   <div class="topnav-right">
-    <a href="${pageContext.request.contextPath }/match/writeForm.do">
+    <a id="write" href="${pageContext.request.contextPath }/match/writeForm.do">
     	<i class="fas fa-edit"></i>
     </a>
   </div>
 
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	function openNav() {
 	  document.getElementById("myNav").style.width = "70%";
@@ -43,6 +44,11 @@
 	  document.getElementById("myNav").style.width = "0%";
 	  document.body.style.backgroundColor = "white";
 	}
+	$(function(){
+		if(${title eq '팀 관리'}){
+			$('#write').attr('href','${pageContext.request.contextPath}/club/createClubForm.do');
+		}
+	});
 </script>
 
 

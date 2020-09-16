@@ -54,12 +54,12 @@ public class MemberController {
         		memberService.insertMember(memberVO);
         	}
         	
-        	List<ClubVO> myTeam=clubService.selectMyClubs(user_id);
+        	List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
         	session.setAttribute("user_id", user_id);
             session.setAttribute("access_Token", access_Token);
-            session.setAttribute("myTeam", myTeam);//소속팀 선택해서 배열로 반환 필요
+            session.setAttribute("myClubs", myClubs);
             
-            logger.info("<<<<<<<myTeam>>>>>>>>>> : "+myTeam);
+            logger.info("<<<<<<<myTeam>>>>>>>>>> : "+myClubs);
         }
 		return "redirect:/main/main.do";
 	}

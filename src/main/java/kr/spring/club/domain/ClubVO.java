@@ -14,6 +14,27 @@ public class ClubVO {
 	private MultipartFile upload;
 	private byte[] club_img;
 	private String club_color;
+	private String club_age;
+	private double club_locX;
+	private double club_locY;
+	public String getClub_age() {
+		return club_age;
+	}
+	public void setClub_age(String club_age) {
+		this.club_age = club_age;
+	}
+	public double getClub_locX() {
+		return club_locX;
+	}
+	public void setClub_locX(double club_locX) {
+		this.club_locX = club_locX;
+	}
+	public double getClub_locY() {
+		return club_locY;
+	}
+	public void setClub_locY(double club_locY) {
+		this.club_locY = club_locY;
+	}
 	public String getClub_num() {
 		return club_num;
 	}
@@ -66,9 +87,10 @@ public class ClubVO {
 	public String toString() {
 		return "ClubVO [club_num=" + club_num + ", id=" + id + ", club_loc=" + club_loc + ", club_name=" + club_name
 				+ ", club_detail=" + club_detail + ", upload=" + upload + ", club_img=" + Arrays.toString(club_img)
-				+ ", club_color=" + club_color + "]";
+				+ ", club_color=" + club_color + ", club_age=" + club_age + ", club_locX=" + club_locX + ", club_locY="
+				+ club_locY + "]";
 	}
-	
+
 	
 }
 	

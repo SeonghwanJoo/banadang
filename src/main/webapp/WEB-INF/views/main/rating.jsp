@@ -85,17 +85,17 @@
 		</div>
 		<div class="row">
 			<div class="text input-container col">
-				<textarea class="input-field" id="rating_detail" name="rating_detail" 
+				<textarea class="detail input-field" id="rating_detail" name="rating_detail" 
 				placeholder="경기평(선택 입력)"></textarea>
 			</div>
 		</div>
 	</li>
 </ul>
 <!-- The Modal -->
-<div id="toast">
+<div id="toast" class="submit_toast">
 
   <!-- Modal content -->
-  <div id="toast-content">
+  <div id="submit_toast_content" class="submit_toast_content">
      <span id="rating_msg">상대팀 평점 수정 완료</span>
      <br><br>확인
   </div>

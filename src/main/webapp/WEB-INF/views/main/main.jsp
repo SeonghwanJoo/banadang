@@ -66,7 +66,9 @@
 			<div class="row">
 				<span class="match-item">${match.match_date}</span>
 				<span class="match-item">${match.start_time }~${match.end_time }</span>
+				<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}" target="_blank">
 				<span class="match-item">${match.address}</span>
+				</a>
 				<span class="match-item">
 					<c:if test="${match.type==1 }">축구</c:if>
 					<c:if test="${match.type==2 }">풋살</c:if>

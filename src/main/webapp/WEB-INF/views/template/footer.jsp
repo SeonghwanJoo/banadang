@@ -13,6 +13,12 @@
 				</a>
 			</div>
 			<div class="col">
+				<a class="menu-item" href="${pageContext.request.contextPath }/club/club.do">
+				<span class="club material-icons bottom-icon">groups</span>
+				<span class="club bottom-icon-txt">팀 관리</span>
+				</a>
+			</div>
+			<div class="col">
 				<a class="menu-item" href="${pageContext.request.contextPath }/match/match_toInvite.do">
 				<span class="invite material-icons bottom-icon">sports_soccer</span>
 				<span class="invite bottom-icon-txt">상대팀 매칭</span>
@@ -22,12 +28,6 @@
 				<a class="menu-item" href="${pageContext.request.contextPath }/match/join.do">
 				<span class="join material-icons bottom-icon">person_add</span>
 				<span class="join bottom-icon-txt">용병 모집</span>
-				</a>
-			</div>
-			<div class="col">
-				<a class="menu-item" href="${pageContext.request.contextPath }/club/club.do">
-				<span class="club material-icons bottom-icon">groups</span>
-				<span class="club bottom-icon-txt">팀 관리</span>
 				</a>
 			</div>
 		</div>

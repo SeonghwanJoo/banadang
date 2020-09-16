@@ -24,4 +24,6 @@ public interface MatchService {
 	public List<MemberVO> selectVote_detail(MatchVO match);
 	public List<MatchVO> selectMatchToInvite();
 	public MatchVO selectMatchToInviteByMatch_num(Integer match_num);
+	public Integer selectMyRequestForMatchToInvite(MatchVO match);
+	public void insertMyRequestForMatchToInvite(MatchVO match);
 }

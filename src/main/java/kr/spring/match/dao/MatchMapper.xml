@@ -41,7 +41,7 @@
 	<select id="updateRating" parameterType="matchVO">
 		update club_rating set manner=#{manner},perform=#{perform}
 		<if test="rating_detail !=''">
-			rating_detail=#{rating_detail}
+			,rating_detail=#{rating_detail}
 		</if>
 		where clubrating_num=#{clubrating_num}
 	</select>
@@ -62,6 +62,18 @@
 				(select * from (select * from match where match_num=#{match_num})a join club b on a.home=b.club_num) d
 				join
 				(select avg(manner) manner,avg(perform) perform,club_num,count(*) count from club_rating group by club_num) e on d.club_num=e.club_num
+	</select>
+	<select id="insertMyRequestForMatchToInvite" parameterType="matchVO">
+		insert into match_request
+			(request_num,match_num,id,away,acceptance,request_detail)
+		values
+			(request_seq.nextval,#{match_num},#{id},#{away},1,
+		<if test="invite_detail !=''">
+			#{invite_detail})
+		</if>
+		<if test="invite_detail ==''">
+			'')
+		</if>
 	</select>
 	
 </mapper>

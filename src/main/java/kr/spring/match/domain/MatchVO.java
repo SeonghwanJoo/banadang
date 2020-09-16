@@ -230,6 +230,13 @@ public class MatchVO {
 	public void setDistance(double distance) {
 		this.distance = distance;
 	}
+	public String getInvite_detail() {
+		return invite_detail;
+	}
+
+	public void setInvite_detail(String invite_detail) {
+		this.invite_detail = invite_detail;
+	}
 
 	private String cost;
 	private int attend;
@@ -266,6 +273,7 @@ public class MatchVO {
 	private byte[] club_img;
 	private String club_color;
 	private double distance;
+	private String invite_detail;
 	
 
 	@Override

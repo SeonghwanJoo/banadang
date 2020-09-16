@@ -39,24 +39,19 @@ public class MatchController {
 	}
 	
 	@RequestMapping("/match/writeForm.do")
-	public ModelAndView process(HttpSession session) {
+	public ModelAndView process() {
 		ModelAndView mav =new ModelAndView();
 		
-		String user_id=(String)session.getAttribute("user_id");
 		List<ClubVO> list = new ArrayList<ClubVO> ();
-		List<ClubVO> myTeam = new ArrayList<ClubVO>();
 		list=clubService.selectAllClubs();
-		myTeam=clubService.selectMyClubs(user_id);
 		for(ClubVO club : list) {
 			logger.info("<<<<List>>>> : "+ club);
 		}
-		logger.info("<<<myTeam>>>:"+myTeam);
 		
 		
 		mav.setViewName("writeForm");
 		mav.addObject("title", "매치 작성");
 		mav.addObject("list",list);
-		mav.addObject("myTeam",myTeam);
 		
 		return mav;
 	}
