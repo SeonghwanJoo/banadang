@@ -145,7 +145,7 @@
 			<div class="input-container col">
 				<i class="far fa-clock icon"></i> <select class="time input-field" id="end_time" name="end_time">
 					<option class="placeholder" value="">종료 시간 선택</option>
-					<option value="06:00">06:00</option>
+					<option value="06:00"></option>
 					<option value="06:30">06:30</option>
 					<option value="07:00">07:00</option>
 					<option value="07:30">07:30</option>
@@ -219,7 +219,7 @@
 <div id="myModals" class="modals">
 	<!-- Modal content -->
 	<div class="modals-content">
-	    <span class="close">&times;</span>
+	    <span class="close_mod">&times;</span>
 		<div class="input-container col" id="search_modal">
 			<input type="text" placeholder="장소 키워드 입력" name="search" class="searchBar" id="keyword">
 	  		<button class="search_btn" id="search_btn"><i class="fa fa-search"></i></button>
@@ -554,7 +554,7 @@ $( function() {
 	var address = document.getElementById("address");
 
 	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("close")[0];
+	var span = document.getElementsByClassName("close_mod")[0];
 
 	// When the user clicks the button, open the modal 
 	address.onclick = function() {

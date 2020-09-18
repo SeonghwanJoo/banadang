@@ -58,22 +58,30 @@
 		</c:forEach>
 	</ul>
 --%>
+<input type="file" id="test" accept="image/*">
+<img id="preview">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-var array=new Array();
-array.push("{one:1,two:2}");
-console.log("<<array.one>> : "+array.one);
-for(var i=0; i<array.length;i++){
-	console.log("array[i]"+array[i]);
-	console.log("array.1"+array[i].one);
-}
-const person2 = {
-		  firstname: 'John',
-		  lastname: 'Doe'
-		};
+
+$("#test").on("change",function preview(event) {
+	console.log("input");
+	var file=event.target.files[0];
+    	console.log("input2");
+      var reader = new FileReader();
+      reader.readAsDataURL(file);          
+      reader.onload = function(e) {
+        $("#preview").attr('src', e.target.result);
+        var image=new Image();
+        image.src=e.target.result;
+        image.onload=function(image){
+        	console.log("image.src : "+image.src);
+        }
+      }
+});
 
 
-		console.log(person2);
-	
+		
+	 
 </script>
 </body>
 

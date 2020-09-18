@@ -79,13 +79,13 @@
 			<div class="row">
 				<div class="team-info col">
 					${match.home_name}<br>
-					매너 : ${match.home_manner*2}/10
+					매너 : ${match.home_manner*2}
 					<span class="star-wrap">
 					<span class="star-rating">
 						<span style="width:${match.home_manner*20}%"></span>
 					</span>
 					</span><br>
-					실력 : ${match.home_perform*2}/10
+					실력 : ${match.home_perform*2}
 					<span class="star-rating">
 						<span style="width:${match.home_perform*20}%"></span>
 					</span>
@@ -118,7 +118,7 @@
 				<span class="voted" 
 					style=
 						"width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#66bb6a;">
+						background-color:#A4D3A6;">
 					<span class="vote-label">참석</span>
 				</span>
 				</c:if>
@@ -146,7 +146,7 @@
 				<span class="voted" 
 					style=
 						"width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#66bb6a;">
+						background-color:#A4D3A6;">
 					<span class="vote-label">불참</span>
 				</span>
 				</c:if>
@@ -173,7 +173,7 @@
 				<span class="voted" 
 					style=
 						"width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#66bb6a;">
+						background-color:#A4D3A6;">
 					<span class="vote-label">미정</span>
 				</span>
 				</c:if>

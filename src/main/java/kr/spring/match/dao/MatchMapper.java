@@ -15,7 +15,7 @@ public interface MatchMapper {
 	
 	public void insertMatch(MatchVO matchVO);
 	
-	@Select("select match_num,id,type,home,away,start_time,end_time,address,address_x,address_y,match_detail,match_date,#{club_num} club_num from match where home=#{club_num} or away=#{club_num} and match_date>sysdate-1 order by match_date")
+	@Select("select* from (select match_num,id,type,home,away,start_time,end_time,address,address_x,address_y,match_detail,match_date,#{club_num} club_num from match where home=#{club_num} or away=#{club_num}) where match_date>sysdate-1 order by match_date")
 	public List<MatchVO> selectMyMatch(String club_num);
 	
 	@Select("select * from (select match_num,id,type,home,away,start_time,end_time,address,match_detail,match_date,#{club_num} club_num from match where home=#{club_num} or away=#{club_num}) where match_date <sysdate-1 and match_date>sysdate-14")

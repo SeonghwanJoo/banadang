@@ -78,7 +78,7 @@
 				<span class="voted" id="attend"
 					style=
 						"width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#66bb6a;">
+						background-color:#a4d3a6;">
 					<span class="vote-label">참석
 						<span class="material-icons sign" id="attend_sign">done</span>
 					</span>
@@ -111,7 +111,7 @@
 				<span class="voted" id="not_attend"
 					style=
 						"width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#66bb6a;">
+						background-color:#a4d3a6;">
 					<span class="vote-label">불참
 						<span class="material-icons sign" id="not_attend_sign">done</span>
 					</span>
@@ -144,7 +144,7 @@
 				<span class="voted" id="undefined"
 					style=
 						"width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#66bb6a;">
+						background-color:#a4d3a6;">
 					<span class="vote-label">미정
 						<span class="material-icons sign" id="undefined_sign">done</span>
 					</span>
@@ -259,19 +259,19 @@
 						$('#total').text(total);
 						var max=Math.max(data.attend,data.not_attend,data.undefined);
 						if (max==data.attend){
-							$('#attend').css('background-color','#66bb6a');
+							$('#attend').css('background-color','#a4d3a6');
 							$('#not_attend').css('background-color','#bfbfbf');
 							$('#undefined').css('background-color','#bfbfbf');
 						}
 						if(max==data.not_attend){
 							$('#attend').css('background-color','#bfbfbf');
-							$('#not_attend').css('background-color','#66bb6a');
+							$('#not_attend').css('background-color','#a4d3a6');
 							$('#undefined').css('background-color','#bfbfbf')
 						}
 						if(max==data.undefined){
 							$('#attend').css('background-color','#bfbfbf');
 							$('#not_attend').css('background-color','#bfbfbf');
-							$('#undefined').css('background-color','#66bb6a');
+							$('#undefined').css('background-color','#a4d3a6');
 						}
 					},
 					error:function(){
