@@ -57,7 +57,11 @@
 			<mapping path="/main/ratingForm.do"/>
 			<mapping path="/main/vote_detail.do"/>
 			<mapping path="/main/invite_detail.do"/>
+			<mapping path="/match/writeForm.do"/>
+			<mapping path="/match/write.do"/>
 			<mapping path="/club/myClub.do"/>
+			<mapping path="/club/createClubForm.do"/>
+			<mapping path="/club/createClub.do"/>
 			<beans:bean 
 			class="kr.spring.interceptor.LoginCheckInterceptor"/>
 		</interceptor>

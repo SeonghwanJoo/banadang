@@ -98,7 +98,6 @@ public class MainAjaxController {
 			matchService.insertRating(match);
 			map.put("result", "inserted");
 		}
-		logger.info("map",map);
 		return map;
 	}
 }

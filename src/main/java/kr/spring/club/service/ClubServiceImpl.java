@@ -33,4 +33,27 @@ public class ClubServiceImpl implements ClubService {
 		return clubMapper.selectMyClubs_num(id);
 	}
 
+	@Override
+	public Integer insertClub(ClubVO club) {
+		
+		return clubMapper.insertClub(club);
+		
+	}
+
+	@Override
+	public ClubVO selectClubDetailWithClub_num(String club_num) {
+		
+		return clubMapper.selectClubDetailWithClub_num(club_num);
+	}
+
+	@Override
+	public List<ClubVO> selectAwayDetailsForRequestedMatch(String club_num) {
+		return clubMapper.selectAwayDetailsForRequestedMatch(club_num);
+	}
+
+	@Override
+	public List<ClubVO> selectHomeDetailsForRequestedMatch(String club_num) {
+		return clubMapper.selectHomeDetailsForRequestedMatch(club_num);
+	}
+
 }

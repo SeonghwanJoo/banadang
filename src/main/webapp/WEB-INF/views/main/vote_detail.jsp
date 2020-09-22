@@ -12,15 +12,15 @@
 		</div>
 	</div>
 </div>
-<div class="row vote_wrapper">
-	<div class="col">
+<div class="tab-row vote_wrapper">
+	<div class="tab-col">
 		<button class="tab-btn tab-active" onclick="openTap(event,'voted-detail')">투표자 현황</button>
 	</div>
-	<div class="col">
+	<div class="tab-col">
 		<button class="tab-btn" onclick="openTap(event,'not-voted')">미투표자</button>
 	</div>
 </div>
-<div id="voted-detail" class="voted_detail" style="display:block">
+<div id="voted-detail" class="tab_detail" style="display:block">
 	<div class="detail_wrapper">
 		<c:if test="${!empty atdance }">
 		<div class="list">
@@ -94,11 +94,11 @@
 		</c:if>
 	</div>
 </div>
-<div id="not-voted" class="voted_detail" style="display:none">
+<div id="not-voted" class="tab_detail" style="display:none">
 	<div class="detail_wrapper">
 		<c:if test="${!empty not_voted }">
 		<div class="list">
-			<div class="col"><span>미정 : ${fn:length(not_voted)}</span></div>
+			<div class="col"><span>미투표자 : ${fn:length(not_voted)}</span></div>
 			<hr class="hr">
 			<div class="row">
 				<c:forEach items="${not_voted }" var="not_voted">
@@ -121,7 +121,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 function openTap(evt,tap){
-	$('.voted_detail').css('display','none');
+	$('.tab_detail').css('display','none');
 	$('.tab-btn').removeClass(' tab-active');
 	var tap=document.getElementById(tap);
 	tap.style.display="block";

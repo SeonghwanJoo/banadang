@@ -1,6 +1,9 @@
 package kr.spring.club.controller;
 
 
+import java.util.List;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -10,10 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.club.domain.ClubVO;
+import kr.spring.club.service.ClubService;
+
 @Controller
 public class ClubController {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Resource
+	private ClubService clubService; 
 	
 	@RequestMapping("/club/club.do")
 	public ModelAndView process(HttpSession session) {
@@ -24,10 +33,19 @@ public class ClubController {
 		
 		return mav;
 	}
-	@RequestMapping("/club/clubManage.do")
-	public ModelAndView manageClub(@RequestParam String club_num) {
+	@RequestMapping("/club/manageClub.do")
+	public ModelAndView manageClub(@RequestParam String club_num,HttpSession session) {
 		ModelAndView mav=new ModelAndView();
 		//클럽정보를 받아서 manage_club 으로 session에 저장한다
+		//팀명,연령,주소,유니폼,매너평가,실력평가,평가수
+		ClubVO manage_club=clubService.selectClubDetailWithClub_num(club_num);
+		List<ClubVO> away_club=clubService.selectAwayDetailsForRequestedMatch(club_num);
+		List<ClubVO> home_club=clubService.selectHomeDetailsForRequestedMatch(club_num);
+		session.setAttribute("manage_club", manage_club);
+		mav.addObject("away_club", away_club);
+		mav.addObject("home_club", home_club);
+		mav.addObject("title","팀 관리");
+		mav.setViewName("manageClub");
 		
 		return mav;
 	}

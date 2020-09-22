@@ -119,7 +119,7 @@ $(function(){
 								+"유니폼";
 			if(matchs[i].club_color!=""){
 			itemStr+=
-								"<span class='color'></span>";
+								"<span class='color' style='background-color:"+matchs[i].club_color+"'></span>";
 			}else if(matchs[i].club_color==""){
 			itemStr+=
 								" 미정";

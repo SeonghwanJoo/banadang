@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="row">
 	<div id="demo" class="carousel slide" data-ride="carousel">
 	
@@ -216,7 +217,7 @@
 <c:if test="${not empty past_match }">
 <ul class="match-list">
 <c:forEach var="match" items="${past_match}">
-<c:if test="${match.home!=match.away}">
+<c:if test="${match.home!=match.away && !fn:contains(match.away_name,'미등록팀')}">
 <li class="match">
 	<div class="match-info">
 		<div class="row">
@@ -260,10 +261,10 @@
 			</div>
 		</div>
 	</div>
-	<c:if test="${match.home!=match.away && match.home==match.club_num}">
-	<button class="block" onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.away }'">${match.away_name } 평점 작성 하기</button>
+	<c:if test="${match.home==match.club_num}">
+	<button class="block" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }'">${match.away_name } 평점 작성 하기</button>
 	</c:if>
-	<c:if test="${match.home!=match.away && match.away==match.club_num}">
+	<c:if test="${match.away==match.club_num }">
 	<button class="block" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }'">${match.home_name } 평점 작성 하기</button>
 	</c:if>
 </li>

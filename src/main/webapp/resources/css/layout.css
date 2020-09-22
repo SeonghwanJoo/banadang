@@ -78,6 +78,7 @@
 	transform: translate(-50%, -50%);
 	font-family: 'Russo One', sans-serif;
 	text-decoration:none;
+	font-weight:bold;
 	font-size: 20px;
 }
 .topnav-centered-form a{
@@ -839,17 +840,40 @@ btn-wrapper{
   from {opacity: 0} 
   to {opacity: 1}
 }
+.tab-row{
+	display:flex;
+}
 .tab-btn{
   background-color: inherit;
-  border: none;
+  border-bottom:3px solid #E5E5E5;
+  border-left: none;
+  border-right: none;
+  border-top:none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
+  padding: 0.8rem;
   font-size: 17px;
   margin:0 auto;
   color:#878585;
-  width:80%
+  width:100%
+}
+.tab-col{
+	display:inline;
+	flex-basis: 0;
+	flex-grow: 1;
+	max-width: 100%
+	width:auto;
+	padding:0;
+	margin:0;
+}
+.tab_detail h6{
+	text-align:center;
+	font-weight: bold;
+	margin:0.5rem 0;
+	
+}
+button.small-font{
+	font-size:0.9rem;
 }
 .tab-btn:focus, tab-btn:active{
 	outline:none;
@@ -954,20 +978,37 @@ div.detail-item{
 	padding-left:20px;
 	min-height:3em;
 }
-.voted_detail{
+.tab_detail{
 	display:none;
 }
 .tab-active{
-	border-bottom: 2px solid black;
+	border-bottom: 3px solid #A4D3A6;
 	color:black;
+}
+.sticky{
+	position:fixed;
+	top:0;
+	width:100%;
 }
 .blank_div{
 	display:block;
 	height:80px;
 }
+.collapsible{
+	color:#a4d3a6;
+	position:absolute;
+	bottom :1.5rem;
+	right:1.5rem;
+	font-size:1.5rem;
+	cursor:pointer;
+}
+.collapsible:hover{
+	color:#799b7a;
+}
 ul.ul-list{
 	background-color:#e5e5e5;
 	padding-inline-start: 0px;
+	margin-bottom:0;
 	width:100%;
 	padding:1px 0;
 }
@@ -979,6 +1020,7 @@ li.li-list{
 	border-top:1px solid #dddddd;
 	border-bottom:1px solid #dddddd;
 	padding:0.2rem 0 0.2rem 1rem;
+	position:relative;
 }
 .rating_count{
 	display:block;

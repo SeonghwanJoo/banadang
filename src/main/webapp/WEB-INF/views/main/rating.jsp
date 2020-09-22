@@ -275,7 +275,7 @@
 				
 				$('#toast').css('display','block');
 				$('#confirm').click(function(){
-					location.href='main.do';
+					location.href='${pageContext.request.contextPath}/club/main.do';
 				});
 				$(window).click(function(){
 					location.href='main.do';
