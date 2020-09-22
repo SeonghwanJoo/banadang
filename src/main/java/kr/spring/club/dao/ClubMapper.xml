@@ -3,9 +3,9 @@
 <mapper  namespace="kr.spring.club.dao.ClubMapper">
 	<insert id="insertClub" parameterType="clubVO">
 		insert into club
-			(club_num,id,club_loc,club_name,club_detail,club_img,club_color,club_age,club_locX,club_locY,club_address)
+			(id,club_loc,club_name,club_detail,club_img,club_color,club_age,club_locX,club_locY,club_address)
 		values
-			(club_seq.nextval,#{id},#{club_loc},#{club_name},
+			(#{id},#{club_loc},#{club_name},
 		<if test="club_detail !=''">
 			#{club_detail},
 		</if>
@@ -25,8 +25,8 @@
 			'',
 		</if>
 		#{club_age},#{club_locX},#{club_locY},#{club_address})
-		<selectKey keyProperty="club_num" resultType="Integer">
-			SELECT id from club where clu 
+		<selectKey keyProperty="club_num" resultType="integer" order="AFTER" statementType="PREPARED">
+			select max(club_num) as club_num from club
 		</selectKey>
 	</insert>
 	<select id="selectAwayDetailsForRequestedMatch" parameterType="string" resultType="clubVO">

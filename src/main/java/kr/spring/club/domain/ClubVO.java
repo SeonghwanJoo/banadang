@@ -4,9 +4,13 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.Arrays;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ClubVO {
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	private String[] club_ages;
 	public String[] getClub_ages() {
@@ -121,9 +125,11 @@ public class ClubVO {
 		this.club_locY = club_locY;
 	}
 	public Integer getClub_num() {
+		logger.info("club_num in VO from getter : "+club_num);
 		return club_num;
 	}
 	public void setClub_num(Integer club_num) {
+		logger.info("club_num in VO from setter : "+club_num);
 		this.club_num = club_num;
 	}
 	public String getId() {
