@@ -65,10 +65,12 @@
 			<beans:bean 
 			class="kr.spring.interceptor.LoginCheckInterceptor"/>
 		</interceptor>
+		<!-- 팀 운영진 권한 체크 -->
 		<interceptor>
-			<mapping path="/main/voteForm.do"/>
+			<mapping path="/match/writeForm.do"/>
+			<mapping path="/match/postMatchRequest.do"/>
 			<beans:bean 
-			class="kr.spring.interceptor.PostInterceptor"/>
+			class="kr.spring.interceptor.ClubAuthCheckInterceptor"/>
 		</interceptor>
 	</interceptors>
 	

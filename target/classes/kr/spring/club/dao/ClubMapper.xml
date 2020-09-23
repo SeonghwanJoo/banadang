@@ -3,7 +3,7 @@
 <mapper  namespace="kr.spring.club.dao.ClubMapper">
 	<insert id="insertClub" parameterType="clubVO">
 		insert into club
-			(id,club_loc,club_name,club_detail,club_img,club_color,club_age,club_locX,club_locY,club_address)
+			(id,club_loc,club_name,club_detail,club_img,club_color,filename,club_age,club_locX,club_locY,club_address)
 		values
 			(#{id},#{club_loc},#{club_name},
 		<if test="club_detail !=''">
@@ -24,6 +24,12 @@
 		<if test="club_color ==''">
 			'',
 		</if>
+		<if test="filename !=''">
+			#{filename},
+		</if>
+		<if test="filename ==''">
+			'',
+		</if>
 		#{club_age},#{club_locX},#{club_locY},#{club_address})
 		<selectKey keyProperty="club_num" resultType="integer" order="AFTER" statementType="PREPARED">
 			select max(club_num) as club_num from club
@@ -34,7 +40,7 @@
     	(select * from
     		(select match_num,away club_num,acceptance,request_detail from match_request ) a
     		join match b on a.match_num=b.match_num where b.match_date>sysdate-1 and b.home=#{club_num})d
-    join 
+    left outer join 
     	(select avg(manner) manner,avg(perform) perform,count(*) rating_count,club_num from club_rating group by club_num)e
     		 on d.club_num=e.club_num) f join club c on f.club_num=c.club_num
 	</select>
@@ -43,7 +49,7 @@
     	(select * from
     		(select match_num,away club_num,acceptance,request_detail from match_request where away=#{club_num} ) a 
     		join match b on a.match_num=b.match_num where b.match_date>sysdate-1)d
-    join 
+    left outer join 
     	(select avg(manner) manner,avg(perform) perform,count(*) rating_count,club_num from club_rating group by club_num)e 
     	on d.club_num=e.club_num) f join club c on f.club_num=c.club_num
 	</select>

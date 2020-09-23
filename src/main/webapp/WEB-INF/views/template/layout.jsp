@@ -41,50 +41,15 @@
 	</div>
 </div>
 </div>
- <!-- The overlay -->
-<div id="myNav" class="overlay">
-	<!-- Button to close the overlay navigation -->
-	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
-	<!-- Overlay content -->
-	<div class="overlay-content">
-		  <c:if test="${empty user_id }">
-			  <a href="${pageContext.request.contextPath}/member/login.do">회원가입</a>
-			  <a href="${pageContext.request.contextPath}/member/login.do">로그인</a>
-		  </c:if>
-		  <c:if test="${!empty user_id}">
-			  <a href="#myPage.do">마이페이지</a>
-			  <a href="#recruit.do">팀원 모집</a>
-			  <a href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a>
-		  </c:if>
-	</div>
-</div>
 <!-- Compiled and minified JavaScript -->
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
  
- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-<script>
-	function openNav() {
-	  document.getElementById("myNav").style.width = "70%";
-	  document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-	  if(document.getElementById("carousel-indicator")){
-		  document.getElementById("carousel-indicator").style.display="none";
-	  }
-	  
-	}
-	
-	function closeNav() {
-	  document.getElementById("myNav").style.width = "0%";
-	  document.body.style.backgroundColor = "white";
-	  if(document.getElementById("carousel-indicator")){
-	  	document.getElementById("carousel-indicator").style.display="";
-	  }
-	}
-</script>
+
 </body>
 </html>
 

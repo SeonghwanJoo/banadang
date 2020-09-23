@@ -34,9 +34,10 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public Integer insertClub(ClubVO club) {
+	public void insertClub(ClubVO club) {
 		
-		return clubMapper.insertClub(club);
+		clubMapper.insertClub(club);
+		clubMapper.joinClubWhenCreated(club);
 		
 	}
 
@@ -54,6 +55,17 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public List<ClubVO> selectHomeDetailsForRequestedMatch(String club_num) {
 		return clubMapper.selectHomeDetailsForRequestedMatch(club_num);
+	}
+
+	@Override
+	public void insertClubMember(ClubVO club) {
+		
+		clubMapper.insertClubMember(club);
+	}
+
+	@Override
+	public Integer selectClubAuth(ClubVO club) {
+		return clubMapper.selectClubAuth(club);
 	}
 
 }

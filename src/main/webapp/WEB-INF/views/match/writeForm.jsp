@@ -39,25 +39,7 @@
 		</div>
 		<div class="row"><div class="col"><span class="msg" id="type_msg"></span></div></div>
 		<hr class="hr">
-		<c:if test="${fn:length(myClubs)>1}">
-		<div class="row">
-			<div class="input-container col">
-				<i class="fa fa-users icon"></i> <select class="time input-field" id="home" name="home">
-					<option value="">우리팀 선택</option>
-					<c:forEach items="${myClubs }" var="myClub">
-					<option value="${myClub.club_num}">${myClub.club_name }</option>
-					</c:forEach>
-				</select>
-			</div>
-		</div>
-		<div class="row"><div class="col"><span class="msg"  id="home_msg"></span></div></div>
-		<hr class="hr">
-		</c:if>
-		<c:if test="${fn:length(myClubs)==1}">
-		<c:forEach items="${myClubs }" var="myClub">
 		<input type="hidden" id="home" name="home" value="${myClub.club_num}">
-		</c:forEach>
-		</c:if>
 		<input type="hidden" name="away" id="away">
 		<div id="away-wrapper">
 			<div class="row">
@@ -202,7 +184,7 @@
 		<div class="row" id="cost-wrapper" style="display:none">
 			<div class="autocomplete input-container col">
 				<i class="fas fa-won-sign"></i> <input class="input-field"
-					type="text" name="cost" id="cost" placeholder="구장 비용">
+					type="text" name="cost" id="cost" placeholder="구장 비용 입력">
 			</div>
 		<hr class="hr">
 		</div>

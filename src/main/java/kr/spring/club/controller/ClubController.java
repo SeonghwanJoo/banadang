@@ -38,10 +38,10 @@ public class ClubController {
 		ModelAndView mav=new ModelAndView();
 		//클럽정보를 받아서 manage_club 으로 session에 저장한다
 		//팀명,연령,주소,유니폼,매너평가,실력평가,평가수
-		ClubVO manage_club=clubService.selectClubDetailWithClub_num(club_num);
+		ClubVO myClub=clubService.selectClubDetailWithClub_num(club_num);
 		List<ClubVO> away_club=clubService.selectAwayDetailsForRequestedMatch(club_num);
 		List<ClubVO> home_club=clubService.selectHomeDetailsForRequestedMatch(club_num);
-		session.setAttribute("manage_club", manage_club);
+		session.setAttribute("myClub", myClub);
 		mav.addObject("away_club", away_club);
 		mav.addObject("home_club", home_club);
 		mav.addObject("title","팀 관리");
@@ -55,6 +55,18 @@ public class ClubController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("title", "팀 만들기");
 		mav.setViewName("createClubForm");
+		
+		return mav;
+	}
+	@RequestMapping("/club/imageView.do")
+	public ModelAndView viewImage(@RequestParam String club_num) {
+		
+		logger.info("imageViewController진입");
+		ModelAndView mav = new ModelAndView();
+		ClubVO club=clubService.selectClubDetailWithClub_num(club_num);
+		mav.setViewName("imageView");
+		mav.addObject("imageFile",club.getClub_img());
+		mav.addObject("filename",club.getFilename());
 		
 		return mav;
 	}

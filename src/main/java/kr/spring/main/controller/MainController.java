@@ -275,4 +275,9 @@ public class MainController {
 		
 		return mav;
 	}
+	@RequestMapping("/main/authcheck.do")
+	public String checkauth() {
+		
+		return "authcheck";
+	}
 }

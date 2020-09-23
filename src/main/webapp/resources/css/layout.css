@@ -488,6 +488,7 @@ input[type=text]:focus, select:focus{
 	padding: 20px;
 	border: 1px solid #888;
 	opacity:0.95;
+	border-radius:0.5rem;
 	width: 80%;
 }
 #img_preview_content{
@@ -861,7 +862,7 @@ btn-wrapper{
 	display:inline;
 	flex-basis: 0;
 	flex-grow: 1;
-	max-width: 100%
+	max-width: 100%;
 	width:auto;
 	padding:0;
 	margin:0;
@@ -870,8 +871,15 @@ btn-wrapper{
 	text-align:center;
 	font-weight: bold;
 	margin:0.5rem 0;
-	
 }
+.mod-h6{
+	color:#9E9E9E;
+	font-weight:bold;
+}
+.set-team-opt{
+	cursor:pointer;
+}
+	
 button.small-font{
 	font-size:0.9rem;
 }
@@ -883,6 +891,19 @@ button.small-font{
 	padding-top:3rem;
 	text-align:center;
 }
+.sel-team{
+	position:relative;
+	display:inline-block;
+	margin-top:1.4rem;
+	font-size:1.2rem;
+	font-weight:bold;
+	cursor:pointer;
+}
+.drop-down{
+	position:absolute;
+	top:0.1rem;
+	display:inline-block;
+}
 .bottom_menu{
 	text-align:center;
 	position:fixed;
@@ -893,6 +914,10 @@ button.small-font{
   	right:0.1%;
   	z-index:66;
   	margin:0 auto;
+}
+.myPage{
+	margin-top:0.5rem;
+	display:block;
 }
 div.col .bottom-icon {
   font-family: 'Material Icons';

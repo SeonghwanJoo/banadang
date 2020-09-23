@@ -106,10 +106,7 @@ $(function(){
 					+"</div>"
 					+"<div class='row'>"
 						+"<div class='col club_main'>";
-			if(matchs[i].club_img !=""){
-			itemStr+=
-							"<img src='"+matchs[i].club_img+"' class='avatar emblem'>";
-			}else if(matchs[i].club_img ==""){
+			if(matchs[i].club_img ==""){
 			itemStr+=
 							"<img src='"+"${pageContext.request.contextPath}"+"/resources/images/blank_emblem.png' class='avatar emblem'>";
 			}
@@ -143,7 +140,6 @@ $(function(){
 					+"</div>"
 				+"</li>"
 				+"</a>";
-			
 		}
 		ul.innerHTML+=itemStr;
 		div.appendChild(ul);

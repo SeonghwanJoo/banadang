@@ -58,6 +58,11 @@ public class MemberController {
         	session.setAttribute("user_id", user_id);
             session.setAttribute("access_Token", access_Token);
             session.setAttribute("myClubs", myClubs);
+            logger.info("<<myClubs>> : "+myClubs);
+            if(myClubs.size()>0) {
+            	session.setAttribute("myClub", myClubs.get(0));
+            }
+            
             
             logger.info("<<<<<<<myTeam>>>>>>>>>> : "+myClubs);
         }

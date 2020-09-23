@@ -10,7 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ClubVO {
 	
-	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	private String[] club_ages;
 	public String[] getClub_ages() {
@@ -34,6 +33,8 @@ public class ClubVO {
 	private Integer club_num;
 	private String id;
 	private String club_loc;
+	private int club_auth;
+
 	private String club_name;
 	private String club_detail;
 	private MultipartFile upload;
@@ -50,6 +51,12 @@ public class ClubVO {
 	private String start_time;
 	private String end_time;
 	private String address;
+	public int getClub_auth() {
+		return club_auth;
+	}
+	public void setClub_auth(int club_auth) {
+		this.club_auth = club_auth;
+	}
 	public String getAddress() {
 		return address;
 	}
@@ -125,11 +132,9 @@ public class ClubVO {
 		this.club_locY = club_locY;
 	}
 	public Integer getClub_num() {
-		logger.info("club_num in VO from getter : "+club_num);
 		return club_num;
 	}
 	public void setClub_num(Integer club_num) {
-		logger.info("club_num in VO from setter : "+club_num);
 		this.club_num = club_num;
 	}
 	public String getId() {
@@ -162,9 +167,12 @@ public class ClubVO {
 	public void setUpload(MultipartFile upload) throws IOException{
 		this.upload = upload;
 		
-		//byte[]로 변환
-		setClub_img(upload.getBytes());
-		setFilename(upload.getOriginalFilename());
+		if(filename.contains(".")) {
+			//byte[]로 변환
+			setClub_img(upload.getBytes());
+		}else {
+			setClub_img(new byte[0]);
+		}
 	}
 	public byte[] getClub_img() {
 		return club_img;
@@ -178,15 +186,19 @@ public class ClubVO {
 	public void setClub_color(String club_color) {
 		this.club_color = club_color;
 	}
-	
 	@Override
 	public String toString() {
 		return "ClubVO [club_ages=" + Arrays.toString(club_ages) + ", club_address=" + club_address + ", club_num="
-				+ club_num + ", id=" + id + ", club_loc=" + club_loc + ", club_name=" + club_name + ", club_detail="
-				+ club_detail + ", upload=" + upload + ", club_img=" + Arrays.toString(club_img) + ", filename="
-				+ filename + ", club_color=" + club_color + ", club_age=" + club_age + ", club_locX=" + club_locX
-				+ ", club_locY=" + club_locY + "]";
+				+ club_num + ", id=" + id + ", club_loc=" + club_loc + ", club_auth=" + club_auth + ", club_name="
+				+ club_name + ", club_detail=" + club_detail + ", upload=" + upload + ", club_img="
+				+ Arrays.toString(club_img) + ", filename=" + filename + ", club_color=" + club_color + ", club_age="
+				+ club_age + ", club_locX=" + club_locX + ", club_locY=" + club_locY + ", perform=" + perform
+				+ ", manner=" + manner + ", rating_count=" + rating_count + ", match_date=" + match_date
+				+ ", start_time=" + start_time + ", end_time=" + end_time + ", address=" + address + ", type=" + type
+				+ "]";
 	}
+	
+	
 
 
 	
