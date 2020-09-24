@@ -26,7 +26,7 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public List<MatchVO> selectMyMatch(String club_num) {
+	public List<MatchVO> selectMyMatch(Integer club_num) {
 		
 		return matchMapper.selectMyMatch(club_num);
 	}
@@ -71,7 +71,7 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public List<MatchVO> selectMyPastMatch(String club_num) {
+	public List<MatchVO> selectMyPastMatch(Integer club_num) {
 		return matchMapper.selectMyPastMatch(club_num);
 	}
 

@@ -8,11 +8,11 @@ public class MemberVO {
 	private String email;
 	private String age_range;
 	private String id;
-	private String club_num;
-	public String getClub_num() {
+	private Integer club_num;
+	public Integer getClub_num() {
 		return club_num;
 	}
-	public void setClub_num(String club_num) {
+	public void setClub_num(Integer club_num) {
 		this.club_num = club_num;
 	}
 	public Integer getStatus() {

@@ -10,31 +10,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ClubVO {
 	
-	
 	private String[] club_ages;
-	public String[] getClub_ages() {
-		return club_ages;
-	}
-	public void setClub_ages(String[] club_ages) {
-		this.club_ages = club_ages;
-		String ages="";
-		for(String age : club_ages) {
-			ages+=age+" ";
-		}
-		setClub_age(ages);
-	}
-	public String getClub_address() {
-		return club_address;
-	}
-	public void setClub_address(String club_address) {
-		this.club_address = club_address;
-	}
 	private String club_address;
 	private Integer club_num;
 	private String id;
 	private String club_loc;
 	private int club_auth;
-
 	private String club_name;
 	private String club_detail;
 	private MultipartFile upload;
@@ -51,6 +32,19 @@ public class ClubVO {
 	private String start_time;
 	private String end_time;
 	private String address;
+	public String[] getClub_ages() {
+		return club_ages;
+	}
+	public void setClub_ages(String[] club_ages) {
+		this.club_ages = club_ages;
+		setClub_age(Arrays.toString(club_ages));
+	}
+	public String getClub_address() {
+		return club_address;
+	}
+	public void setClub_address(String club_address) {
+		this.club_address = club_address;
+	}
 	public int getClub_auth() {
 		return club_auth;
 	}

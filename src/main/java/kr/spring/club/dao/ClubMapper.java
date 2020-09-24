@@ -13,20 +13,20 @@ public interface ClubMapper {
 	public List<ClubVO> selectMyClubs(String id);
 	
 	@Select("select * from(select * from club where club_num=#{club_num}) a left outer join (select avg(manner) manner,avg(perform) perform, COUNT(*) rating_count,club_num from club_rating group by club_num) b on a.club_num=b.club_num")
-	public ClubVO selectClubDetailWithClub_num(String club_num);
+	public ClubVO selectClubDetailWithClub_num(Integer club_num);
 	
 	@Select("select club_auth from club_join where id=#{id} and club_num=#{club_num}")
 	public Integer selectClubAuth(ClubVO club);
 	
-	public List<ClubVO> selectAwayDetailsForRequestedMatch(String club_num);
-	public List<ClubVO> selectHomeDetailsForRequestedMatch(String club_num);
+	public List<ClubVO> selectAwayDetailsForRequestedMatch(Integer club_num);
+	public List<ClubVO> selectHomeDetailsForRequestedMatch(Integer club_num);
 	
 	
 	@Select("select * from club")
 	public List<ClubVO> selectAllClubs();
 	
 	@Select("select club_num from club_join where id=#{id}")
-	public List<String> selectMyClubs_num(String id);
+	public List<Integer> selectMyClubs_num(String id);
 	
 	public void insertClub(ClubVO club);
 	

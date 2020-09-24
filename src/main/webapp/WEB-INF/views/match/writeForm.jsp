@@ -40,7 +40,7 @@
 		<div class="row"><div class="col"><span class="msg" id="type_msg"></span></div></div>
 		<hr class="hr">
 		<input type="hidden" id="home" name="home" value="${myClub.club_num}">
-		<input type="hidden" name="away" id="away">
+		<input type="hidden" name="away" id="away" value="-1">
 		<div id="away-wrapper">
 			<div class="row">
 				<div class="autocomplete input-container col">
@@ -226,7 +226,7 @@ $( function() {
 	$('#non-exist').click(function(){
 		$('#away-wrapper').css('display','none');
 		$('#cost-wrapper').css('display','block');
-		$('#away').val('모집중');
+		$('#away').val('0');
 		
 	});
 	$('#soccer').click(function(){
@@ -620,7 +620,7 @@ $( function() {
 								/*append the DIV element as a child of the autocomplete container:*/
 								this.parentNode.appendChild(a);
 								a.appendChild(c);
-								document.getElementById('away').value=val;
+								document.getElementById('away_name').value=val;
 								/*for each item in the array...*/
 								for (i = 0; i < arr.length; i++) {
 									/*check if the item starts with the same letters as the text field value:*/

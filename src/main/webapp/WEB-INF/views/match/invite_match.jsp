@@ -48,9 +48,10 @@ $(function(){
 	</c:forEach>
 	console.log("<matchVO>"+matchs);
 	
-
-	
-	if(navigator.geolocation){
+	if("${myClub.club_loc}"!=""){
+		var position={latitude:${myClub.club_locY},longitude:${myClub.club_locY}}//사용자 소속팀의 주소  받아서 넣어주기
+		createListOrderByDistance(position.latitude, position.longitude, matchs);
+	}else if(navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(function(pos) {
 		    
 			var latitude = pos.coords.latitude;
@@ -60,10 +61,35 @@ $(function(){
 		    
 		});	
 	}else{
-		var position={latitude:37.57360511,longitude:127.09005352}//사용자 소속팀의 주소  받아서 넣어주기
-		
+		var position={latitude:37.5668260054857,longitude:126.978656785931};
 		createListOrderByDistance(position.latitude, position.longitude, matchs);
 	}
+	
+	
+	
+	
+	
+	/*  ---------------------*/
+
+	
+	/* if(navigator.geolocation){
+		navigator.geolocation.getCurrentPosition(function(pos) {
+		    
+			var latitude = pos.coords.latitude;
+		    var longitude = pos.coords.longitude;
+		    
+		    createListOrderByDistance(latitude,longitude,matchs);
+		    
+		});	
+	}else{
+		var position;
+		if(${myClub.club_loc}){
+			position={latitude:${myClub.club_locY},longitude:${myClub.club_locY}}//사용자 소속팀의 주소  받아서 넣어주기
+		}else{
+			position={latitude:37.5668260054857,longitude:126.978656785931}
+		}
+		createListOrderByDistance(position.latitude, position.longitude, matchs);
+	} */
 	
 	
 	function createListOrderByDistance(latitude,longitude,matchs){

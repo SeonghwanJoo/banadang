@@ -820,6 +820,10 @@ a.detail{
 	background-color:#686767;
 	color:#e0e0e0;
 	opacity:0.8;
+	border:none;
+	width:95%;
+	height:2rem;
+	margin:0.5rem 0 0.5rem 0;
 }
 btn-wrapper{
 	margin:0 auto;
@@ -828,6 +832,10 @@ btn-wrapper{
 	background-color:#000;
 	color:#FFF;
 	opacity:0.8;
+	border:none;
+	width:95%;
+	height:2rem;
+	margin:0.5rem 0 0.5rem 0;
 }
 
 
@@ -1019,23 +1027,34 @@ div.detail-item{
 	display:block;
 	height:80px;
 }
-.collapsible{
+.li-list .collapsible{
 	color:#a4d3a6;
 	position:absolute;
-	bottom :1.5rem;
-	right:1.5rem;
-	font-size:1.5rem;
+	top :4rem;
+	right:1rem;
+	font-size:3rem;
 	cursor:pointer;
+	transition: 0.4s;
 }
-.collapsible:hover{
+ .collapsible:hover{
 	color:#799b7a;
 }
+
 ul.ul-list{
 	background-color:#e5e5e5;
 	padding-inline-start: 0px;
 	margin-bottom:0;
 	width:100%;
 	padding:1px 0;
+}
+.collapsible-content{
+	max-height: 0;
+	transition: max-height 0.2s ease-out;
+}
+.collapsible-content{
+	margin:0.5rem 0 0.5rem 0;
+	padding:0;
+	overflow: hidden;
 }
 li.li-list{
 	margin:0.3rem auto;

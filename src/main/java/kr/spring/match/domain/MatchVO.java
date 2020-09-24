@@ -47,16 +47,16 @@ public class MatchVO {
 	public void setType(int type) {
 		this.type = type;
 	}
-	public String getHome() {
+	public Integer getHome() {
 		return home;
 	}
-	public void setHome(String home) {
+	public void setHome(Integer home) {
 		this.home = home;
 	}
-	public String getAway() {
+	public Integer getAway() {
 		return away;
 	}
-	public void setAway(String away) {
+	public void setAway(Integer away) {
 		this.away = away;
 	}
 	public String getAddress() {
@@ -95,10 +95,10 @@ public class MatchVO {
 	public void setVote_num(String vote_num) {
 		this.vote_num = vote_num;
 	}
-	public String getClub_num() {
+	public Integer getClub_num() {
 		return club_num;
 	}
-	public void setClub_num(String club_num) {
+	public void setClub_num(Integer club_num) {
 		this.club_num = club_num;
 	}
 	public int getStatus() {
@@ -245,8 +245,8 @@ public class MatchVO {
 	private int match_num;
 	private String id;
 	private int type;
-	private String home;
-	private String away;
+	private Integer home;
+	private Integer away;
 	private String address;
 	private double address_x;
 	private double address_y;
@@ -256,7 +256,7 @@ public class MatchVO {
 	private String match_detail;
 	private String rating_detail;
 	private String vote_num;
-	private String club_num;
+	private Integer club_num;
 	private int status;
 	private int count;
 	private int max;

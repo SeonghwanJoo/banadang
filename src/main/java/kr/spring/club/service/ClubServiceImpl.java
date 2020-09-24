@@ -28,7 +28,7 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public List<String> selectMyClubs_num(String id) {
+	public List<Integer> selectMyClubs_num(String id) {
 		
 		return clubMapper.selectMyClubs_num(id);
 	}
@@ -42,18 +42,18 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public ClubVO selectClubDetailWithClub_num(String club_num) {
+	public ClubVO selectClubDetailWithClub_num(Integer club_num) {
 		
 		return clubMapper.selectClubDetailWithClub_num(club_num);
 	}
 
 	@Override
-	public List<ClubVO> selectAwayDetailsForRequestedMatch(String club_num) {
+	public List<ClubVO> selectAwayDetailsForRequestedMatch(Integer club_num) {
 		return clubMapper.selectAwayDetailsForRequestedMatch(club_num);
 	}
 
 	@Override
-	public List<ClubVO> selectHomeDetailsForRequestedMatch(String club_num) {
+	public List<ClubVO> selectHomeDetailsForRequestedMatch(Integer club_num) {
 		return clubMapper.selectHomeDetailsForRequestedMatch(club_num);
 	}
 

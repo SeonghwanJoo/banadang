@@ -93,6 +93,7 @@
 				</div>
 				<span class="from-to">VS</span>
 				<div class="team-info col">
+				<c:if test="${match.away != 0 }">
 					${match.away_name}<br>
 					매너 : ${match.away_manner*2}
 					<span class="star-wrap">
@@ -104,6 +105,10 @@
 					<span class="star-rating">
 						<span style="width:${match.away_perform*20}%"></span>
 					</span>
+				</c:if>
+				<c:if test="${match.away == 0 }">
+					<span>모집중</span>
+				</c:if>
 				</div>
 			</div>
 		</div>

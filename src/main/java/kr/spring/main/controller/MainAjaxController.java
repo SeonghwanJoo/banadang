@@ -29,7 +29,7 @@ public class MainAjaxController {
 	@ResponseBody
 	public Map<String,Integer> process(@RequestParam String id,
 									  @RequestParam int match_num,
-									  @RequestParam String club_num,//참석할 팀의 클럽 번호
+									  @RequestParam Integer club_num,//참석할 팀의 클럽 번호
 									  @RequestParam int status){
 		
 		logger.info("<<<<<AjaxData>>>>> : "+id+"/"+match_num+"/"+club_num+"/"+status);
@@ -76,7 +76,7 @@ public class MainAjaxController {
 	@ResponseBody
 	public Map<String,String> postRating(@RequestParam String id,
 									     @RequestParam int match_num,
-									     @RequestParam String club_num, //참석할 팀의 클럽 번호
+									     @RequestParam Integer club_num, //참석할 팀의 클럽 번호
 									     @RequestParam double manner,
 									     @RequestParam double perform,
 									     @RequestParam String rating_detail){
