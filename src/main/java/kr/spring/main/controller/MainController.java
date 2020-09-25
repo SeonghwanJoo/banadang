@@ -49,7 +49,6 @@ public class MainController {
 			past_match.addAll(matchService.selectMyPastMatch(club.getClub_num()));
 				
 			
-			//match,List<MatchVO>voteStatus,List<MatchVO>clubs_rating
 			for(MatchVO match : matchVO) {
 				Integer myVote=matchService.selectMyVoteStatus(match);
 				
@@ -300,6 +299,7 @@ public class MainController {
 			match.setMax();
 		}
 	}
+	
 	public void addRatingResult(MatchVO match, ArrayList<MatchVO> clubs_rating) {
 		clubs_rating=matchService.selectAverageRating(match);
 		match.setHome_manner(0.0);
