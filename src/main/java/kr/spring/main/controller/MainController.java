@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.club.domain.ClubVO;
 import kr.spring.club.service.ClubService;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
@@ -36,22 +37,19 @@ public class MainController {
 		String user_id=(String) session.getAttribute("user_id");
 		if(user_id!=null) {
 				logger.info("<<<user_id>>> : " +user_id );
-				
-			//내 아이디가 소속된 클럽 번호를 받는다
-			List<Integer> clubs_num=clubService.selectMyClubs_num(user_id);
-			logger.info("<<<clubs_num>>> : " +clubs_num );
+			
+			ClubVO club=(ClubVO)session.getAttribute("myClub");
 			//내가 소속한 클럽번호로  match table에 클럽 번호가 있는 match를 받는다
 			List<MatchVO> matchVO=new ArrayList<MatchVO>();
 			List<MatchVO> vote_status=new ArrayList<MatchVO>();
 			List<MatchVO> clubs_rating=new ArrayList<MatchVO>();
 			List<MatchVO> past_match=new ArrayList<MatchVO>();
-			for(Integer club_num : clubs_num) {
 				
-				matchVO.addAll(matchService.selectMyMatch(club_num));
-				past_match.addAll(matchService.selectMyPastMatch(club_num));
+			matchVO.addAll(matchService.selectMyMatch(club.getClub_num()));
+			past_match.addAll(matchService.selectMyPastMatch(club.getClub_num()));
 				
-			}
 			
+			//match,List<MatchVO>voteStatus,List<MatchVO>clubs_rating
 			for(MatchVO match : matchVO) {
 				Integer myVote=matchService.selectMyVoteStatus(match);
 				
@@ -279,5 +277,49 @@ public class MainController {
 	public String checkauth() {
 		
 		return "authcheck";
+	}
+	public void addVoteResult(MatchVO match,ArrayList<MatchVO> vote_status) {
+		Integer myVote=matchService.selectMyVoteStatus(match);
+		
+		if(myVote != null) {
+			match.setStatus(myVote);
+		}
+		
+		//matchVO에 해당 경기,해당 팀의 투표 현황을 받는다
+		vote_status=matchService.selectVoteStatusByGroup(match);
+		for(MatchVO vote_result: vote_status) {
+			if(vote_result.getStatus()==1) {
+				match.setAttend(vote_result.getCount());
+			}
+			if(vote_result.getStatus()==2) {
+				match.setNot_attend(vote_result.getCount());
+			}
+			if(vote_result.getStatus()==3) {
+				match.setUndefined(vote_result.getCount());
+			}
+			match.setMax();
+		}
+	}
+	public void addRatingResult(MatchVO match, ArrayList<MatchVO> clubs_rating) {
+		clubs_rating=matchService.selectAverageRating(match);
+		match.setHome_manner(0.0);
+		match.setHome_perform(0.0);
+		match.setAway_manner(0.0);
+		logger.info("getAway_name:"+match.getAway_name());
+		match.setAway_name(match.getAway_name()+"(미등록팀)");//DB에 away_name추가
+		match.setAway_perform(0.0);
+		
+		for(MatchVO club_rating:clubs_rating) {
+			if(match.getHome()==club_rating.getClub_num()) {
+				match.setHome_manner(club_rating.getManner());
+				match.setHome_name(club_rating.getClub_name());
+				match.setHome_perform(club_rating.getPerform());
+			}
+			if(match.getAway()==club_rating.getClub_num()) {
+				match.setAway_manner(club_rating.getManner());
+				match.setAway_name(club_rating.getClub_name());
+				match.setAway_perform(club_rating.getPerform());
+			}
+		}
 	}
 }

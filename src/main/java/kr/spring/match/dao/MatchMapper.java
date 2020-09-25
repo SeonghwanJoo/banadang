@@ -39,7 +39,7 @@ public interface MatchMapper {
 	@Select("select status,count(*) as count from match_vote where match_num=#{match_num} and club_num=#{club_num} group by status")
 	public ArrayList<MatchVO> selectVoteStatusByGroup(MatchVO matchVO);
 	
-	public List<MatchVO> selectAverageRating(MatchVO matchVO);
+	public ArrayList<MatchVO> selectAverageRating(MatchVO matchVO);
 	
 	@Select("select clubrating_num from club_rating where id=#{id} and match_num=#{match_num} and club_num=#{club_num}")
 	public Integer selectMyRating(MatchVO match);

@@ -59,7 +59,7 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public List<MatchVO> selectAverageRating(MatchVO matchVO) {
+	public ArrayList<MatchVO> selectAverageRating(MatchVO matchVO) {
 		
 		return matchMapper.selectAverageRating(matchVO);
 	}

@@ -1,6 +1,7 @@
 package kr.spring.club.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -66,6 +67,23 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public Integer selectClubAuth(ClubVO club) {
 		return clubMapper.selectClubAuth(club);
+	}
+
+	@Override
+	public void updateAcceptance(ClubVO club) {
+		clubMapper.updateAcceptance(club);
+		
+	}
+
+	@Override
+	public void rejectOthers(ClubVO club) {
+		clubMapper.rejectOthers(club);
+	}
+
+	@Override
+	public void updateAwayforMatch(ClubVO club) {
+		clubMapper.updateAwayforMatch(club);
+		
 	}
 
 }

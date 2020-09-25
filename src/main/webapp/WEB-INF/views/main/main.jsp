@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<div class="row">
+<div class="main-row">
 	<div id="demo" class="carousel slide" data-ride="carousel">
 	
 	  <!-- Indicators -->
@@ -36,7 +36,7 @@
 </div>
 
 <c:if test="${empty user_id }">
-<div class="row">
+<div class="main-row">
 	<div class="login">
 		<p>간편 로그인하고 바나당에서 우리팀을 관리해보세요</p>
 		<a
@@ -64,7 +64,7 @@
 <c:forEach var="match" items="${match_list}">
 	<li class="match">
 		<div class="match-info">
-			<div class="row">
+			<div class="main-row">
 				<span class="match-item">${match.match_date}</span>
 				<span class="match-item">${match.start_time }~${match.end_time }</span>
 				<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}" target="_blank">
@@ -76,44 +76,42 @@
 				</span>
 			</div>
 		</div>
-		<div class="match-info">
-			<div class="row">
-				<div class="team-info col">
-					${match.home_name}<br>
-					매너 : ${match.home_manner*2}
-					<span class="star-wrap">
-					<span class="star-rating">
-						<span style="width:${match.home_manner*20}%"></span>
-					</span>
-					</span><br>
-					실력 : ${match.home_perform*2}
-					<span class="star-rating">
-						<span style="width:${match.home_perform*20}%"></span>
-					</span>
-				</div>
-				<span class="from-to">VS</span>
-				<div class="team-info col">
-				<c:if test="${match.away != 0 }">
-					${match.away_name}<br>
-					매너 : ${match.away_manner*2}
-					<span class="star-wrap">
-					<span class="star-rating">
-						<span style="width:${match.away_manner*20}%"></span>
-					</span>
-					</span><br>
-					실력 : ${match.away_perform*2}
-					<span class="star-rating">
-						<span style="width:${match.away_perform*20}%"></span>
-					</span>
-				</c:if>
-				<c:if test="${match.away == 0 }">
-					<span>모집중</span>
-				</c:if>
-				</div>
+		<div class="main-row">
+			<div class="team-info col">
+				${match.home_name}<br>
+				매너 : ${match.home_manner*2}
+				<span class="star-wrap">
+				<span class="star-rating">
+					<span style="width:${match.home_manner*20}%"></span>
+				</span>
+				</span><br>
+				실력 : ${match.home_perform*2}
+				<span class="star-rating">
+					<span style="width:${match.home_perform*20}%"></span>
+				</span>
+			</div>
+			<span class="from-to">VS</span>
+			<div class="team-info col">
+			<c:if test="${match.away != 0 }">
+				${match.away_name}<br>
+				매너 : ${match.away_manner*2}
+				<span class="star-wrap">
+				<span class="star-rating">
+					<span style="width:${match.away_manner*20}%"></span>
+				</span>
+				</span><br>
+				실력 : ${match.away_perform*2}
+				<span class="star-rating">
+					<span style="width:${match.away_perform*20}%"></span>
+				</span>
+			</c:if>
+			<c:if test="${match.away == 0 }">
+				<span>모집중</span>
+			</c:if>
 			</div>
 		</div>
 		<!-- 내 팀이 -->
-		<div class="row">
+		<div class="main-row">
 			<span class="vote-rating">
 				<c:if test="${match.attend==0 }">
 				<span class="voted" style="background-color:transparent">
@@ -140,7 +138,7 @@
 				<span class="person material-icons">person</span>
 			</span>
 		</div>	
-		<div class="row">
+		<div class="main-row">
 			<span class="vote-rating">
 				<c:if test="${match.not_attend==0 }">
 				<span class="voted" 
@@ -168,7 +166,7 @@
 				<span class="person material-icons">person</span>
 			</span>
 		</div>	
-		<div class="row">
+		<div class="main-row">
 			<span class="vote-rating">
 				<c:if test="${match.undefined==0 }">
 				<span class="voted" style="background-color:transparent;">
@@ -225,7 +223,7 @@
 <c:if test="${match.home!=match.away && !fn:contains(match.away_name,'미등록팀')}">
 <li class="match">
 	<div class="match-info">
-		<div class="row">
+		<div class="main-row">
 			<span class="match-item">${match.match_date}</span>
 			<span class="match-item">${match.start_time }~${match.end_time }</span>
 			<span class="match-item">${match.address}</span>
@@ -236,7 +234,7 @@
 		</div>
 	</div>
 	<div class="match-info">
-		<div class="row">
+		<div class="main-row">
 			<div class="team-info col">
 				${match.home_name}<br>
 				매너 : ${match.home_manner*2}/10
@@ -273,7 +271,7 @@
 	<button class="block" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }'">${match.home_name } 평점 작성 하기</button>
 	</c:if>
 </li>
-<hr class="hr">
+<hr class="hr"> 
 </c:if>
 </c:forEach>
 </ul>

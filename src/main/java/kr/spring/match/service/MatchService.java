@@ -17,7 +17,7 @@ public interface MatchService {
 	public void insertVoteStatus(MatchVO matchVO);
 	public void updateVoteStatus(MatchVO matchVO);
 	public ArrayList<MatchVO> selectVoteStatusByGroup(MatchVO matchVO);
-	public List<MatchVO> selectAverageRating(MatchVO matchVO);
+	public ArrayList<MatchVO> selectAverageRating(MatchVO matchVO);
 	public Integer selectMyRating(MatchVO match);
 	public void insertRating(MatchVO match);
 	public void updateRating(MatchVO match);

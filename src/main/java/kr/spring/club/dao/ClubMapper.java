@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.club.domain.ClubVO;
 
@@ -38,4 +39,13 @@ public interface ClubMapper {
 	
 	@Select("select club_seq.nextval from dual")
 	public String selectNextSeqForClub_num();
+	
+	@Update("update match_request set acceptance=#{acceptance} where request_num=#{request_num}")
+	public void updateAcceptance(ClubVO club);
+	
+	@Update("update match_request set acceptance=3 where match_num=#{match_num} and away not in #{club_num}")
+	public void rejectOthers(ClubVO club);
+	
+	@Update("update match set away=#{club_num} where match_num=#{match_num}")
+	public void updateAwayforMatch(ClubVO club);
 }

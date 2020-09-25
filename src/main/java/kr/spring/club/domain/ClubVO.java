@@ -10,6 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ClubVO {
 	
+	private Integer match_num;
+	private String request_detail;
+	private String match_detail;
+	private Integer request_num;
+	private Integer acceptance;
 	private String[] club_ages;
 	private String club_address;
 	private Integer club_num;
@@ -32,6 +37,36 @@ public class ClubVO {
 	private String start_time;
 	private String end_time;
 	private String address;
+	public String getRequest_detail() {
+		return request_detail;
+	}
+	public void setRequest_detail(String request_detail) {
+		this.request_detail = request_detail;
+	}
+	public String getMatch_detail() {
+		return match_detail;
+	}
+	public void setMatch_detail(String match_detail) {
+		this.match_detail = match_detail;
+	}
+	public Integer getMatch_num() {
+		return match_num;
+	}
+	public void setMatch_num(Integer match_num) {
+		this.match_num = match_num;
+	}
+	public Integer getAcceptance() {
+		return acceptance;
+	}
+	public void setAcceptance(Integer acceptance) {
+		this.acceptance = acceptance;
+	}
+	public Integer getRequest_num() {
+		return request_num;
+	}
+	public void setRequest_num(Integer request_num) {
+		this.request_num = request_num;
+	}
 	public String[] getClub_ages() {
 		return club_ages;
 	}

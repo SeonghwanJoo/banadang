@@ -1,6 +1,7 @@
 package kr.spring.club.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.spring.club.domain.ClubVO;
 
@@ -14,5 +15,8 @@ public interface ClubService {
 	public List<ClubVO> selectHomeDetailsForRequestedMatch(Integer club_num);
 	public void insertClubMember(ClubVO club);
 	public Integer selectClubAuth(ClubVO club);
+	public void updateAcceptance(ClubVO club);
+	public void rejectOthers(ClubVO club);
+	public void updateAwayforMatch(ClubVO club);
 	
 }

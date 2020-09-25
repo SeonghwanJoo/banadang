@@ -266,6 +266,10 @@
 	text-align: center;
 	color:#7a7a7a;
 }
+.main-row{
+	position:relative;
+	display:flex;
+}
 
 .vote-rating { width:90%;
 margin:5px auto;
@@ -470,8 +474,7 @@ input[type=text]:focus, select:focus{
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
 	z-index:98; /* Sit on top */
-	padding-top: 70px; /* Location of the box */
-	padding-bottom:50px;
+	padding-top:30%;
 	left: 0;
 	top: 0;
 	width: 100%; /* Full width */
@@ -486,10 +489,84 @@ input[type=text]:focus, select:focus{
 	position:relative;
 	margin: auto;
 	padding: 20px;
-	border: 1px solid #888;
+	/* border: 1px solid #888; */
 	opacity:0.95;
 	border-radius:0.5rem;
 	width: 80%;
+}
+.confirm-modals{
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index:98; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: hidden; /* Enable scroll if needed */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+.confirm-modal-content{
+	text-align:center;
+	background-color: transparent;
+	position:fixed;
+	opacity:0.95;
+	width: 80%;
+	animation: slideFromBot 0.3s;
+	left:10%;
+	bottom:3rem;
+}
+.sub-content{
+	margin-bottom:1rem;
+	padding: 20px;
+	background-color:#FFF;
+	border-radius:1rem;
+}
+.pos-btn:focus, .neg-btn:focus, .first-btn:focus, .second-btn:focus{
+	outline:none;
+	opacity:0.6;
+}
+.pos-btn{
+	border:none;
+	width:100%;
+	background-color:transparent;
+	font-size:1.2rem;
+	font-weight:bold;
+	color:#a5d6a7;
+}
+.neg-btn{
+	border:none;
+	width:100%;
+	background-color:transparent;
+	font-size:1.2rem;
+	font-weight:bold;
+	color:#000;
+}
+.status{
+	border-radius:0.5rem;
+	color:#FFF;
+	padding:0.1rem 0.2rem;
+	float:right;
+}
+.neutral{background-color:#878787;}
+.positive{background-color:#a4d3a6;}
+.negative{background-color:#000;}
+
+
+@keyframes slideFromBot{
+	from{
+		bottom:-10rem;
+	}
+	to{
+		bottom:3rem;
+	}
+}
+@keyframes slideFromTop{
+	from{
+		padding-bottom:100%;
+	}
+	to{
+		padding-bottom:40%;
+	}
 }
 #img_preview_content{
 	width:60%;
