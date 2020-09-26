@@ -53,4 +53,10 @@
     	(select avg(manner) manner,avg(perform) perform,count(*) rating_count,club_num from club_rating group by club_num)e 
     	on d.home=e.club_num) f join club c on f.home=c.club_num
 	</select>
+	<select id="selectAttendaceRate" parameterType="memberVO" resultType="float">
+	select b.b/a.a from
+    (select count(match_num) a, club_num from match_vote where club_num=#{club_num} group by club_num)a 
+    join
+    (select count(match_num) b, club_num from match_vote where club_num=#{club_num} and id=#{id} and status=1 group by club_num) b on a.club_num=b.club_num
+	</select>
 </mapper>

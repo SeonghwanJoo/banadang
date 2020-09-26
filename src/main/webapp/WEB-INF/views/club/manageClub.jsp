@@ -63,10 +63,10 @@
 	</ul>
 	<div class="tab-row" id="tab-row">
 		<div class="tab-col">
-			<button class="tab-btn small-font tab-active" onclick="openTap(event,'manageMatch')">매칭 현황</button>
+			<button class="tab-btn small-font " onclick="openTap(event,'manageMatch')">매칭 현황</button>
 		</div>
 		<div class="tab-col">
-			<button class="tab-btn small-font" onclick="openTap(event,'manageSchedule')">경기 일정</button>
+			<button class="tab-btn small-font tab-active" onclick="openTap(event,'manageSchedule')">경기 일정</button>
 		</div>
 		<div class="tab-col">
 			<button class="tab-btn small-font" onclick="openTap(event,'manageMember')">회원 관리</button>
@@ -451,7 +451,7 @@
 		</c:if>
 	</div>
 	<div class="tab_detail" id="manageMember" >
-	
+		
 	</div>
 </div>
 <div id="answer_modal" class="confirm-modals">
@@ -535,30 +535,32 @@ window.onscroll=function(){myFunction()};
 var tab=document.getElementById("tab-row");
 var sticky=tab.offsetTop;
 function myFunction(){
-	if(window.pageYOffset >sticky()){
+	if(window.pageYOffset+60 >=sticky){
 		tab.classList.add("sticky");
 	}else{
 		tab.classList.remove("sticky");
 	}
 }
 
-	$(function(){
-		var collap = document.getElementsByClassName("collapsible");
-		var i;
+$(function(){
+	var collap = document.getElementsByClassName("collapsible");
+	var i;
 
-		for (i = 0; i < collap.length; i++) {
-			collap[i].addEventListener("click", function() {
-		    var panel = this.nextElementSibling;
-		    if (panel.style.maxHeight) {
-		    	panel.style.maxHeight = null;
-		    	$(this).text("add_circle");
-		    } else {
-		    	$(this).text("remove_circle");
-		      	panel.style.maxHeight = panel.scrollHeight + "px";
-		    } 
-		  });
-		}
-	});
+	for (i = 0; i < collap.length; i++) {
+		collap[i].addEventListener("click", function() {
+	    var panel = this.nextElementSibling;
+	    if (panel.style.maxHeight) {
+	    	panel.style.maxHeight = null;
+	    	$(this).text("add_circle");
+	    } else {
+	    	$(this).text("remove_circle");
+	      	panel.style.maxHeight = panel.scrollHeight + "px";
+	    } 
+	  });
+	}
+});
+
+	
 
 
 </script>

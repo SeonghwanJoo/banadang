@@ -1,15 +1,18 @@
 package kr.spring.club.domain;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Arrays;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
-public class ClubVO {
+public class ClubVO implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer match_num;
 	private String request_detail;
 	private String match_detail;

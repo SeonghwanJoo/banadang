@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.club.domain.ClubVO;
+import kr.spring.member.domain.MemberVO;
 
 public interface ClubMapper {
 	
@@ -48,4 +49,6 @@ public interface ClubMapper {
 	
 	@Update("update match set away=#{club_num} where match_num=#{match_num}")
 	public void updateAwayforMatch(ClubVO club);
+	
+	public float selectAttendaceRate(MemberVO member);
 }

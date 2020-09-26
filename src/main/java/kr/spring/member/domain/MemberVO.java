@@ -9,6 +9,14 @@ public class MemberVO {
 	private String age_range;
 	private String id;
 	private Integer club_num;
+	private Integer club_auth;
+	private float attendance_rate;
+	public Integer getClub_auth() {
+		return club_auth;
+	}
+	public void setClub_auth(Integer club_auth) {
+		this.club_auth = club_auth;
+	}
 	public Integer getClub_num() {
 		return club_num;
 	}

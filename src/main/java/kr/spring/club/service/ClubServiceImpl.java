@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.spring.club.dao.ClubMapper;
 import kr.spring.club.domain.ClubVO;
+import kr.spring.member.domain.MemberVO;
 
 @Service("clubService")
 public class ClubServiceImpl implements ClubService {
@@ -84,6 +85,12 @@ public class ClubServiceImpl implements ClubService {
 	public void updateAwayforMatch(ClubVO club) {
 		clubMapper.updateAwayforMatch(club);
 		
+	}
+
+	@Override
+	public float selectAttendaceRate(MemberVO member) {
+		
+		return clubMapper.selectAttendaceRate(member);
 	}
 
 }

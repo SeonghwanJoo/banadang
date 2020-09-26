@@ -48,7 +48,7 @@
 	<select id="selectVote_detail" parameterType="matchVO" resultType="memberVO">
 		select a.club_num,a.id,a.nickname,a.thumbnail_image,a.profile_image,b.status from
 			(select * from match_vote where club_num=#{club_num} and match_num=#{match_num})b right outer join 
-    		(select c.club_num club_num,c.id,m.nickname,m.thumbnail_image,m.profile_image from member_detail m join club_join c on m.id=c.id where c.club_num=#{club_num})
+    		(select c.club_num club_num,c.id,m.nickname,m.thumbnail_image,m.profile_image from member_detail m join club_join c on m.id=c.id where c.club_num=#{club_num} and c.club_auth>3)
     		a on b.id=a.id
 	</select>
 	<select id="selectMatchToInvite" resultType="matchVO">

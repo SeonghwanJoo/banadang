@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.spring.club.domain.ClubVO;
+import kr.spring.member.domain.MemberVO;
 
 public interface ClubService {
 	public List<ClubVO> selectMyClubs(String id);
@@ -18,5 +19,6 @@ public interface ClubService {
 	public void updateAcceptance(ClubVO club);
 	public void rejectOthers(ClubVO club);
 	public void updateAwayforMatch(ClubVO club);
+	public float selectAttendaceRate(MemberVO member);
 	
 }
