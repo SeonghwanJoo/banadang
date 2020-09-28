@@ -957,6 +957,11 @@ btn-wrapper{
 	font-weight: bold;
 	margin:0.5rem 0;
 }
+h6.ages{
+	display:inline-block;
+	text-align:left;
+}
+
 .mod-h6{
 	color:#9E9E9E;
 	font-weight:bold;
@@ -1060,7 +1065,26 @@ a.menu-item:active{
   vertical-align: middle;
   width: 3rem;
   height: 3rem;
-  border-radius: 50%;
+  border-radius: 40%;
+  float:left;
+  margin-right:0.5rem;
+}
+.half_col i{
+	position:relative;
+	font-size:1.6rem;
+	color:#A4D3A6;
+	float:right;
+	margin-left:0.5rem;
+}
+.i-subtitle{
+	position:absolute;
+	font-size:0.6rem;
+	left:0.1rem;
+	top:-1rem;
+}
+
+.fa-users-cog, .fa-cog{
+	cursor:pointer;
 }
 .club_name, .uniform{
 	float:left;

@@ -74,7 +74,7 @@
 	</div>
 	<div class="tab_detail" id="manageMatch" >
 		<c:if test="${!empty away_club }">
-		<h6>상대팀 초청한 경기(선택 후 상대팀 확정)</h6>
+		<h6>상대팀 모집 중인 경기(선택 후 상대팀 확정)</h6>
 		<ul class="ul-list">
 			<c:forEach items="${away_club }" var="away">
 			<li class="li-list">
@@ -152,7 +152,7 @@
 		</ul>
 		</c:if>
 		<c:if test="${!empty home_club}">
-		<h6>경기 신청한 내역</h6>
+		<h6>매치 신청한 경기</h6>
 		<ul class="ul-list">
 			<c:forEach items="${home_club }" var="home">
 			<c:if test="${home.club_num != myClub.club_num }">
@@ -451,7 +451,66 @@
 		</c:if>
 	</div>
 	<div class="tab_detail" id="manageMember" >
-		
+		<div class="main-row">
+		<h6 class="total-ages">
+			총 회원 ${fn:length(members)}
+		</h6>
+		<span id="ages">
+			(
+			<c:if test="${ages.ten!=0 }">
+			 10대 ${ages.ten }명 
+			</c:if>
+			<c:if test="${ages.twent!=0 }">
+			 20대 ${ages.twent }명 
+			</c:if>
+			<c:if test="${ages.thirt!=0 }">
+			 30대 ${ages.thirt }명 
+			</c:if>
+			<c:if test="${ages.fourt!=0 }">
+			 40대 ${ages.fourt }명 
+			</c:if> 
+			<c:if test="${ages.fift!=0 }">
+			 50대 ${ages.fift }명 
+			</c:if> 
+			<c:if test="${ages.sixt!=0 }">
+			 60대 ${ages.sixt }명 
+			</c:if> 
+			<c:if test="${ages.sevent!=0 }">
+			 70대 ${ages.sevent }명 
+			</c:if>
+			<c:if test="${ages.others!=0 }">
+			 기타 ${ages.others }명
+			</c:if> 
+			)
+		</span>
+		</div>
+		<div class="row">
+			<c:forEach items="${members }" var="member">
+			<c:if test="${member.club_auth>3 }">
+				<div class="detail-item col-sm-12 col-lg-6" id="${member.id }-row">
+					<div class="half_col">
+						<img src="${member.thumbnail_image }" alt="Avatar" class="avatar">
+						<span>${member.nickname}</span><br>
+						<span>${fn:substring(member.age_range,0,1)}0대 |</span>
+						<span>참석 투표율 ${member.attendance_rate*100}%</span>
+					</div>
+					<div class="half_col">
+						<c:if test="${user_id == member.id }">
+						<i class="fas fa-cog" onclick="manageMember('${member.id}','${member.nickname}',${member.club_auth },${member.club_num })"></i>
+						</c:if>
+						<c:if test="${myAuth>4 && user_id != member.id }">
+						<i class="fas fa-users-cog" onclick="manageMember('${member.id}','${member.nickname}','${member.club_auth }','${member.club_num }')"></i>
+						</c:if>
+						<c:if test="${ member.club_auth>4}">
+						<i class="fas fa-crown" id="${member.id}">
+						<span class="i-subtitle">운영진</span>
+						</i>
+						</c:if>
+					</div>
+				</div>
+			</c:if>
+			</c:forEach>
+		</div>
 	</div>
 </div>
 <div id="answer_modal" class="confirm-modals">
@@ -467,12 +526,181 @@
 		</div>
 	</div>
 </div>
+<div id="manage_modal" class="confirm-modals">
+	<!-- Modal content -->
+	<div class="confirm-modal-content">
+		<!-- 기존회원 관리 옵션(강제탈퇴,운영진 권한부여,일반회원 권한 부여 )-->
+		<div class="sub-content">
+			<span id="manage_msg"></span>
+			<hr>
+			<button id="out-manage-btn" class="pos-btn">회원 탈퇴</button>
+			<hr>
+			<button id="auth-manage-btn" class="pos-btn" style="display:none"></button>
+		</div>
+		<div class="sub-content">
+			<button id="manage-cancel-btn" class="neg-btn">취소</button>
+		</div>
+	</div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+function manageMember(id,nickname,auth,club_num){
+	//modal창 표시 (현재 멤버 권한이 운영진이면 강제탈퇴와 운영진 제외, 운영진 추가)
+	$('#manage_msg').text(nickname+' 회원 관리');
+	if("${myAuth}">4){
+		$('#auth-manage-btn').css('display','block');
+	}
+	
+	$('#manage_modal').css('display','block');
+	if(auth>4){
+		$('#auth-manage-btn').text('운영진 제외').click(function(){
+			auth=4;
+			updateMemberAuth(id,auth,club_num);
+		});
+	}else if (auth==4){
+		$('#auth-manage-btn').text('운영진 추가').click(function(){
+			auth=5;
+			updateMemberAuth(id,auth,club_num);
+		});
+	}
+	$('#out-manage-btn').click(function(){
+		auth=0;
+		updateMemberAuth(id,auth,club_num);
+	});
+}
+function updateMemberAuth(id,auth,club_num){
+	$.ajax({
+		url:'manageMember.do',
+		type:'post',
+		data:{
+			id:id,
+			auth:auth,
+			club_num:club_num
+		},
+		dataType:'json',
+		cache:false,
+		timeout:30000,
+		success:function(data){
+			if(data.result=="member_auth_updated"){
+				console.log("member_auth_updated 진입");
+				$('#manage_modal').css('display','none');
+			}else if(data.result=="member_deleted"){
+				console.log("member_deleted 진입");
+				updateMemberList();
+				$('#manage_modal').css('display','none');
+			}
+			updateMemberList();
+			if(data.result=="errors"){
+				
+				alert('오류 발생');
+				$(window).click(function(){
+					$("#manage_modal").css("display","none");
+				});
+			}
+			
+		},
+		error:function(){
+			alert('네트워크 오류 발생');
+		}
+	});
+	$('#manage-cancel-btn').click(function(){
+		$('#manage_modal').css('display','none');
+	});
+}
+function toggleClass(element, className) {
+	var check = new RegExp("(\\s|^)" + className + "(\\s|$)"); 
+	if (check.test(element.className)) {
+		element.className = element.className.replace(check, " ").trim();
+	} else {
+		element.className += " " + className;
+	}
+}
+function updateMemberList(){
+	let members_detail=document.getElementById('manageMember');
+	while (members_detail.firstChild) {
+		members_detail.removeChild(members_detail.firstChild);
+	}
+	let members=new Array();
+	<c:forEach items="${members}" var="member">
+	console.log("members forEach진입");
+	var obj={};
+	obj.club_auth="${member.club_auth}";
+	obj.id="${member.club_auth}";
+	obj.thumbnail_img="${member.thumbnail_image}";
+	obj.nickname="${member.nickname}";
+	obj.club_num="${member.club_num}";
+	obj.attendance_rate="${member.attendance_rate}";
+	members.push(obj);
+	</c:forEach>
+	
+	var div=document.getElementById('manageMember');
+	var itemStr='';
+	itemStr+='<div class="main-row">'
+				+'<h6 class="ages">총 회원'+members.length+'명</h6>'
+				+'<span>';
+	if("${ages.ten}"!=0){
+		itemStr+='10대 '+${ages.ten}+'명';
+	}
+	if("${ages.twent}"!=0){
+		itemStr+='20대 '+${ages.twent}+'명';
+	}
+	if("${ages.thirt}"!=0){
+		itemStr+='30대 '+${ages.thirt}+'명';
+	}
+	if("${ages.fourt}"!=0){
+		itemStr+='40대 '+${ages.fourt}+'명';
+	}
+	if("${ages.fift}"!=0){
+		itemStr+='50대 '+${ages.fift}+'명';
+	}
+	if("${ages.sixt}"!=0){
+		itemStr+='60대 '+${ages.sixt}+'명';
+	}
+	if("${ages.sevent}"!=0){
+		itemStr+='70대 '+${ages.sevent}+'명';
+	}
+	if("${ages.others}"!=0){
+		itemStr+='기타 '+${ages.others}+'명';
+	}
+	itemStr+= '</span>';
+	for (var i=0;i<members.length;i++){
+		if(members.club_auth>3){
+			itemStr+=
+				'<div class="detail-item col-sm-12" col-lg-6 id="'+member.id+'-row">'
+					+'<div class="half_col">'
+					+	'<img src="'+member.thumbnail_image+'" alt="Avatar class="avatar">'
+					+	'<span>'+member.nickname+'</span>'
+					+	'<span>'+member.age_range.substring(0,1)+'0대 | </span>'
+					+	'<span>'+member.attendance_rate*100+'%</span>'
+					+'</div>'
+					+'<div class="half_col">';
+			if("${user_id}"==member.id){
+				itemStr+=
+						'<i class="fas fa-cog" onclick="manageMember("'+member.id+','+member.nickname+','+member.club_auth+','+member.club_num+')></i>"';
+			}
+			if("${myAuth}">4 && "${user_id}"!=member_id){
+				itemStr+=
+						'<i class="fas fa-users-cog" onclick="manageMember("'+member.id+','+member.nickname+','+member.club_auth+','+member.club_num+')></i>"';
+			}
+			if(member>club_auth>4){
+				itemStr+=
+						'<i class="fas fa-crown admin visible" id="'+member.id+'">'
+						+'<span class="i-subtitle">운영진</span>'
+						+'</i>';
+			}
+			itemStr+=
+					'</div>'
+				+'</div>';
+		}
+	}
+	members_detail.innerHTML=itemStr;
+}
+
+
 function answerForMatchReq(request_num,club_name,acceptance,club_num,match_num){
 	if(acceptance==2){
 		$('#answer_msg').text(club_name+'의 경기 신청을 수락하겠습니까?');
-		var info='<br>(해당 경기에 '+club_name+'외 나머지 신청은 거절합니다)'
+		var info='<br>(해당 경기에 '+club_name+'외 나머지 팀의 신청은 거절합니다)'
 		$('#answer_msg').append(info);
 		$('#answer-btn').text('수락');
 	}else if(acceptance==3){
@@ -512,17 +740,21 @@ function answerForMatchReq(request_num,club_name,acceptance,club_num,match_num){
 		});
 		
 	});
-	var reject_modal=document.getElementById('answer_modal');
+	
 	$('#cancel-btn').click(function(){
 		$('#answer_modal').css('display','none');
 	});
-	window.onclick = function(event) {
-		if (event.target == answer_modal) {
-			reject_modal.style.display = "none";
-		}
+	
+}
+var manage_modal=document.getElementById('manage_modal');
+var answer_modal=document.getElementById('answer_modal');
+window.onclick = function(event) {
+	if (event.target == answer_modal) {
+		answer_modal.style.display = "none";
+	}else if(event.target==manage_modal){
+		manage_modal.style.display = "none";
 	}
 }
-
 
 function openTap(evt,tab){
 	$('.tab_detail').css('display','none');

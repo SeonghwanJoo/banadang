@@ -88,9 +88,27 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public float selectAttendaceRate(MemberVO member) {
+	public Float selectAttendanceRate(MemberVO member) {
 		
-		return clubMapper.selectAttendaceRate(member);
+		return clubMapper.selectAttendanceRate(member);
+	}
+
+	@Override
+	public List<MemberVO> selectClubMembers(Integer club_num) {
+		
+		return clubMapper.selectClubMembers(club_num);
+	}
+
+	@Override
+	public void deleteMemberFromClub(MemberVO memberVO) {
+		clubMapper.deleteMemberFromClub(memberVO);
+		
+	}
+
+	@Override
+	public void updateMemberAuth(MemberVO memberVO) {
+		clubMapper.updateMemberAuth(memberVO);
+		
 	}
 
 }

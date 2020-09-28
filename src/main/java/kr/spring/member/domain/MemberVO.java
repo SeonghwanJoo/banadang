@@ -10,7 +10,13 @@ public class MemberVO {
 	private String id;
 	private Integer club_num;
 	private Integer club_auth;
-	private float attendance_rate;
+	private Float attendance_rate;
+	public Float getAttendance_rate() {
+		return attendance_rate;
+	}
+	public void setAttendance_rate(Float attendance_rate) {
+		this.attendance_rate = attendance_rate;
+	}
 	public Integer getClub_auth() {
 		return club_auth;
 	}

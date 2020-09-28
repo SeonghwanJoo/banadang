@@ -2,6 +2,7 @@ package kr.spring.club.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -11,7 +12,7 @@ import kr.spring.member.domain.MemberVO;
 
 public interface ClubMapper {
 	
-	@Select("select * from club_join cj join club c on cj.club_num=c.club_num where cj.id=#{id}")
+	@Select("select * from club_join cj join club c on cj.club_num=c.club_num where cj.id=#{id} and club_auth>3")
 	public List<ClubVO> selectMyClubs(String id);
 	
 	@Select("select * from(select * from club where club_num=#{club_num}) a left outer join (select avg(manner) manner,avg(perform) perform, COUNT(*) rating_count,club_num from club_rating group by club_num) b on a.club_num=b.club_num")
@@ -50,5 +51,16 @@ public interface ClubMapper {
 	@Update("update match set away=#{club_num} where match_num=#{match_num}")
 	public void updateAwayforMatch(ClubVO club);
 	
-	public float selectAttendaceRate(MemberVO member);
+	public Float selectAttendanceRate(MemberVO member);
+	
+	@Select("select * from (select * from club_join where club_num=#{club_num} order by club_auth desc) a join member_detail b on a.id=b.id")
+	public List<MemberVO> selectClubMembers(Integer club_num);
+	
+	
+	@Update("update club_join set club_auth=#{club_auth} where id=#{id} and club_num=#{club_num}")
+	public void updateMemberAuth(MemberVO memberVO);
+	
+	@Delete("delete from club_join where id=#{id} and club_num=#{club_num}")
+	public void deleteMemberFromClub(MemberVO memberVO);
+	
 }

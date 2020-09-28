@@ -7,7 +7,9 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +31,7 @@ import kr.spring.club.service.ClubService;
 import kr.spring.main.controller.MainController;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
+import kr.spring.member.domain.MemberVO;
 
 @Controller
 public class ClubController {
@@ -58,8 +61,13 @@ public class ClubController {
 		ModelAndView mav=new ModelAndView();
 		//팀명,연령,주소,유니폼,매너평가,실력평가,평가수
 		ClubVO myClub=clubService.selectClubDetailWithClub_num(club_num);
+		String user_id=(String)session.getAttribute("user_id");
+		myClub.setId(user_id);
+		int myAuth=clubService.selectClubAuth(myClub);
+		
 		List<ClubVO> away_club=clubService.selectAwayDetailsForRequestedMatch(club_num);
 		List<ClubVO> home_club=clubService.selectHomeDetailsForRequestedMatch(club_num);
+		session.setAttribute("myAuth", myAuth);
 		session.setAttribute("myClub", myClub);
 		mav.addObject("away_club", away_club);
 		mav.addObject("home_club", home_club);
@@ -88,9 +96,42 @@ public class ClubController {
 		mav.addObject("past_match",past_match);
 		
 		//클럽 회원 정보 Object에 추가
+		List<MemberVO> members=clubService.selectClubMembers(club_num);
 		//해당 클럽의 전체 회원정보를 받아 memberVO list로 받는다
 		//memberVO list가 루프를 돌면서 attendatacerate를 set한다
+		int ten=0,twent=0,thirt=0,fourt=0,fift=0,sixt=0,sevent=0,others=0;
+		Map<String,Integer> ages=new HashMap<String,Integer>();
+		for(MemberVO member:members) {
+			if(member.getAge_range().startsWith("1")){
+				ten++;
+			}else if(member.getAge_range().startsWith("2")) {
+				twent++;
+			}else if(member.getAge_range().startsWith("3")) {
+				thirt++;
+			}else if(member.getAge_range().startsWith("4")) {
+				fourt++;
+			}else if(member.getAge_range().startsWith("5")) {
+				fift++;
+			}else if(member.getAge_range().startsWith("6")) {
+				sixt++;
+			}else if(member.getAge_range().startsWith("7")) {
+				sevent++;
+			}else{
+				others++;
+			}
+			member.setAttendance_rate(clubService.selectAttendanceRate(member));
+		}
+		ages.put("ten", ten);
+		ages.put("twent", twent);
+		ages.put("thirt", thirt);
+		ages.put("fourt", fourt);
+		ages.put("fift", fift);
+		ages.put("sixt", sixt);
+		ages.put("sevent", sevent);
+		ages.put("others", others);
 		
+		mav.addObject("ages",ages);
+		mav.addObject("members",members);
 		mav.setViewName("manageClub");
 		
 		return mav;
@@ -167,5 +208,5 @@ public class ClubController {
 			}
 		}
 	}
-	
+	//Meber List를 루프가 돌면서 해당하는 연령대의 조건식에 들어가면 count를 1씩 더한다
 }

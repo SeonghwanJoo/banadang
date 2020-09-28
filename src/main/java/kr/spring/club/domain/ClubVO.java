@@ -9,10 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ClubVO implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	private float attendance_rate;
 	private Integer match_num;
 	private String request_detail;
 	private String match_detail;
@@ -40,6 +38,12 @@ public class ClubVO implements Serializable {
 	private String start_time;
 	private String end_time;
 	private String address;
+	public float getAttendance_rate() {
+		return attendance_rate;
+	}
+	public void setAttendance_rate(float attendance_rate) {
+		this.attendance_rate = attendance_rate;
+	}
 	public String getRequest_detail() {
 		return request_detail;
 	}

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.spring.club.domain.ClubVO;
 import kr.spring.club.service.ClubService;
+import kr.spring.member.domain.MemberVO;
 
 @Controller
 public class ClubAjaxController {
@@ -114,6 +116,77 @@ public class ClubAjaxController {
 			e.printStackTrace();
 		}
 		
+		return map;
+	}
+	@RequestMapping("/club/manageMember.do")
+	@ResponseBody
+	public Map<String,String> manageMember(@RequestParam String id,
+										   @RequestParam Integer auth,
+										   @RequestParam Integer club_num,
+										   Model model,
+										   HttpSession session){
+		Map<String,String> map=new HashMap<String,String>();
+		MemberVO member=new MemberVO();
+		member.setId(id);
+		member.setClub_auth(auth);
+		member.setClub_num(club_num);
+		try{
+			if(auth==0) {
+				//clubjoin에서 해당 아이디 삭제
+				clubService.deleteMemberFromClub(member);
+				map.put("result", "member_deleted");
+			}else if(auth>3) {
+				//clubjoin에서 권한 업데이트
+				clubService.updateMemberAuth(member);
+				map.put("result", "member_auth_updated");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		//클럽 회원 정보 Object에 추가
+				List<MemberVO> members=clubService.selectClubMembers(club_num);
+				//해당 클럽의 전체 회원정보를 받아 memberVO list로 받는다
+				//memberVO list가 루프를 돌면서 attendatacerate를 set한다
+				int ten=0,twent=0,thirt=0,fourt=0,fift=0,sixt=0,sevent=0,others=0;
+				Map<String,Integer> ages=new HashMap<String,Integer>();
+				for(MemberVO mem:members) {
+					if(mem.getAge_range().startsWith("1")){
+						ten++;
+					}else if(mem.getAge_range().startsWith("2")) {
+						twent++;
+					}else if(mem.getAge_range().startsWith("3")) {
+						thirt++;
+					}else if(mem.getAge_range().startsWith("4")) {
+						fourt++;
+					}else if(mem.getAge_range().startsWith("5")) {
+						fift++;
+					}else if(mem.getAge_range().startsWith("6")) {
+						sixt++;
+					}else if(mem.getAge_range().startsWith("7")) {
+						sevent++;
+					}else{
+						others++;
+					}
+					mem.setAttendance_rate(clubService.selectAttendanceRate(mem));
+				}
+				ages.put("ten", ten);
+				ages.put("twent", twent);
+				ages.put("thirt", thirt);
+				ages.put("fourt", fourt);
+				ages.put("fift", fift);
+				ages.put("sixt", sixt);
+				ages.put("sevent", sevent);
+				ages.put("others", others);
+				
+				model.addAttribute("ages",ages);
+				model.addAttribute("members",members);
+		//나의 클럽 auth정보 추가
+				String user_id=(String)session.getAttribute("user_id");
+				ClubVO myClub=(ClubVO)session.getAttribute("myClub");
+				myClub.setId(user_id);
+				int myAuth=clubService.selectClubAuth(myClub);
+				session.setAttribute("myAuth", myAuth);
 		return map;
 	}
 }
