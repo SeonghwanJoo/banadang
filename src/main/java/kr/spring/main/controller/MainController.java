@@ -183,6 +183,16 @@ public class MainController {
 		
 		return "authcheck";
 	}
+	@RequestMapping("/main/membercheck.do")
+	public String checkMember() {
+		
+		return "membercheck";
+	}
+	@RequestMapping("/main/myClubcheck.do")
+	public String checkmyClub() {
+		
+		return "myClubcheck";
+	}
 	public void addVoteResult(MatchVO match,ArrayList<MatchVO> vote_status) {
 		logger.info("match in addVoteResult : "+match);
 		Integer myVote=matchService.selectMyVoteStatus(match);

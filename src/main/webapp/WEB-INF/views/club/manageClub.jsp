@@ -6,7 +6,7 @@
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
 		<a href="club.do" >
-		<span class="material-icons" id="cancel" onclick="goBack();">close</span>
+		<span class="material-icons" id="cancel">close</span>
 		</a>
 		<div class="topnav-centered">
 			<a href="#home" class="active">${title }</a>
@@ -62,9 +62,11 @@
 		</li>
 	</ul>
 	<div class="tab-row" id="tab-row">
+		<c:if test="${myAuth>4}">
 		<div class="tab-col">
 			<button class="tab-btn small-font " onclick="openTap(event,'manageMatch')">매칭 현황</button>
 		</div>
+		</c:if>
 		<div class="tab-col">
 			<button class="tab-btn small-font tab-active" onclick="openTap(event,'manageSchedule')">경기 일정</button>
 		</div>
@@ -72,6 +74,7 @@
 			<button class="tab-btn small-font" onclick="openTap(event,'manageMember')">회원 관리</button>
 		</div>
 	</div>
+	<c:if test="${myAuth>4 }">
 	<div class="tab_detail" id="manageMatch" >
 		<c:if test="${!empty away_club }">
 		<h6>상대팀 모집 중인 경기(선택 후 상대팀 확정)</h6>
@@ -222,6 +225,7 @@
 		</ul>
 		</c:if>
 	</div>
+	</c:if>
 	<div class="tab_detail" id="manageSchedule" style="display:block" >
 		<c:if test="${not empty user_id }">
 		<div class="match-head">
@@ -386,7 +390,7 @@
 		</ul>
 		</c:if>
 		<div class="match-head">
-				<span class="title-btw">지난 경기 상대팀 평점 작성</span>
+			<span class="title-btw">지난 경기 상대팀 평점 작성</span>
 		</div>
 		<hr class="hr">
 		<c:if test="${not empty past_match }">
@@ -437,10 +441,10 @@
 				</div>
 			</div>
 			<c:if test="${match.home==match.club_num}">
-			<button class="block" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }'">${match.away_name } 평점 작성 하기</button>
+			<button class="block" onclick="location.href='${pageContext.request.contextPath }/main/ratingForm.do?match_num=${match.match_num}&club_num=${match.away }'">${match.away_name } 평점 작성 하기</button>
 			</c:if>
 			<c:if test="${match.away==match.club_num }">
-			<button class="block" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }'">${match.home_name } 평점 작성 하기</button>
+			<button class="block" onclick="location.href='${pageContext.request.contextPath }/main/ratingForm.do?match_num=${match.match_num}&club_num=${match.home }'">${match.home_name } 평점 작성 하기</button>
 			</c:if>
 		</li>
 		<hr class="hr"> 
@@ -452,59 +456,71 @@
 	</div>
 	<div class="tab_detail" id="manageMember" >
 		<div class="main-row">
-		<h6 class="total-ages">
-			총 회원 ${fn:length(members)}
+		<h6 class="total-ages" id="total">
+			총 회원 ${fn:length(members)}명
 		</h6>
-		<span id="ages">
+		<h6 class="sub-h6" id="ages">
 			(
 			<c:if test="${ages.ten!=0 }">
-			 10대 ${ages.ten }명 
+			 10대:${ages.ten }명 
 			</c:if>
 			<c:if test="${ages.twent!=0 }">
-			 20대 ${ages.twent }명 
+			 20대:${ages.twent }명 
 			</c:if>
 			<c:if test="${ages.thirt!=0 }">
-			 30대 ${ages.thirt }명 
+			 30대:${ages.thirt }명 
 			</c:if>
 			<c:if test="${ages.fourt!=0 }">
-			 40대 ${ages.fourt }명 
+			 40대:${ages.fourt }명 
 			</c:if> 
 			<c:if test="${ages.fift!=0 }">
-			 50대 ${ages.fift }명 
+			 50대:${ages.fift }명 
 			</c:if> 
 			<c:if test="${ages.sixt!=0 }">
-			 60대 ${ages.sixt }명 
+			 60대:${ages.sixt }명 
 			</c:if> 
 			<c:if test="${ages.sevent!=0 }">
-			 70대 ${ages.sevent }명 
+			 70대:${ages.sevent }명 
 			</c:if>
 			<c:if test="${ages.others!=0 }">
-			 기타 ${ages.others }명
+			 기타:${ages.others }명
 			</c:if> 
 			)
-		</span>
+		</h6>
 		</div>
 		<div class="row">
+		<!-- 카톡으로 초대 메시지 보내기 -->
+		<!-- 어플이 깔려있지 않다면 어플 설치 및 초대장 확인 -->
+		<!-- 어플이 깔려 있으면 해당 초대 수락 페이지 호출 -->
+		<!-- 수락 후 해당 클럽 clubManage page호출 -->
 			<c:forEach items="${members }" var="member">
 			<c:if test="${member.club_auth>3 }">
 				<div class="detail-item col-sm-12 col-lg-6" id="${member.id }-row">
 					<div class="half_col">
 						<img src="${member.thumbnail_image }" alt="Avatar" class="avatar">
-						<span>${member.nickname}</span><br>
+						<span style="display:inline">
+						<c:if test="${ member.club_auth>4}">
+						<i class="fas fa-crown admin visible" id="${member.id}">
+						<!-- <span class="i-subtitle">운영진</span> -->
+						</i>
+						</c:if>
+						<c:if test="${ member.club_auth<5}">
+						<i class="fas fa-crown admin" id="${member.id}">
+						<!-- <span class="i-subtitle">운영진</span> -->
+						</i>
+						</c:if>
+						${member.nickname}
+						</span>
+						<br>
 						<span>${fn:substring(member.age_range,0,1)}0대 |</span>
 						<span>참석 투표율 ${member.attendance_rate*100}%</span>
 					</div>
 					<div class="half_col">
 						<c:if test="${user_id == member.id }">
-						<i class="fas fa-cog" onclick="manageMember('${member.id}','${member.nickname}',${member.club_auth },${member.club_num })"></i>
+						<i class="fas fa-cog" id="${member.id }-i" data-auth="${member.club_auth }" onclick="manageMember('${member.id}','${member.nickname}',${member.club_num })"></i>
 						</c:if>
 						<c:if test="${myAuth>4 && user_id != member.id }">
-						<i class="fas fa-users-cog" onclick="manageMember('${member.id}','${member.nickname}','${member.club_auth }','${member.club_num }')"></i>
-						</c:if>
-						<c:if test="${ member.club_auth>4}">
-						<i class="fas fa-crown" id="${member.id}">
-						<span class="i-subtitle">운영진</span>
-						</i>
+						<i class="fas fa-users-cog" id="${member.id }-i" data-auth="${member.club_auth }" onclick="manageMember('${member.id}','${member.nickname}','${member.club_num }')"></i>
 						</c:if>
 					</div>
 				</div>
@@ -533,9 +549,9 @@
 		<div class="sub-content">
 			<span id="manage_msg"></span>
 			<hr>
-			<button id="out-manage-btn" class="pos-btn">회원 탈퇴</button>
+			<button id="out-manage-btn" class="pos-btn">팀 탈퇴</button>
 			<hr>
-			<button id="auth-manage-btn" class="pos-btn" style="display:none"></button>
+			<button id="auth-manage-btn" class="pos-btn" style="display:block"></button>
 		</div>
 		<div class="sub-content">
 			<button id="manage-cancel-btn" class="neg-btn">취소</button>
@@ -544,31 +560,42 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function manageMember(id,nickname,auth,club_num){
+function manageMember(id,nickname,club_num){
 	//modal창 표시 (현재 멤버 권한이 운영진이면 강제탈퇴와 운영진 제외, 운영진 추가)
-	$('#manage_msg').text(nickname+' 회원 관리');
-	if("${myAuth}">4){
-		$('#auth-manage-btn').css('display','block');
+	let set=document.getElementById(id+'-i');
+	let auth=set.getAttribute('data-auth');
+	console.log("auth before update: "+auth);
+	console.log("mem_id before update: "+id);
+	
+	if(${ myAuth }<5){
+		console.log("manage-btn block 진입");
+		$('#auth-manage-btn').css('display','none');
 	}
+	$('#manage_msg').text(nickname+'님 회원 관리');
 	
 	$('#manage_modal').css('display','block');
 	if(auth>4){
-		$('#auth-manage-btn').text('운영진 제외').click(function(){
+		$('#auth-manage-btn').text('운영진 제외');
+			console.log("운영진 제외 버튼 클립 진입");
 			auth=4;
-			updateMemberAuth(id,auth,club_num);
-		});
 	}else if (auth==4){
-		$('#auth-manage-btn').text('운영진 추가').click(function(){
+		$('#auth-manage-btn').text('운영진 추가');
+			console.log("운영진 추가 버튼 클립 진입");
 			auth=5;
-			updateMemberAuth(id,auth,club_num);
-		});
 	}
-	$('#out-manage-btn').click(function(){
+	$('#auth-manage-btn').unbind('click').bind('click',function(){
+		console.log("auth-manage-btn 클릭 진입");
+		updateMember(id,auth,club_num);
+	});
+	$('#out-manage-btn').unbind('click').bind('click',function(){
 		auth=0;
-		updateMemberAuth(id,auth,club_num);
+		updateMember(id,auth,club_num);
+	});
+	$('#manage-cancel-btn').click(function(){
+		$('#manage_modal').css('display','none');
 	});
 }
-function updateMemberAuth(id,auth,club_num){
+function updateMember(id,auth,club_num){
 	$.ajax({
 		url:'manageMember.do',
 		type:'post',
@@ -582,14 +609,28 @@ function updateMemberAuth(id,auth,club_num){
 		timeout:30000,
 		success:function(data){
 			if(data.result=="member_auth_updated"){
-				console.log("member_auth_updated 진입");
+				if(id=="${user_id}"){
+					location.href='${pageContext.request.contextPath}/club/club.do';
+				}
+				var crown=document.getElementById(id);
+				//왕관표시 업데이트
+				toggleClass(crown,"visible");
+				//총 회원 및 나이별 회원수 업데이트
+				//data-auth 업데이트
+				var data_auth=document.getElementById(id+"-i");
+				data_auth.setAttribute('data-auth',auth);
+				
 				$('#manage_modal').css('display','none');
-			}else if(data.result=="member_deleted"){
-				console.log("member_deleted 진입");
-				updateMemberList();
+				
+			}else if(data.result=='member_deleted'){
+				if(id=='${user_id}'){
+					location.href='${pageContext.request.contextPath}/club/club.do';
+				}
 				$('#manage_modal').css('display','none');
+				updateMembers_num(data.ten,data.twent,data.thirt,data.fourt,data.fift,data.sixt,data.sevent,data.others);
+				var member_row=document.getElementById(id+'-row');
+				member_row.remove();
 			}
-			updateMemberList();
 			if(data.result=="errors"){
 				
 				alert('오류 발생');
@@ -615,87 +656,21 @@ function toggleClass(element, className) {
 		element.className += " " + className;
 	}
 }
-function updateMemberList(){
-	let members_detail=document.getElementById('manageMember');
-	while (members_detail.firstChild) {
-		members_detail.removeChild(members_detail.firstChild);
-	}
-	let members=new Array();
-	<c:forEach items="${members}" var="member">
-	console.log("members forEach진입");
-	var obj={};
-	obj.club_auth="${member.club_auth}";
-	obj.id="${member.club_auth}";
-	obj.thumbnail_img="${member.thumbnail_image}";
-	obj.nickname="${member.nickname}";
-	obj.club_num="${member.club_num}";
-	obj.attendance_rate="${member.attendance_rate}";
-	members.push(obj);
-	</c:forEach>
-	
-	var div=document.getElementById('manageMember');
-	var itemStr='';
-	itemStr+='<div class="main-row">'
-				+'<h6 class="ages">총 회원'+members.length+'명</h6>'
-				+'<span>';
-	if("${ages.ten}"!=0){
-		itemStr+='10대 '+${ages.ten}+'명';
-	}
-	if("${ages.twent}"!=0){
-		itemStr+='20대 '+${ages.twent}+'명';
-	}
-	if("${ages.thirt}"!=0){
-		itemStr+='30대 '+${ages.thirt}+'명';
-	}
-	if("${ages.fourt}"!=0){
-		itemStr+='40대 '+${ages.fourt}+'명';
-	}
-	if("${ages.fift}"!=0){
-		itemStr+='50대 '+${ages.fift}+'명';
-	}
-	if("${ages.sixt}"!=0){
-		itemStr+='60대 '+${ages.sixt}+'명';
-	}
-	if("${ages.sevent}"!=0){
-		itemStr+='70대 '+${ages.sevent}+'명';
-	}
-	if("${ages.others}"!=0){
-		itemStr+='기타 '+${ages.others}+'명';
-	}
-	itemStr+= '</span>';
-	for (var i=0;i<members.length;i++){
-		if(members.club_auth>3){
-			itemStr+=
-				'<div class="detail-item col-sm-12" col-lg-6 id="'+member.id+'-row">'
-					+'<div class="half_col">'
-					+	'<img src="'+member.thumbnail_image+'" alt="Avatar class="avatar">'
-					+	'<span>'+member.nickname+'</span>'
-					+	'<span>'+member.age_range.substring(0,1)+'0대 | </span>'
-					+	'<span>'+member.attendance_rate*100+'%</span>'
-					+'</div>'
-					+'<div class="half_col">';
-			if("${user_id}"==member.id){
-				itemStr+=
-						'<i class="fas fa-cog" onclick="manageMember("'+member.id+','+member.nickname+','+member.club_auth+','+member.club_num+')></i>"';
-			}
-			if("${myAuth}">4 && "${user_id}"!=member_id){
-				itemStr+=
-						'<i class="fas fa-users-cog" onclick="manageMember("'+member.id+','+member.nickname+','+member.club_auth+','+member.club_num+')></i>"';
-			}
-			if(member>club_auth>4){
-				itemStr+=
-						'<i class="fas fa-crown admin visible" id="'+member.id+'">'
-						+'<span class="i-subtitle">운영진</span>'
-						+'</i>';
-			}
-			itemStr+=
-					'</div>'
-				+'</div>';
-		}
-	}
-	members_detail.innerHTML=itemStr;
+function updateMembers_num(ten,twent,thirt,fourt,fift,sixt,sevent,others){
+	var total=ten+twent+thirt+fourt+fift+sixt+sevent+others;
+	var num=" ( ";
+	if(ten!=0){num+="10대:"+ten+"명 "}
+	if(twent!=0){num+="20대:"+twent+"명 "}
+	if(thirt!=0){num+="30대:"+thirt+"명 "}
+	if(fourt!=0){num+="40대:"+fourt+"명 "}
+	if(fift!=0){num+="50대:"+fift+"명 "}
+	if(sixt!=0){num+="60대:"+sixt+"명 "}
+	if(sevent!=0){num+="70대:"+sevent+"명 "}
+	if(others!=0){num+="기타:"+sevent+"명 "}
+	num+=")"
+	$('#ages').text(num);
+	$('#total').text("총 회원 "+total+"명");
 }
-
 
 function answerForMatchReq(request_num,club_name,acceptance,club_num,match_num){
 	if(acceptance==2){

@@ -120,12 +120,12 @@ public class ClubAjaxController {
 	}
 	@RequestMapping("/club/manageMember.do")
 	@ResponseBody
-	public Map<String,String> manageMember(@RequestParam String id,
+	public Map<String,Object> manageMember(@RequestParam String id,
 										   @RequestParam Integer auth,
 										   @RequestParam Integer club_num,
 										   Model model,
 										   HttpSession session){
-		Map<String,String> map=new HashMap<String,String>();
+		Map<String,Object> map=new HashMap<String,Object>();
 		MemberVO member=new MemberVO();
 		member.setId(id);
 		member.setClub_auth(auth);
@@ -149,7 +149,6 @@ public class ClubAjaxController {
 				//해당 클럽의 전체 회원정보를 받아 memberVO list로 받는다
 				//memberVO list가 루프를 돌면서 attendatacerate를 set한다
 				int ten=0,twent=0,thirt=0,fourt=0,fift=0,sixt=0,sevent=0,others=0;
-				Map<String,Integer> ages=new HashMap<String,Integer>();
 				for(MemberVO mem:members) {
 					if(mem.getAge_range().startsWith("1")){
 						ten++;
@@ -168,25 +167,19 @@ public class ClubAjaxController {
 					}else{
 						others++;
 					}
-					mem.setAttendance_rate(clubService.selectAttendanceRate(mem));
 				}
-				ages.put("ten", ten);
-				ages.put("twent", twent);
-				ages.put("thirt", thirt);
-				ages.put("fourt", fourt);
-				ages.put("fift", fift);
-				ages.put("sixt", sixt);
-				ages.put("sevent", sevent);
-				ages.put("others", others);
-				
-				model.addAttribute("ages",ages);
-				model.addAttribute("members",members);
-		//나의 클럽 auth정보 추가
-				String user_id=(String)session.getAttribute("user_id");
-				ClubVO myClub=(ClubVO)session.getAttribute("myClub");
-				myClub.setId(user_id);
-				int myAuth=clubService.selectClubAuth(myClub);
-				session.setAttribute("myAuth", myAuth);
+				map.put("ten", ten);
+				map.put("twent", twent);
+				map.put("thirt", thirt);
+				map.put("fourt", fourt);
+				map.put("fift", fift);
+				map.put("sixt", sixt);
+				map.put("sevent", sevent);
+				map.put("others", others);
+				//auth정보를 각 line의 data attribute로 넣어서 받는다
+				//map으로 관련 정보를 담아서 넘긴다
+				//내 운영진 권한이 사라지면?reload가 불가피함
+				//프론트에서 운영진 권한 제외하는 아이디와 나의 아이디가 같을 경우에는 reload처리
 		return map;
 	}
 }

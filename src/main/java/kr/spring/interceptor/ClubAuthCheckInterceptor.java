@@ -1,7 +1,6 @@
 package kr.spring.interceptor;
 
 import javax.annotation.Resource;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -31,14 +30,21 @@ public class ClubAuthCheckInterceptor
 		HttpSession session = request.getSession();
 		String id=(String)session.getAttribute("user_id");
 		ClubVO myClub=(ClubVO)session.getAttribute("myClub");
-		myClub.setId(id);
-		int club_auth=clubService.selectClubAuth(myClub);
-		if(club_auth<6) {
-			//포워드 방식으로 view 호출
+		if(myClub!=null) {
+			myClub.setId(id);
+			int club_auth=clubService.selectClubAuth(myClub);
+			if(club_auth==4) {
+				//포워드 방식으로 view 호출
+				response.sendRedirect(
+						request.getContextPath()+"/main/authcheck.do");
+				return false;
+			}
+		}else if(myClub==null) {
 			response.sendRedirect(
-					request.getContextPath()+"/main/authcheck.do");
+					request.getContextPath()+"/main/myClubcheck.do");
 			return false;
 		}
+		
 		
 		return true;
 	}

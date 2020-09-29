@@ -809,8 +809,16 @@ a.detail{
 	color:#7f7f7f;
 }
 .hr{
-	margin-bottom:0.2rem;
+	margin-bottom:0.1rem;
 }
+.invisible{
+	
+}
+.sub-h6{
+	font-size:0.9rem;
+	color:#757575;
+}
+
 .container{
 	padding-right:8px !important;
 	padding-left:8px !important;
@@ -961,6 +969,15 @@ h6.ages{
 	display:inline-block;
 	text-align:left;
 }
+.half_col .admin{
+	font-size:1rem;
+	display:none;
+	float:none;
+}
+.half_col .visible{
+	display:inline-block;
+}
+
 
 .mod-h6{
 	color:#9E9E9E;
