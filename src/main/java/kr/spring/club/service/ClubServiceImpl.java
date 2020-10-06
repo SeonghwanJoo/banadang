@@ -111,4 +111,38 @@ public class ClubServiceImpl implements ClubService {
 		
 	}
 
+	@Override
+	public Integer selectNumberOfMembers(Integer club_num) {
+		
+		return clubMapper.selectNumberOfMembers(club_num);
+	}
+
+	@Override
+	public Integer selectNumberOfManagers(Integer club_num) {
+		
+		return clubMapper.selectNumberOfManagers(club_num);
+	}
+
+	@Override
+	public void deleteClubFromClub(Integer club_num) {
+		clubMapper.deleteClubFromClub(club_num);
+		clubMapper.deleteClubFromclub_rating(club_num);
+		clubMapper.deleteClubFromClubJoin(club_num);
+	}
+
+	@Override
+	public List<ClubVO> selectRatings(Integer club_num) {
+		
+		return clubMapper.selectRatings(club_num);
+	}
+
+	@Override
+	public void updateClub(ClubVO club) {
+		
+		clubMapper.updateClub(club);
+		
+	}
+	
+
+
 }

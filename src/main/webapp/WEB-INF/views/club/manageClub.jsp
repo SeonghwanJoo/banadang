@@ -9,15 +9,21 @@
 		<span class="material-icons" id="cancel">close</span>
 		</a>
 		<div class="topnav-centered">
-			<a href="#home" class="active">${title }</a>
+			<a href="javascript:location.reload()" class="active cursor">${title }</a>
 		</div>
-		<input type="submit" id="submit" value="신청">
+		<c:if test="${myAuth>4 }">
+		<div class="topnav-right">
+			<a id="write" href="${pageContext.request.contextPath }/club/modifyClub.do">
+				<i class="fas fa-edit"></i>
+			</a>
+		</div>
+		</c:if>
 	</div>
 </div>
 <div class="blank_div"></div>
 <div class="invite-wrapper" id="invite-wrapper">
  	<ul class="ul-list">
-		<li class="li-list">
+		<li class="li-list cursor" onclick="location.href='club_details.do?club_num=${myClub.club_num}'">
 			<div class="row">
 				<div class="col club_main">
 					<c:if test="${!empty myClub.club_img }">
@@ -125,11 +131,11 @@
 								<span class='star-rating'>
 									<span style='width:${away.manner*20 }%'></span>
 								</span><fmt:formatNumber value="${away.manner*2}" pattern="0.0"/><br>
-							<span class='rating'>실력</span>
-								<span class='star-rating'>
-									<span style='width:${away.perform*20 }%'></span>
-								</span><fmt:formatNumber value="${away.perform*2}" pattern="0.0"/><br>
-							</span>
+						<span class='rating'>실력</span>
+							<span class='star-rating'>
+								<span style='width:${away.perform*20 }%'></span>
+							</span><fmt:formatNumber value="${away.perform*2}" pattern="0.0"/><br>
+						</span>
 						<span class="age">연령대 ${away.club_age }</span>
 					</div>
 				</div>
@@ -227,7 +233,6 @@
 	</div>
 	</c:if>
 	<div class="tab_detail" id="manageSchedule" style="display:block" >
-		<c:if test="${not empty user_id }">
 		<div class="match-head">
 				<span class="title-btw">경기 일정</span>
 				<button class="btn_write" onclick="location.href='${pageContext.request.contextPath}/match/writeForm.do'">
@@ -255,42 +260,39 @@
 				<div class="main-row">
 					<div class="team-info col">
 						${match.home_name}<br>
-						매너 : ${match.home_manner*2}
-						<span class="star-wrap">
+						매너  
 						<span class="star-rating">
 							<span style="width:${match.home_manner*20}%"></span>
-						</span>
-						</span><br>
-						실력 : ${match.home_perform*2}
+						</span>${match.home_manner*2}
+						<br>
+						실력  
 						<span class="star-rating">
 							<span style="width:${match.home_perform*20}%"></span>
-						</span>
+						</span>${match.home_perform*2}
 					</div>
 					<span class="from-to">VS</span>
 					<div class="team-info col">
 					<c:if test="${match.away != 0 }">
 						${match.away_name}<br>
-						매너 : ${match.away_manner*2}
-						<span class="star-wrap">
+						매너  
 						<span class="star-rating">
 							<span style="width:${match.away_manner*20}%"></span>
-						</span>
-						</span><br>
-						실력 : ${match.away_perform*2}
+						</span>${match.away_manner*2}
+						<br>
+						실력  
 						<span class="star-rating">
 							<span style="width:${match.away_perform*20}%"></span>
-						</span>
+						</span>${match.away_perform*2}
 					</c:if>
 					<c:if test="${match.away == 0 }">
 						<span>모집중</span>
 					</c:if>
 					</div>
 				</div>
-				<!-- 내 팀이 -->
 				<div class="main-row">
 					<span class="vote-rating">
-						<c:if test="${match.attend==0 }">
-						<span class="voted" style="background-color:transparent">
+						 <c:if test="${match.attend==0 }">
+						<span class="voted" style="background-color:transparent;width:0">
 							<span class="vote-label">참석</span>
 						</span>
 						</c:if>
@@ -311,14 +313,14 @@
 						</span>
 						</c:if>
 						<span id="num_attend" class="vote_num">${match.attend}</span>
-						<span class="person material-icons">person</span>
+						<span class="person material-icons">person</span> 
 					</span>
-				</div>	
+				</div>
 				<div class="main-row">
 					<span class="vote-rating">
-						<c:if test="${match.not_attend==0 }">
+						 <c:if test="${match.not_attend==0 }">
 						<span class="voted" 
-							style="background-color:transparent;">
+							style="background-color:transparent;width:0">
 							<span class="vote-label">불참</span>
 						</span>
 						</c:if>
@@ -339,13 +341,13 @@
 						</span>
 						</c:if>
 						<span id="num_nattend" class="vote_num">${match.not_attend}</span>
-						<span class="person material-icons">person</span>
+						<span class="person material-icons">person</span> 
 					</span>
 				</div>	
 				<div class="main-row">
 					<span class="vote-rating">
-						<c:if test="${match.undefined==0 }">
-						<span class="voted" style="background-color:transparent;">
+						 <c:if test="${match.undefined==0 }">
+						<span class="voted" style="background-color:transparent;width:0">
 							<span class="vote-label">미정</span>
 						</span>
 						</c:if>
@@ -366,22 +368,22 @@
 						</span>
 						</c:if>
 						<span id="num_undefined" class="vote_num">${match.undefined}</span>
-						<span class="person material-icons">person</span>
+						<span class="person material-icons">person</span> 
 					</span>
 				</div>
 				<c:if test="${match.home!=match.away && match.home==match.club_num}">
 				<button class="block" 
-					onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }'">
+					onclick="location.href='${pageContext.request.contextPath }/main/voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }&isMain=false'">
 					${match.home_name } <c:if test="${ match.status !=0}">다시 투표하기</c:if><c:if test="${match.status ==0 }">투표하기</c:if></button>
 				</c:if>
 				<c:if test="${match.home!=match.away && match.away==match.club_num}">
 				<button class="block" 
-					onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }'">
+					onclick="location.href='${pageContext.request.contextPath }/main/voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }&isMain=false'">
 					${match.away_name } <c:if test="${match.status !=0 }">다시 투표하기</c:if><c:if test="${match.status ==0 }">투표하기</c:if></button>
 				</c:if>
 				<c:if test="${match.home==match.away}">
 				<button class="block" 
-					onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }'">
+					onclick="location.href='${pageContext.request.contextPath }/main/voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }&isMain=false'">
 					<c:if test="${match.status !=0 }">다시 투표하기</c:if><c:if test="${match.status ==0 }">투표하기</c:if></button>
 				</c:if>
 			</li>
@@ -413,30 +415,28 @@
 				<div class="main-row">
 					<div class="team-info col">
 						${match.home_name}<br>
-						매너 : ${match.home_manner*2}/10
-						<span class="star-wrap">
+						매너  
 						<span class="star-rating">
 							<span style="width:${match.home_manner*20}%"></span>
-						</span>
-						</span><br>
-						실력 : ${match.home_perform*2}/10
+						</span>${match.home_manner*2}
+						<br>
+						실력  
 						<span class="star-rating">
 							<span style="width:${match.home_perform*20}%"></span>
-						</span>
+						</span>${match.home_perform*2}
 					</div>
 					<span class="from-to">VS</span>
 					<div class="team-info col">
 						${match.away_name}<br>
-						매너 : ${match.away_manner*2}/10
-						<span class="star-wrap">
+						매너  
 						<span class="star-rating">
 							<span style="width:${match.away_manner*20}%"></span>
-						</span>
-						</span><br>
-						실력 : ${match.away_perform*2}/10
+						</span>${match.away_manner*2}
+						<br>
+						실력  
 						<span class="star-rating">
 							<span style="width:${match.away_perform*20}%"></span>
-						</span>
+						</span>${match.away_perform*2}
 					</div>
 				</div>
 			</div>
@@ -451,7 +451,6 @@
 		</c:if>
 		</c:forEach>
 		</ul>
-		</c:if>
 		</c:if>
 	</div>
 	<div class="tab_detail" id="manageMember" >
@@ -488,44 +487,48 @@
 			)
 		</h6>
 		</div>
-		<div class="row">
-		<!-- 카톡으로 초대 메시지 보내기 -->
-		<!-- 어플이 깔려있지 않다면 어플 설치 및 초대장 확인 -->
-		<!-- 어플이 깔려 있으면 해당 초대 수락 페이지 호출 -->
-		<!-- 수락 후 해당 클럽 clubManage page호출 -->
-			<c:forEach items="${members }" var="member">
-			<c:if test="${member.club_auth>3 }">
-				<div class="detail-item col-sm-12 col-lg-6" id="${member.id }-row">
-					<div class="half_col">
-						<img src="${member.thumbnail_image }" alt="Avatar" class="avatar">
-						<span style="display:inline">
-						<c:if test="${ member.club_auth>4}">
-						<i class="fas fa-crown admin visible" id="${member.id}">
-						<!-- <span class="i-subtitle">운영진</span> -->
-						</i>
-						</c:if>
-						<c:if test="${ member.club_auth<5}">
-						<i class="fas fa-crown admin" id="${member.id}">
-						<!-- <span class="i-subtitle">운영진</span> -->
-						</i>
-						</c:if>
-						${member.nickname}
-						</span>
-						<br>
-						<span>${fn:substring(member.age_range,0,1)}0대 |</span>
-						<span>참석 투표율 ${member.attendance_rate*100}%</span>
-					</div>
-					<div class="half_col">
-						<c:if test="${user_id == member.id }">
-						<i class="fas fa-cog" id="${member.id }-i" data-auth="${member.club_auth }" onclick="manageMember('${member.id}','${member.nickname}',${member.club_num })"></i>
-						</c:if>
-						<c:if test="${myAuth>4 && user_id != member.id }">
-						<i class="fas fa-users-cog" id="${member.id }-i" data-auth="${member.club_auth }" onclick="manageMember('${member.id}','${member.nickname}','${member.club_num }')"></i>
-						</c:if>
-					</div>
+		<div class="col-sm-12 one-col">
+			<div class="col">
+				<a href="javascript:sendLink()">
+					<span class="material-icons person_add">person_add</span>
+					<span class="text-by-icon">팀원 초대하기</span>
+					<img class="kakaolink" src="${pageContext.request.contextPath }/resources/images/kakaolink_btn.png">
+				</a>
+			</div>
+		</div>
+		<div class="main-row">
+		<c:forEach items="${members }" var="member">
+		<c:if test="${member.club_auth>3 }">
+			<div class="detail-item col-sm-12 col-lg-6" id="${member.id }-row">
+				<div class="half_col bigger">
+					<img src="${member.thumbnail_image }" alt="Avatar" class="avatar">
+					<span style="display:inline-block">
+					<c:if test="${ member.club_auth>4}">
+					<i class="fas fa-crown admin visible" id="${member.id}">
+					</i>
+					</c:if>
+					<c:if test="${ member.club_auth<5}">
+					<i class="fas fa-crown admin" id="${member.id}">
+					</i>
+					</c:if>
+					${member.nickname}
+					</span>
+					<br>
+					<span>${fn:substring(member.age_range,0,1)}0대 |</span>
+					<span>참석 투표율 <fmt:formatNumber value="${member.attendance_rate*100}" pattern="0"/>%</span>
 				</div>
-			</c:if>
-			</c:forEach>
+				<div class="half_col smaller">
+					<c:if test="${user_id == member.id }">
+					<input type="hidden" value="${member.nickname }" id="nickname">
+					<i class="fas fa-cog" id="${member.id }-i" data-auth="${member.club_auth }" onclick="manageMember('${member.id}','${member.nickname}',${member.club_num })"></i>
+					</c:if>
+					<c:if test="${myAuth>4 && user_id != member.id }">
+					<i class="fas fa-users-cog" id="${member.id }-i" data-auth="${member.club_auth }" onclick="manageMember('${member.id}','${member.nickname}','${member.club_num }')"></i>
+					</c:if>
+				</div>
+			</div>
+		</c:if>
+		</c:forEach>
 		</div>
 	</div>
 </div>
@@ -542,6 +545,19 @@
 		</div>
 	</div>
 </div>
+<div id="delete_modal" class="confirm-modals">
+	<!-- Modal content -->
+	<div class="confirm-modal-content">
+		<div class="sub-content">
+			<span id="delete_msg">탈퇴 후 남은 회원이 없으면 팀을 삭제합니다.<br> 탈퇴하시겠습니까?</span>
+			<hr>
+			<button id="delete-btn" class="pos-btn">탈퇴</button>
+		</div>
+		<div class="sub-content">
+			<button id="delete-cancel-btn" class="neg-btn">취소</button>
+		</div>
+	</div>
+</div>
 <div id="manage_modal" class="confirm-modals">
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
@@ -550,7 +566,7 @@
 			<span id="manage_msg"></span>
 			<hr>
 			<button id="out-manage-btn" class="pos-btn">팀 탈퇴</button>
-			<hr>
+			<hr id="auth-manage-btn-hr">
 			<button id="auth-manage-btn" class="pos-btn" style="display:block"></button>
 		</div>
 		<div class="sub-content">
@@ -558,17 +574,38 @@
 		</div>
 	</div>
 </div>
+<!-- The Modal -->
+<div id="toast" class="submit_toast">
+  <!-- Modal content -->
+  <div id="submit_toast_content" class="submit_toast_content">
+     <span id="club_msg"></span>
+     <br><br>확인
+  </div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
+Kakao.init('32776969383e4a77d92f6e18dd233bc5');
+var nickname=$('#nickname').val();
+function sendLink() {
+    Kakao.Link.sendCustom({
+    	templateId: 34560,
+    	templateArgs: {
+    		'msg_title': '${myClub.club_name} 팀으로 당신을 초대합니다',
+    		'msg_description': '아래 링크를 눌러 들어오세요.',
+    		'club_num': '${myClub.club_num}',
+    		'nickname': nickname
+    	}
+    })
+  }
 function manageMember(id,nickname,club_num){
 	//modal창 표시 (현재 멤버 권한이 운영진이면 강제탈퇴와 운영진 제외, 운영진 추가)
 	let set=document.getElementById(id+'-i');
 	let auth=set.getAttribute('data-auth');
-	console.log("auth before update: "+auth);
-	console.log("mem_id before update: "+id);
 	
 	if(${ myAuth }<5){
 		console.log("manage-btn block 진입");
+		$('#auth-manage-btn-hr').css('display','none');
 		$('#auth-manage-btn').css('display','none');
 	}
 	$('#manage_msg').text(nickname+'님 회원 관리');
@@ -578,21 +615,113 @@ function manageMember(id,nickname,club_num){
 		$('#auth-manage-btn').text('운영진 제외');
 			console.log("운영진 제외 버튼 클립 진입");
 			auth=4;
-	}else if (auth==4){
+	}else if (auth==4 && ${myAuth}==5){
 		$('#auth-manage-btn').text('운영진 추가');
 			console.log("운영진 추가 버튼 클립 진입");
 			auth=5;
 	}
 	$('#auth-manage-btn').unbind('click').bind('click',function(){
 		console.log("auth-manage-btn 클릭 진입");
-		updateMember(id,auth,club_num);
+		if(auth==4){
+			checkNumOfMember(club_num,false,id,auth);
+			
+		}else if (auth==5){
+			updateMember(id,auth,club_num);
+		}
+		 
+		
+		
 	});
 	$('#out-manage-btn').unbind('click').bind('click',function(){
 		auth=0;
-		updateMember(id,auth,club_num);
+		checkNumOfMember(club_num,true,id,auth);
+		
+		
 	});
 	$('#manage-cancel-btn').click(function(){
 		$('#manage_modal').css('display','none');
+	});
+}
+function checkNumOfMember(club_num,memberDeleted,id,auth){
+	$.ajax({
+		url:'checkNumOfMembers.do',
+		type:'post',
+		data:{
+			club_num:club_num,
+			memberDeleted:memberDeleted
+		},
+		dataType:'json',
+		cache:false,
+		timeout:30000,
+		success:function(data){
+			
+			console.log("data.existingNumber : "+data.existingNumber);
+			if(data.existingNumber==1 && !data.memberDeleted){
+				console.log('existing : '+data.existing);
+				//modal 메시지 띄우고 프로세스 빠져나감
+				$('#manage_modal').css('display','none');
+				$('#club_msg').text('적어도 한명 이상은 운영진으로 지정되어야 합니다.');
+				$('#toast').css('display','block');
+				$(window).click(function(){
+					$('#toast').css('display','none');
+					return;
+				});
+			}else if(data.existingNumber==1 && data.memberDeleted){
+				$('#manage_modal').css('display','none');
+				$('#delete_modal').css('display','block');
+				$('#delete-btn').click(function(){
+					//팀 삭제 처리 후 club.do로 location
+					deleteClub(club_num);
+				});
+				$('#delete-cancel-btn').click(function(){
+					$('#delete_modal').css('display','none');
+				});
+				
+			}else if(data.existingNumber>1){
+				updateMember(id,auth,club_num);
+			}
+			if(data.result=="errors"){
+				alert("오류 발생");
+			}
+			
+		},
+		error:function(){
+			alert('네트워크 오류 발생');
+		}
+	});
+	$('#manage-cancel-btn').click(function(){
+		$('#manage_modal').css('display','none');
+	});
+}
+function deleteClub(club_num){
+	$.ajax({
+		url:'deleteClub.do',
+		type:'post',
+		data:{
+			club_num:club_num
+		},
+		dataType:'json',
+		cache:false,
+		timeout:30000,
+		success:function(data){
+			if(data.result=="success"){
+				location.href="${pageContext.request.contextPath}/club/club.do";
+			}
+			if(data.result=="errors"){
+				
+				alert('오류 발생');
+				$(window).click(function(){
+					$("#delete_modal").css("display","none");
+				});
+			}
+			
+		},
+		error:function(){
+			alert('네트워크 오류 발생');
+		}
+	});
+	$('#delete-cancel-btn').click(function(){
+		$('#delete_modal').css('display','none');
 	});
 }
 function updateMember(id,auth,club_num){

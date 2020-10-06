@@ -79,31 +79,31 @@
 		<div class="main-row">
 			<div class="team-info col">
 				${match.home_name}<br>
-				매너 : ${match.home_manner*2}
-				<span class="star-wrap">
+				매너  
 				<span class="star-rating">
 					<span style="width:${match.home_manner*20}%"></span>
 				</span>
-				</span><br>
-				실력 : ${match.home_perform*2}
+				${match.home_manner*2}<br>
+				실력  
 				<span class="star-rating">
 					<span style="width:${match.home_perform*20}%"></span>
 				</span>
+				${match.home_perform*2}
 			</div>
 			<span class="from-to">VS</span>
 			<div class="team-info col">
 			<c:if test="${match.away != 0 }">
 				${match.away_name}<br>
-				매너 : ${match.away_manner*2}
-				<span class="star-wrap">
+				매너  
 				<span class="star-rating">
 					<span style="width:${match.away_manner*20}%"></span>
 				</span>
-				</span><br>
-				실력 : ${match.away_perform*2}
+				${match.away_manner*2}<br>
+				실력  
 				<span class="star-rating">
 					<span style="width:${match.away_perform*20}%"></span>
 				</span>
+				${match.away_perform*2}
 			</c:if>
 			<c:if test="${match.away == 0 }">
 				<span>모집중</span>
@@ -195,17 +195,17 @@
 		</div>
 		<c:if test="${match.home!=match.away && match.home==match.club_num}">
 		<button class="block" 
-			onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }'">
+			onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }&isMain=true'">
 			${match.home_name } <c:if test="${ match.status !=0}">다시 투표하기</c:if><c:if test="${match.status ==0 }">투표하기</c:if></button>
 		</c:if>
 		<c:if test="${match.home!=match.away && match.away==match.club_num}">
 		<button class="block" 
-			onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }'">
+			onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }&isMain=true'">
 			${match.away_name } <c:if test="${match.status !=0 }">다시 투표하기</c:if><c:if test="${match.status ==0 }">투표하기</c:if></button>
 		</c:if>
 		<c:if test="${match.home==match.away}">
 		<button class="block" 
-			onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }'">
+			onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }&isMain=true'">
 			<c:if test="${match.status !=0 }">다시 투표하기</c:if><c:if test="${match.status ==0 }">투표하기</c:if></button>
 		</c:if>
 	</li>
@@ -237,39 +237,39 @@
 		<div class="main-row">
 			<div class="team-info col">
 				${match.home_name}<br>
-				매너 : ${match.home_manner*2}/10
-				<span class="star-wrap">
+				매너 
 				<span class="star-rating">
 					<span style="width:${match.home_manner*20}%"></span>
 				</span>
-				</span><br>
-				실력 : ${match.home_perform*2}/10
+				${match.home_manner*2}<br>
+				실력 
 				<span class="star-rating">
 					<span style="width:${match.home_perform*20}%"></span>
 				</span>
+				${match.home_perform*2}
 			</div>
 			<span class="from-to">VS</span>
 			<div class="team-info col">
 				${match.away_name}<br>
-				매너 : ${match.away_manner*2}/10
-				<span class="star-wrap">
+				매너 
 				<span class="star-rating">
 					<span style="width:${match.away_manner*20}%"></span>
 				</span>
-				</span><br>
-				실력 : ${match.away_perform*2}/10
+				${match.away_manner*2}<br>
+				실력 
 				<span class="star-rating">
 					<span style="width:${match.away_perform*20}%"></span>
 				</span>
+				${match.away_perform*2}
 			</div>
 		</div>
 	</div>
-	<c:if test="${match.home==match.club_num}">
+	<!--<c:if test="${match.home==match.club_num}">
 	<button class="block" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }'">${match.away_name } 평점 작성 하기</button>
 	</c:if>
 	<c:if test="${match.away==match.club_num }">
 	<button class="block" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }'">${match.home_name } 평점 작성 하기</button>
-	</c:if>
+	</c:if>-->
 </li>
 <hr class="hr"> 
 </c:if>

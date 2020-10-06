@@ -6,9 +6,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <form:form id="club_form" accept-charset="utf-8" enctype="multipart/form-data">
 <input type="hidden" name="id" value="${user_id }">
+<input type="hidden" name="club_num" value="${myClub.club_num }">
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
-		<a href="club.do" >
+		<a href="javascript:location.href=document.referrer" >
 		<span class="material-icons" id="cancel">close</span>
 		</a>
 		<div class="topnav-centered">
@@ -21,7 +22,7 @@
 <div class="row">
 	<div class="autocomplete input-container col">
 		<span class="icon material-icons">sports_soccer</span>
-		<input class="input-field" type="text" name="club_name" id="club_name" placeholder="팀 이름 입력" autocomplete="off" onkeyup="removeWhiteSpace(this)">
+		<input class="input-field" type="text" name="club_name" id="club_name" placeholder="팀 이름 입력" autocomplete="off" value="${myClub.club_name }" onkeyup="removeWhiteSpace(this)">
 	</div>
 </div>
 <div class="row"><div class="col"><span class="msg" id="club_name_msg"></span></div></div>
@@ -29,11 +30,11 @@
 <div class="row">
 	<div class="autocomplete input-container col">
 		<i class="fas fa-map-marked-alt icon"></i>
-		<input class="input-field" type="text" name="club_loc" id="club_loc" placeholder="주 활동 구장 검색" autocomplete="off">
+		<input class="input-field" type="text" name="club_loc" id="club_loc" value="${myClub.club_loc }"placeholder="주 활동 구장 검색" autocomplete="off">
 	</div>
-	<input type="hidden" name="club_locX" id="club_locX">
-	<input type="hidden" name="club_locY" id="club_locY">
-	<input type="hidden" name="club_address" id="club_address">
+	<input type="hidden" name="club_locX" id="club_locX" value="${myClub.club_locX }">
+	<input type="hidden" name="club_locY" id="club_locY" value="${myClub.club_locY }">
+	<input type="hidden" name="club_address" id="club_address" value="${myClub.club_address }">
 </div>
 <div class="row"><div class="col"><span class="msg" id="club_loc_msg"></span></div></div>
 <hr class="hr">
@@ -44,27 +45,52 @@
 <div class="row centered-padding">
 	<label class="chip">
 		<span class="chip-txt">20대</span>
+		<c:if test="${fn:contains(myClub.club_age,'2') }">
 		<input type="checkbox" value="20대" name="club_ages" checked="checked">
+		</c:if>
+		<c:if test="${!fn:contains(myClub.club_age,'2') }">
+		<input type="checkbox" value="20대" name="club_ages">
+		</c:if>
 		<span class="checkmark"></span>
 	</label>
 	<label class="chip">
 		<span class="chip-txt">30대</span>
+		<c:if test="${fn:contains(myClub.club_age,'3') }">
+		<input type="checkbox" value="30대" name="club_ages" checked="checked">
+		</c:if>
+		<c:if test="${!fn:contains(myClub.club_age,'3') }">
 		<input type="checkbox" value="30대" name="club_ages">
+		</c:if>
 		<span class="checkmark"></span>
 	</label>
 	<label class="chip">
 		<span class="chip-txt">40대</span>
+		<c:if test="${fn:contains(myClub.club_age,'4') }">
+		<input type="checkbox" value="40대" name="club_ages" checked="checked">
+		</c:if>
+		<c:if test="${!fn:contains(myClub.club_age,'4') }">
 		<input type="checkbox" value="40대" name="club_ages">
+		</c:if>
 		<span class="checkmark"></span>
-	</label> 
+	</label>
 	<label class="chip">
 		<span class="chip-txt">50대</span>
+		<c:if test="${fn:contains(myClub.club_age,'5') }">
+		<input type="checkbox" value="50대" name="club_ages" checked="checked">
+		</c:if>
+		<c:if test="${!fn:contains(myClub.club_age,'5') }">
 		<input type="checkbox" value="50대" name="club_ages">
+		</c:if>
 		<span class="checkmark"></span>
 	</label>
 	<label class="chip">
 		<span class="chip-txt">60대</span>
+		<c:if test="${fn:contains(myClub.club_age,'6') }">
+		<input type="checkbox" value="60대" name="club_ages" checked="checked">
+		</c:if>
+		<c:if test="${!fn:contains(myClub.club_age,'6') }">
 		<input type="checkbox" value="60대" name="club_ages">
+		</c:if>
 		<span class="checkmark"></span>
 	</label>
 </div>
@@ -74,11 +100,11 @@
 	<!-- 유니폼 색상 -->
 	<div class="half_col" id="uniform_div">
 		<div class="row color-view">
-			<i class="fas fa-tshirt uni-view"></i>
+			<i class="fas fa-tshirt uni-view" style="color:${myClub.club_color}"></i>
 		</div>
 		<div class="row">
 			<button class="chip-btn" id="color-btn" >색상 선택</button>
-			<input class="input-field" type="text" name="club_color" id="club_color" placeholder="유니폼 색상 선택" style="display:none">
+			<input class="input-field" type="text" name="club_color" id="club_color" value="${myClub.club_color }" placeholder="유니폼 색상 선택" style="display:none">
 		</div>
 	</div>
 	<!-- 엠블럼 -->
@@ -86,7 +112,12 @@
 			엠블럼 사진 업로드 -->
 	<div class="half_col">
 		<div class="row">
+			<c:if test="${empty myClub.club_img }">
 			<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" id="img-pre">
+			</c:if>
+			<c:if test="${!empty myClub.club_img }">
+			<img src="imageView.do?club_num=${myClub.club_num}" id="img-pre">
+			</c:if>
 		</div>
 		<div class="row">
 			<label for="club_img" class="file-label">
@@ -99,7 +130,7 @@
 <hr class="hr">
 <div class="row">
 	<div class="text input-container col">
-		<textarea class="detail" id="club_detail" name="club_detail" placeholder="팀 소개글 입력"></textarea>
+		<textarea class="detail" id="club_detail" name="club_detail" placeholder="팀 소개글 입력">${myClub.club_detail }</textarea>
 	</div>
 </div>
 <hr class="hr">
@@ -181,7 +212,7 @@ function removeWhiteSpace(obj){
 			formData.append("filename",$("#img-pre").attr("alt"));
 			
 			$.ajax({
-				url:'createClub.do',
+				url:'updateClub.do',
 				type:'post',
 				data:formData,
 				dataType:'json',
@@ -190,9 +221,9 @@ function removeWhiteSpace(obj){
 				cache:false,
 				timeout:30000,
 				success:function(data){
-					if(data.result=="inserted"){
-						console.log("inserted 진입");
-						$("#club_msg").text("팀 생성 완료");
+					if(data.result=="updated"){
+						console.log("updated 진입");
+						$("#club_msg").text("팀 정보 수정 완료");
 						$("#toast").css("display","block");
 						$("#confirm").click(function(){
 							location.href="manageClub.do?club_num="+data.club_num;

@@ -35,6 +35,22 @@
 		 	select max(club_num) as club_num from club
 		 </selectKey>
 	</insert>
+	<update id="updateClub" parameterType="clubVO">
+		update club set id=#{id}, club_loc=#{club_loc}, club_name=#{club_name},
+		<if test="club_detail !=''">
+			club_detail=#{club_detail},
+		</if>
+		<if test="club_img !=''">
+			club_img=#{club_img},
+		</if>
+		<if test="club_color !=''">
+			club_color=#{club_color},
+		</if>
+		<if test="filename !=''">
+			filename=#{filename},
+		</if>
+		club_age=#{club_age},club_locX=#{club_locX},club_locY=#{club_locY},club_address=#{club_address} where club_num=#{club_num}
+	</update>
 	<select id="selectAwayDetailsForRequestedMatch" parameterType="integer" resultType="clubVO">
 	select * from (select e.manner,e.perform,d.club_num,d.request_num,d.match_num,d.acceptance,d.address,d.type,d.start_time,d.end_time,d.match_date,d.request_detail,d.match_detail from
     	(select a.request_num,a.match_num,a.club_num,a.acceptance,a.request_detail,b.type,b.home,b.start_time,b.end_time,b.address,b.match_detail,b.cost,b.match_date from

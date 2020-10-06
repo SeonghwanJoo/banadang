@@ -69,6 +69,7 @@ public class MainController {
 	@RequestMapping("/main/voteForm.do")
 	public ModelAndView vote(@RequestParam int match_num,
 							 @RequestParam Integer club_num,
+							 @RequestParam boolean isMain,
 							 HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -83,7 +84,7 @@ public class MainController {
 			addRatingResult(match,clubs_rating);
 			mav.addObject("match",match);
 		}
-		
+		mav.addObject("isMain",isMain);
 		mav.setViewName("vote");
 		mav.addObject("title","경기 참불 투표");
 		return mav;

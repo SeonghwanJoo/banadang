@@ -5,7 +5,7 @@
 <div class="topnav" id=myTopnav>
   <!-- Centered link -->
   <div class="topnav-centered">
-    <a href="#home" class="active">${title}</a>
+    <a href="javascript:location.reload()" id="top-anchor" class="active">${title}</a>
   </div>
 
   <!-- Left-aligned links (default) -->

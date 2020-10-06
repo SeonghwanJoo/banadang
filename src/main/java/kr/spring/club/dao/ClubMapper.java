@@ -1,6 +1,7 @@
 package kr.spring.club.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -63,4 +64,23 @@ public interface ClubMapper {
 	@Delete("delete from club_join where id=#{id} and club_num=#{club_num}")
 	public void deleteMemberFromClub(MemberVO memberVO);
 	
+	@Select("select count(*) from club_join where club_num=#{club_num} and club_auth>3")
+	public Integer selectNumberOfMembers(Integer club_num);
+	
+	@Select("select count(*) from club_join where club_num=#{club_num} and club_auth>4")
+	public Integer selectNumberOfManagers(Integer club_num);
+	
+	@Delete("delete from club_join where club_num=#{club_num}")
+	public void deleteClubFromClubJoin(Integer club_num);
+	
+	@Delete("delete from club where club_num=#{club_num}")
+	public void deleteClubFromClub(Integer club_num);
+	
+	@Delete("delete from club_rating where club_num=#{club_num}")
+	public void deleteClubFromclub_rating(Integer club_num);
+	
+	@Select("select * from (select * from club_rating where club_num=#{club_num} ) a join match b on a.match_num = b.match_num order by match_date desc")
+	public List<ClubVO> selectRatings(Integer club_num);
+	
+	public void updateClub(ClubVO club);
 }

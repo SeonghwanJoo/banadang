@@ -8,6 +8,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
@@ -18,7 +20,10 @@ import kr.spring.member.domain.MemberVO;
 
 @Service  
 public class LoginAPI {
-    public String getAccessToken (String authorize_code) {
+    
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	public String getAccessToken (String authorize_code,boolean invited) {
         String access_Token = "";
         String refresh_Token = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
@@ -36,7 +41,12 @@ public class LoginAPI {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=0646bcb11e5b9bbdb24fc9153f7693ae");
-            sb.append("&redirect_uri=http://localhost:8080/banadang/member/login.do");
+            if(invited) {
+            	sb.append("&redirect_uri=http://localhost:8080/banadang/member/invitedLogin.do");
+            }else {
+            	sb.append("&redirect_uri=http://localhost:8080/banadang/member/login.do");
+            }
+            
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
@@ -62,8 +72,8 @@ public class LoginAPI {
             access_Token = element.getAsJsonObject().get("access_token").getAsString();
             refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
             
-            System.out.println("access_token : " + access_Token);
-            System.out.println("refresh_token : " + refresh_Token);
+            logger.info("access_token : " + access_Token);
+            logger.info("refresh_token : " + refresh_Token);
             
             br.close();
             bw.close();

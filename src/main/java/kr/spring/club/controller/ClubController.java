@@ -51,6 +51,18 @@ public class ClubController {
 		List<ClubVO> myClubs=clubService.selectMyClubs(id);
 		ModelAndView mav=new ModelAndView();
 		session.setAttribute("myClubs", myClubs);
+		ClubVO myClub=(ClubVO)session.getAttribute("myClub");
+		//myClub이 session에 없다면
+		if (myClub==null) {
+			session.setAttribute("myClub", myClubs.get(0));
+		}
+		//myClub이 탈퇴했으나 session에 업데이트되지 않았다면
+		myClub.setId(id);
+		Integer auth=clubService.selectClubAuth(myClub);
+		if(auth==null) {
+			session.setAttribute("myClub", myClubs.get(0));
+		}
+		
 		mav.setViewName("myClub");
 		mav.addObject("title", "팀 관리");
 		
@@ -136,6 +148,28 @@ public class ClubController {
 		
 		return mav;
 	}
+	@RequestMapping("/club/inviteMember.do")
+	public ModelAndView inviteMember(@RequestParam Integer club_num,
+									 @RequestParam String nickname,
+									 HttpSession session) {
+		
+		ModelAndView mav=new ModelAndView();
+		ClubVO club=clubService.selectClubDetailWithClub_num(club_num);
+		List<ClubVO> myClubs=(ArrayList<ClubVO>)session.getAttribute("myClubs");
+		if(myClubs!=null) {
+			for(ClubVO myClub:myClubs) {
+				if(myClub.getClub_num()==club_num) {
+					mav.setViewName("redirect:/club/manageClub.do?club_num="+club_num);
+					return mav;
+				}
+			}
+		}
+		mav.addObject("nickname",nickname);
+		mav.addObject("club",club);
+		mav.setViewName("inviteMember");
+		
+		return mav;
+	}
 	@RequestMapping("/club/createClubForm.do")
 	public ModelAndView createClubForm() {
 		
@@ -156,6 +190,28 @@ public class ClubController {
 		
 		
 		return "imageView";
+	}
+	@RequestMapping("/club/club_details.do")
+	public ModelAndView viewClubDetails(@RequestParam Integer club_num) {
+		
+		ModelAndView mav=new ModelAndView();
+		ClubVO club=clubService.selectClubDetailWithClub_num(club_num);
+		List<ClubVO> ratings=clubService.selectRatings(club_num);
+		mav.addObject("club",club);
+		mav.addObject("ratings",ratings);
+		mav.addObject("title","팀 평점");
+		logger.info("ratings : "+ratings);
+		mav.setViewName("clubDetails");		
+		
+		return mav;
+		
+	}
+	@RequestMapping("/club/modifyClub.do")
+	public ModelAndView modifyClub() {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("title","팀 정보 수정");
+		mav.setViewName("modifyClub");
+		return mav;
 	}
 	
 	
@@ -208,5 +264,4 @@ public class ClubController {
 			}
 		}
 	}
-	//Meber List를 루프가 돌면서 해당하는 연령대의 조건식에 들어가면 count를 1씩 더한다
 }

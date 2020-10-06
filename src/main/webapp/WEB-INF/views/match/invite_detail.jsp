@@ -90,36 +90,6 @@
      <br><br>확인
   </div>
 </div>
-<!-- The Modal -->
-<div id="team" class="submit_toast">
-	<!-- Modal content -->
-	<div id="team-content" class="submit_toast_content">
-		<div class="row">
-			<div class="input-container col">
-			<c:if test="${!empty myClubs }">
-			<c:if test="${fn:length(myClubs)==1}">
-				<c:forEach items="${myClubs }" var="myClub">
-				<input type="hidden" id="away" name="away" value="${myTeam.club_num}">
-				</c:forEach>
-			</c:if>
-			<c:if test="${fn:length(myClubs)>1}">
-				<i class="fa fa-users icon"></i>
-				<select class="time input-field" id="away" name="away">
-					<option value="">우리팀 선택</option>
-						<c:forEach items="${myClubs }" var="myClub">
-							<option value="${myClub.club_num}">${myClub.club_name }</option>
-						</c:forEach>
-				</select>
-			</c:if>
-			</c:if>
-			</div>
-		</div>
-		<span id="myTeam_msg"></span>
-		<input type="button" class="btn-modal" id="close"value="취소">
-		<input type="button" class="btn-modal" id="team_confirm" value="확인">
-	</div>
-</div>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
@@ -145,40 +115,9 @@
 	$(function(){
 		
 		$('#submit').click(function(){
-			console.log("invite_detail : "+$('#invite_detail').val());
 		
+			postMatchRequest( ${match.match_num}, ${user_id}, ${myClub.club_num}, $('#invite_detail').val());
 			
-			console.log("myTeam.length : "+"${fn:length(myClubs)}");			
-			<c:if  test="${fn:length(myClubs)>1}">
-				$('#team').css('display','block');
-				$('#team_confirm').click(function(){
-					if($('#away').val()==''){
-						$('#myTeam_msg').css('color','red').text('우리팀을 선택하세요');
-				
-					}else{
-						$('#team').hide();
-						postMatchRequest(${match.match_num }, ${user_id},$('#away').val(),$('#invite_detail').val());
-					}
-				});
-				$('#away').click(function(){
-					$('#myTeam_msg').text('');
-				});
-				$('#close').click(function(){
-					$('#team').hide();
-				});
-			</c:if>
-			<c:if test="${fn:length(myClubs)==1}">
-			postMatchRequest( ${match.match_num}, ${user_id}, $('#away').val(), $('#invite_detail').val());
-			</c:if>
-			
-			<c:if test="${fn:length(myClubs)==0}">
-				$('#matchRequest_msg').text('소속팀의 관리자만 경기 신청 가능');
-				$('#toast').css('display','block');
-				$('#toast').click(function(){
-					$('#toast').hide();
-				});
-				
-			</c:if>
 			
 			function postMatchRequest(a,b,c,d){
 				$.ajax({
@@ -203,10 +142,10 @@
 						
 						$('#toast').css('display','block');
 						$('#confirm').click(function(){
-							location.href='${pageContext.request.contextPath}/main/main.do';
+							location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}';
 						});
 						$(window).click(function(){
-							location.href='${pageContext.request.contextPath}/main/main.do';
+							location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}';
 						});
 					},
 					error:function(){

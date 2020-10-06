@@ -34,10 +34,17 @@ public class ClubVO implements Serializable {
 	private double perform;
 	private double manner;
 	private int rating_count;
+	private String rating_detail;
 	private Date match_date;
 	private String start_time;
 	private String end_time;
 	private String address;
+	public String getRating_detail() {
+		return rating_detail;
+	}
+	public void setRating_detail(String rating_detail) {
+		this.rating_detail = rating_detail;
+	}
 	public float getAttendance_rate() {
 		return attendance_rate;
 	}

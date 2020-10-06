@@ -182,4 +182,102 @@ public class ClubAjaxController {
 				//프론트에서 운영진 권한 제외하는 아이디와 나의 아이디가 같을 경우에는 reload처리
 		return map;
 	}
+	@RequestMapping("/club/joinClub.do")
+	@ResponseBody
+	public Map<String,Object> joinClub(@RequestParam String id,@RequestParam Integer club_num){
+		Map<String,Object> map=new HashMap<String,Object>();
+		ClubVO club=new ClubVO();
+		club.setId(id);
+		club.setClub_num(club_num);
+		try {
+			clubService.insertClubMember(club);
+			map.put("result", "success");
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		
+		return map;
+	}
+	@RequestMapping("/club/checkNumOfMembers.do")
+	@ResponseBody
+	public Map<String,Object> checkNumOfMember(@RequestParam Integer club_num,@RequestParam boolean memberDeleted){
+		Map<String,Object> map=new HashMap<String,Object>();
+			map.put("memberDeleted",memberDeleted);
+		try {
+			Integer existingNumber=null;
+			if(memberDeleted) {
+				existingNumber=clubService.selectNumberOfMembers(club_num);
+			}else if(!memberDeleted){
+				existingNumber=clubService.selectNumberOfManagers(club_num);
+			}
+			map.put("existingNumber", existingNumber);
+		}catch (Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		return map;
+	}
+	@RequestMapping("/club/deleteClub.do")
+	@ResponseBody
+	public Map<String,Object> deleteClub(@RequestParam Integer club_num){
+		Map<String,Object> map=new HashMap<String,Object>();
+		try {
+			clubService.deleteClubFromClub(club_num);
+			map.put("result", "success");
+		}catch(Exception e){
+			e.printStackTrace();
+			map.put("result","errors");
+		}
+		return map;
+	}
+	
+	@RequestMapping("/club/updateClub.do")
+	@ResponseBody
+	public Map<String,Object> updateClub(
+									  @RequestParam String id,
+									  @RequestParam String club_loc,
+									  @RequestParam String club_name,
+									  @RequestParam String club_detail,
+									  @RequestParam MultipartFile upload,
+									  @RequestParam String filename,
+									  @RequestParam String club_color,
+									  @RequestParam String[] club_ages,
+									  @RequestParam String club_address,
+									  @RequestParam double club_locX,
+									  @RequestParam double club_locY,
+									  @RequestParam Integer club_num,
+									  HttpSession session) throws IOException{
+		Map<String,Object> map=new HashMap<String,Object>();
+		ClubVO club=new ClubVO();
+		//club_address full address에서 시 구까지만 잘라서 DB에 저장
+		String address_arr[]=club_address.split(" ");
+		String club_addressCut=address_arr[0]+" ";
+		club_addressCut+=address_arr[1];
+		club.setId(id);
+		club.setClub_num(club_num);
+		club.setClub_loc(club_loc);
+		club.setClub_name(club_name);
+		club.setClub_detail(club_detail);
+		club.setFilename(filename);
+		club.setUpload(upload);
+		club.setClub_color(club_color);
+		club.setClub_ages(club_ages);
+		club.setClub_address(club_addressCut);
+		club.setClub_locX(club_locX);
+		club.setClub_locY(club_locY);
+		try {
+			clubService.updateClub(club);
+			map.put("result", "updated");
+			map.put("club_num", club.getClub_num());
+			session.setAttribute("myClub",club);
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		logger.info("map result : "+map.get("result"));
+		return map;
+										  
+	}
 }

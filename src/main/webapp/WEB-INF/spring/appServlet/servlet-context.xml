@@ -51,7 +51,7 @@
 	
 	
 	<interceptors>
-		<!-- 로그인 여부 체크 -->
+		<!-- 로그인 여부 체크-->
 		<interceptor>
 			<mapping path="/main/voteForm.do"/>
 			<mapping path="/main/ratingForm.do"/>
