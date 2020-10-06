@@ -494,7 +494,7 @@
 					<span class="text-by-icon">팀원 초대하기</span>
 					<img class="kakaolink" src="${pageContext.request.contextPath }/resources/images/kakaolink_btn.png">
 				</a>
-			</div>
+			</div>    
 		</div>
 		<div class="main-row">
 		<c:forEach items="${members }" var="member">
