@@ -59,6 +59,8 @@
 			<mapping path="/main/invite_detail.do"/>
 			<mapping path="/match/writeForm.do"/>
 			<mapping path="/match/write.do"/>
+			<mapping path="/match/postMatchRequest.do"/>
+			<mapping path="/match/writeRecruit.do"/>
 			<mapping path="/club/club.do"/>
 			<mapping path="/club/createClubForm.do"/>
 			<mapping path="/club/manageClub.do"/>
@@ -69,6 +71,7 @@
 		<interceptor>
 			<mapping path="/match/writeForm.do"/>
 			<mapping path="/match/postMatchRequest.do"/>
+			<mapping path="/match/writeRecruit.do"/>
 			<beans:bean 
 			class="kr.spring.interceptor.ClubAuthCheckInterceptor"/>
 		</interceptor>

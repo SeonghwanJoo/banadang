@@ -26,4 +26,6 @@ public interface MatchService {
 	public MatchVO selectMatchToInviteByMatch_num(Integer match_num);
 	public Integer selectMyRequestForMatchToInvite(MatchVO match);
 	public void insertMyRequestForMatchToInvite(MatchVO match);
+	public void insertRecruit(MatchVO match);
+	public MatchVO selectRecruitDetail(Integer recruit_num);
 }

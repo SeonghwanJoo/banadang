@@ -225,7 +225,9 @@
 	margin-top:10px;
 	margin-bottom: 15px;
 }
-
+.underline{
+	text-decoration:underline;
+}
 .end {
 	clear: both;
 }
@@ -1020,7 +1022,10 @@ h6.ages{
 .half_col .visible{
 	display:inline-block;
 }
-
+.center{
+	display:block;
+	margin:1rem 1rem;
+}
 
 .mod-h6{
 	color:#9E9E9E;
@@ -1289,37 +1294,6 @@ li.li-list{
 	background-color:#f2f2f2;
 	cursor:pointer;
 }
-
-
-/* chip-checkbox */
-/* The container */
-.input-label{
-	padding-left:1rem;
-	display:block;
-	color:#827C75;
-	margin-top:1rem;
-}
-.centered-padding{
-	padding:0 3%;
-}
-.chip {
-  max-width:94px;
-  display: inline-block;
-  position: relative;
-  padding-left:1.5rem;
-  height:2rem;
-  width:17%;
-  margin:0.5rem 0.2rem;
-  cursor: pointer;
-  line-height: 50px;
-  border-radius: 25px;
-  font-size: 0.8rem;
-  background-color: #f1f1f1;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
 div.bigger{
 	width:80%;
 }
@@ -1370,8 +1344,47 @@ button.chip-btn{
 	border-radius:30%;
 	margin:0 auto;
 }
+/* chip-checkbox */
+.input-label{
+	padding-left:1rem;
+	display:block;
+	color:#827C75;
+	margin-top:1rem;
+}
+.centered-padding{
+	padding:0 3%;
+}
+.chip{
+  max-width:94px;
+  display: inline-block;
+  position: relative;
+  padding-left:1.5rem;
+  height:2rem;
+  width:17%;
+  margin:0.5rem 0.2rem;
+  cursor: pointer;
+  line-height: 50px;
+  border-radius: 25px;
+  font-size: 1rem;
+  background-color: #f1f1f1;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.custom {
+	display: block;
+	margin: 0.5rem auto;
+	position: relative;
+	height: 30px;
+ 	width: 30px;
+ 	background-color: #f1f1f1;
+ 	cursor: pointer;
+ 	border-radius:50%;
+}
+
 /* Hide the browser's default checkbox */
-.chip input {
+.chip input, .custom input[type=radio] {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -1385,17 +1398,17 @@ button.chip-btn{
   border-radius:50%;
   top: 0.2rem;
   left: 0.2rem;
-  height: 25px;
-  width: 25px;
+  height: 24px;
+  width: 24px;
 }
 
 /* On mouse-over, add a grey background color */
-.chip:hover input ~ .checkmark {
+.chip:hover input ~ .checkmark,.custom:hover input ~ .checkmark {
   background-color: #ccc;
 }
 
 /* When the checkbox is checked, add a blue background */
-.chip input:checked ~ .checkmark {
+.chip input:checked ~ .checkmark,.custom input:checked ~ .checkmark {
   background-color: #a5d6a7;
 }
 
@@ -1407,12 +1420,12 @@ button.chip-btn{
 }
 
 /* Show the checkmark when checked */
-.chip input:checked ~ .checkmark:after {
+.chip input:checked ~ .checkmark:after,.custom input:checked ~ .checkmark:after {
   display: block;
 }
 
 /* Style the checkmark/indicator */
-.chip .checkmark:after {
+.chip .checkmark:after,.custom .checkmark:after {
   left: 9px;
   top: 5px;
   width: 5px;

@@ -22,6 +22,22 @@
        <put-attribute name="body" value="/WEB-INF/views/match/invite_detail.jsp"/>
        <put-attribute name="footer" value=""/>
     </definition>
+    <definition name="recruit" extends="main">
+       <put-attribute name="title" value="용병 모집"/> 
+       <put-attribute name="body" value="/WEB-INF/views/match/recruit.jsp"/>
+    </definition>
+    <definition name="writeRecruit" extends="main">
+       <put-attribute name="title" value="용병 모집"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/match/writeRecruit.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="recruitDetail" extends="main">
+       <put-attribute name="title" value="용병 모집"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/match/recruitDetail.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
 </tiles-definitions>
 
 

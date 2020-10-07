@@ -53,5 +53,8 @@ public interface MatchMapper {
 	public Integer selectMyRequestForMatchToInvite(MatchVO match);
 	
 	public void insertMyRequestForMatchToInvite(MatchVO match);
+	
+	public void insertRecruit(MatchVO match);
+	public MatchVO selectRecruitDetail(Integer recruit_num);
 
 }

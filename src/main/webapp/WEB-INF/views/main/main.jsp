@@ -264,12 +264,12 @@
 			</div>
 		</div>
 	</div>
-	<!--<c:if test="${match.home==match.club_num}">
+	<c:if test="${match.home==match.club_num}">
 	<button class="block" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }'">${match.away_name } 평점 작성 하기</button>
 	</c:if>
 	<c:if test="${match.away==match.club_num }">
 	<button class="block" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }'">${match.home_name } 평점 작성 하기</button>
-	</c:if>-->
+	</c:if>
 </li>
 <hr class="hr"> 
 </c:if>

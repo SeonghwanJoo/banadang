@@ -25,7 +25,7 @@
 				</a>
 			</div>
 			<div class="col">
-				<a class="menu-item" href="${pageContext.request.contextPath }/match/join.do">
+				<a class="menu-item" href="${pageContext.request.contextPath }/match/recruit.do">
 				<span class="join material-icons bottom-icon">person_add</span>
 				<span class="join bottom-icon-txt">용병 모집</span>
 				</a>

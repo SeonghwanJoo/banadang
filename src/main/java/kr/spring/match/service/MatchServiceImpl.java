@@ -123,4 +123,16 @@ public class MatchServiceImpl implements MatchService {
 		
 	}
 
+	@Override
+	public void insertRecruit(MatchVO match) {
+		matchMapper.insertRecruit(match);
+		
+	}
+
+	@Override
+	public MatchVO selectRecruitDetail(Integer recruit_num) {
+		
+		return matchMapper.selectRecruitDetail(recruit_num);
+	}
+
 }

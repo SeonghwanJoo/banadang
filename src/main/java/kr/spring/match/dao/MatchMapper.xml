@@ -19,6 +19,21 @@
 			'')
 		</if>
 	</insert>
+	<insert id="insertRecruit" parameterType="matchVO" useGeneratedKeys="true" keyProperty="recruit_num">
+		insert into match_recruit
+			(match_num,id,club_num,recruit_position,recruit_count,recruit_cost,recruit_detail)
+		values
+			(#{match_num},#{id},#{club_num},#{recruit_position},#{recruit_count},#{recruit_cost},
+			<if test="recruit_detail != ''">
+			#{recruit_detail})
+			</if>
+			<if test="recruit_detail == ''">
+				'')
+			</if>
+			<selectKey keyProperty="recruit_num" resultType="integer" order="AFTER">
+				select max(recruit_num) as recruit_num from match_recruit
+			</selectKey>
+	</insert>
 	<select id="selectAverageRating" parameterType="matchVO" resultType="matchVO">
 		select a.club_num,a.club_name,b.perform,b.manner from (select club_num, club_name from club where club_num=#{home} or club_num=#{away} ) a 
 	    left outer join
@@ -26,7 +41,7 @@
 			 from club_rating group by club_num) b
              on a.club_num=b.club_num
 	</select>
-	<select id="insertRating" parameterType="matchVO">
+	<insert id="insertRating" parameterType="matchVO">
 		insert into club_rating
 			(clubrating_num,match_num,id,club_num,perform,manner,rating_detail)
 		values
@@ -37,14 +52,14 @@
 		<if test="rating_detail ==''">
 			'')
 		</if>
-	</select>
-	<select id="updateRating" parameterType="matchVO">
+	</insert>
+	<update id="updateRating" parameterType="matchVO">
 		update club_rating set manner=#{manner},perform=#{perform}
 		<if test="rating_detail !=''">
 			,rating_detail=#{rating_detail}
 		</if>
 		where clubrating_num=#{clubrating_num}
-	</select>
+	</update>
 	<select id="selectVote_detail" parameterType="matchVO" resultType="memberVO">
 		select a.club_num,a.id,a.nickname,a.thumbnail_image,a.profile_image,b.status from
 			(select * from match_vote where club_num=#{club_num} and match_num=#{match_num})b right outer join 
@@ -63,7 +78,7 @@
 				left outer join
 				(select avg(manner) manner,avg(perform) perform,club_num,count(*) count from club_rating group by club_num) e on d.club_num=e.club_num
 	</select>
-	<select id="insertMyRequestForMatchToInvite" parameterType="matchVO">
+	<insert id="insertMyRequestForMatchToInvite" parameterType="matchVO">
 		insert into match_request
 			(request_num,match_num,id,away,acceptance,request_detail)
 		values
@@ -74,6 +89,9 @@
 		<if test="invite_detail ==''">
 			'')
 		</if>
+	</insert>
+	<select id="selectRecruitDetail" parameterType="integer" resultType="matchVO">
+		select * from (select recruit_num,c.club_num,recruit_position, recruit_count, recruit_cost,recruit_detail,type,start_time,end_time,address,match_date,address_x,address_y,club_name,club_img,club_color,club_age from(select * from (select * from match_recruit where recruit_num=#{recruit_num}) a join match b on a.match_num=b.match_num)c join club d on c.club_num=d.club_num) e
+		left outer join (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from club_rating group by club_num) f on e.club_num=f.club_num
 	</select>
-	
 </mapper>

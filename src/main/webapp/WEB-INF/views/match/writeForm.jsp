@@ -127,7 +127,7 @@
 			<div class="input-container col">
 				<i class="far fa-clock icon"></i> <select class="time input-field" id="end_time" name="end_time">
 					<option class="placeholder" value="">종료 시간 선택</option>
-					<option value="06:00"></option>
+					<option value="06:00">06:00</option>
 					<option value="06:30">06:30</option>
 					<option value="07:00">07:00</option>
 					<option value="07:30">07:30</option>
@@ -186,8 +186,8 @@
 				<i class="fas fa-won-sign"></i> <input class="input-field"
 					type="text" name="cost" id="cost" placeholder="구장 비용 입력">
 			</div>
-		<hr class="hr">
 		</div>
+		<hr class="hr">
 		<div class="row">
 			<div class="text input-container col">
 				<textarea class="detail input-field" id="match_detail" name="match_detail" placeholder="추가적으로 공유할 내용이 있으면 입력해주세요.(매너/실력은 자동 계산되어 보여집니다)"></textarea>

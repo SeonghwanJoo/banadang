@@ -69,30 +69,86 @@
 		</li>
 		<li class="li-list">
 			<span>${match.address}</span>
-			<span class="cost">(구장 비용 : ${match.cost })</span>
 			<div id="map" style="width:100%;height:300px;"></div>
 		</li>
-		<c:if test="${!empty match.match_detail }">
+		<c:if test="${!empty match.recruit_detail }">
 		<li class="li-list">
-			<p>${match.match_detail }</p>
+			<p>${match.recruit_detail }</p>
 		</li>
 		</c:if>
 		<li class="li-list">
-			<textarea class="detail input-field" id="invite_detail" name="invite_detail" placeholder="매치 초청 팀에 전송할 내용 입력"></textarea>
+			<div class="row">
+				<span class="col">참가 비용 &nbsp; <span class="underline">${match.recruit_cost }</span></span>
+				<span class="col">필요 인원 &nbsp; <span class="underline">${match.recruit_count }</span></span>
+			</div>
+			<!-- 포지션 -->
+			<div class="row">
+				<span class="center">필요 포지션</span>
+				<c:if test="${fn:contains(match.recruit_position,'G') }">
+				<span class="chip">
+					<span class="chip-txt">GK</span>
+				</span>
+				</c:if>
+				<c:if test="${fn:contains(match.recruit_position,'D') }">
+				<span class="chip">
+					<span class="chip-txt">DF</span>
+				</span>
+				</c:if>
+				<c:if test="${fn:contains(match.recruit_position,'M') }">
+				<span class="chip">
+					<span class="chip-txt">MF</span>
+				</span> 
+				</c:if>
+				<c:if test="${fn:contains(match.recruit_position,'W') }">
+				<span class="chip">
+					<span class="chip-txt">FW</span>
+				</span>
+				</c:if>
+			</div>
+		</li>
+		<li class="li-list">
+			<textarea class="detail input-field" id="recruit_req_detail" name="recruit_req_detail" placeholder="용병 모집 팀에 추가할 내용 입력"></textarea>
 		</li>
 	</ul>
+</div>
+<div id="recruit_modal" class="confirm-modals">
+	<!-- Modal content -->
+	<div class="confirm-modal-content">
+		<!-- 기존회원 관리 옵션(강제탈퇴,운영진 권한부여,일반회원 권한 부여 )-->
+		<div class="sub-content">
+			<span>희망 포지션을 선택하세요</span>
+			<c:if test="${fn:contains(match.recruit_position,'G') }">
+			<hr>
+			<button id="gk-btn" value="gk" class="pos-btn">GK</button>
+			</c:if>
+			<c:if test="${fn:contains(match.recruit_position,'D') }">
+			<hr>
+			<button id="df-btn" value="df" class="pos-btn">DF</button>
+			</c:if>
+			<c:if test="${fn:contains(match.recruit_position,'M') }">
+			<hr>
+			<button id="mf-btn" value="mf" class="pos-btn">MF</button>
+			</c:if>
+			<c:if test="${fn:contains(match.recruit_position,'W') }">
+			<hr>
+			<button id="fw-btn" value="fw" class="pos-btn">FW</button>
+			</c:if>
+		</div>
+		<div class="sub-content">
+			<button id="cancel-btn" class="neg-btn">취소</button>
+		</div>
+	</div>
 </div>
 <!-- The Modal -->
 <div id="toast" class="submit_toast">
   <!-- Modal content -->
   <div id="toast-content" class="submit_toast_content">
-     <span id="matchRequest_msg">경기 신청 완료</span>
+     <span id="recruitRequest_msg">용병 신청 완료</span>
      <br><br>확인
   </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-
 	//이미지 지도에서 마커가 표시될 위치입니다 
 	var markerPosition  = new kakao.maps.LatLng(${match.address_y}, ${match.address_x}); 
 	
@@ -115,19 +171,18 @@
 	$(function(){
 		
 		$('#submit').click(function(){
-		
-			postMatchRequest( ${match.match_num}, ${user_id}, ${myClub.club_num}, $('#invite_detail').val());
-			
-			
-			function postMatchRequest(a,b,c,d){
+			$('#recruit_modal').css('display','block');
+			$('.pos-btn').click(function(){
+				var position=$(this).val();
 				$.ajax({
-					url:'postMatchRequest.do',
+					url:'postRecruitRequest.do',
 					type:'post', 
 					data:{
-						match_num: a,
-						id:b,
-						away:c,
-						invite_detail:d
+						match_num: ${match.match_num},
+						id:${user_id},
+						club_num:${match.club_num},
+						recruit_position:position,
+						recruit_req_detail:$('#recruit_req_detail').val()
 					},
 					dataType:'json',
 					cache:false,
@@ -135,9 +190,9 @@
 					success:function(data){
 						console.log(data.result);
 						if(data.result=='requested'){
-							$('#matchRequest_msg').text('경기 신청  완료');
+							$('#recruitRequest_msg').text('용병 신청  완료');
 						}else if(data.result=='duplicated'){
-							$('#matchRequest_msg').text('이미 경기 신청하셨습니다');
+							$('#recruitRequest_msg').text('이미 용병 신청하셨습니다');
 						}
 						
 						$('#toast').css('display','block');
@@ -152,8 +207,10 @@
 						alert('네트워크 오류 발생');
 					}
 				});
-			}
-
+			});
+		});
+		$('#cancel-btn').click(function(){
+			$('#recruit_modal').css('display','none');
 		});
 	});
   	

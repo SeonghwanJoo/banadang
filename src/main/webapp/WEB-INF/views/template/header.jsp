@@ -79,6 +79,8 @@
 	$(function(){
 		if(${title eq '팀 관리'}){
 			$('#write').attr('href','${pageContext.request.contextPath}/club/createClubForm.do');
+		}else if(${title eq '용병 모집'}){
+			$('#write').attr('href','${pageContext.request.contextPath}/match/writeRecruit.do');
 		}
 		// Get the modal
 		var modal = document.getElementById("team-sel-modal");

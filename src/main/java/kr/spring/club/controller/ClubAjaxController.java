@@ -65,7 +65,6 @@ public class ClubAjaxController {
 			clubService.insertClub(club);
 			map.put("result", "inserted");
 			map.put("club_num", club.getClub_num().toString());
-			logger.info("club_num after club created : "+ club.getClub_num());
 			session.setAttribute("myClub",club);
 		}catch(Exception e) {
 			e.printStackTrace();

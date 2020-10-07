@@ -3,7 +3,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <form:form id="club_form" accept-charset="utf-8" enctype="multipart/form-data">
 <input type="hidden" name="id" value="${user_id }">
 <div class="row" id="top_wrap">

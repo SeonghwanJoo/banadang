@@ -4,7 +4,12 @@ import java.sql.Date;
 import java.util.Arrays;
 import java.util.Collections;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class MatchVO {
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	public void setMax() {
 		Integer arr[]= {attend,not_attend,undefined};
 		Arrays.sort(arr,Collections.reverseOrder());
@@ -237,7 +242,68 @@ public class MatchVO {
 	public void setInvite_detail(String invite_detail) {
 		this.invite_detail = invite_detail;
 	}
+	public Integer getRecruit_num() {
+		logger.info("getRecruit_num 진입 : "+recruit_num);
+		return recruit_num;
+	}
 
+	public void setRecruit_num(Integer recruit_num) {
+		logger.info("setRecruit_num 진입 : "+recruit_num);
+		this.recruit_num = recruit_num;
+	}
+
+	public String getRecruit_position() {
+		return recruit_position;
+	}
+
+	public void setRecruit_position(String recruit_position) {
+		this.recruit_position = recruit_position;
+	}
+
+	public Integer getRecruit_count() {
+		return recruit_count;
+	}
+
+	public void setRecruit_count(Integer recruit_count) {
+		this.recruit_count = recruit_count;
+	}
+
+	public String getRecruit_cost() {
+		return recruit_cost;
+	}
+
+	public void setRecruit_cost(String recruit_cost) {
+		this.recruit_cost = recruit_cost;
+	}
+
+	public String getRecruit_detail() {
+		return recruit_detail;
+	}
+
+	public void setRecruit_detail(String recruit_detail) {
+		this.recruit_detail = recruit_detail;
+	}
+
+	public String getRecruit_att() {
+		return recruit_att;
+	}
+
+	public void setRecruit_att(String recruit_att) {
+		this.recruit_att = recruit_att;
+	}
+	public String getClub_age() {
+		return club_age;
+	}
+
+	public void setClub_age(String club_age) {
+		this.club_age = club_age;
+	}
+	private Integer recruit_num;
+	private String recruit_position;
+	private Integer recruit_count;
+	private String recruit_cost;
+	private String recruit_detail;
+	private String recruit_att;
 	private String cost;
 	private int attend;
 	private int not_attend;
@@ -272,6 +338,7 @@ public class MatchVO {
 	private int clubrating_num;
 	private byte[] club_img;
 	private String club_color;
+	private String club_age;
 	private double distance;
 	private String invite_detail;
 	
