@@ -113,15 +113,34 @@
 		select * from (select recruit_num,c.club_num,recruit_position, recruit_count, recruit_cost,cancel,recruit_detail,type,start_time,end_time,address,match_date,address_x,address_y,club_name,club_img,club_color,club_age from(select * from (select * from match_recruit) a join match b on a.match_num=b.match_num where b.match_date>sysdate-1 order by b.match_date)c join club d on c.club_num=d.club_num) e
 		left outer join (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from club_rating group by club_num) f on e.club_num=f.club_num where cancel is null
 	</select>
+	<select id="selectRecruitByClub_num" parameterType="integer" resultType="memberVO">
+		  select * from( select a.id,recruit_req_num,a.club_num,a.match_num,a.recruit_req_detail,a.recruit_position,a.recruit_accept,b.match_date,b.start_time,b.end_time,b.address from (select * from recruit_req where club_num=#{club_num}) a join match b on a.match_num=b.match_num where b.match_date>sysdate-1 and cancel is null order by b.match_date)f join member_detail g on f.id=g.id
+	</select>
 	<update id="updateRecruit" parameterType="matchVO">
-	update recruit set id=#{id},recruit_cost=#{recruit_cost},recruit_count=#{recruit_count},recruit_position=#{recruit_position}
+	update match_recruit set id=#{id},recruit_cost=#{recruit_cost},recruit_count=#{recruit_count},recruit_position=#{recruit_position}
 		<if test="recruit_detail!=''">
 		,recruit_detail=#{recruit_detail}
 		</if>
+		where recruit_num=#{recruit_num}
 	</update>
 	<select id="selectPKsforMatch" parameterType="matchVO" resultType="matchVO">
 	select request_num,c.match_num,c.away,c.recruit_num from
     (select recruit_num,a.match_num,away from (select home,away,match_num from match where match_num=#{match_num})a left outer join match_recruit b on a.match_num=b.match_num)c left outer join
         match_request d on c.match_num=d.match_num
 	</select>
+	<update id="updateMatch" parameterType="matchVO">
+		update match set 
+			id=#{id},type=#{type},away=#{away},start_time=#{start_time},end_time=#{end_time},
+			address=#{address},address_x=#{address_x},address_y=#{address_y},match_date=#{match_date}
+			<if test="match_detail != ''">
+				,match_detail=#{match_detail}
+			</if>
+			<if test="cost != ''">
+				,cost=#{cost}
+			</if>
+			<if test="away_name !=''">
+				,away_name =#{away_name}
+			</if>
+			where match_num=#{match_num}
+	</update>
 </mapper>

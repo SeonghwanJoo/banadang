@@ -58,6 +58,7 @@ public interface MatchMapper {
 	public void insertRecruit(MatchVO match);
 	public MatchVO selectRecruitDetail(Integer recruit_num);
 	public List<MatchVO> selectRecruit();
+	public List<MemberVO> selectRecruitByClub_num(Integer club_num);
 	@Select("select recruit_req_num from recruit_req where match_num=#{match_num} and id=#{id}")
 	public Integer selectRecruit_req_num(MatchVO match);
 	@Select("select recruit_num from match_recruit where match_num=#{match_num} and club_num=#{club_num} ")
@@ -78,6 +79,9 @@ public interface MatchMapper {
 	
 	@Update("update match set cancel=#{cancel} where match_num=#{match_num} ")
 	public void updateMatchForCancel(MatchVO match);
+	
+	public void updateMatch(MatchVO match);
+	
 	
 
 }

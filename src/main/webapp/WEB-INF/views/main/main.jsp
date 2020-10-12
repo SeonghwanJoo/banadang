@@ -199,20 +199,11 @@
 				<span class="person material-icons">person</span>
 			</span>
 		</div>
-		<c:if test="${match.home!=match.away && match.home==match.club_num && empty match.cancel}">
+		<c:if test="${empty match.cancel}">
 		<button class="block" 
-			onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }&isMain=true'">
-			${match.home_name } <c:if test="${ match.status !=0}">다시 투표하기</c:if><c:if test="${match.status ==0 }">투표하기</c:if></button>
-		</c:if>
-		<c:if test="${match.home!=match.away && match.away==match.club_num && empty match.cancel}">
-		<button class="block" 
-			onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }&isMain=true'">
-			${match.away_name } <c:if test="${match.status !=0 }">다시 투표하기</c:if><c:if test="${match.status ==0 }">투표하기</c:if></button>
-		</c:if>
-		<c:if test="${match.home==match.away && empty match.cancel}">
-		<button class="block" 
-			onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }&isMain=true'">
-			<c:if test="${match.status !=0 }">다시 투표하기</c:if><c:if test="${match.status ==0 }">투표하기</c:if></button>
+			onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${myClub.club_num }&isMain=true'">
+			<c:if test="${ match.status !=0}">다시 투표하기</c:if><c:if test="${match.status ==0 }">투표하기</c:if>
+		</button>
 		</c:if>
 	</li>
 	<hr class="hr">

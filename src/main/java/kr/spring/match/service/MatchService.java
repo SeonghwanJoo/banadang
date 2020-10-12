@@ -38,4 +38,6 @@ public interface MatchService {
 	public MatchVO selectPKsforMatch(Integer match_num);
 	public void deleteMatch(Integer match_num);
 	public void updateMatchForCancel(MatchVO match);
+	public void updateMatch(MatchVO match);
+	public List<MemberVO> selectRecruitByClub_num(Integer club_num);
 }

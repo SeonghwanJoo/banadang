@@ -85,4 +85,5 @@ public interface ClubMapper {
 	public ClubVO selectMyClubDetails(ClubVO club);
 	
 	public void updateClub(ClubVO club);
+	
 }

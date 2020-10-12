@@ -98,7 +98,6 @@ public class MatchController {
 		mav.setViewName("recruit");
 		mav.addObject("title","용병 모집");
 		mav.addObject("matches",matches);
-		logger.info("recruit_num[0]"+matches.get(0).getRecruit_num());
 		return mav;
 	}
 	@RequestMapping("/match/writeRecruit.do")

@@ -142,8 +142,6 @@
 				<span class="material-icons collapsible">add_circle</span>
 				<div class="collapsible-content">
 					<p>${away.request_detail}
-						ksahdfkhkwhfjkl
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 					</p>
 					<c:if test="${away.acceptance==1 }">
 					<div class="row">
@@ -221,14 +219,46 @@
 				<span class="material-icons collapsible">add_circle</span>
 				<div class="collapsible-content">
 					<p>${home.match_detail}
-						ksahdfkhkwhfjkl
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 					</p>
 				</div>
 			</li>
 			</c:if>
 			</c:forEach>
 		</ul>
+		</c:if>
+		<c:if test="${not empty recruits }">
+		<h6>용병 모집 중인 경기(용병 수락/거절 선택)</h6>
+		<ul class="ul-list">
+			<c:forEach items="${recruits }" var="recruit">
+			<li class="li-list">
+				<div class="row">
+					<span class="match-item">${recruit.match_date }</span>
+					<span class="match-item">${recruit.start_time } ~ ${recruit.end_time }</span>
+					<span class="match-item">${recruit.address}</span>
+				</div>
+				<div class="row">
+					<img src="${recruit.thumbnail_image }" alt="Avatar" class="avatar">
+					<span>${recruit.nickname }</span>
+					<span>${fn:substring(recruit.age_range,0,1)}0대 |</span>
+					<span class="small-chip">
+					<c:if test="${fn:contains(recruit.recruit_position,'g') }">
+						<span>GK</span>
+					</c:if>
+					<c:if test="${fn:contains(recruit.recruit_position,'d') }">
+						<span>DF</span>
+					</c:if>
+					<c:if test="${fn:contains(recruit.recruit_position,'m') }">
+						<span>MF</span>
+					</c:if>
+					<c:if test="${fn:contains(recruit.recruit_position,'w') }">
+						<span>FW</span>
+					</c:if>
+					</span><br>
+					<span>${recruit.recruit_req_detail }</span>
+				</div>
+			</li>
+			</c:forEach>
+		</ul>			
 		</c:if>
 	</div>
 	</c:if>

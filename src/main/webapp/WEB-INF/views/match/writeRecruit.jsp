@@ -191,10 +191,12 @@
 					}
 					$("#toast").css("display","block");
 					$("#confirm").click(function(){
-						location.href="recruitDetail.do?recruit_num="+data.recruit_num;
+						if(data.result=="inserted"){location.href="recruitDetail.do?recruit_num="+data.recruit_num;}
+						if(data.result=="duplicated"){ $('#toast').css('display','none');}
 					});
 					$(window).click(function(){
-						location.href="recruitDetail.do?recruit_num="+data.recruit_num;
+						if(data.result=="inserted") {location.href="recruitDetail.do?recruit_num="+data.recruit_num;}
+						if(data.result=="duplicated") {$('#toast').css('display','none');}
 					});
 					
 					if(data.result=="errors"){

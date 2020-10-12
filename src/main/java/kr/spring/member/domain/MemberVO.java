@@ -1,5 +1,7 @@
 package kr.spring.member.domain;
 
+import java.sql.Date;
+
 public class MemberVO {
 	
 	private String nickname;
@@ -9,8 +11,71 @@ public class MemberVO {
 	private String age_range;
 	private String id;
 	private Integer club_num;
+	private Integer match_num;
+	private Integer recruit_req_num;
+	private String recruit_req_detail;
+	private String recruit_position;
+	private Integer recruit_accept;
+	private Date match_date;
+	private String start_time;
+	private String end_time;
+	private String address;
 	private Integer club_auth;
 	private Float attendance_rate;
+	public Integer getMatch_num() {
+		return match_num;
+	}
+	public void setMatch_num(Integer match_num) {
+		this.match_num = match_num;
+	}
+	public Integer getRecruit_req_num() {
+		return recruit_req_num;
+	}
+	public void setRecruit_req_num(Integer recruit_req_num) {
+		this.recruit_req_num = recruit_req_num;
+	}
+	public String getRecruit_req_detail() {
+		return recruit_req_detail;
+	}
+	public void setRecruit_req_detail(String recruit_req_detail) {
+		this.recruit_req_detail = recruit_req_detail;
+	}
+	public String getRecruit_position() {
+		return recruit_position;
+	}
+	public void setRecruit_position(String recruit_position) {
+		this.recruit_position = recruit_position;
+	}
+	public Integer getRecruit_accept() {
+		return recruit_accept;
+	}
+	public void setRecruit_accept(Integer recruit_accept) {
+		this.recruit_accept = recruit_accept;
+	}
+	public Date getMatch_date() {
+		return match_date;
+	}
+	public void setMatch_date(Date match_date) {
+		this.match_date = match_date;
+	}
+	public String getStart_time() {
+		return start_time;
+	}
+	public void setStart_time(String start_time) {
+		this.start_time = start_time;
+	}
+	public String getEnd_time() {
+		return end_time;
+	}
+	public void setEnd_time(String end_time) {
+		this.end_time = end_time;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	public Float getAttendance_rate() {
 		return attendance_rate;
 	}

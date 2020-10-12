@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.spring.club.domain.ClubVO;
+import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
 
 public interface ClubService {
@@ -29,5 +30,6 @@ public interface ClubService {
 	public List<ClubVO> selectRatings(Integer club_num);
 	public void updateClub(ClubVO club);
 	public ClubVO selectMyClubDetails(ClubVO club);
+	
 	
 }

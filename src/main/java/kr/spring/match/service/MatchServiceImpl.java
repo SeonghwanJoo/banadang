@@ -192,4 +192,17 @@ public class MatchServiceImpl implements MatchService {
 		
 	}
 
+	@Override
+	public void updateMatch(MatchVO match) {
+		
+		matchMapper.updateMatch(match);
+		
+	}
+
+	@Override
+	public List<MemberVO> selectRecruitByClub_num(Integer club_num) {
+		
+		return matchMapper.selectRecruitByClub_num(club_num);
+	}
+
 }

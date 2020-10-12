@@ -84,6 +84,10 @@ public class ClubController {
 		mav.addObject("away_club", away_club);
 		mav.addObject("home_club", home_club);
 		mav.addObject("title","팀 관리");
+		//용병 신청 정보 Object에 추가
+		List<MemberVO> recruits=matchService.selectRecruitByClub_num(club_num);
+		mav.addObject("recruits",recruits);
+		
 		//경기 일정 정보 Object에 추가
 		List<MatchVO> matchVO=new ArrayList<MatchVO>();
 		ArrayList<MatchVO> vote_status=new ArrayList<MatchVO>();

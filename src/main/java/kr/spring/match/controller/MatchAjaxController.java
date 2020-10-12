@@ -26,17 +26,9 @@ public class MatchAjaxController {
 	
 	@RequestMapping("/match/postMatchRequest.do")
 	@ResponseBody
-	public Map<String,String> process(@RequestParam Integer match_num,
-									  @RequestParam String id,
-									  @RequestParam Integer away,
-									  @RequestParam String invite_detail){
-		logger.info("<<<<<AjaxData>>>>> : "+id+"/"+match_num+"/"+away+"/"+invite_detail);
+	public Map<String,String> process(MatchVO match){
 		Map<String,String> map=new HashMap<String,String>();
-		MatchVO match=new MatchVO();
-		match.setMatch_num(match_num);
-		match.setId(id);
-		match.setAway(away);
-		match.setInvite_detail(invite_detail);
+		
 		//해당 매치에 해당클럽의 매치 신청이 있는지 확인
 		Integer request_num=matchService.selectMyRequestForMatchToInvite(match);
 		if(request_num!=null) {
@@ -70,7 +62,6 @@ public class MatchAjaxController {
 		match.setRecruit_position(Arrays.toString(recruit_positions));
 		
 		try {
-			logger.info("recruit_num : "+match.getRecruit_num());
 			Integer recruit_num=matchService.selectRecruit_num(match);
 			if(recruit_num!=null) {
 				map.put("result", "duplicated");
@@ -105,30 +96,38 @@ public class MatchAjaxController {
 		match.setRecruit_position(Arrays.toString(recruit_positions));
 		match.setRecruit_detail(recruit_detail);
 		try {
-			
+			matchService.updateRecruit(match);
+			map.put("result", "updated");
+			map.put("recruit_num", recruit_num);
 		}catch(Exception e) {
-			
+			map.put("result", "errors");
 		}
 		
 		return map;
 	}
 	
+	@RequestMapping("/match/updateMatch.do")
+	@ResponseBody
+	public Map<String,Object> updateMatch(MatchVO match){
+		
+		logger.info("match in updateMatch"+match);
+		Map<String,Object> map=new HashMap<String, Object>();
+		try {
+			matchService.updateMatch(match);
+			map.put("result", "updated");
+		}catch(Exception e) {
+			map.put("result", "errors");
+		}
+		return map;
+		
+	}
+	
 	@RequestMapping("/match/postRecruitRequest.do")
 	@ResponseBody
-	public Map<String,Object> postRecruitRequest(@RequestParam String id,
-												 @RequestParam Integer match_num,
-												 @RequestParam Integer club_num,
-												 @RequestParam String recruit_position,
-												 @RequestParam String recruit_req_detail){
+	public Map<String,Object> postRecruitRequest(MatchVO match){
 		
 		Map<String,Object> map=new HashMap<String,Object>();
-		MatchVO match=new MatchVO();
-		//신청한 recruit_req_detail이 있는지 확인
-		match.setId(id);
-		match.setMatch_num(match_num);
-		match.setClub_num(club_num);
-		match.setRecruit_position(recruit_position);
-		match.setRecruit_req_detail(recruit_req_detail);
+		
 		try {
 			Integer recruit_req_num=matchService.selectRecruit_req_num(match);
 			if(recruit_req_num!=null) {
@@ -145,4 +144,8 @@ public class MatchAjaxController {
 		return map;
 		
 	}
+	
+	
+	
+	
 }

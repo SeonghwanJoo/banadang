@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.spring.club.dao.ClubMapper;
 import kr.spring.club.domain.ClubVO;
+import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
 
 @Service("clubService")
@@ -147,6 +148,7 @@ public class ClubServiceImpl implements ClubService {
 	public ClubVO selectMyClubDetails(ClubVO club) {
 		return clubMapper.selectMyClubDetails(club);
 	}
+
 	
 
 

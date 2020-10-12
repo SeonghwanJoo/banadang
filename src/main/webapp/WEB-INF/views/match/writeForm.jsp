@@ -46,25 +46,6 @@
 				<span class="checkmark"></span>
 			</label>
 		</div>
-		<!-- <div class="row" id="write_body">
-			<div class="btn-group btn-group-toggle col-sm-12" data-toggle="buttons">
-				<label class="radio btn" id="soc_label">
-					<input type="radio" class="soc_fut" name="type" id="soccer" value="1"> 축구
-				</label>
-				<label class="radio btn">
-					<input type="radio" class="soc_fut" name="type" id="futsal" value="2"> 풋살
-				</label>
-				<input type="hidden" id="type" name="type">
-			</div>
-			<div class="btn-group btn-group-toggle col-sm-12" data-toggle="buttons">
-				<label class="radio btn">
-					<input type="radio" class="opponent" name="opponent" id="exist" value="1"> 상대팀 있음
-				</label>
-				<label class="radio btn">
-					<input type="radio" class="opponent"name="opponent" id="non-exist" value="2"> 상대팀 초청
-				</label>
-			</div>
-		</div> -->
 		<div class="row"><div class="col"><span class="msg" id="type_msg"></span></div></div>
 		<hr class="hr">
 		<input type="hidden" id="home" name="home" value="${myClub.club_num}">
