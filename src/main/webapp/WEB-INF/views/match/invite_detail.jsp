@@ -5,13 +5,18 @@
 
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
-		<a href="javascript:location.href=document.referrer">
+		<a href="javascript:location.href='match_toInvite.do'">
 		<span class="material-icons" id="cancel">close</span>
 		</a>
 		<div class="topnav-centered">
 			<a href="javascript:document.reload()" class="active">${title }</a>
 		</div>
+		<c:if test="${match.club_num!=myClub.club_num }">
 		<input type="submit" id="submit" value="신청">
+		</c:if>
+		<c:if test="${match.club_num==myClub.club_num && myClub.club_auth>4 }">
+		<span class="material-icons more cursor xl-font" id="more">more_horiz</span>
+		</c:if>
 	</div>
 </div>
 <div class="blank_div"></div>
@@ -78,7 +83,7 @@
 		</li>
 		</c:if>
 		<li class="li-list">
-			<textarea class="detail input-field" id="invite_detail" name="invite_detail" placeholder="매치 초청 팀에 전송할 내용 입력"></textarea>
+			<textarea class="detail input-field" id="invite_detail" name="invite_detail" placeholder="매치 신청 시 ${match.club_name } 팀에 추가적으로 전달할 내용 입력"></textarea>
 		</li>
 	</ul>
 </div>
@@ -89,6 +94,19 @@
      <span id="matchRequest_msg">경기 신청 완료</span>
      <br><br>확인
   </div>
+</div>
+<div id="more_modal" class="confirm-modals">
+	<!-- Modal content -->
+	<div class="confirm-modal-content">
+		<div class="sub-content">
+			<button id="modify" class="pos-btn" onclick="location.href='modifyMatch.do?match_num=${match.match_num}'">수정</button>
+			<hr>
+			<button id="delete" class="pos-btn red" onclick="location.href='deleteMatch.do?match_num=${match.match_num}&club_name=${myClub.club_name }'">삭제</button>
+		</div>
+		<div class="sub-content">
+			<button id="more-cancel-btn" class="neg-btn">취소</button>
+		</div>
+	</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -113,6 +131,13 @@
 	var map = new kakao.maps.Map(mapContainer, mapOption);
 	marker.setMap(map); 
 	$(function(){
+		
+		$('#more').click(function(){
+			$('#more_modal').css('display','block');
+		});
+		$('#more-cancel-btn').click(function(){
+			$('#more_modal').css('display','none');
+		});
 		
 		$('#submit').click(function(){
 		

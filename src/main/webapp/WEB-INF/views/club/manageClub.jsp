@@ -11,7 +11,7 @@
 		<div class="topnav-centered">
 			<a href="javascript:location.reload()" class="active cursor">${title }</a>
 		</div>
-		<c:if test="${myAuth>4 }">
+		<c:if test="${myClub.club_auth>4 }">
 		<div class="topnav-right">
 			<a id="write" href="${pageContext.request.contextPath }/club/modifyClub.do">
 				<i class="fas fa-edit"></i>
@@ -68,7 +68,7 @@
 		</li>
 	</ul>
 	<div class="tab-row" id="tab-row">
-		<c:if test="${myAuth>4}">
+		<c:if test="${myClub.club_auth>4}">
 		<div class="tab-col">
 			<button class="tab-btn small-font " onclick="openTap(event,'manageMatch')">매칭 현황</button>
 		</div>
@@ -80,7 +80,7 @@
 			<button class="tab-btn small-font" onclick="openTap(event,'manageMember')">회원 관리</button>
 		</div>
 	</div>
-	<c:if test="${myAuth>4 }">
+	<c:if test="${myClub.club_auth>4 }">
 	<div class="tab_detail" id="manageMatch" >
 		<c:if test="${!empty away_club }">
 		<h6>상대팀 모집 중인 경기(선택 후 상대팀 확정)</h6>
@@ -101,10 +101,10 @@
 					<span id="status-${request_num}"class="status neutral">대기 중</span>
 					</c:if>
 					<c:if test="${away.acceptance==2 }">
-					<span id="status-${request_num}"class="status positive">수락</span>
+					<span id="status-${request_num}"class="status positive">수락 완료</span>
 					</c:if>
 					<c:if test="${away.acceptance==3 }">
-					<span id="status-${request_num}"class="status negative">거절</span>
+					<span id="status-${request_num}"class="status negative">거절 완료</span>
 					</c:if>
 				</div>
 				<div class="row">
@@ -180,10 +180,10 @@
 					<span id="status-${request_num}"class="status neutral">대기 중</span>
 					</c:if>
 					<c:if test="${home.acceptance==2 }">
-					<span id="status-${request_num}"class="status positive">수락</span>
+					<span id="status-${request_num}"class="status positive">수락 완료</span>
 					</c:if>
 					<c:if test="${home.acceptance==3 }">
-					<span id="status-${request_num}"class="status negative">거절</span>
+					<span id="status-${request_num}"class="status negative">거절 완료</span>
 					</c:if>
 				</div>
 				<div class="row">
@@ -522,7 +522,7 @@
 					<input type="hidden" value="${member.nickname }" id="nickname">
 					<i class="fas fa-cog" id="${member.id }-i" data-auth="${member.club_auth }" onclick="manageMember('${member.id}','${member.nickname}',${member.club_num })"></i>
 					</c:if>
-					<c:if test="${myAuth>4 && user_id != member.id }">
+					<c:if test="${myClub.club_auth>4 && user_id != member.id }">
 					<i class="fas fa-users-cog" id="${member.id }-i" data-auth="${member.club_auth }" onclick="manageMember('${member.id}','${member.nickname}','${member.club_num }')"></i>
 					</c:if>
 				</div>
@@ -603,8 +603,7 @@ function manageMember(id,nickname,club_num){
 	let set=document.getElementById(id+'-i');
 	let auth=set.getAttribute('data-auth');
 	
-	if(${ myAuth }<5){
-		console.log("manage-btn block 진입");
+	if(${ myClub.club_auth}<5){
 		$('#auth-manage-btn-hr').css('display','none');
 		$('#auth-manage-btn').css('display','none');
 	}
@@ -613,15 +612,12 @@ function manageMember(id,nickname,club_num){
 	$('#manage_modal').css('display','block');
 	if(auth>4){
 		$('#auth-manage-btn').text('운영진 제외');
-			console.log("운영진 제외 버튼 클립 진입");
 			auth=4;
-	}else if (auth==4 && ${myAuth}==5){
+	}else if (auth==4 && ${myClub.club_auth}==5){
 		$('#auth-manage-btn').text('운영진 추가');
-			console.log("운영진 추가 버튼 클립 진입");
 			auth=5;
 	}
 	$('#auth-manage-btn').unbind('click').bind('click',function(){
-		console.log("auth-manage-btn 클릭 진입");
 		if(auth==4){
 			checkNumOfMember(club_num,false,id,auth);
 			
@@ -655,9 +651,7 @@ function checkNumOfMember(club_num,memberDeleted,id,auth){
 		timeout:30000,
 		success:function(data){
 			
-			console.log("data.existingNumber : "+data.existingNumber);
 			if(data.existingNumber==1 && !data.memberDeleted){
-				console.log('existing : '+data.existing);
 				//modal 메시지 띄우고 프로세스 빠져나감
 				$('#manage_modal').css('display','none');
 				$('#club_msg').text('적어도 한명 이상은 운영진으로 지정되어야 합니다.');
@@ -826,7 +820,6 @@ function answerForMatchReq(request_num,club_name,acceptance,club_num,match_num){
 			timeout:30000,
 			success:function(data){
 				if(data.result=="updated"){
-					console.log("updated 진입");
 					location.reload();
 				}
 				if(data.result=="errors"){

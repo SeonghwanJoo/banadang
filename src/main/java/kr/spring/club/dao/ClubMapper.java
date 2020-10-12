@@ -82,5 +82,7 @@ public interface ClubMapper {
 	@Select("select * from (select * from club_rating where club_num=#{club_num} ) a join match b on a.match_num = b.match_num order by match_date desc")
 	public List<ClubVO> selectRatings(Integer club_num);
 	
+	public ClubVO selectMyClubDetails(ClubVO club);
+	
 	public void updateClub(ClubVO club);
 }

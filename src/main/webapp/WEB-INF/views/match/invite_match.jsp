@@ -14,16 +14,10 @@ $(function(){
 
 	    const R = 6371; // Radius of the earth in km
 	    let dLat = deg2rad(lat2-lat1);  // deg2rad below
-	    console.log("R : "+R);
-	    console.log("dLat : "+dLat);
 	    let dLon = deg2rad(lng2-lng1);
-	    console.log("dLon : "+dLon);
 	    let a = (Math.sin(dLat/2) * Math.sin(dLat/2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
-	    console.log("a : "+a);
 	    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-	    console.log("c : "+c);
 	    let d = R * c; // Distance in km
-	    console.log("d : "+d);
 	    return d;
 	}
 	let matchs=new Array();
@@ -44,12 +38,12 @@ $(function(){
 		obj.club_img="${match.club_img}";
 		obj.manner="${match.manner}";
 		obj.perform="${match.perform}";
+		obj.club_age="${match.club_age}";
 		matchs.push(obj);
 	</c:forEach>
-	console.log("<matchVO>"+matchs);
 	
 	if("${myClub.club_loc}"!=""){
-		var position={latitude:${myClub.club_locY},longitude:${myClub.club_locY}}//사용자 소속팀의 주소  받아서 넣어주기
+		var position={latitude:'${myClub.club_locY}',longitude:'${myClub.club_locY}'}//사용자 소속팀의 주소  받아서 넣어주기
 		createListOrderByDistance(position.latitude, position.longitude, matchs);
 	}else if(navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(function(pos) {
@@ -72,24 +66,6 @@ $(function(){
 	/*  ---------------------*/
 
 	
-	/* if(navigator.geolocation){
-		navigator.geolocation.getCurrentPosition(function(pos) {
-		    
-			var latitude = pos.coords.latitude;
-		    var longitude = pos.coords.longitude;
-		    
-		    createListOrderByDistance(latitude,longitude,matchs);
-		    
-		});	
-	}else{
-		var position;
-		if(${myClub.club_loc}){
-			position={latitude:${myClub.club_locY},longitude:${myClub.club_locY}}//사용자 소속팀의 주소  받아서 넣어주기
-		}else{
-			position={latitude:37.5668260054857,longitude:126.978656785931}
-		}
-		createListOrderByDistance(position.latitude, position.longitude, matchs);
-	} */
 	
 	
 	function createListOrderByDistance(latitude,longitude,matchs){
@@ -101,14 +77,11 @@ $(function(){
 		for(var i=0;i<matchs.length;i++){
 			
 			matchs[i].distance=getDistanceFromLatLonInKm(latitude,longitude,matchs[i].address_y,matchs[i].address_x);
-			console.log("<<matchs.distance>>"+i+"번째"+matchs[i].distance);
 		}
 		matchs.sort(function (a,b){
 			return a.distance - b.distance;
 		});
 		for(var i=0;i<matchs.length;i++){
-			
-			console.log("<<matchs.distance>>"+i+"번째"+matchs[i].distance);
 			
 			
 			itemStr+=
@@ -135,6 +108,9 @@ $(function(){
 			if(matchs[i].club_img ==""){
 			itemStr+=
 							"<img src='"+"${pageContext.request.contextPath}"+"/resources/images/blank_emblem.png' class='avatar emblem'>";
+			}else if(matchs[i].club_img !=""){
+				itemStr+=
+					"<img src='"+"${pageContext.request.contextPath}"+"/club/imageView.do?club_num="+matchs[i].club_num+"' class='avatar emblem'>"
 			}
 			itemStr+=
 							"<span class='club_name'>"+matchs[i].club_name+"</span><br>"
@@ -149,23 +125,25 @@ $(function(){
 			}
 			itemStr+=
 							"</span>"
+							+"</div>"
+							+"<div class='col'>"
+								+"<span class='rating'>매너 "+"</span>"
+								+"<span class='star-wrap'>"
+									+"<span class='star-rating'>"
+										+"<span style='width:"+matchs[i].perform*20+"%'></span>"
+									+"</span>"
+									+Number(matchs[i].manner*2).toFixed(1)+"<br>"
+								+"<span class='rating'>실력 "+"</span>"
+									+"<span class='star-rating'>"
+										+"<span style='width:"+matchs[i].perform*20+"%'></span>"
+									+"</span>"
+									+Number(matchs[i].perform*2).toFixed(1)+"<br>"
+								+"</span>"
+								+"주 연령대"+matchs[i].club_age
+							+"</div>"			
 						+"</div>"
-						+"<div class='col'>"
-							+"<span class='rating'>매너 : "+Number(matchs[i].manner*2).toFixed(1)+"</span>"
-							+"<span class='star-wrap'>"
-								+"<span class='star-rating'>"
-									+"<span style='width:"+matchs[i].perform*20+"%'></span>"
-								+"</span><br>"
-							+"<span class='rating'>실력 : "+Number(matchs[i].perform*2).toFixed(1)+"</span>"
-								+"<span class='star-rating'>"
-									+"<span style='width:"+matchs[i].perform*20+"%'></span>"
-								+"</span><br>"
-							+"</span>"
-							+"주 연령대 : 30대"
-						+"</div>"			
-					+"</div>"
-				+"</li>"
-				+"</a>";
+					+"</li>"
+					+"</a>";
 		}
 		ul.innerHTML+=itemStr;
 		div.appendChild(ul);

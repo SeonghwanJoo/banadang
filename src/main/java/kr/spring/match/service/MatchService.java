@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import kr.spring.club.domain.ClubVO;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
 
@@ -28,4 +29,13 @@ public interface MatchService {
 	public void insertMyRequestForMatchToInvite(MatchVO match);
 	public void insertRecruit(MatchVO match);
 	public MatchVO selectRecruitDetail(Integer recruit_num);
+	public Integer selectRecruit_req_num(MatchVO match);
+	public void insertRecruitRequest(MatchVO match);
+	public Integer selectRecruit_num(MatchVO match);
+	public List<MatchVO> selectRecruit();
+	public void updateRecruit(MatchVO match);
+	public void deleteRecruit(Integer recruit_num);
+	public MatchVO selectPKsforMatch(Integer match_num);
+	public void deleteMatch(Integer match_num);
+	public void updateMatchForCancel(MatchVO match);
 }

@@ -234,7 +234,7 @@ public class ClubVO implements Serializable {
 		return "ClubVO [club_ages=" + Arrays.toString(club_ages) + ", club_address=" + club_address + ", club_num="
 				+ club_num + ", id=" + id + ", club_loc=" + club_loc + ", club_auth=" + club_auth + ", club_name="
 				+ club_name + ", club_detail=" + club_detail + ", upload=" + upload + ", club_img="
-				+ Arrays.toString(club_img) + ", filename=" + filename + ", club_color=" + club_color + ", club_age="
+				+ ", filename=" + filename + ", club_color=" + club_color + ", club_age="
 				+ club_age + ", club_locX=" + club_locX + ", club_locY=" + club_locY + ", perform=" + perform
 				+ ", manner=" + manner + ", rating_count=" + rating_count + ", match_date=" + match_date
 				+ ", start_time=" + start_time + ", end_time=" + end_time + ", address=" + address + ", type=" + type

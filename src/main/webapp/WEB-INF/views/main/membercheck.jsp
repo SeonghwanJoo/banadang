@@ -14,7 +14,6 @@
 	$(function(){
 		$("#toast").css("display","block");
 		$("#submit_toast_content").click(function(){
-			console.log("submit_content.click 진입");
 			location.href=document.referrer;
 		})
 	});

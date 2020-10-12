@@ -40,13 +40,13 @@
 		<if test="club_detail !=''">
 			club_detail=#{club_detail},
 		</if>
-		<if test="club_img !=''">
+		<if test="club_img != null">
 			club_img=#{club_img},
 		</if>
 		<if test="club_color !=''">
 			club_color=#{club_color},
 		</if>
-		<if test="filename !=''">
+		<if test="filename !=null">
 			filename=#{filename},
 		</if>
 		club_age=#{club_age},club_locX=#{club_locX},club_locY=#{club_locY},club_address=#{club_address} where club_num=#{club_num}
@@ -74,5 +74,11 @@
     (select count(match_num) a, club_num from match_vote where club_num=#{club_num} group by club_num)a 
     join
     (select count(match_num) b, club_num from match_vote where club_num=#{club_num} and id=#{id} and status=1 group by club_num) b on a.club_num=b.club_num
+	</select>
+	<select id="selectMyClubDetails" parameterType="clubVO" resultType="clubVO">
+	select * from
+    (select a.club_num,club_loc,club_age,club_name,club_detail,club_img,club_color,club_locX,club_locY,club_address,filename,manner,perform,rating_count from
+            (select * from club where club_num=#{club_num}) a left outer join
+        (select avg(manner) manner,avg(perform) perform, COUNT(*) rating_count,club_num from club_rating group by club_num) b on a.club_num=b.club_num)c join club_join d on c.club_num=d.club_num where d.id=#{id}
 	</select>
 </mapper>

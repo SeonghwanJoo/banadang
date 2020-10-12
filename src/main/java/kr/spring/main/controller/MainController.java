@@ -95,34 +95,14 @@ public class MainController {
 							 @RequestParam Integer club_num,
 							 HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		List<MatchVO> clubs_rating=new ArrayList<MatchVO>();
+		ArrayList<MatchVO> clubs_rating=new ArrayList<MatchVO>();
 		String user_id=(String)session.getAttribute("user_id");
 		if(user_id!=null) {
 			MatchVO match=matchService.selectMatchByMatch_num(match_num);
 			match.setId(user_id);
 			match.setClub_num(club_num);
 			
-			clubs_rating=matchService.selectAverageRating(match);
-			match.setHome_manner(0.0);
-			match.setHome_name(match.getHome()+"(미등록팀)");
-			match.setHome_perform(0.0);
-			match.setAway_manner(0.0);
-			match.setAway_name(match.getAway()+"(미등록팀)");
-			match.setAway_perform(0.0);
-			logger.info("<<<clubs_rating>>>> : "+clubs_rating);
-			logger.info("<<<final match_justbefore rating setting>>>> : "+match);
-			for(MatchVO club_rating:clubs_rating) {
-				if(match.getHome().equals(club_rating.getClub_num())) {
-					match.setHome_manner(Math.round(club_rating.getManner()*10)/10.0);
-					match.setHome_name(club_rating.getClub_name());
-					match.setHome_perform(Math.round(club_rating.getPerform()*10)/10.0);
-				}
-				if(match.getAway().equals(club_rating.getClub_num())) {
-					match.setAway_manner(Math.round(club_rating.getManner()*10)/10.0);
-					match.setAway_name(club_rating.getClub_name());
-					match.setAway_perform(Math.round(club_rating.getPerform()*10)/10.0);
-				}
-			}
+			addRatingResult(match,clubs_rating);
 			mav.addObject("match",match);
 		}
 		mav.setViewName("rating");

@@ -51,13 +51,13 @@ public class MatchAjaxController {
 	}
 	@RequestMapping("/match/postRecruit.do")
 	@ResponseBody
-	public Map<String,Object> recruitDetail(@RequestParam Integer match_num,
-									  @RequestParam String id,
-									  @RequestParam Integer club_num,
-									  @RequestParam String[] recruit_positions,
-									  @RequestParam Integer recruit_count,
-									  @RequestParam String recruit_cost,
-									  @RequestParam String recruit_detail) {
+	public Map<String,Object> postRecruit(@RequestParam Integer match_num,
+									  	  @RequestParam String id,
+									  	  @RequestParam Integer club_num,
+									  	  @RequestParam String[] recruit_positions,
+									  	  @RequestParam Integer recruit_count,
+									  	  @RequestParam String recruit_cost,
+									  	  @RequestParam String recruit_detail) {
 		
 		Map<String,Object> map=new HashMap<String,Object>();
 		MatchVO match=new MatchVO();
@@ -71,14 +71,78 @@ public class MatchAjaxController {
 		
 		try {
 			logger.info("recruit_num : "+match.getRecruit_num());
-			matchService.insertRecruit(match);
-			map.put("result", "inserted");
-			map.put("recruit_num",match.getRecruit_num());
+			Integer recruit_num=matchService.selectRecruit_num(match);
+			if(recruit_num!=null) {
+				map.put("result", "duplicated");
+			}else {
+				matchService.insertRecruit(match);
+				map.put("result", "inserted");
+				map.put("recruit_num",match.getRecruit_num());
+			}
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			map.put("result", "errors");
 		}
 				
 		return map;
+	}
+	@RequestMapping("/match/updateRecruit.do")
+	@ResponseBody
+	public Map<String,Object> updateRecruit(@RequestParam Integer recruit_num,
+											@RequestParam String id,
+		  	  								@RequestParam String[] recruit_positions,
+		  	  								@RequestParam Integer recruit_count,
+		  	  								@RequestParam String recruit_cost,
+		  	  								@RequestParam String recruit_detail){
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		MatchVO match=new MatchVO();
+		match.setRecruit_num(recruit_num);
+		match.setId(id);
+		match.setRecruit_cost(recruit_cost);
+		match.setRecruit_count(recruit_count);
+		match.setRecruit_position(Arrays.toString(recruit_positions));
+		match.setRecruit_detail(recruit_detail);
+		try {
+			
+		}catch(Exception e) {
+			
+		}
+		
+		return map;
+	}
+	
+	@RequestMapping("/match/postRecruitRequest.do")
+	@ResponseBody
+	public Map<String,Object> postRecruitRequest(@RequestParam String id,
+												 @RequestParam Integer match_num,
+												 @RequestParam Integer club_num,
+												 @RequestParam String recruit_position,
+												 @RequestParam String recruit_req_detail){
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		MatchVO match=new MatchVO();
+		//신청한 recruit_req_detail이 있는지 확인
+		match.setId(id);
+		match.setMatch_num(match_num);
+		match.setClub_num(club_num);
+		match.setRecruit_position(recruit_position);
+		match.setRecruit_req_detail(recruit_req_detail);
+		try {
+			Integer recruit_req_num=matchService.selectRecruit_req_num(match);
+			if(recruit_req_num!=null) {
+				map.put("result", "duplicated");
+			}else {
+				matchService.insertRecruitRequest(match);
+				map.put("result", "requested");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		
+		return map;
+		
 	}
 }

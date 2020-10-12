@@ -39,10 +39,8 @@ public class MemberController {
 	public String kakaoLogin(@RequestParam String code,HttpSession session)throws IOException {	
 		
 		String access_Token = loginAPI.getAccessToken(code,false);
-        logger.info("controller access_token : " + access_Token);
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_Token);
-        logger.info("login Controller : " + memberVO);
         
         String user_id=memberVO.getId();
         
@@ -60,13 +58,13 @@ public class MemberController {
         	session.setAttribute("user_id", user_id);
             session.setAttribute("access_Token", access_Token);
             session.setAttribute("myClubs", myClubs);
-            logger.info("<<myClubs>> : "+myClubs);
+            
             if(myClubs.size()>0) {
-            	session.setAttribute("myClub", myClubs.get(0));
+            	ClubVO club=new ClubVO();
+                club.setId(user_id);
+                club.setClub_num(myClubs.get(0).getClub_num());
+            	session.setAttribute("myClub", clubService.selectMyClubDetails(club));
             }
-            
-            
-            logger.info("<<<<<<<myTeam>>>>>>>>>> : "+myClubs);
         }
 		return "redirect:/main/main.do";
 	}
@@ -75,12 +73,9 @@ public class MemberController {
 									@RequestParam String state,
 									HttpSession session)throws IOException {	
 		
-		logger.info("state : " +state);
 		String access_Token = loginAPI.getAccessToken(code,true);
-        logger.info("controller access_token : " + access_Token);
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_Token);
-        logger.info("login Controller : " + memberVO);
         
         String user_id=memberVO.getId();
         
@@ -98,16 +93,16 @@ public class MemberController {
         	session.setAttribute("user_id", user_id);
             session.setAttribute("access_Token", access_Token);
             session.setAttribute("myClubs", myClubs);
-            logger.info("<<myClubs>> : "+myClubs);
             if(myClubs.size()>0) {
-            	session.setAttribute("myClub", myClubs.get(0));
+            	ClubVO club=new ClubVO();
+                club.setId(user_id);
+                club.setClub_num(myClubs.get(0).getClub_num());
+            	session.setAttribute("myClub", clubService.selectMyClubDetails(club));
             }
-            logger.info("<<<<<<<myTeam>>>>>>>>>> : "+myClubs);
         }
         String[] values=state.split("-");
         Integer club_num=Integer.parseInt(values[0]);
         String nickname=URLEncoder.encode(values[1],"utf-8");
-        logger.info("nickname : "+nickname);
 		return "redirect:/club/inviteMember.do?club_num="+club_num+"&nickname="+nickname;
 	}
 	@RequestMapping("/member/logout.do")

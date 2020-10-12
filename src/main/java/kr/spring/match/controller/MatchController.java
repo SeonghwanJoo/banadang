@@ -87,17 +87,18 @@ public class MatchController {
 		mav.setViewName("invite_detail");
 		mav.addObject("title","경기 신청");
 		mav.addObject("match", match);
-		logger.info("<<<matchVO>>>"+match);
 		
 		return mav;
 	}
 	@RequestMapping("/match/recruit.do")
 	public ModelAndView recruitPlayer() {
 		ModelAndView mav=new ModelAndView();
+		List<MatchVO> matches=matchService.selectRecruit();
 		
 		mav.setViewName("recruit");
 		mav.addObject("title","용병 모집");
-		
+		mav.addObject("matches",matches);
+		logger.info("recruit_num[0]"+matches.get(0).getRecruit_num());
 		return mav;
 	}
 	@RequestMapping("/match/writeRecruit.do")
@@ -130,6 +131,57 @@ public class MatchController {
 		mav.addObject("title","용병 모집");
 		mav.setViewName("recruitDetail");
 		
+		return mav;
+	}
+	@RequestMapping("/match/modifyRecruit.do")
+	public ModelAndView modifyRecruit(@RequestParam Integer recruit_num) {
+		ModelAndView mav=new ModelAndView();
+		MatchVO match=matchService.selectRecruitDetail(recruit_num);
+		mav.addObject("match", match);
+		mav.addObject("title","용병 모집 수정");
+		mav.setViewName("modifyRecruit");
+		
+		return mav;
+	}
+	@RequestMapping("/match/deleteRecruit.do")
+	public String deleteRecruit(@RequestParam Integer recruit_num) {
+		
+		matchService.deleteRecruit(recruit_num);
+		
+		return "redirect:/match/recruit.do";
+		
+	}
+	@RequestMapping("/match/deleteMatch.do")
+	public String deleteMatch(@RequestParam Integer match_num,
+							  @RequestParam String club_name) {
+		
+		//해당 매치로 생성되어 있는 match/match_recruit/match_request/match_vote 삭제해야 함
+		//아무것도 없는 상태라면 match 삭제 처리
+		//상대팀이 매칭되어 있는 경우
+		//recruit이 신청되어 있는 경우 =>상태표시로 취소됨 표시
+		//match_request가 신청되어 있는 경우=>상태표시로 취소됨 표시
+		//투표가 되어 잇는 경우 =>운영진 권한에 따라 삭제 OK
+		MatchVO match=matchService.selectPKsforMatch(match_num);
+		logger.info("match in delete : "+match);
+		if(match.getRequest_num()==null&&(match.getAway()==-1||match.getAway()==0)&&match.getRecruit_num()==null) {
+			matchService.deleteMatch(match_num);
+		}else {
+			match.setCancel(club_name);
+			matchService.updateMatchForCancel(match);
+		}
+		
+		return "redirect:/main/main.do";
+		
+	}
+	@RequestMapping("/match/modifyMatch.do")
+	public ModelAndView modifyMatch(@RequestParam Integer match_num) {
+		
+		ModelAndView mav=new ModelAndView();
+		MatchVO match=matchService.selectMatchToInviteByMatch_num(match_num);
+		
+		mav.setViewName("modifyMatch");
+		mav.addObject("title","경기 수정");
+		mav.addObject("match", match);
 		return mav;
 	}
 	

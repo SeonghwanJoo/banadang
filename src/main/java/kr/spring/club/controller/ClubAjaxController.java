@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sun.istack.internal.Nullable;
+
 import kr.spring.club.domain.ClubVO;
 import kr.spring.club.service.ClubService;
 import kr.spring.member.domain.MemberVO;
@@ -65,7 +67,6 @@ public class ClubAjaxController {
 			clubService.insertClub(club);
 			map.put("result", "inserted");
 			map.put("club_num", club.getClub_num().toString());
-			session.setAttribute("myClub",club);
 		}catch(Exception e) {
 			e.printStackTrace();
 			map.put("result", "errors");
@@ -77,7 +78,11 @@ public class ClubAjaxController {
 	@ResponseBody
 	public Map<String,String> setMyClub(@RequestParam Integer club_num,HttpSession session){
 		Map<String,String> map=new HashMap<String,String>();
-		ClubVO myClub=clubService.selectClubDetailWithClub_num(club_num);
+		String user_id=(String)session.getAttribute("user_id");
+		ClubVO club=new ClubVO();
+		club.setId(user_id);
+		club.setClub_num(club_num);
+		ClubVO myClub=clubService.selectMyClubDetails(club);
 		try {
 			session.setAttribute("myClub", myClub);
 			map.put("result","set");
@@ -239,8 +244,8 @@ public class ClubAjaxController {
 									  @RequestParam String club_loc,
 									  @RequestParam String club_name,
 									  @RequestParam String club_detail,
-									  @RequestParam MultipartFile upload,
-									  @RequestParam String filename,
+									  @RequestParam(required=false) MultipartFile upload,
+									  @RequestParam(required=false) String filename,
 									  @RequestParam String club_color,
 									  @RequestParam String[] club_ages,
 									  @RequestParam String club_address,
@@ -259,18 +264,22 @@ public class ClubAjaxController {
 		club.setClub_loc(club_loc);
 		club.setClub_name(club_name);
 		club.setClub_detail(club_detail);
-		club.setFilename(filename);
-		club.setUpload(upload);
+		if(filename!=null) {
+			club.setFilename(filename);
+		}
+		if(upload!=null) {
+			club.setUpload(upload);
+		}
 		club.setClub_color(club_color);
 		club.setClub_ages(club_ages);
 		club.setClub_address(club_addressCut);
 		club.setClub_locX(club_locX);
 		club.setClub_locY(club_locY);
+		logger.info("club_img : "+club.getClub_img());
 		try {
 			clubService.updateClub(club);
 			map.put("result", "updated");
 			map.put("club_num", club.getClub_num());
-			session.setAttribute("myClub",club);
 		}catch(Exception e) {
 			e.printStackTrace();
 			map.put("result", "errors");

@@ -142,6 +142,11 @@ public class ClubServiceImpl implements ClubService {
 		clubMapper.updateClub(club);
 		
 	}
+
+	@Override
+	public ClubVO selectMyClubDetails(ClubVO club) {
+		return clubMapper.selectMyClubDetails(club);
+	}
 	
 
 

@@ -239,7 +239,6 @@
 }
 .match-item{
 	font-weight:bold;
-	padding-right:1rem;
 	padding-left:1rem;
 }
 
@@ -562,7 +561,7 @@ input[type=text]:focus, select:focus{
 }
 .sub-content{
 	margin-bottom:1rem;
-	padding: 20px;
+	padding: 20px 0;
 	background-color:#FFF;
 	border-radius:1rem;
 }
@@ -587,15 +586,30 @@ input[type=text]:focus, select:focus{
 	color:#000;
 }
 .status{
+	display:block;
 	border-radius:0.5rem;
 	color:#FFF;
 	padding:0.1rem 0.2rem;
-	float:right;
+	position:absolute;
+	right:1rem;
+	text-align:center;
 }
+.main-row span.more{
+	position:absolute;
+	right:1rem;
+	text-align:center;
+	display:block;
+	font-size:2rem;
+}
+.last{margin-right:2rem;}
+
 .neutral{background-color:#878787;}
 .positive{background-color:#a4d3a6;}
 .negative{background-color:#000;}
-
+.full{
+	width:97%;
+	margin: 0 auth;
+}
 
 @keyframes slideFromBot{
 	from{
@@ -749,13 +763,13 @@ a:hover, div.col a:hover { color:#a0a0a0;text-decoration: none; }
 .fixed_top a{
 	cursor:pointer;
 }
-
-#submit{
+#submit, .fixed_top span.more{
 	position:absolute;
 	right:1%;
 	top:20%;
 	margin:2px;
 	border: none;
+	color:#878787;
 	background:transparent;
 }
 #write_body{
@@ -1038,10 +1052,25 @@ h6.ages{
 button.small-font{
 	font-size:0.9rem;
 }
+.small-font{
+	font-size:0.9rem;
+}
+.m-font{
+	font-size:1.2rem;
+}
+.l-font{
+	font-size:2rem;
+}
+.xl-font, .fixed_top span.xl-font{
+	font-size:2.5rem;
+}
+
 .tab-btn:focus, tab-btn:active{
 	outline:none;
 }
-
+.red{
+	color:#dc3545;
+}
 .vote_wrapper{
 	padding-top:3rem;
 	text-align:center;
@@ -1372,6 +1401,11 @@ button.chip-btn{
   -ms-user-select: none;
   user-select: none;
 }
+.wider{
+	width:30%;
+	max-width:none;
+}
+
 .custom {
 	display: block;
 	margin: 0.5rem auto;

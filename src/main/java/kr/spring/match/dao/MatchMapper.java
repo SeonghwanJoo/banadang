@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -15,7 +16,7 @@ public interface MatchMapper {
 	
 	public void insertMatch(MatchVO matchVO);
 	
-	@Select("select* from (select match_num,id,type,home,away,away_name,start_time,end_time,address,address_x,address_y,match_detail,match_date,#{club_num} club_num from match where home=#{club_num} or away=#{club_num}) where match_date>sysdate-1 order by match_date")
+	@Select("select* from (select match_num,id,type,home,away,away_name,start_time,end_time,cancel,address,address_x,address_y,match_detail,match_date,#{club_num} club_num from match where home=#{club_num} or away=#{club_num}) where match_date>sysdate-1 order by match_date")
 	public List<MatchVO> selectMyMatch(Integer club_num);
 	
 	@Select("select * from (select match_num,id,type,home,away,start_time,end_time,address,match_detail,match_date,#{club_num} club_num from match where home=#{club_num} or away=#{club_num}) where match_date <sysdate-1 and match_date>sysdate-14")
@@ -56,5 +57,27 @@ public interface MatchMapper {
 	
 	public void insertRecruit(MatchVO match);
 	public MatchVO selectRecruitDetail(Integer recruit_num);
+	public List<MatchVO> selectRecruit();
+	@Select("select recruit_req_num from recruit_req where match_num=#{match_num} and id=#{id}")
+	public Integer selectRecruit_req_num(MatchVO match);
+	@Select("select recruit_num from match_recruit where match_num=#{match_num} and club_num=#{club_num} ")
+	public Integer selectRecruit_num(MatchVO match);
+	
+	public void insertRecruitRequest(MatchVO match);
+	public void updateRecruit(MatchVO match);
+	@Delete("delete from match_recruit where recruit_num=#{recruit_num}")
+	public void deleteRecruit(Integer recruit_num);
+	
+	public MatchVO selectPKsforMatch(Integer match_num);
+	
+	@Delete("delete from match where match_num=#{match_num}")
+	public void deleteMatch(Integer match_num);
+	
+	@Delete("delete from match_vote where match_num=#{match_num}")
+	public void deleteVote(Integer match_num);
+	
+	@Update("update match set cancel=#{cancel} where match_num=#{match_num} ")
+	public void updateMatchForCancel(MatchVO match);
+	
 
 }

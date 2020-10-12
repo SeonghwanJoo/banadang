@@ -265,9 +265,7 @@
 			cache:false,
 			timeout:30000,
 			success:function(data){
-				console.log(data.result);
 				if(data.result=='updated'){
-					console.log(data.result+'in updated');
 					$('#rating_msg').text('상대팀 평점 수정 완료');
 				}else if(data.result=='inserted'){
 					$('#rating_msg').text('상대팀 평점 등록 완료');

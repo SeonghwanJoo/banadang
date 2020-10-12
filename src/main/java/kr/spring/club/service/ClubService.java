@@ -28,5 +28,6 @@ public interface ClubService {
 	public void deleteClubFromClub(Integer club_num);
 	public List<ClubVO> selectRatings(Integer club_num);
 	public void updateClub(ClubVO club);
+	public ClubVO selectMyClubDetails(ClubVO club);
 	
 }

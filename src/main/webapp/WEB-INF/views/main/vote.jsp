@@ -6,7 +6,7 @@
 	<div class="fixed_top">
 		<c:if test="${isMain==true }">
 		<a href="${pageContext.request.contextPath}/main/main.do" >
-		<span class="material-icons" id="chevron_left">chevron_left</span>
+		<span class="material-icons" id="cancel">close</span>
 		</a>
 		</c:if>
 		<c:if test="${isMain==false }">
@@ -252,12 +252,8 @@
 					cache:false,
 					timeout:30000,
 					success:function(data){
-						console.log("참석자"+data.attend);
-						console.log("불참자"+data.not_attend);
-						console.log("미정"+data.undefined);
 						
 						var total=data.attend+data.not_attend+data.undefined;
-						console.log("총합"+total);
 						
 						$('#attend').css('width',(data.attend/total)*100+'%');
 						$('#not_attend').css('width',(data.not_attend/total)*100+'%');

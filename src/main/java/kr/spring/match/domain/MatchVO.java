@@ -4,11 +4,8 @@ import java.sql.Date;
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class MatchVO {
-	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public void setMax() {
 		Integer arr[]= {attend,not_attend,undefined};
@@ -243,12 +240,10 @@ public class MatchVO {
 		this.invite_detail = invite_detail;
 	}
 	public Integer getRecruit_num() {
-		logger.info("getRecruit_num 진입 : "+recruit_num);
 		return recruit_num;
 	}
 
 	public void setRecruit_num(Integer recruit_num) {
-		logger.info("setRecruit_num 진입 : "+recruit_num);
 		this.recruit_num = recruit_num;
 	}
 
@@ -283,14 +278,6 @@ public class MatchVO {
 	public void setRecruit_detail(String recruit_detail) {
 		this.recruit_detail = recruit_detail;
 	}
-
-	public String getRecruit_att() {
-		return recruit_att;
-	}
-
-	public void setRecruit_att(String recruit_att) {
-		this.recruit_att = recruit_att;
-	}
 	public String getClub_age() {
 		return club_age;
 	}
@@ -298,12 +285,35 @@ public class MatchVO {
 	public void setClub_age(String club_age) {
 		this.club_age = club_age;
 	}
+	public String getRecruit_req_detail() {
+		return recruit_req_detail;
+	}
+
+	public void setRecruit_req_detail(String recruit_req_detail) {
+		this.recruit_req_detail = recruit_req_detail;
+	}
+	public Integer getRequest_num() {
+		return request_num;
+	}
+
+	public void setRequest_num(Integer request_num) {
+		this.request_num = request_num;
+	}
+	public String getCancel() {
+		return cancel;
+	}
+
+	public void setCancel(String cancel) {
+		this.cancel = cancel;
+	}
+	private String cancel;
+	private String recruit_req_detail;
 	private Integer recruit_num;
 	private String recruit_position;
 	private Integer recruit_count;
 	private String recruit_cost;
 	private String recruit_detail;
-	private String recruit_att;
+	private Integer request_num;
 	private String cost;
 	private int attend;
 	private int not_attend;

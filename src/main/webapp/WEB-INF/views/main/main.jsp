@@ -70,10 +70,16 @@
 				<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}" target="_blank">
 				<span class="match-item">${match.address}</span>
 				</a>
-				<span class="match-item">
+				<span class="match-item last">
 					<c:if test="${match.type==1 }">축구</c:if>
 					<c:if test="${match.type==2 }">풋살</c:if>
 				</span>
+				<c:if test="${myClub.club_auth>4 && myClub.club_num==match.home}">
+				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }')">more_horiz</span>
+				</c:if>
+				<c:if test="${not empty match.cancel }">
+				<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
+				</c:if>
 			</div>
 		</div>
 		<div class="main-row">
@@ -193,17 +199,17 @@
 				<span class="person material-icons">person</span>
 			</span>
 		</div>
-		<c:if test="${match.home!=match.away && match.home==match.club_num}">
+		<c:if test="${match.home!=match.away && match.home==match.club_num && empty match.cancel}">
 		<button class="block" 
 			onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }&isMain=true'">
 			${match.home_name } <c:if test="${ match.status !=0}">다시 투표하기</c:if><c:if test="${match.status ==0 }">투표하기</c:if></button>
 		</c:if>
-		<c:if test="${match.home!=match.away && match.away==match.club_num}">
+		<c:if test="${match.home!=match.away && match.away==match.club_num && empty match.cancel}">
 		<button class="block" 
 			onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }&isMain=true'">
 			${match.away_name } <c:if test="${match.status !=0 }">다시 투표하기</c:if><c:if test="${match.status ==0 }">투표하기</c:if></button>
 		</c:if>
-		<c:if test="${match.home==match.away}">
+		<c:if test="${match.home==match.away && empty match.cancel}">
 		<button class="block" 
 			onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${match.club_num }&isMain=true'">
 			<c:if test="${match.status !=0 }">다시 투표하기</c:if><c:if test="${match.status ==0 }">투표하기</c:if></button>
@@ -277,7 +283,38 @@
 </ul>
 </c:if>
 </c:if>
+<div id="more_modal" class="confirm-modals">
+	<!-- Modal content -->
+	<div class="confirm-modal-content">
+		<div class="sub-content">
+			<button id="modify" class="pos-btn" onclick="location.href='modifyMatch.do?match_num=${match.match_num}'">수정</button>
+			<hr>
+			<button id="delete" class="pos-btn red" onclick="location.href='deleteMatch.do?match_num=${match.match_num}&club_name=${myClub.club_name }'">삭제</button>
+		</div>
+		<div class="sub-content">
+			<button id="more-cancel-btn" class="neg-btn">취소</button>
+		</div>
+	</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+ function openMore(match_num,club_name){
+	 $('#more_modal').css('display','block');
+	 
+	 $('#modify').click(function(){
+		 location.href='${pageContext.request.contextPath}/match/modifyMatch.do?match_num='+match_num;
+	 });
+	 $('#delete').click(function(){
+		 location.href='${pageContext.request.contextPath}/match/deleteMatch.do?match_num='+match_num+'&club_name='+club_name;
+	 });
+	 $('#more-cancel-btn').click(function(){
+		$('#more_modal').css('display','none');
+	 });
+ }
+	
 
+</script>
 
 
 

@@ -135,4 +135,61 @@ public class MatchServiceImpl implements MatchService {
 		return matchMapper.selectRecruitDetail(recruit_num);
 	}
 
+	@Override
+	public Integer selectRecruit_req_num(MatchVO match) {
+		
+		return matchMapper.selectRecruit_req_num(match);
+	}
+
+	@Override
+	public void insertRecruitRequest(MatchVO match) {
+		matchMapper.insertRecruitRequest(match);
+		
+	}
+
+	@Override
+	public Integer selectRecruit_num(MatchVO match) {
+		
+		return matchMapper.selectRecruit_num(match);
+	}
+
+	@Override
+	public List<MatchVO> selectRecruit() {
+		
+		return matchMapper.selectRecruit();
+	}
+
+	@Override
+	public void updateRecruit(MatchVO match) {
+		matchMapper.updateRecruit(match);
+		
+	}
+
+	@Override
+	public void deleteRecruit(Integer recruit_num) {
+		matchMapper.deleteRecruit(recruit_num);
+		
+	}
+
+	@Override
+	public MatchVO selectPKsforMatch(Integer match_num) {
+		
+		return matchMapper.selectPKsforMatch(match_num);
+	}
+
+	@Override
+	public void deleteMatch(Integer match_num) {
+	
+		matchMapper.deleteMatch(match_num);
+		matchMapper.deleteVote(match_num);
+		
+	}
+
+	@Override
+	public void updateMatchForCancel(MatchVO match) {
+		
+		matchMapper.updateMatchForCancel(match);
+		
+	}
+
 }

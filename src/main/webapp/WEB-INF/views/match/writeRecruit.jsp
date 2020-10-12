@@ -100,17 +100,6 @@
 			<option value="3">3</option>
 			<option value="4">4</option>
 			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			<option value="9">9</option>
-			<option value="10">10</option>
-			<option value="11">11</option>
-			<option value="12">12</option>
-			<option value="13">13</option>
-			<option value="14">14</option>
-			<option value="15">15</option>
-			<option value="16">16</option>
 		</select>
 	</div>
 </div>
@@ -134,8 +123,19 @@
 <div id="toast" class="submit_toast">
 
   <!-- Modal content -->
-  <div id="submit_toast_content" class="submit_toast_content">
+  <div  class="submit_toast_content cursor">
      <span id="club_msg"></span>
+     <br><br>확인
+  </div>
+</div>
+</c:if>
+<c:if test="${empty matches }">
+<!-- The Modal -->
+<div onclick="location.href=document.referrer" class="submit_toast" style="display:block">
+
+  <!-- Modal content -->
+  <div onclick="location.href=document.referrer" id="submit_toast_content" class="submit_toast_content">
+     <span>예정된 경기 일정이 있어야 용병 모집 가능합니다</span>
      <br><br>확인
   </div>
 </div>
@@ -183,17 +183,20 @@
 				timeout:30000,
 				success:function(data){
 					if(data.result=="inserted"){
-						console.log("inserted 진입");
 						$("#club_msg").text("용병 모집 글 생성 완료");
-						$("#toast").css("display","block");
-						$("#confirm").click(function(){
-							location.href="recruitDetail.do?recruit_num="+data.recruit_num;
-						});
-						$(window).click(function(){
-							location.href="recruitDetail.do?recruit_num="+data.recruit_num;
-						});
 						
+						
+					}else if(data.result=="duplicated"){
+						$("#club_msg").text("이미 해당 매치에 용병 모집 글을 작성하셨습니다");
 					}
+					$("#toast").css("display","block");
+					$("#confirm").click(function(){
+						location.href="recruitDetail.do?recruit_num="+data.recruit_num;
+					});
+					$(window).click(function(){
+						location.href="recruitDetail.do?recruit_num="+data.recruit_num;
+					});
+					
 					if(data.result=="errors"){
 						
 						$("#club_msg").text("용병 모집 글 생성 실패");

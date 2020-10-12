@@ -5,7 +5,7 @@
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
 		<a onclick="location.href=document.referrer">
-		<span class="material-icons" id="cancel" >close</span>
+		<span class="material-icons" id="chevron_left" >chevron_left</span>
 		</a>
 		<div class="topnav-centered-form">
 			<a href="#home" class="active">${match.home_name } VS ${match.away_name}</a>

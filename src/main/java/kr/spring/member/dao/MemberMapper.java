@@ -1,5 +1,6 @@
 package kr.spring.member.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
@@ -15,6 +16,8 @@ public interface MemberMapper {
 	
 	@Insert("insert into member_detail(id,nickname,profile_image,thumbnail_image,email,age_range) values(#{id},#{nickname},#{profile_image},#{thumbnail_image},#{email},#{age_range})")
 	public void insertMember_detail(MemberVO memberVO);
+	
+
 
 	
 }

@@ -18,7 +18,35 @@
 				<input type="submit" id="submit" value="완료">
 			</div>
 		</div>
-		<div class="row" id="write_body">
+		<div class="blank_div"></div>
+		<span class="input-label">경기 유형(축구/풋살) 선택</span>
+		<div class="row centered-padding">
+			<label class="chip">
+				<span class="chip-txt">축구</span>
+				<input type="radio" name="type" id="soccer" value="1" checked="checked">
+				<span class="checkmark"></span>
+			</label> 
+			<label class="chip">
+				<span class="chip-txt">풋살</span>
+				<input type="radio" name="type" id="futsal" value="2">
+				<span class="checkmark"></span>
+			</label>
+		</div>
+		<hr>
+		<span class="input-label">예정된 상대팀 있음/상대팀 초청 선택</span>
+		<div class="row centered-padding">
+			<label class="chip wider">
+				<span class="chip-txt">상대팀 있음</span>
+				<input type="radio" name="opponent" id="exist" value="1" checked="checked">
+				<span class="checkmark"></span>
+			</label> 
+			<label class="chip wider">
+				<span class="chip-txt">상대팀 초청</span>
+				<input type="radio" name="opponent" id="non-exist" value="2">
+				<span class="checkmark"></span>
+			</label>
+		</div>
+		<!-- <div class="row" id="write_body">
 			<div class="btn-group btn-group-toggle col-sm-12" data-toggle="buttons">
 				<label class="radio btn" id="soc_label">
 					<input type="radio" class="soc_fut" name="type" id="soccer" value="1"> 축구
@@ -36,7 +64,7 @@
 					<input type="radio" class="opponent"name="opponent" id="non-exist" value="2"> 상대팀 초청
 				</label>
 			</div>
-		</div>
+		</div> -->
 		<div class="row"><div class="col"><span class="msg" id="type_msg"></span></div></div>
 		<hr class="hr">
 		<input type="hidden" id="home" name="home" value="${myClub.club_num}">
@@ -442,7 +470,6 @@ $( function() {
 		    	document.getElementById('address_x').value=places.x;
 		    	document.getElementById('address_y').value=places.y;
 		  		modal.style.display = "none";
-		  		console.log("<<places x,y>>"+places.x+", "+places.y);
 		    };
 	
 		    return el;
@@ -585,10 +612,6 @@ $( function() {
 		},
 		function(start, end, label) {
 			/* 자바스크립트 에러시 로그 추적 */
-			/* console.log('New date range selected: '
-					+ start.format('YYYY-MM-DD') + ' to '
-					+ end.format('YYYY-MM-DD') + ' (predefined range: '
-					+ label + ')'); */
 			$('#datepicker').val(start.format('YYYY-MM-DD'));
 		});
 
@@ -648,7 +671,7 @@ $( function() {
 												.toUpperCase().indexOf(
 														val.toUpperCase())
 												+ val.length);
-										b.innerHTML += "<span class='club_loc'>"+clubs_loc[i]+"</span>"
+										b.innerHTML += "<span class='club_loc'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+clubs_loc[i]+"</span>"
 										/*insert a input field that will hold the current array item's value:*/
 										b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
 										b.innerHTML += "<input type='hidden' value='" + clubs_num[i] + "'>";
@@ -744,9 +767,6 @@ $( function() {
 			clubs_num.push("${clubs.club_num}");
 			clubs_loc.push("${clubs.club_loc}");
 		</c:forEach>
-		console.log(clubs_name);
-		console.log(clubs_num);
-		console.log(clubs_loc);
 
 		/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocompleawayalues:*/
 		autocomplete(document.getElementById("away_name"), clubs_name,clubs_num,clubs_loc);

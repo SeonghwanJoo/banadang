@@ -173,7 +173,6 @@ function removeWhiteSpace(obj){
 		
 		$("#submit").click(function(e){
 			e.preventDefault();
-			console.log("filename : "+$("#img-pre").attr("alt"));
 			let club_img=dataURLToBlob($("#img-pre").attr("src"));
 			var formData = new FormData($('#club_form')[0]);
 			formData.append("upload", club_img); 
@@ -190,7 +189,6 @@ function removeWhiteSpace(obj){
 				timeout:30000,
 				success:function(data){
 					if(data.result=="inserted"){
-						console.log("inserted 진입");
 						$("#club_msg").text("팀 생성 완료");
 						$("#toast").css("display","block");
 						$("#confirm").click(function(){
@@ -225,7 +223,6 @@ function removeWhiteSpace(obj){
 		$("#club_img").on("change",function(event){
 			const file = event.target.files[0];
 			const filename=file.name;
-			console.log("filename : "+filename);
 			const reader = new FileReader();
 			
 		    reader.onload = function(e) {
@@ -233,7 +230,6 @@ function removeWhiteSpace(obj){
 		        image.src = e.target.result;//OK
 		        image.onload=function(){
 		        	
-		        	console.log("image.src : "+image.src);
 					let canvas = document.createElement("canvas"),
 					max_size = 150,
 					
@@ -257,7 +253,6 @@ function removeWhiteSpace(obj){
 					canvas.height = height;
 					canvas.getContext("2d").drawImage(image, 0, 0, width, height);
 					const dataUrl = canvas.toDataURL();
-					console.log("dataURL : "+dataUrl);
 					// 미리보기 위해서 마크업 추가.
 					$("#img-pre").attr("src",dataUrl);
 					$("#img-pre").attr("alt",filename);
@@ -269,7 +264,6 @@ function removeWhiteSpace(obj){
 		
 		
 		function dataURLToBlob (dataURL) {
-			console.log("dataURLToBlob 진입 ");
 			const BASE64_MARKER = ";base64,";
 		
 			// base64로 인코딩 되어있지 않을 경우
@@ -463,9 +457,7 @@ function removeWhiteSpace(obj){
 				document.getElementById('club_locX').value = places.x;
 				document.getElementById('club_locY').value = places.y;
 				document.getElementById('club_address').value = places.address_name;
-				console.log("places_name : "+places.address_name);
 				modal.style.display = "none";
-				console.log("<<places x,y>>" + places.x + ", " + places.y);
 			};
 
 			return el;
@@ -575,7 +567,6 @@ function removeWhiteSpace(obj){
 				modal.style.display = "none";
 			}
 			if (event.target == color_modal) {
-				console.log("event.target==color_modal진입");
 				color_modal.style.display = "none";
 			}
 		}
@@ -591,20 +582,17 @@ function removeWhiteSpace(obj){
 		// When the user clicks the button, open the modal 
 		color.onclick = function(e) {
 			e.preventDefault();
-			console.log("color.onclick진입");
 			color_modal.style.display = "block";
 		}
 
 		// When the user clicks on <span> (x), close the modal
 		span_color.onclick = function() {
-			console.log("span_color진입");
 			color_modal.style.display = "none";
 		}
 
 		// When the user clicks anywhere outside of the modal, close it
 		$(".color_opt").click(function(){
 			var clickedColor=$(this).css("color");
-			console.log("whiteColor : "+clickedColor);
 			if(clickedColor=="rgb(255, 255, 255)"){
 				$(".uni-view").css("background-color","#7a7a7a");
 			}

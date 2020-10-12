@@ -54,13 +54,13 @@ public class ClubController {
 		ClubVO myClub=(ClubVO)session.getAttribute("myClub");
 		//myClub이 session에 없다면
 		if (myClub==null) {
-			session.setAttribute("myClub", myClubs.get(0));
+			session.setAttribute("myClub", clubService.selectMyClubDetails(myClubs.get(0)));
 		}
 		//myClub이 탈퇴했으나 session에 업데이트되지 않았다면
 		myClub.setId(id);
 		Integer auth=clubService.selectClubAuth(myClub);
 		if(auth==null) {
-			session.setAttribute("myClub", myClubs.get(0));
+			session.setAttribute("myClub", clubService.selectMyClubDetails(myClubs.get(0)));
 		}
 		
 		mav.setViewName("myClub");
@@ -72,14 +72,14 @@ public class ClubController {
 	public ModelAndView manageClub(@RequestParam Integer club_num,HttpSession session) {
 		ModelAndView mav=new ModelAndView();
 		//팀명,연령,주소,유니폼,매너평가,실력평가,평가수
-		ClubVO myClub=clubService.selectClubDetailWithClub_num(club_num);
 		String user_id=(String)session.getAttribute("user_id");
-		myClub.setId(user_id);
-		int myAuth=clubService.selectClubAuth(myClub);
+		ClubVO club=new ClubVO();
+		club.setClub_num(club_num);
+		club.setId(user_id);
+		ClubVO myClub=clubService.selectMyClubDetails(club);
 		
 		List<ClubVO> away_club=clubService.selectAwayDetailsForRequestedMatch(club_num);
 		List<ClubVO> home_club=clubService.selectHomeDetailsForRequestedMatch(club_num);
-		session.setAttribute("myAuth", myAuth);
 		session.setAttribute("myClub", myClub);
 		mav.addObject("away_club", away_club);
 		mav.addObject("home_club", home_club);

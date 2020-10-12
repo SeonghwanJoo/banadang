@@ -5,13 +5,18 @@
 
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
-		<a href="javascript:location.href=document.referrer">
+		<a href="recruit.do">
 		<span class="material-icons" id="cancel">close</span>
 		</a>
 		<div class="topnav-centered">
 			<a href="javascript:document.reload()" class="active">${title }</a>
 		</div>
+		<c:if test="${match.club_num!=myClub.club_num }">
 		<input type="submit" id="submit" value="신청">
+		</c:if>
+		<c:if test="${match.club_num==myClub.club_num && myClub.club_auth>4 }">
+		<span class="material-icons more cursor xl-font" id="more">more_horiz</span>
+		</c:if>
 	</div>
 </div>
 <div class="blank_div"></div>
@@ -107,7 +112,7 @@
 			</div>
 		</li>
 		<li class="li-list">
-			<textarea class="detail input-field" id="recruit_req_detail" name="recruit_req_detail" placeholder="용병 모집 팀에 추가할 내용 입력"></textarea>
+			<textarea class="detail input-field" id="recruit_req_detail" name="recruit_req_detail" placeholder="용병 신청 시 ${match.club_name } 팀에 추가적으로 전달할 내용 입력"></textarea>
 		</li>
 	</ul>
 </div>
@@ -136,6 +141,20 @@
 		</div>
 		<div class="sub-content">
 			<button id="cancel-btn" class="neg-btn">취소</button>
+		</div>
+	</div>
+</div>
+<div id="more_modal" class="confirm-modals">
+	<!-- Modal content -->
+	<div class="confirm-modal-content">
+		<!-- 기존회원 관리 옵션(강제탈퇴,운영진 권한부여,일반회원 권한 부여 )-->
+		<div class="sub-content">
+			<button id="modify" class="pos-btn" onclick="location.href='modifyRecruit.do?recruit_num=${match.recruit_num}'">수정</button>
+			<hr>
+			<button id="delete" class="pos-btn red" onclick="location.href='deleteRecruit.do?recruit_num=${match.recruit_num}'">삭제</button>
+		</div>
+		<div class="sub-content">
+			<button id="more-cancel-btn" class="neg-btn">취소</button>
 		</div>
 	</div>
 </div>
@@ -169,7 +188,12 @@
 	var map = new kakao.maps.Map(mapContainer, mapOption);
 	marker.setMap(map); 
 	$(function(){
-		
+		$('#more').click(function(){
+			$('#more_modal').css('display','block');
+		});
+		$('#more-cancel-btn').click(function(){
+			$('#more_modal').css('display','none');
+		});
 		$('#submit').click(function(){
 			$('#recruit_modal').css('display','block');
 			$('.pos-btn').click(function(){
@@ -178,9 +202,9 @@
 					url:'postRecruitRequest.do',
 					type:'post', 
 					data:{
-						match_num: ${match.match_num},
-						id:${user_id},
-						club_num:${match.club_num},
+						match_num: '${match.match_num}',
+						id:'${user_id}',
+						club_num:'${match.club_num}',
 						recruit_position:position,
 						recruit_req_detail:$('#recruit_req_detail').val()
 					},
@@ -188,13 +212,11 @@
 					cache:false,
 					timeout:30000,
 					success:function(data){
-						console.log(data.result);
 						if(data.result=='requested'){
 							$('#recruitRequest_msg').text('용병 신청  완료');
 						}else if(data.result=='duplicated'){
 							$('#recruitRequest_msg').text('이미 용병 신청하셨습니다');
 						}
-						
 						$('#toast').css('display','block');
 						$('#confirm').click(function(){
 							location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}';
