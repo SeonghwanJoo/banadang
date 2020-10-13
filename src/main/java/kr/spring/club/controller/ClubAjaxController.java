@@ -22,6 +22,7 @@ import com.sun.istack.internal.Nullable;
 
 import kr.spring.club.domain.ClubVO;
 import kr.spring.club.service.ClubService;
+import kr.spring.match.service.MatchService;
 import kr.spring.member.domain.MemberVO;
 
 @Controller
@@ -31,6 +32,9 @@ public class ClubAjaxController {
 	
 	@Resource
 	private ClubService clubService;
+	
+	@Resource
+	private MatchService matchService;
 	
 	@RequestMapping("/club/createClub.do")
 	@ResponseBody
@@ -233,6 +237,20 @@ public class ClubAjaxController {
 		}catch(Exception e){
 			e.printStackTrace();
 			map.put("result","errors");
+		}
+		return map;
+	}
+		
+	@RequestMapping("/club/answerForRecruit.do")
+	@ResponseBody
+	public Map<String, Object> answerForRecruit(MemberVO member){
+		Map<String,Object> map=new HashMap<String,Object>();
+		try {
+			clubService.updateRecruitReq(member);
+			map.put("result", "updated");
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
 		}
 		return map;
 	}

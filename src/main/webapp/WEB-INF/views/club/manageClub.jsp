@@ -235,8 +235,18 @@
 					<span class="match-item">${recruit.match_date }</span>
 					<span class="match-item">${recruit.start_time } ~ ${recruit.end_time }</span>
 					<span class="match-item">${recruit.address}</span>
+					<c:if test="${recruit.recruit_accept==1 }">
+					<span id="status-${recruit.recruit_req_num}"class="status neutral">대기 중</span>
+					</c:if>
+					<c:if test="${recruit.recruit_accept==2 }">
+					<span id="status-${recruit.recruit_req_num}"class="status positive">수락 완료</span>
+					</c:if>
+					<c:if test="${recruit.recruit_accept==3 }">
+					<span id="status-${recruit.recruit_req_num}"class="status negative">거절 완료</span>
+					</c:if>
 				</div>
 				<div class="row">
+					<div class="col">
 					<img src="${recruit.thumbnail_image }" alt="Avatar" class="avatar">
 					<span>${recruit.nickname }</span>
 					<span>${fn:substring(recruit.age_range,0,1)}0대 |</span>
@@ -255,7 +265,18 @@
 					</c:if>
 					</span><br>
 					<span>${recruit.recruit_req_detail }</span>
+					</div>
 				</div>
+				<c:if test="${recruit.recruit_accept==1 }">
+				<div class="row" id="btn-${recruit.recruit_req_num }">
+					<div class="half_col">
+						<button class="first-btn" onclick="answerForRecruitReq(${recruit.recruit_req_num},'${recruit.nickname }',3)">거절</button>
+					</div>
+					<div class="half_col">
+						<button class="second-btn" onclick="answerForRecruitReq(${recruit.recruit_req_num},'${recruit.nickname }',2)">수락</button>
+					</div>
+				</div>
+				</c:if>
 			</li>
 			</c:forEach>
 		</ul>			
@@ -575,6 +596,19 @@
 		</div>
 	</div>
 </div>
+<div id="recruit_modal" class="confirm-modals">
+	<!-- Modal content -->
+	<div class="confirm-modal-content">
+		<div class="sub-content">
+			<span id="recruit_msg"></span>
+			<hr>
+			<button id="recruit-btn" class="pos-btn"></button>
+		</div>
+		<div class="sub-content">
+			<button id="recruit-cancel-btn" class="neg-btn">취소</button>
+		</div>
+	</div>
+</div>
 <div id="delete_modal" class="confirm-modals">
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
@@ -628,6 +662,57 @@ function sendLink() {
     	}
     })
   }
+function answerForRecruitReq(recruit_req_num,nickname,recruit_accept){
+	if(recruit_accept==2){
+		$('#recruit_msg').text(nickname+'님의 용병 신청을 수락하겠습니까?');
+		$('#recruit-btn').text('수락');
+	}else if(recruit_accept==3){
+		$('#recruit_msg').text(nickname+'님의 경기 신청을 거절하겠습니까?');
+		$('#recruit-btn').text('거절');
+	}
+	$('#recruit_modal').css('display','block');
+	$('#recruit-btn').click(function(){
+		$.ajax({
+			url:'answerForRecruit.do',
+			type:'post',
+			data:{recruit_req_num:recruit_req_num, recruit_accept:recruit_accept},
+			dataType:'json',
+			cache:false,
+			timeout:30000,
+			success:function(data){
+				if(data.result=='updated'){
+					var status=document.getElementById('status-'+recruit_req_num);
+					status.className = status.className.replace(/\bneutral\b/g, "");
+					if(recruit_accept==2){
+						status.classList.add('positive');
+						status.innerText='수락 완료';
+					}else if(recruit_accept==3){
+						status.classList.add('negative');
+						status.innerText='거절 완료';
+					}
+					$('#recruit_modal').css('display','none');
+					document.getElementById('btn-'+recruit_req_num).style.display="none";
+				}
+				if(data.result=='errors'){
+					
+					alert('오류 발생');
+					$(window).click(function(){
+						$('#recruit_modal').css('display','none');
+					});
+				}
+				
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+		
+	});
+	
+	$('#recruit-cancel-btn').click(function(){
+		$('#recruit_modal').css('display','none');
+	});
+}
 function manageMember(id,nickname,club_num){
 	//modal창 표시 (현재 멤버 권한이 운영진이면 강제탈퇴와 운영진 제외, 운영진 추가)
 	let set=document.getElementById(id+'-i');

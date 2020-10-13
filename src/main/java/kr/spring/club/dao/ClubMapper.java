@@ -86,4 +86,7 @@ public interface ClubMapper {
 	
 	public void updateClub(ClubVO club);
 	
+	@Update("update recruit_req set recruit_accept=#{recruit_accept} where recruit_req_num=#{recruit_req_num}")
+	public void updateRecruitReq(MemberVO member);
+	
 }

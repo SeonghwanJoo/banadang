@@ -21,7 +21,6 @@ import kr.spring.club.domain.ClubVO;
 import kr.spring.club.service.ClubService;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
-import kr.spring.util.LocationDistance;
 
 @Controller
 public class MatchController {
@@ -127,7 +126,7 @@ public class MatchController {
 		ModelAndView mav=new ModelAndView();
 		MatchVO match=matchService.selectRecruitDetail(recruit_num);
 		mav.addObject("match", match);
-		mav.addObject("title","용병 모집");
+		mav.addObject("title","용병 신청");
 		mav.setViewName("recruitDetail");
 		
 		return mav;
