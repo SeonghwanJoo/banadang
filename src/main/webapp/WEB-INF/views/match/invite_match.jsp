@@ -59,19 +59,11 @@ $(function(){
 		createListOrderByDistance(position.latitude, position.longitude, matchs);
 	}
 	
-	
-	
-	
-	
-	/*  ---------------------*/
-
-	
-	
-	
 	function createListOrderByDistance(latitude,longitude,matchs){
 		var div=document.getElementById("invite-wrapper");
 		var ul=document.createElement("UL");
 		ul.setAttribute("class","ul-list");
+		ul.classList.add('non-border-btm');
 		var itemStr="";
 		
 		for(var i=0;i<matchs.length;i++){
@@ -82,7 +74,6 @@ $(function(){
 			return a.distance - b.distance;
 		});
 		for(var i=0;i<matchs.length;i++){
-			
 			
 			itemStr+=
 				"<a class='detail' href='${pageContext.request.contextPath}/match/invite_detail.do?match_num="

@@ -64,6 +64,7 @@ $(function(){
 		var div=document.getElementById("invite-wrapper");
 		var ul=document.createElement("UL");
 		ul.setAttribute("class","ul-list");
+		ul.classList.add('non-border-btm');
 		var itemStr="";
 		
 		for(var i=0;i<matchs.length;i++){

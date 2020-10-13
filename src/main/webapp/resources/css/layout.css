@@ -1268,14 +1268,6 @@ div.detail-item{
  .collapsible:hover{
 	color:#799b7a;
 }
-
-ul.ul-list{
-	background-color:#e5e5e5;
-	padding-inline-start: 0px;
-	margin-bottom:0;
-	width:100%;
-	padding:1px 0;
-}
 .collapsible-content{
 	max-height: 0;
 	transition: max-height 0.2s ease-out;
@@ -1285,14 +1277,21 @@ ul.ul-list{
 	padding:0;
 	overflow: hidden;
 }
+ul.ul-list{
+	padding-inline-start: 0px;
+	width:100%;
+	border-bottom:3px solid #cecece;
+	margin-bottom:0;
+}
+ul.non-border-btm{
+	border-bottom:none;
+}
 li.li-list{
-	margin:0.3rem auto;
+	margin:0.3rem auto 0 auto;
 	list-style: none;
-	background-color:white;
 	display:block;
-	border-top:1px solid #dddddd;
 	border-bottom:1px solid #dddddd;
-	padding:0.2rem 0 0.2rem 1rem;
+	padding:0.5rem 0 0.5rem 1rem;
 	position:relative;
 }
 .rating_count{
@@ -1330,6 +1329,24 @@ div.smaller{
 	width:15%;
 	float:right;
 	padding:0.7rem;
+}
+.sync{
+	position:relative;
+	border:none;
+	border-radius:0.5rem;
+	height:2.5rem;
+	font-weight:bold;
+	font-size:0.8rem;
+	background-color:#FFEB00;
+	color:#3C1E1E;
+	margin:0.5rem auto;
+	float:right;
+	padding-right:2.5rem;
+}
+.sync-icon{
+	position:absolute;
+	right:0.5rem;
+	top:0.5rem;
 }
 button.chip-btn{
 	height:2rem;

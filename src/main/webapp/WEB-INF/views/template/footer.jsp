@@ -30,7 +30,7 @@
 				</a>
 			</div>
 			<div class="col">
-				<a href="javascript:void(0);" class="menu-item" onclick="openNav()">
+				<a class="menu-item" href="${pageContext.request.contextPath }/member/myPage.do">
 				<span class="myPage material-icons bottom-icon">more_horiz</span>
 				<span class="myPage bottom-icon-txt"></span>
 				</a>
@@ -38,7 +38,7 @@
 		</div>
 	</div>
 </div>
- <!-- The overlay -->
+<%--  <!-- The overlay -->
 <div id="myNav" class="overlay">
 	<!-- Button to close the overlay navigation -->
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -56,11 +56,11 @@
 		  </c:if>
 	</div>
 </div>
-
+ --%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
-function openNav() {
+/* function openNav() {
   document.getElementById("myNav").style.width = "70%";
   document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
   if(document.getElementById("carousel-indicator")){
@@ -75,7 +75,7 @@ function closeNav() {
   if(document.getElementById("carousel-indicator")){
   	document.getElementById("carousel-indicator").style.display="";
   }
-}
+} */
 	$(function(){
 		if(${ title eq 'BANADANG'}){
 			$('.main').css('color','black');
@@ -85,7 +85,7 @@ function closeNav() {
 			$('.join').css('color','black');
 		}else if(${title eq '팀 관리'}){
 			$('.club').css('color','black');
-		}else if(${title eq 'My BANADANG'}){
+		}else if(${title eq '나의 페이지'}){
 			$('.myPage').css('color','black');
 		}
 		

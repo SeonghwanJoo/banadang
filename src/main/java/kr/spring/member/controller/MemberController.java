@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.club.domain.ClubVO;
 import kr.spring.club.service.ClubService;
@@ -110,6 +111,27 @@ public class MemberController {
 		loginAPI.kakaoLogout((String)session.getAttribute("access_Token"));
 	    session.invalidate();
 	    return "redirect:/main/main.do";
+	}
+	
+	@RequestMapping("/member/myPage.do")
+	public ModelAndView myPage(HttpSession session) {
+		
+		
+		ModelAndView mav=new ModelAndView();
+		String user_id=(String)session.getAttribute("user_id");
+		MemberVO member=memberService.getMember(user_id);
+		mav.addObject("member",member);
+		mav.setViewName("myPage");
+		mav.addObject("title","나의 페이지");
+		return mav;
+	}
+	@RequestMapping("/member/myMsg.do")
+	public ModelAndView myMsg(HttpSession session) {
+		
+		ModelAndView mav=new ModelAndView();
+		
+		return mav;
+		
 	}
 
 }

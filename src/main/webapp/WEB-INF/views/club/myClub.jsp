@@ -6,7 +6,7 @@
 <c:if test="${!empty myClubs }">
 <span>우리팀을 선택하세요</span>
 <div class="invite-wrapper" id="invite-wrapper">
- 	<ul class="ul-list">
+ 	<ul class="ul-list non-border-btm">
  		<c:forEach items="${myClubs }" var="myClub">
 		<li class="select li-list" onclick="location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}'">
 			<div class="row">

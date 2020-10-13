@@ -21,7 +21,7 @@
   <!-- Right-aligned links -->
   <div class="topnav-right">
     <a id="write" href="${pageContext.request.contextPath }/match/writeForm.do">
-    	<i class="fas fa-edit"></i>
+    	<i class="fas fa-edit" id="topIcon"></i>
     </a>
   </div>
 </div>
@@ -81,6 +81,10 @@
 			$('#write').attr('href','${pageContext.request.contextPath}/club/createClubForm.do');
 		}else if(${title eq '용병 모집'}){
 			$('#write').attr('href','${pageContext.request.contextPath}/match/writeRecruit.do');
+		}else if(${title eq '나의 페이지'}){
+			$('#write').attr('href','${pageContext.request.contextPath}/member/myMsg.do');
+			$('#topIcon').removeClass('fas fa-edit');
+			$('#topIcon').addClass('fas fa-comment-dots');
 		}
 		// Get the modal
 		var modal = document.getElementById("team-sel-modal");
