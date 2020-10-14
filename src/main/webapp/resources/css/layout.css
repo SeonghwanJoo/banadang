@@ -51,7 +51,7 @@
 .topnav a.active .tapnav-right a:active{
 	color: #9e9e9e;
 }
-.cursor{
+.cursor, li.cursor{
 	cursor:pointer;
 }
 
@@ -1071,6 +1071,9 @@ button.small-font{
 .red{
 	color:#dc3545;
 }
+.relative{
+	position:relative;
+}
 .vote_wrapper{
 	padding-top:3rem;
 	text-align:center;
@@ -1280,14 +1283,14 @@ div.detail-item{
 ul.ul-list{
 	padding-inline-start: 0px;
 	width:100%;
-	border-bottom:3px solid #cecece;
+	border-bottom:3px solid #e2e2e2;
 	margin-bottom:0;
 }
 ul.non-border-btm{
 	border-bottom:none;
 }
 li.li-list{
-	margin:0.3rem auto 0 auto;
+	margin:0 auto ;
 	list-style: none;
 	display:block;
 	border-bottom:1px solid #dddddd;

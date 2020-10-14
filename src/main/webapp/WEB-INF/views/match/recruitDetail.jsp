@@ -147,7 +147,6 @@
 <div id="more_modal" class="confirm-modals">
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
-		<!-- 기존회원 관리 옵션(강제탈퇴,운영진 권한부여,일반회원 권한 부여 )-->
 		<div class="sub-content">
 			<button id="modify" class="pos-btn" onclick="location.href='modifyRecruit.do?recruit_num=${match.recruit_num}'">수정</button>
 			<hr>
@@ -219,10 +218,10 @@
 						}
 						$('#toast').css('display','block');
 						$('#confirm').click(function(){
-							location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}';
+							location.href='${pageContext.request.contextPath}/member/myRecruitReq.do';
 						});
 						$(window).click(function(){
-							location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}';
+							location.href='${pageContext.request.contextPath}/member/myRecruitReq.do';
 						});
 					},
 					error:function(){

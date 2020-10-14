@@ -98,7 +98,7 @@ $(function(){
 					+"<div class='row'>"
 						+"<div class='col club_main'>";
 			if(matchs[i].club_img ==""){
-			itemStr+=
+			itemStr+=	
 							"<img src='"+"${pageContext.request.contextPath}"+"/resources/images/blank_emblem.png' class='avatar emblem'>";
 			}else if(matchs[i].club_img !=""){
 			itemStr+=

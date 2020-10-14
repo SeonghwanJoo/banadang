@@ -65,6 +65,7 @@
 			<mapping path="/club/club.do"/>
 			<mapping path="/club/createClubForm.do"/>
 			<mapping path="/club/manageClub.do"/>
+			<mapping path="/member/myPage.do"/>
 			<beans:bean 
 			class="kr.spring.interceptor.LoginCheckInterceptor"/>
 		</interceptor>
@@ -73,6 +74,7 @@
 			<mapping path="/match/writeForm.do"/>
 			<mapping path="/match/postMatchRequest.do"/>
 			<mapping path="/match/writeRecruit.do"/>
+			<mapping path="/club/modifyClub.do"/>
 			<beans:bean 
 			class="kr.spring.interceptor.ClubAuthCheckInterceptor"/>
 		</interceptor>

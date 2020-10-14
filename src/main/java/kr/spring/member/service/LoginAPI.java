@@ -86,7 +86,6 @@ public class LoginAPI {
     }
     public MemberVO getUserInfo (String access_Token) {
         
-        //    요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
         MemberVO memberVO = new MemberVO ();
         String reqURL = "https://kapi.kakao.com/v2/user/me";
         try {
@@ -134,6 +133,44 @@ public class LoginAPI {
         }
         return memberVO;
     }
+    public MemberVO getUpdatedUserInfo (String access_Token) {
+    	
+        MemberVO member = new MemberVO ();
+        String reqURL = "https://kapi.kakao.com/v1/api/talk/profile";
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            
+            //    요청에 필요한 Header에 포함될 내용
+            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+            
+            int responseCode = conn.getResponseCode();
+            System.out.println("responseCode : " + responseCode);
+            
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            
+            String line = "";
+            String result = "";
+            
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            System.out.println("response body : " + result);
+            
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(result);
+            
+            member.setNickname(element.getAsJsonObject().get("nickName").getAsString());
+            member.setProfile_image(element.getAsJsonObject().get("profileImageURL").getAsString());
+            member.setThumbnail_image(element.getAsJsonObject().get("thumbnailURL").getAsString());
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return member;
+    }
+    
     public void kakaoLogout(String access_Token) {
         String reqURL = "https://kapi.kakao.com/v1/user/logout";
         try {

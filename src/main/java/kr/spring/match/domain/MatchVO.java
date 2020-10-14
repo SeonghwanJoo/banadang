@@ -306,6 +306,14 @@ public class MatchVO {
 	public void setCancel(String cancel) {
 		this.cancel = cancel;
 	}
+	public Integer getRecruit_accept() {
+		return recruit_accept;
+	}
+
+	public void setRecruit_accept(Integer recruit_accept) {
+		this.recruit_accept = recruit_accept;
+	}
+	private Integer recruit_accept;
 	private String cancel;
 	private String recruit_req_detail;
 	private Integer recruit_num;

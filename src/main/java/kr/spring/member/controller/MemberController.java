@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.club.domain.ClubVO;
 import kr.spring.club.service.ClubService;
+import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
 import kr.spring.member.service.LoginAPI;
 import kr.spring.member.service.MemberService;
@@ -69,6 +70,25 @@ public class MemberController {
         }
 		return "redirect:/main/main.do";
 	}
+	@RequestMapping("/member/kakaoSync.do")
+	public String kakaoSync(HttpSession session) {
+		String access_Token=(String)session.getAttribute("access_Token");
+		MemberVO member=new MemberVO();
+		MemberVO profile=new MemberVO();
+		member=loginAPI.getUserInfo(access_Token);
+		profile=loginAPI.getUpdatedUserInfo(access_Token);
+		member.setNickname(profile.getNickname());
+		member.setThumbnail_image(profile.getThumbnail_image());
+		member.setProfile_image(profile.getProfile_image());
+		try {
+			memberService.updateMember_detail(member);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return "redirect:/member/myPage.do";
+	}
 	@RequestMapping("/member/invitedLogin.do")
 	public String invitedKakaoLogin(@RequestParam String code,
 									@RequestParam String state,
@@ -112,7 +132,21 @@ public class MemberController {
 	    session.invalidate();
 	    return "redirect:/main/main.do";
 	}
-	
+	@RequestMapping("/member/myRecruitReq.do")
+	public ModelAndView myRecruitReq(HttpSession session) {
+		
+		ModelAndView mav=new ModelAndView();
+		String user_id=(String)session.getAttribute("user_id");
+		try {
+			List<MatchVO> matches=memberService.selectMyRecruitReq(user_id);
+			mav.addObject("matches",matches);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		mav.addObject("title","나의 용병 신청 현황");
+		mav.setViewName("myRecruitReq");
+		return mav;
+	}
 	@RequestMapping("/member/myPage.do")
 	public ModelAndView myPage(HttpSession session) {
 		
@@ -125,7 +159,7 @@ public class MemberController {
 		mav.addObject("title","나의 페이지");
 		return mav;
 	}
-	@RequestMapping("/member/myMsg.do")
+	@RequestMapping("/member/myMsg.do")//나의 메시지함
 	public ModelAndView myMsg(HttpSession session) {
 		
 		ModelAndView mav=new ModelAndView();

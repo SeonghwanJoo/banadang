@@ -1,9 +1,11 @@
 package kr.spring.member.dao;
 
-import org.apache.ibatis.annotations.Delete;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
+import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
 
 public interface MemberMapper {
@@ -14,9 +16,11 @@ public interface MemberMapper {
 	@Insert("insert into member (id) values (#{id})")
 	public void insertMember(MemberVO memberVO);
 	
-	@Insert("insert into member_detail(id,nickname,profile_image,thumbnail_image,email,age_range) values(#{id},#{nickname},#{profile_image},#{thumbnail_image},#{email},#{age_range})")
 	public void insertMember_detail(MemberVO memberVO);
 	
+	public void updateMember_detail(MemberVO member);
+	
+	public List<MatchVO> selectMyRecruitReq(String id);
 
 
 	
