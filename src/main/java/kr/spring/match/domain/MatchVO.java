@@ -31,12 +31,6 @@ public class MatchVO {
 	public void setUndefined(int undefined) {
 		this.undefined = undefined;
 	}
-	public int getMatch_num() {
-		return match_num;
-	}
-	public void setMatch_num(int match_num) {
-		this.match_num = match_num;
-	}
 	public String getId() {
 		return id;
 	}
@@ -232,13 +226,6 @@ public class MatchVO {
 	public void setDistance(double distance) {
 		this.distance = distance;
 	}
-	public String getInvite_detail() {
-		return invite_detail;
-	}
-
-	public void setInvite_detail(String invite_detail) {
-		this.invite_detail = invite_detail;
-	}
 	public Integer getRecruit_num() {
 		return recruit_num;
 	}
@@ -313,6 +300,29 @@ public class MatchVO {
 	public void setRecruit_accept(Integer recruit_accept) {
 		this.recruit_accept = recruit_accept;
 	}
+	public Integer getRecruit_req_num() {
+		return recruit_req_num;
+	}
+
+	public void setRecruit_req_num(Integer recruit_req_num) {
+		this.recruit_req_num = recruit_req_num;
+	}
+
+	public String getRequest_detail() {
+		return request_detail;
+	}
+
+	public void setRequest_detail(String request_detail) {
+		this.request_detail = request_detail;
+	}
+
+	public void setMatch_num(Integer match_num) {
+		this.match_num = match_num;
+	}
+	public Integer getMatch_num() {
+		return match_num;
+	}
+	private Integer recruit_req_num;
 	private Integer recruit_accept;
 	private String cancel;
 	private String recruit_req_detail;
@@ -326,7 +336,7 @@ public class MatchVO {
 	private int attend;
 	private int not_attend;
 	private int undefined;
-	private int match_num;
+	private Integer match_num;
 	private String id;
 	private int type;
 	private Integer home;
@@ -358,7 +368,7 @@ public class MatchVO {
 	private String club_color;
 	private String club_age;
 	private double distance;
-	private String invite_detail;
+	private String request_detail;
 	
 
 	@Override

@@ -37,7 +37,7 @@ public interface ClubMapper {
 	@Insert("insert into club_join (club_num,id) values(#{club_num},#{id})")
 	public void insertClubMember(ClubVO club);
 	
-	@Insert("insert into club_join (club_num,id,club_auth) values(#{club_num},#{id},6)")
+	@Insert("insert into club_join (club_num,id,club_auth) values(#{club_num},#{id},5)")
 	public void joinClubWhenCreated(ClubVO club);
 	
 	@Select("select club_seq.nextval from dual")
@@ -49,7 +49,7 @@ public interface ClubMapper {
 	@Update("update match_request set acceptance=3 where match_num=#{match_num} and away not in #{club_num}")
 	public void rejectOthers(ClubVO club);
 	
-	@Update("update match set away=#{club_num} where match_num=#{match_num}")
+	@Update("update match set away=#{club_num}, away_name=#{club_name} where match_num=#{match_num}")
 	public void updateAwayforMatch(ClubVO club);
 	
 	public Float selectAttendanceRate(MemberVO member);

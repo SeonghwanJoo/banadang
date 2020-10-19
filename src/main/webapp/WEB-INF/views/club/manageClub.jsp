@@ -929,6 +929,7 @@ function answerForMatchReq(request_num,club_name,acceptance,club_num,match_num){
 				request_num:request_num,
 				acceptance:acceptance,
 				club_num:club_num,
+				club_name:club_name,
 				match_num:match_num},
 			dataType:'json',
 			cache:false,

@@ -83,7 +83,7 @@
 		</li>
 		</c:if>
 		<li class="li-list">
-			<textarea class="detail input-field" id="invite_detail" name="invite_detail" placeholder="매치 신청 시 ${match.club_name } 팀에 추가적으로 전달할 내용 입력"></textarea>
+			<textarea class="detail input-field" id="request_detail" name="request_detail" placeholder="매치 신청 시 ${match.club_name } 팀에 추가적으로 전달할 내용 입력"></textarea>
 		</li>
 	</ul>
 </div>
@@ -141,8 +141,8 @@
 		
 		$('#submit').click(function(){
 		
-			postMatchRequest( ${match.match_num}, ${user_id}, ${myClub.club_num}, $('#invite_detail').val());
-			
+			postMatchRequest( ${match.match_num}, ${user_id}, ${myClub.club_num}, $('#request_detail').val());
+			console.log( '${match.match_num}'+ '${user_id}'+' ${myClub.club_num}'+ $('#request_detail').val());
 			
 			function postMatchRequest(a,b,c,d){
 				$.ajax({
@@ -152,7 +152,7 @@
 						match_num: a,
 						id:b,
 						away:c,
-						invite_detail:d
+						request_detail:d
 					},
 					dataType:'json',
 					cache:false,

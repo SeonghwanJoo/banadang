@@ -7,9 +7,9 @@
 	values
 		(#{id},#{nickname},#{profile_image},#{thumbnail_image},#{email}
 		<if test="age_range != null">
-			,#{age_range})
+			,#{age_range}
 		</if>
-			,'')
+		)
 	</insert>
 	<update id="updateMember_detail" parameterType="memberVO">
 	update member_detail set 

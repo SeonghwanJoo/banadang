@@ -23,7 +23,6 @@ $(function(){
 	let matchs=new Array();
 	<c:forEach items="${matches}" var="match">
 		var obj={};
-		obj.match_num="${match.match_num}";
 		obj.type="${match.type}"
 		obj.start_time="${match.start_time}";
 		obj.end_time="${match.end_time}";

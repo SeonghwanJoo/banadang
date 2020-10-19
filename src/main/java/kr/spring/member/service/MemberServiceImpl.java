@@ -40,4 +40,16 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.selectMyRecruitReq(id);
 	}
 
+	@Override
+	public void deleteRecruitReq(Integer recruit_req_num) {
+		memberMapper.deleteRecruitReq(recruit_req_num);
+		
+	}
+
+	@Override
+	public void updateRecruitReqForCancel(Integer recruit_req_num) {
+		memberMapper.updateRecruitReqForCancel(recruit_req_num);
+		
+	}
+
 }

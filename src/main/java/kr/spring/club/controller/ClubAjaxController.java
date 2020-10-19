@@ -70,6 +70,8 @@ public class ClubAjaxController {
 		try {
 			clubService.insertClub(club);
 			map.put("result", "inserted");
+			ClubVO myClub=clubService.selectMyClubDetails(club);
+			session.setAttribute("myClub", myClub);
 			map.put("club_num", club.getClub_num().toString());
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -100,19 +102,11 @@ public class ClubAjaxController {
 	}
 	@RequestMapping("/club/answerForMatch.do")
 	@ResponseBody
-	public Map<String,String> rejectMatch(@RequestParam Integer request_num,
-										  @RequestParam Integer acceptance,
-										  @RequestParam Integer match_num,
-										  @RequestParam Integer club_num){
+	public Map<String,String> rejectMatch(ClubVO club){
 		Map<String,String> map=new HashMap<String,String>();
-		ClubVO club=new ClubVO();
-		club.setRequest_num(request_num);
-		club.setAcceptance(acceptance);
-		club.setMatch_num(match_num);
-		club.setClub_num(club_num);
 		try {
 			clubService.updateAcceptance(club);
-			if(acceptance==2) {
+			if(club.getAcceptance()==2) {
 				//match_request에 해당 매치의 다른팀은 거절(3)처리 한다
 				clubService.rejectOthers(club);
 				//match의 해당 매치의 away팀을 해당팀으로  처리한다

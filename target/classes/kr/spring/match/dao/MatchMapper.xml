@@ -3,9 +3,9 @@
 <mapper  namespace="kr.spring.match.dao.MatchMapper">
 	<insert id="insertMatch" parameterType="matchVO">
 		insert into match
-			(match_num,id,type,home,away,away_name,address,address_x,address_y,match_date,start_time,end_time,match_detail,cost)
+			(id,type,home,away,away_name,address,address_x,address_y,match_date,start_time,end_time,match_detail,cost)
 		values
-			(match_seq.nextval,#{id},#{type},#{home},#{away},#{away_name},#{address},#{address_x},#{address_y},#{match_date},#{start_time},#{end_time},
+			(#{id},#{type},#{home},#{away},#{away_name},#{address},#{address_x},#{address_y},#{match_date},#{start_time},#{end_time},
 		<if test="match_detail != ''">
 			#{match_detail},
 		</if>
@@ -80,13 +80,13 @@
 	</select>
 	<insert id="insertMyRequestForMatchToInvite" parameterType="matchVO">
 		insert into match_request
-			(request_num,match_num,id,away,acceptance,request_detail)
+			(match_num,id,away,acceptance,request_detail)
 		values
-			(request_seq.nextval,#{match_num},#{id},#{away},1,
-		<if test="invite_detail !=''">
-			#{invite_detail})
+			(#{match_num},#{id},#{away},1,
+		<if test="request_detail !=''">
+			#{request_detail})
 		</if>
-		<if test="invite_detail ==''">
+		<if test="request_detail ==''">
 			'')
 		</if>
 	</insert>
@@ -129,17 +129,9 @@
         match_request d on c.match_num=d.match_num
 	</select>
 	<update id="updateMatch" parameterType="matchVO">
-		update match set 
-			id=#{id},type=#{type},away=#{away},start_time=#{start_time},end_time=#{end_time},
-			address=#{address},address_x=#{address_x},address_y=#{address_y},match_date=#{match_date}
+		update match set match_num=#{match_num}
 			<if test="match_detail != ''">
 				,match_detail=#{match_detail}
-			</if>
-			<if test="cost != ''">
-				,cost=#{cost}
-			</if>
-			<if test="away_name !=''">
-				,away_name =#{away_name}
 			</if>
 			where match_num=#{match_num}
 	</update>

@@ -53,16 +53,19 @@ public class ClubController {
 		session.setAttribute("myClubs", myClubs);
 		ClubVO myClub=(ClubVO)session.getAttribute("myClub");
 		//myClub이 session에 없다면
-		if (myClub==null) {
+		if (myClub==null && !myClubs.isEmpty()) {
+			logger.info("myClub : " + myClub);
+			logger.info("myClubs : " + myClubs);
 			session.setAttribute("myClub", clubService.selectMyClubDetails(myClubs.get(0)));
 		}
 		//myClub이 탈퇴했으나 session에 업데이트되지 않았다면
-		myClub.setId(id);
-		Integer auth=clubService.selectClubAuth(myClub);
-		if(auth==null) {
-			session.setAttribute("myClub", clubService.selectMyClubDetails(myClubs.get(0)));
+		if(myClub!=null) {
+			myClub.setId(id);
+			Integer auth=clubService.selectClubAuth(myClub);
+			if(auth==null) {
+				session.setAttribute("myClub", clubService.selectMyClubDetails(myClubs.get(0)));
+			}
 		}
-		
 		mav.setViewName("myClub");
 		mav.addObject("title", "팀 관리");
 		

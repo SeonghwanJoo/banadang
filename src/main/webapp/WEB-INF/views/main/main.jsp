@@ -74,8 +74,8 @@
 					<c:if test="${match.type==1 }">축구</c:if>
 					<c:if test="${match.type==2 }">풋살</c:if>
 				</span>
-				<c:if test="${myClub.club_auth>4 && myClub.club_num==match.home}">
-				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }')">more_horiz</span>
+				<c:if test="${myClub.club_auth>4 && myClub.club_num==match.home && empty match.cancel}">
+				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }')">more_vert</span>
 				</c:if>
 				<c:if test="${not empty match.cancel }">
 				<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>

@@ -18,7 +18,7 @@
 	<c:if test="${not empty matches }">
 	<c:forEach items="${matches }" var="match">
 	<li class="li-list">
-		<div class="row">
+		<div class="main-row">
 			<span class="match-item">${match.match_date }</span>
 			<span class="match-item">${match.start_time } ~ ${match.end_time }</span>
 			<span class="match-item">${match.address }</span>
@@ -36,6 +36,12 @@
 			</c:if>
 			<c:if test="${match.recruit_accept==3 }">
 			<span id="status-${recruit_req_num}"class="status negative">거절 완료</span>
+			</c:if>
+			<c:if test="${empty isCanceled }">
+			<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.recruit_req_num},${match.recruit_accept })">more_vert</span>
+			</c:if>
+			<c:if test="${not empty isCanceled }">
+			<span class="status negative full">용병 신청 취소 완료</span>
 			</c:if>
 		</div>
 		<div class="row">
@@ -76,3 +82,59 @@
 	</c:forEach>
 	</c:if>
 </ul>
+<div id="recruit_modal" class="confirm-modals">
+	<!-- Modal content -->
+	<div class="confirm-modal-content">
+		<div class="sub-content">
+			<span id="recruit_msg">용병 신청을 취소/삭제하시겠습니까?</span>
+			<hr>
+			<button id="recruit-delete-btn" class="pos-btn red">삭제</button>
+		</div>
+		<div class="sub-content">
+			<button id="recruit-cancel-btn" class="neg-btn">닫기</button>
+		</div>
+	</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	
+	function deleteRecruitReq(recruit_req_num,recruit_accept){
+		$.ajax({
+			url:'deleteRecruitReq.do',
+			type:'post',
+			data:{recruit_req_num:recruit_req_num, recruit_accept:recruit_accept},
+			dataType:'json',
+			cache:false,
+			timeout:30000,
+			success:function(data){
+				if(data.result=='success'){
+					location.reload();
+				}
+				if(data.result=='errors'){
+					
+					alert('오류 발생');
+					$(window).click(function(){
+						$('#recruit_modal').css('display','none');
+					});
+				}
+				
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+	}
+	
+	function openMore(recruit_req_num,recruit_accept){
+		$('#recruit_modal').css('display','block');
+		$('#recruit-delete-btn').click(function(){
+			deleteRecruitReq(recruit_req_num,recruit_accept)
+		})
+		
+	}
+	$('#recruit-cancel-btn').click(function(){
+		$('#recruit_modal').css('display','none');
+	});
+
+</script>
+

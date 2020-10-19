@@ -591,12 +591,12 @@ input[type=text]:focus, select:focus{
 	color:#FFF;
 	padding:0.1rem 0.2rem;
 	position:absolute;
-	right:1rem;
+	right:2rem;
 	text-align:center;
 }
 .main-row span.more{
 	position:absolute;
-	right:1rem;
+	right:0rem;
 	text-align:center;
 	display:block;
 	font-size:2rem;
@@ -607,7 +607,7 @@ input[type=text]:focus, select:focus{
 .positive{background-color:#a4d3a6;}
 .negative{background-color:#000;}
 .full{
-	width:97%;
+	width:95%;
 	margin: 0 auth;
 }
 
