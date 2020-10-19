@@ -18,7 +18,7 @@
 		,age_range=#{age_range}
 		</if>
 		 where id=#{id}	
-	</update>
+	</update>   
 	<select id="selectMyRecruitReq" parameterType="string" resultType="matchVO">
 		select * from 
     (select recruit_req_num,c.id,c.match_num,c.club_num,recruit_position,recruit_accept,type,start_time,end_time,address,match_date,address_x,address_y,club_name,club_img,club_color,club_age from
