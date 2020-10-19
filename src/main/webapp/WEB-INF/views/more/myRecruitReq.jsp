@@ -37,6 +37,7 @@
 			<c:if test="${match.recruit_accept==3 }">
 			<span id="status-${recruit_req_num}"class="status negative">거절 완료</span>
 			</c:if>
+			$()
 			<c:if test="${empty isCanceled }">
 			<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.recruit_req_num},${match.recruit_accept })">more_vert</span>
 			</c:if>
