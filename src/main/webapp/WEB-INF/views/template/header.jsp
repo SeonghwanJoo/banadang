@@ -88,6 +88,8 @@
 			$('#write').attr('href','${pageContext.request.contextPath}/member/myMsg.do');
 			$('#topIcon').removeClass('fas fa-edit');
 			$('#topIcon').addClass('fas fa-comment-dots');
+		}else if(${title eq '팀원 모집'}){
+			$('#write').attr('href','${pageContext.request.contextPath}/member/writeClubRecruit.do');
 		}
 		// Get the modal
 		var modal = document.getElementById("team-sel-modal");

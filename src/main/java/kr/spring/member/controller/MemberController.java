@@ -157,7 +157,15 @@ public class MemberController {
 		
 		return mav;
 	}
-	
+	@RequestMapping("/member/writeClubRecruit.do")
+	public ModelAndView writeClubRecruit() {
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("title","팀원 모집 작성");
+		mav.setViewName("writeClubRecruit");
+		
+		return mav;
+	}
 	@RequestMapping("/member/myPage.do")
 	public ModelAndView myPage(HttpSession session) {
 		

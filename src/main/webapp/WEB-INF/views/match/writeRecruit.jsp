@@ -115,11 +115,11 @@
 </div>
 <div class="row"><div class="col"><span class="msg" id="cost_msg"></span></div></div>
 <hr class="hr">
-	<div class="row">
-		<div class="text input-container col">
-			<textarea class="detail input-field" id="recruit_detail" name="recruit_detail" placeholder="추가적으로 공유할 내용이 있으면 입력해주세요."></textarea>
-		</div>
+<div class="row">
+	<div class="text input-container col">
+		<textarea class="detail input-field" id="recruit_detail" name="recruit_detail" placeholder="추가적으로 공유할 내용이 있으면 입력해주세요."></textarea>
 	</div>
+</div>
 </form:form>
 <!-- The Modal -->
 <div id="toast" class="submit_toast">
