@@ -36,12 +36,12 @@
 		<span class="input-label">예정된 상대팀 있음/상대팀 초청 선택</span>
 		<div class="row centered-padding">
 			<label class="chip wider">
-				<span class="chip-txt">상대팀 있음</span>
+				<span class="chip-txt small-font">상대팀 있음</span>
 				<input type="radio" name="opponent" id="exist" value="1" checked="checked">
 				<span class="checkmark"></span>
 			</label> 
 			<label class="chip wider">
-				<span class="chip-txt">상대팀 초청</span>
+				<span class="chip-txt small-font">상대팀 초청</span>
 				<input type="radio" name="opponent" id="non-exist" value="2">
 				<span class="checkmark"></span>
 			</label>

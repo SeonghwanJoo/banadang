@@ -5,6 +5,7 @@ import java.sql.Date;
 public class MemberVO {
 	
 	private String nickname;
+	private Integer cancel;
 	private String profile_image;
 	private String thumbnail_image;
 	private String email;
@@ -20,8 +21,21 @@ public class MemberVO {
 	private String start_time;
 	private String end_time;
 	private String address;
+	private Integer isCanceled;
 	private Integer club_auth;
 	private Float attendance_rate;
+	public Integer getCancel() {
+		return cancel;
+	}
+	public void setCancel(Integer cancel) {
+		this.cancel = cancel;
+	}
+	public Integer getIsCanceled() {
+		return isCanceled;
+	}
+	public void setIsCanceled(Integer isCanceled) {
+		this.isCanceled = isCanceled;
+	}
 	public Integer getMatch_num() {
 		return match_num;
 	}

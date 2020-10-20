@@ -100,6 +100,27 @@ public class ClubAjaxController {
 		
 		return map;
 	}
+	@RequestMapping("/club/cancelMatchReq")
+	@ResponseBody
+	public Map<String,Object> cancelMatchReq(@RequestParam Integer request_num,@RequestParam Integer acceptance,@RequestParam Integer match_num){
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		
+		try {
+			if(acceptance==1 || acceptance==3) {
+				clubService.deleteMatchReqForCancel(request_num);
+			}else if (acceptance==2) {
+				clubService.updateMatchReqForCancel(request_num,match_num);
+			}
+			map.put("result", "success");
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		
+		return map;
+	}
+	
 	@RequestMapping("/club/answerForMatch.do")
 	@ResponseBody
 	public Map<String,String> rejectMatch(ClubVO club){

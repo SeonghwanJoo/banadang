@@ -602,6 +602,9 @@ input[type=text]:focus, select:focus{
 	font-size:2rem;
 }
 .last{margin-right:2rem;}
+.margin-btm{
+	margin-bottom:0.5rem;
+}
 
 .neutral{background-color:#878787;}
 .positive{background-color:#a4d3a6;}
@@ -1441,7 +1444,7 @@ button.chip-btn{
   user-select: none;
 }
 .wider{
-	width:21%;
+	width:25%;
 	max-width:146px;
 }
 

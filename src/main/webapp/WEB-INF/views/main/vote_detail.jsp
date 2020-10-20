@@ -12,7 +12,8 @@
 		</div>
 	</div>
 </div>
-<div class="tab-row vote_wrapper">
+<div class="blank_div"></div>
+<div class="tab-row">
 	<div class="tab-col">
 		<button class="tab-btn tab-active" onclick="openTap(event,'voted-detail')">투표자 현황</button>
 	</div>

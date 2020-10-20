@@ -89,4 +89,13 @@ public interface ClubMapper {
 	@Update("update recruit_req set recruit_accept=#{recruit_accept} where recruit_req_num=#{recruit_req_num}")
 	public void updateRecruitReq(MemberVO member);
 	
+	@Delete("delete from match_request where request_num=#{request_num}")
+	public void deleteMatchReqForCancel(Integer request_num);
+	
+	@Update("update match_request set match_req_cancel=1")
+	public void updateMatchReqForCancel(Integer request_num);
+	
+	@Update("update match set away=0,away_name='' where match_num=#{match_num}")
+	public void updateMatchForMatchReqCancel(Integer match_num);
+	
 }

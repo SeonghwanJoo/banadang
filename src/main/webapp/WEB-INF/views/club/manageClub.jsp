@@ -83,11 +83,11 @@
 	<c:if test="${myClub.club_auth>4 }">
 	<div class="tab_detail" id="manageMatch" >
 		<c:if test="${!empty away_club }">
-		<h6>상대팀 모집 중인 경기(선택 후 상대팀 확정)</h6>
+		<h6>상대 모집 중인 경기의 상대팀을 선택 후 확정하세요</h6>
 		<ul class="ul-list">
 			<c:forEach items="${away_club }" var="away">
 			<li class="li-list">
-				<div class="row">
+				<div class="row margin-btm">
 					<span class="match-item">${away.match_date }</span>
 					<span class="match-item">${away.start_time } ~ ${away.end_time }</span>
 					<span class="match-item">${away.address}</span>
@@ -98,13 +98,22 @@
 					<span class="match-item">풋살</span>
 					</c:if>
 					<c:if test="${away.acceptance==1 }">
-					<span id="status-${request_num}"class="status neutral">대기 중</span>
+					<span id="status-${away.request_num}"class="status neutral">대기 중</span>
 					</c:if>
 					<c:if test="${away.acceptance==2 }">
-					<span id="status-${request_num}"class="status positive">수락 완료</span>
+					<span id="status-${away.request_num}"class="status positive">수락 완료</span>
 					</c:if>
 					<c:if test="${away.acceptance==3 }">
-					<span id="status-${request_num}"class="status negative">거절 완료</span>
+					<span id="status-${away.request_num}"class="status negative">거절 완료</span>
+					</c:if>
+					<c:if test="${not empty away.cancel }">
+					<span class="status negative full">${away.cancel}팀에 의해 취소됨</span>
+					</c:if>
+					<c:if test="${not empty away.match_req_cancel }">
+					<span class="status negative full" id="${away.request_num }">${away.club_name }팀에 의해 경기 신청 취소 처리됨</span>
+					</c:if>
+					<c:if test="${empty away.match_req_cancel }">
+					<span class="status negative full" id="${away.request_num }" style="display:none">${away.club_name }팀에 의해 경기 신청 취소 처리됨</span>
 					</c:if>
 				</div>
 				<div class="row">
@@ -143,7 +152,7 @@
 				<div class="collapsible-content">
 					<p>${away.request_detail}
 					</p>
-					<c:if test="${away.acceptance==1 }">
+					<c:if test="${away.acceptance==1 && empty away.cancel }">
 					<div class="row">
 						<div class="half_col">
 							<button class="first-btn" onclick="answerForMatchReq(${away.request_num},'${away.club_name }',3,${away.club_num },${away.match_num })">거절</button>
@@ -159,12 +168,12 @@
 		</ul>
 		</c:if>
 		<c:if test="${!empty home_club}">
-		<h6>매치 신청한 경기</h6>
+		<h6>홈팀에 매치 신청한 경기</h6>
 		<ul class="ul-list">
 			<c:forEach items="${home_club }" var="home">
 			<c:if test="${home.club_num != myClub.club_num }">
 			<li class="li-list">
-				<div class="row">
+				<div class="row margin-btm">
 					<span class="match-item">${home.match_date }</span>
 					<span class="match-item">${home.start_time } ~ ${home.end_time }</span>
 					<span class="match-item">${home.address}</span>
@@ -175,13 +184,22 @@
 					<span class="match-item">풋살</span>
 					</c:if>
 					<c:if test="${home.acceptance==1 }">
-					<span id="status-${request_num}"class="status neutral">대기 중</span>
+					<span class="status neutral">대기 중</span>
 					</c:if>
 					<c:if test="${home.acceptance==2 }">
-					<span id="status-${request_num}"class="status positive">수락 완료</span>
+					<span class="status positive">수락 완료</span>
 					</c:if>
 					<c:if test="${home.acceptance==3 }">
-					<span id="status-${request_num}"class="status negative">거절 완료</span>
+					<span class="status negative">거절 완료</span>
+					</c:if>
+					<c:if test="${not empty home.cancel }">
+					<span class="status negative full">${home.cancel}팀에 의해 취소됨</span>
+					</c:if>
+					<c:if test="${not empty home.match_req_cancel }">
+					<span class="status negative full" id="${home.request_num }">경기 신청 취소 처리됨</span>
+					</c:if>
+					<c:if test="${empty home.match_req_cancel }">
+					<span class="status negative full" id="${home.request_num }" style="display:none">경기 신청 취소 처리됨</span>
 					</c:if>
 				</div>
 				<div class="row">
@@ -220,6 +238,20 @@
 				<div class="collapsible-content">
 					<p>${home.match_detail}
 					</p>
+					<c:if test="${empty home.cancel}">
+					<div class="row">
+					<c:if test="${empty home.match_req_cancel }">
+					<button class="block" id="${home.request_num }-btn" onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num })">
+						경기 신청 취소
+					</button>
+					</c:if>
+					<c:if test="${not empty home.match_req_cancel }">
+					<button class="block" id="${home.request_num }-btn" style="display:none"  onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num})">
+						경기 신청 취소
+					</button>
+					</c:if>
+					</div>
+					</c:if>
 				</div>
 			</li>
 			</c:if>
@@ -227,11 +259,11 @@
 		</ul>
 		</c:if>
 		<c:if test="${not empty recruits }">
-		<h6>용병 모집 중인 경기(용병 수락/거절 선택)</h6>
+		<h6>용병 모집 중인 경기의 용병 신청을 수락/거절 선택하세요</h6>
 		<ul class="ul-list">
 			<c:forEach items="${recruits }" var="recruit">
 			<li class="li-list">
-				<div class="row">
+				<div class="row margin-btm">
 					<span class="match-item">${recruit.match_date }</span>
 					<span class="match-item">${recruit.start_time } ~ ${recruit.end_time }</span>
 					<span class="match-item">${recruit.address}</span>
@@ -243,6 +275,10 @@
 					</c:if>
 					<c:if test="${recruit.recruit_accept==3 }">
 					<span id="status-${recruit.recruit_req_num}"class="status negative">거절 완료</span>
+					</c:if>
+					${recruit.isCanceled }
+					<c:if test="${not empty recruit.isCanceled }">
+					<span class="status negative full" >${recruit.nickname }님이 용병 신청을 취소하셨습니다.</span>
 					</c:if>
 				</div>
 				<div class="row">
@@ -622,6 +658,19 @@
 		</div>
 	</div>
 </div>
+<div id="match_modal" class="confirm-modals">
+	<!-- Modal content -->
+	<div class="confirm-modal-content">
+		<div class="sub-content">
+			<span id="match_msg">경기 신청을 취소하시겠습니까?</span>
+			<hr>
+			<button id="match-btn" class="pos-btn">경기 신청 취소</button>
+		</div>
+		<div class="sub-content">
+			<button id="match-cancel-btn" class="neg-btn">닫기</button>
+		</div>
+	</div>
+</div>
 <div id="manage_modal" class="confirm-modals">
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
@@ -662,6 +711,40 @@ function sendLink() {
     	}
     })
   }
+function cancelMatchReq(request_num,acceptance,match_num){
+	$('#match_modal').css('display','block');
+	$('#match-btn').click(function(){
+		$.ajax({
+			url:'cancelMatchReq.do',
+			type:'post',
+			data:{request_num:request_num, acceptance:acceptance,match_num:match_num},
+			dataType:'json',
+			cache:false,
+			timeout:30000,
+			success:function(data){
+				if(data.result=='success'){
+					$('#match_modal').css('display','none');
+					$('#'+request_num).css('display','block');
+					$('#'+request_num+'-btn').css('display','none');
+				}
+				if(data.result=='errors'){
+					
+					alert('오류 발생');
+					$(window).click(function(){
+						$('#cancel_modal').css('display','none');
+					});
+				}
+				
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+	});
+	$('#match-cancel-btn').click(function(){
+		$('#match_modal').css('display','none');
+	});
+}
 function answerForRecruitReq(recruit_req_num,nickname,recruit_accept){
 	if(recruit_accept==2){
 		$('#recruit_msg').text(nickname+'님의 용병 신청을 수락하겠습니까?');

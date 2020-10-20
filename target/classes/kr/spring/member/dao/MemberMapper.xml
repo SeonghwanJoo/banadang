@@ -21,8 +21,8 @@
 	</update>   
 	<select id="selectMyRecruitReq" parameterType="string" resultType="matchVO">
 		select * from 
-    (select recruit_req_num,c.id,c.match_num,c.club_num,recruit_position,recruit_accept,type,start_time,end_time,address,match_date,address_x,address_y,club_name,club_img,club_color,club_age from
-        (select recruit_req_num,a.match_num,a.id,club_num,recruit_accept,recruit_position,type,start_time,end_time,address,match_date,address_x,address_y from
+    (select recruit_req_num,isCanceled,c.id,c.match_num,c.club_num,recruit_position,recruit_accept,type,start_time,end_time,cancel,address,match_date,address_x,address_y,club_name,club_img,club_color,club_age from
+        (select recruit_req_num,isCanceled,a.match_num,a.id,club_num,recruit_accept,recruit_position,type,start_time,end_time,cancel,address,match_date,address_x,address_y from
             (select * from recruit_req where id=1459494566) a join (select * from match where match_date>sysdate-1) b on a.match_num=b.match_num)c join club d on c.club_num=d.club_num) e left outer join
     (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from club_rating group by club_num) f on e.club_num=f.club_num
 	</select>

@@ -3,6 +3,7 @@ package kr.spring.club.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.club.domain.ClubVO;
@@ -33,5 +34,7 @@ public interface ClubService {
 	public void updateClub(ClubVO club);
 	public ClubVO selectMyClubDetails(ClubVO club);
 	public void updateRecruitReq(MemberVO member);
+	public void deleteMatchReqForCancel(Integer request_num);
+	public void updateMatchReqForCancel(Integer request_num,Integer match_num);
 	
 }

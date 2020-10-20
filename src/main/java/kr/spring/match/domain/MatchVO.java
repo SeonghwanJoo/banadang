@@ -322,8 +322,16 @@ public class MatchVO {
 	public Integer getMatch_num() {
 		return match_num;
 	}
+	public Integer getIsCanceled() {
+		return isCanceled;
+	}
+
+	public void setIsCanceled(Integer isCanceled) {
+		this.isCanceled = isCanceled;
+	}
 	private Integer recruit_req_num;
 	private Integer recruit_accept;
+	private Integer isCanceled;
 	private String cancel;
 	private String recruit_req_detail;
 	private Integer recruit_num;

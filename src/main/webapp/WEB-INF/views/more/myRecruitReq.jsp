@@ -18,7 +18,7 @@
 	<c:if test="${not empty matches }">
 	<c:forEach items="${matches }" var="match">
 	<li class="li-list">
-		<div class="main-row">
+		<div class="main-row margin-btm">
 			<span class="match-item">${match.match_date }</span>
 			<span class="match-item">${match.start_time } ~ ${match.end_time }</span>
 			<span class="match-item">${match.address }</span>
@@ -29,20 +29,28 @@
 			<span class="match-item">풋살</span>
 			</c:if>
 			<c:if test="${match.recruit_accept==1 }">
-			<span id="status-${recruit_req_num}"class="status neutral">대기 중</span>
+			<span class="status neutral">대기 중</span>
 			</c:if>
 			<c:if test="${match.recruit_accept==2 }">
-			<span id="status-${recruit_req_num}"class="status positive">수락 완료</span>
+			<span class="status positive">수락 완료</span>
 			</c:if>
 			<c:if test="${match.recruit_accept==3 }">
-			<span id="status-${recruit_req_num}"class="status negative">거절 완료</span>
+			<span class="status negative">거절 완료</span>
 			</c:if>
-			$()
-			<c:if test="${empty isCanceled }">
+			<c:if test="${empty match.isCanceled }">
 			<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.recruit_req_num},${match.recruit_accept })">more_vert</span>
 			</c:if>
-			<c:if test="${not empty isCanceled }">
-			<span class="status negative full">용병 신청 취소 완료</span>
+			<c:if test="${not empty match.isCanceled }">
+			<span class="status negative full" id="recruit-cancel-${match.recruit_req_num }" >용병 신청 취소 완료</span>
+			</c:if>
+			<c:if test="${not empty match.cancel }">
+			<span class="status negative full" id="match-cancel-${match.recruit_req_num }" >${match.cancel }팀에 의해 경기 취소됨</span>
+			</c:if>
+			<c:if test="${empty match.isCanceled }">
+			<span class="status negative full" id="recruit-cancel-${match.recruit_req_num }" style="display:none">용병 신청 취소 완료</span>
+			</c:if>
+			<c:if test="${empty match.cancel }">
+			<span class="status negative full" id="match-cancel-${match.recruit_req_num }" style="display:none">${match.cancel }팀에 의해 경기 취소됨</span>
 			</c:if>
 		</div>
 		<div class="row">
@@ -109,7 +117,8 @@
 			timeout:30000,
 			success:function(data){
 				if(data.result=='success'){
-					location.reload();
+					$('#recruit-cancel-'+recruit_req_num).css('display','block');
+					$('#recruit_modal').css('display','none');
 				}
 				if(data.result=='errors'){
 					

@@ -22,6 +22,7 @@
 <span class="input-label" style="margin-top:0">용병을 모집하려는 경기를 선택하세요</span>
 <ul class="ul-list">
 	<c:forEach items="${matches }" var="match">
+	<c:if test="${empty match.cancel }">
 	<li class="li-list">
 		<div class="row">
 			<div class="half_col smaller">
@@ -63,6 +64,7 @@
 			</div>
 		</div>
 	</li>
+	</c:if>
 	</c:forEach>
 </ul>
 <span class="input-label">모집하는 포지션 선택(복수 선택 가능)</span>

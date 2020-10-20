@@ -10,6 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class ClubVO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	private String cancel;
+	private Integer match_req_cancel;
 	private float attendance_rate;
 	private Integer match_num;
 	private String request_detail;
@@ -39,6 +41,18 @@ public class ClubVO implements Serializable {
 	private String start_time;
 	private String end_time;
 	private String address;
+	public String getCancel() {
+		return cancel;
+	}
+	public void setCancel(String cancel) {
+		this.cancel = cancel;
+	}
+	public Integer getMatch_req_cancel() {
+		return match_req_cancel;
+	}
+	public void setMatch_req_cancel(Integer match_req_cancel) {
+		this.match_req_cancel = match_req_cancel;
+	}
 	public String getRating_detail() {
 		return rating_detail;
 	}
@@ -231,14 +245,17 @@ public class ClubVO implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "ClubVO [club_ages=" + Arrays.toString(club_ages) + ", club_address=" + club_address + ", club_num="
+		return "ClubVO [cancel=" + cancel + ", match_req_cancel=" + match_req_cancel + ", attendance_rate="
+				+ attendance_rate + ", match_num=" + match_num + ", request_detail=" + request_detail
+				+ ", match_detail=" + match_detail + ", request_num=" + request_num + ", acceptance=" + acceptance
+				+ ", club_ages=" + Arrays.toString(club_ages) + ", club_address=" + club_address + ", club_num="
 				+ club_num + ", id=" + id + ", club_loc=" + club_loc + ", club_auth=" + club_auth + ", club_name="
 				+ club_name + ", club_detail=" + club_detail + ", upload=" + upload + ", club_img="
-				+ ", filename=" + filename + ", club_color=" + club_color + ", club_age="
+				+ Arrays.toString(club_img) + ", filename=" + filename + ", club_color=" + club_color + ", club_age="
 				+ club_age + ", club_locX=" + club_locX + ", club_locY=" + club_locY + ", perform=" + perform
-				+ ", manner=" + manner + ", rating_count=" + rating_count + ", match_date=" + match_date
-				+ ", start_time=" + start_time + ", end_time=" + end_time + ", address=" + address + ", type=" + type
-				+ "]";
+				+ ", manner=" + manner + ", rating_count=" + rating_count + ", rating_detail=" + rating_detail
+				+ ", match_date=" + match_date + ", start_time=" + start_time + ", end_time=" + end_time + ", address="
+				+ address + ", type=" + type + "]";
 	}
 	
 	

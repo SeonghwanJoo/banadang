@@ -156,6 +156,19 @@ public class ClubServiceImpl implements ClubService {
 		
 	}
 
+	@Override
+	public void deleteMatchReqForCancel(Integer request_num) {
+		
+		clubMapper.deleteMatchReqForCancel(request_num);
+	}
+
+	@Override
+	public void updateMatchReqForCancel(Integer request_num,Integer match_num) {
+		
+		clubMapper.updateMatchReqForCancel(request_num);
+		clubMapper.updateMatchForMatchReqCancel(match_num);
+	}
+
 	
 
 
