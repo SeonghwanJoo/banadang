@@ -149,6 +149,15 @@ public class MemberController {
 		mav.setViewName("myRecruitReq");
 		return mav;
 	}
+	@RequestMapping("/member/clubRecruit.do")
+	public ModelAndView clubRecruit() {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("title","팀원 모집");
+		mav.setViewName("clubRecruit");
+		
+		return mav;
+	}
+	
 	@RequestMapping("/member/myPage.do")
 	public ModelAndView myPage(HttpSession session) {
 		

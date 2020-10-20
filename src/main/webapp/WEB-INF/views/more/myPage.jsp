@@ -34,7 +34,7 @@
 			</div>
 		</div>
 	</li>
-	<li class="li-list">
+	<li class="li-list ">
 		<div class="row">
 			<div class="col">
 				<i class="fas fa-users"></i>
@@ -44,7 +44,7 @@
 	</li>
 </ul>
 <ul class="ul-list">
-	<li class="li-list">
+	<li class="li-list cursor" onclick="location.href='clubRecruit.do'">
 		<div class="row">
 			<div class="col">
 				<i class="far fa-futbol"></i>
