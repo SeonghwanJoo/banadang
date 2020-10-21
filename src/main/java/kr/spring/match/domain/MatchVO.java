@@ -219,13 +219,6 @@ public class MatchVO {
 	public void setClub_img(byte[] club_img) {
 		this.club_img = club_img;
 	}
-	public double getDistance() {
-		return distance;
-	}
-
-	public void setDistance(double distance) {
-		this.distance = distance;
-	}
 	public Integer getRecruit_num() {
 		return recruit_num;
 	}
@@ -329,6 +322,149 @@ public class MatchVO {
 	public void setIsCanceled(Integer isCanceled) {
 		this.isCanceled = isCanceled;
 	}
+	public String[] getRecruit_positions() {
+		return recruit_positions;
+	}
+
+	public void setRecruit_positions(String[] recruit_positions) {
+		this.recruit_positions = recruit_positions;
+		setRecruit_position(Arrays.toString(recruit_positions));
+	}
+
+	public String[] getAct_days() {
+		return act_days;
+	}
+
+	public void setAct_days(String[] act_days) {
+		this.act_days = act_days;
+	}
+
+	public String[] getAct_times() {
+		return act_times;
+	}
+
+	public void setAct_times(String[] act_times) {
+		this.act_times = act_times;
+		setAct_time(Arrays.toString(act_times));
+	}
+	public String getRegister_cost() {
+		return register_cost;
+	}
+
+	public void setRegister_cost(String register_cost) {
+		this.register_cost = register_cost;
+	}
+
+	public String getMonth_cost() {
+		return month_cost;
+	}
+
+	public void setMonth_cost(String month_cost) {
+		this.month_cost = month_cost;
+	}
+
+	public String getClubRecruit_detail() {
+		return clubRecruit_detail;
+	}
+
+	public void setClubRecruit_detail(String clubRecruit_detail) {
+		this.clubRecruit_detail = clubRecruit_detail;
+	}
+
+	public Integer getClubRecruit_num() {
+		return clubRecruit_num;
+	}
+
+	public void setClubRecruit_num(Integer clubRecruit_num) {
+		this.clubRecruit_num = clubRecruit_num;
+	}
+	public String getAct_day() {
+		return act_day;
+	}
+	public void setAct_day(String act_day) {
+		this.act_day = act_day;
+	}
+
+	public String getAct_time() {
+		return act_time;
+	}
+
+	public void setAct_time(String act_time) {
+		this.act_time = act_time;
+	}
+
+	public Date getRecruit_due() {
+		return recruit_due;
+	}
+
+	public void setRecruit_due(Date recruit_due) {
+		this.recruit_due = recruit_due;
+	}
+	public String getClub_address() {
+		return club_address;
+	}
+
+	public void setClub_address(String club_address) {
+		this.club_address = club_address;
+	}
+	public String getClub_loc() {
+		return club_loc;
+	}
+
+	public void setClub_loc(String club_loc) {
+		this.club_loc = club_loc;
+	}
+
+	public double getClub_locX() {
+		return club_locX;
+	}
+
+	public void setClub_locX(double club_locX) {
+		this.club_locX = club_locX;
+	}
+
+	public double getClub_locY() {
+		return club_locY;
+	}
+
+	public void setClub_locY(double club_locY) {
+		this.club_locY = club_locY;
+	}
+	public String getClubRecruit_req_detail() {
+		return clubRecruit_req_detail;
+	}
+
+	public void setClubRecruit_req_detail(String clubRecruit_req_detail) {
+		this.clubRecruit_req_detail = clubRecruit_req_detail;
+	}
+
+	public Integer getClubRecruit_accept() {
+		return clubRecruit_accept;
+	}
+
+	public void setClubRecruit_accept(Integer clubRecruit_accept) {
+		this.clubRecruit_accept = clubRecruit_accept;
+	}
+	public Integer getClubRecruit_req_num() {
+		return clubRecruit_req_num;
+	}
+
+	public void setClubRecruit_req_num(Integer clubRecruit_req_num) {
+		this.clubRecruit_req_num = clubRecruit_req_num;
+	}
+	private Integer clubRecruit_req_num;
+	private String clubRecruit_req_detail;
+	private Integer clubRecruit_accept;
+	private String[] recruit_positions;
+	private String[] act_days;
+	private String[] act_times;
+	private String act_day;
+	private String act_time;
+	private Date recruit_due;
+	private String register_cost;
+	private String month_cost;
+	private String clubRecruit_detail;
+	private Integer clubRecruit_num;
 	private Integer recruit_req_num;
 	private Integer recruit_accept;
 	private Integer isCanceled;
@@ -375,23 +511,41 @@ public class MatchVO {
 	private byte[] club_img;
 	private String club_color;
 	private String club_age;
-	private double distance;
 	private String request_detail;
+	private String club_address;
+	private String club_loc;
+	private double club_locX;
+	private double club_locY;
 	
-
 	@Override
 	public String toString() {
-		return "MatchVO [cost=" + cost + ", attend=" + attend + ", not_attend=" + not_attend + ", undefined="
-				+ undefined + ", match_num=" + match_num + ", id=" + id + ", type=" + type + ", home=" + home
-				+ ", away=" + away + ", address=" + address + ", address_x=" + address_x + ", address_y=" + address_y
-				+ ", match_date=" + match_date + ", start_time=" + start_time + ", end_time=" + end_time
-				+ ", match_detail=" + match_detail + ", rating_detail=" + rating_detail + ", vote_num=" + vote_num
-				+ ", club_num=" + club_num + ", status=" + status + ", count=" + count + ", max=" + max + ", home_name="
-				+ home_name + ", home_manner=" + home_manner + ", home_perform=" + home_perform + ", away_name="
-				+ away_name + ", away_manner=" + away_manner + ", away_perform=" + away_perform + ", perform=" + perform
-				+ ", manner=" + manner + ", club_name=" + club_name + ", clubrating_num=" + clubrating_num
-				+ ", club_color=" + club_color + "]";
+		return "MatchVO [clubRecruit_req_detail=" + clubRecruit_req_detail + ", clubRecruit_accept="
+				+ clubRecruit_accept + ", recruit_positions=" + Arrays.toString(recruit_positions) + ", act_days="
+				+ Arrays.toString(act_days) + ", act_times=" + Arrays.toString(act_times) + ", act_day=" + act_day
+				+ ", act_time=" + act_time + ", recruit_due=" + recruit_due + ", register_cost=" + register_cost
+				+ ", month_cost=" + month_cost + ", clubRecruit_detail=" + clubRecruit_detail + ", clubRecruit_num="
+				+ clubRecruit_num + ", recruit_req_num=" + recruit_req_num + ", recruit_accept=" + recruit_accept
+				+ ", isCanceled=" + isCanceled + ", cancel=" + cancel + ", recruit_req_detail=" + recruit_req_detail
+				+ ", recruit_num=" + recruit_num + ", recruit_position=" + recruit_position + ", recruit_count="
+				+ recruit_count + ", recruit_cost=" + recruit_cost + ", recruit_detail=" + recruit_detail
+				+ ", request_num=" + request_num + ", cost=" + cost + ", attend=" + attend + ", not_attend="
+				+ not_attend + ", undefined=" + undefined + ", match_num=" + match_num + ", id=" + id + ", type=" + type
+				+ ", home=" + home + ", away=" + away + ", address=" + address + ", address_x=" + address_x
+				+ ", address_y=" + address_y + ", match_date=" + match_date + ", start_time=" + start_time
+				+ ", end_time=" + end_time + ", match_detail=" + match_detail + ", rating_detail=" + rating_detail
+				+ ", vote_num=" + vote_num + ", club_num=" + club_num + ", status=" + status + ", count=" + count
+				+ ", max=" + max + ", home_name=" + home_name + ", home_manner=" + home_manner + ", home_perform="
+				+ home_perform + ", away_name=" + away_name + ", away_manner=" + away_manner + ", away_perform="
+				+ away_perform + ", perform=" + perform + ", manner=" + manner + ", club_name=" + club_name
+				+ ", clubrating_num=" + clubrating_num + ", club_color="
+				+ club_color + ", club_age=" + club_age + ", request_detail=" + request_detail + ", club_address="
+				+ club_address + ", club_loc=" + club_loc + ", club_locX=" + club_locX + ", club_locY=" + club_locY
+				+ "]";
 	}
+	
+
+
+	
 	
 	
 

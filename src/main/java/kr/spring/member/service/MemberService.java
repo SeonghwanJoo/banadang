@@ -13,4 +13,12 @@ public interface MemberService {
 	public List<MatchVO> selectMyRecruitReq(String id);
 	public void deleteRecruitReq(Integer recruit_req_num);
 	public void updateRecruitReqForCancel(Integer recruit_req_num);
+	public void insertClubRecruit(MatchVO match);
+	public MatchVO selectClubRecruitWithClubDetail(Integer clubRecruit_num);
+	public List<MatchVO> selectClubRecruits();
+	public void deleteClubRecruit(Integer clubRecruit_num);
+	public void updateClubRecruit(MatchVO match);
+	public void insertClubRecruitReq(MatchVO match);
+	public List<MatchVO> selectMyClubRecruitReq(String id);
+	public void deleteClubRecruitReq(Integer clubRecruit_req_num);
 }

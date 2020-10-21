@@ -29,4 +29,19 @@ public interface MemberMapper {
 
 	@Update("update recruit_req set isCanceled=1 where recruit_req_num=#{recruit_req_num}")
 	public void updateRecruitReqForCancel(Integer recruit_req_num);
+	
+	public void insertClubRecruit(MatchVO match);
+	public MatchVO selectClubRecruitWithClubDetail(Integer clubRecruit_num);
+	public List<MatchVO> selectClubRecruits();
+	
+	@Delete("delete from club_recruit where clubRecruit_num=#{clubRecruit_num}")
+	public void deleteClubRecruit(Integer clubRecruit_num);
+	
+	public void updateClubRecruit(MatchVO match);
+	
+	public void insertClubRecruitReq(MatchVO match);
+	public List<MatchVO> selectMyClubRecruitReq(String id);
+	
+	@Delete("delete from clubRecruit_req where clubRecruit_req_num=#{clubRecruit_req_num}")
+	public void deleteClubRecruitReq(Integer clubRecruit_req_num);
 }

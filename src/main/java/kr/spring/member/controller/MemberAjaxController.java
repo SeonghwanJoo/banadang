@@ -9,9 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.club.service.ClubService;
+import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
 import kr.spring.member.domain.MemberVO;
 import kr.spring.member.service.MemberService;
@@ -46,6 +48,38 @@ public class MemberAjaxController {
 		}catch(Exception e) {
 			e.printStackTrace();
 			map.put("result","errors");
+		}
+		
+		return map;
+	}
+	@RequestMapping("/member/postClubRecruitRequest.do")
+	@ResponseBody
+	public Map<String,Object> postClubRecruitRequest(MatchVO match){
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		try {
+			memberService.insertClubRecruitReq(match);
+			map.put("result", "success");
+		}catch (Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		
+		return map;
+		
+	}
+	@RequestMapping("/member/deleteClubRecruitReq.do")
+	@ResponseBody
+	public Map<String,Object> deleteClubRecruitReq(@RequestParam Integer clubRecruit_req_num){
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		//수락,대기,거절
+		try {
+			memberService.deleteClubRecruitReq(clubRecruit_req_num);
+			map.put("result", "success");
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
 		}
 		
 		return map;

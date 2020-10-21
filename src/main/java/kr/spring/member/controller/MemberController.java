@@ -153,6 +153,8 @@ public class MemberController {
 	public ModelAndView clubRecruit() {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("title","팀원 모집");
+		List<MatchVO> matches=memberService.selectClubRecruits();
+		mav.addObject("matches", matches);
 		mav.setViewName("clubRecruit");
 		
 		return mav;
@@ -166,6 +168,57 @@ public class MemberController {
 		
 		return mav;
 	}
+	@RequestMapping("/member/postClubRecruit.do")
+	public ModelAndView postClubRecruit(MatchVO match) {
+		
+		try {
+			memberService.insertClubRecruit(match);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return clubRecruitDetail(match.getClubRecruit_num());
+	}
+	@RequestMapping("/member/clubRecruitDetail")
+	public ModelAndView clubRecruitDetail(@RequestParam Integer clubRecruit_num) {
+		
+		ModelAndView mav=new ModelAndView();
+		try {
+			MatchVO clubRecruit=memberService.selectClubRecruitWithClubDetail(clubRecruit_num);
+			mav.addObject("clubRecruit",clubRecruit);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		mav.addObject("title", "팀원 모집");
+		mav.setViewName("clubRecruitDetail");
+		return mav;
+	}
+	@RequestMapping("/member/modifyClubRecruit.do")
+	public ModelAndView modifyRecruit(@RequestParam Integer clubRecruit_num) {
+		ModelAndView mav=new ModelAndView();
+		MatchVO match=memberService.selectClubRecruitWithClubDetail(clubRecruit_num);
+		mav.addObject("match", match);
+		mav.addObject("title","팀원 모집 수정");
+		mav.setViewName("modifyClubRecruit");
+		
+		return mav;
+	}
+	@RequestMapping("/member/deleteClubRecruit.do")
+	public String deleteRecruit(@RequestParam Integer clubRecruit_num) {
+		
+		memberService.deleteClubRecruit(clubRecruit_num);
+		
+		return "redirect:/member/clubRecruit.do";
+		
+	}
+	@RequestMapping("/member/postUpdatedClubRecruit.do")
+	public ModelAndView postUpdatedClubRecruit(MatchVO match) {
+		
+		memberService.updateClubRecruit(match);
+		
+		
+		return clubRecruitDetail(match.getClubRecruit_num());
+	}
+	
 	@RequestMapping("/member/myPage.do")
 	public ModelAndView myPage(HttpSession session) {
 		
@@ -178,6 +231,20 @@ public class MemberController {
 		mav.addObject("title","나의 페이지");
 		return mav;
 	}
+	
+	@RequestMapping("/member/myClubRecruitReq.do")
+	public ModelAndView myClubRecruitReq(HttpSession session) {
+		
+		ModelAndView mav=new ModelAndView();
+		String user_id=(String)session.getAttribute("user_id");
+		List<MatchVO> matches=memberService.selectMyClubRecruitReq(user_id);
+		mav.addObject("matches", matches);
+		mav.addObject("title","나의 팀 가입 신청 현황");
+		mav.setViewName("myClubRecruitReq");
+		
+		return mav;
+	}
+	
 	@RequestMapping("/member/myMsg.do")//나의 메시지함
 	public ModelAndView myMsg(HttpSession session) {
 		
