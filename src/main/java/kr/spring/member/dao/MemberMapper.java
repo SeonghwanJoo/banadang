@@ -44,4 +44,7 @@ public interface MemberMapper {
 	
 	@Delete("delete from clubRecruit_req where clubRecruit_req_num=#{clubRecruit_req_num}")
 	public void deleteClubRecruitReq(Integer clubRecruit_req_num);
+	
+	@Select("select clubRecruit_req_num from clubRecruit_req where id=#{id} and clubRecruit_num=#{clubRecruit_num}")
+	public Integer selectClubRecruit_reqForDuplicate(MatchVO match);
 }

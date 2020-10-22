@@ -36,5 +36,9 @@ public interface ClubService {
 	public void updateRecruitReq(MemberVO member);
 	public void deleteMatchReqForCancel(Integer request_num);
 	public void updateMatchReqForCancel(Integer request_num,Integer match_num);
+	public List<MemberVO> selectClubRecruitReqForRequestor(Integer club_num);
+	public void updateClubRecruitReq(MemberVO member);
+	public void insertClubMemberWithMemberVO(MemberVO member);
+	public Integer selectClubJoinForDuplicate(MemberVO member);
 	
 }

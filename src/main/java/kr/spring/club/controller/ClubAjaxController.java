@@ -262,7 +262,28 @@ public class ClubAjaxController {
 		Map<String,Object> map=new HashMap<String,Object>();
 		try {
 			clubService.updateRecruitReq(member);
-			map.put("result", "updated");
+			map.put("result", "success");
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		return map;
+	}
+	@RequestMapping("/club/answerForClubRecruit.do")
+	@ResponseBody
+	public Map<String,Object> answerForClubRecruit(MemberVO member){
+		Map<String,Object> map=new HashMap<String,Object>();
+		try {
+			clubService.updateClubRecruitReq(member);
+			map.put("result", "success");
+			if(member.getClubRecruit_accept()==2) {
+				//회원 여부 체크
+				Integer clubJoin_num=clubService.selectClubJoinForDuplicate(member);
+				if(clubJoin_num==null) {
+					clubService.insertClubMemberWithMemberVO(member);
+				}
+			}
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			map.put("result", "errors");

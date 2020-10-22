@@ -109,4 +109,11 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 
+	@Override
+	public Integer selectClubRecruit_reqForDuplicate(MatchVO match) {
+		
+		return memberMapper.selectClubRecruit_reqForDuplicate(match);
+		
+	}
+
 }

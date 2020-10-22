@@ -21,4 +21,5 @@ public interface MemberService {
 	public void insertClubRecruitReq(MatchVO match);
 	public List<MatchVO> selectMyClubRecruitReq(String id);
 	public void deleteClubRecruitReq(Integer clubRecruit_req_num);
+	public Integer selectClubRecruit_reqForDuplicate(MatchVO match);
 }

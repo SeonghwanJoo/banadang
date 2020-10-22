@@ -81,6 +81,10 @@ public class ClubController {
 		List<MemberVO> recruits=matchService.selectRecruitByClub_num(club_num);
 		mav.addObject("recruits",recruits);
 		
+		//팀원 가입 신청 정보 Object에 추가
+		List<MemberVO> clubRecruits=clubService.selectClubRecruitReqForRequestor(club_num);
+		mav.addObject("clubRecruits",clubRecruits);
+		
 		//경기 일정 정보 Object에 추가
 		List<MatchVO> matchVO=new ArrayList<MatchVO>();
 		ArrayList<MatchVO> vote_status=new ArrayList<MatchVO>();

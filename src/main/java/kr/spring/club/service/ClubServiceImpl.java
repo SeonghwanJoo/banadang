@@ -169,6 +169,32 @@ public class ClubServiceImpl implements ClubService {
 		clubMapper.updateMatchForMatchReqCancel(match_num);
 	}
 
+	@Override
+	public List<MemberVO> selectClubRecruitReqForRequestor(Integer club_num) {
+		
+		return clubMapper.selectClubRecruitReqForRequestor(club_num);
+	}
+
+	@Override
+	public void updateClubRecruitReq(MemberVO member) {
+		
+		clubMapper.updateClubRecruitReq(member);
+		
+	}
+
+	@Override
+	public void insertClubMemberWithMemberVO(MemberVO member) {
+		
+		clubMapper.insertClubMemberWithMemberVO(member);
+		
+	}
+
+	@Override
+	public Integer selectClubJoinForDuplicate(MemberVO member) {
+		
+		return clubMapper.selectClubJoinForDuplicate(member);
+	}
+
 	
 
 

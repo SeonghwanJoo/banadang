@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.club.domain.ClubVO;
+import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
 
 public interface ClubMapper {
@@ -36,6 +37,9 @@ public interface ClubMapper {
 	
 	@Insert("insert into club_join (club_num,id) values(#{club_num},#{id})")
 	public void insertClubMember(ClubVO club);
+	
+	@Insert("insert into club_join (club_num,id) values(#{club_num},#{id})")
+	public void insertClubMemberWithMemberVO(MemberVO member);
 	
 	@Insert("insert into club_join (club_num,id,club_auth) values(#{club_num},#{id},5)")
 	public void joinClubWhenCreated(ClubVO club);
@@ -97,5 +101,13 @@ public interface ClubMapper {
 	
 	@Update("update match set away=0,away_name='' where match_num=#{match_num}")
 	public void updateMatchForMatchReqCancel(Integer match_num);
+	
+	public List<MemberVO> selectClubRecruitReqForRequestor(Integer club_num);
+	
+	@Update("update clubRecruit_req set clubRecruit_accept=#{clubRecruit_accept} where clubRecruit_req_num=#{clubRecruit_req_num}")
+	public void updateClubRecruitReq(MemberVO member);
+	
+	@Select("select clubJoin_num from club_join where id=#{id} and club_num=#{club_num} and club_auth>3")
+	public Integer selectClubJoinForDuplicate(MemberVO member);
 	
 }

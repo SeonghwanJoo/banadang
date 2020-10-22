@@ -58,9 +58,9 @@
 	</insert>
 	<select id="selectMyClubRecruitReq" parameterType="string" resultType="matchVO">
 	select * from (select * from
-    (select clubRecruit_num,clubRecruit_req_num,id,clubRecruit_req_detail,a.recruit_position,clubRecruit_accept,act_day,act_time,type,a.club_num from
+    (select clubRecruit_num,clubRecruit_req_num,id,clubRecruit_req_detail,a.recruit_position,recruit_due,clubRecruit_accept,act_day,act_time,type,a.club_num from
         (select * from clubRecruit_req where id=#{user_id}) a
-            join club_recruit b using(clubRecruit_num))a join club b using(club_num))c left outer join
+            join club_recruit b using(clubRecruit_num) where recruit_due>sysdate-1)a join club b using(club_num))c left outer join
             (select avg(manner) manner,avg(perform)perform,club_num from club_rating group by club_num) using(club_num)
 	</select>
 </mapper>

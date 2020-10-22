@@ -58,8 +58,14 @@ public class MemberAjaxController {
 		
 		Map<String,Object> map=new HashMap<String,Object>();
 		try {
-			memberService.insertClubRecruitReq(match);
-			map.put("result", "success");
+			//가입 신청 여부 확인
+			Integer clubRecruit_req_num=memberService.selectClubRecruit_reqForDuplicate(match);
+			if(clubRecruit_req_num==null) {
+				memberService.insertClubRecruitReq(match);
+				map.put("result", "success");
+			}else {
+				map.put("result", "duplicated");
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 			map.put("result", "errors");

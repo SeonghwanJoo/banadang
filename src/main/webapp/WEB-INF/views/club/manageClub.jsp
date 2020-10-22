@@ -276,7 +276,6 @@
 					<c:if test="${recruit.recruit_accept==3 }">
 					<span id="status-${recruit.recruit_req_num}"class="status negative">거절 완료</span>
 					</c:if>
-					${recruit.isCanceled }
 					<c:if test="${not empty recruit.isCanceled }">
 					<span class="status negative full" >${recruit.nickname }님이 용병 신청을 취소하셨습니다.</span>
 					</c:if>
@@ -310,6 +309,59 @@
 					</div>
 					<div class="half_col">
 						<button class="second-btn" onclick="answerForRecruitReq(${recruit.recruit_req_num},'${recruit.nickname }',2)">수락</button>
+					</div>
+				</div>
+				</c:if>
+			</li>
+			</c:forEach>
+		</ul>			
+		</c:if>
+		<c:if test="${not empty clubRecruits }">
+		<h6>팀원 가입 신청을 수락/거절 선택하세요</h6>
+		<ul class="ul-list">
+			<c:forEach items="${clubRecruits }" var="recruit">
+			<li class="li-list">
+				<div class="row margin-btm">
+					<span class="match-item">모집 마감일 ${recruit.recruit_due }</span>
+					<c:if test="${recruit.clubRecruit_accept==1 }">
+					<span id="club-status-${recruit.clubRecruit_req_num}"class="status neutral">대기 중</span>
+					</c:if>
+					<c:if test="${recruit.clubRecruit_accept==2 }">
+					<span id="club-status-${recruit.clubRecruit_req_num}"class="status positive">수락 완료</span>
+					</c:if>
+					<c:if test="${recruit.clubRecruit_accept==3 }">
+					<span id="club-status-${recruit.clubRecruit_req_num}"class="status negative">거절 완료</span>
+					</c:if>
+				</div>
+				<div class="row">
+					<div class="col">
+					<img src="${recruit.thumbnail_image }" alt="Avatar" class="avatar">
+					<span>${recruit.nickname }</span>
+					<span>${fn:substring(recruit.age_range,0,1)}0대 |</span>
+					<span class="small-chip">
+					<c:if test="${fn:contains(recruit.recruit_position,'g') }">
+						<span>GK</span>
+					</c:if>
+					<c:if test="${fn:contains(recruit.recruit_position,'d') }">
+						<span>DF</span>
+					</c:if>
+					<c:if test="${fn:contains(recruit.recruit_position,'m') }">
+						<span>MF</span>
+					</c:if>
+					<c:if test="${fn:contains(recruit.recruit_position,'w') }">
+						<span>FW</span>
+					</c:if>
+					</span><br>
+					<span>${recruit.clubRecruit_req_detail }</span>
+					</div>
+				</div>
+				<c:if test="${recruit.clubRecruit_accept==1 }">
+				<div class="row" id="btn-${recruit.clubRecruit_req_num }">
+					<div class="half_col">
+						<button class="first-btn" onclick="answerForClubRecruitReq(${recruit.clubRecruit_req_num},'${recruit.nickname }',3,'${recruit.id }')">거절</button>
+					</div>
+					<div class="half_col">
+						<button class="second-btn" onclick="answerForClubRecruitReq(${recruit.clubRecruit_req_num},'${recruit.nickname }',2,'${recruit.id }')">수락</button>
 					</div>
 				</div>
 				</c:if>
@@ -645,6 +697,19 @@
 		</div>
 	</div>
 </div>
+<div id="clubRecruit_modal" class="confirm-modals">
+	<!-- Modal content -->
+	<div class="confirm-modal-content">
+		<div class="sub-content">
+			<span id="clubRecruit_msg"></span>
+			<hr>
+			<button id="clubRecruit-btn" class="pos-btn"></button>
+		</div>
+		<div class="sub-content">
+			<button id="clubRecruit-cancel-btn" class="neg-btn">취소</button>
+		</div>
+	</div>
+</div>
 <div id="delete_modal" class="confirm-modals">
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
@@ -745,12 +810,67 @@ function cancelMatchReq(request_num,acceptance,match_num){
 		$('#match_modal').css('display','none');
 	});
 }
+function answerForClubRecruitReq(clubRecruit_req_num,nickname,clubRecruit_accept,id){
+	if(clubRecruit_accept==2){
+		$('#clubRecruit_msg').text(nickname+'님의 가입 신청을 수락하겠습니까?');
+		$('#clubRecruit-btn').text('수락');
+	}else if(clubRecruit_accept==3){
+		$('#clubRecruit_msg').text(nickname+'님의 가입 신청을 거절하겠습니까?');
+		$('#clubRecruit-btn').text('거절');
+	}
+	$('#clubRecruit_modal').css('display','block');
+	$('#clubRecruit-btn').click(function(){
+		$.ajax({
+			url:'answerForClubRecruit.do',
+			type:'post',
+			data:{clubRecruit_req_num:clubRecruit_req_num, 
+				  clubRecruit_accept:clubRecruit_accept,
+				  id:id,
+				  club_num:${myClub.club_num}
+			},
+			dataType:'json',
+			cache:false,
+			timeout:30000,
+			success:function(data){
+				if(data.result=='success'){
+					var status=document.getElementById('club-status-'+clubRecruit_req_num);
+					status.className = status.className.replace(/\bneutral\b/g, "");
+					if(clubRecruit_accept==2){
+						status.classList.add('positive');
+						status.innerText='수락 완료';
+					}else if(clubRecruit_accept==3){
+						status.classList.add('negative');
+						status.innerText='거절 완료';
+					}
+					$('#clubRecruit_modal').css('display','none');
+					document.getElementById('btn-'+clubRecruit_req_num).style.display="none";
+				}
+				if(data.result=='errors'){
+					
+					alert('오류 발생');
+					$(window).click(function(){
+						$('#clubRecruit_modal').css('display','none');
+					});
+				}
+				
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+		
+	});
+	
+	$('#clubRecruit-cancel-btn').click(function(){
+		$('#clubRecruit_modal').css('display','none');
+	});
+}
 function answerForRecruitReq(recruit_req_num,nickname,recruit_accept){
 	if(recruit_accept==2){
 		$('#recruit_msg').text(nickname+'님의 용병 신청을 수락하겠습니까?');
 		$('#recruit-btn').text('수락');
 	}else if(recruit_accept==3){
-		$('#recruit_msg').text(nickname+'님의 경기 신청을 거절하겠습니까?');
+		$('#recruit_msg').text(nickname+'님의 용병 신청을 거절하겠습니까?');
 		$('#recruit-btn').text('거절');
 	}
 	$('#recruit_modal').css('display','block');
@@ -763,7 +883,7 @@ function answerForRecruitReq(recruit_req_num,nickname,recruit_accept){
 			cache:false,
 			timeout:30000,
 			success:function(data){
-				if(data.result=='updated'){
+				if(data.result=='success'){
 					var status=document.getElementById('status-'+recruit_req_num);
 					status.className = status.className.replace(/\bneutral\b/g, "");
 					if(recruit_accept==2){

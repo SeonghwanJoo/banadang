@@ -24,6 +24,62 @@ public class MemberVO {
 	private Integer isCanceled;
 	private Integer club_auth;
 	private Float attendance_rate;
+	private Integer clubRecruit_req_num;
+	private Integer clubRecruit_num;
+	private String clubRecruit_req_detail;
+	private Integer clubRecruit_accept;
+	private String act_day;
+	private String act_time;
+	private Integer type;
+	private Date recruit_due;
+	public Integer getClubRecruit_req_num() {
+		return clubRecruit_req_num;
+	}
+	public void setClubRecruit_req_num(Integer clubRecruit_req_num) {
+		this.clubRecruit_req_num = clubRecruit_req_num;
+	}
+	public Integer getClubRecruit_num() {
+		return clubRecruit_num;
+	}
+	public void setClubRecruit_num(Integer clubRecruit_num) {
+		this.clubRecruit_num = clubRecruit_num;
+	}
+	public String getClubRecruit_req_detail() {
+		return clubRecruit_req_detail;
+	}
+	public void setClubRecruit_req_detail(String clubRecruit_req_detail) {
+		this.clubRecruit_req_detail = clubRecruit_req_detail;
+	}
+	public Integer getClubRecruit_accept() {
+		return clubRecruit_accept;
+	}
+	public void setClubRecruit_accept(Integer clubRecruit_accept) {
+		this.clubRecruit_accept = clubRecruit_accept;
+	}
+	public String getAct_day() {
+		return act_day;
+	}
+	public void setAct_day(String act_day) {
+		this.act_day = act_day;
+	}
+	public String getAct_time() {
+		return act_time;
+	}
+	public void setAct_time(String act_time) {
+		this.act_time = act_time;
+	}
+	public Integer getType() {
+		return type;
+	}
+	public void setType(Integer type) {
+		this.type = type;
+	}
+	public Date getRecruit_due() {
+		return recruit_due;
+	}
+	public void setRecruit_due(Date recruit_due) {
+		this.recruit_due = recruit_due;
+	}
 	public Integer getCancel() {
 		return cancel;
 	}
@@ -153,10 +209,18 @@ public class MemberVO {
 	}
 	@Override
 	public String toString() {
-		return "MemberVO [nickname=" + nickname + ", profile_image=" + profile_image + ", thumbnail_image="
-				+ thumbnail_image + ", email=" + email + ", age_range=" + age_range + ", id=" + id + ", club_num="
-				+ club_num + ", status=" + status + "]";
+		return "MemberVO [nickname=" + nickname + ", cancel=" + cancel + ", profile_image=" + profile_image
+				+ ", thumbnail_image=" + thumbnail_image + ", email=" + email + ", age_range=" + age_range + ", id="
+				+ id + ", club_num=" + club_num + ", match_num=" + match_num + ", recruit_req_num=" + recruit_req_num
+				+ ", recruit_req_detail=" + recruit_req_detail + ", recruit_position=" + recruit_position
+				+ ", recruit_accept=" + recruit_accept + ", match_date=" + match_date + ", start_time=" + start_time
+				+ ", end_time=" + end_time + ", address=" + address + ", isCanceled=" + isCanceled + ", club_auth="
+				+ club_auth + ", attendance_rate=" + attendance_rate + ", clubRecruit_req_num=" + clubRecruit_req_num
+				+ ", clubRecruit_num=" + clubRecruit_num + ", clubRecruit_req_detail=" + clubRecruit_req_detail
+				+ ", clubRecruit_accept=" + clubRecruit_accept + ", act_day=" + act_day + ", act_time=" + act_time
+				+ ", type=" + type + ", recruit_due=" + recruit_due + ", status=" + status + "]";
 	}
+	
 	
 	
 }

@@ -81,4 +81,10 @@
             (select * from club where club_num=#{club_num}) a left outer join
         (select avg(manner) manner,avg(perform) perform, COUNT(*) rating_count,club_num from club_rating group by club_num) b on a.club_num=b.club_num)c join club_join d on c.club_num=d.club_num where d.id=#{id}
 	</select>
+	<select id="selectClubRecruitReqForRequestor" parameterType="integer" resultType="memberVO">
+	select * from
+    (select clubRecruit_num,clubRecruit_req_num,id,clubRecruit_req_detail,a.recruit_position,clubRecruit_accept,act_day,act_time,type,a.club_num,recruit_due from
+        (select * from clubRecruit_req where club_num=#{club_num}) a
+            join club_recruit b using(clubRecruit_num) where recruit_due>sysdate-1)a join member_detail b using(id)
+	</select>
 </mapper>
