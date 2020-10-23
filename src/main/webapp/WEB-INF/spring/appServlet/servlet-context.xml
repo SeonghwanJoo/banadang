@@ -20,6 +20,7 @@
 	<context:component-scan base-package="kr.spring.member.controller" />
 	<context:component-scan base-package="kr.spring.match.controller" />
 	<context:component-scan base-package="kr.spring.club.controller" />
+	<context:component-scan base-package="kr.spring.board.controller" />
 	
 	<!-- 메시지 처리 -->
 	<beans:bean id="messageSource"
@@ -39,6 +40,7 @@
 				<beans:value>/WEB-INF/tiles-def/match.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/club.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/more.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/board.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>

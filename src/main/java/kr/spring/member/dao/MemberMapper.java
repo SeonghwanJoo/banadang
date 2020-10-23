@@ -12,7 +12,7 @@ import kr.spring.member.domain.MemberVO;
 
 public interface MemberMapper {
 	
-	@Select("select * from member_detail where id=#{id}")
+	@Select("select * from(select * from member_detail where id=#{id}) join member using(id)")
 	public MemberVO getMember(String id);
 	
 	@Insert("insert into member (id) values (#{id})")

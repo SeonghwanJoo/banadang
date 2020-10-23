@@ -32,6 +32,13 @@ public class MemberVO {
 	private String act_time;
 	private Integer type;
 	private Date recruit_due;
+	private Integer mem_auth;
+	public Integer getMem_auth() {
+		return mem_auth;
+	}
+	public void setMem_auth(Integer mem_auth) {
+		this.mem_auth = mem_auth;
+	}
 	public Integer getClubRecruit_req_num() {
 		return clubRecruit_req_num;
 	}

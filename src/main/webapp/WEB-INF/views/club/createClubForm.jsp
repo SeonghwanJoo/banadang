@@ -67,8 +67,8 @@
 		<span class="checkmark"></span>
 	</label>
 </div>
+<div class="row"><div class="col"><span class="msg" id="club_ages_msg"></span></div></div>
 <hr>
-
 <div class="row uni-em">
 	<!-- 유니폼 색상 -->
 	<div class="half_col" id="uniform_div">
@@ -169,6 +169,13 @@ function removeWhiteSpace(obj){
 		
 	$(function(){
 		
+		$('#club_name').click(function(){
+			$('#club_name_msg').text('');
+		});
+		
+		$('input[name="club_ages"]').click(function(){
+			$('#club_ages_msg').text('');
+		});
 		
 		
 		$("#submit").click(function(e){
@@ -177,6 +184,16 @@ function removeWhiteSpace(obj){
 			var formData = new FormData($('#club_form')[0]);
 			formData.append("upload", club_img); 
 			formData.append("filename",$("#img-pre").attr("alt"));
+			if(!$('#club_name').val().replace(/^\s+|\s+$/g, '')){
+				$('#club_name_msg').css('color','red').text('팀명을 입력해주세요.');
+				return false;
+			}else if(!$('#club_loc').val().replace(/^\s+|\s+$/g, '')){
+				$('#club_loc_msg').css('color','red').text('주 활동 구장을 입력해주세요.');
+				return false;
+			}else if(!$("input[name='club_ages']").is(":checked")){
+				$('#club_ages_msg').css('color','red').text('주 연령대를 선택해주세요.');
+				return false;
+			}
 			
 			$.ajax({
 				url:'createClub.do',
@@ -554,6 +571,7 @@ function removeWhiteSpace(obj){
 		// When the user clicks the button, open the modal 
 		address.onfocus = function() {
 			modal.style.display = "block";
+			$('#club_loc_msg').text('');
 		}
 
 		// When the user clicks on <span> (x), close the modal

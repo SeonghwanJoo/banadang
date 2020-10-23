@@ -12,7 +12,7 @@
 			<span class="material-icons" id="chevron_left" >chevron_left</span>
 		</a>
 		<div class="topnav-centered">
-			<a href="#home" class="active">${title }</a>
+			<a href="javascript:document.reload()" class="active">${title }</a>
 		</div>
 	<input type="submit" id="submit" value="완료">
 	</div>

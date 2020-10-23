@@ -425,7 +425,7 @@ div.half_col{
 .input-field {
 	border:none;
 	background-color:white;
-	width: 75%;
+	width: 90%;
 	padding: 10px;
 }
 
@@ -1054,8 +1054,17 @@ h6.ages{
 	color:#9E9E9E;
 	font-weight:bold;
 }
+.span-link{
+	color:#A4D3A6;
+	display:block;
+	text-align:center;
+	font-weight:bold;
+}
 .set-team-opt{
 	cursor:pointer;
+}
+.align-center{
+	margin:0 auto;
 }
 	
 button.small-font{
@@ -1453,6 +1462,13 @@ button.chip-btn{
 	width:28%;
 	max-width:146px;
 }
+.gray{
+	color:#9E9E9E;
+}
+.bold{
+	font-weight:bold;
+}
+
 
 .custom {
 	display: block;

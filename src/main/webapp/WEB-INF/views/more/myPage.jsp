@@ -60,7 +60,7 @@
 			</div>
 		</div>
 	</li>
-	<li class="li-list">
+	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/board/notice.do'">
 		<div class="row">
 			<div class="col">
 				<i class="fas fa-bullhorn"></i>
@@ -68,7 +68,7 @@
 			</div>
 		</div>
 	</li>
-	<li class="li-list">
+	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/board/qna.do'">
 		<div class="row">
 			<div class="col">
 				<i class="fas fa-headset"></i>

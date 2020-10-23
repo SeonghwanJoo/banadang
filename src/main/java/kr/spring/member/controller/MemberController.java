@@ -43,7 +43,6 @@ public class MemberController {
 		String access_Token = loginAPI.getAccessToken(code,false);
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_Token);
-        
         String user_id=memberVO.getId();
         
         //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
@@ -54,6 +53,9 @@ public class MemberController {
         	//등록되어 있으면 session setting
         	if(existingMember == null) {//등록되어 있지 않으면 insert로 회원정보 추가 후 session setting
         		memberService.insertMember(memberVO);
+        		session.setAttribute("mem_auth", 1);
+        	}else if(existingMember !=null) {
+        		session.setAttribute("mem_auth", existingMember.getMem_auth());
         	}
         	
         	List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
@@ -108,6 +110,9 @@ public class MemberController {
         	//등록되어 있으면 session setting
         	if(existingMember == null) {//등록되어 있지 않으면 insert로 회원정보 추가 후 session setting
         		memberService.insertMember(memberVO);
+        		session.setAttribute("mem_auth", 1);
+        	}else if(existingMember !=null) {
+        		session.setAttribute("mem_auth", existingMember.getMem_auth());
         	}
         	
         	List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
