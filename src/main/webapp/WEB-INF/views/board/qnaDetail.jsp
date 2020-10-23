@@ -17,16 +17,31 @@
 	</div>
 </div>
 <div class="blank_div"></div>
-<div class="row">
+<div class="main-row">
 	<span class="small-font bold gray">${board.register_date }</span>
 </div>
-<div class="row">
+<div class="main-row">
 	<span class="m-font">${board.title }</span>
 </div>
 <hr class="hr">
 <p class="detail">
 	${board.content}
 </p>
+<c:if test="${not empty board.answer }">
+<hr class="hr">
+<i class="fab fa-replyd"></i>
+<div class="main-row">
+	<span class="small-font bold gray">${board.answer_reg_date }</span>
+</div>
+<textarea class="detail">
+${board.answer }
+</textarea>
+</c:if>
+<c:if test="${mem_auth==2 }">
+<button class="block" id="modifyAnswerForQna">
+답변(수정) 하기
+</button>
+</c:if>
 <div id="more_modal" class="confirm-modals">
 	<!-- Modal content -->
 	<div class="confirm-modal-content">

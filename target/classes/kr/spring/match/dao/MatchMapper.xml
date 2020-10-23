@@ -117,7 +117,7 @@
 		 select * from
     ( select a.id,recruit_req_num,isCanceled,cancel,a.club_num,a.match_num,a.recruit_req_detail,a.recruit_position,a.recruit_accept,b.match_date,b.start_time,b.end_time,b.address from 
         (select * from recruit_req where club_num=#{club_num}) a join match b on a.match_num=b.match_num where b.match_date>sysdate-1 order by b.match_date)f 
-            join member_detail g on f.id=g.id
+            join member_detail g using(id)
 	</select>
 	<update id="updateRecruit" parameterType="matchVO">
 	update match_recruit set id=#{id},recruit_cost=#{recruit_cost},recruit_count=#{recruit_count},recruit_position=#{recruit_position}

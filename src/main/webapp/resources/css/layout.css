@@ -1060,6 +1060,15 @@ h6.ages{
 	text-align:center;
 	font-weight:bold;
 }
+.span-link-reverse{
+	background-color:#A4D3A6;
+	color:#FFF;
+	border-radius:0.3rem;
+	padding:0 0.3rem;
+	display:block;
+	text-align:center;
+	font-weight:bold;
+}
 .set-team-opt{
 	cursor:pointer;
 }

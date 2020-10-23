@@ -6,6 +6,7 @@
 
 <form:form class="col s12" id="writeNoticeForm" action="postQna.do" commandName="boardVO" autocomplete="off">
 <input type="hidden" name="id" value="${user_id }">
+<input type="hidden" name="fromUser" value="${fromUser }">
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
 		<a onclick="location.href='qna.do'">
@@ -25,10 +26,13 @@
 	</div>
 </div>
 <div class="row"><div class="col"><span class="msg" id="title_msg"></span></div></div>
-<hr class="hr">
-<div class="row">
+<hr class="hr margin-btm">
+<c:if test="${not empty fromUser }">
+<span class="small-font gray">*답변에는 시간이 필요합니다. 조금만 인내심을 갖고 기다려주세요:)</span>
+</c:if>
+<div class="row margin-top">
 	<div class="text input-container col">
-		<textarea class="detail input-field" name="content" id="content" placeholder="공지 사항 내용을 입력해주세요."></textarea>
+		<textarea class="detail input-field" name="content" id="content" placeholder="질문 내용을 입력해주세요."></textarea>
 	</div>
 </div>
 <div class="row"><div class="col"><span class="msg" id="content_msg"></span></div></div>

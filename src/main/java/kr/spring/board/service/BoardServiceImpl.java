@@ -80,5 +80,11 @@ public class BoardServiceImpl implements BoardService{
 		boardMapper.insertQna(board);
 		
 	}
+
+	@Override
+	public List<BoardVO> selectPersonQna(String id) {
+		
+		return boardMapper.selectPersonQna(id);
+	}
 	
 }

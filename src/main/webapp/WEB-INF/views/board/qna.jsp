@@ -8,9 +8,16 @@
 		<span class="material-icons" id="cancel">close</span>
 		</a>
 		<div class="topnav-centered">
-			<a href="javascript:document.reload()" class="active">${title }</a>
+			<a href="javascript:document.reload()" class="active">
+				<c:if test="${empty fromUser }">	
+					${title }
+				</c:if>
+				<c:if test="${not empty fromUser }">	
+					나의 문의사항
+				</c:if>
+			</a>
 		</div>
-		<c:if test="${mem_auth==2 }">
+		<c:if test="${mem_auth==2 && empty fromUser}">
 		<div class="topnav-right">
 			<a id="write" href="${pageContext.request.contextPath }/board/writeQna.do">
 				<i class="fas fa-edit"></i>
@@ -34,14 +41,21 @@
 	</c:forEach>
 	</c:if>
 </ul>
+<c:if test="${empty fromUser}">
 <ul class="ul-list">
 	<li class="li-list">
 		<div class="row">
 			<h6 class="mod-h6 margin-top align-center">원하시는 답변을 찾지 못하셨나요?</h6><br>
 		</div>
+		<br>
 		<div class="row">
-				<span class="span-link margin-btm align-center">1:1 문의사항 남기기</span>
+			<span class="span-link margin-btm align-center cursor" onclick="location.href='personalQnaWrite.do'">1:1 문의사항 남기기</span>
+		</div>
+		<br>
+		<div class="row">
+			<span class="span-link-reverse margin-btm align-center cursor" onclick="location.href='personalQna.do'">1:1 문의사항 답변 보러가기</span>
 		</div>
 	</li>
 </ul>
+</c:if>
 	

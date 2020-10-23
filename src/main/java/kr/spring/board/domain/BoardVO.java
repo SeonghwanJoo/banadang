@@ -9,6 +9,27 @@ public class BoardVO {
 	private String title;
 	private String content;
 	private Date register_date;
+	private Integer fromUser;
+	private String answer;
+	private Date answer_reg_date;
+	public Integer getFromUser() {
+		return fromUser;
+	}
+	public void setFromUser(Integer fromUser) {
+		this.fromUser = fromUser;
+	}
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+	public Date getAnswer_reg_date() {
+		return answer_reg_date;
+	}
+	public void setAnswer_reg_date(Date answer_reg_date) {
+		this.answer_reg_date = answer_reg_date;
+	}
 	public String getTitle() {
 		return title;
 	}

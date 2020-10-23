@@ -17,5 +17,6 @@ public interface BoardService {
 	public void updateQna(BoardVO board);
 	public void deleteQna(Integer qna_num);
 	public void insertQna(BoardVO board);
+	public List<BoardVO> selectPersonQna(String id);
 
 }

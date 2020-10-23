@@ -3,6 +3,7 @@ package kr.spring.board.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -152,6 +153,26 @@ public class BoardController {
 		return "redirect:/board/qna.do";
 		
 	}
-	
+	@RequestMapping("/board/personalQnaWrite.do")
+	public ModelAndView personalQnaWrite() {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("title","문의 사항 작성");
+		mav.addObject("fromUser",1);
+		mav.setViewName("writeQna");
+		return mav;
+	}
+	@RequestMapping("/board/personalQna.do")
+	public ModelAndView personalQna(HttpSession session) {
+		
+		ModelAndView mav=new ModelAndView();
+		String id=(String)session.getAttribute("user_id");
+		List<BoardVO> boards=boardService.selectPersonQna(id);
+		mav.addObject("title","나의 문의 사항");
+		mav.addObject("boards",boards);
+		mav.addObject("fromUser","1");
+		mav.setViewName("qna");
+		return mav;
+	}
+
 			
 }

@@ -30,7 +30,7 @@ public interface BoardMapper {
 	
 	public void insertQna(BoardVO board);
 	
-	@Select("select * from qna where qna_num=#{qna_num}")
+	@Select("select * from qna where qna_num=#{qna_num} and fromUser is null")
 	public BoardVO selectQnaDetail(Integer qna_num);
 	
 	@Update("update qna set content=#{content},title=#{title} where qna_num=#{qna_num}")
@@ -38,4 +38,7 @@ public interface BoardMapper {
 	
 	@Delete("delete from qna where qna_num=#{qna_num}")
 	public void deleteQna(Integer qna_num);
+	
+	@Select("select * from qna where id=#{id} and fromUser=1 order by register_date desc")
+	public List<BoardVO> selectPersonQna(String id);
 }

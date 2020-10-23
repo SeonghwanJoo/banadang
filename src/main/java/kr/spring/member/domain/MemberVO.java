@@ -5,7 +5,7 @@ import java.sql.Date;
 public class MemberVO {
 	
 	private String nickname;
-	private Integer cancel;
+	private String cancel;
 	private String profile_image;
 	private String thumbnail_image;
 	private String email;
@@ -87,10 +87,10 @@ public class MemberVO {
 	public void setRecruit_due(Date recruit_due) {
 		this.recruit_due = recruit_due;
 	}
-	public Integer getCancel() {
+	public String getCancel() {
 		return cancel;
 	}
-	public void setCancel(Integer cancel) {
+	public void setCancel(String cancel) {
 		this.cancel = cancel;
 	}
 	public Integer getIsCanceled() {
