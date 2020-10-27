@@ -13,9 +13,16 @@ public class BoardVO {
 	private String answer;
 	private String answer_num;
 	private String nickname;
+	private String thumbnail_image;
 	private Integer match_num;
 	private Integer club_num;
 	private Integer voteAnswer_num;
+	public String getThumbnail_image() {
+		return thumbnail_image;
+	}
+	public void setThumbnail_image(String thumbnail_image) {
+		this.thumbnail_image = thumbnail_image;
+	}
 	public Integer getVoteAnswer_num() {
 		return voteAnswer_num;
 	}

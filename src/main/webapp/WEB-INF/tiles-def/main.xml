@@ -53,6 +53,12 @@
        <put-attribute name="body" value="/WEB-INF/views/main/writeReplyToVote.jsp"/>
        <put-attribute name="footer" value=""/>
     </definition>
+    <definition name="modifyVoteAnswer" extends="main">
+       <put-attribute name="title" value="투표 댓글 수정"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/main/modifyVoteAnswer.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
 </tiles-definitions>
 
 

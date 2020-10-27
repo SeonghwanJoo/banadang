@@ -17,10 +17,10 @@
 	</div>
 </div>
 <div class="blank_div"></div>
-<div class="row">
+<div class="main-row">
 	<span class="small-font bold gray">${board.register_date }</span>
 </div>
-<div class="row">
+<div class="main-row">
 	<span class="m-font">${board.title }</span>
 </div>
 <hr class="hr">

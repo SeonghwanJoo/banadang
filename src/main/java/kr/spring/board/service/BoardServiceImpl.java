@@ -133,6 +133,27 @@ public class BoardServiceImpl implements BoardService{
 		
 		return boardMapper.selectVote_answer(match);
 	}
+
+	@Override
+	public void deleteVote_answer(Integer voteAnswer_num) {
+		
+		boardMapper.deleteVote_answer(voteAnswer_num);
+		
+	}
+
+	@Override
+	public BoardVO selectVote_AnswerByVoteAnswer_num(Integer voteAnswer_num) {
+		
+		return boardMapper.selectVote_AnswerByVoteAnswer_num(voteAnswer_num);
+	}
+
+	@Override
+	public void updateVote_Answer(BoardVO board) {
+		
+		boardMapper.updateVote_Answer(board);
+		
+	}
+	
 	
 	
 }

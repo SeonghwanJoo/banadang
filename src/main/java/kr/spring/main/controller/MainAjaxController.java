@@ -120,6 +120,37 @@ public class MainAjaxController {
 		
 		return map;
 	}
+	@RequestMapping("/main/deleteVoteAnswer.do")
+	@ResponseBody
+	public Map<String,Object> deleteVoteAnswer(Integer voteAnswer_num){
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		try {
+			boardService.deleteVote_answer(voteAnswer_num);
+			map.put("result", "success");
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		return map;
+	}
+	@RequestMapping("/main/updateAnswerToVote.do")
+	@ResponseBody
+	public Map<String,Object> updateAnswerToVote(BoardVO board){
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		
+		try {
+			boardService.updateVote_Answer(board);
+			map.put("result", "success");
+		}catch(Exception e) {
+			
+			map.put("result", "errors");
+		}
+		
+		return map;
+	}
 }
 
 

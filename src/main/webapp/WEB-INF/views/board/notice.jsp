@@ -20,7 +20,7 @@
 	</div>
 </div>
 <div class="blank_div"></div>
-<ul class="ul-list">
+<ul class="ul-list non-border-btm">
 	<c:if test="${not empty boards}">
 	<c:forEach items="${boards }" var="board">
 	<li class="li-list cursor" onclick="location.href='noticeDetail.do?notice_num=${board.notice_num}'">

@@ -26,5 +26,8 @@ public interface BoardService {
 	public void updateQna_answer(BoardVO board);
 	public void insertVote_answer(BoardVO board);
 	public List<BoardVO> selectVote_answer(MatchVO match);
+	public void deleteVote_answer(Integer voteAnswer_num);
+	public BoardVO selectVote_AnswerByVoteAnswer_num(Integer voteAnswer_num);
+	public void updateVote_Answer(BoardVO board);
 
 }

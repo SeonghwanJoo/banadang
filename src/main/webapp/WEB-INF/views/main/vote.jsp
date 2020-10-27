@@ -202,20 +202,25 @@
 	<span class="gray small-font">댓글 입력</span>
 </button>
 <c:if test="${not empty answers }">
-<div id="answer-wrapper" class="border-top">
+<div id="answer-wrapper" class="margin-top">
 <ul class="ul-list">
 <c:forEach items="${answers }" var="answer">
 <li class="li-list">
-	<div class="main-row margin-top">
-		<span class="nickname">${answer.nickname }</span>
-		<span class="small-font bold gray">${answer.register_date }</span>
-		<c:if test="${answer.id==user_id }">
-		<span class="material-icons more cursor m-font gray" id="more" onclick="modifyAnswer(${answer.voteAnswer_num})" >more_vert</span>
-		</c:if>
+	<div class="main-row">
+		<div class="x-smaller">
+			<img src="${answer.thumbnail_image }" alt="Avatar" class="avatar">
+		</div>
+		<div class="x-bigger">
+			<div class="main-row">
+			<span class="nickname">${answer.nickname }</span>
+			<span class="small-font bold gray">${answer.register_date }</span>
+			<c:if test="${answer.id==user_id }">
+			<span class="material-icons more cursor m-font gray" id="more" onclick="modifyAnswer(${answer.voteAnswer_num})" >more_vert</span>
+			</c:if>
+			</div>
+			<p>${answer.content }</p>
+		</div>
 	</div>
-	<p>
-	${answer.content }
-	</p>
 </li>
 </c:forEach>
 </ul>
@@ -244,7 +249,7 @@ function modifyAnswer(voteAnswer_num){
 			url:'deleteVoteAnswer.do',
 			type:'post',
 			data:{
-				answer_num: answer_num,
+				voteAnswer_num: voteAnswer_num,
 			},
 			dataType:'json',
 			cache:false,
@@ -269,7 +274,7 @@ function modifyAnswer(voteAnswer_num){
 		
 	});
 	$('#modify').click(function(){
-		location.href='modifyVoteAnswer.do?voteAnswer_num='+voteAnswer_num;
+		location.href='modifyVoteAnswer.do?voteAnswer_num='+voteAnswer_num+'&isMain=${isMain}';
 	});
 }
 	$(function(){

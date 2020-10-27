@@ -1398,6 +1398,12 @@ div.smaller{
 	float:right;
 	padding:0.7rem;
 }
+div.x-smaller{
+	width:10%;
+}
+div.x-bigger{
+	width:90%;
+}
 .sync{
 	position:relative;
 	border:none;

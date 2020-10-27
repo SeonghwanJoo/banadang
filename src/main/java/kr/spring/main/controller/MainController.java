@@ -177,7 +177,20 @@ public class MainController {
 		
 		return mav;
 	}
-	
+	@RequestMapping("/main/modifyVoteAnswer.do")
+	public ModelAndView modifyVoteAnswer(Integer voteAnswer_num,boolean isMain) {
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("title","투표 댓글 수정");
+		BoardVO answer=boardService.selectVote_AnswerByVoteAnswer_num(voteAnswer_num);
+		answer.setIsMain(isMain);
+		mav.addObject("answer",answer);
+		mav.setViewName("modifyVoteAnswer");
+		
+		return mav;
+		
+	}
 	@RequestMapping("/main/authcheck.do")
 	public String checkauth() {
 		

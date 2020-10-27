@@ -14,7 +14,7 @@
 	</div>
 </div>
 <div class="blank_div"></div>
-<ul class="ul-list">
+<ul class="ul-list non-border-btm">
 	<c:if test="${not empty matches }">
 	<c:forEach items="${matches }" var="match">
 	<li class="li-list">

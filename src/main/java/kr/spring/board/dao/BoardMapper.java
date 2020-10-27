@@ -63,4 +63,13 @@ public interface BoardMapper {
 	
 	@Select("select* from(select * from vote_answer where club_num=#{club_num} and match_num=#{match_num}) join member_detail using(id)")
 	public List<BoardVO> selectVote_answer(MatchVO match);
+	
+	@Delete("delete from vote_answer where voteAnswer_num=#{voteAnswer_num}")
+	public void deleteVote_answer(Integer voteAnswer_num);
+	
+	@Select("select * from vote_answer where voteAnswer_num=#{voteAnswer_num}")
+	public BoardVO selectVote_AnswerByVoteAnswer_num(Integer voteAnswer_num);
+	
+	@Update("update vote_answer set content=#{content} where voteAnswer_num=#{voteAnswer_num}")
+	public void updateVote_Answer(BoardVO board);
 }
