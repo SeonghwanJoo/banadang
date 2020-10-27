@@ -76,6 +76,7 @@ public class BoardController {
 	@RequestMapping("/board/postQna.do")
 	public String postQna(BoardVO board) {
 		
+		logger.info("fromUser : "+board.getFromUser());
 		boardService.insertQna(board);
 		
 		return "redirect:/board/qnaDetail.do?qna_num="+board.getQna_num();
@@ -97,8 +98,15 @@ public class BoardController {
 		
 		ModelAndView mav=new ModelAndView();
 		BoardVO board=boardService.selectQnaDetail(qna_num);
+		List<BoardVO> answers=boardService.selectQna_answer(qna_num);
 		mav.addObject("board", board);
-		mav.addObject("title","자주 묻는 질문");
+		mav.addObject("answers",answers);
+		if(board.getFromUser()==null) {
+			mav.addObject("title","자주 묻는 질문");
+		}else if(board.getFromUser()==1) {
+			mav.addObject("title","나의 문의 사항");
+		}
+		
 		mav.setViewName("qnaDetail");
 		
 		return mav;
@@ -169,9 +177,35 @@ public class BoardController {
 		List<BoardVO> boards=boardService.selectPersonQna(id);
 		mav.addObject("title","나의 문의 사항");
 		mav.addObject("boards",boards);
-		mav.addObject("fromUser","1");
+		mav.addObject("fromUser",1);
 		mav.setViewName("qna");
 		return mav;
+	}
+	@RequestMapping("/board/replytoQna.do")
+	public ModelAndView replyToQna(Integer qna_num) {
+		
+		ModelAndView mav=new ModelAndView();
+		BoardVO board=boardService.selectQnaDetail(qna_num);
+		List<BoardVO> answers=boardService.selectQna_answer(qna_num);
+		mav.addObject("answers",answers);
+		mav.addObject("board", board);
+		mav.addObject("qna_num",qna_num);
+		mav.addObject("title","답글 쓰기");
+		mav.setViewName("replytoQna");
+		
+		return mav;
+		
+	}
+	@RequestMapping("/board/modifyAnswer.do")
+	public ModelAndView modifyAnswer(Integer answer_num) {
+		
+		ModelAndView mav=new ModelAndView();
+		BoardVO board=boardService.selectQna_answerByAnswer_num(answer_num);
+		mav.addObject("board",board);
+		mav.addObject("title","답글 수정");
+		mav.setViewName("modifyAnswer");
+		return mav;
+		
 	}
 
 			

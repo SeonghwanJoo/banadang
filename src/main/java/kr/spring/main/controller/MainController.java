@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.board.domain.BoardVO;
+import kr.spring.board.service.BoardService;
 import kr.spring.club.domain.ClubVO;
 import kr.spring.club.service.ClubService;
 import kr.spring.match.domain.MatchVO;
@@ -30,6 +32,10 @@ public class MainController {
 	
 	@Resource
 	private ClubService clubService;
+	
+	@Resource
+	private BoardService boardService;
+	
 	
 	@RequestMapping("/main/main.do")
 	public ModelAndView process(HttpSession session) {
@@ -76,14 +82,15 @@ public class MainController {
 		ArrayList<MatchVO> vote_status=new ArrayList<MatchVO>();
 		ArrayList<MatchVO> clubs_rating=new ArrayList<MatchVO>();
 		String user_id=(String)session.getAttribute("user_id");
-		if(user_id!=null) {
-			MatchVO match=matchService.selectMatchByMatch_num(match_num);
-			match.setId(user_id);
-			match.setClub_num(club_num);
-			addVoteResult(match,vote_status);
-			addRatingResult(match,clubs_rating);
-			mav.addObject("match",match);
-		}
+		
+		MatchVO match=matchService.selectMatchByMatch_num(match_num);
+		match.setId(user_id);
+		match.setClub_num(club_num);
+		addVoteResult(match,vote_status);
+		addRatingResult(match,clubs_rating);
+		mav.addObject("match",match);
+		List<BoardVO> answers=boardService.selectVote_answer(match);
+		mav.addObject("answers",answers);
 		mav.addObject("isMain",isMain);
 		mav.setViewName("vote");
 		mav.addObject("title","경기 참불 투표");
@@ -159,6 +166,18 @@ public class MainController {
 		
 		return mav;
 	}
+	@RequestMapping("/main/replyToVote.do")
+	public ModelAndView replyToVote(BoardVO board) {
+		
+		ModelAndView mav= new ModelAndView();
+		
+		mav.addObject("title","투표 댓글 작성");
+		mav.addObject("board",board);
+		mav.setViewName("writeReplyToVote");
+		
+		return mav;
+	}
+	
 	@RequestMapping("/main/authcheck.do")
 	public String checkauth() {
 		

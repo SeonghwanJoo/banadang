@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.spring.board.domain.BoardVO;
+import kr.spring.board.service.BoardService;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
 
@@ -24,6 +26,9 @@ public class MainAjaxController {
 	
 	@Resource
 	private MatchService matchService;
+	
+	@Resource
+	private BoardService boardService;
 	
 	@RequestMapping("/main/vote.do")
 	@ResponseBody
@@ -98,6 +103,21 @@ public class MainAjaxController {
 			matchService.insertRating(match);
 			map.put("result", "inserted");
 		}
+		return map;
+	}
+	@RequestMapping("/main/registerAnswerToVote.do")
+	@ResponseBody
+	public Map<String,Object> registerAnswerToVote(BoardVO board){
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		try {
+			boardService.insertVote_answer(board);
+			map.put("result", "success");
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		
 		return map;
 	}
 }

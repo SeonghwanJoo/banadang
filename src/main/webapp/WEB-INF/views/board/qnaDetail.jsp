@@ -17,38 +17,51 @@
 	</div>
 </div>
 <div class="blank_div"></div>
-<div class="main-row">
-	<span class="small-font bold gray">${board.register_date }</span>
-</div>
-<div class="main-row">
-	<span class="m-font">${board.title }</span>
-</div>
-<hr class="hr">
-<p class="detail">
-	${board.content}
-</p>
-<c:if test="${not empty board.answer }">
-<hr class="hr">
-<i class="fab fa-replyd"></i>
-<div class="main-row">
-	<span class="small-font bold gray">${board.answer_reg_date }</span>
-</div>
-<textarea class="detail">
-${board.answer }
-</textarea>
-</c:if>
-<c:if test="${mem_auth==2 }">
-<button class="block" id="modifyAnswerForQna">
-답변(수정) 하기
+<ul class="ul-list">
+	<li class="li-list">
+		<div class="main-row">
+			<span class="small-font bold gray">${board.register_date }</span>
+		</div>
+		<div class="main-row">
+			<span class="m-font">${board.title }</span>
+		</div>
+		<hr class="hr">
+		<p class="detail">
+			${board.content}
+		</p>
+	</li>
+</ul>
+<c:if test="${board.fromUser==1}">
+<button class="reply-btn" onclick="location.href='replytoQna.do?qna_num=${board.qna_num}'">
+	<span class="material-icons icon-margin gray">
+	account_circle
+	</span>
+	<span class="gray small-font">댓글 입력</span>
 </button>
 </c:if>
+
+
+<c:if test="${not empty answers }">
+<c:forEach items="${answers }" var="answer">
+<hr class="hr">
+<div class="main-row">
+	<span class="nickname">${answer.nickname }</span>
+	<span class="small-font bold gray">${answer.register_date }</span>
+	<span class="material-icons more cursor m-font gray" id="more" onclick="modifyAnswer(${answer.answer_num})" >more_vert</span>
+</div>
+<p>
+${answer.content }
+</p>
+</c:forEach>
+</c:if>
+
 <div id="more_modal" class="confirm-modals">
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
 		<div class="sub-content">
-			<button id="modify" class="pos-btn" onclick="location.href='modifyQna.do?qna_num=${board.qna_num}'">수정</button>
+			<button id="modify" class="pos-btn">수정</button>
 			<hr>
-			<button id="delete" class="pos-btn red" onclick="location.href='deleteQna.do?qna_num=${board.qna_num}'">삭제</button>
+			<button id="delete" class="pos-btn red">삭제</button>
 		</div>
 		<div class="sub-content">
 			<button id="more-cancel-btn" class="neg-btn">취소</button>
@@ -57,6 +70,41 @@ ${board.answer }
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+function modifyAnswer(answer_num){
+	$('#more_modal').css('display','block');
+	$('#delete').click(function(){
+		$.ajax({
+			url:'deleteAnswer.do',
+			type:'post',
+			data:{
+				answer_num: answer_num,
+			},
+			dataType:'json',
+			cache:false,
+			timeout:30000,
+			success:function(data){
+				if(data.result=='success'){
+					location.reload();
+				}
+				if(data.result=='errors'){
+					
+					alert('오류 발생');
+					$(window).click(function(){
+						$('#more_modal').css('display','none');
+					});
+				}
+				
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+		
+	});
+	$('#modify').click(function(){
+		location.href='modifyAnswer.do?answer_num='+answer_num;
+	});
+}
 	$(function(){
 		$('#more').click(function(){
 			

@@ -597,7 +597,7 @@ $( function() {
 		});
 
 		/*datepicker-end*/
-		function autocomplete(inp, arr,clubs_num,clubs_loc) {
+		function autocomplete(inp, arr,clubs_num,clubs_address) {
 			/*the autocomplete function takes two arguments,
 			the text field element and an array of possible autocompleted values:*/
 			var currentFocus;
@@ -652,7 +652,7 @@ $( function() {
 												.toUpperCase().indexOf(
 														val.toUpperCase())
 												+ val.length);
-										b.innerHTML += "<span class='club_loc'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+clubs_loc[i]+"</span>"
+										b.innerHTML += "<span class='club_address'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+clubs_address[i]+"</span>"
 										/*insert a input field that will hold the current array item's value:*/
 										b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
 										b.innerHTML += "<input type='hidden' value='" + clubs_num[i] + "'>";
@@ -742,14 +742,14 @@ $( function() {
 		/*An array containing all the country names in the world:*/
 		let clubs_name = new Array();
 		let clubs_num = new Array();
-		let clubs_loc = new Array();
+		let clubs_address = new Array();
 		<c:forEach items="${list}" var="clubs">
 			clubs_name.push("${clubs.club_name}");
 			clubs_num.push("${clubs.club_num}");
-			clubs_loc.push("${clubs.club_loc}");
+			clubs_address.push("${clubs.club_address}");
 		</c:forEach>
 
 		/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocompleawayalues:*/
-		autocomplete(document.getElementById("away_name"), clubs_name,clubs_num,clubs_loc);
+		autocomplete(document.getElementById("away_name"), clubs_name,clubs_num,clubs_address);
 	});
 </script>

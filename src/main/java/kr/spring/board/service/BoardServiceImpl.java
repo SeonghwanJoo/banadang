@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.spring.board.dao.BoardMapper;
 import kr.spring.board.domain.BoardVO;
+import kr.spring.match.domain.MatchVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
@@ -86,5 +87,52 @@ public class BoardServiceImpl implements BoardService{
 		
 		return boardMapper.selectPersonQna(id);
 	}
+
+	@Override
+	public void insertQna_answer(BoardVO board) {
+		
+		boardMapper.insertQna_answer(board);
+		
+	}
+
+	@Override
+	public List<BoardVO> selectQna_answer(Integer qna_num) {
+		
+		return boardMapper.selectQna_answer(qna_num);
+	}
+
+	@Override
+	public void deleteQna_answer(Integer answer_num) {
+		
+		boardMapper.deleteQna_answer(answer_num);
+		
+	}
+
+	@Override
+	public BoardVO selectQna_answerByAnswer_num(Integer answer_num) {
+		
+		return boardMapper.selectQna_answerByAnswer_num(answer_num);
+	}
+
+	@Override
+	public void updateQna_answer(BoardVO board) {
+		
+		boardMapper.updateQna_answer(board);
+		
+	}
+
+	@Override
+	public void insertVote_answer(BoardVO board) {
+		
+		boardMapper.insertVote_answer(board);
+		
+	}
+
+	@Override
+	public List<BoardVO> selectVote_answer(MatchVO match) {
+		
+		return boardMapper.selectVote_answer(match);
+	}
+	
 	
 }

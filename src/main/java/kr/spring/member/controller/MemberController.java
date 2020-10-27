@@ -146,7 +146,6 @@ public class MemberController {
 			
 			List<MatchVO> matches=memberService.selectMyRecruitReq(user_id);
 			mav.addObject("matches",matches);
-			logger.info("isCanceled : "+matches.get(0).getIsCanceled());
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

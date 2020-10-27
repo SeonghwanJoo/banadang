@@ -11,7 +11,49 @@ public class BoardVO {
 	private Date register_date;
 	private Integer fromUser;
 	private String answer;
-	private Date answer_reg_date;
+	private String answer_num;
+	private String nickname;
+	private Integer match_num;
+	private Integer club_num;
+	private Integer voteAnswer_num;
+	public Integer getVoteAnswer_num() {
+		return voteAnswer_num;
+	}
+	public void setVoteAnswer_num(Integer voteAnswer_num) {
+		this.voteAnswer_num = voteAnswer_num;
+	}
+	private boolean isMain;
+	
+	public boolean getIsMain() {
+		return isMain;
+	}
+	public void setIsMain(boolean isMain) {
+		this.isMain = isMain;
+	}
+	public Integer getMatch_num() {
+		return match_num;
+	}
+	public void setMatch_num(Integer match_num) {
+		this.match_num = match_num;
+	}
+	public Integer getClub_num() {
+		return club_num;
+	}
+	public void setClub_num(Integer club_num) {
+		this.club_num = club_num;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getAnswer_num() {
+		return answer_num;
+	}
+	public void setAnswer_num(String answer_num) {
+		this.answer_num = answer_num;
+	}
 	public Integer getFromUser() {
 		return fromUser;
 	}
@@ -23,12 +65,6 @@ public class BoardVO {
 	}
 	public void setAnswer(String answer) {
 		this.answer = answer;
-	}
-	public Date getAnswer_reg_date() {
-		return answer_reg_date;
-	}
-	public void setAnswer_reg_date(Date answer_reg_date) {
-		this.answer_reg_date = answer_reg_date;
 	}
 	public String getTitle() {
 		return title;
