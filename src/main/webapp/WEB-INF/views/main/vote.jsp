@@ -203,7 +203,7 @@
 </button>
 <c:if test="${not empty answers }">
 <div id="answer-wrapper" class="margin-top">
-<ul class="ul-list">
+<ul class="ul-list non-border-btm">
 <c:forEach items="${answers }" var="answer">
 <li class="li-list">
 	<div class="main-row">
@@ -213,7 +213,7 @@
 		<div class="x-bigger">
 			<div class="main-row">
 			<span class="nickname">${answer.nickname }</span>
-			<span class="small-font bold gray">${answer.register_date }</span>
+			<span class="small-font bold gray right">${answer.register_date }</span>
 			<c:if test="${answer.id==user_id }">
 			<span class="material-icons more cursor m-font gray" id="more" onclick="modifyAnswer(${answer.voteAnswer_num})" >more_vert</span>
 			</c:if>
@@ -293,7 +293,7 @@ function modifyAnswer(voteAnswer_num){
 			$('#not_attend_sign').css('display','none');
 			$('#undefined_sign').css('display','none');
 			$('#attend_btn').addClass(' focus active');
-		} else if(${myVote == 2}){
+		} else if(${ myVote == 2}){
 			$('#attend_sign').css('display','none');
 			$('#not_attend_sign').css('display','inline-block');
 			$('#undefined_sign').css('display','none');

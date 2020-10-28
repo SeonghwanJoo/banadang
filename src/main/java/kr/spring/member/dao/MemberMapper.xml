@@ -63,4 +63,8 @@
             join club_recruit b using(clubRecruit_num) where recruit_due>sysdate-1)a join club b using(club_num))c left outer join
             (select avg(manner) manner,avg(perform)perform,club_num from club_rating group by club_num) using(club_num)
 	</select>
+	<select id="selectMatchForMsg" parameterType="integer" resultType="msgVO">
+	select * from(select match_num,match_date,a.id,start_time,end_time,address,club_name,club_img,club_num from
+                    (select  match_num,match_date,start_time,end_time,address,#{club_num} as club_num,#{id} as id from match where match_num=42)a join club b using(club_num)) c join member_detail d using(id)
+	</select>
 </mapper>

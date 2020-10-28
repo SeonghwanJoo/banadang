@@ -52,14 +52,16 @@
 			</div>
 		</div>
 	</li>
-	<li class="li-list">
+	<c:if test="${not empty myClub }">
+	<li class="li-list cursor" onclick="sendLink()">
 		<div class="row">
 			<div class="col">
 				<i class="fas fa-share-alt"></i>
-				<span>앱 공유</span>
+				<span>카카오톡으로 팀원 초대하기</span>
 			</div>
 		</div>
 	</li>
+	</c:if>
 	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/board/notice.do'">
 		<div class="row">
 			<div class="col">
@@ -76,14 +78,14 @@
 			</div>
 		</div>
 	</li>
-	<li class="li-list">
+	<!-- <li class="li-list">
 		<div class="row">
 			<div class="col">
 				<i class="fas fa-cog"></i>
 				<span>앱 설정</span>
 			</div>
 		</div>
-	</li>
+	</li> -->
 </ul>
 <ul class="ul-list">
 	<li class="li-list">
@@ -94,6 +96,8 @@
 				</a>
 			</div>
 		</div>
+	</li>
+	<li class="li-list">
 		<div class="row">
 			<div class="col">
 				<span class="red">서비스 탈퇴</span>
@@ -102,6 +106,20 @@
 	</li>
 </ul>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
 
+Kakao.init('32776969383e4a77d92f6e18dd233bc5');
+var nickname=$('#nickname').val();
+function sendLink() {
+    Kakao.Link.sendCustom({
+    	templateId: 34560,
+    	templateArgs: {
+    		'msg_title': '${myClub.club_name} 팀으로 당신을 초대합니다',
+    		'msg_description': '아래 링크를 눌러 들어오세요.',
+    		'club_num': '${myClub.club_num}',
+    		'nickname': nickname
+    	}
+    })
+  }
 </script>

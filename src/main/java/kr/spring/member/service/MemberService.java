@@ -5,6 +5,7 @@ import java.util.List;
 
 import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
+import kr.spring.member.domain.MsgVO;
 
 public interface MemberService {
 	public MemberVO getMember(String id);
@@ -22,4 +23,12 @@ public interface MemberService {
 	public List<MatchVO> selectMyClubRecruitReq(String id);
 	public void deleteClubRecruitReq(Integer clubRecruit_req_num);
 	public Integer selectClubRecruit_reqForDuplicate(MatchVO match);
+	public MsgVO selectMatchForMsg(MsgVO input);
+	public void insertMsg(MsgVO msg);
+	public List<MsgVO> selectSentMsg(String sender);
+	public List<MsgVO> selectReceivedMsg(String receiver);
+	public void deleteMsgFromReceiver(Integer msg_num);
+	public Integer selectS_Del(Integer msg_num);
+	public void deleteMsg(Integer msg_num);
+	
 }

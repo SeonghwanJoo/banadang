@@ -630,7 +630,7 @@
 			<div class="col">
 				<a href="javascript:sendLink()">
 					<span class="material-icons person_add">person_add</span>
-					<span class="text-by-icon">팀원 초대하기</span>
+					<span class="text-by-icon">카카오톡으로 팀원 초대하기</span>
 					<img class="kakaolink" src="${pageContext.request.contextPath }/resources/images/kakaolink_btn.png">
 				</a>
 			</div>    

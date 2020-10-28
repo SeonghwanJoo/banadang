@@ -19,7 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.club.domain.ClubVO;
 import kr.spring.club.service.ClubService;
 import kr.spring.match.domain.MatchVO;
+import kr.spring.match.service.MatchService;
 import kr.spring.member.domain.MemberVO;
+import kr.spring.member.domain.MsgVO;
 import kr.spring.member.service.LoginAPI;
 import kr.spring.member.service.MemberService;
 
@@ -36,6 +38,9 @@ public class MemberController {
 	
 	@Resource
 	private ClubService clubService;
+	
+	@Resource
+	private MatchService matchService;
 
 	@RequestMapping("/member/login.do")
 	public String kakaoLogin(@RequestParam String code,HttpSession session)throws IOException {	
@@ -253,9 +258,39 @@ public class MemberController {
 	public ModelAndView myMsg(HttpSession session) {
 		
 		ModelAndView mav=new ModelAndView();
+		String receiver=(String)session.getAttribute("user_id");
+		List<MsgVO> msgs=memberService.selectReceivedMsg(receiver);
+		mav.addObject("msgs",msgs);
+		mav.addObject("title","받은 메시지");
+		mav.setViewName("myMsg");
 		
 		return mav;
 		
+	}
+	@RequestMapping("/member/writeMsg.do")
+	public ModelAndView writeMsg(MsgVO input) {
+		
+		ModelAndView mav=new ModelAndView();
+		//club_name,match_num,address(match),starttime,endtime,id,nickname
+		MsgVO msg=memberService.selectMatchForMsg(input);
+		mav.addObject("msg",msg);
+		mav.addObject("title","메시지 작성");
+		mav.setViewName("writeMsg");
+		
+		return mav;
+		
+	}
+	@RequestMapping("/member/sentMsg.do")
+	public ModelAndView sentMsg(HttpSession session) {
+		
+		ModelAndView mav=new ModelAndView();
+		String sender=(String)session.getAttribute("user_id");
+		List<MsgVO> msgs=memberService.selectSentMsg(sender);
+		mav.addObject("msgs",msgs);
+		mav.addObject("title","보낸 메시지");
+		mav.setViewName("sentMsg");
+		
+		return mav;
 	}
 
 }

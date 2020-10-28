@@ -48,4 +48,28 @@
        <put-attribute name="body" value="/WEB-INF/views/more/myClubRecruitReq.jsp"/>
        <put-attribute name="footer" value=""/>
     </definition>
+    <definition name="myClubRecruitReq" extends="main">
+       <put-attribute name="title" value="나의 팀 가입 신청 현황"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/myClubRecruitReq.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="myMsg" extends="main">
+       <put-attribute name="title" value="받은 메시지"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/myMsg.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="writeMsg" extends="main">
+       <put-attribute name="title" value="메시지 작성"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/writeMsg.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="sentMsg" extends="main">
+       <put-attribute name="title" value="보낸 메시지"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/sentMsg.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
 </tiles-definitions>

@@ -16,6 +16,7 @@ import kr.spring.club.service.ClubService;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
 import kr.spring.member.domain.MemberVO;
+import kr.spring.member.domain.MsgVO;
 import kr.spring.member.service.MemberService;
 
 @Controller
@@ -82,6 +83,42 @@ public class MemberAjaxController {
 		//수락,대기,거절
 		try {
 			memberService.deleteClubRecruitReq(clubRecruit_req_num);
+			map.put("result", "success");
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		
+		return map;
+	}
+	@RequestMapping("/member/sendMsg.do")
+	@ResponseBody
+	public Map<String,Object> sendMsg(MsgVO msg){
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		try {
+			memberService.insertMsg(msg);
+			map.put("result", "success");
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		
+		return map;
+		
+	}
+	@RequestMapping("/member/deleteMsgFromReceiver.do")
+	@ResponseBody
+	public Map<String,Object> deleteMsg(Integer msg_num){
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		try{
+			Integer s_del=memberService.selectS_Del(msg_num);
+			if (s_del ==1) {
+				memberService.deleteMsgFromReceiver(msg_num);
+			}else if(s_del==2) {
+				memberService.deleteMsg(msg_num);
+			}
 			map.put("result", "success");
 		}catch(Exception e) {
 			e.printStackTrace();

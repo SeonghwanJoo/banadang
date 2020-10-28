@@ -239,7 +239,7 @@
 }
 .match-item{
 	font-weight:bold;
-	padding-left:1rem;
+	padding-right:1rem;
 }
 
 .match {
@@ -596,7 +596,7 @@ input[type=text]:focus, select:focus{
 }
 .main-row span.more{
 	position:absolute;
-	right:0rem;
+	right:0.5rem;
 	text-align:center;
 	display:block;
 	font-size:2rem;
@@ -604,6 +604,12 @@ input[type=text]:focus, select:focus{
 .last{margin-right:2rem;}
 .margin-btm{
 	margin-bottom:0.5rem;
+}
+.bubble{
+	position:absolute;
+	right:-1.7rem;
+	top:-0.2rem;
+	font-size:1.5rem;
 }
 .margin-top, span.margin-top{
 	margin-top:0.5rem;
@@ -614,6 +620,7 @@ input[type=text]:focus, select:focus{
 }
 .neutral{background-color:#878787;}
 .positive{background-color:#a4d3a6;}
+.positive-color{color:#a4d3a6;}
 .negative{background-color:#000;}
 .full{
 	width:95%;
@@ -1240,8 +1247,12 @@ a.menu-item:active{
 	width:2rem;
 	height:2rem;
 	position:absolute;
-	left:12rem;
+	right:0rem;
 	top:0.5rem;
+}
+.right{
+	position:absolute;
+	right:3rem;
 }
 div.one-col{
 	position:relative;
@@ -1400,9 +1411,10 @@ div.smaller{
 }
 div.x-smaller{
 	width:10%;
+	margin-right:0.5rem;
 }
 div.x-bigger{
-	width:90%;
+	width:87%;
 }
 .sync{
 	position:relative;

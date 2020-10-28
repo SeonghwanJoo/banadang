@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.domain.MemberVO;
+import kr.spring.member.domain.MsgVO;
 
 @Service("memberService")
 public class MemberServiceImpl implements MemberService{
@@ -113,6 +114,51 @@ public class MemberServiceImpl implements MemberService{
 	public Integer selectClubRecruit_reqForDuplicate(MatchVO match) {
 		
 		return memberMapper.selectClubRecruit_reqForDuplicate(match);
+		
+	}
+
+
+	@Override
+	public void insertMsg(MsgVO msg) {
+		
+		memberMapper.insertMsg(msg);
+		
+	}
+
+	@Override
+	public MsgVO selectMatchForMsg(MsgVO input) {
+		
+		return memberMapper.selectMatchForMsg(input);
+	}
+
+	@Override
+	public List<MsgVO> selectSentMsg(String sender) {
+		
+		return memberMapper.selectSentMsg(sender);
+	}
+
+	@Override
+	public List<MsgVO> selectReceivedMsg(String receiver) {
+		
+		return memberMapper.selectReceivedMsg(receiver);
+	}
+
+	@Override
+	public void deleteMsgFromReceiver(Integer msg_num) {
+		memberMapper.deleteMsgFromReceiver(msg_num);
+		
+	}
+
+	@Override
+	public Integer selectS_Del(Integer msg_num) {
+		
+		return memberMapper.selectS_Del(msg_num);
+	}
+
+	@Override
+	public void deleteMsg(Integer msg_num) {
+		
+		memberMapper.deleteMsg(msg_num);
 		
 	}
 

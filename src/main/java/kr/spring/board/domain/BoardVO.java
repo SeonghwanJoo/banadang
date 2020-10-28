@@ -17,6 +17,7 @@ public class BoardVO {
 	private Integer match_num;
 	private Integer club_num;
 	private Integer voteAnswer_num;
+
 	public String getThumbnail_image() {
 		return thumbnail_image;
 	}

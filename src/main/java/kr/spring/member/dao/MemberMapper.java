@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Update;
 
 import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
+import kr.spring.member.domain.MsgVO;
 
 public interface MemberMapper {
 	
@@ -47,4 +48,24 @@ public interface MemberMapper {
 	
 	@Select("select clubRecruit_req_num from clubRecruit_req where id=#{id} and clubRecruit_num=#{clubRecruit_num}")
 	public Integer selectClubRecruit_reqForDuplicate(MatchVO match);
+	
+	public MsgVO selectMatchForMsg(MsgVO input);
+	
+	@Insert("insert into msg (sender,receiver,content,match_num,club_num) values (#{sender},#{receiver},#{content},#{match_num},#{club_num})")
+	public void insertMsg(MsgVO msg);
+	
+	@Select("select * from (select * from msg where sender=#{sender} and s_del=1 order by register_date desc)a join member_detail b on a.receiver=b.id ")
+	public List<MsgVO> selectSentMsg(String sender);
+	
+	@Select("select * from(select * from (select * from msg where receiver=#{receiver} and r_del=1 order by register_date desc) a join member_detail b on a.sender=b.id) join club using(club_num)")
+	public List<MsgVO> selectReceivedMsg(String receiver);
+	
+	@Update("update msg set r_del=2 where msg_num=#{msg_num}")
+	public void deleteMsgFromReceiver(Integer msg_num);
+	
+	@Select("select s_del from msg where msg_num=#{msg_num}")
+	public Integer selectS_Del(Integer msg_num);
+	
+	@Delete("delete from msg where msg_num=#{msg_num}")
+	public void deleteMsg(Integer msg_num);
 }
