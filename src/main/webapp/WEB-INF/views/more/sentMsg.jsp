@@ -7,7 +7,11 @@
 		<span class="material-icons" id="cancel">close</span>
 		</a>
 		<div class="topnav-centered">
-			<a href="javascript:location.reload()" class="active cursor">${title }</a>
+			<a id="sel" class="active cursor gray">${title }
+				<span class="drop-down material-icons">
+					arrow_drop_down
+				</span>
+			</a>
 		</div>
 	</div>
 </div>
@@ -18,17 +22,24 @@
 	<li class="li-list">
 		<div class="main-row">
 			<div class="x-smaller">
+				<c:if test="${not empty msg.thumbnail_image }">
 				<img src="${msg.thumbnail_image }" alt="Avatar" class="avatar">
+				</c:if>
 			</div>
 			<div class="x-bigger">
 				<div class="main-row">
 					<span class="match-item">${msg.club_name } </span>
+					<c:if test="${not empty msg.nickname }">
 					<span class="nickname bold">${msg.nickname }</span>
+					</c:if>
+					<c:if test="${empty msg.nickname }">
+					<span class="gray bold">탈퇴 회원</span>
+					</c:if>
 					<c:if test="${msg.status==2 }">
-					<span>읽음</span>
+					<span class="msg-status">읽음</span>
 					</c:if>
 					<span class="small-font bold gray right">${msg.register_date }</span>
-					<span class="material-icons more cursor m-font gray" id="more" onclick="openOption(${msg.msg_num},${msg.match_num },${msg.club_num })" >more_vert</span>
+					<span class="material-icons more cursor m-font gray" id="more" onclick="openOption(${msg.msg_num})" >more_vert</span>
 				</div>
 				<p>${msg.content }</p>
 			</div>
@@ -37,12 +48,23 @@
 	</c:forEach>
 </ul>
 </c:if>
+<!-- The Modal -->
+<div id="sel-modal" class="modals">
+  <!-- Modal content -->
+  	
+	<div class="modals-content">
+	<span class="close_mod">&times;</span>
+		<h6 class="mod-h6">메시지함 선택</h6>
+		<hr>
+	  	<span onclick="location.href='myMsg.do'" class="margin-top bold disp-bl cursor" >받은 메시지 함</span>
+	  	<hr>
+	  	<span onclick="location.href='sentMsg.do'" class="margin-top bold disp-bl cursor">보낸 메시지 함</span>
+	</div>
+</div>
 <div id="more_modal" class="confirm-modals">
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
 		<div class="sub-content">
-			<button id="reply" class="pos-btn">답장</button>
-			<hr>
 			<button id="delete" class="pos-btn red">삭제</button>
 		</div>
 		<div class="sub-content">
@@ -52,11 +74,36 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function openOption(msg_num,match_num,club_num){
+//Get the modal
+var modal = document.getElementById("sel-modal");
+
+// Get the button that opens the modal
+var sel = document.getElementById("sel");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close_mod")[0];
+
+// When the user clicks the button, open the modal 
+sel.onclick = function() {
+	modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+	modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+	if (event.target == modal) {
+		modal.style.display = "none";
+	}
+}
+function openOption(msg_num){
 	$('#more_modal').css('display','block');
 	$('#delete').click(function(){
 		$.ajax({
-			url:'deleteMsgFromReceiver.do',
+			url:'deleteMsgFromSender.do',
 			type:'post',
 			data:{
 				msg_num: msg_num,
@@ -83,9 +130,6 @@ function openOption(msg_num,match_num,club_num){
 		});
 		
 	});
-	$('#reply').click(function(){
-		location.href='writeMsg.do?match_num='+match_num+'&club_num='+club_num+;
-	});
 }
 	$(function(){
 		$('#more').click(function(){
@@ -96,7 +140,7 @@ function openOption(msg_num,match_num,club_num){
 			$('#more_modal').css('display','none');
 		});
 		
-	})
+	});
 
 
 </script>

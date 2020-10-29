@@ -11,8 +11,9 @@
 		</div>
 	</div>
 </div>
-<div class="blank_div"></div>
-<div class="main-row cursor" onclick="location.href='${pageContext.request.contextPath}/match/invite_detail.do?match_num=${msg.match_num }'">
+
+<div class="blank_div"></div><!-- match_num이 없을 때,club_num이 없을 때, 아이디가 없을 때-->
+<div class="main-row">
 	<div class="x-smaller">
 		<c:if test="${!empty msg.club_img }">
 		<img src="${pageContext.request.contextPath}/club/imageView.do?club_num=${msg.club_num}" alt="Avatar" class="avatar">
@@ -23,17 +24,23 @@
 	</div>
 	<div class="x-bigger">
 		<div class="main-row">
+			<c:if test="${not empty msg.club_name }">
 			<span class="match-item">${msg.club_name }</span>
+			</c:if>
+			<c:if test="${not empty msg.address }">
 			<span class="match-item">${msg.address }</span>
 			<span class="match-item">${msg.match_date }</span>
 			<span class="match-item">${msg.start_time }~${msg.end_time }</span>
+			</c:if>
 		</div>
 		<span class="gray">받는 사람</span>
+		<c:if test="${not empty msg.nickname }">
 		<span class="positive-color bold">${msg.nickname }</span>
+		</c:if>
+		<c:if test="${empty msg.nickname }">
+		<span class="gray bold">탈퇴 회원</span>
+		</c:if>
 	</div>
-	<span class="material-icons float-right l-font gray">
-		chevron_right
-	</span>
 </div>
 <hr class="hr">
 <div class="row">
@@ -54,15 +61,18 @@ function submitContent(){
 		$('#content_msg').css('color','red').text('메시지 내용을 입력해주세요.');
 		return false;
 	}
-	
+	if('${msg.id}'==''){
+		alert('탈퇴한 회원입니다.');
+		return false;
+	}
 	$.ajax({
 		url:'sendMsg.do',
 		type:'post',
 		data:{
 			sender:${user_id},
 			receiver:${msg.id},
-			match_num:${msg.match_num},
-			club_num:${msg.club_num},
+			match_num:'${msg.match_num}',
+			club_num:'${msg.club_num}',
 			content:$('#content').val()
 		},
 		dataType:'json',

@@ -1,6 +1,7 @@
 package kr.spring.member.domain;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 public class MsgVO {
 	private Integer msg_num;
@@ -136,5 +137,14 @@ public class MsgVO {
 	public void setRegister_date(Date register_date) {
 		this.register_date = register_date;
 	}
-
+	@Override
+	public String toString() {
+		return "MsgVO [msg_num=" + msg_num + ", sender=" + sender + ", receiver=" + receiver + ", status=" + status
+				+ ", r_del=" + r_del + ", s_del=" + s_del + ", content=" + content + ", register_date=" + register_date
+				+ ", club_name=" + club_name + ", match_num=" + match_num + ", address=" + address + ", start_time="
+				+ start_time + ", end_time=" + end_time + ", nickname=" + nickname + ", id=" + id + ", club_img="
+				+ Arrays.toString(club_img) + ", club_num=" + club_num + ", match_date=" + match_date
+				+ ", thumbnail_image=" + thumbnail_image + "]";
+	}
+	
 }

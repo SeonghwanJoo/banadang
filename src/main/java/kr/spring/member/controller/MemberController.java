@@ -62,7 +62,8 @@ public class MemberController {
         	}else if(existingMember !=null) {
         		session.setAttribute("mem_auth", existingMember.getMem_auth());
         	}
-        	
+        	Integer count_msg=memberService.selectCountMsg(user_id);
+        	session.setAttribute("count_msg", count_msg);
         	List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
         	session.setAttribute("user_id", user_id);
             session.setAttribute("access_Token", access_Token);
@@ -120,6 +121,8 @@ public class MemberController {
         		session.setAttribute("mem_auth", existingMember.getMem_auth());
         	}
         	
+        	Integer count_msg=memberService.selectCountMsg(user_id);
+        	session.setAttribute("count_msg", count_msg);
         	List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
         	session.setAttribute("user_id", user_id);
             session.setAttribute("access_Token", access_Token);
@@ -270,9 +273,12 @@ public class MemberController {
 	@RequestMapping("/member/writeMsg.do")
 	public ModelAndView writeMsg(MsgVO input) {
 		
+		
 		ModelAndView mav=new ModelAndView();
-		//club_name,match_num,address(match),starttime,endtime,id,nickname
+
+		logger.info("match_num : " +input.getMatch_num());
 		MsgVO msg=memberService.selectMatchForMsg(input);
+		
 		mav.addObject("msg",msg);
 		mav.addObject("title","메시지 작성");
 		mav.setViewName("writeMsg");

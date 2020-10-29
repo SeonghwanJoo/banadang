@@ -6,6 +6,7 @@
 
 <form:form class="col s12" id="clubRecruitForm" action="postClubRecruit.do" commandName="matchVO" autocomplete="off">
 <input type="hidden" name="club_num" value="${myClub.club_num }">
+<input type="hidden" name="id" value="${user_id }">
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
 		<a onclick="location.href='clubRecruit.do'">

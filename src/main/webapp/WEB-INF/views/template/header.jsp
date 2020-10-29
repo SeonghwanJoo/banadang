@@ -24,7 +24,10 @@
   <!-- Right-aligned links -->
   <div class="topnav-right">
     <a id="write" href="${pageContext.request.contextPath }/match/writeForm.do">
-    	<i class="fas fa-edit" id="topIcon"></i>
+    	<i class="fas fa-edit relative" id="topIcon"></i>
+    	<c:if test="${title eq '나의 페이지' && count_msg!=0 }">
+		<span class="count-msg-page">${count_msg }</span>
+		</c:if>
     </a>
   </div>
 </div>
@@ -38,8 +41,8 @@
 		<h6 class="mod-h6">소속팀 설정</h6>
 		<c:if test="${!empty myClubs }">
 		<c:forEach items="${myClubs }" var="club">
-		<hr class="hr">
-	  	<span onclick="setMyClub(this)" class="set-team-opt" data-club="${club.club_num }">${club.club_name }</span>
+		<hr>
+	  	<span onclick="setMyClub(${club.club_num })" class="margin-top bold disp-bl cursor" >${club.club_name }</span>
 	  	</c:forEach>
 	  	</c:if>
 	</div>
@@ -48,8 +51,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	
-	function setMyClub(myClub){
-		var myClub_num=myClub.getAttribute("data-club");
+	function setMyClub(myClub_num){
 		$.ajax({
 			url:'${pageContext.request.contextPath}/club/setMyClub.do',
 			type:'post',

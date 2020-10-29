@@ -76,7 +76,7 @@ $(function(){
 				"<a class='detail' href='${pageContext.request.contextPath}/member/clubRecruitDetail.do?clubRecruit_num="
 				+matchs[i].clubRecruit_num+"'>"
 				+"<li class='li-list'>"
-					+"<div class='row'>"
+					+"<div class='main-row'>"
 						+"<span class='match-item'>주 활동 요일 "+matchs[i].act_day+" | </span>"
 						+"<span class='match-item'>시간대 "+matchs[i].act_time+" | </span>"
 						+"<span class='match-item'>지역 "+matchs[i].club_address+" | </span>"

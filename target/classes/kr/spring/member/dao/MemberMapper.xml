@@ -27,9 +27,9 @@
     (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from club_rating group by club_num) f on e.club_num=f.club_num
 	</select>
 	<insert id="insertClubRecruit" parameterType="matchVO" useGeneratedKeys="true" keyProperty="clubRecruit_num">
-	insert into club_recruit (club_num,act_day,act_time,register_cost,month_cost,type,recruit_position,recruit_due,clubRecruit_detail)
+	insert into club_recruit (id,club_num,act_day,act_time,register_cost,month_cost,type,recruit_position,recruit_due,clubRecruit_detail)
 		values
-		(#{club_num},#{act_day},#{act_time},#{register_cost},#{month_cost},#{type},#{recruit_position},#{recruit_due},
+		(#{id},#{club_num},#{act_day},#{act_time},#{register_cost},#{month_cost},#{type},#{recruit_position},#{recruit_due},
 		<if test="clubRecruit_detail==''">
 			''
 		</if>
@@ -42,7 +42,9 @@
 		</selectKey>
 	</insert>
 	<select id="selectClubRecruitWithClubDetail" parameterType="integer" resultType="matchVO">
-		 select * from (select * from (select * from club_recruit where clubRecruit_num=#{clubRecruit_num}) join club using(club_num)) left outer join 
+		  select * from 
+    (select club_num,clubRecruit_num,act_day,act_time,register_cost,month_cost,type,recruit_position,clubRecruit_detail,a.id,club_name,club_img,club_color,club_age,club_address,club_loc,club_locX,club_locY from
+        (select * from club_recruit where clubRecruit_num=1)a join club b using(club_num)) left outer join 
     (select avg(manner),avg(perform),count(*) count,club_num from club_rating group by club_num) using(club_num)
 	</select>
 	<select id="selectClubRecruits" resultType="matchVO">
@@ -63,8 +65,32 @@
             join club_recruit b using(clubRecruit_num) where recruit_due>sysdate-1)a join club b using(club_num))c left outer join
             (select avg(manner) manner,avg(perform)perform,club_num from club_rating group by club_num) using(club_num)
 	</select>
-	<select id="selectMatchForMsg" parameterType="integer" resultType="msgVO">
-	select * from(select match_num,match_date,a.id,start_time,end_time,address,club_name,club_img,club_num from
-                    (select  match_num,match_date,start_time,end_time,address,#{club_num} as club_num,#{id} as id from match where match_num=42)a join club b using(club_num)) c join member_detail d using(id)
+	<select id="selectMatchForMsg" parameterType="msgVO" resultType="msgVO">
+		<if test="match_num != null">
+			select * from
+   				 (select nickname,thumbnail_image,a.id,club_num,club_name,club_img,#{match_num} as match_num from
+       				 (select nickname,thumbnail_image,id,#{club_num} as club_num from member_detail where id=#{id})a left outer join club using(club_num))b left outer join match using(match_num)
+		</if>
+		<if test="match_num == null">
+    		select nickname,thumbnail_image,a.id,club_num,club_name,club_img from
+       			(select nickname,thumbnail_image,id,#{club_num} as club_num from member_detail where id=#{id})a left outer join club using(club_num)
+		</if>
 	</select>
+	<insert id="insertMsg" parameterType="msgVO">
+		insert into msg (sender,receiver,content,match_num,club_num) 
+		values (#{sender},#{receiver},#{content},
+		<if test="match_num == null">
+		'',
+		</if>
+		<if test="match_num != null">
+		#{match_num},
+		</if>
+		<if test="club_num == null">
+		''
+		</if>
+		<if test="club_num != null">
+		#{club_num}
+		</if>
+		)
+	</insert>
 </mapper>

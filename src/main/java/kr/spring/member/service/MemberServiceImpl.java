@@ -162,4 +162,30 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 
+	@Override
+	public Integer selectR_Del(Integer msg_num) {
+		
+		return memberMapper.selectR_Del(msg_num);
+	}
+
+	@Override
+	public void deleteMsgFromSender(Integer msg_num) {
+		
+		memberMapper.deleteMsgFromSender(msg_num);
+		
+	}
+
+	@Override
+	public void updateMsgStatus(Integer receiver) {
+		
+		memberMapper.updateMsgStatus(receiver);
+		
+	}
+
+	@Override
+	public Integer selectCountMsg(String user_id) {
+		
+		return memberMapper.selectCountMsg(user_id);
+	}
+
 }

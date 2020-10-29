@@ -30,5 +30,9 @@ public interface MemberService {
 	public void deleteMsgFromReceiver(Integer msg_num);
 	public Integer selectS_Del(Integer msg_num);
 	public void deleteMsg(Integer msg_num);
+	public Integer selectR_Del(Integer msg_num);
+	public void deleteMsgFromSender(Integer msg_num);
+	public void updateMsgStatus(Integer receiver);
+	public Integer selectCountMsg(String user_id);
 	
 }

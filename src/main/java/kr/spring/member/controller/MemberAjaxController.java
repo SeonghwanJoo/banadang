@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -96,6 +97,7 @@ public class MemberAjaxController {
 	public Map<String,Object> sendMsg(MsgVO msg){
 		
 		Map<String,Object> map=new HashMap<String,Object>();
+		logger.info("match_num : "+msg.getMatch_num());
 		try {
 			memberService.insertMsg(msg);
 			map.put("result", "success");
@@ -109,7 +111,7 @@ public class MemberAjaxController {
 	}
 	@RequestMapping("/member/deleteMsgFromReceiver.do")
 	@ResponseBody
-	public Map<String,Object> deleteMsg(Integer msg_num){
+	public Map<String,Object> deleteMsgFromReceiver(Integer msg_num){
 		
 		Map<String,Object> map=new HashMap<String,Object>();
 		try{
@@ -123,6 +125,43 @@ public class MemberAjaxController {
 		}catch(Exception e) {
 			e.printStackTrace();
 			map.put("result", "errors");
+		}
+		
+		return map;
+	}
+	
+	@RequestMapping("/member/deleteMsgFromSender.do")
+	@ResponseBody
+	public Map<String,Object> deleteMsgFromSender(Integer msg_num){
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		try{
+			Integer r_del=memberService.selectR_Del(msg_num);
+			if (r_del ==1) {
+				memberService.deleteMsgFromReceiver(msg_num);
+			}else if(r_del==2) {
+				memberService.deleteMsg(msg_num);
+			}
+			map.put("result", "success");
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		
+		return map;
+	}
+	@RequestMapping("/member/updateMsgStatus.do")
+	@ResponseBody
+	public Map<String,Object> updateMsgStatus(Integer receiver,HttpSession session){
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		try {
+			memberService.updateMsgStatus(receiver);
+			session.setAttribute("count_msg", 0);
+			map.put("result", "success");
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", "success");
 		}
 		
 		return map;

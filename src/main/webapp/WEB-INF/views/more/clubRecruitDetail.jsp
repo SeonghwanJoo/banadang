@@ -23,9 +23,9 @@
 <div class="invite-wrapper" id="invite-wrapper">
  	<ul class="ul-list">
 		<li class="li-list">
-			<div class="row">
-				<span class="match-item">주 활동 요일 ${clubRecruit.act_day} | </span>
-				<span class="match-item">주 활동 시간대 ${clubRecruit.act_time } | </span>
+			<div class="main-row">
+				<span class="match-item">주 활동 요일 <span class="gray">${clubRecruit.act_day}</span></span>
+				<span class="match-item">주 활동 시간대 <span class="gray">${clubRecruit.act_time }</span></span>
 				<span class="match-item">
 					<c:if test="${clubRecruit.type==1 }">축구</c:if>
 					<c:if test="${clubRecruit.type==2 }">풋살</c:if>
@@ -40,6 +40,10 @@
 					<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
 					</c:if>
 					<span class="club_name">${clubRecruit.club_name }</span><br>
+					<span class="relative positive-color cursor" onclick="location.href='${pageContext.request.contextPath}/member/writeMsg.do?club_num=${clubRecruit.club_num }&id=${clubRecruit.id }'" >
+						<b>${clubRecruit.club_name }에 메시지 보내기</b>
+						<i class="fas fa-comment bubble"></i>
+					</span>
 				</div>
 				<div class="col">
 					<span class="age">주 연령대 ${clubRecruit.club_age }</span><br>

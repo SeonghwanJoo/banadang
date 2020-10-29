@@ -51,21 +51,36 @@ public interface MemberMapper {
 	
 	public MsgVO selectMatchForMsg(MsgVO input);
 	
-	@Insert("insert into msg (sender,receiver,content,match_num,club_num) values (#{sender},#{receiver},#{content},#{match_num},#{club_num})")
+	public MsgVO selectReceiverDetailWithoutMatch(MsgVO input);
+	
 	public void insertMsg(MsgVO msg);
 	
-	@Select("select * from (select * from msg where sender=#{sender} and s_del=1 order by register_date desc)a join member_detail b on a.receiver=b.id ")
+	@Select("select * from(select * from (select * from msg where sender=#{sender} and s_del=1 order by register_date desc)a left outer join member_detail b on a.receiver=b.id ) join club using(club_num) ")
 	public List<MsgVO> selectSentMsg(String sender);
 	
-	@Select("select * from(select * from (select * from msg where receiver=#{receiver} and r_del=1 order by register_date desc) a join member_detail b on a.sender=b.id) join club using(club_num)")
+	@Select("select * from(select * from (select * from msg where receiver=#{receiver} and r_del=1 order by register_date desc) a left outer join member_detail b on a.sender=b.id) join club using(club_num)")
 	public List<MsgVO> selectReceivedMsg(String receiver);
 	
 	@Update("update msg set r_del=2 where msg_num=#{msg_num}")
 	public void deleteMsgFromReceiver(Integer msg_num);
 	
+	@Select("select count(*) from msg where receiver=#{user_id} and status=1")
+	public Integer selectCountMsg(String user_id);
+	
+	@Update("update msg set s_del=2 where msg_num=#{msg_num}")
+	public void deleteMsgFromSender(Integer msg_num);
+	
 	@Select("select s_del from msg where msg_num=#{msg_num}")
 	public Integer selectS_Del(Integer msg_num);
 	
+	@Select("select r_del from msg where msg_num=#{msg_num}")
+	public Integer selectR_Del(Integer msg_num);
+	
 	@Delete("delete from msg where msg_num=#{msg_num}")
 	public void deleteMsg(Integer msg_num);
+	
+	@Update("update msg set status=2 where receiver=#{receiver}")
+	public void updateMsgStatus(Integer receiver);
+	
+	
 }
