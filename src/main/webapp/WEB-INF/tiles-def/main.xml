@@ -47,6 +47,12 @@
        <put-attribute name="body" value="/WEB-INF/views/main/myClubcheck.jsp"/>
        <put-attribute name="footer" value=""/>
     </definition>
+    <definition name="checkMemAuth" extends="main">
+       <put-attribute name="title" value="접근 권한 확인"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/main/checkMemAuth.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
     <definition name="writeReplyToVote" extends="main">
        <put-attribute name="title" value="투표 댓글 작성"/> 
        <put-attribute name="header" value=""/>

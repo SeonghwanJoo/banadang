@@ -56,35 +56,78 @@
 	<interceptors>
 		<!-- 로그인 여부 체크-->
 		<interceptor>
-			<mapping path="/main/voteForm.do"/>
-			<mapping path="/main/ratingForm.do"/>
-			<mapping path="/main/vote_detail.do"/>
-			<mapping path="/main/invite_detail.do"/>
-			<mapping path="/match/writeForm.do"/>
-			<mapping path="/match/write.do"/>
-			<mapping path="/match/postMatchRequest.do"/>
-			<mapping path="/match/writeRecruit.do"/>
+			<mapping path="/board/deleteNotice.do"/>
+			<mapping path="/board/deleteQna.do"/>
+			<mapping path="/board/modifyAnswer.do"/>
+			<mapping path="/board/modifyNotice.do"/>
+			<mapping path="/board/modifyQna.do"/>
+			<mapping path="/board/personalQna.do"/>
+			<mapping path="/board/personalQnaWrite.do"/>
+			<mapping path="/board/postNotice.do"/>
+			<mapping path="/board/postQna.do"/>
+			<mapping path="/board/qna.do"/>
+			<mapping path="/board/qnaDetail.do"/>
+			<mapping path="/board/replytoQna.do"/>
+			<mapping path="/board/updateNotice.do"/>
+			<mapping path="/board/updateQna.do"/>
+			<mapping path="/board/writeNotice.do"/>
+			<mapping path="/board/writeQna.do"/>
 			<mapping path="/club/club.do"/>
+			<mapping path="/club/club_details.do"/>
 			<mapping path="/club/createClubForm.do"/>
+			<mapping path="/club/imageView.do"/>
+			<mapping path="/club/inviteMember.do"/>
 			<mapping path="/club/manageClub.do"/>
+			<mapping path="/club/modifyClub.do"/>
+			<mapping path="/match/deleteMatch.do"/>
+			<mapping path="/match/deleteRecruit.do"/>
+			<mapping path="/match/invite_detail.do"/>
+			<mapping path="/match/modifyMatch.do"/>
+			<mapping path="/match/modifyRecruit.do"/>
+			<mapping path="/match/recruitDetail.do"/>
+			<mapping path="/match/write.do"/>
+			<mapping path="/match/writeForm.do"/>
+			<mapping path="/match/writeRecruit.do"/>
+			<mapping path="/member/clubRecruitDetail"/>
+			<mapping path="/member/deleteClubRecruit.do"/>
+			<mapping path="/member/kakaoSync.do"/>
+			<mapping path="/member/modifyClubRecruit.do"/>
+			<mapping path="/member/myClubRecruitReq.do"/>
+			<mapping path="/member/myMsg.do"/>
 			<mapping path="/member/myPage.do"/>
-			<beans:bean 
-			class="kr.spring.interceptor.LoginCheckInterceptor"/>
+			<mapping path="/member/myRecruitReq.do"/>
+			<mapping path="/member/postClubRecruit.do"/>
+			<mapping path="/member/postUpdatedClubRecruit.do"/>
+			<mapping path="/member/sentMsg.do"/>
+			<mapping path="/member/writeClubRecruit.do"/>
+			<mapping path="/member/writeMsg.do"/>
+			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/>
 		</interceptor>
 		<!-- 팀 운영진 권한 체크 -->
 		<interceptor>
-			<mapping path="/match/writeForm.do"/>
-			<mapping path="/match/postMatchRequest.do"/>
-			<mapping path="/match/writeRecruit.do"/>
 			<mapping path="/club/modifyClub.do"/>
-			<beans:bean 
-			class="kr.spring.interceptor.ClubAuthCheckInterceptor"/>
+			<mapping path="/match/deleteMatch.do"/>
+			<mapping path="/match/deleteRecruit.do"/>
+			<mapping path="/match/modifyMatch.do"/>
+			<mapping path="/match/modifyRecruit.do"/>
+			<mapping path="/match/writeForm.do"/>
+			<mapping path="/match/writeRecruit.do"/>
+			<mapping path="/member/deleteClubRecruit.do"/>
+			<mapping path="/member/modifyClubRecruit.do"/>
+			<mapping path="/member/writeClubRecruit.do"/>
+			<beans:bean class="kr.spring.interceptor.ClubAuthCheckInterceptor"/>
 		</interceptor>
 		<!-- 팀 소속회원 체크 -->
 		<interceptor>
 			<mapping path="/club/manageClub.do"/>
-			<beans:bean 
-			class="kr.spring.interceptor.ClubMemberCheckInterceptor"/>
+			<beans:bean class="kr.spring.interceptor.ClubMemberCheckInterceptor"/>
+		</interceptor>
+		<!-- 관리자 권한 체크 -->
+		<interceptor>
+			<mapping path="/board/deleteNotice.do"/>
+			<mapping path="/board/modifyNotice.do"/>
+			<mapping path="/board/writeNotice.do"/>
+			<beans:bean class="kr.spring.interceptor.MemAuthCheckInterceptor"/>
 		</interceptor>
 	</interceptors>
 	

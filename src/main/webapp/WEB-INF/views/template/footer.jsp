@@ -33,7 +33,7 @@
 				<a class="menu-item" href="${pageContext.request.contextPath }/member/myPage.do">
 				<span class="myPage material-icons bottom-icon relative">more_horiz</span>
 				<span class="myPage bottom-icon-txt"></span>
-				<c:if test="${count_msg!=0 }">
+				<c:if test="${count_msg!=0 && not empty count_msg }">
 				<span class="count-msg">${count_msg }</span>
 				</c:if>
 				</a>

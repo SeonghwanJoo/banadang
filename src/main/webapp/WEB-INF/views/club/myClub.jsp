@@ -30,16 +30,25 @@
 </c:if>
 <c:if test="${empty myClubs }">
 <!-- The Modal -->
-<div id="toast" class="submit_toast" style="display:block">
+<div id="toast" class="submit_toast">
   <!-- Modal content -->
-  <div id="toast-content" class="submit_toast_content">
-  	<span id="myTeam_msg">소속팀이 없습니다</span>
-	<input type="button" class="btn-modal" id="close" onclick="location.href='${pageContext.request.contextPath}/club/joinClub.do'" value="소속팀 찾기">
-	<input type="button" class="btn-modal" id="team_confirm" onclick="location.href='${pageContext.request.contextPath}/club/createClubForm.do'"value="소속팀 만들기">
+  <div id="submit_toast_content" class="submit_toast_content">
+  	<span id="club_msg">소속팀이 없습니다</span>
+  	<br><br>확인
   </div>
 </div>
 <!-- The Modal -->
 </c:if>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(function(){
+		$("#toast").css("display","block");
+		$("#submit_toast_content").click(function(){
+			$("#toast").css("display","none");
+		})
+	});
+
+</script>
 
 
 

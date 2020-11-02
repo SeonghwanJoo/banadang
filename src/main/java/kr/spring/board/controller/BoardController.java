@@ -125,7 +125,7 @@ public class BoardController {
 	public ModelAndView modifyQna(Integer qna_num) {
 		ModelAndView mav=new ModelAndView();
 		BoardVO board=boardService.selectQnaDetail(qna_num);
-		mav.addObject("title","자주 묻는 질문 수정");
+		mav.addObject("title","질문 수정");
 		mav.addObject("board",board);
 		mav.setViewName("modifyQna");
 		

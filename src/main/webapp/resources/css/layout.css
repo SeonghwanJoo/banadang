@@ -872,7 +872,7 @@ input:checked + .slider:before {
 }
 .count-msg{
 	position:absolute;
-	right:2rem;
+	right:35%;
 	top:0.5rem;
 	font-size:0.3rem;
 	width:1rem;

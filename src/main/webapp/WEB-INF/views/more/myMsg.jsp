@@ -23,7 +23,7 @@
 		<div class="main-row">
 			<div class="x-smaller">
 				<c:if test="${not empty msg.thumbnail_image }">
-				<img src="${msg.thumbnail_image }" alt="Avatar" class="avatar">
+				<img src="${msg.thumbnail_image }" alt="Avatar" class="avatar align-center">
 				</c:if>
 			</div>
 			<div class="x-bigger">

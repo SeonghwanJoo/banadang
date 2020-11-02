@@ -55,13 +55,26 @@ ${answer.content }
 </c:forEach>
 </c:if>
 
+<div id="reply-more_modal" class="confirm-modals">
+	<!-- Modal content -->
+	<div class="confirm-modal-content">
+		<div class="sub-content">
+			<button id="reply-modify" class="pos-btn">댓글 수정</button>
+			<hr>
+			<button id="reply-delete" class="pos-btn red">댓글 삭제</button>
+		</div>
+		<div class="sub-content">
+			<button id="reply-more-cancel-btn" class="neg-btn">취소</button>
+		</div>
+	</div>
+</div>
 <div id="more_modal" class="confirm-modals">
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
 		<div class="sub-content">
-			<button id="modify" class="pos-btn">수정</button>
+			<button id="modify" class="pos-btn" onclick="location.href='modifyQna.do?qna_num=${board.qna_num}'">글 수정</button>
 			<hr>
-			<button id="delete" class="pos-btn red">삭제</button>
+			<button id="delete" class="pos-btn red" onclick="location.href='deleteQna.do?qna_num=${board.qna_num}'">글 삭제</button>
 		</div>
 		<div class="sub-content">
 			<button id="more-cancel-btn" class="neg-btn">취소</button>
@@ -71,8 +84,8 @@ ${answer.content }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 function modifyAnswer(answer_num){
-	$('#more_modal').css('display','block');
-	$('#delete').click(function(){
+	$('#reply-more_modal').css('display','block');
+	$('#reply-delete').click(function(){
 		$.ajax({
 			url:'deleteAnswer.do',
 			type:'post',
@@ -90,7 +103,7 @@ function modifyAnswer(answer_num){
 					
 					alert('오류 발생');
 					$(window).click(function(){
-						$('#more_modal').css('display','none');
+						$('#reply-more_modal').css('display','none');
 					});
 				}
 				
@@ -101,7 +114,7 @@ function modifyAnswer(answer_num){
 		});
 		
 	});
-	$('#modify').click(function(){
+	$('#reply-modify').click(function(){
 		location.href='modifyAnswer.do?answer_num='+answer_num;
 	});
 }
@@ -109,12 +122,14 @@ function modifyAnswer(answer_num){
 		$('#more').click(function(){
 			
 			$('#more_modal').css('display','block');
+		
 		});
-		$('#more-cancel-btn').click(function(){
-			$('#more_modal').css('display','none');
+			
+		$('#reply-more-cancel-btn').click(function(){
+			$('#reply-more_modal').css('display','none');
 		});
 		
-	})
+	});
 
 
 </script>

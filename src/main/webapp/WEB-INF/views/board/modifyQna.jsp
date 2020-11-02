@@ -28,7 +28,7 @@
 <hr class="hr">
 <div class="row">
 	<div class="text input-container col">
-		<textarea class="detail input-field" name="content" id="content" placeholder="자주 묻는 질문 내용을 입력해주세요.">${board.content }</textarea>
+		<textarea class="detail input-field" name="content" id="content" placeholder="질문 내용을 입력해주세요.">${board.content }</textarea>
 	</div>
 </div>
 <div class="row"><div class="col"><span class="msg" id="content_msg"></span></div></div>
