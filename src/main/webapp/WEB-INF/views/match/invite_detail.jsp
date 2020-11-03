@@ -99,6 +99,14 @@
      <br><br>확인
   </div>
 </div>
+<!-- The Modal -->
+<div id="myClub-toast" class="submit_toast">
+  <!-- Modal content -->
+  <div id="myClub-toast-content" class="submit_toast_content">
+     <span>소속팀의 운영진만 경기 신청 가능합니다</span>
+     <br><br>확인
+  </div>
+</div>
 <div id="more_modal" class="confirm-modals">
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
@@ -145,10 +153,17 @@
 		
 		$('#submit').click(function(){
 		
-			postMatchRequest( ${match.match_num}, ${user_id}, ${myClub.club_num}, $('#request_detail').val());
+			postMatchRequest( ${match.match_num}, ${user_id}, '${myClub.club_num}', $('#request_detail').val());
 			console.log( '${match.match_num}'+ '${user_id}'+' ${myClub.club_num}'+ $('#request_detail').val());
 			
 			function postMatchRequest(a,b,c,d){
+				if(c==''||${myClub.club_auth<5}){
+					$('#myClub-toast').css('display','block');
+					$('#myClub-toast').click(function(){
+						$('#myClub-toast').css('display','none');
+					})
+					return;
+				}
 				$.ajax({
 					url:'postMatchRequest.do',
 					type:'post', 

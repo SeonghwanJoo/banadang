@@ -129,6 +129,24 @@
 			<mapping path="/board/writeNotice.do"/>
 			<beans:bean class="kr.spring.interceptor.MemAuthCheckInterceptor"/>
 		</interceptor>
+		<!-- 질문 작성자 or 관리자 권한 체크 -->
+		<interceptor>
+			<mapping path="/board/deleteQna.do"/>
+			<mapping path="/board/modifyQna.do"/>
+			<mapping path="/board/qnaDetail.do"/>
+			<mapping path="/board/replytoQna.do"/>
+			<beans:bean class="kr.spring.interceptor.PosterCheckInterceptor"/>
+		</interceptor>
+		<!-- 질문 댓글 작성자 or 관리자 권한 체크 -->
+		<interceptor>
+			<mapping path="/board/modifyAnswer.do"/>
+			<beans:bean class="kr.spring.interceptor.AnswerPosterCheckInterceptor"/>
+		</interceptor>
+		<!-- 모집중인 경기 여부 체크 -->
+		<interceptor>
+			<mapping path="/match/invite_detail.do"/>
+			<beans:bean class="kr.spring.interceptor.AwayCheckInterceptor"/>
+		</interceptor>
 	</interceptors>
 	
 

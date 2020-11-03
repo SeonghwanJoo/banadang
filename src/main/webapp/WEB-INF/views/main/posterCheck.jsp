@@ -5,7 +5,7 @@
 
   <!-- Modal content -->
   <div id="submit_toast_content" class="submit_toast_content">
-     <span id="club_msg">소속된 팀이 없습니다</span>
+     <span id="club_msg">잘못된 접근 입니다.</span>
      <br><br>확인
   </div>
 </div>

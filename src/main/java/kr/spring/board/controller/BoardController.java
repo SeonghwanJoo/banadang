@@ -93,6 +93,7 @@ public class BoardController {
 		
 		return mav;
 	}
+	
 	@RequestMapping("/board/qnaDetail.do")
 	public ModelAndView qnaDetail(Integer qna_num) {
 		
@@ -111,6 +112,7 @@ public class BoardController {
 		
 		return mav;
 	}
+	
 	@RequestMapping("/board/modifyNotice.do")
 	public ModelAndView modifyNotice(Integer notice_num) {
 		ModelAndView mav=new ModelAndView();
@@ -190,7 +192,7 @@ public class BoardController {
 		mav.addObject("answers",answers);
 		mav.addObject("board", board);
 		mav.addObject("qna_num",qna_num);
-		mav.addObject("title","답글 쓰기");
+		mav.addObject("title","댓글 쓰기");
 		mav.setViewName("replytoQna");
 		
 		return mav;
@@ -202,7 +204,7 @@ public class BoardController {
 		ModelAndView mav=new ModelAndView();
 		BoardVO board=boardService.selectQna_answerByAnswer_num(answer_num);
 		mav.addObject("board",board);
-		mav.addObject("title","답글 수정");
+		mav.addObject("title","댓글 수정");
 		mav.setViewName("modifyAnswer");
 		return mav;
 		

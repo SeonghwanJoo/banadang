@@ -22,7 +22,7 @@
 <hr class="hr">
 <div class="row">
 	<div class="text input-container col">
-		<textarea class="detail input-field" name="content" id="content" placeholder="답글 내용을 입력해주세요."></textarea>
+		<textarea class="detail input-field" name="content" id="content" placeholder="댓글 내용을 입력해주세요."></textarea>
 	</div>
 </div>
 <div style="display:block;height:2rem;">

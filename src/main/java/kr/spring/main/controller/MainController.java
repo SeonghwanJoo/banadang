@@ -42,7 +42,6 @@ public class MainController {
 		ModelAndView mav = new ModelAndView();
 		String user_id=(String) session.getAttribute("user_id");
 		if(user_id!=null) {
-				logger.info("<<<user_id>>> : " +user_id );
 			
 			ClubVO club=(ClubVO)session.getAttribute("myClub");
 			//내가 소속한 클럽번호로  match table에 클럽 번호가 있는 match를 받는다
@@ -211,10 +210,13 @@ public class MainController {
 		
 		return "checkMemAuth";
 	}
+	@RequestMapping("/main/posterCheck.do")
+	public String posterCheck() {
+		
+		return "posterCheck";
+	}
 	public void addVoteResult(MatchVO match,ArrayList<MatchVO> vote_status) {
-		logger.info("match in addVoteResult : "+match);
 		Integer myVote=matchService.selectMyVoteStatus(match);
-		logger.info("myVote : "+myVote);
 		
 		if(myVote != null) {
 			match.setStatus(myVote);
@@ -241,7 +243,6 @@ public class MainController {
 		match.setHome_manner(0.0);
 		match.setHome_perform(0.0);
 		match.setAway_manner(0.0);
-		logger.info("getAway_name:"+match.getAway_name());
 		match.setAway_name(match.getAway_name()+"(미등록팀)");//DB에 away_name추가
 		match.setAway_perform(0.0);
 		

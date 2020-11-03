@@ -114,7 +114,7 @@ function sendLink() {
     Kakao.Link.sendCustom({
     	templateId: 34560,
     	templateArgs: {
-    		'msg_title': '${myClub.club_name} 팀으로 당신을 초대합니다',
+    		'msg_title': '${myClub.club_name} 팀으로 당신을 초대합니다.',
     		'msg_description': '아래 링크를 눌러 들어오세요.',
     		'club_num': '${myClub.club_num}',
     		'nickname': '${member.nickname}'

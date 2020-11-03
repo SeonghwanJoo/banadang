@@ -5,7 +5,7 @@
 
   <!-- Modal content -->
   <div id="submit_toast_content" class="submit_toast_content">
-     <span id="club_msg">팀의 소속된 회원만 접근 가능합니다</span>
+     <span id="club_msg">팀의 소속된 회원만 접근 가능합니다.</span>
      <br><br>확인
   </div>
 </div>

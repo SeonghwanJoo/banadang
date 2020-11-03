@@ -574,7 +574,7 @@ input[type=text]:focus, select:focus{
 	background-color:transparent;
 	font-size:1.2rem;
 	font-weight:bold;
-	color:#a5d6a7;
+	color:#007bff;
 }
 .neg-btn{
 	border:none;

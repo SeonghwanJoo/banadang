@@ -54,13 +54,13 @@
        <put-attribute name="footer" value=""/>
     </definition>
     <definition name="replytoQna" extends="main">
-       <put-attribute name="title" value="답글 쓰기"/> 
+       <put-attribute name="title" value="댓글 쓰기"/> 
        <put-attribute name="header" value=""/>
        <put-attribute name="body" value="/WEB-INF/views/board/replytoQna.jsp"/>
        <put-attribute name="footer" value=""/>
     </definition>
     <definition name="modifyAnswer" extends="main">
-       <put-attribute name="title" value="답글 수정"/> 
+       <put-attribute name="title" value="댓글 수정"/> 
        <put-attribute name="header" value=""/>
        <put-attribute name="body" value="/WEB-INF/views/board/modifyAnswer.jsp"/>
        <put-attribute name="footer" value=""/>

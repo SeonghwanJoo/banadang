@@ -44,10 +44,6 @@ public class MatchController {
 		
 		List<ClubVO> list = new ArrayList<ClubVO> ();
 		list=clubService.selectAllClubs();
-		for(ClubVO club : list) {
-			logger.info("<<<<List>>>> : "+ club);
-		}
-		
 		
 		mav.setViewName("writeForm");
 		mav.addObject("title", "매치 작성");
@@ -58,10 +54,11 @@ public class MatchController {
 	
 	@RequestMapping("/match/write.do")
 	public String registerMatch(MatchVO matchVO) {
-		logger.info("<<<<matchVO>>>> : "+ matchVO);
 		
 		matchService.insertMatch(matchVO);
-		
+		if(matchVO.getAway()==0) {
+			return "redirect:/match/match_toInvite.do";
+		}
 		return "redirect:/main/main.do";
 	}
 	@RequestMapping("/match/match_toInvite.do")
@@ -73,7 +70,6 @@ public class MatchController {
 		mav.setViewName("invite_match");
 		mav.addObject("title","경기 매치");
 		mav.addObject("matchVO", matchVO);
-		logger.info("<<<matchVO>>>"+matchVO);
 		
 		return mav;
 	}
@@ -160,7 +156,6 @@ public class MatchController {
 		//match_request가 신청되어 있는 경우=>상태표시로 취소됨 표시
 		//투표가 되어 잇는 경우 =>운영진 권한에 따라 삭제 OK
 		MatchVO match=matchService.selectPKsforMatch(match_num);
-		logger.info("match in delete : "+match);
 		if(match.getRequest_num()==null&&(match.getAway()==-1||match.getAway()==0)&&match.getRecruit_num()==null) {
 			matchService.deleteMatch(match_num);
 		}else {
@@ -185,9 +180,7 @@ public class MatchController {
 	
 	
 	public void addVoteResult(MatchVO match,ArrayList<MatchVO> vote_status) {
-		logger.info("match in addVoteResult : "+match);
 		Integer myVote=matchService.selectMyVoteStatus(match);
-		logger.info("myVote : "+myVote);
 		
 		if(myVote != null) {
 			match.setStatus(myVote);
@@ -214,7 +207,6 @@ public class MatchController {
 		match.setHome_manner(0.0);
 		match.setHome_perform(0.0);
 		match.setAway_manner(0.0);
-		logger.info("getAway_name:"+match.getAway_name());
 		match.setAway_name(match.getAway_name()+"(미등록팀)");//DB에 away_name추가
 		match.setAway_perform(0.0);
 		
