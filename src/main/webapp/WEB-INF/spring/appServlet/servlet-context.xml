@@ -75,7 +75,6 @@
 			<mapping path="/club/club.do"/>
 			<mapping path="/club/club_details.do"/>
 			<mapping path="/club/createClubForm.do"/>
-			<mapping path="/club/imageView.do"/>
 			<mapping path="/club/inviteMember.do"/>
 			<mapping path="/club/manageClub.do"/>
 			<mapping path="/club/modifyClub.do"/>

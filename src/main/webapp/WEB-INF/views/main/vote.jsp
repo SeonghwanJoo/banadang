@@ -187,11 +187,15 @@
 		<div class="total_wrapper">
 			<a href="vote_detail.do?
 				club_num=${match.club_num }&match_num=${match.match_num}&home_name=${match.home_name}&away_name=${match.away_name}"
-				onclick="location.reload(true)">
+				>
 			<span class="total_person material-icons">person</span>
 			<span id="total" class="total">${match.attend+match.not_attend+match.undefined}</span><span class="unit"> 명 투표 </span>
 			<i class="total fas fa-chevron-right"></i>
 			</a>
+			<span class="share cursor" onclick="sendLink('${match.match_num}','${match.club_num}','${match.match_date}','${match.address}','${match.start_time}')">
+			투표 공유하기
+			<i class="fas fa-share-alt"></i>
+			</span>
 		</div>
 	</li>
 </ul>
@@ -241,7 +245,21 @@
 </div>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
+Kakao.init('32776969383e4a77d92f6e18dd233bc5');
+function sendLink(match_num,club_num,match_date,address,start_time) {
+    Kakao.Link.sendCustom({
+    	templateId: 39879,
+    	templateArgs: {
+    		'msg_title': '경기 참석 투표를 완료해주세요.',
+    		'msg_description': address+'에서 '+match_date+'일 '+start_time+'에 경기 예정입니다.',
+    		'club_num': club_num,
+    		'match_num': match_num,
+    		'isMain': true
+    	}
+    })
+  }
 function modifyAnswer(voteAnswer_num){
 	$('#more_modal').css('display','block');
 	$('#delete').click(function(){

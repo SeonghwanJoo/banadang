@@ -301,6 +301,11 @@
 	color:#e0dede;
 	font-size:10px;
 }
+.share{
+	position:absolute;
+	right:8rem;
+}
+
 div.row{
 	position:relative;
 }

@@ -75,7 +75,7 @@
 					<c:if test="${match.type==2 }">풋살</c:if>
 				</span>
 				<c:if test="${myClub.club_auth>4 && myClub.club_num==match.home && empty match.cancel}">
-				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }')">more_vert</span>
+				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }')">more_vert</span>
 				</c:if>
 				<c:if test="${not empty match.cancel }">
 				<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
@@ -303,19 +303,19 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
 	Kakao.init('32776969383e4a77d92f6e18dd233bc5');
-	function sendLink(match_num,club_num) {
+	function sendLink(match_num,club_num,match_date,address,start_time) {
 	    Kakao.Link.sendCustom({
-	    	templateId: 34560,
+	    	templateId: 39879,
 	    	templateArgs: {
 	    		'msg_title': '경기 참석 투표를 완료해주세요.',
-	    		'msg_description': '아래 링크를 눌러 들어오세요.',
+	    		'msg_description': address+'에서 '+match_date+'일 '+start_time+'에 경기 예정입니다.',
 	    		'club_num': club_num,
 	    		'match_num': match_num,
 	    		'isMain': true
 	    	}
 	    })
 	  }
-	function openMore(match_num,club_name,club_num){
+	function openMore(match_num,club_name,club_num,match_date,address,start_time){
 		$('#more_modal').css('display','block');
 		 
 		$('#modify').click(function(){
@@ -325,7 +325,8 @@
 			location.href='${pageContext.request.contextPath}/match/deleteMatch.do?match_num='+match_num+'&club_name='+club_name;
 		});
 		$('#share').click(function(){
-			sendLink(match_num,club_num);
+			sendLink(match_num,club_num,match_date,address,start_time);
+			$('#more_modal').css('display','none');
 		});
 		$('#more-cancel-btn').click(function(){
 			$('#more_modal').css('display','none');
