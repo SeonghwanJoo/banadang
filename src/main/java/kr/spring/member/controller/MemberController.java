@@ -45,7 +45,7 @@ public class MemberController {
 	@RequestMapping("/member/login.do")
 	public String kakaoLogin(@RequestParam String code,HttpSession session)throws IOException {	
 		
-		String access_Token = loginAPI.getAccessToken(code,false);
+		String access_Token = loginAPI.getAccessToken(code,1);
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_Token);
         String user_id=memberVO.getId();
@@ -102,7 +102,7 @@ public class MemberController {
 									@RequestParam String state,
 									HttpSession session)throws IOException {	
 		
-		String access_Token = loginAPI.getAccessToken(code,true);
+		String access_Token = loginAPI.getAccessToken(code,0);
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_Token);
         
@@ -138,6 +138,56 @@ public class MemberController {
         Integer club_num=Integer.parseInt(values[0]);
         String nickname=URLEncoder.encode(values[1],"utf-8");
 		return "redirect:/club/inviteMember.do?club_num="+club_num+"&nickname="+nickname;
+	}
+	@RequestMapping("/member/voteLogin.do")
+	public String voteKakaoLogin(@RequestParam String code,
+								 @RequestParam String state,
+								 HttpSession session)throws IOException {	
+		String[] values=state.split("-");
+		Integer match_num=Integer.parseInt(values[0]);
+	    Integer club_num=Integer.parseInt(values[1]);
+	    Boolean isMain=Boolean.valueOf(values[2]);
+		
+	    String access_Token = loginAPI.getAccessToken(code,2);
+        MemberVO memberVO=new MemberVO();
+        memberVO = loginAPI.getUserInfo(access_Token);
+        
+        String user_id=memberVO.getId();
+        
+        //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
+        if (memberVO != null) {
+        
+        	//memberVO의 아이디가 DB에 기 등록된 id인지 확인
+        	MemberVO existingMember=memberService.getMember(user_id);
+        	//등록되어 있으면 session setting
+        	if(existingMember == null) {//등록되어 있지 않으면 insert로 회원정보 추가 후 session setting
+        		memberService.insertMember(memberVO);
+        		session.setAttribute("mem_auth", 1);
+        	}else if(existingMember !=null) {
+        		session.setAttribute("mem_auth", existingMember.getMem_auth());
+        	}
+        	
+        	Integer count_msg=memberService.selectCountMsg(user_id);
+        	session.setAttribute("count_msg", count_msg);
+        	List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
+        	session.setAttribute("user_id", user_id);
+            session.setAttribute("access_Token", access_Token);
+            session.setAttribute("myClubs", myClubs);
+            if(myClubs.size()>0) {
+            	
+            	for(ClubVO myClub:myClubs) {
+            		
+            		if(myClub.getClub_num()==club_num) {
+            			ClubVO club=new ClubVO();
+                        club.setId(user_id);
+                        club.setClub_num(club_num);
+            			session.setAttribute("myClub", clubService.selectMyClubDetails(club));
+            			return "redirect:/main/voteForm.do?match_num="+match_num+"&club_num="+club_num+"&isMain="+isMain;
+            		}
+            	}
+            }
+        }
+        return "redirect:/main/membercheck.do";
 	}
 	@RequestMapping("/member/logout.do")
 	public String kakaoLogout(HttpSession session) {

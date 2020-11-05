@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:if test="${!empty myClubs }">
-<span>우리팀을 선택하세요</span>
+<span class="margin-top disp-bl" >우리팀을 선택하세요</span>
 <div class="invite-wrapper" id="invite-wrapper">
  	<ul class="ul-list non-border-btm">
  		<c:forEach items="${myClubs }" var="myClub">

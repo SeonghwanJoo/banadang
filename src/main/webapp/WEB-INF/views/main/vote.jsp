@@ -2,6 +2,29 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:if test="${empty user_id }">
+<div id="login_modal" class="certify-modals" style="display:block">
+	<!-- Modal content -->
+	<div class="certify-modal-content">
+		<div class="sub-content">
+			<div class="main-row">
+				<div class="login">
+					<p>간편 로그인하고 GentlePro에서 우리팀을 관리해보세요</p>
+					<a onclick="loginProcess()">
+						<img class="login_btn"
+						src="${pageContext.request.contextPath}/resources/images/kakao_login/ko/kakao_login_medium_wide.png">
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="sub-content">
+			<button id="login-cancel-btn" class="neg-btn">취소</button>
+		</div>
+	</div>
+</div>
+</c:if>
+<c:if test="${not empty user_id }">
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
 		<c:if test="${isMain==true }">
@@ -23,7 +46,7 @@
 	<li class="match">	
 		<div class="match-info" id="write_body">
 			<div class="match-info invote">
-				<span class="match-item">${match.match_date}</span>
+				<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="yy.MM.dd"/></span>
 				<span class="match-item">${match.start_time }~${match.end_time }</span>
 				<span class="match-item">${match.address}</span>
 				<span class="match-item">
@@ -49,31 +72,33 @@
 				</div>
 				<span class="from-to">VS</span>
 				<div class="team-info col">
+					<c:if test="${match.away != 0 }">
+					<c:if test="${not empty match.away_name }">
 					${match.away_name}<br>
 					매너  
 					<span class="star-rating">
 						<span style="width:${match.away_manner*20}%"></span>
 					</span>
 					${match.away_manner*2}<br>
-					실력 
+					실력  
 					<span class="star-rating">
 						<span style="width:${match.away_perform*20}%"></span>
 					</span>
 					${match.away_perform*2}
+					</c:if>
+					<c:if test="${empty match.away_name }">
+					삭제된 팀
+					</c:if>
+					</c:if>
+					<c:if test="${match.away == 0 }">
+						<span>모집중</span>
+					</c:if>
 				</div>
 			</div>
 		</div>
 		<input type="hidden" id="id" value="${user_id }">
 		<input type="hidden" id="match_num" value="${match.match_num }">
-		<c:if test="${match.home!=match.away && match.home==match.club_num}">
-		<input type="hidden" id="club_num" value="${match.home }">
-		</c:if>
-		<c:if test="${match.home!=match.away && match.away==match.club_num}">
-		<input type="hidden" id="club_num" value="${match.away }">
-		</c:if>
-		<c:if test="${match.home==match.away}">
-		<input type="hidden" id="club_num" value="${match.home }">
-		</c:if>
+		<input type="hidden" id="club_num" value="${myClub.club_num }">
 		<div class="row">
 			<span class="vote-rating">
 				<c:if test="${match.attend==0 }">
@@ -184,17 +209,16 @@
 				<input class="vote" type="radio" name="vote" id="undefined" value="3"> 미정
 			</label>
 		</div>
-		<div class="total_wrapper">
-			<a href="vote_detail.do?
-				club_num=${match.club_num }&match_num=${match.match_num}&home_name=${match.home_name}&away_name=${match.away_name}"
-				>
+		<div class="total_wrapper margin-btm">
+			<span class="cursor" onclick="location.href='vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num}&home_name=${match.home_name}&away_name=${match.away_name}'">
 			<span class="total_person material-icons">person</span>
 			<span id="total" class="total">${match.attend+match.not_attend+match.undefined}</span><span class="unit"> 명 투표 </span>
 			<i class="total fas fa-chevron-right"></i>
-			</a>
+			</span>
 			<span class="share cursor" onclick="sendLink('${match.match_num}','${match.club_num}','${match.match_date}','${match.address}','${match.start_time}')">
 			투표 공유하기
-			<i class="fas fa-share-alt"></i>
+			<img class="kakaolink-share" src="${pageContext.request.contextPath }/resources/images/kakaolink_btn.png">
+			<!-- <i class="fas fa-share-alt"></i> -->
 			</span>
 		</div>
 	</li>
@@ -243,6 +267,7 @@
 		</div>
 	</div>
 </div>
+</c:if>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -260,6 +285,9 @@ function sendLink(match_num,club_num,match_date,address,start_time) {
     	}
     })
   }
+function loginProcess(){
+	location.href="https://kauth.kakao.com/oauth/authorize?client_id=0646bcb11e5b9bbdb24fc9153f7693ae&redirect_uri=http://localhost:8080/banadang/member/voteLogin.do&response_type=code&state=${match.match_num }-${match.club_num}-${isMain}";
+};
 function modifyAnswer(voteAnswer_num){
 	$('#more_modal').css('display','block');
 	$('#delete').click(function(){

@@ -7,7 +7,7 @@
 		<a onclick="location.href=document.referrer">
 		<span class="material-icons" id="chevron_left" >chevron_left</span>
 		</a>
-		<div class="topnav-centered-form">
+		<div class="topnav-centered">
 			<a href="#home" class="active">${match.home_name } VS ${match.away_name}</a>
 		</div>
 	</div>
@@ -22,9 +22,9 @@
 	</div>
 </div>
 <div id="voted-detail" class="tab_detail" style="display:block">
-	<div class="detail_wrapper">
+	<ul class="ul-list">
 		<c:if test="${!empty atdance }">
-		<div class="list">
+		<li class="li-list">
 			<div class="col"><span>참석 : ${fn:length(atdance)}</span></div>
 			<hr class="hr">
 			<div class="row">
@@ -35,20 +35,20 @@
 					</div>
 				</c:forEach>
 			</div>
-		</div>
+		</li>
 		</c:if>
 		<c:if test="${empty atdance }">
-		<div class="list">
+		<li class="li-list">
 			<div class="col"><span>참석 : 0</span></div>
 			<hr class="hr">
 			<div class="detail-item">
 			아직 투표한 사람이 없습니다</div>
-		</div>
+		</li>
 		</c:if>
-	</div>
-	<div class="detail_wrapper">
+	</ul>
+	<ul class="ul-list">
 		<c:if test="${!empty no_atdance }">
-		<div class="list">
+		<li class="li-list">
 			<div class="col"><span>불참 : ${fn:length(no_atdance)}</span></div>
 			<hr class="hr">
 			<div class="row">
@@ -59,20 +59,20 @@
 					</div>
 				</c:forEach>
 			</div>
-		</div>
+		</li>
 		</c:if>
 		<c:if test="${empty no_atdance }">
-		<div class="list">
+		<li class="li-list">
 			<div class="col"><span>불참 : 0</span></div>
 			<hr class="hr">
 			<div class="detail-item">
 			아직 투표한 사람이 없습니다</div>
-		</div>
+		</li>
 		</c:if>
-	</div>
-	<div class="detail_wrapper">
+	</ul>
+	<ul class="ul-list">
 		<c:if test="${!empty undefined_atdance }">
-		<div class="list">
+		<li class="li-list">
 			<div class="col"><span>미정 : ${fn:length(undefined_atdance)}</span></div>
 			<hr class="hr">
 			<div class="row">
@@ -83,17 +83,17 @@
 					</div>
 				</c:forEach>
 			</div>
-		</div>
+		</li>
 		</c:if>
 		<c:if test="${empty undefined_atdance }">
-		<div class="list">
+		<li class="li-list">
 			<div class="col"><span>미정 : 0</span></div>
 			<hr class="hr">
 			<div class="detail-item">
 			아직 투표한 사람이 없습니다</div>
-		</div>
+		</li>
 		</c:if>
-	</div>
+	</ul>
 </div>
 <div id="not-voted" class="tab_detail" style="display:none">
 	<div class="detail_wrapper">

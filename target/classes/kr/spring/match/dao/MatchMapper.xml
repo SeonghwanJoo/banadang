@@ -35,7 +35,7 @@
 			</selectKey>
 	</insert>
 	<select id="selectAverageRating" parameterType="matchVO" resultType="matchVO">
-		select a.club_num,a.club_name,b.perform,b.manner from (select club_num, club_name from club where club_num=#{home} or club_num=#{away} ) a 
+		select a.club_num,a.club_name,filename,b.perform,b.manner from (select club_num, club_name,filename from club where club_num=#{home} or club_num=#{away} ) a 
 	    left outer join
 	    (select club_num, avg(perform) as perform, avg(manner) as manner
 			 from club_rating group by club_num) b

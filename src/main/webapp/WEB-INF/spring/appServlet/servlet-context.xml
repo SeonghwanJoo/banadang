@@ -75,7 +75,6 @@
 			<mapping path="/club/club.do"/>
 			<mapping path="/club/club_details.do"/>
 			<mapping path="/club/createClubForm.do"/>
-			<mapping path="/club/inviteMember.do"/>
 			<mapping path="/club/manageClub.do"/>
 			<mapping path="/club/modifyClub.do"/>
 			<mapping path="/match/deleteMatch.do"/>
@@ -100,6 +99,10 @@
 			<mapping path="/member/sentMsg.do"/>
 			<mapping path="/member/writeClubRecruit.do"/>
 			<mapping path="/member/writeMsg.do"/>
+			<mapping path="/main/ratingForm.do"/>
+			<mapping path="/main/vote_detail.do"/>
+			<mapping path="/main/replyToVote.do"/>
+			<mapping path="/main/modifyVoteAnswer.do"/>
 			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/>
 		</interceptor>
 		<!-- 팀 운영진 권한 체크 -->
@@ -119,6 +122,9 @@
 		<!-- 팀 소속회원 체크 -->
 		<interceptor>
 			<mapping path="/club/manageClub.do"/>
+			<mapping path="/main/vote_detail.do"/>
+			<mapping path="/main/replyToVote.do"/>
+			<mapping path="/main/modifyVoteAnswer.do"/>
 			<beans:bean class="kr.spring.interceptor.ClubMemberCheckInterceptor"/>
 		</interceptor>
 		<!-- 관리자 권한 체크 -->

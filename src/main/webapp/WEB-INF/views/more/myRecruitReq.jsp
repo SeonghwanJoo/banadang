@@ -19,7 +19,7 @@
 	<c:forEach items="${matches }" var="match">
 	<li class="li-list">
 		<div class="main-row margin-btm">
-			<span class="match-item">${match.match_date }</span>
+			<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="yy.MM.dd"/></span>
 			<span class="match-item">${match.start_time } ~ ${match.end_time }</span>
 			<span class="match-item">${match.address }</span>
 			<c:if test="${match.type==1 }">

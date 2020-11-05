@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="main-row">
 	<div id="demo" class="carousel slide" data-ride="carousel">
 	
@@ -38,7 +39,7 @@
 <c:if test="${empty user_id }">
 <div class="main-row">
 	<div class="login">
-		<p>간편 로그인하고 바나당에서 우리팀을 관리해보세요</p>
+		<p>간편 로그인하고 GentlePro에서 우리팀을 관리해보세요</p>
 		<a
 			href="https://kauth.kakao.com/oauth/authorize?
 	client_id=0646bcb11e5b9bbdb24fc9153f7693ae
@@ -52,43 +53,53 @@
 </c:if>
 
 <c:if test="${not empty user_id }">
-<div class="match-head">
-		<span class="title-btw">경기 일정</span>
-		<button class="btn_write" onclick="location.href='${pageContext.request.contextPath}/match/writeForm.do'">
-			<span>매치 작성</span> <span class="material-icons">create</span>
-		</button>
+<div class="match-head" id="bc">
+	<span class="title-btw">경기 일정</span>
+	<button class="btn_write" id="btn_write" onclick="location.href='${pageContext.request.contextPath}/match/writeForm.do'">
+		<span>매치 작성</span> <span class="material-icons">create</span>
+	</button>
 </div>
 <hr class="hr">
 <c:if test="${not empty match_list }">
 <ul class="match-list">
 <c:forEach var="match" items="${match_list}">
 	<li class="match">
-		<div class="match-info">
-			<div class="main-row">
-				<span class="match-item">${match.match_date}</span>
-				<span class="match-item">${match.start_time }~${match.end_time }</span>
-				<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}" target="_blank">
-				<span class="match-item">${match.address}</span>
-				</a>
-				<span class="match-item last">
-					<c:if test="${match.type==1 }">축구</c:if>
-					<c:if test="${match.type==2 }">풋살</c:if>
-				</span>
-				<c:if test="${myClub.club_auth>4 && myClub.club_num==match.home && empty match.cancel}">
-				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }')">more_vert</span>
-				</c:if>
-				<c:if test="${not empty match.cancel }">
-				<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
-				</c:if>
-			</div>
+		<div class="main-row margin-top">
+			<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="yy.MM.dd"/></span>
+			<span class="match-item">${match.start_time }~${match.end_time }</span>
+			<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}" target="_blank">
+			<span class="match-item">${match.address}</span>
+			</a>
+			<span class="match-item last">
+				<c:if test="${match.type==1 }">축구</c:if>
+				<c:if test="${match.type==2 }">풋살</c:if>
+			</span>
+			<c:if test="${myClub.club_auth>4 && myClub.club_num==match.home && empty match.cancel}">
+			<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }')">more_vert</span>
+			</c:if>
+			<c:if test="${not empty match.cancel }">
+			<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
+			</c:if>
 		</div>
 		<div class="main-row">
-			<div class="team-info col">
 			<c:if test="${empty match.home_name }">
-				삭제된 팀
+			<div class="team-info col">
+				<span class="disp-inbl margin-top">삭제된 팀</span>
+			</div>
 			</c:if>
 			<c:if test="${not empty match.home_name }">
-				${match.home_name}<br>
+			<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.home }'">
+				<div class="row margin-top margin-btm">
+					<div class="centered">
+						<c:if test="${not empty match.home_filename }">
+						<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.home}" alt="Avatar" class="avatar emblem">
+						</c:if>
+						<c:if test="${empty match.home_filename  }">
+						<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+						</c:if>
+						<span class="disp-inbl margin-top">${match.home_name}</span>
+					</div>
+				</div>
 				매너  
 				<span class="star-rating">
 					<span style="width:${match.home_manner*20}%"></span>
@@ -99,32 +110,47 @@
 					<span style="width:${match.home_perform*20}%"></span>
 				</span>
 				${match.home_perform*2}
-			</c:if>
 			</div>
+			</c:if>
 			<span class="from-to">VS</span>
-			<div class="team-info col">
+			
 			<c:if test="${match.away != 0 }">
 				<c:if test="${not empty match.away_name }">
-				${match.away_name}<br>
-				매너  
-				<span class="star-rating">
-					<span style="width:${match.away_manner*20}%"></span>
-				</span>
-				${match.away_manner*2}<br>
-				실력  
-				<span class="star-rating">
-					<span style="width:${match.away_perform*20}%"></span>
-				</span>
-				${match.away_perform*2}
+				<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
+					<div class="row margin-top margin-btm">
+						<div class="centered">
+							<c:if test="${not empty match.away_filename }">
+							<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}" alt="Avatar" class="avatar emblem">
+							</c:if>
+							<c:if test="${empty match.away_filename  }">
+							<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+							</c:if>
+							<span class="disp-inbl margin-top">${match.away_name}</span>
+						</div>
+					</div>
+					매너  
+					<span class="star-rating">
+						<span style="width:${match.away_manner*20}%"></span>
+					</span>
+					${match.away_manner*2}<br>
+					실력  
+					<span class="star-rating">
+						<span style="width:${match.away_perform*20}%"></span>
+					</span>
+					${match.away_perform*2}
+				</div>
 				</c:if>
 				<c:if test="${empty match.away_name }">
-				삭제된 팀
-			</c:if>
+				<div class="team-info col">
+					<span class="disp-inbl margin-top">삭제된 팀</span>
+				</div>
+				</c:if>
 			</c:if>
 			<c:if test="${match.away == 0 }">
-				<span>모집중</span>
-			</c:if>
+			<div class="team-info col">
+				<span class="disp-inbl margin-top">모집중</span>
 			</div>
+			</c:if>
 		</div>
 		<!-- 내 팀이 -->
 		<div class="main-row">
@@ -230,8 +256,8 @@
 <c:if test="${match.home!=match.away && !fn:contains(match.away_name,'미등록팀')}">
 <li class="match">
 	<div class="match-info">
-		<div class="main-row">
-			<span class="match-item">${match.match_date}</span>
+		<div class="main-row margin-top">
+			<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="yy.MM.dd"/></span>
 			<span class="match-item">${match.start_time }~${match.end_time }</span>
 			<span class="match-item">${match.address}</span>
 			<span class="match-item">
@@ -242,8 +268,18 @@
 	</div>
 	<div class="match-info">
 		<div class="main-row">
-			<div class="team-info col">
-				${match.home_name}<br>
+			<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.home }'">
+				<div class="row margin-top margin-btm">
+					<div class="centered">
+						<c:if test="${not empty match.home_filename }">
+						<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.home}" alt="Avatar" class="avatar emblem">
+						</c:if>
+						<c:if test="${empty match.home_filename  }">
+						<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+						</c:if>
+						<span class="disp-inbl margin-top">${match.home_name}</span>
+					</div>
+				</div>
 				매너 
 				<span class="star-rating">
 					<span style="width:${match.home_manner*20}%"></span>
@@ -256,8 +292,18 @@
 				${match.home_perform*2}
 			</div>
 			<span class="from-to">VS</span>
-			<div class="team-info col">
-				${match.away_name}<br>
+			<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
+				<div class="row margin-top margin-btm">
+					<div class="centered">
+						<c:if test="${not empty match.away_filename }">
+						<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}" alt="Avatar" class="avatar emblem">
+						</c:if>
+						<c:if test="${empty match.away_filename  }">
+						<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+						</c:if>
+						<span class="disp-inbl margin-top">${match.away_name}</span>
+					</div>
+				</div>
 				매너 
 				<span class="star-rating">
 					<span style="width:${match.away_manner*20}%"></span>
@@ -272,10 +318,10 @@
 		</div>
 	</div>
 	<c:if test="${match.home==match.club_num}">
-	<button class="block" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }'">${match.away_name } 평점 작성 하기</button>
+	<button class="block margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }'">${match.away_name } 평점 작성 하기</button>
 	</c:if>
 	<c:if test="${match.away==match.club_num }">
-	<button class="block" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }'">${match.home_name } 평점 작성 하기</button>
+	<button class="block margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }'">${match.home_name } 평점 작성 하기</button>
 	</c:if>
 </li>
 <hr class="hr"> 

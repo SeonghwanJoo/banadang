@@ -5,7 +5,14 @@
 <div class="topnav" id=myTopnav>
   <!-- Centered link -->
   <div class="topnav-centered">
-    <a href="javascript:location.reload()" id="top-anchor" class="active">${title}</a>
+    <a href="javascript:location.reload()" id="top-anchor" class="active">
+    <c:if test="${title eq 'main'}">
+    <img src="${pageContext.request.contextPath }/resources/images/logo_header_sq_f.png" class="header-logo">
+    </c:if>
+    <c:if test="${title ne 'main' }">
+    ${title}
+    </c:if>
+    </a>
   </div>
 
   <!-- Left-aligned links (default) -->

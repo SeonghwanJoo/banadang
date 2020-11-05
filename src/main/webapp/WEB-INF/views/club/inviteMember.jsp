@@ -51,7 +51,7 @@
 		<div class="sub-content">
 			<div class="main-row">
 				<div class="login">
-					<p>간편 로그인하고 바나당에서 우리팀을 관리해보세요</p>
+					<p>간편 로그인하고 GentlePro에서 우리팀을 관리해보세요</p>
 					<a onclick="loginProcess()">
 						<img class="login_btn"
 						src="${pageContext.request.contextPath}/resources/images/kakao_login/ko/kakao_login_medium_wide.png">

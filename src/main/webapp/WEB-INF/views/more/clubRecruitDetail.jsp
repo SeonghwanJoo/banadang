@@ -24,8 +24,8 @@
  	<ul class="ul-list">
 		<li class="li-list">
 			<div class="main-row">
-				<span class="match-item">주 활동 요일 <span class="gray">${clubRecruit.act_day}</span></span>
-				<span class="match-item">주 활동 시간대 <span class="gray">${clubRecruit.act_time }</span></span>
+				<span class="match-item"> <span class="gray">주 활동 요일 </span>${clubRecruit.act_day}</span>
+				<span class="match-item"><span class="gray">주 활동 시간대 </span> ${clubRecruit.act_time }</span>
 				<span class="match-item">
 					<c:if test="${clubRecruit.type==1 }">축구</c:if>
 					<c:if test="${clubRecruit.type==2 }">풋살</c:if>
@@ -46,8 +46,8 @@
 					</span>
 				</div>
 				<div class="col">
-					<span class="age">주 연령대 ${clubRecruit.club_age }</span><br>
-					<span class="uniform">
+					<span class="age"><span class="gray">주 연령대 </span>${clubRecruit.club_age }</span><br>
+					<span class="uniform gray">
 						유니폼
 						<c:if test="${!empty clubRecruit.club_color }">
 						<span class="color" style="background-color:${clubRecruit.club_color}"></span>
@@ -59,8 +59,8 @@
 				</div>
 			</div>
 		</li>
-		<li class="li-list">
-			<span class="rating_count">총 ${clubRecruit.count }명의 평가</span>
+		<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${clubRecruit.club_num }'">
+			<span class="rating_count">총 ${clubRecruit.count }명의 평가 <i class="fas fa-chevron-right"></i></span>
 			<div class="row">
 				<div class="col">
 					매너 
@@ -87,12 +87,12 @@
 		</c:if>
 		<li class="li-list">
 			<div class="row">
-				<span class="col">가입비 &nbsp; <span class="underline">${clubRecruit.register_cost }</span></span>
-				<span class="col">월 회비 &nbsp; <span class="underline">${clubRecruit.month_cost }</span></span>
+				<span class="col"><span class="gray">가입비</span> <span>${clubRecruit.register_cost }</span></span>
+				<span class="col"><span class="gray">월 회비</span> <span>${clubRecruit.month_cost }</span></span>
 			</div>
 			<!-- 포지션 -->
 			<div class="row">
-				<span class="center">필요 포지션</span>
+				<span class="center gray">필요 포지션</span>
 				<c:if test="${fn:contains(clubRecruit.recruit_position,'G') }">
 				<span class="chip">
 					<span class="chip-txt">GK</span>
@@ -190,6 +190,7 @@
 	// 이미지 지도를 생성합니다
 	var map = new kakao.maps.Map(mapContainer, mapOption);
 	marker.setMap(map); 
+	console.log('clubRecruit_num : '+${clubRecruit.clubRecruit_num})
 	$(function(){
 		$('#more').click(function(){
 			$('#more_modal').css('display','block');

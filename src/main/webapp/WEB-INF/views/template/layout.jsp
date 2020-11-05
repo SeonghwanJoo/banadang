@@ -10,7 +10,6 @@
 <title><tiles:getAsString name="title"/></title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout.css">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 .star-rating { width:100px;position:relative;top:3px; text-align: left; }
 .star-rating,.star-rating span {
 	display:inline-block; height:19px; overflow:hidden; background:url('${pageContext.request.contextPath}/resources/images/star1.png')no-repeat;
@@ -27,7 +26,7 @@
 <script src="https://kit.fontawesome.com/154da1ea0f.js" ></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0646bcb11e5b9bbdb24fc9153f7693ae&libraries=services"></script>
 </head>
-<body>
+<body class="body">
 <div class="container">
 <div id="main">
 	<div id="main_header">

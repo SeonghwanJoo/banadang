@@ -8,7 +8,7 @@
 		<a href="club.do" >
 		<span class="material-icons" id="cancel">close</span>
 		</a>
-		<div class="topnav-centered">
+		<div class="topnav-centered inner">
 			<a href="javascript:location.reload()" class="active cursor">${title }</a>
 		</div>
 		<c:if test="${myClub.club_auth>4 }">
@@ -83,12 +83,12 @@
 	<c:if test="${myClub.club_auth>4 }">
 	<div class="tab_detail" id="manageMatch" >
 		<c:if test="${!empty away_club }">
-		<h6>상대 모집 중인 경기의 상대팀을 선택 후 확정하세요</h6>
-		<ul class="ul-list">
+		<h6>상대팀 선택</h6>
+		<ul class="ul-list border-top">
 			<c:forEach items="${away_club }" var="away">
 			<li class="li-list">
-				<div class="row margin-btm">
-					<span class="match-item">${away.match_date }</span>
+				<div class="main-row margin-btm gray">
+					<span class="match-item"><fmt:formatDate value="${away.match_date}" pattern="yy.MM.dd"/></span>
 					<span class="match-item">${away.start_time } ~ ${away.end_time }</span>
 					<span class="match-item">${away.address}</span>
 					<c:if test="${away.type==1 }">
@@ -168,13 +168,13 @@
 		</ul>
 		</c:if>
 		<c:if test="${!empty home_club}">
-		<h6>홈팀에 매치 신청한 경기</h6>
-		<ul class="ul-list">
+		<h6>신청한 경기</h6>
+		<ul class="ul-list border-top">
 			<c:forEach items="${home_club }" var="home">
 			<c:if test="${home.club_num != myClub.club_num }">
 			<li class="li-list">
-				<div class="row margin-btm">
-					<span class="match-item">${home.match_date }</span>
+				<div class="main-row margin-btm gray">
+					<span class="match-item"><fmt:formatDate value="${home.match_date}" pattern="yy.MM.dd"/></span>
 					<span class="match-item">${home.start_time } ~ ${home.end_time }</span>
 					<span class="match-item">${home.address}</span>
 					<c:if test="${home.type==1 }">
@@ -259,12 +259,12 @@
 		</ul>
 		</c:if>
 		<c:if test="${not empty recruits }">
-		<h6>용병 모집 중인 경기의 용병 신청을 수락/거절 선택하세요</h6>
-		<ul class="ul-list">
+		<h6>용병 신청 선택</h6>
+		<ul class="ul-list border-top">
 			<c:forEach items="${recruits }" var="recruit">
 			<li class="li-list">
-				<div class="row margin-btm">
-					<span class="match-item">${recruit.match_date }</span>
+				<div class="main-row margin-btm gray">
+					<span class="match-item"><fmt:formatDate value="${recruit.match_date}" pattern="yy.MM.dd"/></span>
 					<span class="match-item">${recruit.start_time } ~ ${recruit.end_time }</span>
 					<span class="match-item">${recruit.address}</span>
 					<c:if test="${recruit.recruit_accept==1 }">
@@ -317,12 +317,12 @@
 		</ul>			
 		</c:if>
 		<c:if test="${not empty clubRecruits }">
-		<h6>팀원 가입 신청을 수락/거절 선택하세요</h6>
-		<ul class="ul-list">
+		<h6>팀원 가입 신청 수락/거절</h6>
+		<ul class="ul-list border-top">
 			<c:forEach items="${clubRecruits }" var="recruit">
 			<li class="li-list">
-				<div class="row margin-btm">
-					<span class="match-item">모집 마감일 ${recruit.recruit_due }</span>
+				<div class="main-row margin-btm">
+					<span class="match-item"><span class="gray">모집 마감일</span> <fmt:formatDate value="${recruit.recruit_due}" pattern="yy.MM.dd"/></span>
 					<c:if test="${recruit.clubRecruit_accept==1 }">
 					<span id="club-status-${recruit.clubRecruit_req_num}"class="status neutral">대기 중</span>
 					</c:if>
@@ -650,11 +650,11 @@
 					<i class="fas fa-crown admin" id="${member.id}">
 					</i>
 					</c:if>
-					${member.nickname}
+					${member.nickname} | <span class="gray">가입일</span> <fmt:formatDate value="${member.join_date}" pattern="yy.MM.dd"/> 
 					</span>
 					<br>
 					<span>${fn:substring(member.age_range,0,1)}0대 |</span>
-					<span>참석 투표율 <fmt:formatNumber value="${member.attendance_rate*100}" pattern="0"/>%</span>
+					<span><span class="gray">참석 투표율 </span><fmt:formatNumber value="${member.attendance_rate*100}" pattern="0"/>%</span>
 				</div>
 				<div class="half_col smaller">
 					<c:if test="${user_id == member.id }">

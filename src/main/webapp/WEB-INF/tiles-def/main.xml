@@ -6,7 +6,7 @@
 
 <tiles-definitions>
     <definition name="main" template="/WEB-INF/views/template/layout.jsp">
-       <put-attribute name="title" value="Banadang"/> 
+       <put-attribute name="title" value="GentlePro"/> 
        <put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
        <put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
        <put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
@@ -39,12 +39,6 @@
        <put-attribute name="title" value="접근 권한 확인"/> 
        <put-attribute name="header" value=""/>
        <put-attribute name="body" value="/WEB-INF/views/main/membercheck.jsp"/>
-       <put-attribute name="footer" value=""/>
-    </definition>
-    <definition name="myClubcheck" extends="main">
-       <put-attribute name="title" value="접근 권한 확인"/> 
-       <put-attribute name="header" value=""/>
-       <put-attribute name="body" value="/WEB-INF/views/main/myClubcheck.jsp"/>
        <put-attribute name="footer" value=""/>
     </definition>
     <definition name="checkMemAuth" extends="main">

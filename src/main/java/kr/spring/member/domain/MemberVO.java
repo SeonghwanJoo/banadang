@@ -33,6 +33,13 @@ public class MemberVO {
 	private Integer type;
 	private Date recruit_due;
 	private Integer mem_auth;
+	private Date join_date;
+	public Date getJoin_date() {
+		return join_date;
+	}
+	public void setJoin_date(Date join_date) {
+		this.join_date = join_date;
+	}
 	public Integer getMem_auth() {
 		return mem_auth;
 	}

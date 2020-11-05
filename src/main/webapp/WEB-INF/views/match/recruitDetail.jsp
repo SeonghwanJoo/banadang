@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
@@ -24,7 +25,7 @@
  	<ul class="ul-list">
 		<li class="li-list">
 			<div class="row">
-				<span class="match-item">${match.match_date}</span>
+				<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="yy.MM.dd"/></span>
 				<span class="match-item">${match.start_time }~${match.end_time }</span>
 				<span class="match-item">
 					<c:if test="${match.type==1 }">축구</c:if>
@@ -59,8 +60,8 @@
 				</div>
 			</div>
 		</li>
-		<li class="li-list">
-			<span class="rating_count">총 ${match.count }명의 평가</span>
+		<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.club_num }'">
+			<span class="rating_count">총 ${match.count }명의 평가 <i class="fas fa-chevron-right"></i></span>
 			<div class="row">
 				<div class="col">
 					매너 

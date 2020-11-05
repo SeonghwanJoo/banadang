@@ -25,31 +25,60 @@
 	}
 	
 }
+/* noto-sans-kr-regular - korean */
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/noto-sans-kr-v12-korean-regular.eot'); /* IE9 Compat Modes */
+  src: local('Noto Sans KR Regular'), local('NotoSansKR-Regular'),
+       url('../fonts/noto-sans-kr-v12-korean-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/noto-sans-kr-v12-korean-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/noto-sans-kr-v12-korean-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/noto-sans-kr-v12-korean-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/noto-sans-kr-v12-korean-regular.svg#NotoSansKR') format('svg'); /* Legacy iOS */
+}
 /* Add a black background color to the top navigation */
 .topnav {
 	position: relative;
 	overflow: hidden;
+	background-color:#000;
+	color:#fff;
+}
+.header-logo{
+	width:
 }
 
 /* Style the links inside the navigation bar */
-.topnav a {
+.topnav a,.topnav a:visited,#myTopnav a {
 	float: left;
-	color: #000;
+	color:#fff;
 	text-align: center;
-	padding: 14px 16px;
+	padding: 0 16px; 
 	text-decoration: none;
-	font-size: 17px;
+	font-size: 1.4rem;
+}
+.fixed_top .topnav-right{
+	margin-right:1rem;
+}
+.fixed_top .topnav-right a:hover{
+	background-color:#fff;
+	color:#b5b5b5;
+}
+.fixed_top a:hover{
+	background-color:#fff;
+	color:#b5b5b5;
 }
 
 /* Change the color of links on hover */
-.topnav a:hover, div.topnav-right a:hover {
-	background-color: #FFF;
-	color: #9e9e9e;
-}
+/* .topnav a:hover, div.topnav-right a:hover {
+	background-color: #000;
+	color: #FFF;
+} 
 
 /* Add a color to the active/current link */
 .topnav a.active .tapnav-right a:active{
-	color: #9e9e9e;
+	color: #fff;
 }
 .cursor, li.cursor{
 	cursor:pointer;
@@ -62,28 +91,19 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	font-family: 'Russo One', sans-serif;
 	text-decoration:none;
 	font-weight:bold;
 	font-size: 20px;
 }
-.topnav-centered-form a{
-	float: none;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	font-family: sans-serif;
-	font-size: 20px;
-}
+
 
 /* Right-aligned section inside the top navigation */
 .topnav-right {
 	float: right;
-	padding-top:0.5rem;
+	padding: 0.5rem 0;
 }
 .topnav-right a:hover{
-	background-color:#FFF;
+	background-color:#000;
 }
 .topnav-right a i{
 	font-size:2rem;
@@ -197,12 +217,11 @@
 }
 /* Style buttons */
 .btn_write {
-	background-color: white; /* Blue background */
+	background-color: #6d6d6d;
+	color:white;
 	border: none; /* Remove borders */
-	color: bfbfbf; /* bfbfbf text */
 	padding: 6px 8px; /* Some padding */
 	font-size: 1rem; /* Set a font size */
-	cursor: pointer; /* Mouse pointer on hover */
 	margin: auto 10px;
 	border-radius: 5%;
 	float: right;
@@ -210,20 +229,19 @@
 
 /* Darker background on mouse-over */
 .btn_write:hover {
-	background-color: #ccff90;
+	background-color: #c4c4c4;
 }
 
 .title-btw {
 	margin: 10px 10px;
 	position: absolute;
-	font-size: 1rem; /* Set a font size */
+	font-size: 1.1rem; /* Set a font size */
+	font-weight:bold;
 }
 
-.match-head {
-	height: 30px;
-	width: 100%;
-	margin-top:10px;
-	margin-bottom: 15px;
+div.match-head {
+	margin-top:0.5rem;
+	margin-bottom: 3.5rem;
 }
 .underline{
 	text-decoration:underline;
@@ -242,13 +260,6 @@
 	padding-right:1rem;
 }
 
-.match {
-	padding: 0 auto;
-}
-.match-info{
-	margin: 0 auto;
-	width:99%;
-}
 .team-info{
 	padding: 0 auto;
 	text-align: center;
@@ -292,6 +303,7 @@
 .total_wrapper{
 	margin-top: 1rem;
 	vertical-align: top;
+	position:relative;
 }
 .total, .unit{
 	position:relative;
@@ -303,7 +315,7 @@
 }
 .share{
 	position:absolute;
-	right:8rem;
+	right:1rem;
 }
 
 div.row{
@@ -499,6 +511,9 @@ input[type=text]:focus, select:focus{
 	border-radius:0.5rem;
 	width: 80%;
 }
+body.body {
+    font-family: Noto Sans KR,sans-serif;
+}
 .certify-modals{
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
@@ -615,7 +630,7 @@ input[type=text]:focus, select:focus{
 	top:-0.2rem;
 	font-size:1.5rem;
 }
-.margin-top, span.margin-top{
+.margin-top, span.margin-top, li .margin-top{
 	margin-top:0.5rem;
 }
 .topnav span.align{
@@ -626,6 +641,7 @@ input[type=text]:focus, select:focus{
 .positive{background-color:#a4d3a6;}
 .positive-color{color:#a4d3a6;}
 .negative{background-color:#000;}
+.negative-color{background-color:#000;}
 .full{
 	width:95%;
 	margin: 0 auth;
@@ -737,14 +753,16 @@ input[type=text]:focus, select:focus{
   display: block;
   width:90%;
   margin:0 auto;
-  border: 1px solid #d4d4d4;
+  color:#FFFFFF;
   border-radius:0.2rem;
   padding: 4px 28px;
   font-size: 16px;
   font-weight:bold;
   cursor: pointer;
-  background-color:#FFFFFF;
+  background-color:#000;
   text-align: center;
+  border-color:#FFF;
+  border-style:solid;
 }
 .block-btn{
 	padding-right:8px;
@@ -763,7 +781,7 @@ input[type=text]:focus, select:focus{
   right:1%;
   z-index:50;
   height:4rem;
-  margin:0 auto 2% auto;
+  margin:0 auto;
   font-size:18px;
   border-bottom: 1px solid #d4d4d4;
   padding-top:5px;
@@ -999,6 +1017,9 @@ a.detail{
 .disp-bl{
 	display:block;
 }
+.disp-inbl{
+	display:inline-block;
+}
 .btn-modal{
 	display:inline;
 	width:49%;
@@ -1065,10 +1086,15 @@ btn-wrapper{
 	padding:0;
 	margin:0;
 }
+.border-top{
+	border-top:1px solid #d1d1d1;
+}
 .tab_detail h6{
 	text-align:center;
 	font-weight: bold;
-	margin:0.5rem 0;
+	padding:0.5rem 0;
+	margin-bottom:0; 
+	
 }
 .middle-title{
 	text-align:center;
@@ -1188,8 +1214,7 @@ button.small-font{
 .sel-team{
 	position:relative;
 	display:inline-block;
-	margin-top:1.4rem;
-	margin-left:1rem;
+	margin:0.7rem 0 0.7rem 1rem;
 	font-size:1.2rem;
 	font-weight:bold;
 	cursor:pointer;
@@ -1285,6 +1310,11 @@ a.menu-item:active{
 	right:0rem;
 	top:0.5rem;
 }
+.kakaolink-share{
+	border-radius:50%;
+	width:2rem;
+	height:2rem;
+}
 .right{
 	position:absolute;
 	right:3rem;
@@ -1368,14 +1398,13 @@ div.detail-item{
 }
 .blank_div{
 	display:block;
-	height:80px;
+	height:70px;
 }
 .li-list .collapsible{
 	color:#a4d3a6;
 	position:absolute;
-	top :4rem;
 	right:1rem;
-	font-size:3rem;
+	font-size:2rem;
 	cursor:pointer;
 	transition: 0.4s;
 }
@@ -1385,9 +1414,7 @@ div.detail-item{
 .collapsible-content{
 	max-height: 0;
 	transition: max-height 0.2s ease-out;
-}
-.collapsible-content{
-	margin:0.5rem 0 0.5rem 0;
+	margin:2rem 0 0 0;
 	padding:0;
 	overflow: hidden;
 }
@@ -1520,6 +1547,9 @@ button.chip-btn{
 }
 .centered-padding{
 	padding:0 3%;
+}
+.centered{
+	margin:0 auto;
 }
 .chip{
   max-width:94px;

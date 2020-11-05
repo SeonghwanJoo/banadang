@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="invite-wrapper" id="invite-wrapper">
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -29,7 +30,7 @@ $(function(){
 		obj.end_time="${match.end_time}";
 		obj.address="${match.address}";
 		obj.match_detail="${match.match_detail}";
-		obj.match_date="${match.match_date}";
+		obj.match_date="<fmt:formatDate value="${match.match_date}" pattern="yy.MM.dd"/>";
 		obj.address_x="${match.address_x}";
 		obj.address_y="${match.address_y}";
 		obj.club_num="${match.club_num}";

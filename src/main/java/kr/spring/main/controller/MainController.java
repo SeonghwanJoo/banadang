@@ -67,7 +67,7 @@ public class MainController {
 			mav.addObject("past_match",past_match);
 		}
 		mav.setViewName("main");
-		mav.addObject("title", "BANADANG");
+		mav.addObject("title", "main");
 		
 		return mav;
 	}
@@ -83,10 +83,14 @@ public class MainController {
 		String user_id=(String)session.getAttribute("user_id");
 		
 		MatchVO match=matchService.selectMatchByMatch_num(match_num);
-		match.setId(user_id);
 		match.setClub_num(club_num);
-		addVoteResult(match,vote_status);
-		addRatingResult(match,clubs_rating);
+		if(user_id!=null) {
+			
+			match.setId(user_id);
+			addVoteResult(match,vote_status);
+			addRatingResult(match,clubs_rating);
+			
+		}
 		mav.addObject("match",match);
 		List<BoardVO> answers=boardService.selectVote_answer(match);
 		mav.addObject("answers",answers);
@@ -200,11 +204,6 @@ public class MainController {
 		
 		return "membercheck";
 	}
-	@RequestMapping("/main/myClubcheck.do")
-	public String checkmyClub() {
-		
-		return "myClubcheck";
-	}
 	@RequestMapping("/main/memberAuthCheck.do")
 	public String checkMemAuth() {
 		
@@ -251,11 +250,13 @@ public class MainController {
 				match.setHome_manner(club_rating.getManner());
 				match.setHome_name(club_rating.getClub_name());
 				match.setHome_perform(club_rating.getPerform());
+				match.setHome_filename(club_rating.getFilename());
 			}
 			if(match.getAway()==club_rating.getClub_num()) {
 				match.setAway_manner(club_rating.getManner());
 				match.setAway_name(club_rating.getClub_name());
 				match.setAway_perform(club_rating.getPerform());
+				match.setAway_filename(club_rating.getFilename());
 			}
 		}
 	}

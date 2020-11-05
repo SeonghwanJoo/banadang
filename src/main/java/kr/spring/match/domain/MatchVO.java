@@ -452,6 +452,29 @@ public class MatchVO {
 	public void setClubRecruit_req_num(Integer clubRecruit_req_num) {
 		this.clubRecruit_req_num = clubRecruit_req_num;
 	}
+	public String getHome_filename() {
+		return home_filename;
+	}
+
+	public void setHome_filename(String home_filename) {
+		this.home_filename = home_filename;
+	}
+
+	public String getAway_filename() {
+		return away_filename;
+	}
+
+	public void setAway_filename(String away_filename) {
+		this.away_filename = away_filename;
+	}
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	private String filename;
 	private Integer clubRecruit_req_num;
 	private String clubRecruit_req_detail;
 	private Integer clubRecruit_accept;
@@ -501,9 +524,11 @@ public class MatchVO {
 	private String home_name;
 	private double home_manner;
 	private double home_perform;
+	private String home_filename;
 	private String away_name;
 	private double away_manner;
 	private double away_perform;
+	private String away_filename;
 	private double perform;
 	private double manner;
 	private String club_name;

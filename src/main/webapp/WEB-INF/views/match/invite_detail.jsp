@@ -59,8 +59,8 @@
 				</div>
 			</div>
 		</li>
-		<li class="li-list">
-			<span class="rating_count">총 ${match.count }명의 평가</span>
+		<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.club_num }'">
+			<span class="rating_count">총 ${match.count }명의 평가 <i class="fas fa-chevron-right"></i></span>
 			<div class="row">
 				<div class="col">
 					매너 

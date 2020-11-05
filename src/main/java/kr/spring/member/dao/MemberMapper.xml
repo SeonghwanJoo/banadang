@@ -44,12 +44,12 @@
 	<select id="selectClubRecruitWithClubDetail" parameterType="integer" resultType="matchVO">
 		  select * from 
     (select club_num,clubRecruit_num,act_day,act_time,register_cost,month_cost,type,recruit_position,clubRecruit_detail,a.id,club_name,club_img,club_color,club_age,club_address,club_loc,club_locX,club_locY from
-        (select * from club_recruit where clubRecruit_num=1)a join club b using(club_num)) left outer join 
-    (select avg(manner),avg(perform),count(*) count,club_num from club_rating group by club_num) using(club_num)
+        (select * from club_recruit where clubRecruit_num=#{clubRecruit_num})a join club b using(club_num)) left outer join 
+    (select avg(manner) manner,avg(perform) perform,count(*) count,club_num from club_rating group by club_num) using(club_num)
 	</select>
 	<select id="selectClubRecruits" resultType="matchVO">
 		select * from (select * from (select * from club_recruit where recruit_due>sysdate-1) join club using(club_num)) left outer join 
-    (select avg(manner),avg(perform),count(*) count,club_num from club_rating group by club_num) using(club_num)
+    (select avg(manner) manner,avg(perform) perform,count(*) count,club_num from club_rating group by club_num) using(club_num)
 	</select>
 	<update id="updateClubRecruit" parameterType="matchVO">
 		update club_recruit set act_day=#{act_day},act_time=#{act_time},register_cost=#{register_cost},month_cost=#{month_cost},type=#{type},recruit_position=#{recruit_position},clubRecruit_detail=#{clubRecruit_detail},recruit_due=#{recruit_due} where clubRecruit_num=#{clubRecruit_num}
@@ -60,7 +60,7 @@
 	</insert>
 	<select id="selectMyClubRecruitReq" parameterType="string" resultType="matchVO">
 	select * from (select * from
-    (select clubRecruit_num,clubRecruit_req_num,id,clubRecruit_req_detail,a.recruit_position,recruit_due,clubRecruit_accept,act_day,act_time,type,a.club_num from
+    (select clubRecruit_num,clubRecruit_req_num,a.id,clubRecruit_req_detail,a.recruit_position,recruit_due,clubRecruit_accept,act_day,act_time,type,a.club_num from
         (select * from clubRecruit_req where id=#{user_id}) a
             join club_recruit b using(clubRecruit_num) where recruit_due>sysdate-1)a join club b using(club_num))c left outer join
             (select avg(manner) manner,avg(perform)perform,club_num from club_rating group by club_num) using(club_num)

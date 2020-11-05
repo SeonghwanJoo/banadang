@@ -58,7 +58,7 @@ public interface ClubMapper {
 	
 	public Float selectAttendanceRate(MemberVO member);
 	
-	@Select("select * from (select * from club_join where club_num=#{club_num} order by club_auth desc) a join member_detail b on a.id=b.id")
+	@Select("select * from (select * from club_join where club_num=#{club_num} order by join_date asc, club_auth desc) a join member_detail b on a.id=b.id")
 	public List<MemberVO> selectClubMembers(Integer club_num);
 	
 	
