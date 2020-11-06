@@ -80,7 +80,7 @@ $(function(){
 				"<a class='detail' href='${pageContext.request.contextPath}/match/recruitDetail.do?recruit_num="
 				+matchs[i].recruit_num+"'>"
 				+"<li class='li-list'>"
-					+"<div class='row'>"
+					+"<div class='main-row'>"
 						+"<span class='match-item'>"+matchs[i].match_date+"</span>"
 						+"<span class='match-item'>"+matchs[i].start_time+"~"+matchs[i].end_time+"</span>"
 						+"<span class='match-item'>"+matchs[i].address+"</span>"

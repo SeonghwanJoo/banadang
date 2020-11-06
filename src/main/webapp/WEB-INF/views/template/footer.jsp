@@ -45,7 +45,7 @@
 <script>
 
 	$(function(){
-		if(${ title eq 'BANADANG'}){
+		if(${ title eq 'main'}){
 			$('.main').css('color','black');
 		}else if(${title eq '경기 매치'}){
 			$('.invite').css('color','black');

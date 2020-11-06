@@ -204,5 +204,10 @@ public class MatchServiceImpl implements MatchService {
 		
 		return matchMapper.selectRecruitByClub_num(club_num);
 	}
+	@Override
+	public List<MatchVO> selectMatchToInviteWithFilter(MatchVO match){
+		
+		return matchMapper.selectMatchToInviteWithFilter(match);
+	};
 
 }

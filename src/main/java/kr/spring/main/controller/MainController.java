@@ -214,6 +214,11 @@ public class MainController {
 		
 		return "posterCheck";
 	}
+	@RequestMapping("/main/myClubCheck.do")
+	public String checkmyClub() {
+		
+		return "myClubCheck";
+	}
 	public void addVoteResult(MatchVO match,ArrayList<MatchVO> vote_status) {
 		Integer myVote=matchService.selectMyVoteStatus(match);
 		

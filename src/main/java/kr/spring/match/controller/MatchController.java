@@ -1,5 +1,6 @@
 package kr.spring.match.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -70,6 +71,32 @@ public class MatchController {
 		mav.setViewName("invite_match");
 		mav.addObject("title","경기 매치");
 		mav.addObject("matchVO", matchVO);
+		
+		return mav;
+	}
+	@RequestMapping("/match/filter.do")
+	public ModelAndView filter(MatchVO match) {
+		
+		ModelAndView mav=new ModelAndView();
+		String period=match.getPeriod();
+		logger.info("type : "+match.getType());
+		logger.info("period : "+match.getPeriod());
+		if(period!="") {
+			
+			String[] values=period.split(" ~ ");
+			match.setStart(java.sql.Date.valueOf(values[0]));
+			match.setEnd(java.sql.Date.valueOf(values[1]));
+			logger.info("start : "+match.getStart());
+			logger.info("end : "+match.getEnd());
+			logger.info("period : "+period);
+		}
+		List<MatchVO> matchVO=matchService.selectMatchToInviteWithFilter(match);
+		
+		mav.setViewName("invite_match");
+		mav.addObject("title","경기 매치");
+		mav.addObject("match", match);
+		mav.addObject("matchVO", matchVO);
+		
 		
 		return mav;
 	}

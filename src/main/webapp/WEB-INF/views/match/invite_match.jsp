@@ -2,11 +2,132 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<div class="main-row filter-wrapper margin-btm">
+	<div class="filter">
+		<c:if test="${match.type==1 }">
+		<span>축구</span>
+		</c:if>
+		<c:if test="${match.type==2 }">
+		<span>풋살</span>
+		</c:if>
+		<span>${match.period}</span>
+		<span class="material-icons cursor l-font filter-icon" id="filter">filter_alt</span>
+	</div>
+</div>
 <div class="invite-wrapper" id="invite-wrapper">
+</div>
+<!-- The Modal -->
+<div id="myModals" class="modals">
+	<!-- Modal content -->
+	<form:form class="col s12" id="form" action="filter.do" commandName="matchVO" autocomplete="off">
+	<div class="modals-content">
+		<span id="close_mod" class="close_mod">&times;</span>
+		<span class="input-label">경기 유형(축구/풋살) 선택</span>
+		<div class="row centered-padding">
+			<label class="chip">
+				<span class="chip-txt small-font">전체</span>
+				<input type="radio" name="type" id="soccer" value="3" checked="checked">
+				<span class="checkmark"></span>
+			</label> 
+			<label class="chip">
+				<span class="chip-txt small-font">축구</span>
+				<input type="radio" name="type" id="soccer" value="1">
+				<span class="checkmark"></span>
+			</label> 
+			<label class="chip">
+				<span class="chip-txt small-font">풋살</span>
+				<input type="radio" name="type" id="futsal" value="2">
+				<span class="checkmark"></span>
+			</label>
+		</div>
+		<hr class="hr">
+		<span class="input-label margin-btm">검색 기간</span>
+		<label class="chip wider">
+				<span class="chip-txt">전체</span>
+				<input type="radio" id="entire-pr" checked="checked">
+				<span class="checkmark"></span>
+		</label> 
+		<label class="chip wider">
+			<span class="chip-txt">특정 기간</span>
+			<input type="radio" id="specific-pr">
+			<span class="checkmark"></span>
+		</label>
+		<div class="row margin-top" id="period-filter" style="display:none">
+			<div class="input-container col">
+				<i class="fas fa-calendar-alt icon"></i> <input class="input-field"
+					type="text" id="datepicker" placeholder="검색 기간 선택" name="period">
+			</div>
+		</div>
+		<hr class="hr">
+		<div class="row margin-top">
+			<input type="submit" class="block modal-block" id="apply-filter" value="필터 적용">
+		</div>
+	</div>
+	</form:form>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
+	$('#specific-pr').click(function(){
+		$('#period-filter').css('display','block');
+	});
+	$('#entire-pr').click(function(){
+		$('#period-filter').css('display','none');
+		$('#datepicker').val('');
+	});
+	let today=new Date();
+	let endDate=new Date();
+	endDate.setDate(endDate.getDate()+31);
+	
+	$('#datepicker').daterangepicker({
+		"minDate": today,
+		"startDate": today,
+		"endDate": endDate,
+	    "autoApply": true,
+	    "opens": "center",
+		"locale" : {
+			"format" : "YYYY-MM-DD",
+			"separator" : " ~ ",
+			"applyLabel" : "Apply",
+			"cancelLabel" : "Cancel",
+			"fromLabel" : "From",
+			"toLabel" : "To",
+			"customRangeLabel" : "Custom",
+			"weekLabel" : "W",
+			"daysOfWeek" : [ "일", "월", "화", "수", "목",
+			"금", "토" ],
+			"monthNames" : [ "1월", "2월", "3월", "4월",
+			"5월", "6월", "7월", "8월", "9월",
+			"10월", "11월", "12월" ],
+			"firstDay" : 1
+			}
+	}, function(start, end, label) {
+	  console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+	}); 
+	$('#datepicker').val('');
+	// Get the modal
+	var modal = document.getElementById("myModals");
+
+	// Get the button that opens the modal
+	var filter = document.getElementById("filter");
+
+
+	// When the user clicks the button, open the modal 
+	filter.onclick = function() {
+	 	modal.style.display = "block";
+	}
+	
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}
+	$('#close_mod').click(function(){
+		 modal.style.display = "none";
+	});
 		
 	function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
 	    function deg2rad(deg) {
@@ -80,7 +201,7 @@ $(function(){
 				"<a class='detail' href='${pageContext.request.contextPath}/match/invite_detail.do?match_num="
 				+matchs[i].match_num+"'>"
 				+"<li class='li-list'>"
-					+"<div class='row'>"
+					+"<div class='main-row'>"
 						+"<span class='match-item'>"+matchs[i].match_date+"</span>"
 						+"<span class='match-item'>"+matchs[i].start_time+"~"+matchs[i].end_time+"</span>"
 						+"<span class='match-item'>"+matchs[i].address+"</span>"

@@ -49,6 +49,7 @@ public interface MatchMapper {
 	public void updateRating(MatchVO match);
 	public List<MemberVO> selectVote_detail(MatchVO match);
 	public List<MatchVO> selectMatchToInvite();
+	public List<MatchVO> selectMatchToInviteWithFilter(MatchVO match);
 	public MatchVO selectMatchToInviteByMatch_num(Integer match_num);
 	@Select("select request_num from match_request where match_num=#{match_num} and away=#{away} ")
 	public Integer selectMyRequestForMatchToInvite(MatchVO match);

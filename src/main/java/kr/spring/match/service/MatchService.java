@@ -40,5 +40,6 @@ public interface MatchService {
 	public void updateMatchForCancel(MatchVO match);
 	public void updateMatch(MatchVO match);
 	public List<MemberVO> selectRecruitByClub_num(Integer club_num);
+	public List<MatchVO> selectMatchToInviteWithFilter(MatchVO match);
 
 }

@@ -99,104 +99,106 @@
 		<input type="hidden" id="id" value="${user_id }">
 		<input type="hidden" id="match_num" value="${match.match_num }">
 		<input type="hidden" id="club_num" value="${myClub.club_num }">
-		<div class="row">
-			<span class="vote-rating">
-				<c:if test="${match.attend==0 }">
-				<span class="voted" id="attend" style="background-color:transparent">
-					<span class="vote-label">참석
-						<span class="material-icons sign" id="attend_sign">done</span>
+		<div class="cursor" onclick="location.href='${pageContext.request.contextPath}/main/vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num }&home_name=${match.home_name }&away_name=${match.away_name }'">
+			<div class="row">
+				<span class="vote-rating">
+					<c:if test="${match.attend==0 }">
+					<span class="voted" id="attend" style="background-color:transparent">
+						<span class="vote-label">참석
+							<span class="material-icons sign" id="attend_sign">done</span>
+						</span>
 					</span>
-				</span>
-				</c:if>
-				<c:if test="${match.attend!=0 && match.max==match.attend }">
-				<span class="voted" id="attend"
-					style=
-						"width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#a4d3a6;">
-					<span class="vote-label">참석
-						<span class="material-icons sign" id="attend_sign">done</span>
+					</c:if>
+					<c:if test="${match.attend!=0 && match.max==match.attend }">
+					<span class="voted" id="attend"
+						style=
+							"width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%;
+							background-color:#a4d3a6;">
+						<span class="vote-label">참석
+							<span class="material-icons sign" id="attend_sign">done</span>
+						</span>
 					</span>
-				</span>
-				</c:if>
-				<c:if test="${match.attend!=0 && match.max!=match.attend }">
-				<span class="voted" id="attend"
-					style=
-						"width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#bfbfbf;">
-					<span class="vote-label">참석
-						<span class="material-icons sign" id="attend_sign">done</span>
+					</c:if>
+					<c:if test="${match.attend!=0 && match.max!=match.attend }">
+					<span class="voted" id="attend"
+						style=
+							"width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%;
+							background-color:#bfbfbf;">
+						<span class="vote-label">참석
+							<span class="material-icons sign" id="attend_sign">done</span>
+						</span>
 					</span>
+					</c:if>
+					<span id="num_attend" class="vote_num">${match.attend}</span>
+					<span class="person material-icons">person</span>
 				</span>
-				</c:if>
-				<span id="num_attend" class="vote_num">${match.attend}</span>
-				<span class="person material-icons">person</span>
-			</span>
-		</div>
-		<div class="row">
-			<span class="vote-rating">
-				<c:if test="${match.not_attend==0 }">
-				<span class="voted" id="not_attend" style="background-color:transparent;">
-					<span class="vote-label">불참
-						<span class="material-icons sign" id="not_attend_sign">done</span>
+			</div>
+			<div class="row">
+				<span class="vote-rating">
+					<c:if test="${match.not_attend==0 }">
+					<span class="voted" id="not_attend" style="background-color:transparent;">
+						<span class="vote-label">불참
+							<span class="material-icons sign" id="not_attend_sign">done</span>
+						</span>
 					</span>
-				</span>
-				</c:if>
-				<c:if test="${match.not_attend!=0 && match.max==match.not_attend }">
-				<span class="voted" id="not_attend"
-					style=
-						"width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#a4d3a6;">
-					<span class="vote-label">불참
-						<span class="material-icons sign" id="not_attend_sign">done</span>
+					</c:if>
+					<c:if test="${match.not_attend!=0 && match.max==match.not_attend }">
+					<span class="voted" id="not_attend"
+						style=
+							"width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%;
+							background-color:#a4d3a6;">
+						<span class="vote-label">불참
+							<span class="material-icons sign" id="not_attend_sign">done</span>
+						</span>
 					</span>
-				</span>
-				</c:if>
-				<c:if test="${match.not_attend!=0 && match.max!=match.not_attend }">
-				<span class="voted" id="not_attend"
-					style=
-						"width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#bfbfbf;">
-					<span class="vote-label">불참
-						<span class="material-icons sign" id="not_attend_sign">done</span>
+					</c:if>
+					<c:if test="${match.not_attend!=0 && match.max!=match.not_attend }">
+					<span class="voted" id="not_attend"
+						style=
+							"width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%;
+							background-color:#bfbfbf;">
+						<span class="vote-label">불참
+							<span class="material-icons sign" id="not_attend_sign">done</span>
+						</span>
 					</span>
+					</c:if>
+					<span id="num_nattend" class="vote_num">${match.not_attend}</span>
+					<span class="person material-icons">person</span>
 				</span>
-				</c:if>
-				<span id="num_nattend" class="vote_num">${match.not_attend}</span>
-				<span class="person material-icons">person</span>
-			</span>
-		</div>	
-		<div class="row">
-			<span class="vote-rating">
-				<c:if test="${match.undefined==0 }">
-				<span class="voted" id="undefined" style="background-color:transparent;">
-					<span class="vote-label">미정
-						<span class="material-icons sign" id="undefined_sign">done</span>
+			</div>	
+			<div class="row">
+				<span class="vote-rating">
+					<c:if test="${match.undefined==0 }">
+					<span class="voted" id="undefined" style="background-color:transparent;">
+						<span class="vote-label">미정
+							<span class="material-icons sign" id="undefined_sign">done</span>
+						</span>
 					</span>
-				</span>
-				</c:if>
-				<c:if test="${match.undefined!=0 && match.max==match.undefined }">
-				<span class="voted" id="undefined"
-					style=
-						"width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#a4d3a6;">
-					<span class="vote-label">미정
-						<span class="material-icons sign" id="undefined_sign">done</span>
+					</c:if>
+					<c:if test="${match.undefined!=0 && match.max==match.undefined }">
+					<span class="voted" id="undefined"
+						style=
+							"width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%;
+							background-color:#a4d3a6;">
+						<span class="vote-label">미정
+							<span class="material-icons sign" id="undefined_sign">done</span>
+						</span>
 					</span>
-				</span>
-				</c:if>
-				<c:if test="${match.undefined!=0 && match.max!=match.undefined }">
-				<span class="voted" id="undefined"
-					style=
-						"width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#bfbfbf;">
-					<span class="vote-label">미정
-						<span class="material-icons sign" id="undefined_sign">done</span>
+					</c:if>
+					<c:if test="${match.undefined!=0 && match.max!=match.undefined }">
+					<span class="voted" id="undefined"
+						style=
+							"width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%;
+							background-color:#bfbfbf;">
+						<span class="vote-label">미정
+							<span class="material-icons sign" id="undefined_sign">done</span>
+						</span>
 					</span>
+					</c:if>
+					<span id="num_undefined" class="vote_num">${match.undefined}</span>
+					<span class="person material-icons">person</span>
 				</span>
-				</c:if>
-				<span id="num_undefined" class="vote_num">${match.undefined}</span>
-				<span class="person material-icons">person</span>
-			</span>
+			</div>
 		</div>
 		<div class="btn-group btn-group-toggle col-sm-12" id="btn-group" data-toggle="buttons">
 			<label class="radio btn" id="attend_btn">

@@ -72,6 +72,25 @@
 				left outer join
 				(select avg(manner) manner,avg(perform) perform,club_num from club_rating group by club_num) e on d.club_num=e.club_num where cancel is null order by d.match_date
 	</select>
+	<select id="selectMatchToInviteWithFilter" parameterType="matchVO" resultType="matchVO">
+		select * from 
+				(select * from (select * from match where
+					<if test="start==null">
+					match_date>sysdate-1
+					</if>
+					<if test="start!=null">
+					<![CDATA[	
+				 		(match_date>=#{start} and match_date<=#{end}) 
+					]]>
+					</if>
+					and away=0
+					<if test="type !=3">
+					and	type=#{type}
+					</if>
+					)a join club b on a.home=b.club_num) d
+				left outer join
+				(select avg(manner) manner,avg(perform) perform,club_num from club_rating group by club_num) e on d.club_num=e.club_num where cancel is null order by d.match_date
+	</select>
 	<select id="selectMatchToInviteByMatch_num" parameterType="Integer" resultType="matchVO">
 		select * from 
 				(select match_num,match_date,a.id,start_time,end_time,address,cost,type,address_x,address_y,match_detail,club_name,club_img,club_color,club_num,club_age from

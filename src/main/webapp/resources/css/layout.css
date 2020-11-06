@@ -238,7 +238,13 @@
 	font-size: 1.1rem; /* Set a font size */
 	font-weight:bold;
 }
-
+.filter{
+	position:absolute;
+	right:0.2rem;
+}
+.filter-wrapper{
+	height:1.5rem;
+}
 div.match-head {
 	margin-top:0.5rem;
 	margin-bottom: 3.5rem;
@@ -274,11 +280,8 @@ div.match-head {
 
 
 .vote-rating {
-	width:90%;
-	margin:5px auto;
-	text-align:left;
-	top:3px;
-
+	margin:0.2rem auto;
+	width:94%;
  }
 .vote-rating, .voted{
 	display:inline-block; 
@@ -702,7 +705,7 @@ body.body {
 	width: 20%;
 	padding: 10px;
 	background: white;
-	color: bfbfbf;
+	color: #bfbfbf;
 	font-size: 1rem;
 	border: 1px solid grey;
 	border-left: none; /* Prevent double borders */
@@ -749,10 +752,11 @@ body.body {
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 
-.block {
+.block ,.block.modal-block{
   display: block;
-  width:90%;
-  margin:0 auto;
+  width:95%;
+  height:2.6rem;
+  margin:0.2rem auto;
   color:#FFFFFF;
   border-radius:0.2rem;
   padding: 4px 28px;
@@ -1194,8 +1198,12 @@ button.small-font{
 .l-font,.topnav span.l-font, .main-row .l-font{
 	font-size:2rem;
 }
-.xl-font, .fixed_top span.xl-font,.topnav span.xl-font{
+.xl-font, .fixed_top span.xl-font,.topnav span.xl-font, .filter .xl-font{
 	font-size:2.5rem;
+}
+.filter-icon{
+	position:relative;
+	top:0.5rem;
 }
 
 .tab-btn:focus, tab-btn:active{
@@ -1315,10 +1323,10 @@ a.menu-item:active{
 	width:2rem;
 	height:2rem;
 }
-.right{
+/* .right{
 	position:absolute;
 	right:3rem;
-}
+} */
 div.one-col{
 	position:relative;
 }
@@ -1350,6 +1358,10 @@ div.one-col{
 	font-size:0.6rem;
 	left:0.1rem;
 	top:-1rem;
+}
+.reverse{
+	-webkit-flex-direction:row-revers;
+	flex-direction:row-revers;
 }
 
 .fa-users-cog, .fa-cog{
@@ -1421,7 +1433,7 @@ div.detail-item{
 ul.ul-list{
 	padding-inline-start: 0px;
 	width:100%;
-	border-bottom:3px solid #e2e2e2;
+	border-bottom:10px solid #eee;
 	margin-bottom:0;
 }
 ul.non-border-btm{
@@ -1552,12 +1564,11 @@ button.chip-btn{
 	margin:0 auto;
 }
 .chip{
-  max-width:94px;
   display: inline-block;
   position: relative;
   padding-left:1.5rem;
   height:2rem;
-  width:17%;
+  width:6rem;
   margin:0.5rem 0.2rem;
   cursor: pointer;
   line-height: 50px;
@@ -1588,9 +1599,8 @@ button.chip-btn{
   -ms-user-select: none;
   user-select: none;
 }
-.wider{
-	width:28%;
-	max-width:146px;
+label.chip.wider{
+	width:8rem;
 }
 .gray{
 	color:#9E9E9E;

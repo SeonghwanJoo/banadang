@@ -49,7 +49,7 @@ public class ClubController {
 			session.setAttribute("myClub", clubService.selectMyClubDetails(myClubs.get(0)));
 		}
 		//myClub이 탈퇴했으나 session에 업데이트되지 않았다면
-		if(myClub!=null) {
+		if(myClub!=null && !myClubs.isEmpty()) {
 			myClub.setId(id);
 			Integer auth=clubService.selectClubAuth(myClub);
 			if(auth==null) {

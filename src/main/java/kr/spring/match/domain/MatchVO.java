@@ -474,6 +474,31 @@ public class MatchVO {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
+	public String getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(String period) {
+		this.period = period;
+	}
+	public Date getStart() {
+		return start;
+	}
+
+	public void setStart(Date start) {
+		this.start = start;
+	}
+
+	public Date getEnd() {
+		return end;
+	}
+
+	public void setEnd(Date end) {
+		this.end = end;
+	}
+	private Date start;
+	private Date end;
+	private String period;
 	private String filename;
 	private Integer clubRecruit_req_num;
 	private String clubRecruit_req_detail;

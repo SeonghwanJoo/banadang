@@ -356,7 +356,7 @@
 					</div>
 				</div>
 				<c:if test="${recruit.clubRecruit_accept==1 }">
-				<div class="row" id="btn-${recruit.clubRecruit_req_num }">
+				<div class="row" id="club-btn-${recruit.clubRecruit_req_num }">
 					<div class="half_col">
 						<button class="first-btn" onclick="answerForClubRecruitReq(${recruit.clubRecruit_req_num},'${recruit.nickname }',3,'${recruit.id }')">거절</button>
 					</div>
@@ -843,7 +843,8 @@ function answerForClubRecruitReq(clubRecruit_req_num,nickname,clubRecruit_accept
 						status.innerText='거절 완료';
 					}
 					$('#clubRecruit_modal').css('display','none');
-					document.getElementById('btn-'+clubRecruit_req_num).style.display="none";
+					console.log('btn-'+clubRecruit_req_num);
+					document.getElementById('club-btn-'+clubRecruit_req_num).style.display="none";
 				}
 				if(data.result=='errors'){
 					

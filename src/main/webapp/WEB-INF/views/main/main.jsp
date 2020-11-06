@@ -61,9 +61,9 @@
 </div>
 <hr class="hr">
 <c:if test="${not empty match_list }">
-<ul class="match-list">
+<ul class="ul-list">
 <c:forEach var="match" items="${match_list}">
-	<li class="match">
+	<li class="li-list">
 		<div class="main-row margin-top">
 			<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="yy.MM.dd"/></span>
 			<span class="match-item">${match.start_time }~${match.end_time }</span>
@@ -81,7 +81,7 @@
 			<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
 			</c:if>
 		</div>
-		<div class="main-row">
+		<div class="row">
 			<c:if test="${empty match.home_name }">
 			<div class="team-info col">
 				<span class="disp-inbl margin-top">삭제된 팀</span>
@@ -113,7 +113,6 @@
 			</div>
 			</c:if>
 			<span class="from-to">VS</span>
-			
 			<c:if test="${match.away != 0 }">
 				<c:if test="${not empty match.away_name }">
 				<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
@@ -152,97 +151,100 @@
 			</div>
 			</c:if>
 		</div>
-		<!-- 내 팀이 -->
-		<div class="main-row">
-			<span class="vote-rating">
-				<c:if test="${match.attend==0 }">
-				<span class="voted" style="background-color:transparent">
-					<span class="vote-label">참석</span>
+		<div class="cursor" onclick="location.href='${pageContext.request.contextPath}/main/vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num }&home_name=${match.home_name }&away_name=${match.away_name }'">
+			<div class="row">
+				<span class="vote-rating">
+					<c:if test="${match.attend==0 }">
+					<span class="voted" style="background-color:transparent">
+						<span class="vote-label">참석</span>
+					</span>
+					</c:if>
+					<c:if test="${match.attend!=0 && match.max==match.attend }">
+					<span class="voted" 
+						style=
+							"width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%;
+							background-color:#A4D3A6;">
+						<span class="vote-label">참석</span>
+					</span>
+					</c:if>
+					<c:if test="${match.attend!=0 && match.max!=match.attend }">
+					<span class="voted" 
+						style=
+							"width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%;
+							background-color:#bfbfbf;">
+						<span class="vote-label">참석</span>
+					</span>
+					</c:if>
+					<span id="num_attend" class="vote_num">${match.attend}</span>
+					<span class="person material-icons">person</span>
 				</span>
-				</c:if>
-				<c:if test="${match.attend!=0 && match.max==match.attend }">
-				<span class="voted" 
-					style=
-						"width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#A4D3A6;">
-					<span class="vote-label">참석</span>
+			</div>	
+			<div class="row" >
+				<span class="vote-rating">
+					<c:if test="${match.not_attend==0 }">
+					<span class="voted" 
+						style="background-color:transparent;">
+						<span class="vote-label">불참</span>
+					</span>
+					</c:if>
+					<c:if test="${match.not_attend!=0 && match.max==match.not_attend }">
+					<span class="voted" 
+						style=
+							"width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%;
+							background-color:#A4D3A6;">
+						<span class="vote-label">불참</span>
+					</span>
+					</c:if>
+					<c:if test="${match.not_attend!=0 && match.max!=match.not_attend }">
+					<span class="voted" 
+						style=
+							"width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%;
+							background-color:#bfbfbf;">
+						<span class="vote-label">불참</span>
+					</span>
+					</c:if>
+					<span id="num_nattend" class="vote_num">${match.not_attend}</span>
+					<span class="person material-icons">person</span>
 				</span>
-				</c:if>
-				<c:if test="${match.attend!=0 && match.max!=match.attend }">
-				<span class="voted" 
-					style=
-						"width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#bfbfbf;">
-					<span class="vote-label">참석</span>
+			</div>	
+			<div class="row">
+				<span class="vote-rating">
+					<c:if test="${match.undefined==0 }">
+					<span class="voted" style="background-color:transparent;">
+						<span class="vote-label">미정</span>
+					</span>
+					</c:if>
+					<c:if test="${match.undefined!=0 && match.max==match.undefined }">
+					<span class="voted" 
+						style=
+							"width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%;
+							background-color:#A4D3A6;">
+						<span class="vote-label">미정</span>
+					</span>
+					</c:if>
+					<c:if test="${match.undefined!=0 && match.max!=match.undefined }">
+					<span class="voted" 
+						style=
+							"width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%;
+							background-color:#bfbfbf;">
+						<span class="vote-label">미정</span>
+					</span>
+					</c:if>
+					<span id="num_undefined" class="vote_num">${match.undefined}</span>
+					<span class="person material-icons">person</span>
 				</span>
-				</c:if>
-				<span id="num_attend" class="vote_num">${match.attend}</span>
-				<span class="person material-icons">person</span>
-			</span>
-		</div>	
-		<div class="main-row">
-			<span class="vote-rating">
-				<c:if test="${match.not_attend==0 }">
-				<span class="voted" 
-					style="background-color:transparent;">
-					<span class="vote-label">불참</span>
-				</span>
-				</c:if>
-				<c:if test="${match.not_attend!=0 && match.max==match.not_attend }">
-				<span class="voted" 
-					style=
-						"width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#A4D3A6;">
-					<span class="vote-label">불참</span>
-				</span>
-				</c:if>
-				<c:if test="${match.not_attend!=0 && match.max!=match.not_attend }">
-				<span class="voted" 
-					style=
-						"width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#bfbfbf;">
-					<span class="vote-label">불참</span>
-				</span>
-				</c:if>
-				<span id="num_nattend" class="vote_num">${match.not_attend}</span>
-				<span class="person material-icons">person</span>
-			</span>
-		</div>	
-		<div class="main-row">
-			<span class="vote-rating">
-				<c:if test="${match.undefined==0 }">
-				<span class="voted" style="background-color:transparent;">
-					<span class="vote-label">미정</span>
-				</span>
-				</c:if>
-				<c:if test="${match.undefined!=0 && match.max==match.undefined }">
-				<span class="voted" 
-					style=
-						"width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#A4D3A6;">
-					<span class="vote-label">미정</span>
-				</span>
-				</c:if>
-				<c:if test="${match.undefined!=0 && match.max!=match.undefined }">
-				<span class="voted" 
-					style=
-						"width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%;
-						background-color:#bfbfbf;">
-					<span class="vote-label">미정</span>
-				</span>
-				</c:if>
-				<span id="num_undefined" class="vote_num">${match.undefined}</span>
-				<span class="person material-icons">person</span>
-			</span>
+				<c:if test="${empty match.cancel}">
+				
+			</c:if>
+			</div>
 		</div>
-		<c:if test="${empty match.cancel}">
-		<button class="block" 
-			onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${myClub.club_num }&isMain=true'">
-			<c:if test="${ match.status !=0}">다시 투표하기</c:if><c:if test="${match.status ==0 }">투표하기</c:if>
-		</button>
-		</c:if>
+		<div class="row">
+			<button class="block" 
+				onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${myClub.club_num }&isMain=true'">
+				<c:if test="${ match.status !=0}">다시 투표하기</c:if><c:if test="${match.status ==0 }">투표하기</c:if>
+			</button>
+		</div>
 	</li>
-	<hr class="hr">
 </c:forEach>
 </ul>
 </c:if>
@@ -324,7 +326,6 @@
 	<button class="block margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }'">${match.home_name } 평점 작성 하기</button>
 	</c:if>
 </li>
-<hr class="hr"> 
 </c:if>
 </c:forEach>
 </ul>

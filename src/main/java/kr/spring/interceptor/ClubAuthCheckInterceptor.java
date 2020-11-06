@@ -41,7 +41,7 @@ public class ClubAuthCheckInterceptor
 			}
 		}else if(myClub==null) {
 			response.sendRedirect(
-					request.getContextPath()+"/main/myClubcheck.do");
+					request.getContextPath()+"/main/myClubCheck.do");
 			return false;
 		}
 		
