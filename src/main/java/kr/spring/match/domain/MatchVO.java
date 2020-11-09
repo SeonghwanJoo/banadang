@@ -496,6 +496,14 @@ public class MatchVO {
 	public void setEnd(Date end) {
 		this.end = end;
 	}
+	public int getPageCount() {
+		return pageCount;
+	}
+
+	public void setPageCount(int pageCount) {
+		this.pageCount = pageCount;
+	}
+	private int pageCount;
 	private Date start;
 	private Date end;
 	private String period;

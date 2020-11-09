@@ -1,6 +1,7 @@
 package kr.spring.match.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
@@ -114,6 +116,63 @@ public class MatchAjaxController {
 		
 		return map;
 		
+	}
+	@RequestMapping("/match/nextPage.do")
+	@ResponseBody
+	public Map<String,Object> nextPage(MatchVO match){
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		String period=match.getPeriod();
+		logger.info("type : "+match.getType());
+		logger.info("period : "+match.getPeriod());
+		if(period!="" && period!=null) {
+			
+			String[] values=period.split(" ~ ");
+			match.setStart(java.sql.Date.valueOf(values[0]));
+			match.setEnd(java.sql.Date.valueOf(values[1]));
+			logger.info("start : "+match.getStart());
+			logger.info("end : "+match.getEnd());
+			logger.info("period : "+period);
+		}
+		try {
+			List<MatchVO> matches=matchService.selectMatchToInviteWithFilter(match);
+			map.put("result", "success");
+			map.put("matches", matches);
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		
+		return map;
+	}
+	
+	@RequestMapping("/match/nextRecruitPage.do")
+	@ResponseBody
+	public Map<String,Object> nextRecruitPage(MatchVO match){
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		String period=match.getPeriod();
+		logger.info("type : "+match.getType());
+		logger.info("period : "+match.getPeriod());
+		if(period!="" && period!=null) {
+			
+			String[] values=period.split(" ~ ");
+			match.setStart(java.sql.Date.valueOf(values[0]));
+			match.setEnd(java.sql.Date.valueOf(values[1]));
+			logger.info("start : "+match.getStart());
+			logger.info("end : "+match.getEnd());
+			logger.info("period : "+period);
+		}
+		try {
+			List<MatchVO> matches=matchService.selectRecruitWithFilter(match);
+			map.put("result", "success");
+			map.put("matches", matches);
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		
+		return map;
 	}
 	
 	

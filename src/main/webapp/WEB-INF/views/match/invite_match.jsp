@@ -17,10 +17,13 @@
 </div>
 <div class="invite-wrapper" id="invite-wrapper">
 </div>
+<div class="row margin-top margin-btm" id="moreList">
+	<button class="seemore margin-top" onclick="moreList()">더보기</button>
+</div>
 <!-- The Modal -->
 <div id="myModals" class="modals">
 	<!-- Modal content -->
-	<form:form class="col s12" id="form" action="filter.do" commandName="matchVO" autocomplete="off">
+	<form:form class="col s12" id="form" action="match_toInvite.do" commandName="matchVO" autocomplete="off">
 	<div class="modals-content">
 		<span id="close_mod" class="close_mod">&times;</span>
 		<span class="input-label">경기 유형(축구/풋살) 선택</span>
@@ -43,16 +46,18 @@
 		</div>
 		<hr class="hr">
 		<span class="input-label margin-btm">검색 기간</span>
-		<label class="chip wider">
-				<span class="chip-txt">전체</span>
-				<input type="radio" id="entire-pr" checked="checked">
+		<div class="row centered-padding">
+			<label class="chip wider">
+					<span class="chip-txt">전체</span>
+					<input type="radio" name="period-opt" id="entire-pr" checked="checked">
+					<span class="checkmark"></span>
+			</label> 
+			<label class="chip wider">
+				<span class="chip-txt">특정 기간</span>
+				<input type="radio" name="period-opt" id="specific-pr">
 				<span class="checkmark"></span>
-		</label> 
-		<label class="chip wider">
-			<span class="chip-txt">특정 기간</span>
-			<input type="radio" id="specific-pr">
-			<span class="checkmark"></span>
-		</label>
+			</label>
+		</div>
 		<div class="row margin-top" id="period-filter" style="display:none">
 			<div class="input-container col">
 				<i class="fas fa-calendar-alt icon"></i> <input class="input-field"
@@ -68,6 +73,246 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+function createListOrderByDistance(latitude,longitude,matchs){
+	var div=document.getElementById("invite-wrapper");
+	var ul=document.createElement("UL");
+	ul.setAttribute("class","ul-list");
+	ul.classList.add('non-border-btm');
+	var itemStr="";
+	
+	for(var i=0;i<matchs.length;i++){
+		
+		matchs[i].distance=getDistanceFromLatLonInKm(latitude,longitude,matchs[i].address_y,matchs[i].address_x);
+	}
+	matchs.sort(function (a,b){
+		return a.distance - b.distance;
+	});
+	for(var i=0;i<matchs.length;i++){
+		
+		itemStr+=
+			"<a class='detail' href='${pageContext.request.contextPath}/match/invite_detail.do?match_num="
+			+matchs[i].match_num+"'>"
+			+"<li class='li-list'>"
+				+"<div class='main-row'>"
+					+"<span class='match-item'>"+matchs[i].match_date+"</span>"
+					+"<span class='match-item'>"+matchs[i].start_time+"~"+matchs[i].end_time+"</span>"
+					+"<span class='match-item'>"+matchs[i].address+"</span>"
+					+"<span class='match-item'>";
+		if(matchs[i].type==1){
+		itemStr+=
+					"축구";
+		}else if(matchs[i].type==2){
+		itemStr+=			
+					"풋살";
+		}
+		itemStr+=
+					"</span>"
+				+"</div>"
+				+"<div class='row small-font'>"
+					+"<div class='col club_main'>";
+		if(matchs[i].club_img ==""){
+		itemStr+=
+						"<img src='"+"${pageContext.request.contextPath}"+"/resources/images/blank_emblem.png' class='avatar emblem'>";
+		}else if(matchs[i].club_img !=""){
+			itemStr+=
+				"<img src='"+"${pageContext.request.contextPath}"+"/club/imageView.do?club_num="+matchs[i].club_num+"' class='avatar emblem'>"
+		}
+		itemStr+=
+						"<span class='club_name'>"+matchs[i].club_name+"</span><br>"
+						+"<span class='uniform'>"
+							+"유니폼";
+		if(matchs[i].club_color!=""){
+		itemStr+=
+							"<span class='color' style='background-color:"+matchs[i].club_color+"'></span>";
+		}else if(matchs[i].club_color==""){
+		itemStr+=
+							" 미정";
+		}
+		itemStr+=
+						"</span>"
+						+"</div>"
+						+"<div class='col'>"
+							+"<span class='rating'>매너 "+"</span>"
+							+"<span class='star-wrap'>"
+								+"<span class='star-rating'>"
+									+"<span style='width:"+matchs[i].manner*20+"%'></span>"
+								+"</span>"
+								+Number(matchs[i].manner*2).toFixed(1)+"<br>"
+							+"<span class='rating'>실력 "+"</span>"
+								+"<span class='star-rating'>"
+									+"<span style='width:"+matchs[i].perform*20+"%'></span>"
+								+"</span>"
+								+Number(matchs[i].perform*2).toFixed(1)+"<br>"
+							+"</span>"
+							+"주 연령대"+matchs[i].club_age
+						+"</div>"			
+					+"</div>"
+				+"</li>"
+				+"</a>";
+	}
+	ul.innerHTML+=itemStr;
+	div.appendChild(ul);
+}
+function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
+    function deg2rad(deg) {
+        return deg * (Math.PI/180)
+    }
+
+    const R = 6371; // Radius of the earth in km
+    let dLat = deg2rad(lat2-lat1);  // deg2rad below
+    let dLon = deg2rad(lng2-lng1);
+    let a = (Math.sin(dLat/2) * Math.sin(dLat/2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    let d = R * c; // Distance in km
+    return d;
+}
+let position;
+if("${myClub.club_loc}"!=""){
+	position={latitude:'${myClub.club_locY}',longitude:'${myClub.club_locY}'}//사용자 소속팀의 주소  받아서 넣어주기
+}else if(navigator.geolocation){
+	navigator.geolocation.getCurrentPosition(function(pos) {
+		position={latitude:pos.coords.latitude,longitude:pos.coords.longitude}
+	});	
+}else{
+	position={latitude:37.5668260054857,longitude:126.978656785931};
+}
+let pageCount=0;
+function moreList(){
+	
+	pageCount++;;
+	console.log("pageCount : "+pageCount);
+	var scrollTop=$(window).scrollTop();
+	console.log("scrolTop : "+scrollTop);
+	
+	$.ajax({
+		url:'nextPage.do',
+		type:'post',
+		data:{
+			type: ${match.type},
+			period: '${match.period}',
+			pageCount: pageCount*30,
+		},
+		dataType:'json',
+		cache:false,
+		timeout:30000,
+		success:function(data){
+			if(data.result=='success'){
+				
+				
+				var addContent="";
+				var matches=new Array();
+				matches=data.matches;
+				for(var i=0;i<matches.length;i++){
+					
+					matches[i].distance=getDistanceFromLatLonInKm(position.latitude,position.longitude,matches[i].address_y,matches[i].address_x);
+				}
+				matches.sort(function (a,b){
+					return a.distance - b.distance;
+				});
+				for(var i=0; i<matches.length; i++){
+					addContent+=
+							"<a class='detail' href='${pageContext.request.contextPath}/match/invite_detail.do?match_num="
+							+matches[i].match_num+"'>"
+							+"<li class='li-list'>"
+								+"<div class='main-row'>"
+									+"<span class='match-item'>"+new Date(matches[i].match_date).format('yy.MM.dd')+"</span>"
+									+"<span class='match-item'>"+matches[i].start_time+"~"+matches[i].end_time+"</span>"
+									+"<span class='match-item'>"+matches[i].address+"</span>"
+									+"<span class='match-item'>";
+						if(matches[i].type==1){
+						addContent+=
+									"축구";
+						}else if(matches[i].type==2){
+						addContent+=			
+									"풋살";
+						}
+						addContent+=
+									"</span>"
+								+"</div>"
+								+"<div class='row small-font'>"
+									+"<div class='col club_main'>";
+						if(matches[i].club_img ==""){
+						addContent+=
+										"<img src='"+"${pageContext.request.contextPath}"+"/resources/images/blank_emblem.png' class='avatar emblem'>";
+						}else if(matches[i].club_img !=""){
+							addContent+=
+								"<img src='"+"${pageContext.request.contextPath}"+"/club/imageView.do?club_num="+matches[i].club_num+"' class='avatar emblem'>"
+						}
+						addContent+=
+										"<span class='club_name'>"+matches[i].club_name+"</span><br>"
+										+"<span class='uniform'>"
+											+"유니폼";
+						if(matches[i].club_color!=""){
+						addContent+=
+											"<span class='color' style='background-color:"+matches[i].club_color+"'></span>";
+						}else if(matches[i].club_color==""){
+						addContent+=
+											" 미정";
+						}
+						addContent+=
+										"</span>"
+										+"</div>"
+										+"<div class='col'>"
+											+"<span class='rating'>매너 "+"</span>"
+											+"<span class='star-wrap'>"
+												+"<span class='star-rating'>"
+													+"<span style='width:"+matches[i].manner*20+"%'></span>"
+												+"</span>"
+												+Number(matches[i].manner*2).toFixed(1)+"<br>"
+											+"<span class='rating'>실력 "+"</span>"
+												+"<span class='star-rating'>"
+													+"<span style='width:"+matches[i].perform*20+"%'></span>"
+												+"</span>"
+												+Number(matches[i].perform*2).toFixed(1)+"<br>"
+											+"</span>"
+											+"주 연령대"+matches[i].club_age
+										+"</div>"			
+									+"</div>"
+								+"</li>"
+								+"</a>";	
+				}
+				$(addContent).appendTo('.ul-list');
+				window.scroll({ top: scrollTop, left: 0, behavior: 'smooth' });
+				if(!matches.length){
+					$('#moreList').css('display','none');
+				}
+			}	
+			if(data.result=='errors'){
+				alert('오류 발생');
+			}
+			
+		},
+		error:function(){
+			alert('네트워크 오류 발생');
+		}
+	});
+}
+Date.prototype.format = function(f) {
+    if (!this.valueOf()) return " ";
+ 
+    var weekName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+    var d = this;
+     
+    return f.replace(/(yyyy|yy|MM|dd|E|hh|mm|ss|a\/p)/gi, function($1) {
+        switch ($1) {
+            case "yyyy": return d.getFullYear();
+            case "yy": return (d.getFullYear() % 1000).zf(2);
+            case "MM": return (d.getMonth() + 1).zf(2);
+            case "dd": return d.getDate().zf(2);
+            case "E": return weekName[d.getDay()];
+            case "HH": return d.getHours().zf(2);
+            case "hh": return ((h = d.getHours() % 12) ? h : 12).zf(2);
+            case "mm": return d.getMinutes().zf(2);
+            case "ss": return d.getSeconds().zf(2);
+            case "a/p": return d.getHours() < 12 ? "오전" : "오후";
+            default: return $1;
+        }
+    });
+};
+String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s += this; } return s;};
+String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
+Number.prototype.zf = function(len){return this.toString().zf(len);};
+
 $(function(){
 	$('#specific-pr').click(function(){
 		$('#period-filter').css('display','block');
@@ -129,19 +374,7 @@ $(function(){
 		 modal.style.display = "none";
 	});
 		
-	function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
-	    function deg2rad(deg) {
-	        return deg * (Math.PI/180)
-	    }
-
-	    const R = 6371; // Radius of the earth in km
-	    let dLat = deg2rad(lat2-lat1);  // deg2rad below
-	    let dLon = deg2rad(lng2-lng1);
-	    let a = (Math.sin(dLat/2) * Math.sin(dLat/2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
-	    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-	    let d = R * c; // Distance in km
-	    return d;
-	}
+	
 	let matchs=new Array();
 	<c:forEach items="${matchVO}" var="match">
 		var obj={};
@@ -163,104 +396,10 @@ $(function(){
 		obj.club_age="${match.club_age}";
 		matchs.push(obj);
 	</c:forEach>
+	createListOrderByDistance(position.latitude, position.longitude, matchs);
 	
-	if("${myClub.club_loc}"!=""){
-		var position={latitude:'${myClub.club_locY}',longitude:'${myClub.club_locY}'}//사용자 소속팀의 주소  받아서 넣어주기
-		createListOrderByDistance(position.latitude, position.longitude, matchs);
-	}else if(navigator.geolocation){
-		navigator.geolocation.getCurrentPosition(function(pos) {
-		    
-			var latitude = pos.coords.latitude;
-		    var longitude = pos.coords.longitude;
-		    
-		    createListOrderByDistance(latitude,longitude,matchs);
-		    
-		});	
-	}else{
-		var position={latitude:37.5668260054857,longitude:126.978656785931};
-		createListOrderByDistance(position.latitude, position.longitude, matchs);
-	}
 	
-	function createListOrderByDistance(latitude,longitude,matchs){
-		var div=document.getElementById("invite-wrapper");
-		var ul=document.createElement("UL");
-		ul.setAttribute("class","ul-list");
-		ul.classList.add('non-border-btm');
-		var itemStr="";
-		
-		for(var i=0;i<matchs.length;i++){
-			
-			matchs[i].distance=getDistanceFromLatLonInKm(latitude,longitude,matchs[i].address_y,matchs[i].address_x);
-		}
-		matchs.sort(function (a,b){
-			return a.distance - b.distance;
-		});
-		for(var i=0;i<matchs.length;i++){
-			
-			itemStr+=
-				"<a class='detail' href='${pageContext.request.contextPath}/match/invite_detail.do?match_num="
-				+matchs[i].match_num+"'>"
-				+"<li class='li-list'>"
-					+"<div class='main-row'>"
-						+"<span class='match-item'>"+matchs[i].match_date+"</span>"
-						+"<span class='match-item'>"+matchs[i].start_time+"~"+matchs[i].end_time+"</span>"
-						+"<span class='match-item'>"+matchs[i].address+"</span>"
-						+"<span class='match-item'>";
-			if(matchs[i].type==1){
-			itemStr+=
-						"축구";
-			}else if(matchs[i].type==2){
-			itemStr+=			
-						"풋살";
-			}
-			itemStr+=
-						"</span>"
-					+"</div>"
-					+"<div class='row'>"
-						+"<div class='col club_main'>";
-			if(matchs[i].club_img ==""){
-			itemStr+=
-							"<img src='"+"${pageContext.request.contextPath}"+"/resources/images/blank_emblem.png' class='avatar emblem'>";
-			}else if(matchs[i].club_img !=""){
-				itemStr+=
-					"<img src='"+"${pageContext.request.contextPath}"+"/club/imageView.do?club_num="+matchs[i].club_num+"' class='avatar emblem'>"
-			}
-			itemStr+=
-							"<span class='club_name'>"+matchs[i].club_name+"</span><br>"
-							+"<span class='uniform'>"
-								+"유니폼";
-			if(matchs[i].club_color!=""){
-			itemStr+=
-								"<span class='color' style='background-color:"+matchs[i].club_color+"'></span>";
-			}else if(matchs[i].club_color==""){
-			itemStr+=
-								" 미정";
-			}
-			itemStr+=
-							"</span>"
-							+"</div>"
-							+"<div class='col'>"
-								+"<span class='rating'>매너 "+"</span>"
-								+"<span class='star-wrap'>"
-									+"<span class='star-rating'>"
-										+"<span style='width:"+matchs[i].perform*20+"%'></span>"
-									+"</span>"
-									+Number(matchs[i].manner*2).toFixed(1)+"<br>"
-								+"<span class='rating'>실력 "+"</span>"
-									+"<span class='star-rating'>"
-										+"<span style='width:"+matchs[i].perform*20+"%'></span>"
-									+"</span>"
-									+Number(matchs[i].perform*2).toFixed(1)+"<br>"
-								+"</span>"
-								+"주 연령대"+matchs[i].club_age
-							+"</div>"			
-						+"</div>"
-					+"</li>"
-					+"</a>";
-		}
-		ul.innerHTML+=itemStr;
-		div.appendChild(ul);
-	}
+
 
 });
 

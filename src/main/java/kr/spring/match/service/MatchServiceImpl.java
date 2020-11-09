@@ -209,5 +209,10 @@ public class MatchServiceImpl implements MatchService {
 		
 		return matchMapper.selectMatchToInviteWithFilter(match);
 	};
+	@Override
+	public List<MatchVO> selectRecruitWithFilter(MatchVO match){
+		
+		return matchMapper.selectRecruitWithFilter(match);
+	};
 
 }

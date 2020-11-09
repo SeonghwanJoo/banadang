@@ -59,6 +59,7 @@ public interface MatchMapper {
 	public void insertRecruit(MatchVO match);
 	public MatchVO selectRecruitDetail(Integer recruit_num);
 	public List<MatchVO> selectRecruit();
+	public List<MatchVO> selectRecruitWithFilter(MatchVO match);
 	public List<MemberVO> selectRecruitByClub_num(Integer club_num);
 	@Select("select recruit_req_num from recruit_req where match_num=#{match_num} and id=#{id}")
 	public Integer selectRecruit_req_num(MatchVO match);

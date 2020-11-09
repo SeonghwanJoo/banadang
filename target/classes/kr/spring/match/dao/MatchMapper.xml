@@ -74,7 +74,7 @@
 	</select>
 	<select id="selectMatchToInviteWithFilter" parameterType="matchVO" resultType="matchVO">
 		select * from 
-				(select * from (select * from match where
+				(select * from (select match_num,match_date,start_time,end_time, address,cancel, type,home,away,address_x,address_y,away_name,match_detail, rownum rnum from match where
 					<if test="start==null">
 					match_date>sysdate-1
 					</if>
@@ -84,12 +84,18 @@
 					]]>
 					</if>
 					and away=0
-					<if test="type !=3">
+					<if test="type !=3 and type!=0">
 					and	type=#{type}
 					</if>
+					order by match_date
 					)a join club b on a.home=b.club_num) d
 				left outer join
-				(select avg(manner) manner,avg(perform) perform,club_num from club_rating group by club_num) e on d.club_num=e.club_num where cancel is null order by d.match_date
+				(select avg(manner) manner,avg(perform) perform,club_num from club_rating group by club_num) e on d.club_num=e.club_num
+				 where cancel is null and 
+				 <![CDATA[
+				(rnum>#{pageCount} and rnum<=#{pageCount}+30)
+				]]>  
+				
 	</select>
 	<select id="selectMatchToInviteByMatch_num" parameterType="Integer" resultType="matchVO">
 		select * from 
@@ -129,6 +135,28 @@
 			'')
 			</if>
 	</insert>
+	<select id="selectRecruitWithFilter" resultType="matchVO">
+		select * from (select recruit_num,c.club_num,recruit_position, recruit_count, recruit_cost,cancel,recruit_detail,type,start_time,end_time,address,match_date,address_x,address_y,club_name,club_img,club_color,club_age,rownum rnum from
+    		(select * from (select * from match_recruit) a join (select * from match where
+                <if test="start==null">
+					match_date>sysdate-1
+                </if>
+				<if test="start!=null">
+					<![CDATA[	
+				 		(match_date>=#{start} and match_date<=#{end}) 
+					]]>
+				</if>
+				<if test="type !=3 and type!=0">
+					and	type=#{type}
+				</if>
+				order by match_date) b using(match_num))c join club d on c.club_num=d.club_num) e
+				left outer join (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from club_rating group by club_num) f on e.club_num=f.club_num
+				where cancel is null
+				and 
+				<![CDATA[
+				(rnum>#{pageCount} and rnum<=#{pageCount}+30)
+				]]>  
+	</select>
 	<select id="selectRecruit" resultType="matchVO">
 		select * from (select recruit_num,c.club_num,recruit_position, recruit_count, recruit_cost,cancel,recruit_detail,type,start_time,end_time,address,match_date,address_x,address_y,club_name,club_img,club_color,club_age from(select * from (select * from match_recruit) a join match b on a.match_num=b.match_num where b.match_date>sysdate-1 order by b.match_date)c join club d on c.club_num=d.club_num) e
 		left outer join (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from club_rating group by club_num) f on e.club_num=f.club_num where cancel is null

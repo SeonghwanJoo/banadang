@@ -81,7 +81,7 @@
 			<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
 			</c:if>
 		</div>
-		<div class="row">
+		<div class="row small-font">
 			<c:if test="${empty match.home_name }">
 			<div class="team-info col">
 				<span class="disp-inbl margin-top">삭제된 팀</span>
@@ -147,7 +147,7 @@
 			</c:if>
 			<c:if test="${match.away == 0 }">
 			<div class="team-info col">
-				<span class="disp-inbl margin-top">모집중</span>
+				<span class="disp-inbl margin-top">모집 중</span>
 			</div>
 			</c:if>
 		</div>
@@ -253,10 +253,10 @@
 </div>
 <hr class="hr">
 <c:if test="${not empty past_match }">
-<ul class="match-list">
+<ul class="ul-list">
 <c:forEach var="match" items="${past_match}">
 <c:if test="${match.home!=match.away && !fn:contains(match.away_name,'미등록팀')}">
-<li class="match">
+<li class="li-list">
 	<div class="match-info">
 		<div class="main-row margin-top">
 			<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="yy.MM.dd"/></span>
@@ -269,7 +269,7 @@
 		</div>
 	</div>
 	<div class="match-info">
-		<div class="main-row">
+		<div class="main-row small-font">
 			<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.home }'">
 				<div class="row margin-top margin-btm">
 					<div class="centered">
@@ -319,12 +319,14 @@
 			</div>
 		</div>
 	</div>
-	<c:if test="${match.home==match.club_num}">
-	<button class="block margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }'">${match.away_name } 평점 작성 하기</button>
-	</c:if>
-	<c:if test="${match.away==match.club_num }">
-	<button class="block margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }'">${match.home_name } 평점 작성 하기</button>
-	</c:if>
+	<div class="row">
+		<c:if test="${match.home==match.club_num}">
+		<button class="block margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }'">${match.away_name } 평점 작성 하기</button>
+		</c:if>
+		<c:if test="${match.away==match.club_num }">
+		<button class="block margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }'">${match.home_name } 평점 작성 하기</button>
+		</c:if>
+	</div>
 </li>
 </c:if>
 </c:forEach>

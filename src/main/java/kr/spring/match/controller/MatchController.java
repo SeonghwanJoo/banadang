@@ -63,25 +63,13 @@ public class MatchController {
 		return "redirect:/main/main.do";
 	}
 	@RequestMapping("/match/match_toInvite.do")
-	public ModelAndView inviteList() {
-		
-		ModelAndView mav=new ModelAndView();
-		List<MatchVO> matchVO=matchService.selectMatchToInvite();
-		
-		mav.setViewName("invite_match");
-		mav.addObject("title","경기 매치");
-		mav.addObject("matchVO", matchVO);
-		
-		return mav;
-	}
-	@RequestMapping("/match/filter.do")
-	public ModelAndView filter(MatchVO match) {
+	public ModelAndView inviteList(MatchVO match) {
 		
 		ModelAndView mav=new ModelAndView();
 		String period=match.getPeriod();
 		logger.info("type : "+match.getType());
 		logger.info("period : "+match.getPeriod());
-		if(period!="") {
+		if(period!="" && period!=null) {
 			
 			String[] values=period.split(" ~ ");
 			match.setStart(java.sql.Date.valueOf(values[0]));
@@ -96,6 +84,32 @@ public class MatchController {
 		mav.addObject("title","경기 매치");
 		mav.addObject("match", match);
 		mav.addObject("matchVO", matchVO);
+		
+		return mav;
+	}
+
+	@RequestMapping("/match/filterRecruit.do")
+	public ModelAndView filterRecruit(MatchVO match) {
+		
+		ModelAndView mav=new ModelAndView();
+		String period=match.getPeriod();
+		logger.info("type : "+match.getType());
+		logger.info("period : "+match.getPeriod());
+		if(period!="" && period!=null) {
+			
+			String[] values=period.split(" ~ ");
+			match.setStart(java.sql.Date.valueOf(values[0]));
+			match.setEnd(java.sql.Date.valueOf(values[1]));
+			logger.info("start : "+match.getStart());
+			logger.info("end : "+match.getEnd());
+			logger.info("period : "+period);
+		}
+		List<MatchVO> matches=matchService.selectRecruitWithFilter(match);
+		
+		mav.setViewName("recruit");
+		mav.addObject("title","용병 모집");
+		mav.addObject("match", match);
+		mav.addObject("matches", matches);
 		
 		
 		return mav;
@@ -113,13 +127,28 @@ public class MatchController {
 		return mav;
 	}
 	@RequestMapping("/match/recruit.do")
-	public ModelAndView recruitPlayer() {
+	public ModelAndView recruitPlayer(MatchVO match) {
 		ModelAndView mav=new ModelAndView();
-		List<MatchVO> matches=matchService.selectRecruit();
+		String period=match.getPeriod();
+		logger.info("type : "+match.getType());
+		logger.info("period : "+match.getPeriod());
+		if(period!="" && period!=null) {
+			
+			String[] values=period.split(" ~ ");
+			match.setStart(java.sql.Date.valueOf(values[0]));
+			match.setEnd(java.sql.Date.valueOf(values[1]));
+			logger.info("start : "+match.getStart());
+			logger.info("end : "+match.getEnd());
+			logger.info("period : "+period);
+		}
+		List<MatchVO> matches=matchService.selectRecruitWithFilter(match);
 		
 		mav.setViewName("recruit");
 		mav.addObject("title","용병 모집");
-		mav.addObject("matches",matches);
+		mav.addObject("match", match);
+		mav.addObject("matches", matches);
+		
+		
 		return mav;
 	}
 	@RequestMapping("/match/writeRecruit.do")
