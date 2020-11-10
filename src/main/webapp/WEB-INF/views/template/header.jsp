@@ -17,7 +17,7 @@
 
   <!-- Left-aligned links (default) -->
 	<c:if test="${title eq '팀원 모집' }">
-	<span class="material-icons cursor l-font" style="position:relative;top:0.5rem" onclick="location.href='myPage.do'">close</span>
+	<span class="material-icons cursor l-font" style="position:relative;top:0.5rem;left:0.5rem;" onclick="location.href='myPage.do'">close</span>
 	</c:if>
 	<c:if test="${!empty myClub }">
 	<span class="sel-team" id="sel-team">

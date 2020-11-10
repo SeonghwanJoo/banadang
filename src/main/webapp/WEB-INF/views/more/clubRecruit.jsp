@@ -4,13 +4,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="main-row filter-wrapper margin-btm">
 	<div class="filter">
-		<c:if test="${match.type==1 }">
+		<c:if test="${type==1 }">
 		<span>축구</span>
 		</c:if>
-		<c:if test="${match.type==2 }">
+		<c:if test="${type==2 }">
 		<span>풋살</span>
 		</c:if>
-		<span>${match.period}</span>
+		<c:if test="${type==3 }">
+		<span>전체</span>
+		</c:if>
 		<span class="material-icons cursor l-font filter-icon" id="filter">filter_alt</span>
 	</div>
 </div>
@@ -22,7 +24,7 @@
 <!-- The Modal -->
 <div id="myModals" class="modals">
 	<!-- Modal content -->
-	<form:form class="col s12" id="form" action="filterRecruit.do" commandName="matchVO" autocomplete="off">
+	<form:form class="col s12" id="form" action="clubRecruit.do" commandName="matchVO" autocomplete="off">
 	<div class="modals-content">
 		<span id="close_mod" class="close_mod">&times;</span>
 		<span class="input-label">경기 유형(축구/풋살) 선택</span>
@@ -42,26 +44,6 @@
 				<input type="radio" name="type" id="futsal" value="2">
 				<span class="checkmark"></span>
 			</label>
-		</div>
-		<hr class="hr">
-		<span class="input-label margin-btm">검색 기간</span>
-		<div class="row centered-padding">
-			<label class="chip wider">
-					<span class="chip-txt">전체</span>
-					<input type="radio" name="period-opt" id="entire-pr" checked="checked">
-					<span class="checkmark"></span>
-			</label> 
-			<label class="chip wider">
-				<span class="chip-txt">특정 기간</span>
-				<input type="radio" name="period-opt" id="specific-pr">
-				<span class="checkmark"></span>
-			</label>
-		</div>
-		<div class="row margin-top" id="period-filter" style="display:none">
-			<div class="input-container col">
-				<i class="fas fa-calendar-alt icon"></i> <input class="input-field"
-					type="text" id="datepicker" placeholder="검색 기간 선택" name="period">
-			</div>
 		</div>
 		<hr class="hr">
 		<div class="row margin-top">
@@ -94,7 +76,7 @@ function createListOrderByDistance(latitude,longitude,matchs){
 	
 	for(var i=0;i<matchs.length;i++){
 		
-		matchs[i].distance=getDistanceFromLatLonInKm(latitude,longitude,matchs[i].address_y,matchs[i].address_x);
+		matchs[i].distance=getDistanceFromLatLonInKm(latitude,longitude,matchs[i].club_locX,matchs[i].club_locY);
 	}
 	matchs.sort(function (a,b){
 		return a.distance - b.distance;
@@ -179,17 +161,16 @@ if("${myClub.club_loc}"!=""){
 let pageCount=0;
 function moreList(){
 	
-	pageCount++;;
+	pageCount++;
 	console.log("pageCount : "+pageCount);
 	var scrollTop=$(window).scrollTop();
 	console.log("scrolTop : "+scrollTop);
 	
 	$.ajax({
-		url:'nextRecruitPage.do',
+		url:'nextClubRecruitPage.do',
 		type:'post',
 		data:{
-			type: ${match.type},
-			period: '${match.period}',
+			type: ${type},
 			pageCount: pageCount*30,
 		},
 		dataType:'json',
@@ -280,70 +261,9 @@ function moreList(){
 		}
 	});
 }
-Date.prototype.format = function(f) {
-    if (!this.valueOf()) return " ";
- 
-    var weekName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
-    var d = this;
-     
-    return f.replace(/(yyyy|yy|MM|dd|E|hh|mm|ss|a\/p)/gi, function($1) {
-        switch ($1) {
-            case "yyyy": return d.getFullYear();
-            case "yy": return (d.getFullYear() % 1000).zf(2);
-            case "MM": return (d.getMonth() + 1).zf(2);
-            case "dd": return d.getDate().zf(2);
-            case "E": return weekName[d.getDay()];
-            case "HH": return d.getHours().zf(2);
-            case "hh": return ((h = d.getHours() % 12) ? h : 12).zf(2);
-            case "mm": return d.getMinutes().zf(2);
-            case "ss": return d.getSeconds().zf(2);
-            case "a/p": return d.getHours() < 12 ? "오전" : "오후";
-            default: return $1;
-        }
-    });
-};
-String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s += this; } return s;};
-String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
-Number.prototype.zf = function(len){return this.toString().zf(len);};
 
 $(function(){
-	$('#specific-pr').click(function(){
-		$('#period-filter').css('display','block');
-	});
-	$('#entire-pr').click(function(){
-		$('#period-filter').css('display','none');
-		$('#datepicker').val('');
-	});
-	let today=new Date();
-	let endDate=new Date();
-	endDate.setDate(endDate.getDate()+31);
 	
-	$('#datepicker').daterangepicker({
-		"minDate": today,
-		"startDate": today,
-		"endDate": endDate,
-	    "autoApply": true,
-	    "opens": "center",
-		"locale" : {
-			"format" : "YYYY-MM-DD",
-			"separator" : " ~ ",
-			"applyLabel" : "Apply",
-			"cancelLabel" : "Cancel",
-			"fromLabel" : "From",
-			"toLabel" : "To",
-			"customRangeLabel" : "Custom",
-			"weekLabel" : "W",
-			"daysOfWeek" : [ "일", "월", "화", "수", "목",
-			"금", "토" ],
-			"monthNames" : [ "1월", "2월", "3월", "4월",
-			"5월", "6월", "7월", "8월", "9월",
-			"10월", "11월", "12월" ],
-			"firstDay" : 1
-			}
-	}, function(start, end, label) {
-	  console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-	}); 
-	$('#datepicker').val('');
 	// Get the modal
 	var modal = document.getElementById("myModals");
 
@@ -382,6 +302,8 @@ $(function(){
 		obj.act_day="${match.act_day}";
 		obj.act_time="${match.act_time}";
 		obj.club_address="${match.club_address}";
+		obj.club_locX="${match.club_locX}";
+		obj.club_locY="${match.club_locY}";
 		matchs.push(obj);
 		console.log("match"+obj);
 	</c:forEach>

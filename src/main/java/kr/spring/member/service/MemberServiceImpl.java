@@ -1,6 +1,7 @@
 package kr.spring.member.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -70,9 +71,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List<MatchVO> selectClubRecruits() {
+	public List<MatchVO> selectClubRecruits(MatchVO match) {
 		
-		return memberMapper.selectClubRecruits();
+		return memberMapper.selectClubRecruits(match);
 	}
 
 	@Override
@@ -186,6 +187,32 @@ public class MemberServiceImpl implements MemberService{
 	public Integer selectCountMsg(String user_id) {
 		
 		return memberMapper.selectCountMsg(user_id);
+	}
+	@Override
+	public void deleteMember(MemberVO member) {
+		
+		memberMapper.deleteIDFromclub_join(member);
+		memberMapper.deleteIDFromClub_Recruit(member);
+		memberMapper.deleteIDFromclubRecruit_req(member);
+		memberMapper.deleteIDFromMatch_Recruit(member);
+		memberMapper.deleteIDFromMatch_Request(member);
+		memberMapper.deleteIDFromMember_Detail(member);
+		memberMapper.deleteIDFromMsg(member);
+		memberMapper.deleteIDFromNotice(member);
+		memberMapper.deleteIDFromQna(member);
+		memberMapper.deleteIDFromQna_Answer(member);
+		memberMapper.deleteIDFromRecruit_Req(member);
+		memberMapper.deleteIDFromVote_Answer(member);
+		memberMapper.deleteIDFromVMatch_Vote(member);
+		memberMapper.updateIDFromMemberForUnlink(member);
+		
+	}
+	@Override
+	public void updateMemberForReValidation(MemberVO member) {
+		
+		memberMapper.updateMemberForReValidation(member);
+		memberMapper.insertMember_detail(member);
+		
 	}
 
 }

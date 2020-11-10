@@ -14,7 +14,7 @@
 	$(function(){
 		$("#toast").css("display","block");
 		$("#submit_toast_content").click(function(){
-			location.href=document.referrer;
+			location.href='main.do';
 		})
 	});
 </script>

@@ -1,5 +1,7 @@
 package kr.spring.interceptor;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,28 +27,38 @@ public class ClubMemberCheckInterceptor  extends HandlerInterceptorAdapter {
 			               Object handler)throws Exception {
 		//로그 표시
 		logger.info("<<ClubMemberCheckInterCeptor 진입>>");
+		//requestParameter에서 club_num을 받는다
+		//session에서 myClubs를 받는다
+		//myClubs에 club_num이 있는지 확인 한다
+		//myClubs가 null이 거나 club_num이 없으면 redirect한다
+		Integer club_num=Integer.parseInt(request.getParameter("club_num"));
+		
 		HttpSession session = request.getSession();
-		String id=(String)session.getAttribute("user_id");
-		ClubVO myClub=(ClubVO)session.getAttribute("myClub");
+		List<ClubVO> myClubs=null;
+		myClubs=(List)session.getAttribute("myClubs");
+		
 		try {
-			if(myClub!=null) {
-				myClub.setId(id);
-				Integer club_auth=clubService.selectClubAuth(myClub);
-				if(club_auth<4) {
+			if(myClubs!=null) {
+				int count=0;
+				for(ClubVO myClub : myClubs) {
+					if(myClub.getClub_num()==club_num) {
+						count++;
+					}
+				}
+				if(count==0) {
 					response.sendRedirect(
 							request.getContextPath()+"/main/membercheck.do");
 					return false;
 				}
-			}else if(myClub==null) {
+				
+			}else if(myClubs==null) {
 				response.sendRedirect(
-						request.getContextPath()+"/main/myClubcheck.do");
+						request.getContextPath()+"/main/myClubCheck.do");
 				return false;
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 		
 		return true;
 	}

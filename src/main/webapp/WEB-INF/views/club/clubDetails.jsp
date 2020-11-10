@@ -61,7 +61,7 @@
 		</li>
 	</ul>
 	<h6 class="middle-title">상대팀의 평가 내역</h6>
-	<ul class="ul-list">
+	<ul class="ul-list non-border-btm">
 		<c:if test="${not empty ratings }">
 		<c:forEach items="${ratings }" var="rating">
 		<li class="li-list">

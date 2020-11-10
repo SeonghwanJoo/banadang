@@ -34,6 +34,13 @@ public class MemberVO {
 	private Date recruit_due;
 	private Integer mem_auth;
 	private Date join_date;
+	private String reason;
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
 	public Date getJoin_date() {
 		return join_date;
 	}

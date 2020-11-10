@@ -1,7 +1,7 @@
 package kr.spring.member.service;
 
 import java.util.List;
-
+import java.util.Map;
 
 import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
@@ -16,7 +16,7 @@ public interface MemberService {
 	public void updateRecruitReqForCancel(Integer recruit_req_num);
 	public void insertClubRecruit(MatchVO match);
 	public MatchVO selectClubRecruitWithClubDetail(Integer clubRecruit_num);
-	public List<MatchVO> selectClubRecruits();
+	public List<MatchVO> selectClubRecruits(MatchVO match);
 	public void deleteClubRecruit(Integer clubRecruit_num);
 	public void updateClubRecruit(MatchVO match);
 	public void insertClubRecruitReq(MatchVO match);
@@ -34,5 +34,7 @@ public interface MemberService {
 	public void deleteMsgFromSender(Integer msg_num);
 	public void updateMsgStatus(Integer receiver);
 	public Integer selectCountMsg(String user_id);
+	public void deleteMember(MemberVO member);
+	public void updateMemberForReValidation(MemberVO member);
 	
 }

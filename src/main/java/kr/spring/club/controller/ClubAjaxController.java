@@ -207,13 +207,11 @@ public class ClubAjaxController {
 	}
 	@RequestMapping("/club/joinClub.do")
 	@ResponseBody
-	public Map<String,Object> joinClub(@RequestParam String id,@RequestParam Integer club_num){
+	public Map<String,Object> joinClub(ClubVO club,HttpSession session){
 		Map<String,Object> map=new HashMap<String,Object>();
-		ClubVO club=new ClubVO();
-		club.setId(id);
-		club.setClub_num(club_num);
 		try {
 			clubService.insertClubMember(club);
+			session.setAttribute("myClub", clubService.selectMyClubDetails(club));
 			map.put("result", "success");
 			
 		}catch (Exception e) {

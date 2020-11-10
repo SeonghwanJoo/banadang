@@ -78,7 +78,7 @@
 		</li>
 		</c:if>
 	</ul>
-	<ul class="ul-list">
+	<ul class="ul-list non-border-btm">
 		<c:if test="${!empty undefined_atdance }">
 		<li class="li-list">
 			<div class="col"><span class="positive-color bold">미정 : ${fn:length(undefined_atdance)}</span></div>
@@ -104,7 +104,7 @@
 	</ul>
 </div>
 <div id="not-voted" class="tab_detail" style="display:none">
-	<ul class="ul-list">
+	<ul class="ul-list non-border-btm">
 		<c:if test="${!empty not_voted }">
 		<li class="li-list">
 			<div class="col"><span class="positive-color bold">미투표자 : ${fn:length(not_voted)}</span></div>

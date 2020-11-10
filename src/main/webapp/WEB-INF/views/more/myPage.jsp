@@ -13,7 +13,7 @@
 				<span> | ${fn:substring(member.age_range,0,1)}0대</span>
 				</c:if>
 				<br>
-				<span>${member.email }</span>
+				<span class="small-font gray">${member.email }</span>
 			</div>
 			<div class="col">
 				<button class="sync" onclick="location.href='${pageContext.request.contextPath}/member/kakaoSync.do'">
@@ -25,7 +25,7 @@
 		</div>
 	</li>
 </ul>
-<ul class="ul-list">
+<ul class="ul-list gray">
 	<li class="li-list cursor" onclick="location.href='myRecruitReq.do'">
 		<div class="row">
 			<div class="col">
@@ -43,7 +43,7 @@
 		</div>
 	</li>
 </ul>
-<ul class="ul-list">
+<ul class="ul-list gray">
 	<li class="li-list cursor" onclick="location.href='clubRecruit.do'">
 		<div class="row">
 			<div class="col">
@@ -78,22 +78,21 @@
 			</div>
 		</div>
 	</li>
-	<!-- <li class="li-list">
+</ul>
+<ul class="ul-list non-border-btm gray">
+	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/member/appSetting.do'">
 		<div class="row">
 			<div class="col">
 				<i class="fas fa-cog"></i>
 				<span>앱 설정</span>
 			</div>
 		</div>
-	</li> -->
-</ul>
-<ul class="ul-list">
-	<li class="li-list">
+	</li>
+	<%-- <li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/member/logout.do'">
 		<div class="row">
 			<div class="col">
-				<a href="${pageContext.request.contextPath}/member/logout.do">
+				<i class="fas fa-sign-out-alt"></i>
 				<span>로그아웃</span>
-				</a>
 			</div>
 		</div>
 	</li>
@@ -103,7 +102,7 @@
 				<span class="red">서비스 탈퇴</span>
 			</div>
 		</div>
-	</li>
+	</li> --%>
 </ul>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>

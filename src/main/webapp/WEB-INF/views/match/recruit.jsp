@@ -23,7 +23,7 @@
 <!-- The Modal -->
 <div id="myModals" class="modals">
 	<!-- Modal content -->
-	<form:form class="col s12" id="form" action="filterRecruit.do" commandName="matchVO" autocomplete="off">
+	<form:form class="col s12" id="form" action="recruit.do" commandName="matchVO" autocomplete="off">
 	<div class="modals-content">
 		<span id="close_mod" class="close_mod">&times;</span>
 		<span class="input-label">경기 유형(축구/풋살) 선택</span>
@@ -45,7 +45,7 @@
 			</label>
 		</div>
 		<hr class="hr">
-		<span class="input-label margin-btm">검색 기간</span>
+		<span class="input-label margin-btm">검색 기간 설정</span>
 		<div class="row centered-padding">
 			<label class="chip wider">
 					<span class="chip-txt">전체</span>

@@ -517,6 +517,8 @@ input[type=text]:focus, select:focus{
 }
 body.body {
     font-family: Noto Sans KR,sans-serif;
+    word-break:keep-all;
+    word-wrap:break-word;
 }
 .certify-modals{
 	display: none; /* Hidden by default */
@@ -648,7 +650,7 @@ body.body {
 .negative-color{background-color:#000;}
 .full{
 	width:95%;
-	margin: 0 auth;
+	margin: 0 auto;
 }
 
 @keyframes slideFromBot{
@@ -658,6 +660,13 @@ body.body {
 	to{
 		bottom:3rem;
 	}
+}
+#reason{
+	border:1px solid #ccc;
+	border-radius:0.5rem;
+	background-color:#fff;
+	font-size:0.8rem;
+	width:95%;
 }
 
 #img_preview_content{
@@ -769,7 +778,15 @@ body.body {
   border-color:#FFF;
   border-style:solid;
 }
-.seemore, .seemore:focus{
+#submit_delete{
+	background-color:#dc3545;
+	color:#fff;
+	border-radius:0.4rem;
+}
+#submit_delete:focus{
+	outline:none;
+}
+.seemore{
   display: block;
   width:95%;
   height:2.6rem;
@@ -945,9 +962,9 @@ input:checked + .slider:before {
 }
 .msg-status{
 	position: absolute;
-	right:9rem;
+	right:2rem;
 	font-size:0.8rem;
-	color:#9E9E9E;
+	color:#007bff;
 }
 a.detail:hover{
 	color:#7f7f7f;
@@ -1044,6 +1061,9 @@ a.detail{
 }
 .disp-bl{
 	display:block;
+}
+.align-center{
+	text-align:center;
 }
 .disp-inbl{
 	display:inline-block;
@@ -1457,7 +1477,7 @@ div.detail-item{
 ul.ul-list{
 	padding-inline-start: 0px;
 	width:100%;
-	border-bottom:10px solid #eee;
+	border-bottom:15px solid #eee;
 	margin-bottom:0;
 }
 ul.non-border-btm{
@@ -1523,7 +1543,7 @@ div.x-bigger{
 	font-size:0.8rem;
 	background-color:#FFEB00;
 	color:#3C1E1E;
-	margin:0.5rem auto;
+	margin:0.5rem 1rem;
 	float:right;
 	padding-right:2.5rem;
 }
@@ -1587,6 +1607,17 @@ button.chip-btn{
 .centered{
 	margin:0 auto;
 }
+.border{
+	border:1px solid #ccc;
+	border-radius:0.5rem;
+}
+.padding-left{
+	padding-left:1rem;
+}
+.padding-right{
+	padding-right:0.5rem;
+}
+
 .chip{
   display: inline-block;
   position: relative;

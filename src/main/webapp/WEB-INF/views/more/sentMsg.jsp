@@ -41,7 +41,7 @@
 					<span class="small-font bold gray right">${msg.register_date }</span>
 					<span class="material-icons more cursor m-font gray" id="more" onclick="openOption(${msg.msg_num})" >more_vert</span>
 				</div>
-				<p>${msg.content }</p>
+				<p class="gray">${msg.content }</p>
 			</div>
 		</div>
 	</li>

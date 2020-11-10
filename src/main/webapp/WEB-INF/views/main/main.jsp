@@ -100,17 +100,17 @@
 						<span class="disp-inbl margin-top">${match.home_name}</span>
 					</div>
 				</div>
-				매너  
-				<span class="star-rating">
-					<span style="width:${match.home_manner*20}%"></span>
-				</span>
-				${match.home_manner*2}<br>
-				실력  
-				<span class="star-rating">
-					<span style="width:${match.home_perform*20}%"></span>
-				</span>
-				${match.home_perform*2}
-			</div>
+					매너  
+					<span class="star-rating">
+						<span style="width:${match.home_manner*20}%"></span>
+					</span>
+					${match.home_manner*2}<br>
+					실력  
+					<span class="star-rating">
+						<span style="width:${match.home_perform*20}%"></span>
+					</span>
+					${match.home_perform*2}
+				</div>
 			</c:if>
 			<span class="from-to">VS</span>
 			<c:if test="${match.away != 0 }">
@@ -253,7 +253,7 @@
 </div>
 <hr class="hr">
 <c:if test="${not empty past_match }">
-<ul class="ul-list">
+<ul class="ul-list non-border-btm">
 <c:forEach var="match" items="${past_match}">
 <c:if test="${match.home!=match.away && !fn:contains(match.away_name,'미등록팀')}">
 <li class="li-list">

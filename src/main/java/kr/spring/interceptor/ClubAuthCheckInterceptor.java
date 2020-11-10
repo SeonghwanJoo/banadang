@@ -29,7 +29,13 @@ public class ClubAuthCheckInterceptor
 		//로그인 여부 체크
 		HttpSession session = request.getSession();
 		String id=(String)session.getAttribute("user_id");
+		
 		ClubVO myClub=(ClubVO)session.getAttribute("myClub");
+		if(myClub==null) {
+			response.sendRedirect(
+					request.getContextPath()+"/main/myClubCheck.do");
+			return false;
+		}
 		if(myClub!=null) {
 			myClub.setId(id);
 			int club_auth=clubService.selectClubAuth(myClub);
@@ -39,10 +45,6 @@ public class ClubAuthCheckInterceptor
 						request.getContextPath()+"/main/authcheck.do");
 				return false;
 			}
-		}else if(myClub==null) {
-			response.sendRedirect(
-					request.getContextPath()+"/main/myClubCheck.do");
-			return false;
 		}
 		
 		

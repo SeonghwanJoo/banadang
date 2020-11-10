@@ -72,7 +72,8 @@
 		<hr class="hr">
 		<div class="row">
 			<div class="input-container col">
-				<i class="fas fa-calendar-alt icon"></i> <input class="input-field"
+				<i class="fas fa-calendar-alt icon"></i>
+				<input class="input-field"
 					type="text" id="datepicker" placeholder="경기 날짜 선택" name="match_date">
 			</div>
 		</div>

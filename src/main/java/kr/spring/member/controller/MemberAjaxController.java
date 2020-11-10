@@ -1,6 +1,7 @@
 package kr.spring.member.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -18,6 +19,7 @@ import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
 import kr.spring.member.domain.MemberVO;
 import kr.spring.member.domain.MsgVO;
+import kr.spring.member.service.LoginAPI;
 import kr.spring.member.service.MemberService;
 
 @Controller
@@ -33,6 +35,9 @@ public class MemberAjaxController {
 	
 	@Resource
 	private MemberService memberService;
+	
+	@Resource
+	private LoginAPI loginAPI;
 	
 	
 	@RequestMapping("/member/deleteRecruitReq.do")
@@ -162,6 +167,39 @@ public class MemberAjaxController {
 		}catch(Exception e) {
 			e.printStackTrace();
 			map.put("result", "success");
+		}
+		
+		return map;
+	}
+	@RequestMapping("/member/nextClubRecruitPage.do")
+	@ResponseBody
+	public Map<String,Object> nextClubRecruitPage(MatchVO match){
+		Map<String,Object> map=new HashMap<String,Object>();
+		try {
+			List<MatchVO> matches=memberService.selectClubRecruits(match);
+			map.put("result", "success");
+			map.put("matches", matches);
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		
+		return map;
+	}
+	@RequestMapping("/member/unlink.do")
+	@ResponseBody
+	public Map<String,Object> unlink(MemberVO member,HttpSession session) {
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		try {
+			logger.info("id : " + member.getId());
+			logger.info("reason : "+ member.getReason());
+			memberService.deleteMember(member);
+			loginAPI.kakaoUnlink((String)session.getAttribute("access_Token"));
+			session.invalidate();
+			map.put("result", "success");
+		}catch(Exception e) {
+			map.put("result", "errors");
 		}
 		
 		return map;

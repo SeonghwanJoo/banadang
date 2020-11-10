@@ -123,6 +123,7 @@
 		<interceptor>
 			<mapping path="/club/manageClub.do"/>
 			<mapping path="/main/vote_detail.do"/>
+			<mapping path="/main/voteForm.do"/>
 			<mapping path="/main/replyToVote.do"/>
 			<mapping path="/main/modifyVoteAnswer.do"/>
 			<beans:bean class="kr.spring.interceptor.ClubMemberCheckInterceptor"/>

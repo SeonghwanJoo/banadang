@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -56,11 +56,15 @@ public class MemberController {
         	//memberVO의 아이디가 DB에 기 등록된 id인지 확인
         	MemberVO existingMember=memberService.getMember(user_id);
         	//등록되어 있으면 session setting
-        	if(existingMember == null) {//등록되어 있지 않으면 insert로 회원정보 추가 후 session setting
+        	if(existingMember !=null && existingMember.getMem_auth()!=3) {
+        		session.setAttribute("mem_auth", existingMember.getMem_auth());
+        	}else if(existingMember == null){
         		memberService.insertMember(memberVO);
         		session.setAttribute("mem_auth", 1);
-        	}else if(existingMember !=null) {
-        		session.setAttribute("mem_auth", existingMember.getMem_auth());
+        	}
+        	else if(existingMember.getMem_auth()==3) {
+        		memberService.updateMemberForReValidation(memberVO);
+        		session.setAttribute("mem_auth", 1);
         	}
         	Integer count_msg=memberService.selectCountMsg(user_id);
         	session.setAttribute("count_msg", count_msg);
@@ -114,11 +118,15 @@ public class MemberController {
         	//memberVO의 아이디가 DB에 기 등록된 id인지 확인
         	MemberVO existingMember=memberService.getMember(user_id);
         	//등록되어 있으면 session setting
-        	if(existingMember == null) {//등록되어 있지 않으면 insert로 회원정보 추가 후 session setting
+        	if(existingMember !=null && existingMember.getMem_auth()!=3) {
+        		session.setAttribute("mem_auth", existingMember.getMem_auth());
+        	}else if(existingMember == null){
         		memberService.insertMember(memberVO);
         		session.setAttribute("mem_auth", 1);
-        	}else if(existingMember !=null) {
-        		session.setAttribute("mem_auth", existingMember.getMem_auth());
+        	}
+        	else if(existingMember.getMem_auth()==3) {
+        		memberService.updateMemberForReValidation(memberVO);
+        		session.setAttribute("mem_auth", 1);
         	}
         	
         	Integer count_msg=memberService.selectCountMsg(user_id);
@@ -160,11 +168,15 @@ public class MemberController {
         	//memberVO의 아이디가 DB에 기 등록된 id인지 확인
         	MemberVO existingMember=memberService.getMember(user_id);
         	//등록되어 있으면 session setting
-        	if(existingMember == null) {//등록되어 있지 않으면 insert로 회원정보 추가 후 session setting
+        	if(existingMember !=null && existingMember.getMem_auth()!=3) {
+        		session.setAttribute("mem_auth", existingMember.getMem_auth());
+        	}else if(existingMember == null){
         		memberService.insertMember(memberVO);
         		session.setAttribute("mem_auth", 1);
-        	}else if(existingMember !=null) {
-        		session.setAttribute("mem_auth", existingMember.getMem_auth());
+        	}
+        	else if(existingMember.getMem_auth()==3) {
+        		memberService.updateMemberForReValidation(memberVO);
+        		session.setAttribute("mem_auth", 1);
         	}
         	
         	Integer count_msg=memberService.selectCountMsg(user_id);
@@ -195,6 +207,7 @@ public class MemberController {
 	    session.invalidate();
 	    return "redirect:/main/main.do";
 	}
+	
 	@RequestMapping("/member/myRecruitReq.do")
 	public ModelAndView myRecruitReq(HttpSession session) {
 		
@@ -212,11 +225,12 @@ public class MemberController {
 		return mav;
 	}
 	@RequestMapping("/member/clubRecruit.do")
-	public ModelAndView clubRecruit() {
+	public ModelAndView clubRecruit(MatchVO match) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("title","팀원 모집");
-		List<MatchVO> matches=memberService.selectClubRecruits();
+		List<MatchVO> matches=memberService.selectClubRecruits(match);
 		mav.addObject("matches", matches);
+		mav.addObject("type",match.getType());
 		mav.setViewName("clubRecruit");
 		
 		return mav;
@@ -336,6 +350,16 @@ public class MemberController {
 		return mav;
 		
 	}
+	@RequestMapping("/member/appSetting.do")
+	public ModelAndView setApp(HttpSession session) {
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("title","앱 설정");
+		mav.setViewName("appSetting");
+		
+		return mav;
+	}
+	
 	@RequestMapping("/member/sentMsg.do")
 	public ModelAndView sentMsg(HttpSession session) {
 		

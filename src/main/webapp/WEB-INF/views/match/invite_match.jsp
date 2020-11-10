@@ -45,7 +45,7 @@
 			</label>
 		</div>
 		<hr class="hr">
-		<span class="input-label margin-btm">검색 기간</span>
+		<span class="input-label margin-btm">검색 기간 설정</span>
 		<div class="row centered-padding">
 			<label class="chip wider">
 					<span class="chip-txt">전체</span>

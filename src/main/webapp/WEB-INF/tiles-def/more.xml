@@ -72,4 +72,10 @@
        <put-attribute name="body" value="/WEB-INF/views/more/sentMsg.jsp"/>
        <put-attribute name="footer" value=""/>
     </definition>
+    <definition name="appSetting" extends="main">
+       <put-attribute name="title" value="앱 설정"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/appSetting.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
 </tiles-definitions>

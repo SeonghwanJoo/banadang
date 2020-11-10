@@ -1,6 +1,7 @@
 package kr.spring.member.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -13,7 +14,7 @@ import kr.spring.member.domain.MsgVO;
 
 public interface MemberMapper {
 	
-	@Select("select * from(select * from member_detail where id=#{id}) join member using(id)")
+	@Select("select * from(select * from member where id=#{id}) left outer join member_detail using(id)")
 	public MemberVO getMember(String id);
 	
 	@Insert("insert into member (id) values (#{id})")
@@ -33,7 +34,7 @@ public interface MemberMapper {
 	
 	public void insertClubRecruit(MatchVO match);
 	public MatchVO selectClubRecruitWithClubDetail(Integer clubRecruit_num);
-	public List<MatchVO> selectClubRecruits();
+	public List<MatchVO> selectClubRecruits(MatchVO match);
 	
 	@Delete("delete from club_recruit where clubRecruit_num=#{clubRecruit_num}")
 	public void deleteClubRecruit(Integer clubRecruit_num);
@@ -81,6 +82,51 @@ public interface MemberMapper {
 	
 	@Update("update msg set status=2 where receiver=#{receiver}")
 	public void updateMsgStatus(Integer receiver);
+	
+	@Delete("delete from club_join where id=#{id}")
+	public void deleteIDFromclub_join(MemberVO member);
+	
+	@Delete("delete from club_recruit where id=#{id}")
+	public void deleteIDFromClub_Recruit(MemberVO member);
+	
+	@Delete("delete from clubRecruit_req where id=#{id}")
+	public void deleteIDFromclubRecruit_req(MemberVO member);
+	
+	@Delete("delete from match_recruit where id=#{id}")
+	public void deleteIDFromMatch_Recruit(MemberVO member);
+	
+	@Delete("delete from match_request where id=#{id}")
+	public void deleteIDFromMatch_Request(MemberVO member);
+	
+	@Delete("delete from member_detail where id=#{id}")
+	public void deleteIDFromMember_Detail(MemberVO member);
+	
+	@Delete("delete from msg where (receiver=#{id} or sender=#{id})")
+	public void deleteIDFromMsg(MemberVO member);
+	
+	@Delete("delete from notice where id=#{id}")
+	public void deleteIDFromNotice(MemberVO member);
+	
+	@Delete("delete from qna where id=#{id}")
+	public void deleteIDFromQna(MemberVO member);
+	
+	@Delete("delete from qna_answer where id=#{id}")
+	public void deleteIDFromQna_Answer(MemberVO member);
+	
+	@Delete("delete from recruit_req where id=#{id}")
+	public void deleteIDFromRecruit_Req(MemberVO member);
+	
+	@Delete("delete from vote_answer where id=#{id}")
+	public void deleteIDFromVote_Answer(MemberVO member);
+	
+	@Delete("delete from match_vote where id=#{id}")
+	public void deleteIDFromVMatch_Vote(MemberVO member);
+	
+	@Update("update member set mem_auth=3, reason=#{reason} where id=#{id}")
+	public void updateIDFromMemberForUnlink(MemberVO member);
+	
+	@Update("update member set mem_auth=1 where id=#{id}")
+	public void updateMemberForReValidation(MemberVO member);
 	
 	
 }
