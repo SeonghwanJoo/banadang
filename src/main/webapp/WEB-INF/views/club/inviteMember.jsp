@@ -111,6 +111,10 @@ $(function(){
 					$(window).click(function(){
 						location.href='manageClub.do?club_num=${club.club_num}';
 					})
+				}else if(data.result=='duplicated'){
+					
+					location.href='manageClub.do?club_num=${club.club_num}';
+					
 				}else if(data.result=='errors'){
 					alert('네트 워크 오류 발생');
 					$(window).click(function(){

@@ -76,10 +76,8 @@
     (select count(match_num) b,club_num from match_vote where id=#{id} and status=1 group by club_num having club_num=37) b on a.club_num=b.club_num
 	</select>
 	<select id="selectMyClubDetails" parameterType="clubVO" resultType="clubVO">
-	select * from
-    (select a.club_num,club_loc,club_age,club_name,club_detail,club_img,club_color,club_locX,club_locY,club_address,filename,manner,perform,rating_count from
-            (select * from club where club_num=#{club_num}) a left outer join
-        (select avg(manner) manner,avg(perform) perform, COUNT(*) rating_count,club_num from club_rating group by club_num) b on a.club_num=b.club_num)c join club_join d on c.club_num=d.club_num where d.id=#{id}
+	       select * from (select * from (select * from club where club_num=#{club_num}) join (select * from club_join where id=#{id}) using(club_num))a left outer join
+        (select avg(manner) manner,avg(perform) perform, COUNT(*) rating_count,club_num from club_rating group by club_num) b using(club_num)
 	</select>
 	<select id="selectClubRecruitReqForRequestor" parameterType="integer" resultType="memberVO">
 	select * from

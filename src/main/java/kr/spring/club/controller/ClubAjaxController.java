@@ -210,9 +210,16 @@ public class ClubAjaxController {
 	public Map<String,Object> joinClub(ClubVO club,HttpSession session){
 		Map<String,Object> map=new HashMap<String,Object>();
 		try {
+			
 			clubService.insertClubMember(club);
-			session.setAttribute("myClub", clubService.selectMyClubDetails(club));
+			ClubVO myClub=clubService.selectMyClubDetails(club);
+			List<ClubVO> myClubs=null;
+			myClubs=(List)session.getAttribute("myClubs");
+			myClubs.add(myClub);
+			session.setAttribute("myClubs", myClubs);
+			session.setAttribute("myClub", myClub);
 			map.put("result", "success");
+			
 			
 		}catch (Exception e) {
 			e.printStackTrace();
