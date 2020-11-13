@@ -7,7 +7,12 @@
 	<li class="li-list">
 		<div class="row">
 			<div class="col">
+				<c:if test="${empty member.thumbnail_image }">
+				<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
+				</c:if>
+				<c:if test="${not empty member.thumbnail_image }">
 				<img src="${member.thumbnail_image }" alt="Avatar" class="avatar">
+				</c:if>
 				<span>${member.nickname }  </span>
 				<c:if test="${not empty member.age_range }">
 				<span> | ${fn:substring(member.age_range,0,1)}0대</span>

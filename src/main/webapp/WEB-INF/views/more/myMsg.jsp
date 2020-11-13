@@ -25,6 +25,9 @@
 				<c:if test="${not empty msg.thumbnail_image }">
 				<img src="${msg.thumbnail_image }" alt="Avatar" class="avatar align-center">
 				</c:if>
+				<c:if test="${empty msg.thumbnail_image }">
+				<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar align-center">
+				</c:if>
 			</div>
 			<div class="x-bigger">
 				<div class="main-row">

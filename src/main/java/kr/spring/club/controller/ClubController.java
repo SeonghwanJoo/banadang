@@ -219,9 +219,7 @@ public class ClubController {
 	
 	
 	public void addVoteResult(MatchVO match,ArrayList<MatchVO> vote_status) {
-		logger.info("match in addVoteResult : "+match);
 		Integer myVote=matchService.selectMyVoteStatus(match);
-		logger.info("myVote : "+myVote);
 		
 		if(myVote != null) {
 			match.setStatus(myVote);
@@ -248,7 +246,6 @@ public class ClubController {
 		match.setHome_manner(0.0);
 		match.setHome_perform(0.0);
 		match.setAway_manner(0.0);
-		logger.info("getAway_name:"+match.getAway_name());
 		match.setAway_name(match.getAway_name()+"(미등록팀)");//DB에 away_name추가
 		match.setAway_perform(0.0);
 		
@@ -257,11 +254,13 @@ public class ClubController {
 				match.setHome_manner(club_rating.getManner());
 				match.setHome_name(club_rating.getClub_name());
 				match.setHome_perform(club_rating.getPerform());
+				match.setHome_filename(club_rating.getFilename());
 			}
 			if(match.getAway()==club_rating.getClub_num()) {
 				match.setAway_manner(club_rating.getManner());
 				match.setAway_name(club_rating.getClub_name());
 				match.setAway_perform(club_rating.getPerform());
+				match.setAway_filename(club_rating.getFilename());
 			}
 		}
 	}

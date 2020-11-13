@@ -238,7 +238,12 @@
 <li class="li-list">
 	<div class="main-row">
 		<div class="x-smaller">
+			<c:if test="${empty answer.thumbnail_image }">
+			<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
+			</c:if>
+			<c:if test="${not empty answer.thumbnail_image }">
 			<img src="${answer.thumbnail_image }" alt="Avatar" class="avatar">
+			</c:if>
 		</div>
 		<div class="x-bigger">
 			<div class="main-row">

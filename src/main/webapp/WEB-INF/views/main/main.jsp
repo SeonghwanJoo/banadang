@@ -16,20 +16,20 @@
 	  <!-- The slideshow -->
 	  <div class="carousel-inner">
 	    <div class="carousel-item active">
-	      <img class="slide-img" src="${pageContext.request.contextPath}/resources/images/5.jpg">
+	      <img class="slide-img" src="${pageContext.request.contextPath}/resources/images/1_1t-1.png">
 	    </div>
 	    <div class="carousel-item">
-	      <img class="slide-img" src="${pageContext.request.contextPath}/resources/images/6.jpg">
+	      <img class="slide-img" src="${pageContext.request.contextPath}/resources/images/2_1t-1.png">
 	    </div>
 	    <div class="carousel-item">
-	      <img class="slide-img" src="${pageContext.request.contextPath}/resources/images/5.jpg">
+	      <img class="slide-img" src="${pageContext.request.contextPath}/resources/images/3_1t-1.png">
 	    </div>
 	  </div>
 	  
 	  <!-- Left and right controls -->
-	  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+	  <!-- <a class="carousel-control-prev" href="#demo" data-slide="prev">
 	    <span class="carousel-control-prev-icon"></span>
-	  </a>
+	  </a> -->
 	  <a class="carousel-control-next" href="#demo" data-slide="next">
 	    <span class="carousel-control-next-icon"></span>
 	  </a>
@@ -53,13 +53,22 @@
 </c:if>
 
 <c:if test="${not empty user_id }">
-<div class="match-head" id="bc">
+<div class="margin-top margin-btm">
 	<span class="title-btw">경기 일정</span>
 	<button class="btn_write" id="btn_write" onclick="location.href='${pageContext.request.contextPath}/match/writeForm.do'">
 		<span>매치 작성</span> <span class="material-icons">create</span>
 	</button>
 </div>
 <hr class="hr">
+<c:if test="${empty match_list }">
+<div class="row">
+	<div class="empty-wrapper">
+		<i class="far fa-grimace empty">
+		</i>
+		<span class="gray small-font">예정된 경기가 없습니다.</span>
+	</div>
+</div>
+</c:if>
 <c:if test="${not empty match_list }">
 <ul class="ul-list">
 <c:forEach var="match" items="${match_list}">
@@ -249,9 +258,18 @@
 </ul>
 </c:if>
 <div class="match-head">
-		<span class="title-btw">지난 경기 상대팀 평점 작성</span>
+	<span class="title-btw">지난 경기 상대팀 평점 작성</span>
 </div>
 <hr class="hr">
+<c:if test="${empty past_match }">
+<div class="row">
+	<div class="empty-wrapper">
+		<i class="far fa-grimace empty">
+		</i>
+		<span class="gray small-font">최근 2주간 경기가 없습니다.</span>
+	</div>
+</div>
+</c:if>
 <c:if test="${not empty past_match }">
 <ul class="ul-list non-border-btm">
 <c:forEach var="match" items="${past_match}">
@@ -352,7 +370,7 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
 	Kakao.init('32776969383e4a77d92f6e18dd233bc5');
-	function sendLink(match_num,club_num,match_date,address,start_time) {
+	function sendLinkForVote(match_num,club_num,match_date,address,start_time) {
 	    Kakao.Link.sendCustom({
 	    	templateId: 39879,
 	    	templateArgs: {
@@ -374,7 +392,7 @@
 			location.href='${pageContext.request.contextPath}/match/deleteMatch.do?match_num='+match_num+'&club_name='+club_name;
 		});
 		$('#share').click(function(){
-			sendLink(match_num,club_num,match_date,address,start_time);
+			sendLinkForVote(match_num,club_num,match_date,address,start_time);
 			$('#more_modal').css('display','none');
 		});
 		$('#more-cancel-btn').click(function(){

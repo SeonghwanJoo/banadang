@@ -2,27 +2,42 @@
 	.fixed_top, div.bottom_menu, .sticky{
 		width:100%;
 	}
+	.carousel-inner img{
+		height:10rem;
+	} 
 }
 @media screen and (min-width:577px) and (max-width: 768px) {
 	.fixed_top, div.bottom_menu, stick{
 		width:577px;
 	}
+	.carousel-inner img{
+		height:12rem;
+	} 
 }
 @media screen and (min-width:769px) and (max-width: 992px) {
 	.fixed_top, div.bottom_menu, .sticky{
 		width:769px;
 	}
+	.carousel-inner img{
+		height:14rem;
+	} 
 }
 @media screen and (min-width:993px) and (max-width: 1200px) {
 	.fixed_top, div.bottom_menu, .sticky{
 		width:993px;
 	}
+	.carousel-inner img{
+		height:14rem;
+	} 
 	
 }
 @media screen and (min-width: 1200px) {
 	.fixed_top, div.bottom_menu, .sticky{
 		width:1130px;
 	}
+	.carousel-inner img{
+		height:16rem;
+	} 
 	
 }
 /* noto-sans-kr-regular - korean */
@@ -195,15 +210,20 @@
 /* ((((((((((((((((((((((sidebar-end))))))))))))))))))*/
 /* ((((((((((((((((((((((carousel-start))))))))))))))))))*/
 /* Make the image fully responsive */
+.carousel-inner{
+	position:relative;
+	border-radius:1rem;
+	margin-top:0.5rem;
+}
 .carousel-inner img {
 	width: 100%;
-	height: 400px;
+	
 }
 
-.carousel-indicators {
-	position: relative;
-	top: 370px;
-	display: hidden;
+ul.carousel-indicators {
+	
+	top: 88%;
+	left:55%;
 }
 /* ((((((((((((((((((((((carousel-end))))))))))))))))))*/
 .login {
@@ -232,10 +252,12 @@
 .btn_write:hover {
 	background-color: #c4c4c4;
 }
-
+.margin-left{
+	margin-left:0.5rem;
+}
 .title-btw {
-	margin: 10px 10px;
-	position: absolute;
+	margin: 0.5rem 0.5rem;
+	display:inline-block;
 	font-size: 1.1rem; /* Set a font size */
 	font-weight:bold;
 }
@@ -246,10 +268,7 @@
 .filter-wrapper{
 	height:1.5rem;
 }
-div.match-head {
-	margin-top:0.5rem;
-	margin-bottom: 3.5rem;
-}
+
 .underline{
 	text-decoration:underline;
 }
@@ -974,6 +993,7 @@ a.detail{
 	color:#7f7f7f;
 }
 .hr{
+	margin-top:0.5rem;
 	margin-bottom:0.1rem;
 }
 .invisible{
@@ -1603,6 +1623,21 @@ button.chip-btn{
 }
 .centered-padding{
 	padding:0 3%;
+}
+.row .empty{
+	color:#ccc;
+	font-size:3rem;
+	display:block;
+	margin:0.5rem auto;
+	
+}
+
+.empty-wrapper{
+	width:100%;
+	display: flex;
+  	align-items: center;
+  	flex-direction: column;
+  	justify-content: center;
 }
 .centered{
 	margin:0 auto;
