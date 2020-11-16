@@ -40,6 +40,9 @@
 	} 
 	
 }
+html{
+	font-size:14px;
+}
 /* noto-sans-kr-regular - korean */
 @font-face {
   font-family: 'Noto Sans KR';

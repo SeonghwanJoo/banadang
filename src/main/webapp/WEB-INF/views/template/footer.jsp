@@ -20,7 +20,7 @@
 			<div class="col">
 				<a class="menu-item" href="${pageContext.request.contextPath }/match/match_toInvite.do">
 				<span class="invite material-icons bottom-icon">sports_soccer</span>
-				<span class="invite bottom-icon-txt">상대팀 매칭</span>
+				<span class="invite bottom-icon-txt">상대 매칭</span>
 				</a>
 			</div>
 			<div class="col">
