@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper  namespace="kr.spring.match.dao.MatchMapper">
 	<insert id="insertMatch" parameterType="matchVO">
-		insert into match
+		insert into gentlepro.match
 			(id,type,home,away,away_name,address,address_x,address_y,match_date,start_time,end_time,match_detail,cost)
 		values
 			(#{id},#{type},#{home},#{away},#{away_name},#{address},#{address_x},#{address_y},#{match_date},#{start_time},#{end_time},
@@ -20,7 +20,7 @@
 		</if>
 	</insert>
 	<insert id="insertRecruit" parameterType="matchVO" useGeneratedKeys="true" keyProperty="recruit_num">
-		insert into match_recruit
+		insert into gentlepro.match_recruit
 			(match_num,id,club_num,recruit_position,recruit_count,recruit_cost,recruit_detail)
 		values
 			(#{match_num},#{id},#{club_num},#{recruit_position},#{recruit_count},#{recruit_cost},
@@ -35,14 +35,14 @@
 			</selectKey>
 	</insert>
 	<select id="selectAverageRating" parameterType="matchVO" resultType="matchVO">
-		select a.club_num,a.club_name,filename,b.perform,b.manner from (select club_num, club_name,filename from club where club_num=#{home} or club_num=#{away} ) a 
+		select a.club_num,a.club_name,filename,b.perform,b.manner from (select club_num, club_name,filename from gentlepro.club where club_num=#{home} or club_num=#{away} ) a 
 	    left outer join
 	    (select club_num, avg(perform) as perform, avg(manner) as manner
-			 from club_rating group by club_num) b
+			 from gentlepro.club_rating group by club_num) b
              on a.club_num=b.club_num
 	</select>
 	<insert id="insertRating" parameterType="matchVO">
-		insert into club_rating
+		insert into gentlepro.club_rating
 			(clubrating_num,match_num,id,club_num,perform,manner,rating_detail)
 		values
 			(clubrating_seq.nextval,#{match_num},#{id},#{club_num},#{perform},#{manner},
@@ -54,7 +54,7 @@
 		</if>
 	</insert>
 	<update id="updateRating" parameterType="matchVO">
-		update club_rating set manner=#{manner},perform=#{perform}
+		update gentlepro.club_rating set manner=#{manner},perform=#{perform}
 		<if test="rating_detail !=''">
 			,rating_detail=#{rating_detail}
 		</if>
@@ -62,21 +62,21 @@
 	</update>
 	<select id="selectVote_detail" parameterType="matchVO" resultType="memberVO">
 		select a.club_num,a.id,a.nickname,a.thumbnail_image,a.profile_image,b.status from
-			(select * from match_vote where club_num=#{club_num} and match_num=#{match_num})b right outer join 
-    		(select c.club_num club_num,c.id,m.nickname,m.thumbnail_image,m.profile_image from member_detail m join club_join c on m.id=c.id where c.club_num=#{club_num} and c.club_auth>3)
+			(select * from gentlepro.match_vote where club_num=#{club_num} and match_num=#{match_num})b right outer join 
+    		(select c.club_num club_num,c.id,m.nickname,m.thumbnail_image,m.profile_image from gentlepro.member_detail m join gentlepro.club_join c on m.id=c.id where c.club_num=#{club_num} and c.club_auth>3)
     		a on b.id=a.id
 	</select>
 	<select id="selectMatchToInvite" resultType="matchVO">
 		select * from 
-				(select * from (select * from match where match_date>sysdate-1 and away=0)a join club b on a.home=b.club_num) d
+				(select * from (select * from gentlepro.match where match_date>sysdate()-1 and away=0)a join club b on a.home=b.club_num) d
 				left outer join
-				(select avg(manner) manner,avg(perform) perform,club_num from club_rating group by club_num) e on d.club_num=e.club_num where cancel is null order by d.match_date
+				(select avg(manner) manner,avg(perform) perform,club_num from gentlepro.club_rating group by club_num) e on d.club_num=e.club_num where cancel is null order by d.match_date
 	</select>
 	<select id="selectMatchToInviteWithFilter" parameterType="matchVO" resultType="matchVO">
 		select * from 
-				(select * from (select match_num,match_date,start_time,end_time, address,cancel, type,home,away,address_x,address_y,away_name,match_detail, rownum rnum from match where
+				(select * from (select match_num,match_date,start_time,end_time, address,cancel, type,home,away,address_x,address_y,away_name,match_detail, rownum rnum from gentlepro.match where
 					<if test="start==null">
-					match_date>sysdate-1
+					match_date>sysdate()-1
 					</if>
 					<if test="start!=null">
 					<![CDATA[	
@@ -90,7 +90,7 @@
 					order by match_date
 					)a join club b on a.home=b.club_num) d
 				left outer join
-				(select avg(manner) manner,avg(perform) perform,club_num from club_rating group by club_num) e on d.club_num=e.club_num
+				(select avg(manner) manner,avg(perform) perform,club_num from gentlepro.club_rating group by club_num) e on d.club_num=e.club_num
 				 where cancel is null and 
 				 <![CDATA[
 				(rnum>#{pageCount} and rnum<=#{pageCount}+30)
@@ -100,12 +100,12 @@
 	<select id="selectMatchToInviteByMatch_num" parameterType="Integer" resultType="matchVO">
 		select * from 
 				(select match_num,match_date,a.id,start_time,end_time,address,cost,type,address_x,address_y,match_detail,club_name,club_img,club_color,club_num,club_age from
-                    (select * from match where match_num=#{match_num})a join club b on a.home=b.club_num) d
+                    (select * from gentlepro.match where match_num=#{match_num})a join club b on a.home=b.club_num) d
 				left outer join
-				(select avg(manner) manner,avg(perform) perform,club_num,count(*) count from club_rating group by club_num) e using(club_num)
+				(select avg(manner) manner,avg(perform) perform,club_num,count(*) count from gentlepro.club_rating group by club_num) e using(club_num)
 	</select>
 	<insert id="insertMyRequestForMatchToInvite" parameterType="matchVO">
-		insert into match_request
+		insert into gentlepro.match_request
 			(match_num,id,away,acceptance,request_detail)
 		values
 			(#{match_num},#{id},#{away},1,
@@ -120,11 +120,11 @@
 		select * from 
     (select recruit_num,c.id,c.match_num,c.club_num,recruit_position, recruit_count, recruit_cost,recruit_detail,type,start_time,end_time,address,match_date,address_x,address_y,club_name,club_img,club_color,club_age from
         (select recruit_num,a.match_num,a.id,club_num,recruit_position,recruit_count,recruit_cost,recruit_detail,type,start_time,end_time,address,match_date,address_x,address_y from
-            (select * from match_recruit where recruit_num=#{recruit_num}) a join match b on a.match_num=b.match_num)c join club d on c.club_num=d.club_num) e left outer join
-    (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from club_rating group by club_num) f using(club_num)
+            (select * from gentlepro.match_recruit where recruit_num=#{recruit_num}) a join gentlepro.match b on a.match_num=b.match_num)c join gentlepro.club d on c.club_num=d.club_num) e left outer join
+    (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from gentlepro.club_rating group by club_num) f using(club_num)
 	</select>
 	<insert id="insertRecruitRequest" parameterType="matchVO">
-		insert into recruit_req
+		insert into gentlepro.recruit_req
 			(id,club_num,match_num,recruit_position,recruit_req_detail)
 		values
 			(#{id},#{club_num},#{match_num},#{recruit_position},
@@ -137,9 +137,9 @@
 	</insert>
 	<select id="selectRecruitWithFilter" resultType="matchVO">
 		select * from (select recruit_num,c.club_num,recruit_position, recruit_count, recruit_cost,cancel,recruit_detail,type,start_time,end_time,address,match_date,address_x,address_y,club_name,club_img,club_color,club_age,rownum rnum from
-    		(select * from (select * from match_recruit) a join (select * from match where
+    		(select * from (select * from gentlepro.match_recruit) a join (select * from gentlepro.match where
                 <if test="start==null">
-					match_date>sysdate-1
+					match_date>sysdate()-1
                 </if>
 				<if test="start!=null">
 					<![CDATA[	
@@ -150,7 +150,7 @@
 					and	type=#{type}
 				</if>
 				order by match_date) b using(match_num))c join club d on c.club_num=d.club_num) e
-				left outer join (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from club_rating group by club_num) f on e.club_num=f.club_num
+				left outer join (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from gentlepro.club_rating group by club_num) f on e.club_num=f.club_num
 				where cancel is null
 				and 
 				<![CDATA[
@@ -158,17 +158,20 @@
 				]]>  
 	</select>
 	<select id="selectRecruit" resultType="matchVO">
-		select * from (select recruit_num,c.club_num,recruit_position, recruit_count, recruit_cost,cancel,recruit_detail,type,start_time,end_time,address,match_date,address_x,address_y,club_name,club_img,club_color,club_age from(select * from (select * from match_recruit) a join match b on a.match_num=b.match_num where b.match_date>sysdate-1 order by b.match_date)c join club d on c.club_num=d.club_num) e
-		left outer join (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from club_rating group by club_num) f on e.club_num=f.club_num where cancel is null
+		select * from (select recruit_num,c.club_num,recruit_position, recruit_count, recruit_cost,cancel,recruit_detail,type,start_time,end_time,address,match_date,address_x,address_y,club_name,club_img,club_color,club_age from
+			(select * from 
+				(select * from gentlepro.match_recruit) a join 
+					gentlepro.match b on a.match_num=b.match_num where b.match_date>sysdate()-1 order by b.match_date)c join gentlepro.club d on c.club_num=d.club_num) e
+		left outer join (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from gentlepro.club_rating group by club_num) f on e.club_num=f.club_num where cancel is null
 	</select>
 	<select id="selectRecruitByClub_num" parameterType="integer" resultType="memberVO">
 		 select * from
     ( select a.id,recruit_req_num,isCanceled,cancel,a.club_num,a.match_num,a.recruit_req_detail,a.recruit_position,a.recruit_accept,b.match_date,b.start_time,b.end_time,b.address from 
-        (select * from recruit_req where club_num=#{club_num}) a join match b on a.match_num=b.match_num where b.match_date>sysdate-1 order by b.match_date)f 
-            join member_detail g using(id)
+        (select * from gentlepro.recruit_req where club_num=#{club_num}) a join gentlepro.match b on a.match_num=b.match_num where b.match_date>sysdate()-1 order by b.match_date)f 
+            join gentlepro.member_detail g using(id)
 	</select>
 	<update id="updateRecruit" parameterType="matchVO">
-	update match_recruit set id=#{id},recruit_cost=#{recruit_cost},recruit_count=#{recruit_count},recruit_position=#{recruit_position}
+	update gentlepro.match_recruit set id=#{id},recruit_cost=#{recruit_cost},recruit_count=#{recruit_count},recruit_position=#{recruit_position}
 		<if test="recruit_detail!=''">
 		,recruit_detail=#{recruit_detail}
 		</if>
@@ -176,11 +179,11 @@
 	</update>
 	<select id="selectPKsforMatch" parameterType="matchVO" resultType="matchVO">
 	select request_num,c.match_num,c.away,c.recruit_num from
-    (select recruit_num,a.match_num,away from (select home,away,match_num from match where match_num=#{match_num})a left outer join match_recruit b on a.match_num=b.match_num)c left outer join
-        match_request d on c.match_num=d.match_num
+    (select recruit_num,a.match_num,away from (select home,away,match_num from gentlepro.match where match_num=#{match_num})a left outer join gentlepro.match_recruit b on a.match_num=b.match_num)c left outer join
+        gentlepro.match_request d on c.match_num=d.match_num
 	</select>
 	<update id="updateMatch" parameterType="matchVO">
-		update match set match_num=#{match_num}
+		update gentlepro.match set match_num=#{match_num}
 			<if test="match_detail != ''">
 				,match_detail=#{match_detail}
 			</if>
