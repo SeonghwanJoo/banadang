@@ -867,12 +867,13 @@ a:hover, div.col a:hover { color:#a0a0a0;text-decoration: none; }
 }
 #submit, .fixed_top span.more{
 	position:absolute;
-	right:1%;
+	right:5%;
 	top:20%;
 	margin:2px;
 	border: none;
 	color:#878787;
 	background:transparent;
+	font-weight:bold;
 }
 #write_body{
 	padding-top: 75px;

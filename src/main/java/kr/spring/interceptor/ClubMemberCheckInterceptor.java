@@ -31,7 +31,7 @@ public class ClubMemberCheckInterceptor  extends HandlerInterceptorAdapter {
 		//session에서 myClubs를 받는다
 		//myClubs에 club_num이 있는지 확인 한다
 		//myClubs가 null이 거나 club_num이 없으면 redirect한다
-		Integer club_num=Integer.parseInt(request.getParameter("club_num"));
+		Integer club_num=Integer.parseInt((String)request.getParameter("club_num"));
 		
 		HttpSession session = request.getSession();
 		List<ClubVO> myClubs=null;
@@ -41,7 +41,7 @@ public class ClubMemberCheckInterceptor  extends HandlerInterceptorAdapter {
 			if(myClubs!=null) {
 				int count=0;
 				for(ClubVO myClub : myClubs) {
-					if(myClub.getClub_num()==club_num) {
+					if(myClub.getClub_num().equals(club_num)) {
 						count++;
 					}
 				}
@@ -51,11 +51,12 @@ public class ClubMemberCheckInterceptor  extends HandlerInterceptorAdapter {
 					return false;
 				}
 				
-			}else if(myClubs==null) {
+			}
+			/*else if(myClubs==null) {
 				response.sendRedirect(
 						request.getContextPath()+"/main/myClubCheck.do");
 				return false;
-			}
+			}*/
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

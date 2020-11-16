@@ -125,7 +125,6 @@
 			<mapping path="/main/vote_detail.do"/>
 			<mapping path="/main/voteForm.do"/>
 			<mapping path="/main/replyToVote.do"/>
-			<mapping path="/main/modifyVoteAnswer.do"/>
 			<beans:bean class="kr.spring.interceptor.ClubMemberCheckInterceptor"/>
 		</interceptor>
 		<!-- 관리자 권한 체크 -->
@@ -147,6 +146,11 @@
 		<interceptor>
 			<mapping path="/board/modifyAnswer.do"/>
 			<beans:bean class="kr.spring.interceptor.AnswerPosterCheckInterceptor"/>
+		</interceptor>
+		<!-- 투표 댓글 작성자 체크 -->
+		<interceptor>
+			<mapping path="/main/modifyVoteAnswer.do"/>
+			<beans:bean class="kr.spring.interceptor.VoteAnswerPosterCheckInterceptor"/>
 		</interceptor>
 		<!-- 모집중인 경기 여부 체크 -->
 		<interceptor>

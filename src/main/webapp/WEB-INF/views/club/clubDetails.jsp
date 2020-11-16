@@ -17,7 +17,7 @@
 <div class="invite-wrapper" id="invite-wrapper">
  	<ul class="ul-list">
 		<li class="li-list cursor" onclick="location.href='club_details.do?club_num=${club.club_num}'">
-			<div class="row">
+			<div class="row small-font gray">
 				<div class="col club_main">
 					<c:if test="${!empty club.club_img }">
 					<img src="imageView.do?club_num=${club.club_num}" alt="Avatar" class="avatar emblem">
@@ -44,7 +44,7 @@
 				</div>
 			</div>
 			<span class="rating_count">총 ${club.rating_count }명의 평가</span>
-			<div class="row">
+			<div class="row small-font gray">
 				<div class="col">
 					매너 
 					<span class="star-rating">
@@ -65,12 +65,12 @@
 		<c:if test="${not empty ratings }">
 		<c:forEach items="${ratings }" var="rating">
 		<li class="li-list">
-			<div class="row">
+			<div class="main-row">
 				<span class="match-item">${rating.match_date}</span>
 				<span class="match-item">${rating.address}</span>
 				<span>매치의 평가</span>
 			</div>
-			<div class="row">
+			<div class="row small-font gray">
 				<div class="col">
 				<span class='rating'>매너</span>
 					<span class='star-rating'><span style='width:${rating.manner*20 }%'></span>

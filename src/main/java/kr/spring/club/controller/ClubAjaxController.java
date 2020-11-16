@@ -69,9 +69,10 @@ public class ClubAjaxController {
 		club.setClub_locY(club_locY);
 		try {
 			clubService.insertClub(club);
+			List<ClubVO> myClubs=(List<ClubVO>)session.getAttribute("myClubs");
+			myClubs.add(club);
+			session.setAttribute("myClubs", myClubs);
 			map.put("result", "inserted");
-			ClubVO myClub=clubService.selectMyClubDetails(club);
-			session.setAttribute("myClub", myClub);
 			map.put("club_num", club.getClub_num().toString());
 		}catch(Exception e) {
 			e.printStackTrace();

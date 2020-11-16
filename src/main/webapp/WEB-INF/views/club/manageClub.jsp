@@ -22,14 +22,14 @@
 </div>
 <div class="blank_div"></div>
 <div class="invite-wrapper" id="invite-wrapper">
- 	<ul class="ul-list">
+ 	<ul class="ul-list small-font">
 		<li class="li-list cursor" onclick="location.href='club_details.do?club_num=${myClub.club_num}'">
 			<div class="row">
 				<div class="col club_main">
-					<c:if test="${!empty myClub.club_img }">
+					<c:if test="${!empty myClub.filename }">
 					<img src="imageView.do?club_num=${myClub.club_num}" alt="Avatar" class="avatar emblem">
 					</c:if>
-					<c:if test="${empty myClub.club_img }">
+					<c:if test="${empty myClub.filename }">
 					<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
 					</c:if>
 					<span class="club_name">${myClub.club_name }</span><br>
@@ -116,7 +116,7 @@
 					<span class="status negative full" id="${away.request_num }" style="display:none">${away.club_name }팀에 의해 경기 신청 취소 처리됨</span>
 					</c:if>
 				</div>
-				<div class="row">
+				<div class="row small-font gray">
 					<div class="col club_main">
 						<c:if test="${!empty away.club_img }">
 							<img src="imageView.do?club_num=${away.club_num }" class="avatar emblem">
@@ -153,7 +153,7 @@
 					<p>${away.request_detail}
 					</p>
 					<c:if test="${away.acceptance==1 && empty away.cancel }">
-					<div class="row">
+					<div class="row" id="match-btn-${away.request_num }">
 						<div class="half_col">
 							<button class="first-btn" onclick="answerForMatchReq(${away.request_num},'${away.club_name }',3,${away.club_num },${away.match_num })">거절</button>
 						</div>
@@ -202,7 +202,7 @@
 					<span class="status negative full" id="${home.request_num }" style="display:none">경기 신청 취소 처리됨</span>
 					</c:if>
 				</div>
-				<div class="row">
+				<div class="row small-font gray">
 					<div class="col club_main">
 						<c:if test="${!empty home.club_img }">
 							<img src="imageView.do?club_num=${home.club_num}"  class="avatar emblem">
@@ -268,13 +268,13 @@
 					<span class="match-item">${recruit.start_time } ~ ${recruit.end_time }</span>
 					<span class="match-item">${recruit.address}</span>
 					<c:if test="${recruit.recruit_accept==1 }">
-					<span id="status-${recruit.recruit_req_num}"class="status neutral">대기 중</span>
+					<span id="recruit-status-${recruit.recruit_req_num}"class="status neutral">대기 중</span>
 					</c:if>
 					<c:if test="${recruit.recruit_accept==2 }">
-					<span id="status-${recruit.recruit_req_num}"class="status positive">수락 완료</span>
+					<span id="recruit-status-${recruit.recruit_req_num}"class="status positive">수락 완료</span>
 					</c:if>
 					<c:if test="${recruit.recruit_accept==3 }">
-					<span id="status-${recruit.recruit_req_num}"class="status negative">거절 완료</span>
+					<span id="recruit-status-${recruit.recruit_req_num}"class="status negative">거절 완료</span>
 					</c:if>
 					<c:if test="${not empty recruit.isCanceled }">
 					<span class="status negative full" >${recruit.nickname }님이 용병 신청을 취소하셨습니다.</span>
@@ -1021,12 +1021,13 @@ function answerForRecruitReq(recruit_req_num,nickname,recruit_accept){
 			timeout:30000,
 			success:function(data){
 				if(data.result=='success'){
-					var status=document.getElementById('status-'+recruit_req_num);
+					var status=document.getElementById('recruit-status-'+recruit_req_num);
 					status.className = status.className.replace(/\bneutral\b/g, "");
 					if(recruit_accept==2){
 						status.classList.add('positive');
 						status.innerText='수락 완료';
 					}else if(recruit_accept==3){
+						console.log('recruit_accept : '+recruit_accept);
 						status.classList.add('negative');
 						status.innerText='거절 완료';
 					}
@@ -1276,7 +1277,16 @@ function answerForMatchReq(request_num,club_name,acceptance,club_num,match_num){
 			timeout:30000,
 			success:function(data){
 				if(data.result=="updated"){
-					location.reload();
+					var status=document.getElementById('status-'+request_num);
+					status.className = status.className.replace(/\bneutral\b/g, "");
+					if(acceptance==2){
+						location.reload();
+					}else if(acceptance==3){
+						status.classList.add('negative');
+						status.innerText='거절 완료';
+					}
+					$('#answer_modal').css('display','none');
+					document.getElementById('match-btn-'+request_num).style.display="none";
 				}
 				if(data.result=="errors"){
 					

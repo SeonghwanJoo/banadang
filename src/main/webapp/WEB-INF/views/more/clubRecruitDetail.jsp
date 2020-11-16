@@ -31,7 +31,7 @@
 					<c:if test="${clubRecruit.type==2 }">풋살</c:if>
 				</span>
 			</div>
-			<div class="row">
+			<div class="row small-font gray">
 				<div class="col club_main">
 					<c:if test="${!empty clubRecruit.club_img }">
 					<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${clubRecruit.club_num}" alt="Avatar" class="avatar emblem">
@@ -41,7 +41,7 @@
 					</c:if>
 					<span class="club_name">${clubRecruit.club_name }</span><br>
 					<span class="relative positive-color cursor" onclick="location.href='${pageContext.request.contextPath}/member/writeMsg.do?club_num=${clubRecruit.club_num }&id=${clubRecruit.id }'" >
-						<b>${clubRecruit.club_name }에 메시지 보내기</b>
+						<b>메시지 보내기</b>
 						<i class="fas fa-comment bubble"></i>
 					</span>
 				</div>
@@ -61,7 +61,7 @@
 		</li>
 		<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${clubRecruit.club_num }'">
 			<span class="rating_count">총 ${clubRecruit.count }명의 평가 <i class="fas fa-chevron-right"></i></span>
-			<div class="row">
+			<div class="row small-font gray">
 				<div class="col">
 					매너 
 					<span class="star-rating">

@@ -43,9 +43,9 @@
 	</select>
 	<insert id="insertRating" parameterType="matchVO">
 		insert into gentlepro.club_rating
-			(clubrating_num,match_num,id,club_num,perform,manner,rating_detail)
+			(match_num,id,club_num,perform,manner,rating_detail)
 		values
-			(clubrating_seq.nextval,#{match_num},#{id},#{club_num},#{perform},#{manner},
+			(#{match_num},#{id},#{club_num},#{perform},#{manner},
 		<if test="rating_detail !=''">
 			#{rating_detail})
 		</if>
@@ -68,15 +68,16 @@
 	</select>
 	<select id="selectMatchToInvite" resultType="matchVO">
 		select * from 
-				(select * from (select * from gentlepro.match where match_date>sysdate()-1 and away=0)a join club b on a.home=b.club_num) d
+				(select * from (select * from gentlepro.match where match_date>date_sub(now(), interval 1 day) and away=0)a join club b on a.home=b.club_num) d
 				left outer join
 				(select avg(manner) manner,avg(perform) perform,club_num from gentlepro.club_rating group by club_num) e on d.club_num=e.club_num where cancel is null order by d.match_date
 	</select>
 	<select id="selectMatchToInviteWithFilter" parameterType="matchVO" resultType="matchVO">
 		select * from 
-				(select * from (select match_num,match_date,start_time,end_time, address,cancel, type,home,away,address_x,address_y,away_name,match_detail, rownum rnum from gentlepro.match where
+				(select * from (select match_num,match_date,start_time,end_time, address,cancel, type,home,away,address_x,address_y,away_name,match_detail, @rownum := @rownum+1 as rnum
+					from gentlepro.match,(select @rownum :=0) rownum where
 					<if test="start==null">
-					match_date>sysdate()-1
+					match_date>date_sub(now(), interval 1 day)
 					</if>
 					<if test="start!=null">
 					<![CDATA[	
@@ -136,10 +137,10 @@
 			</if>
 	</insert>
 	<select id="selectRecruitWithFilter" resultType="matchVO">
-		select * from (select recruit_num,c.club_num,recruit_position, recruit_count, recruit_cost,cancel,recruit_detail,type,start_time,end_time,address,match_date,address_x,address_y,club_name,club_img,club_color,club_age,rownum rnum from
-    		(select * from (select * from gentlepro.match_recruit) a join (select * from gentlepro.match where
+		select * from (select recruit_num,c.club_num,recruit_position, recruit_count, recruit_cost,cancel,recruit_detail,type,start_time,end_time,address,match_date,address_x,address_y,club_name,club_img,club_color,club_age,@rownum := @rownum+1 as rnum from
+    		(select * from (select * from gentlepro.match_recruit) a join (select match_num,cancel,type,start_time,end_time,address,match_date,address_x,address_y from gentlepro.match,(select @rownum :=0) rownum where
                 <if test="start==null">
-					match_date>sysdate()-1
+					match_date>date_sub(now(), interval 1 day)
                 </if>
 				<if test="start!=null">
 					<![CDATA[	
@@ -161,13 +162,13 @@
 		select * from (select recruit_num,c.club_num,recruit_position, recruit_count, recruit_cost,cancel,recruit_detail,type,start_time,end_time,address,match_date,address_x,address_y,club_name,club_img,club_color,club_age from
 			(select * from 
 				(select * from gentlepro.match_recruit) a join 
-					gentlepro.match b on a.match_num=b.match_num where b.match_date>sysdate()-1 order by b.match_date)c join gentlepro.club d on c.club_num=d.club_num) e
+					gentlepro.match b on a.match_num=b.match_num where b.match_date>date_sub(now(), interval 1 day) order by b.match_date)c join gentlepro.club d on c.club_num=d.club_num) e
 		left outer join (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from gentlepro.club_rating group by club_num) f on e.club_num=f.club_num where cancel is null
 	</select>
 	<select id="selectRecruitByClub_num" parameterType="integer" resultType="memberVO">
 		 select * from
     ( select a.id,recruit_req_num,isCanceled,cancel,a.club_num,a.match_num,a.recruit_req_detail,a.recruit_position,a.recruit_accept,b.match_date,b.start_time,b.end_time,b.address from 
-        (select * from gentlepro.recruit_req where club_num=#{club_num}) a join gentlepro.match b on a.match_num=b.match_num where b.match_date>sysdate()-1 order by b.match_date)f 
+        (select * from gentlepro.recruit_req where club_num=#{club_num}) a join gentlepro.match b on a.match_num=b.match_num where b.match_date>date_sub(now(), interval 1 day) order by b.match_date)f 
             join gentlepro.member_detail g using(id)
 	</select>
 	<update id="updateRecruit" parameterType="matchVO">

@@ -47,7 +47,7 @@ public interface ClubMapper {
 	@Update("update gentlepro.match_request set acceptance=#{acceptance} where request_num=#{request_num}")
 	public void updateAcceptance(ClubVO club);
 	
-	@Update("update gentlepro.match_request set acceptance=3 where match_num=#{match_num} and away not in #{club_num}")
+	@Update("update gentlepro.match_request set acceptance=3 where match_num=#{match_num} and away not in (#{club_num})")
 	public void rejectOthers(ClubVO club);
 	
 	@Update("update gentlepro.match set away=#{club_num}, away_name=#{club_name} where match_num=#{match_num}")

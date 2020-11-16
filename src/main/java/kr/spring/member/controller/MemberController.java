@@ -245,16 +245,16 @@ public class MemberController {
 		return mav;
 	}
 	@RequestMapping("/member/postClubRecruit.do")
-	public ModelAndView postClubRecruit(MatchVO match) {
+	public String postClubRecruit(MatchVO match) {
 		
 		try {
 			memberService.insertClubRecruit(match);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return clubRecruitDetail(match.getClubRecruit_num());
+		return "redirect:/member/clubRecruitDetail.do?clubRecruit_num="+match.getClubRecruit_num();
 	}
-	@RequestMapping("/member/clubRecruitDetail")
+	@RequestMapping("/member/clubRecruitDetail.do")
 	public ModelAndView clubRecruitDetail(@RequestParam Integer clubRecruit_num) {
 		
 		ModelAndView mav=new ModelAndView();

@@ -23,7 +23,7 @@
 <div class="invite-wrapper" id="invite-wrapper">
  	<ul class="ul-list">
 		<li class="li-list">
-			<div class="row">
+			<div class="main-row">
 				<span class="match-item">${match.match_date}</span>
 				<span class="match-item">${match.start_time }~${match.end_time }</span>
 				<span class="match-item">
@@ -31,7 +31,7 @@
 					<c:if test="${match.type==2 }">풋살</c:if>
 				</span>
 			</div>
-			<div class="row">
+			<div class="row small-font gray">
 				<div class="col club_main">
 					<c:if test="${!empty match.club_img }">
 					<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.club_num}" alt="Avatar" class="avatar emblem">
@@ -41,7 +41,7 @@
 					</c:if>
 					<span class="club_name">${match.club_name }</span><br>
 					<span class="relative positive-color cursor" onclick="location.href='${pageContext.request.contextPath}/member/writeMsg.do?match_num=${match.match_num }&club_num=${match.club_num }&id=${match.id }'" >
-						<b>${match.club_name }에 메시지 보내기</b>
+						<b>메시지 보내기</b>
 						<i class="fas fa-comment bubble"></i>
 					</span>
 				</div>
@@ -61,7 +61,7 @@
 		</li>
 		<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.club_num }'">
 			<span class="rating_count">총 ${match.count }명의 평가 <i class="fas fa-chevron-right"></i></span>
-			<div class="row">
+			<div class="row small-font gray">
 				<div class="col">
 					매너 
 					<span class="star-rating">

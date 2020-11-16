@@ -53,7 +53,7 @@
 			<span class="status negative full" id="match-cancel-${match.recruit_req_num }" style="display:none">${match.cancel }팀에 의해 경기 취소됨</span>
 			</c:if>
 		</div>
-		<div class="row">
+		<div class="row small-font gray">
 			<div class="col club_main">
 				<c:if test="${empty match.club_img }">
 				<img src="${pageContext.request.contextPath }/resources//resources/images/blank_emblem.png" class="avatar emblem">

@@ -144,7 +144,7 @@ function createListOrderByDistance(latitude,longitude,matchs){
 								+"</span>"
 								+Number(matchs[i].perform*2).toFixed(1)+"<br>"
 							+"</span>"
-							+"주 연령대"+matchs[i].club_age
+							+"연령대"+matchs[i].club_age
 						+"</div>"			
 					+"</div>"
 				+"</li>"
