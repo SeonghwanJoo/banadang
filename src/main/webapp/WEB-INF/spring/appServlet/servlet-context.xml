@@ -105,6 +105,15 @@
 			<mapping path="/main/modifyVoteAnswer.do"/>
 			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/>
 		</interceptor>
+		<!-- 신규 메시지 체크-->
+		<interceptor>
+			<mapping path="/main/main.do"/>
+			<mapping path="/club/club.do"/>
+			<mapping path="/match/match_toInvite.do"/>
+			<mapping path="/match/recruit.do"/>
+			<mapping path="/match/member/myPage.do"/>
+			<beans:bean class="kr.spring.interceptor.MsgCheckInterceptor"/>
+		</interceptor>
 		<!-- 팀 운영진 권한 체크 -->
 		<interceptor>
 			<mapping path="/club/modifyClub.do"/>

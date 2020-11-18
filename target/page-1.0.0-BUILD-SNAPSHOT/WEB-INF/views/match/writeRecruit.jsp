@@ -92,7 +92,7 @@
 </div>
 <div class="row"><div class="col"><span class="msg" id="position_msg"></span></div></div>
 <hr>
-<div class="row">
+<div class="row  centered-padding">
 	<div class="input-container col selectbox margin-top">
 		<label for="recruit_count">필요 용병 인원 선택</label>
 		<select class="input-field" name="recruit_count" id="recruit_count">
@@ -108,7 +108,7 @@
 <div class="row"><div class="col"><span class="msg" id="count_msg"></span></div></div>
 <hr>
 <div class="row">
-	<div class="autocomplete input-container col">
+	<div class="autocomplete input-container col centered-padding">
 		<span class="icon material-icons">money</span>
 		<input class="input-field" type="text" name="recruit_cost" id="recruit_cost" placeholder="용병 참가 비용 입력">
 	</div>

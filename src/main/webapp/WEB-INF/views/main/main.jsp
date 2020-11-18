@@ -296,23 +296,23 @@
 <c:if test="${match.home!=match.away && !fn:contains(match.away_name,'미등록팀')}">
 <li class="li-list">
 	<div class="main-row margin-top gray">
-			<c:if test="${match.type==1 }">
-			<span class="match-item last soccer">
-			축구
-			</span>	
-			</c:if>
-			<c:if test="${match.type==2 }">
-			<span class="match-item last futsal">
-			풋살
-			</span>	
-			</c:if>
-			<span class="match-item">${match.address}</span>
-			<c:if test="${myClub.club_auth>4 && myClub.club_num==match.home && empty match.cancel}">
-			<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }')">more_vert</span>
-			</c:if>
-			<c:if test="${not empty match.cancel }">
-			<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
-			</c:if>
+		<c:if test="${match.type==1 }">
+		<span class="match-item last soccer">
+		축구
+		</span>	
+		</c:if>
+		<c:if test="${match.type==2 }">
+		<span class="match-item last futsal">
+		풋살
+		</span>	
+		</c:if>
+		<span class="match-item">${match.address}</span>
+		<c:if test="${myClub.club_auth>4 && myClub.club_num==match.home && empty match.cancel}">
+		<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }')">more_vert</span>
+		</c:if>
+		<c:if test="${not empty match.cancel }">
+		<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
+		</c:if>
 	</div>
 	<div class="row gray">
 		<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>

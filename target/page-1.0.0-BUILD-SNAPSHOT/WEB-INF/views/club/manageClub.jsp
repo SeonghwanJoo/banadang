@@ -12,9 +12,9 @@
 			<a href="javascript:location.reload()" class="active cursor">${title }</a>
 		</div>
 		<c:if test="${myClub.club_auth>4 }">
-		<div class="topnav-right">
+		<div class="topnav-right relative">
 			<a id="write" href="${pageContext.request.contextPath }/club/modifyClub.do">
-				<i class="fas fa-edit"></i>
+				<i class="fas fa-edit down"></i>
 			</a>
 		</div>
 		</c:if>
@@ -433,27 +433,31 @@
 				<c:forEach var="match" items="${match_list}">
 					<li class="li-list">
 						<div class="main-row margin-top">
-							<span class="match-item"><fmt:formatDate
-									value="${match.match_date}" pattern="yy.MM.dd" /></span> <span
-								class="match-item">${match.start_time }~${match.end_time }</span>
-							<a
-								href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}"
-								target="_blank"> <span class="match-item">${match.address}</span>
-							</a> <span class="match-item last"> <c:if
-									test="${match.type==1 }">축구</c:if> <c:if
-									test="${match.type==2 }">풋살</c:if>
-							</span>
-							<c:if
-								test="${myClub.club_auth>4 && myClub.club_num==match.home && empty match.cancel}">
-								<span class="material-icons more cursor xl-font" id="more"
-									onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }')">more_vert</span>
+							<c:if test="${match.type==1 }">
+							<span class="match-item last soccer">
+							축구
+							</span>	
+							</c:if>
+							<c:if test="${match.type==2 }">
+							<span class="match-item last futsal">
+							풋살
+							</span>	
+							</c:if>
+							<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}" target="_blank">
+								<span class="match-item">${match.address}</span>
+							</a>
+							<c:if test="${myClub.club_auth>4 && myClub.club_num==match.home && empty match.cancel}">
+							<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }')">more_vert</span>
 							</c:if>
 							<c:if test="${not empty match.cancel }">
-								<span class="status negative full">${match.cancel}팀에 의해
-									취소됨</span>
+							<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
 							</c:if>
 						</div>
-						<div class="row small-font">
+						<div class="row gray">
+							<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
+							<span class="match-item">${match.start_time }~${match.end_time }</span>
+						</div>
+						<div class="row small-font margin-top margin-btm">
 							<c:if test="${empty match.home_name }">
 								<div class="team-info col">
 									<span class="disp-inbl margin-top">삭제된 팀</span>
@@ -518,9 +522,13 @@
 								</c:if>
 							</c:if>
 							<c:if test="${match.away == 0 }">
-								<div class="team-info col">
-									<span class="disp-inbl margin-top">모집 중</span>
+							<div class="team-info col">
+								<div class="row margin-top">
+									<div class="margin-top centered">
+										<span class="disp-bl gray">모집 중</span>
+									</div>
 								</div>
+							</div>
 							</c:if>
 						</div>
 						<div class="cursor"
@@ -625,19 +633,30 @@
 		<c:if test="${not empty past_match }">
 			<ul class="ul-list non-border-btm">
 				<c:forEach var="match" items="${past_match}">
-					<c:if
-						test="${match.home!=match.away && !fn:contains(match.away_name,'미등록팀')}">
+					<c:if test="${match.home!=match.away && !fn:contains(match.away_name,'미등록팀')}">
 						<li class="li-list">
-							<div class="match-info">
-								<div class="main-row margin-top">
-									<span class="match-item"><fmt:formatDate
-											value="${match.match_date}" pattern="yy.MM.dd" /></span> <span
-										class="match-item">${match.start_time }~${match.end_time }</span>
-									<span class="match-item">${match.address}</span> <span
-										class="match-item"> <c:if test="${match.type==1 }">축구</c:if>
-										<c:if test="${match.type==2 }">풋살</c:if>
-									</span>
-								</div>
+							<div class="main-row margin-top gray">
+								<c:if test="${match.type==1 }">
+								<span class="match-item last soccer">
+								축구
+								</span>	
+								</c:if>
+								<c:if test="${match.type==2 }">
+								<span class="match-item last futsal">
+								풋살
+								</span>	
+								</c:if>
+								<span class="match-item">${match.address}</span>
+								<c:if test="${myClub.club_auth>4 && myClub.club_num==match.home && empty match.cancel}">
+								<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }')">more_vert</span>
+								</c:if>
+								<c:if test="${not empty match.cancel }">
+								<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
+								</c:if>
+							</div>
+							<div class="row gray">
+								<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
+								<span class="match-item">${match.start_time }~${match.end_time }</span>
 							</div>
 							<div class="match-info">
 								<div class="main-row small-font">
@@ -711,11 +730,11 @@
 	</div>
 	<div class="tab_detail" id="manageMember" >
 		<div class="main-row">
-		<h6 class="margin-left" id="total">
+		<h6 class="margin-left margin-right" id="total">
 			총 회원 ${fn:length(members)}명
 		</h6>
-		<h6 class="sub-h6" id="ages">
-			(
+		<h6 class="sub-h6 small-font" id="ages">
+			 ( 
 			<c:if test="${ages.ten!=0 }">
 			 10대:${ages.ten }명 
 			</c:if>
@@ -772,11 +791,11 @@
 					<i class="fas fa-crown admin" id="${member.id}">
 					</i>
 					</c:if>
-					${member.nickname} | <span class="gray">가입일</span> <fmt:formatDate value="${member.join_date}" pattern="yy.MM.dd"/> 
+					${member.nickname} | <span class="gray small-font">가입일 <fmt:formatDate value="${member.join_date}" pattern="yy.MM.dd"/> </span>
 					</span>
 					<br>
-					<span>${fn:substring(member.age_range,0,1)}0대 |</span>
-					<span><span class="gray">참석 투표율 </span><fmt:formatNumber value="${member.attendance_rate*100}" pattern="0"/>%</span>
+					<span class="gray small-font">${fn:substring(member.age_range,0,1)}0대 |</span>
+					<span class="gray small-font">참석 투표율<fmt:formatNumber value="${member.attendance_rate*100}" pattern="0"/>%</span>
 				</div>
 				<div class="half_col smaller">
 					<c:if test="${user_id == member.id }">

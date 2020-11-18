@@ -36,9 +36,6 @@ public class LoginCheckInterceptor
 			request.getContextPath()+"/main/main.do");
 			return false;
 		}
-		//신규 메시지 수 session설정
-		Integer count_msg=memberService.selectCountMsg(user_id);
-    	session.setAttribute("count_msg", count_msg);
 		
 		return true;
 	}

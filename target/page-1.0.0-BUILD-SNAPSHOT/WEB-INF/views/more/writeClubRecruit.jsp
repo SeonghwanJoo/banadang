@@ -37,37 +37,37 @@
 <span class="input-label">주 활동 요일 선택</span>
 <div class="row centered-padding">
 	<label class="chip">
-		<span class="chip-txt small-font">월</span>
+		<span class="chip-txt">월</span>
 		<input type="checkbox" name="act_day" value="월" checked="checked">
 		<span class="checkmark"></span>
 	</label> 
 	<label class="chip">
-		<span class="chip-txt small-font">화</span>
+		<span class="chip-txt">화</span>
 		<input type="checkbox" name="act_day" value="화">
 		<span class="checkmark"></span>
 	</label>
 	<label class="chip">
-		<span class="chip-txt small-font">수</span>
+		<span class="chip-txt">수</span>
 		<input type="checkbox" name="act_day" value="수">
 		<span class="checkmark"></span>
 	</label>
 	<label class="chip">
-		<span class="chip-txt small-font">목</span>
+		<span class="chip-txt">목</span>
 		<input type="checkbox" name="act_day" value="목">
 		<span class="checkmark"></span>
 	</label>
 	<label class="chip">
-		<span class="chip-txt small-font">금</span>
+		<span class="chip-txt">금</span>
 		<input type="checkbox" name="act_day" value="금">
 		<span class="checkmark"></span>
 	</label>
 	<label class="chip">
-		<span class="chip-txt small-font">토</span>
+		<span class="chip-txt">토</span>
 		<input type="checkbox" name="act_day" value="토">
 		<span class="checkmark"></span>
 	</label>
 	<label class="chip">
-		<span class="chip-txt small-font">일</span>
+		<span class="chip-txt">일</span>
 		<input type="checkbox" name="act_day" value="일">
 		<span class="checkmark"></span>
 	</label>
@@ -224,7 +224,7 @@ $(function(){
 
 	$('#datepicker').daterangepicker(
 		{
-			"opens" : "center",
+			"opens" : "left",
 			minDate : today,
 			singleDatePicker : true,
 			showDropdowns : true,

@@ -116,7 +116,7 @@ public class MainController {
 			mav.addObject("match",match);
 		}
 		mav.setViewName("rating");
-		mav.addObject("title","상대팀 평가");
+		mav.addObject("title","지난 경기 상대팀 평가");
 		return mav;
 	}
 	@RequestMapping("/main/vote_detail.do")

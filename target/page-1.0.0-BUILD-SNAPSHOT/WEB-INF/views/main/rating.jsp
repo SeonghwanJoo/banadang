@@ -13,9 +13,10 @@
 		<input type="submit" id="submit" value="완료">
 	</div>
 </div>
+<div class="blank_div"></div>
 <ul class="ul-list non-border-btm">
 	<li class="li-list">	
-			<div class="match-info invote">
+			<div class="row">
 				<c:if test="${match.type==1 }">
 				<span class="match-item last soccer">
 				축구
@@ -32,8 +33,7 @@
 				<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
 				<span class="match-item">${match.start_time }~${match.end_time }</span>
 			</div>
-			<hr class="hr">
-					<div class="row small-font margin-top margin-btm">
+			<div class="row small-font margin-top margin-btm">
 			<c:if test="${empty match.home_name }">
 			<div class="team-info col">
 				<span class="disp-inbl margin-top">삭제된 팀</span>
@@ -122,24 +122,26 @@
 		<div class="wrapper">
 		<span class="rating_title">매너</span><br>
 		<span>약속 준수/페어플레이/거친 정도 등을 고려해 평가해주세요</span><br>
-			<i class="manner_rating fas fa-star"  id="manner_1"></i>
-			<i class="manner_rating fas fa-star"  id="manner_2"></i>
-			<i class="manner_rating fas fa-star"  id="manner_3"></i>
-			<i class="manner_rating fas fa-star"  id="manner_4"></i>
-			<i class="manner_rating fas fa-star"  id="manner_5"></i>
-			<br>
+			<div class="row centered margin-top margin-btm">
+				<i class="manner_rating fas fa-star"  id="manner_1"></i>
+				<i class="manner_rating fas fa-star"  id="manner_2"></i>
+				<i class="manner_rating fas fa-star"  id="manner_3"></i>
+				<i class="manner_rating fas fa-star"  id="manner_4"></i>
+				<i class="manner_rating fas fa-star"  id="manner_5"></i>
+			</div>
 		<span id="manner_msg">선택하세요</span>
 		<input type="hidden" name="manner" id="manner">
 		</div>
 		<div class="wrapper">
 		<span class="rating_title">실력</span><br>
-		<span>실력 수준을 평가해주세요</span><br>
-			<i class="perform_rating fas fa-star" id="perform_1"></i>
-			<i class="perform_rating fas fa-star" id="perform_2"></i>
-			<i class="perform_rating fas fa-star" id="perform_3"></i>
-			<i class="perform_rating fas fa-star" id="perform_4"></i>
-			<i class="perform_rating fas fa-star" id="perform_5"></i>
-			<br>
+		<span >실력 수준을 평가해주세요</span><br>
+			<div class="row centered margin-top margin-btm">
+				<i class="perform_rating fas fa-star" id="perform_1"></i>
+				<i class="perform_rating fas fa-star" id="perform_2"></i>
+				<i class="perform_rating fas fa-star" id="perform_3"></i>
+				<i class="perform_rating fas fa-star" id="perform_4"></i>
+				<i class="perform_rating fas fa-star" id="perform_5"></i>
+			</div>
 		<span id="perform_msg">선택하세요</span>
 		<input type="hidden" name="perform" id="perform">
 		</div>

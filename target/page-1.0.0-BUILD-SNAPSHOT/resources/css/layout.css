@@ -21,6 +21,9 @@
 	.carousel-inner img{
 		height:14rem;
 	} 
+	html{
+		font-size:17px;
+	}
 }
 @media screen and (min-width:993px) and (max-width: 1200px) {
 	.fixed_top, div.bottom_menu, .sticky{
@@ -38,6 +41,9 @@
 	.carousel-inner img{
 		height:16rem;
 	} 
+	html{
+		font-size:19px;
+	}
 	
 }
 html{
@@ -123,7 +129,7 @@ div.row{
 	transform: translate(-50%, -50%);
 	text-decoration:none;
 	font-weight:bold;
-	font-size: 20px;
+	font-size: 1.2rem;
 }
 
 
@@ -877,7 +883,7 @@ body.body {
   left:1%;
   right:1%;
   z-index:50;
-  height:4rem;
+  height:3rem;
   margin:0 auto;
   font-size:18px;
   border-bottom: 1px solid #d4d4d4;
@@ -1003,7 +1009,8 @@ div.col{
 	position:absolute;
 	right:1.2rem;
 	top:0.3rem;
-	font-size:0.6rem;
+	font-size:0.7rem;
+	font-weight:bold;
 	width:1.2rem;
 	height:1.2rem;
 	background-color:#DC3545;
@@ -1014,12 +1021,18 @@ div.col{
 	position:absolute;
 	right:0.4rem;
 	top:0.3rem;
-	font-size:0.6rem;
+	font-size:0.7rem;
+	font-weight:bold;
 	width:1.2rem;
 	height:1.2rem;
 	background-color:#DC3545;
 	color:#FFF;
 	border-radius:50%;
+}
+#write .down{
+	position:absolute;
+	top:0.2rem;
+	right:0rem;
 }
 .msg-status{
 	position: absolute;
@@ -1521,14 +1534,14 @@ div.detail-item{
 	position:sticky;
 	background-color:#FFF;
 	z-index:95;
-	top:64px;
+	top:3rem;
 }
 .sticky+tab_detail{
 	padding-top: 160px;
 }
 .blank_div{
 	display:block;
-	height:70px;
+	height:3rem;
 }
 .li-list .collapsible{
 	color:#a4d3a6;
@@ -1627,6 +1640,9 @@ div.x-bigger{
 	right:0.5rem;
 	top:0.5rem;
 }
+.sync-text{
+	font-size:0.9rem;
+}
 button.chip-btn{
 	height:2rem;
 	border-radius: 25px;
@@ -1700,6 +1716,10 @@ button.chip-btn{
 	flex-direction:row;
 	justify-content:center;
 }
+.space-around{
+	flex-direction:row;
+	justify-content:space-around;
+}
 .border{
 	border:1px solid #ccc;
 	border-radius:0.5rem;
@@ -1750,8 +1770,11 @@ button.chip-btn{
 label.chip.wider{
 	width:8rem;
 }
+label.chip.m-wider{
+	width:7rem;
+}
 .gray{
-	color:#777;
+	color:#666;
 }
 .bold{
 	font-weight:bold;
@@ -1792,6 +1815,9 @@ label.chip.wider{
 /* On mouse-over, add a grey background color */
 .chip:hover input ~ .checkmark,.custom:hover input ~ .checkmark {
   	background-color: #ccc;
+}
+.chip input ~ .checkmark,.custom input ~ .checkmark {
+  	background-color: #ddd;
 }
 
 /* When the checkbox is checked, add a blue background */

@@ -14,7 +14,7 @@
 	$(function(){
 		$("#toast").css("display","block");
 		$("#submit_toast_content").click(function(){
-			location.href='main.do';
+			location.href='${pageContext.request.contextPath}/main/main.do';
 		})
 	});
 </script>

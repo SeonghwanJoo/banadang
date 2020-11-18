@@ -37,7 +37,6 @@ public class MainAjaxController {
 									  @RequestParam Integer club_num,//참석할 팀의 클럽 번호
 									  @RequestParam int status){
 		
-		logger.info("<<<<<AjaxData>>>>> : "+id+"/"+match_num+"/"+club_num+"/"+status);
 		Map<String,Integer> map=new HashMap<String,Integer>();
 		MatchVO matchVO=new MatchVO();
 		matchVO.setId(id);
@@ -67,9 +66,6 @@ public class MainAjaxController {
 				undefined=vote_result.getCount();
 			}
 		}
-		logger.info("<<<attend>>> :"+attend);
-		logger.info("<<<not_attend>>> :"+not_attend);
-		logger.info("<<<undefined>>> :"+undefined);
 		map.put("attend",attend );
 		map.put("not_attend", not_attend);
 		map.put("undefined", undefined);

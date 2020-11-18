@@ -16,7 +16,7 @@
 <div class="blank_div"></div>
 <div class="invite-wrapper" id="invite-wrapper">
  	<ul class="ul-list">
-		<li class="li-list cursor" onclick="location.href='club_details.do?club_num=${club.club_num}'">
+		<li class="li-list">
 			<div class="row small-font gray">
 				<div class="col club_main">
 					<c:if test="${!empty club.club_img }">
