@@ -92,9 +92,9 @@
 </div>
 <div class="row"><div class="col"><span class="msg" id="position_msg"></span></div></div>
 <hr>
-<div class="row">
-	<div class="autocomplete input-container col">
-		<span class="icon material-icons">groups</span>
+<div class="row  centered-padding">
+	<div class="input-container col selectbox margin-top">
+		<label for="recruit_count">필요 용병 인원 선택</label>
 		<select class="input-field" name="recruit_count" id="recruit_count">
 			<option class="placeholder" value="">필요 용병 인원 선택</option>
 			<option value="1">1</option>
@@ -108,7 +108,7 @@
 <div class="row"><div class="col"><span class="msg" id="count_msg"></span></div></div>
 <hr>
 <div class="row">
-	<div class="autocomplete input-container col">
+	<div class="autocomplete input-container col centered-padding">
 		<span class="icon material-icons">money</span>
 		<input class="input-field" type="text" name="recruit_cost" id="recruit_cost" placeholder="용병 참가 비용 입력">
 	</div>
@@ -146,6 +146,22 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function(){
+		
+		var selectTarget = $('.selectbox select');
+
+	    selectTarget.change(function(){
+	        var select_name = $(this).children('option:selected').text();
+	        $(this).siblings('label').text(select_name);
+	    });
+	    
+	    selectTarget.on({
+	        'focus' : function () {
+	            $(this).parent().addClass('focus');
+	        },
+	        'blur' : function () {
+	            $(this).parent().removeClass('focus');
+	        }
+	    });
 		
 		$('input:checkbox').click(function(){
 			$('#position_msg').text('');

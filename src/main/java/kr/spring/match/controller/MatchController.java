@@ -1,18 +1,14 @@
 package kr.spring.match.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,16 +63,11 @@ public class MatchController {
 		
 		ModelAndView mav=new ModelAndView();
 		String period=match.getPeriod();
-		logger.info("type : "+match.getType());
-		logger.info("period : "+match.getPeriod());
 		if(period!="" && period!=null) {
 			
 			String[] values=period.split(" ~ ");
 			match.setStart(java.sql.Date.valueOf(values[0]));
 			match.setEnd(java.sql.Date.valueOf(values[1]));
-			logger.info("start : "+match.getStart());
-			logger.info("end : "+match.getEnd());
-			logger.info("period : "+period);
 		}
 		List<MatchVO> matchVO=matchService.selectMatchToInviteWithFilter(match);
 		
@@ -93,16 +84,11 @@ public class MatchController {
 		
 		ModelAndView mav=new ModelAndView();
 		String period=match.getPeriod();
-		logger.info("type : "+match.getType());
-		logger.info("period : "+match.getPeriod());
 		if(period!="" && period!=null) {
 			
 			String[] values=period.split(" ~ ");
 			match.setStart(java.sql.Date.valueOf(values[0]));
 			match.setEnd(java.sql.Date.valueOf(values[1]));
-			logger.info("start : "+match.getStart());
-			logger.info("end : "+match.getEnd());
-			logger.info("period : "+period);
 		}
 		List<MatchVO> matches=matchService.selectRecruitWithFilter(match);
 		
@@ -130,16 +116,11 @@ public class MatchController {
 	public ModelAndView recruitPlayer(MatchVO match) {
 		ModelAndView mav=new ModelAndView();
 		String period=match.getPeriod();
-		logger.info("type : "+match.getType());
-		logger.info("period : "+match.getPeriod());
 		if(period!="" && period!=null) {
 			
 			String[] values=period.split(" ~ ");
 			match.setStart(java.sql.Date.valueOf(values[0]));
 			match.setEnd(java.sql.Date.valueOf(values[1]));
-			logger.info("start : "+match.getStart());
-			logger.info("end : "+match.getEnd());
-			logger.info("period : "+period);
 		}
 		List<MatchVO> matches=matchService.selectRecruitWithFilter(match);
 		

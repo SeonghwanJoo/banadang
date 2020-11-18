@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="myClub" extends="main">
+       <put-attribute name="title" value="팀 관리"/> 
+       <put-attribute name="body" value="/WEB-INF/views/club/myClub.jsp"/>
+       <put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
+    </definition>
+    <definition name="createClubForm" extends="main">
+       <put-attribute name="title" value="팀 만들기"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/club/createClubForm.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="manageClub" extends="main">
+       <put-attribute name="title" value="팀 관리"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/club/manageClub.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="inviteMember" extends="main">
+       <put-attribute name="title" value="팀 초대"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/club/inviteMember.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="clubDetails" extends="main">
+       <put-attribute name="title" value="팀 평점"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/club/clubDetails.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="modifyClub" extends="main">
+       <put-attribute name="title" value="팀 정보 수정"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/club/modifyClub.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+</tiles-definitions>
+
+
+
+
+
+
+
+

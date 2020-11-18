@@ -64,13 +64,13 @@
 		update gentlepro.club_recruit set act_day=#{act_day},act_time=#{act_time},register_cost=#{register_cost},month_cost=#{month_cost},type=#{type},recruit_position=#{recruit_position},clubRecruit_detail=#{clubRecruit_detail},recruit_due=#{recruit_due} where clubRecruit_num=#{clubRecruit_num}
 	</update>
 	<insert id="insertClubRecruitReq" parameterType="matchVO">
-		insert into gentlepro.clubRecruit_req (id,club_num,clubRecruit_req_detail,recruit_position,clubRecruit_accept,clubRecruit_num)
+		insert into gentlepro.clubrecruit_req (id,club_num,clubRecruit_req_detail,recruit_position,clubRecruit_accept,clubRecruit_num)
 		values (#{id},#{club_num},#{clubRecruit_req_detail},#{recruit_position},1,#{clubRecruit_num})
 	</insert>
 	<select id="selectMyClubRecruitReq" parameterType="string" resultType="matchVO">
-	select * from (select clubRecruit_num,clubRecruit_req_num,b.id,clubRecruit_req_detail,recruit_position,recruit_due,clubRecruit_accept,act_day,act_time,type,club_num,club_address,club_color,filename,club_name from
+	select * from (select clubRecruit_num,clubRecruit_req_num,b.id,clubRecruit_req_detail,recruit_position,recruit_due,clubRecruit_accept,act_day,act_time,type,club_num,club_address,club_color,filename,club_name,club_age from
     (select clubRecruit_num,clubRecruit_req_num,a.id,clubRecruit_req_detail,a.recruit_position,recruit_due,clubRecruit_accept,act_day,act_time,type,a.club_num from
-        (select * from gentlepro.clubRecruit_req where id=#{id}) a
+        (select * from gentlepro.clubrecruit_req where id=#{id}) a
             join gentlepro.club_recruit f using(clubRecruit_num) where recruit_due>date_sub(now(), interval 1 day))b join gentlepro.club e using(club_num))c left outer join
             (select avg(manner) manner,avg(perform)perform,club_num from gentlepro.club_rating group by club_num)d using(club_num)
 	</select>

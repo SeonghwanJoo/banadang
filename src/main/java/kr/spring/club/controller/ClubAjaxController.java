@@ -1,7 +1,6 @@
 package kr.spring.club.controller;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.sun.istack.internal.Nullable;
 
 import kr.spring.club.domain.ClubVO;
 import kr.spring.club.service.ClubService;
@@ -78,7 +76,6 @@ public class ClubAjaxController {
 			e.printStackTrace();
 			map.put("result", "errors");
 		}
-		logger.info("map result : "+map.get("result"));
 		return map;
 	}
 	@RequestMapping("/club/setMyClub.do")
@@ -335,7 +332,6 @@ public class ClubAjaxController {
 		club.setClub_address(club_addressCut);
 		club.setClub_locX(club_locX);
 		club.setClub_locY(club_locY);
-		logger.info("club_img : "+club.getClub_img());
 		try {
 			clubService.updateClub(club);
 			map.put("result", "updated");
@@ -344,7 +340,6 @@ public class ClubAjaxController {
 			e.printStackTrace();
 			map.put("result", "errors");
 		}
-		logger.info("map result : "+map.get("result"));
 		return map;
 										  
 	}

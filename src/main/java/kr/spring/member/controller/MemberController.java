@@ -2,11 +2,10 @@ package kr.spring.member.controller;
 
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -43,9 +42,10 @@ public class MemberController {
 	private MatchService matchService;
 
 	@RequestMapping("/member/login.do")
-	public String kakaoLogin(@RequestParam String code,HttpSession session)throws IOException {	
+	public String kakaoLogin(@RequestParam String code,HttpSession session,HttpServletRequest request)throws IOException {	
 		
-		String access_Token = loginAPI.getAccessToken(code,1);
+		String uri="http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
+		String access_Token = loginAPI.getAccessToken(code,1,uri);
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_Token);
         String user_id=memberVO.getId();
@@ -104,9 +104,10 @@ public class MemberController {
 	@RequestMapping("/member/invitedLogin.do")
 	public String invitedKakaoLogin(@RequestParam String code,
 									@RequestParam String state,
-									HttpSession session)throws IOException {	
-		
-		String access_Token = loginAPI.getAccessToken(code,0);
+									HttpSession session,
+									HttpServletRequest request)throws IOException {	
+		String uri="http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
+		String access_Token = loginAPI.getAccessToken(code,0,uri);
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_Token);
         
@@ -150,13 +151,15 @@ public class MemberController {
 	@RequestMapping("/member/voteLogin.do")
 	public String voteKakaoLogin(@RequestParam String code,
 								 @RequestParam String state,
-								 HttpSession session)throws IOException {	
+								 HttpSession session,
+								 HttpServletRequest request)throws IOException {	
 		String[] values=state.split("-");
 		Integer match_num=Integer.parseInt(values[0]);
 	    Integer club_num=Integer.parseInt(values[1]);
 	    Boolean isMain=Boolean.valueOf(values[2]);
+	    String uri="http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
 		
-	    String access_Token = loginAPI.getAccessToken(code,2);
+	    String access_Token = loginAPI.getAccessToken(code,2,uri);
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_Token);
         
@@ -340,7 +343,6 @@ public class MemberController {
 		
 		ModelAndView mav=new ModelAndView();
 
-		logger.info("match_num : " +input.getMatch_num());
 		MsgVO msg=memberService.selectMatchForMsg(input);
 		
 		mav.addObject("msg",msg);

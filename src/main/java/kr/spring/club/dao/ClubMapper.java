@@ -101,7 +101,7 @@ public interface ClubMapper {
 	
 	public List<MemberVO> selectClubRecruitReqForRequestor(Integer club_num);
 	
-	@Update("update gentlepro.clubRecruit_req set clubRecruit_accept=#{clubRecruit_accept} where clubRecruit_req_num=#{clubRecruit_req_num}")
+	@Update("update gentlepro.clubrecruit_req set clubRecruit_accept=#{clubRecruit_accept} where clubRecruit_req_num=#{clubRecruit_req_num}")
 	public void updateClubRecruitReq(MemberVO member);
 	
 	@Select("select clubJoin_num from gentlepro.club_join where id=#{id} and club_num=#{club_num} and club_auth>3")

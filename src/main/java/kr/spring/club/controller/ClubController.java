@@ -44,8 +44,6 @@ public class ClubController {
 		ClubVO myClub=(ClubVO)session.getAttribute("myClub");
 		//myClub이 session에 없다면
 		if (myClub==null && !myClubs.isEmpty()) {
-			logger.info("myClub : " + myClub);
-			logger.info("myClubs : " + myClubs);
 			session.setAttribute("myClub", clubService.selectMyClubDetails(myClubs.get(0)));
 		}
 		//myClub이 탈퇴했으나 session에 업데이트되지 않았다면
@@ -183,7 +181,6 @@ public class ClubController {
 	@RequestMapping("/club/imageView.do")
 	public String viewImage(@RequestParam Integer club_num,Model model) {
 		
-		logger.info("imageViewController진입");
 		ClubVO club=clubService.selectClubDetailWithClub_num(club_num);
 			
 		model.addAttribute("imageFile",club.getClub_img());
@@ -201,7 +198,6 @@ public class ClubController {
 		mav.addObject("club",club);
 		mav.addObject("ratings",ratings);
 		mav.addObject("title","팀 평점");
-		logger.info("ratings : "+ratings);
 		mav.setViewName("clubDetails");		
 		
 		return mav;

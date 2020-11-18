@@ -85,7 +85,7 @@
 	<select id="selectClubRecruitReqForRequestor" parameterType="integer" resultType="memberVO">
 	select * from
     (select clubRecruit_num,clubRecruit_req_num,a.id,clubRecruit_req_detail,a.recruit_position,clubRecruit_accept,act_day,act_time,type,a.club_num,recruit_due from
-        (select * from gentlepro.clubRecruit_req where club_num=#{club_num}) a
+        (select * from gentlepro.clubrecruit_req where club_num=#{club_num}) a
             join gentlepro.club_recruit b using(clubRecruit_num) where recruit_due>date_sub(now(), interval 1 day))a join member_detail b using(id)
 	</select>
 </mapper>

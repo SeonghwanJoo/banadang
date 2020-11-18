@@ -102,7 +102,6 @@ public class MemberAjaxController {
 	public Map<String,Object> sendMsg(MsgVO msg){
 		
 		Map<String,Object> map=new HashMap<String,Object>();
-		logger.info("match_num : "+msg.getMatch_num());
 		try {
 			memberService.insertMsg(msg);
 			map.put("result", "success");
@@ -192,8 +191,6 @@ public class MemberAjaxController {
 		
 		Map<String,Object> map=new HashMap<String,Object>();
 		try {
-			logger.info("id : " + member.getId());
-			logger.info("reason : "+ member.getReason());
 			memberService.deleteMember(member);
 			loginAPI.kakaoUnlink((String)session.getAttribute("access_Token"));
 			session.invalidate();

@@ -167,7 +167,7 @@
 	</select>
 	<select id="selectRecruitByClub_num" parameterType="integer" resultType="memberVO">
 		 select * from
-    ( select a.id,recruit_req_num,isCanceled,cancel,a.club_num,a.match_num,a.recruit_req_detail,a.recruit_position,a.recruit_accept,b.match_date,b.start_time,b.end_time,b.address from 
+    ( select a.id,recruit_req_num,isCanceled,cancel,a.club_num,a.match_num,a.recruit_req_detail,a.recruit_position,a.recruit_accept,b.match_date,b.type,b.start_time,b.end_time,b.address from 
         (select * from gentlepro.recruit_req where club_num=#{club_num}) a join gentlepro.match b on a.match_num=b.match_num where b.match_date>date_sub(now(), interval 1 day) order by b.match_date)f 
             join gentlepro.member_detail g using(id)
 	</select>

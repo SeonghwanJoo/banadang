@@ -44,10 +44,10 @@ public interface MemberMapper {
 	public void insertClubRecruitReq(MatchVO match);
 	public List<MatchVO> selectMyClubRecruitReq(String id);
 	
-	@Delete("delete from gentlepro.clubRecruit_req where clubRecruit_req_num=#{clubRecruit_req_num}")
+	@Delete("delete from gentlepro.clubrecruit_req where clubRecruit_req_num=#{clubRecruit_req_num}")
 	public void deleteClubRecruitReq(Integer clubRecruit_req_num);
 	
-	@Select("select clubRecruit_req_num from gentlepro.clubRecruit_req where id=#{id} and clubRecruit_num=#{clubRecruit_num}")
+	@Select("select clubRecruit_req_num from gentlepro.clubrecruit_req where id=#{id} and clubRecruit_num=#{clubRecruit_num}")
 	public Integer selectClubRecruit_reqForDuplicate(MatchVO match);
 	
 	public MsgVO selectMatchForMsg(MsgVO input);
@@ -89,7 +89,7 @@ public interface MemberMapper {
 	@Delete("delete from gentlepro.club_recruit where id=#{id}")
 	public void deleteIDFromClub_Recruit(MemberVO member);
 	
-	@Delete("delete from gentlepro.clubRecruit_req where id=#{id}")
+	@Delete("delete from gentlepro.clubrecruit_req where id=#{id}")
 	public void deleteIDFromclubRecruit_req(MemberVO member);
 	
 	@Delete("delete from gentlepro.match_recruit where id=#{id}")

@@ -36,7 +36,6 @@ public class MatchAjaxController {
 			matchService.insertMyRequestForMatchToInvite(match);
 			map.put("result", "requested");
 		}
-		logger.info("map",map);
 		
 		return map;
 	}
@@ -83,7 +82,6 @@ public class MatchAjaxController {
 	@ResponseBody
 	public Map<String,Object> updateMatch(MatchVO match){
 		
-		logger.info("match in updateMatch"+match);
 		Map<String,Object> map=new HashMap<String, Object>();
 		try {
 			matchService.updateMatch(match);
@@ -123,16 +121,11 @@ public class MatchAjaxController {
 		
 		Map<String,Object> map=new HashMap<String,Object>();
 		String period=match.getPeriod();
-		logger.info("type : "+match.getType());
-		logger.info("period : "+match.getPeriod());
 		if(period!="" && period!=null) {
 			
 			String[] values=period.split(" ~ ");
 			match.setStart(java.sql.Date.valueOf(values[0]));
 			match.setEnd(java.sql.Date.valueOf(values[1]));
-			logger.info("start : "+match.getStart());
-			logger.info("end : "+match.getEnd());
-			logger.info("period : "+period);
 		}
 		try {
 			List<MatchVO> matches=matchService.selectMatchToInviteWithFilter(match);
@@ -152,16 +145,11 @@ public class MatchAjaxController {
 		
 		Map<String,Object> map=new HashMap<String,Object>();
 		String period=match.getPeriod();
-		logger.info("type : "+match.getType());
-		logger.info("period : "+match.getPeriod());
 		if(period!="" && period!=null) {
 			
 			String[] values=period.split(" ~ ");
 			match.setStart(java.sql.Date.valueOf(values[0]));
 			match.setEnd(java.sql.Date.valueOf(values[1]));
-			logger.info("start : "+match.getStart());
-			logger.info("end : "+match.getEnd());
-			logger.info("period : "+period);
 		}
 		try {
 			List<MatchVO> matches=matchService.selectRecruitWithFilter(match);

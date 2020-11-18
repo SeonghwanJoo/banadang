@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="writeForm" extends="main">
+       <put-attribute name="title" value="매치 등록"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/match/writeForm.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="invite_match" extends="main">
+       <put-attribute name="title" value="경기 매치"/> 
+       <put-attribute name="body" value="/WEB-INF/views/match/invite_match.jsp"/>
+       <put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
+    </definition>
+    <definition name="invite_detail" extends="main">
+       <put-attribute name="title" value="경기 매치"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/match/invite_detail.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="recruit" extends="main">
+       <put-attribute name="title" value="용병 모집"/> 
+       <put-attribute name="body" value="/WEB-INF/views/match/recruit.jsp"/>
+    </definition>
+    <definition name="writeRecruit" extends="main">
+       <put-attribute name="title" value="용병 모집"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/match/writeRecruit.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="recruitDetail" extends="main">
+       <put-attribute name="title" value="용병 신청"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/match/recruitDetail.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="modifyRecruit" extends="main">
+       <put-attribute name="title" value="용병 모집"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/match/modifyRecruit.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="modifyMatch" extends="main">
+       <put-attribute name="title" value="경기 수정"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/match/modifyMatch.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+</tiles-definitions>
+
+
+
+
+
+
+
+
