@@ -147,7 +147,7 @@
 		<div class="cursor" onclick="location.href='${pageContext.request.contextPath}/main/vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num }&home_name=${match.home_name }&away_name=${match.away_name }'">
 			<div class="row">
 				<span class="vote-rating">
-					<span class="voted" id="attend" style="background-color:transparent">
+					<span class="voted" id="attend" style="width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%">
 						<span class="vote-label">참석
 							<i class="fas fa-check sign"  id="attend_sign" ></i>
 						</span>
@@ -158,7 +158,7 @@
 			</div>
 			<div class="row">
 				<span class="vote-rating">
-					<span class="voted" id="not_attend" style="background-color:transparent;">
+					<span class="voted" id="not_attend" style="width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%">
 						<span class="vote-label">불참
 							<i class="fas fa-check sign"  id="not_attend_sign" ></i>
 						</span>
@@ -169,7 +169,7 @@
 			</div>	
 			<div class="row">
 				<span class="vote-rating">
-					<span class="voted" id="undefined" style="background-color:transparent;">
+					<span class="voted" id="undefined" style="width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%">
 						<span class="vote-label">미정
 							<i class="fas fa-check sign"  id="undefined_sign" ></i>
 						</span>

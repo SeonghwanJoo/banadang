@@ -23,7 +23,7 @@
 			<div class="col">
 				<button class="sync" onclick="location.href='${pageContext.request.contextPath}/member/kakaoSync.do'">
 					<img src="${pageContext.request.contextPath }/resources/images/kakao-logo.jpg">
-					<span class="sync-text">카카오 Sync</span>
+					<span class="sync-text">카카오</span>
 					<span class="material-icons sync-icon">sync</span>
 				</button>
 			</div>

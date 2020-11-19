@@ -125,10 +125,14 @@
 <div id="toast" class="submit_toast">
 
   <!-- Modal content -->
-  <div  class="submit_toast_content cursor">
-     <span id="club_msg"></span>
-     <br><br>확인
-  </div>
+  <div id="submit_toast_content" class="submit_toast_content">
+		<div class="row centered margin-btm centered-padding">
+			<span id="club_msg"></span>
+		</div>
+		<div class="row margin-top centered">
+			<button class="alert-btn">확인</button>
+		</div>
+	</div>
 </div>
 </c:if>
 <c:if test="${empty matches }">
@@ -136,9 +140,13 @@
 <div onclick="location.href=document.referrer" class="submit_toast" style="display:block">
 
   <!-- Modal content -->
-  <div onclick="location.href=document.referrer" id="submit_toast_content" class="submit_toast_content">
-     <span>예정된 경기 일정이 있어야 용병 모집 가능합니다</span>
-     <br><br>확인
+  <div onclick="location.href=document.referrer" class="submit_toast_content">
+     <div class="row centered margin-btm centered-padding">
+     	<span>예정된 경기 일정이 있어야 용병 모집 가능합니다</span>
+    </div>
+     <div class="row margin-top centered">
+			<button class="alert-btn">확인</button>
+	</div>
   </div>
 </div>
 </c:if>

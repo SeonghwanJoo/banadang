@@ -147,7 +147,7 @@
 		<div class="cursor" onclick="location.href='${pageContext.request.contextPath}/main/vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num }&home_name=${match.home_name }&away_name=${match.away_name }'">
 			<div class="row">
 				<span class="vote-rating">
-					<span class="voted" id="attend" style="background-color:transparent">
+					<span class="voted" id="attend" style="width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%">
 						<span class="vote-label">참석
 							<i class="fas fa-check sign"  id="attend_sign" ></i>
 						</span>
@@ -158,7 +158,7 @@
 			</div>
 			<div class="row">
 				<span class="vote-rating">
-					<span class="voted" id="not_attend" style="background-color:transparent;">
+					<span class="voted" id="not_attend" style="width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%">
 						<span class="vote-label">불참
 							<i class="fas fa-check sign"  id="not_attend_sign" ></i>
 						</span>
@@ -169,7 +169,7 @@
 			</div>	
 			<div class="row">
 				<span class="vote-rating">
-					<span class="voted" id="undefined" style="background-color:transparent;">
+					<span class="voted" id="undefined" style="width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%">
 						<span class="vote-label">미정
 							<i class="fas fa-check sign"  id="undefined_sign" ></i>
 						</span>
@@ -324,6 +324,7 @@ function setVoteStyle(max,attend,not_attend,undefined,status){
 		$('#not_attend').css('background-color','transparent');
 		$('#undefined').css('background-color','transparent');
 	}else if (max==attend){
+		console.log('max==attend 진입');
 		$('#attend').css('background-color','#a4d3a6');
 		$('#not_attend').css('background-color','#bfbfbf');
 		$('#undefined').css('background-color','#bfbfbf');
@@ -336,16 +337,6 @@ function setVoteStyle(max,attend,not_attend,undefined,status){
 		$('#not_attend').css('background-color','#bfbfbf');
 		$('#undefined').css('background-color','#a4d3a6');
 	}
-	if(attend==0){
-		$('#attend').css('background-color','transparent');
-	}
-	if(not_attend==0){
-		$('#not_attend').css('background-color','transparent');
-	}
-	if(undefined==0){
-		$('#undefined').css('background-color','transparent');
-	}
-	
 	if( status ==  1){
 		$('#attend_sign').css('display','inline-block');
 		$('#not_attend_sign').css('display','none');

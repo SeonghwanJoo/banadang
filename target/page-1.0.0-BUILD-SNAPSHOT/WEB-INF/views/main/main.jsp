@@ -143,41 +143,39 @@
 				</div>
 			</c:if>
 			<span class="from-to">VS</span>
-			<c:if test="${match.away != 0 }">
-				<c:if test="${not empty match.away_name }">
-				<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
-					<div class="row margin-top margin-btm">
-						<div class="centered">
-							<c:if test="${not empty match.away_filename }">
-							<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}" alt="Avatar" class="avatar emblem">
-							</c:if>
-							<c:if test="${empty match.away_filename  }">
-							<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
-							</c:if>
-							<span class="disp-inbl margin-top">${match.away_name}</span>
-						</div>
-					</div>
+			<c:if test="${not empty match.away_name && match.away != 0}">
+			<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
+				<div class="row margin-top margin-btm">
 					<div class="centered">
-						<span class="margin-right">매너</span> 
-						<span class="star-rating">
-							<span style="width:${match.away_manner*20}%"></span>
-						</span>
-						<span>${match.away_manner*2}</span>
-					</div>
-					<div class="centered">
-						<span class="margin-right">실력</span> 
-						<span class="star-rating">
-							<span style="width:${match.away_perform*20}%"></span>
-						</span>
-						${match.away_perform*2}
+						<c:if test="${not empty match.away_filename }">
+						<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}" alt="Avatar" class="avatar emblem">
+						</c:if>
+						<c:if test="${empty match.away_filename  }">
+						<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+						</c:if>
+						<span class="disp-inbl margin-top">${match.away_name}</span>
 					</div>
 				</div>
-				</c:if>
-				<c:if test="${empty match.away_name }">
-				<div class="team-info col">
-					<span class="disp-inbl margin-top">삭제된 팀</span>
+				<div class="centered">
+					<span class="margin-right">매너</span> 
+					<span class="star-rating">
+						<span style="width:${match.away_manner*20}%"></span>
+					</span>
+					<span>${match.away_manner*2}</span>
 				</div>
-				</c:if>
+				<div class="centered">
+					<span class="margin-right">실력</span> 
+					<span class="star-rating">
+						<span style="width:${match.away_perform*20}%"></span>
+					</span>
+					${match.away_perform*2}
+				</div>
+			</div>
+			</c:if>
+			<c:if test="${empty match.away_name }">
+			<div class="team-info col">
+				<span class="disp-inbl margin-top">삭제된 팀</span>
+			</div>
 			</c:if>
 			<c:if test="${match.away == 0 }">
 			<div class="team-info col">
@@ -192,82 +190,27 @@
 		<div class="cursor" onclick="location.href='${pageContext.request.contextPath}/main/vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num }&home_name=${match.home_name }&away_name=${match.away_name }'">
 			<div class="row">
 				<span class="vote-rating">
-					<c:if test="${match.attend==0 }">
-					<span class="voted" style="background-color:transparent">
+					<span class="voted" id="voted-attend-${match.match_num }" style="width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%">
 						<span class="vote-label">참석</span>
 					</span>
-					</c:if>
-					<c:if test="${match.attend!=0 && match.max==match.attend }">
-					<span class="voted" 
-						style=
-							"width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%;
-							background-color:#A4D3A6;">
-						<span class="vote-label">참석</span>
-					</span>
-					</c:if>
-					<c:if test="${match.attend!=0 && match.max!=match.attend }">
-					<span class="voted" 
-						style=
-							"width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%;
-							background-color:#bfbfbf;">
-						<span class="vote-label">참석</span>
-					</span>
-					</c:if>
 					<span id="num_attend" class="vote_num">${match.attend}</span>
 					<span class="person material-icons">person</span>
 				</span>
 			</div>	
 			<div class="row" >
 				<span class="vote-rating">
-					<c:if test="${match.not_attend==0 }">
-					<span class="voted" 
-						style="background-color:transparent;">
+					<span class="voted" id="voted-not_attend-${match.match_num }" style="width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%">
 						<span class="vote-label">불참</span>
 					</span>
-					</c:if>
-					<c:if test="${match.not_attend!=0 && match.max==match.not_attend }">
-					<span class="voted" 
-						style=
-							"width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%;
-							background-color:#A4D3A6;">
-						<span class="vote-label">불참</span>
-					</span>
-					</c:if>
-					<c:if test="${match.not_attend!=0 && match.max!=match.not_attend }">
-					<span class="voted" 
-						style=
-							"width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%;
-							background-color:#bfbfbf;">
-						<span class="vote-label">불참</span>
-					</span>
-					</c:if>
 					<span id="num_nattend" class="vote_num">${match.not_attend}</span>
 					<span class="person material-icons">person</span>
 				</span>
 			</div>	
 			<div class="row">
 				<span class="vote-rating">
-					<c:if test="${match.undefined==0 }">
-					<span class="voted" style="background-color:transparent;">
+					<span class="voted" id="voted-not_fixed-${match.match_num }" style="width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%">
 						<span class="vote-label">미정</span>
 					</span>
-					</c:if>
-					<c:if test="${match.undefined!=0 && match.max==match.undefined }">
-					<span class="voted" 
-						style=
-							"width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%;
-							background-color:#A4D3A6;">
-						<span class="vote-label">미정</span>
-					</span>
-					</c:if>
-					<c:if test="${match.undefined!=0 && match.max!=match.undefined }">
-					<span class="voted" 
-						style=
-							"width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%;
-							background-color:#bfbfbf;">
-						<span class="vote-label">미정</span>
-					</span>
-					</c:if>
 					<span id="num_undefined" class="vote_num">${match.undefined}</span>
 					<span class="person material-icons">person</span>
 				</span>
@@ -411,8 +354,63 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
-	Kakao.init('32776969383e4a77d92f6e18dd233bc5');
-	function sendLinkForVote(match_num,club_num,match_date,address,start_time) {
+let matches=new Array();
+<c:forEach items="${match_list}" var="match">
+	var obj={};
+	obj.match_num="${match.match_num}";
+	obj.max="${match.max}";
+	obj.attend="${match.attend}";
+	obj.not_attend="${match.not_attend}";
+	obj.undefined="${match.undefined}";
+	console.log("undefined : "+${match.undefined});
+	matches.push(obj);
+</c:forEach>
+ for(var i=0; i<matches.length;i++){
+	
+	var max=matches[i].max;
+	var attend=matches[i].attend;
+	var not_attend=matches[i].not_attend;
+	var not_fixed=matches[i].undefined;
+	console.log("undefined : "+not_fixed);
+	console.log("not_attend : "+not_attend);
+	var match_num=matches[i].match_num;
+	console.log("max/attend/not_attend/undefined/match_num : "+max+"/"+attend+"/"+not_attend+"/"+not_fixed+"/"+match_num);
+	 if(max==0){
+		$('#voted-attend-'+matches[i].match_num).css('background-color','transparent');
+		$('#voted-not_attend-'+matches[i].match_num).css('background-color','transparent');
+		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','transparent');
+	}else if (max==attend){
+		$('#voted-attend-'+matches[i].match_num).css('background-color','#a4d3a6');
+		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#bfbfbf');
+		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#bfbfbf');
+	}else if(max==not_attend){
+		$('#voted-attend-'+matches[i].match_num).css('background-color','#bfbfbf');
+		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#a4d3a6');
+		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#bfbfbf')
+	}else if(max==not_fixed){
+		$('#voted-attend-'+matches[i].match_num).css('background-color','#bfbfbf');
+		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#bfbfbf');
+		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#a4d3a6');
+	}
+	if(attend==0){
+		console.log("attend==0 진입");
+		$('#voted-attend-'+matches[i].match_num).css('background-color','transparent');
+	}
+	if(not_attend==0){
+		console.log("not_attend==0 진입");
+		$('#voted-not_attend-'+matches[i].match_num).css('background-color','transparent');
+	}
+	if(not_fixed==0){
+		console.log("undefined==0 진입");
+		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','transparent');
+	}
+ }
+	
+
+
+
+Kakao.init('32776969383e4a77d92f6e18dd233bc5');
+function sendLinkForVote(match_num,club_num,match_date,address,start_time) {
 	    Kakao.Link.sendCustom({
 	    	templateId: 39879,
 	    	templateArgs: {
@@ -423,8 +421,8 @@
 	    		'isMain': true
 	    	}
 	    })
-	  }
-	function openMore(match_num,club_name,club_num,match_date,address,start_time,modify){
+}
+function openMore(match_num,club_name,club_num,match_date,address,start_time,modify){
 		var itemStr='';
 		if(modify){
 			console.log('if modify 진입');
@@ -458,6 +456,13 @@
 			}
 		});
  }
+ $(function(){
+
+	 
+	 
+	 
+	 
+ });
 	
 
 </script>
