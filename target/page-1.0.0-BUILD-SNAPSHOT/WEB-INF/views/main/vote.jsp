@@ -147,100 +147,33 @@
 		<div class="cursor" onclick="location.href='${pageContext.request.contextPath}/main/vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num }&home_name=${match.home_name }&away_name=${match.away_name }'">
 			<div class="row">
 				<span class="vote-rating">
-					<c:if test="${match.attend==0 }">
 					<span class="voted" id="attend" style="background-color:transparent">
 						<span class="vote-label">참석
-							<span class="material-icons sign" id="attend_sign">done</span>
-							<i class="fas fa-check sign"  id="attend_sign"></i>
+							<i class="fas fa-check sign"  id="attend_sign" ></i>
 						</span>
 					</span>
-					</c:if>
-					<c:if test="${match.attend!=0 && match.max==match.attend }">
-					<span class="voted" id="attend"
-						style=
-							"width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%;
-							background-color:#a4d3a6;">
-						<span class="vote-label">참석
-							<span class="material-icons sign" id="attend_sign">done</span>
-						</span>
-					</span>
-					</c:if>
-					<c:if test="${match.attend!=0 && match.max!=match.attend }">
-					<span class="voted" id="attend"
-						style=
-							"width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%;
-							background-color:#bfbfbf;">
-						<span class="vote-label">참석
-							<span class="material-icons sign" id="attend_sign">done</span>
-						</span>
-					</span>
-					</c:if>
 					<span id="num_attend" class="vote_num">${match.attend}</span>
 					<span class="person material-icons">person</span>
 				</span>
 			</div>
 			<div class="row">
 				<span class="vote-rating">
-					<c:if test="${match.not_attend==0 }">
 					<span class="voted" id="not_attend" style="background-color:transparent;">
 						<span class="vote-label">불참
-							<span class="material-icons sign" id="not_attend_sign">done</span>
+							<i class="fas fa-check sign"  id="not_attend_sign" ></i>
 						</span>
 					</span>
-					</c:if>
-					<c:if test="${match.not_attend!=0 && match.max==match.not_attend }">
-					<span class="voted" id="not_attend"
-						style=
-							"width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%;
-							background-color:#a4d3a6;">
-						<span class="vote-label">불참
-							<span class="material-icons sign" id="not_attend_sign">done</span>
-						</span>
-					</span>
-					</c:if>
-					<c:if test="${match.not_attend!=0 && match.max!=match.not_attend }">
-					<span class="voted" id="not_attend"
-						style=
-							"width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%;
-							background-color:#bfbfbf;">
-						<span class="vote-label">불참
-							<span class="material-icons sign" id="not_attend_sign">done</span>
-						</span>
-					</span>
-					</c:if>
 					<span id="num_nattend" class="vote_num">${match.not_attend}</span>
 					<span class="person material-icons">person</span>
 				</span>
 			</div>	
 			<div class="row">
 				<span class="vote-rating">
-					<c:if test="${match.undefined==0 }">
 					<span class="voted" id="undefined" style="background-color:transparent;">
 						<span class="vote-label">미정
-							<span class="material-icons sign" id="undefined_sign">done</span>
+							<i class="fas fa-check sign"  id="undefined_sign" ></i>
 						</span>
 					</span>
-					</c:if>
-					<c:if test="${match.undefined!=0 && match.max==match.undefined }">
-					<span class="voted" id="undefined"
-						style=
-							"width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%;
-							background-color:#a4d3a6;">
-						<span class="vote-label">미정
-							<span class="material-icons sign" id="undefined_sign">done</span>
-						</span>
-					</span>
-					</c:if>
-					<c:if test="${match.undefined!=0 && match.max!=match.undefined }">
-					<span class="voted" id="undefined"
-						style=
-							"width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%;
-							background-color:#bfbfbf;">
-						<span class="vote-label">미정
-							<span class="material-icons sign" id="undefined_sign">done</span>
-						</span>
-					</span>
-					</c:if>
 					<span id="num_undefined" class="vote_num">${match.undefined}</span>
 					<span class="person material-icons">person</span>
 				</span>
@@ -249,61 +182,23 @@
 		<hr>
 		<span class="input-label">참석 여부 선택</span>
 		<div class="row space-around">
-			<c:if test="${match.status==1 }">
 			<label class="chip m-wider">
 				<span class="chip-txt">참석</span>
-				<input type="radio" name="vote" value="1" id="attend" class="vote" checked="checked">
+				<input type="radio" name="vote" value="1" id="attend_radio" class="vote">
 				<span class="checkmark"></span>
 			</label>
-			</c:if>
-			<c:if test="${match.status!=1 }">
-			<label class="chip m-wider">
-				<span class="chip-txt">참석</span>
-				<input type="radio" name="vote" value="1" id="attend" class="vote">
-				<span class="checkmark"></span>
-			</label>
-			</c:if>
-			<c:if test="${match.status==2 }">
 			<label class="chip m-wider">
 				<span class="chip-txt">불참</span>
-				<input type="radio" name="vote" value="2" id="absent" class="vote" checked="checked">
+				<input type="radio" name="vote" value="2" id="not_attend_radio" class="vote">
 				<span class="checkmark"></span>
 			</label>
-			</c:if>
-			<c:if test="${match.status!=2 }">
-			<label class="chip m-wider">
-				<span class="chip-txt">불참</span>
-				<input type="radio" name="vote" value="2" id="absent" class="vote">
-				<span class="checkmark"></span>
-			</label>
-			</c:if>
-			<c:if test="${match.status==3 }">
 			<label class="chip m-wider">
 				<span class="chip-txt">미정</span>
-				<input type="radio" name="vote" value="3" id="undefined" class="vote" checked="checked">
+				<input type="radio" name="vote" value="3" id="undefined_radio" class="vote">
 				<span class="checkmark"></span>
 			</label>
-			</c:if>
-			<c:if test="${match.status!=3 }">
-			<label class="chip m-wider">
-				<span class="chip-txt">미정</span>
-				<input type="radio" name="vote" value="3" id="undefined" class="vote">
-				<span class="checkmark"></span>
-			</label>
-			</c:if>
 		</div>
 		<hr class="hr">
-		<!-- <div class="btn-group btn-group-toggle col-sm-12" id="btn-group" data-toggle="buttons">
-			<label class="radio btn" id="attend_btn">
-				<input class="vote" type="radio" id="attend" value="1"> 참석
-			</label>
-			<label class="radio btn" id="not_attend_btn">
-				<input class="vote" type="radio" name="vote" id="absent" value="2"> 불참
-			</label>
-			<label class="radio btn" id="undefined_btn">
-				<input class="vote" type="radio" name="vote" id="undefined" value="3"> 미정
-			</label>
-		</div> -->
 		<div class="total_wrapper margin-btm">
 			<span class="cursor" onclick="location.href='vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num}&home_name=${match.home_name}&away_name=${match.away_name}'">
 			<span class="total_person material-icons">person</span>
@@ -422,6 +317,54 @@ function modifyAnswer(voteAnswer_num){
 		location.href='modifyVoteAnswer.do?voteAnswer_num='+voteAnswer_num+'&isMain=${isMain}';
 	});
 }
+function setVoteStyle(max,attend,not_attend,undefined,status){
+	
+	if(max==0){
+		$('#attend').css('background-color','transparent');
+		$('#not_attend').css('background-color','transparent');
+		$('#undefined').css('background-color','transparent');
+	}else if (max==attend){
+		$('#attend').css('background-color','#a4d3a6');
+		$('#not_attend').css('background-color','#bfbfbf');
+		$('#undefined').css('background-color','#bfbfbf');
+	}else if(max==not_attend){
+		$('#attend').css('background-color','#bfbfbf');
+		$('#not_attend').css('background-color','#a4d3a6');
+		$('#undefined').css('background-color','#bfbfbf')
+	}else if(max==undefined){
+		$('#attend').css('background-color','#bfbfbf');
+		$('#not_attend').css('background-color','#bfbfbf');
+		$('#undefined').css('background-color','#a4d3a6');
+	}
+	if(attend==0){
+		$('#attend').css('background-color','transparent');
+	}
+	if(not_attend==0){
+		$('#not_attend').css('background-color','transparent');
+	}
+	if(undefined==0){
+		$('#undefined').css('background-color','transparent');
+	}
+	
+	if( status ==  1){
+		$('#attend_sign').css('display','inline-block');
+		$('#not_attend_sign').css('display','none');
+		$('#undefined_sign').css('display','none');
+	}else if(status == 2){
+		$('#attend_sign').css('display','none');
+		$('#not_attend_sign').css('display','inline-block');
+		$('#undefined_sign').css('display','none');
+	}else if(status == 3){
+		$('#attend_sign').css('display','none');
+		$('#not_attend_sign').css('display','none');
+		$('#undefined_sign').css('display','inline-block');
+	}else{
+		$('#attend_sign').css('display','none');
+		$('#not_attend_sign').css('display','none');
+		$('#undefined_sign').css('display','none');
+	}
+}
+
 	$(function(){
 		
 		$('#more').click(function(){
@@ -431,54 +374,26 @@ function modifyAnswer(voteAnswer_num){
 		$('#more-cancel-btn').click(function(){
 			$('#more_modal').css('display','none');
 		});
-		
-		/* $('.radio').removeClass(' focus');
-		$('.radio').removeClass(' active'); */
-		if( ${myVote == 1}){
-			$('#attend_sign').css('display','inline-block');
-			$('#not_attend_sign').css('display','none');
-			$('#undefined_sign').css('display','none');
-			$('#attend_btn').addClass(' focus active');
-		} else if(${ myVote == 2}){
-			$('#attend_sign').css('display','none');
-			$('#not_attend_sign').css('display','inline-block');
-			$('#undefined_sign').css('display','none');
-			$('#not_attend_btn').addClass(' focus active');
-		} else if(${myVote == 3}){
-			$('#attend_sign').css('display','none');
-			$('#not_attend_sign').css('display','none');
-			$('#undefined_sign').css('display','inline-block');
-			$('#undefined_btn').addClass(' focus active');
-		} else if (${empty myVote}){
-			$('#attend_sign').css('display','none');
-			$('#not_attend_sign').css('display','none');
-			$('#undefined_sign').css('display','none');
+		if(${match.status}==1){
+			$('#attend_radio').prop('checked',true);
+		}else if(${match.status}==2){
+			$('#not_attend_radio').prop('checked',true);
+		}else if(${match.status}==3){
+			$('#undefined_radio').prop('checked',true);
 		}
+		
+		setVoteStyle(${match.max},${match.attend},${match.not_attend},${match.undefined},${match.status});
+		
 		$('.vote').click(function(){
-			/* $('.radio').removeClass(' focus');
-			$('.radio').removeClass(' active'); */
 			
-			if( $(this).val() ==  1){
-				$('#attend_sign').css('display','inline-block');
-				$('#not_attend_sign').css('display','none');
-				$('#undefined_sign').css('display','none');
-			}else if($(this).val() == 2){
-				$('#attend_sign').css('display','none');
-				$('#not_attend_sign').css('display','inline-block');
-				$('#undefined_sign').css('display','none');
-			}else if($(this).val() == 3){
-				$('#attend_sign').css('display','none');
-				$('#not_attend_sign').css('display','none');
-				$('#undefined_sign').css('display','inline-block');
-			}
-			
+			var status=$(this).val();
 			$.ajax({
 				url:'vote.do',
 				type:'post',
 				data:{id:$('#id').val(),
 					match_num:$('#match_num').val(),
 					club_num:$('#club_num').val(),
-					status:$(this).val()},
+					status:status},
 					dataType:'json',
 					cache:false,
 					timeout:30000,
@@ -494,21 +409,8 @@ function modifyAnswer(voteAnswer_num){
 						$('#num_undefined').text(data.undefined);
 						$('#total').text(total);
 						var max=Math.max(data.attend,data.not_attend,data.undefined);
-						if (max==data.attend){
-							$('#attend').css('background-color','#a4d3a6');
-							$('#not_attend').css('background-color','#bfbfbf');
-							$('#undefined').css('background-color','#bfbfbf');
-						}
-						if(max==data.not_attend){
-							$('#attend').css('background-color','#bfbfbf');
-							$('#not_attend').css('background-color','#a4d3a6');
-							$('#undefined').css('background-color','#bfbfbf')
-						}
-						if(max==data.undefined){
-							$('#attend').css('background-color','#bfbfbf');
-							$('#not_attend').css('background-color','#bfbfbf');
-							$('#undefined').css('background-color','#a4d3a6');
-						}
+						setVoteStyle(max,data.attend,data.not_attend,data.undefined,status)
+						
 					},
 					error:function(){
 						alert('네트워크 오류 발생');

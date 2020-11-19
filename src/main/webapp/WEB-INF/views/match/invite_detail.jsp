@@ -93,19 +93,27 @@
 </div>
 <!-- The Modal -->
 <div id="toast" class="submit_toast">
-  <!-- Modal content -->
-  <div id="toast-content" class="submit_toast_content">
-     <span id="matchRequest_msg">경기 신청 완료</span>
-     <br><br>확인
-  </div>
+	<!-- Modal content -->
+	<div id="toast-content" class="submit_toast_content">
+		<div class="row centered margin-btm centered-padding">
+			<span id="matchRequest_msg">경기 신청 완료</span>
+		</div>
+		<div class="row margin-top centered">
+			<button class="alert-btn">확인</button>
+		</div>
+	</div>
 </div>
 <!-- The Modal -->
 <div id="myClub-toast" class="submit_toast">
-  <!-- Modal content -->
-  <div id="myClub-toast-content" class="submit_toast_content">
-     <span>소속팀의 운영진만 경기 신청 가능합니다</span>
-     <br><br>확인
-  </div>
+	<!-- Modal content -->
+	<div id="myClub-toast-content" class="submit_toast_content">
+		<div class="row centered margin-btm centered-padding">
+			<span>소속팀의 운영진만 경기 신청 가능합니다</span>
+		</div>
+		<div class="row margin-top centered">
+			<button class="alert-btn">확인</button>
+		</div>
+	</div>
 </div>
 <div id="more_modal" class="confirm-modals">
 	<!-- Modal content -->

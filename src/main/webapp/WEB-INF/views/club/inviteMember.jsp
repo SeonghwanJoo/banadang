@@ -14,7 +14,7 @@
 		<br>
 		<span>${club.club_name}(${club.club_address })</span>
 		<p>${nickname}님이 당신을 ${club.club_name } 팀으로 초대합니다</p>
-		<button onclick="inviteMember(${club.club_num })" class="block">초대장 보기</button>
+		<button onclick="inviteMember()" class="block">가입 하기</button>
 	</div>
 </div>
 </c:if>
@@ -32,7 +32,12 @@
 					</c:if>
 					<br>
 					<span>${club.club_name}(${club.club_address })</span>
+					<c:if test="${not empty nickname }">
 					<p>${nickname}님이 당신을 ${club.club_name } 팀으로 초대합니다</p>
+					</c:if>
+					<c:if test="${empty nickname }">
+					<p>당신을 ${club.club_name } 팀으로 초대합니다</p>
+					</c:if>
 					<hr>
 					<button id="invite-btn" class="pos-btn">수락</button>
 				</div>
@@ -67,16 +72,20 @@
 <!-- The Modal -->
 <div id="toast" class="submit_toast">
   <!-- Modal content -->
-  <div id="toast-content" class="submit_toast_content">
-     <span id="matchRequest_msg">${club.club_name }팀에 가입했습니다.</span>
-     <br><br>확인
-  </div>
+  <div id="submit_toast_content" class="submit_toast_content">
+		<div class="row centered margin-btm centered-padding">
+			<span id="club_msg">${club.club_name }팀에 가입했습니다.</span>
+		</div>
+		<div class="row margin-top centered">
+			<button class="alert-btn">확인</button>
+		</div>
+	</div>
 </div>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 Kakao.init('32776969383e4a77d92f6e18dd233bc5');
-function inviteMember(club_num){
+function inviteMember(){
 	if('${user_id}'==''){
 		$('#login_modal').css('display','block');
 	}

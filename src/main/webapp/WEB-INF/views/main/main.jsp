@@ -87,12 +87,21 @@
 			<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}" target="_blank">
 				<span class="match-item">${match.address}</span>
 			</a>
-			<c:if test="${myClub.club_auth>4 && myClub.club_num==match.home && empty match.cancel}">
-			<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }')">more_vert</span>
+			<c:if test="${empty match.cancel }">
+				<c:if test="${myClub.club_auth==4 }">
+				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',false)">more_vert</span>
+				</c:if>
+				<c:if test="${myClub.club_auth==5 && (myClub.club_num==match.home || match.home==match.away)}">
+				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',true)">more_vert</span>
+				</c:if>
+				<c:if test="${myClub.club_auth==5 && (myClub.club_num==match.away && match.home!=match.away) }">
+				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',false)">more_vert</span>
+				</c:if>
 			</c:if>
 			<c:if test="${not empty match.cancel }">
 			<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
 			</c:if>
+			
 		</div>
 		<div class="row gray">
 			<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
@@ -134,41 +143,39 @@
 				</div>
 			</c:if>
 			<span class="from-to">VS</span>
-			<c:if test="${match.away != 0 }">
-				<c:if test="${not empty match.away_name }">
-				<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
-					<div class="row margin-top margin-btm">
-						<div class="centered">
-							<c:if test="${not empty match.away_filename }">
-							<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}" alt="Avatar" class="avatar emblem">
-							</c:if>
-							<c:if test="${empty match.away_filename  }">
-							<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
-							</c:if>
-							<span class="disp-inbl margin-top">${match.away_name}</span>
-						</div>
-					</div>
+			<c:if test="${not empty match.away_name && match.away != 0}">
+			<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
+				<div class="row margin-top margin-btm">
 					<div class="centered">
-						<span class="margin-right">매너</span> 
-						<span class="star-rating">
-							<span style="width:${match.away_manner*20}%"></span>
-						</span>
-						<span>${match.away_manner*2}</span>
-					</div>
-					<div class="centered">
-						<span class="margin-right">실력</span> 
-						<span class="star-rating">
-							<span style="width:${match.away_perform*20}%"></span>
-						</span>
-						${match.away_perform*2}
+						<c:if test="${not empty match.away_filename }">
+						<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}" alt="Avatar" class="avatar emblem">
+						</c:if>
+						<c:if test="${empty match.away_filename  }">
+						<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+						</c:if>
+						<span class="disp-inbl margin-top">${match.away_name}</span>
 					</div>
 				</div>
-				</c:if>
-				<c:if test="${empty match.away_name }">
-				<div class="team-info col">
-					<span class="disp-inbl margin-top">삭제된 팀</span>
+				<div class="centered">
+					<span class="margin-right">매너</span> 
+					<span class="star-rating">
+						<span style="width:${match.away_manner*20}%"></span>
+					</span>
+					<span>${match.away_manner*2}</span>
 				</div>
-				</c:if>
+				<div class="centered">
+					<span class="margin-right">실력</span> 
+					<span class="star-rating">
+						<span style="width:${match.away_perform*20}%"></span>
+					</span>
+					${match.away_perform*2}
+				</div>
+			</div>
+			</c:if>
+			<c:if test="${empty match.away_name }">
+			<div class="team-info col">
+				<span class="disp-inbl margin-top">삭제된 팀</span>
+			</div>
 			</c:if>
 			<c:if test="${match.away == 0 }">
 			<div class="team-info col">
@@ -307,9 +314,6 @@
 		</span>	
 		</c:if>
 		<span class="match-item">${match.address}</span>
-		<c:if test="${myClub.club_auth>4 && myClub.club_num==match.home && empty match.cancel}">
-		<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }')">more_vert</span>
-		</c:if>
 		<c:if test="${not empty match.cancel }">
 		<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
 		</c:if>
@@ -394,12 +398,8 @@
 <div id="more_modal" class="confirm-modals">
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
-		<div class="sub-content">
+		<div class="sub-content" id="option">
 			<button id="share" class="pos-btn">투표 링크 공유</button>
-			<hr>
-			<button id="modify" class="pos-btn">수정</button>
-			<hr>
-			<button id="delete" class="pos-btn red">삭제</button>
 		</div>
 		<div class="sub-content">
 			<button id="more-cancel-btn" class="neg-btn">취소</button>
@@ -409,8 +409,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
-	Kakao.init('32776969383e4a77d92f6e18dd233bc5');
-	function sendLinkForVote(match_num,club_num,match_date,address,start_time) {
+Kakao.init('32776969383e4a77d92f6e18dd233bc5');
+function sendLinkForVote(match_num,club_num,match_date,address,start_time) {
 	    Kakao.Link.sendCustom({
 	    	templateId: 39879,
 	    	templateArgs: {
@@ -421,8 +421,22 @@
 	    		'isMain': true
 	    	}
 	    })
-	  }
-	function openMore(match_num,club_name,club_num,match_date,address,start_time){
+}
+function openMore(match_num,club_name,club_num,match_date,address,start_time,modify){
+		var itemStr='';
+		if(modify){
+			console.log('if modify 진입');
+			
+			itemStr+=
+				'<div id="options">'
+				+'<hr class="hr">'
+				+'<button id="modify" class="pos-btn">수정</button>'
+				+'<hr class="hr">'
+				+'<button id="delete" class="pos-btn red">삭제</button>'
+				+'</div>';
+			
+			$(itemStr).appendTo('#option');
+		}
 		$('#more_modal').css('display','block');
 		 
 		$('#modify').click(function(){
@@ -437,8 +451,18 @@
 		});
 		$('#more-cancel-btn').click(function(){
 			$('#more_modal').css('display','none');
+			if(modify){
+				$('#options').replaceWith('');
+			}
 		});
  }
+ $(function(){
+
+	 
+	 
+	 
+	 
+ });
 	
 
 </script>

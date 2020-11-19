@@ -32,10 +32,14 @@
 <!-- The Modal -->
 <div id="toast" class="submit_toast">
   <!-- Modal content -->
-  <div id="submit_toast_content" class="submit_toast_content">
-  	<span id="club_msg">소속팀이 없습니다</span>
-  	<br><br>확인
-  </div>
+    <div id="submit_toast_content" class="submit_toast_content">
+		<div class="row centered margin-btm centered-padding">
+			<span id="club_msg">소속팀이 없습니다.</span>
+		</div>
+		<div class="row margin-top centered">
+			<button class="alert-btn">확인</button>
+		</div>
+	</div>
 </div>
 <!-- The Modal -->
 </c:if>

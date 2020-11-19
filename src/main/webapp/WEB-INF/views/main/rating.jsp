@@ -157,11 +157,14 @@
 <div id="toast" class="submit_toast">
 
   <!-- Modal content -->
-  <div id="submit_toast_content" class="submit_toast_content">
-     <span id="rating_msg">상대팀 평점 수정 완료</span>
-     <br><br>확인
-  </div>
-  
+	<div id="submit_toast_content" class="submit_toast_content">
+		<div class="row centered margin-btm centered-padding">
+			<span id="club_msg">상대팀 평점 업데이트 완료</span>
+		</div>
+		<div class="row margin-top centered">
+			<button class="alert-btn">확인</button>
+		</div>
+	</div>
 
 </div>
 

@@ -164,10 +164,14 @@
 <!-- The Modal -->
 <div id="toast" class="submit_toast">
   <!-- Modal content -->
-  <div id="toast-content" class="submit_toast_content">
-     <span id="recruitRequest_msg">용병 신청 완료</span>
-     <br><br>확인
-  </div>
+  	<div id="submit_toast_content" class="submit_toast_content">
+		<div class="row centered margin-btm centered-padding">
+			<span id="club_msg">팀 가입 신청 완료</span>
+		</div>
+		<div class="row margin-top centered">
+			<button class="alert-btn">확인</button>
+		</div>
+	</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>

@@ -51,35 +51,40 @@ public class MemberController {
         String user_id=memberVO.getId();
         
         //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
-        if (memberVO != null) {
-        
-        	//memberVO의 아이디가 DB에 기 등록된 id인지 확인
-        	MemberVO existingMember=memberService.getMember(user_id);
-        	//등록되어 있으면 session setting
-        	if(existingMember !=null && existingMember.getMem_auth()!=3) {
-        		session.setAttribute("mem_auth", existingMember.getMem_auth());
-        	}else if(existingMember == null){
-        		memberService.insertMember(memberVO);
-        		session.setAttribute("mem_auth", 1);
-        	}
-        	else if(existingMember.getMem_auth()==3) {
-        		memberService.updateMemberForReValidation(memberVO);
-        		session.setAttribute("mem_auth", 1);
-        	}
-        	Integer count_msg=memberService.selectCountMsg(user_id);
-        	session.setAttribute("count_msg", count_msg);
-        	List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
-        	session.setAttribute("user_id", user_id);
-            session.setAttribute("access_Token", access_Token);
-            session.setAttribute("myClubs", myClubs);
-            
-            if(myClubs.size()>0) {
-            	ClubVO club=new ClubVO();
-                club.setId(user_id);
-                club.setClub_num(myClubs.get(0).getClub_num());
-            	session.setAttribute("myClub", clubService.selectMyClubDetails(club));
+        try {
+            if (memberVO != null) {
+                
+            	//memberVO의 아이디가 DB에 기 등록된 id인지 확인
+            	MemberVO existingMember=memberService.getMember(user_id);
+            	//등록되어 있으면 session setting
+            	if(existingMember !=null && existingMember.getMem_auth()!=3) {
+            		session.setAttribute("mem_auth", existingMember.getMem_auth());
+            	}else if(existingMember == null){
+            		memberService.insertMember(memberVO);
+            		session.setAttribute("mem_auth", 1);
+            	}
+            	else if(existingMember.getMem_auth()==3) {
+            		memberService.updateMemberForReValidation(memberVO);
+            		session.setAttribute("mem_auth", 1);
+            	}
+            	Integer count_msg=memberService.selectCountMsg(user_id);
+            	session.setAttribute("count_msg", count_msg);
+            	List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
+            	session.setAttribute("user_id", user_id);
+                session.setAttribute("access_Token", access_Token);
+                session.setAttribute("myClubs", myClubs);
+                
+                if(myClubs.size()>0) {
+                	ClubVO club=new ClubVO();
+                    club.setId(user_id);
+                    club.setClub_num(myClubs.get(0).getClub_num());
+                	session.setAttribute("myClub", clubService.selectMyClubDetails(club));
+                }
             }
+        }catch (Exception e) {
+        	return "redirect:/main/posterCheck.do";
         }
+        
 		return "redirect:/main/main.do";
 	}
 	@RequestMapping("/member/kakaoSync.do")

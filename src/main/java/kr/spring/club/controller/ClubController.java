@@ -149,7 +149,7 @@ public class ClubController {
 	}
 	@RequestMapping("/club/inviteMember.do")
 	public ModelAndView inviteMember(@RequestParam Integer club_num,
-									 @RequestParam String nickname,
+									 @RequestParam(required=false) String nickname,
 									 HttpSession session) {
 		
 		ModelAndView mav=new ModelAndView();

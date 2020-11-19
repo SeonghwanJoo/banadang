@@ -563,7 +563,7 @@ input[type=text]:focus, select:focus{
 	border-radius:0.5rem;
 	width: 90%;
 }
-body.body {
+body.body, body.body btn{
     font-family: Noto Sans KR,sans-serif;
     word-break:keep-all;
     word-wrap:break-word;
@@ -634,7 +634,7 @@ body.body {
 }
 .sub-content{
 	margin-bottom:1rem;
-	padding: 20px 0;
+	padding: 1rem 0;
 	background-color:#FFF;
 	border-radius:1rem;
 }
@@ -1049,7 +1049,7 @@ a.detail{
 }
 .hr{
 	margin-top:0.5rem;
-	margin-bottom:0.1rem;
+	margin-bottom:0.5rem;
 }
 .invisible{
 	
@@ -1110,14 +1110,13 @@ a.detail{
   text-align:center;
   border-radius:6px;
   cursor:pointer;
-  bottom: 70%;
+  bottom: 50%;
   left:20%;
   background-color: black;
   opacity:0.8;
   color:white;
   width: 60%;
-  height:8rem;
-  padding:1rem;
+  padding:1rem 0 0 0;
   -webkit-animation-name: fadeIn;
   -webkit-animation-duration: 0.4s;
   animation-name: fadeIn;
@@ -1127,6 +1126,22 @@ a.detail{
 	height:1rem;
 	font-size:1rem;
 }
+.alert-btn{
+	border:none;
+	border-top:1px solid #fff;
+	background-color:transparent;
+	margin-top:2rem;
+	color:#fff;
+	padding:0.8rem;
+	width:100%;
+}
+.border-right{
+	border-right: 1px solid #fff;
+}
+.yellow{
+	color:#ffc107;
+}
+
 #team-content{
 	left:25%;
 	width:50%;

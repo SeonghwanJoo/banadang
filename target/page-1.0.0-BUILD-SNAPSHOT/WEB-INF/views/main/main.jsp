@@ -87,12 +87,21 @@
 			<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}" target="_blank">
 				<span class="match-item">${match.address}</span>
 			</a>
-			<c:if test="${myClub.club_auth>4 && myClub.club_num==match.home && empty match.cancel}">
-			<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }')">more_vert</span>
+			<c:if test="${empty match.cancel }">
+				<c:if test="${myClub.club_auth==4 }">
+				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',false)">more_vert</span>
+				</c:if>
+				<c:if test="${myClub.club_auth==5 && (myClub.club_num==match.home || match.home==match.away)}">
+				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',true)">more_vert</span>
+				</c:if>
+				<c:if test="${myClub.club_auth==5 && (myClub.club_num==match.away && match.home!=match.away) }">
+				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',false)">more_vert</span>
+				</c:if>
 			</c:if>
 			<c:if test="${not empty match.cancel }">
 			<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
 			</c:if>
+			
 		</div>
 		<div class="row gray">
 			<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
@@ -307,9 +316,6 @@
 		</span>	
 		</c:if>
 		<span class="match-item">${match.address}</span>
-		<c:if test="${myClub.club_auth>4 && myClub.club_num==match.home && empty match.cancel}">
-		<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }')">more_vert</span>
-		</c:if>
 		<c:if test="${not empty match.cancel }">
 		<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
 		</c:if>
@@ -394,12 +400,8 @@
 <div id="more_modal" class="confirm-modals">
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
-		<div class="sub-content">
+		<div class="sub-content" id="option">
 			<button id="share" class="pos-btn">투표 링크 공유</button>
-			<hr>
-			<button id="modify" class="pos-btn">수정</button>
-			<hr>
-			<button id="delete" class="pos-btn red">삭제</button>
 		</div>
 		<div class="sub-content">
 			<button id="more-cancel-btn" class="neg-btn">취소</button>
@@ -422,7 +424,21 @@
 	    	}
 	    })
 	  }
-	function openMore(match_num,club_name,club_num,match_date,address,start_time){
+	function openMore(match_num,club_name,club_num,match_date,address,start_time,modify){
+		var itemStr='';
+		if(modify){
+			console.log('if modify 진입');
+			
+			itemStr+=
+				'<div id="options">'
+				+'<hr class="hr">'
+				+'<button id="modify" class="pos-btn">수정</button>'
+				+'<hr class="hr">'
+				+'<button id="delete" class="pos-btn red">삭제</button>'
+				+'</div>';
+			
+			$(itemStr).appendTo('#option');
+		}
 		$('#more_modal').css('display','block');
 		 
 		$('#modify').click(function(){
@@ -437,6 +453,9 @@
 		});
 		$('#more-cancel-btn').click(function(){
 			$('#more_modal').css('display','none');
+			if(modify){
+				$('#options').replaceWith('');
+			}
 		});
  }
 	

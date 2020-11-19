@@ -47,7 +47,7 @@ public class ClubMemberCheckInterceptor  extends HandlerInterceptorAdapter {
 				}
 				if(count==0) {
 					response.sendRedirect(
-							request.getContextPath()+"/main/membercheck.do");
+							request.getContextPath()+"/main/membercheck.do?club_num="+club_num);
 					return false;
 				}
 				
