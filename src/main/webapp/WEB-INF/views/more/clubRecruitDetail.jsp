@@ -23,13 +23,19 @@
 <div class="invite-wrapper" id="invite-wrapper">
  	<ul class="ul-list">
 		<li class="li-list">
-			<div class="main-row">
-				<span class="match-item"> <span class="gray">주 활동 요일 </span>${clubRecruit.act_day}</span>
-				<span class="match-item"><span class="gray">주 활동 시간대 </span> ${clubRecruit.act_time }</span>
-				<span class="match-item">
-					<c:if test="${clubRecruit.type==1 }">축구</c:if>
-					<c:if test="${clubRecruit.type==2 }">풋살</c:if>
-				</span>
+			<div class="main-row margin-btm">
+				<c:if test="${clubRecruit.type==1 }">
+				<span class="match-item last soccer">
+				축구
+				</span>	
+				</c:if>
+				<c:if test="${clubRecruit.type==2 }">
+				<span class="match-item last futsal">
+				풋살
+				</span>	
+				</c:if>
+				<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>주 활동 요일 ${clubRecruit.act_day}</span>
+				<span class="match-item"><i class="far fa-clock margin-right"></i>시간대 ${clubRecruit.act_time }</span>
 			</div>
 			<div class="row small-font gray">
 				<div class="col club_main">
@@ -62,13 +68,13 @@
 		<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${clubRecruit.club_num }'">
 			<span class="rating_count">총 ${clubRecruit.count }명의 평가 <i class="fas fa-chevron-right"></i></span>
 			<div class="row small-font gray">
-				<div class="col">
+				<div class="col flex-start">
 					매너 
 					<span class="star-rating">
 						<span style="width:${clubRecruit.manner*20}%"></span>
 					</span>${clubRecruit.manner*2}
 				</div>
-				<div class="col">
+				<div class="col flex-start">
 					실력  
 					<span class="star-rating">
 						<span style="width:${clubRecruit.perform*20}%"></span>

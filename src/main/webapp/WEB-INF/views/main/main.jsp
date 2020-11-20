@@ -51,19 +51,18 @@
 </c:if>
 
 <c:if test="${not empty user_id }">
-<div class="margin-top margin-btm">
+<div class="border-btm v-padding">
 	<span class="title-btw">경기 일정</span>
 	<button class="btn_write" id="btn_write" onclick="location.href='${pageContext.request.contextPath}/match/writeForm.do'">
 		<span>매치 작성</span><i class="fas fa-pen margin-left"></i>
 	</button>
 </div>
-<hr class="hr">
 <c:if test="${empty match_list }">
 <div class="row">
 	<div class="empty-wrapper">
 		<i class="far fa-grimace empty">
 		</i>
-		<span class="gray small-font">예정된 경기가 없습니다.</span>
+		<span class=" small-font">예정된 경기가 없습니다.</span>
 	</div>
 </div>
 </c:if>
@@ -71,39 +70,40 @@
 <ul class="ul-list">
 <c:forEach var="match" items="${match_list}">
 	<li class="li-list">
-		<div class="main-row margin-top">
-			<c:if test="${match.type==1 }">
-			<span class="match-item last soccer">
-			축구
-			</span>	
-			</c:if>
-			<c:if test="${match.type==2 }">
-			<span class="match-item last futsal">
-			풋살
-			</span>	
-			</c:if>
-			<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}" target="_blank">
-				<span class="match-item">${match.address}</span>
-			</a>
-			<c:if test="${empty match.cancel }">
-				<c:if test="${myClub.club_auth==4 }">
-				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',false)">more_vert</span>
+		<div class="match-info-wrapper">
+			<div class="main-row ">
+				<c:if test="${match.type==1 }">
+				<span class="match-item last soccer">
+				축구
+				</span>	
 				</c:if>
-				<c:if test="${myClub.club_auth==5 && (myClub.club_num==match.home || match.home==match.away)}">
-				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',true)">more_vert</span>
+				<c:if test="${match.type==2 }">
+				<span class="match-item last futsal">
+				풋살
+				</span>	
 				</c:if>
-				<c:if test="${myClub.club_auth==5 && (myClub.club_num==match.away && match.home!=match.away) }">
-				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',false)">more_vert</span>
+				<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}" target="_blank">
+					<span class="match-item">${match.address}</span>
+				</a>
+				<c:if test="${empty match.cancel }">
+					<c:if test="${myClub.club_auth==4 }">
+					<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',false)">more_vert</span>
+					</c:if>
+					<c:if test="${myClub.club_auth==5 && (myClub.club_num==match.home || match.home==match.away)}">
+					<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',true)">more_vert</span>
+					</c:if>
+					<c:if test="${myClub.club_auth==5 && (myClub.club_num==match.away && match.home!=match.away) }">
+					<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',false)">more_vert</span>
+					</c:if>
 				</c:if>
-			</c:if>
-			<c:if test="${not empty match.cancel }">
-			<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
-			</c:if>
-			
-		</div>
-		<div class="row gray">
-			<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
-			<span class="match-item">${match.start_time }~${match.end_time }</span>
+				<c:if test="${not empty match.cancel }">
+				<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
+				</c:if>
+			</div>
+			<div class="row ">
+				<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
+				<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>${match.start_time }~${match.end_time }</span>
+			</div>
 		</div>
 		<div class="row small-font margin-top margin-btm">
 			<c:if test="${empty match.home_name }">
@@ -124,21 +124,21 @@
 						<span class="disp-inbl margin-top">${match.home_name}</span>
 					</div>
 				</div>
-					<div class="centered">
-						<span class="margin-right">매너</span> 
-						<span class="star-rating">
-							<span style="width:${match.home_manner*20}%"></span>
-						</span>
-						<span>${match.home_manner*2}</span>
-					</div>
-					<div class="centered">
-						<span class="margin-right">실력</span> 
-						<span class="star-rating">
-							<span style="width:${match.home_perform*20}%"></span>
-						</span>
-						${match.home_perform*2}
-					</div>
+				<div class="centered">
+					<span class="margin-right">매너</span> 
+					<span class="star-rating">
+						<span style="width:${match.home_manner*20}%"></span>
+					</span>
+					<span>${match.home_manner*2}</span>
 				</div>
+				<div class="centered">
+					<span class="margin-right">실력</span> 
+					<span class="star-rating">
+						<span style="width:${match.home_perform*20}%"></span>
+					</span>
+					${match.home_perform*2}
+				</div>
+			</div>
 			</c:if>
 			<span class="from-to">VS</span>
 			<c:if test="${not empty match.away_name && match.away != 0}">
@@ -227,16 +227,15 @@
 </c:forEach>
 </ul>
 </c:if>
-<div class="match-head">
+<div class="border-btm v-padding">
 	<span class="title-btw">지난 경기 상대팀 평점 작성</span>
 </div>
-<hr class="hr">
 <c:if test="${empty past_match }">
 <div class="row">
 	<div class="empty-wrapper">
 		<i class="far fa-grimace empty">
 		</i>
-		<span class="gray small-font">최근 2주간 경기가 없습니다.</span>
+		<span class=" small-font">최근 2주간 경기가 없습니다.</span>
 	</div>
 </div>
 </c:if>
@@ -245,25 +244,27 @@
 <c:forEach var="match" items="${past_match}">
 <c:if test="${match.home!=match.away && !fn:contains(match.away_name,'미등록팀')}">
 <li class="li-list">
-	<div class="main-row margin-top gray">
-		<c:if test="${match.type==1 }">
-		<span class="match-item last soccer">
-		축구
-		</span>	
-		</c:if>
-		<c:if test="${match.type==2 }">
-		<span class="match-item last futsal">
-		풋살
-		</span>	
-		</c:if>
-		<span class="match-item">${match.address}</span>
-		<c:if test="${not empty match.cancel }">
-		<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
-		</c:if>
-	</div>
-	<div class="row gray">
-		<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
-		<span class="match-item">${match.start_time }~${match.end_time }</span>
+	<div class="match-info-wrapper">
+		<div class="main-row margin-top ">
+			<c:if test="${match.type==1 }">
+			<span class="match-item last soccer">
+			축구
+			</span>	
+			</c:if>
+			<c:if test="${match.type==2 }">
+			<span class="match-item last futsal">
+			풋살
+			</span>	
+			</c:if>
+			<span class="match-item">${match.address}</span>
+			<c:if test="${not empty match.cancel }">
+			<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
+			</c:if>
+		</div>
+		<div class="row ">
+			<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
+			<span class="match-item"><i class="far fa-clock margin-right"></i>${match.start_time }~${match.end_time }</span>
+		</div>
 	</div>
 	<div class="match-info">
 		<div class="main-row small-font margin-top margin-btm">

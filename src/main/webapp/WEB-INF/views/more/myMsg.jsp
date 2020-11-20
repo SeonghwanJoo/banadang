@@ -7,7 +7,9 @@
 		<span class="material-icons" id="cancel">close</span>
 		</a>
 		<div class="topnav-centered">
-			<a id="sel" class="active cursor gray">${title }
+			<a id="sel" class="active cursor gray">
+				<i class="fas fa-inbox margin-right"></i>
+				${title }
 				<span class="drop-down material-icons">
 					arrow_drop_down
 				</span>
@@ -52,13 +54,15 @@
 <div id="sel-modal" class="modals">
   <!-- Modal content -->
   	
-	<div class="modals-content">
+	<div class="modals-content align-center">
 	<span class="close_mod">&times;</span>
-		<h6 class="mod-h6">메시지함 선택</h6>
-		<hr>
-	  	<span onclick="location.href='myMsg.do'" class="margin-top bold disp-bl cursor" >받은 메시지 함</span>
-	  	<hr>
-	  	<span onclick="location.href='sentMsg.do'" class="margin-top bold disp-bl cursor">보낸 메시지 함</span>
+		<div class="modal-wrapper">
+			<h6 class="mod-h6 margin-top"><i class="fas fa-inbox margin-right"></i>메시지함 선택</h6>
+			<hr>
+		  	<span onclick="location.href='myMsg.do'" class="margin-top bold disp-bl cursor" >받은 메시지 함</span>
+		  	<hr>
+		  	<span onclick="location.href='sentMsg.do'" class="margin-top bold disp-bl cursor margin-btm">보낸 메시지 함</span>
+		</div>
 	</div>
 </div>
 <div id="more_modal" class="confirm-modals">

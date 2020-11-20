@@ -13,7 +13,7 @@
 </div>
 
 <div class="blank_div"></div><!-- match_num이 없을 때,club_num이 없을 때, 아이디가 없을 때-->
-<div class="main-row">
+<div class="main-row margin-top">
 	<div class="x-smaller">
 		<c:if test="${!empty msg.club_img }">
 		<img src="${pageContext.request.contextPath}/club/imageView.do?club_num=${msg.club_num}" alt="Avatar" class="avatar">
@@ -29,11 +29,15 @@
 			</c:if>
 			<c:if test="${not empty msg.address }">
 			<span class="match-item">${msg.address }</span>
-			<span class="match-item">${msg.match_date }</span>
-			<span class="match-item">${msg.start_time }~${msg.end_time }</span>
+			<div class="row">
+			<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>${msg.match_date }</span>
+			<span class="match-item"><i class="far fa-clock margin-right"></i>${msg.start_time }~${msg.end_time }</span>
+			</div>
 			</c:if>
 		</div>
-		<span class="gray">받는 사람</span>
+	</div>
+	<div class="row margin-top">
+		<span class="gray margin-right">받는 사람</span>
 		<c:if test="${not empty msg.nickname }">
 		<span class="positive-color bold">${msg.nickname }</span>
 		</c:if>

@@ -4,15 +4,19 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="main-row filter-wrapper margin-btm">
-	<div class="filter">
-		<span class="material-icons cursor l-font filter-icon" id="filter">filter_alt</span>
+	<div class="filter cursor"  id="filter">
+		<span class="material-icons l-font filter-icon">filter_alt</span>
+		<span class="filter-txt">
+			<c:if test="${not empty match.period }">
+			<i class="far fa-calendar-alt margin-right"></i>${match.period}
+			</c:if>
+		</span>
 		<c:if test="${match.type==1 }">
-		<span class="filter-txt">축구</span>
+		<span class="filter-txt margin-right">축구</span>
 		</c:if>
 		<c:if test="${match.type==2 }">
-		<span class="filter-txt">풋살</span>
+		<span class="filter-txt margin-right">풋살</span>
 		</c:if>
-		<span class="filter-txt">${match.period}</span>
 	</div>
 </div>
 <div class="invite-wrapper" id="invite-wrapper">
@@ -73,26 +77,13 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-function createListOrderByDistance(latitude,longitude,matchs){
-	var div=document.getElementById("invite-wrapper");
-	var ul=document.createElement("UL");
-	ul.setAttribute("class","ul-list");
-	ul.classList.add('non-border-btm');
-	var itemStr="";
-	
-	for(var i=0;i<matchs.length;i++){
-		
-		matchs[i].distance=getDistanceFromLatLonInKm(latitude,longitude,matchs[i].address_y,matchs[i].address_x);
-	}
-	matchs.sort(function (a,b){
-		return a.distance - b.distance;
-	});
+function createListInHTML(matchs){
+	var itemStr='';
 	for(var i=0;i<matchs.length;i++){
 		
 		itemStr+=
-			"<a class='detail' href='${pageContext.request.contextPath}/match/invite_detail.do?match_num="
-			+matchs[i].match_num+"'>"
-			+"<li class='li-list'>"
+			"<li class='li-list cursor' onclick='location.href=\"${pageContext.request.contextPath}/match/invite_detail.do?match_num="+matchs[i].match_num+"\"'>"
+				+"<div class='match-info-wrapper'>"
 				+"<div class='main-row'>";
 		if(matchs[i].type==1){
 			itemStr+=
@@ -109,8 +100,9 @@ function createListOrderByDistance(latitude,longitude,matchs){
 					"<span class='match-item'>"+matchs[i].address+"</span>"
 				+"</div>"
 				+"<div class='row'>"
-					+"<span class='match-item'>"+matchs[i].match_date+"</span>"
-					+"<span class='match-item'>"+matchs[i].start_time+"~"+matchs[i].end_time+"</span>"
+					+"<span class='match-item'><i class='far fa-calendar-alt margin-right'></i>"+matchs[i].match_date+"</span>"
+					+"<span class='match-item'><i class='far fa-clock margin-right'></i>"+matchs[i].start_time+"~"+matchs[i].end_time+"</span>"
+				+"</div>"
 				+"</div>"
 				+"<div class='row small-font margin-top margin-btm'>"
 					+"<div class='col club_main'>";
@@ -136,24 +128,40 @@ function createListOrderByDistance(latitude,longitude,matchs){
 						"</span>"
 						+"</div>"
 						+"<div class='col'>"
-							+"<span class='rating'>매너 "+"</span>"
-							+"<span class='star-wrap'>"
+							+"<div class='flex-start'>"
+							+"<span class='rating'>매너</span>"
 								+"<span class='star-rating'>"
 									+"<span style='width:"+matchs[i].manner*20+"%'></span>"
 								+"</span>"
-								+Number(matchs[i].manner*2).toFixed(1)+"<br>"
-							+"<span class='rating'>실력 "+"</span>"
+								+Number(matchs[i].manner*2).toFixed(1)+"</div>"
+							+"<div class='flex-start'>"
+								+"<span class='rating'>실력</span>"
 								+"<span class='star-rating'>"
 									+"<span style='width:"+matchs[i].perform*20+"%'></span>"
 								+"</span>"
-								+Number(matchs[i].perform*2).toFixed(1)+"<br>"
-							+"</span>"
+								+Number(matchs[i].perform*2).toFixed(1)+"</div>"
 							+"연령대" + "<span class='xs-font'>"+matchs[i].club_age+"</span>"
 						+"</div>"			
 					+"</div>"
-				+"</li>"
-				+"</a>";
+				+"</li>";
 	}
+	return itemStr;
+}
+function createListOrderByDistance(latitude,longitude,matchs){
+	var div=document.getElementById("invite-wrapper");
+	var ul=document.createElement("UL");
+	ul.setAttribute("class","ul-list");
+	ul.classList.add('non-border-btm');
+	var itemStr="";
+	
+	for(var i=0;i<matchs.length;i++){
+		
+		matchs[i].distance=getDistanceFromLatLonInKm(latitude,longitude,matchs[i].address_y,matchs[i].address_x);
+	}
+	matchs.sort(function (a,b){
+		return a.distance - b.distance;
+	});
+	itemStr+=createListInHTML(matchs);
 	ul.innerHTML+=itemStr;
 	div.appendChild(ul);
 }
@@ -213,68 +221,7 @@ function moreList(){
 				matches.sort(function (a,b){
 					return a.distance - b.distance;
 				});
-				for(var i=0; i<matches.length; i++){
-					addContent+=
-							"<a class='detail' href='${pageContext.request.contextPath}/match/invite_detail.do?match_num="
-							+matches[i].match_num+"'>"
-							+"<li class='li-list'>"
-								+"<div class='main-row'>"
-									+"<span class='match-item'>"+new Date(matches[i].match_date).format('yy.MM.dd')+"</span>"
-									+"<span class='match-item'>"+matches[i].start_time+"~"+matches[i].end_time+"</span>"
-									+"<span class='match-item'>"+matches[i].address+"</span>"
-									+"<span class='match-item'>";
-						if(matches[i].type==1){
-						addContent+=
-									"축구";
-						}else if(matches[i].type==2){
-						addContent+=			
-									"풋살";
-						}
-						addContent+=
-									"</span>"
-								+"</div>"
-								+"<div class='row small-font'>"
-									+"<div class='col club_main'>";
-						if(matches[i].club_img ==""){
-						addContent+=
-										"<img src='"+"${pageContext.request.contextPath}"+"/resources/images/blank_emblem.png' class='avatar emblem'>";
-						}else if(matches[i].club_img !=""){
-							addContent+=
-								"<img src='"+"${pageContext.request.contextPath}"+"/club/imageView.do?club_num="+matches[i].club_num+"' class='avatar emblem'>"
-						}
-						addContent+=
-										"<span class='club_name'>"+matches[i].club_name+"</span><br>"
-										+"<span class='uniform'>"
-											+"유니폼";
-						if(matches[i].club_color!=""){
-						addContent+=
-											"<span class='color' style='background-color:"+matches[i].club_color+"'></span>";
-						}else if(matches[i].club_color==""){
-						addContent+=
-											" 미정";
-						}
-						addContent+=
-										"</span>"
-										+"</div>"
-										+"<div class='col'>"
-											+"<span class='rating'>매너 "+"</span>"
-											+"<span class='star-wrap'>"
-												+"<span class='star-rating'>"
-													+"<span style='width:"+matches[i].manner*20+"%'></span>"
-												+"</span>"
-												+Number(matches[i].manner*2).toFixed(1)+"<br>"
-											+"<span class='rating'>실력 "+"</span>"
-												+"<span class='star-rating'>"
-													+"<span style='width:"+matches[i].perform*20+"%'></span>"
-												+"</span>"
-												+Number(matches[i].perform*2).toFixed(1)+"<br>"
-											+"</span>"
-											+"주 연령대"+matches[i].club_age
-										+"</div>"			
-									+"</div>"
-								+"</li>"
-								+"</a>";	
-				}
+				addContent+=createListInHTML(matches);
 				$(addContent).appendTo('.ul-list');
 				window.scroll({ top: scrollTop, left: 0, behavior: 'smooth' });
 				if(!matches.length){

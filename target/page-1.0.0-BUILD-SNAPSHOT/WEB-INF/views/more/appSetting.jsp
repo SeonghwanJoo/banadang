@@ -37,8 +37,12 @@
 		<span id="close_mod" class="close_mod">&times;</span>
 		<span class="m-font bold disp-bl align-center">계정 삭제하기</span>
 		<hr>
-		<span class="gray small-font disp-bl margin-top margin-btm">계정을 삭제하면 상대편 평가 및 작성한 경기 정보 제외한 회원 정보,가입 팀 정보, 메시지, 게시글 등의 활동 정보가 삭제됩니다.</span>
-		<span class="disp-bl bold margin-tbm">계정을 삭제하는 사유를 알려주시면 향후 서비스 개선에 큰 도움이 됩니다.</span>
+		<span class="gray small-font disp-bl margin-top margin-btm">
+			계정을 삭제하면 상대팀 평가 및 작성한 경기 정보를 제외한 회원 정보,가입 팀 정보, 메시지, 게시글 등의
+			모든 활동 정보가 삭제됩니다.</span>
+		<span class="disp-bl bold margin-tbm">
+			계정을 삭제하는 사유를 알려주시면 향후 서비스 개선에 큰 도움이 됩니다.
+		</span>
 		<div class="row margin-top padding-left">
 			<input type="text" placeholder="사유 입력" id="reason" name="reason">
 		</div>

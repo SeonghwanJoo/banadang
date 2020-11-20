@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<div class="main-row">
 	<div id="demo" class="carousel slide" data-ride="carousel">
 	
 	  <!-- Indicators -->
@@ -30,11 +29,10 @@
 	  <!-- <a class="carousel-control-prev" href="#demo" data-slide="prev">
 	    <span class="carousel-control-prev-icon"></span>
 	  </a> -->
-	  <a class="carousel-control-next" href="#demo" data-slide="next">
+	  <!-- <a class="carousel-control-next" href="#demo" data-slide="next">
 	    <span class="carousel-control-next-icon"></span>
-	  </a>
+	  </a> -->
 	</div>
-</div>
 
 <c:if test="${empty user_id }">
 <div class="main-row">
@@ -56,7 +54,7 @@
 <div class="margin-top margin-btm">
 	<span class="title-btw">경기 일정</span>
 	<button class="btn_write" id="btn_write" onclick="location.href='${pageContext.request.contextPath}/match/writeForm.do'">
-		<span>매치 작성</span> <span class="material-icons">create</span>
+		<span>매치 작성</span><i class="fas fa-pen margin-left"></i>
 	</button>
 </div>
 <hr class="hr">
@@ -354,61 +352,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
-let matches=new Array();
-<c:forEach items="${match_list}" var="match">
-	var obj={};
-	obj.match_num="${match.match_num}";
-	obj.max="${match.max}";
-	obj.attend="${match.attend}";
-	obj.not_attend="${match.not_attend}";
-	obj.undefined="${match.undefined}";
-	console.log("undefined : "+${match.undefined});
-	matches.push(obj);
-</c:forEach>
- for(var i=0; i<matches.length;i++){
-	
-	var max=matches[i].max;
-	var attend=matches[i].attend;
-	var not_attend=matches[i].not_attend;
-	var not_fixed=matches[i].undefined;
-	console.log("undefined : "+not_fixed);
-	console.log("not_attend : "+not_attend);
-	var match_num=matches[i].match_num;
-	console.log("max/attend/not_attend/undefined/match_num : "+max+"/"+attend+"/"+not_attend+"/"+not_fixed+"/"+match_num);
-	 if(max==0){
-		$('#voted-attend-'+matches[i].match_num).css('background-color','transparent');
-		$('#voted-not_attend-'+matches[i].match_num).css('background-color','transparent');
-		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','transparent');
-	}else if (max==attend){
-		$('#voted-attend-'+matches[i].match_num).css('background-color','#a4d3a6');
-		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#bfbfbf');
-		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#bfbfbf');
-	}else if(max==not_attend){
-		$('#voted-attend-'+matches[i].match_num).css('background-color','#bfbfbf');
-		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#a4d3a6');
-		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#bfbfbf')
-	}else if(max==not_fixed){
-		$('#voted-attend-'+matches[i].match_num).css('background-color','#bfbfbf');
-		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#bfbfbf');
-		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#a4d3a6');
-	}
-	if(attend==0){
-		console.log("attend==0 진입");
-		$('#voted-attend-'+matches[i].match_num).css('background-color','transparent');
-	}
-	if(not_attend==0){
-		console.log("not_attend==0 진입");
-		$('#voted-not_attend-'+matches[i].match_num).css('background-color','transparent');
-	}
-	if(not_fixed==0){
-		console.log("undefined==0 진입");
-		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','transparent');
-	}
- }
-	
-
-
-
 Kakao.init('32776969383e4a77d92f6e18dd233bc5');
 function sendLinkForVote(match_num,club_num,match_date,address,start_time) {
 	    Kakao.Link.sendCustom({
@@ -457,7 +400,56 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 		});
  }
  $(function(){
-
+	 let matches=new Array();
+	 <c:forEach items="${match_list}" var="match">
+	 	var obj={};
+	 	obj.match_num="${match.match_num}";
+	 	obj.max="${match.max}";
+	 	obj.attend="${match.attend}";
+	 	obj.not_attend="${match.not_attend}";
+	 	obj.undefined="${match.undefined}";
+	 	matches.push(obj);
+	 </c:forEach>
+	  for(var i=0; i<matches.length;i++){
+	 	
+	 	var max=matches[i].max;
+	 	var attend=matches[i].attend;
+	 	var not_attend=matches[i].not_attend;
+	 	var not_fixed=matches[i].undefined;
+	 	console.log("undefined : "+not_fixed);
+	 	console.log("not_attend : "+not_attend);
+	 	var match_num=matches[i].match_num;
+	 	console.log("max/attend/not_attend/undefined/match_num : "+max+"/"+attend+"/"+not_attend+"/"+not_fixed+"/"+match_num);
+	 	 if(max==0){
+	 		$('#voted-attend-'+matches[i].match_num).css('background-color','transparent');
+	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','transparent');
+	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','transparent');
+	 	}else if (max==attend){
+	 		$('#voted-attend-'+matches[i].match_num).css('background-color','#a4d3a6');
+	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#bfbfbf');
+	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#bfbfbf');
+	 	}else if(max==not_attend){
+	 		$('#voted-attend-'+matches[i].match_num).css('background-color','#bfbfbf');
+	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#a4d3a6');
+	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#bfbfbf')
+	 	}else if(max==not_fixed){
+	 		$('#voted-attend-'+matches[i].match_num).css('background-color','#bfbfbf');
+	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#bfbfbf');
+	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#a4d3a6');
+	 	}
+	 	if(attend==0){
+	 		console.log("attend==0 진입");
+	 		$('#voted-attend-'+matches[i].match_num).css('background-color','transparent');
+	 	}
+	 	if(not_attend==0){
+	 		console.log("not_attend==0 진입");
+	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','transparent');
+	 	}
+	 	if(not_fixed==0){
+	 		console.log("undefined==0 진입");
+	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','transparent');
+	 	}
+	  }
 	 
 	 
 	 

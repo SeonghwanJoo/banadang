@@ -52,21 +52,17 @@
 			</div>
 			<span class="rating_count">총 ${myClub.rating_count }명의 평가</span>
 			<div class="row">
-				<div class="half_col">
-					<div class="row">
-						매너 
-						<span class="star-rating">
-							<span style="width:${myClub.manner*20}%"></span>
-						</span><fmt:formatNumber value="${myClub.manner*2}" pattern="0.0"/>
-					</div>
+				<div class="col flex-start">
+					매너 
+					<span class="star-rating">
+						<span style="width:${myClub.manner*20}%"></span>
+					</span><fmt:formatNumber value="${myClub.manner*2}" pattern="0.0"/>
 				</div>
-				<div class="half_col">
-					<div class="row">
-						실력  
-						<span class="star-rating">
-							<span style="width:${myClub.perform*20}%"></span>
-						</span><fmt:formatNumber value="${myClub.perform*2}" pattern="0.0"/>
-					</div>
+				<div class="col flex-start">
+					실력  
+					<span class="star-rating">
+						<span style="width:${myClub.perform*20}%"></span>
+					</span><fmt:formatNumber value="${myClub.perform*2}" pattern="0.0"/>
 				</div>			
 			</div>
 		</li>
@@ -87,10 +83,11 @@
 	<c:if test="${myClub.club_auth>4 }">
 	<div class="tab_detail" id="manageMatch" >
 		<c:if test="${!empty away_club }">
-		<h6>상대팀 선택</h6>
+		<h6>초청한 경기(상대팀 선택)</h6>
 		<ul class="ul-list border-top">
 			<c:forEach items="${away_club }" var="away">
 			<li class="li-list">
+				<div class="match-info-wrapper">
 				<div class="main-row gray">
 					<c:if test="${away.type==1 }">
 					<span class="match-item last soccer">
@@ -123,8 +120,9 @@
 					</c:if>
 				</div>
 				<div class="row gray">
-					<span class="match-item"><fmt:formatDate value="${away.match_date}" pattern="MM월 dd일"/></span>
-					<span class="match-item">${away.start_time }~${away.end_time }</span>
+					<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${away.match_date}" pattern="MM월 dd일"/></span>
+					<span class="match-item"><i class="far fa-clock margin-right"></i>${away.start_time }~${away.end_time }</span>
+				</div>
 				</div>
 				<div class="row small-font gray margin-top margin-btm">
 					<div class="col club_main">
@@ -185,40 +183,42 @@
 			<c:forEach items="${home_club }" var="home">
 			<c:if test="${home.club_num != myClub.club_num }">
 			<li class="li-list">
-				<div class="main-row margin-btm gray">
-					<c:if test="${home.type==1 }">
-					<span class="match-item last soccer">
-					축구
-					</span>	
-					</c:if>
-					<c:if test="${home.type==2 }">
-					<span class="match-item last futsal">
-					풋살
-					</span>	
-					</c:if>
-					<span class="match-item">${home.address}</span>
-					<c:if test="${home.acceptance==1 }">
-					<span class="status neutral">대기 중</span>
-					</c:if>
-					<c:if test="${home.acceptance==2 }">
-					<span class="status positive">수락 완료</span>
-					</c:if>
-					<c:if test="${home.acceptance==3 }">
-					<span class="status negative">거절 완료</span>
-					</c:if>
-					<c:if test="${not empty home.cancel }">
-					<span class="status negative full">${home.cancel}팀에 의해 취소됨</span>
-					</c:if>
-					<c:if test="${not empty home.match_req_cancel }">
-					<span class="status negative full" id="${home.request_num }">경기 신청 취소 처리됨</span>
-					</c:if>
-					<c:if test="${empty home.match_req_cancel }">
-					<span class="status negative full" id="${home.request_num }" style="display:none">경기 신청 취소 처리됨</span>
-					</c:if>
-				</div>
-				<div class="row gray">
-					<span class="match-item"><fmt:formatDate value="${home.match_date}" pattern="MM월 dd일"/></span>
-					<span class="match-item">${home.start_time }~${home.end_time }</span>
+				<div class="match-info-wrapper">
+					<div class="main-row margin-btm gray">
+						<c:if test="${home.type==1 }">
+						<span class="match-item last soccer">
+						축구
+						</span>	
+						</c:if>
+						<c:if test="${home.type==2 }">
+						<span class="match-item last futsal">
+						풋살
+						</span>	
+						</c:if>
+						<span class="match-item">${home.address}</span>
+						<c:if test="${home.acceptance==1 }">
+						<span class="status neutral">대기 중</span>
+						</c:if>
+						<c:if test="${home.acceptance==2 }">
+						<span class="status positive">수락 완료</span>
+						</c:if>
+						<c:if test="${home.acceptance==3 }">
+						<span class="status negative">거절 완료</span>
+						</c:if>
+						<c:if test="${not empty home.cancel }">
+						<span class="status negative full">${home.cancel}팀에 의해 취소됨</span>
+						</c:if>
+						<c:if test="${not empty home.match_req_cancel }">
+						<span class="status negative full" id="${home.request_num }">경기 신청 취소 처리됨</span>
+						</c:if>
+						<c:if test="${empty home.match_req_cancel }">
+						<span class="status negative full" id="${home.request_num }" style="display:none">경기 신청 취소 처리됨</span>
+						</c:if>
+					</div>
+					<div class="row gray">
+						<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${home.match_date}" pattern="MM월 dd일"/></span>
+						<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>${home.start_time }~${home.end_time }</span>
+					</div>
 				</div>
 				<div class="row small-font gray margin-top margin-btm">
 					<div class="col club_main">
@@ -279,38 +279,40 @@
 		</ul>
 		</c:if>
 		<c:if test="${not empty recruits }">
-		<h6>용병 신청 선택</h6>
+		<h6>용병 신청자 선택</h6>
 		<ul class="ul-list border-top">
 			<c:forEach items="${recruits }" var="recruit">
 			<li class="li-list">
-				<div class="main-row gray">
-					<c:if test="${recruit.type==1 }">
-					<span class="match-item last soccer">
-					축구
-					</span>	
-					</c:if>
-					<c:if test="${recruit.type==2 }">
-					<span class="match-item last futsal">
-					풋살
-					</span>	
-					</c:if>
-					<span class="match-item">${recruit.address}</span>
-					<c:if test="${recruit.recruit_accept==1 }">
-					<span id="recruit-status-${recruit.recruit_req_num}"class="status neutral">대기 중</span>
-					</c:if>
-					<c:if test="${recruit.recruit_accept==2 }">
-					<span id="recruit-status-${recruit.recruit_req_num}"class="status positive">수락 완료</span>
-					</c:if>
-					<c:if test="${recruit.recruit_accept==3 }">
-					<span id="recruit-status-${recruit.recruit_req_num}"class="status negative">거절 완료</span>
-					</c:if>
-					<c:if test="${not empty recruit.isCanceled }">
-					<span class="status negative full" >${recruit.nickname }님이 용병 신청을 취소하셨습니다.</span>
-					</c:if>
-				</div>
-				<div class="row gray">
-					<span class="match-item"><fmt:formatDate value="${recruit.match_date}" pattern="MM월 dd일"/></span>
-					<span class="match-item">${recruit.start_time }~${recruit.end_time }</span>
+				<div class="match-info-wrapper">
+					<div class="main-row gray">
+						<c:if test="${recruit.type==1 }">
+						<span class="match-item last soccer">
+						축구
+						</span>	
+						</c:if>
+						<c:if test="${recruit.type==2 }">
+						<span class="match-item last futsal">
+						풋살
+						</span>	
+						</c:if>
+						<span class="match-item">${recruit.address}</span>
+						<c:if test="${recruit.recruit_accept==1 }">
+						<span id="recruit-status-${recruit.recruit_req_num}"class="status neutral">대기 중</span>
+						</c:if>
+						<c:if test="${recruit.recruit_accept==2 }">
+						<span id="recruit-status-${recruit.recruit_req_num}"class="status positive">수락 완료</span>
+						</c:if>
+						<c:if test="${recruit.recruit_accept==3 }">
+						<span id="recruit-status-${recruit.recruit_req_num}"class="status negative">거절 완료</span>
+						</c:if>
+						<c:if test="${not empty recruit.isCanceled }">
+						<span class="status negative full" >${recruit.nickname }님이 용병 신청을 취소하셨습니다.</span>
+						</c:if>
+					</div>
+					<div class="row gray">
+						<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${recruit.match_date}" pattern="MM월 dd일"/></span>
+						<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>${recruit.start_time }~${recruit.end_time }</span>
+					</div>
 				</div>
 				<div class="row margin-top">
 					<c:if test="${empty recruit.thumbnail_image }">
@@ -356,17 +358,19 @@
 		<ul class="ul-list border-top">
 			<c:forEach items="${clubRecruits }" var="recruit">
 			<li class="li-list">
-				<div class="main-row margin-btm">
-					<span class="match-item"><span class="gray">모집 마감일</span> <fmt:formatDate value="${recruit.recruit_due}" pattern="yy.MM.dd"/></span>
-					<c:if test="${recruit.clubRecruit_accept==1 }">
-					<span id="club-status-${recruit.clubRecruit_req_num}"class="status neutral">대기 중</span>
-					</c:if>
-					<c:if test="${recruit.clubRecruit_accept==2 }">
-					<span id="club-status-${recruit.clubRecruit_req_num}"class="status positive">수락 완료</span>
-					</c:if>
-					<c:if test="${recruit.clubRecruit_accept==3 }">
-					<span id="club-status-${recruit.clubRecruit_req_num}"class="status negative">거절 완료</span>
-					</c:if>
+				<div class="match-info-wrapper  margin-btm v-padding">
+					<div class="main-row">
+						<span class="match-item margin-left"><span class="gray margin-right"><i class="far fa-calendar-alt margin-right"></i>모집 마감일</span><fmt:formatDate value="${recruit.recruit_due}" pattern="yy.MM.dd"/></span>
+						<c:if test="${recruit.clubRecruit_accept==1 }">
+						<span id="club-status-${recruit.clubRecruit_req_num}"class="status neutral">대기 중</span>
+						</c:if>
+						<c:if test="${recruit.clubRecruit_accept==2 }">
+						<span id="club-status-${recruit.clubRecruit_req_num}"class="status positive">수락 완료</span>
+						</c:if>
+						<c:if test="${recruit.clubRecruit_accept==3 }">
+						<span id="club-status-${recruit.clubRecruit_req_num}"class="status negative">거절 완료</span>
+						</c:if>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col">
@@ -412,58 +416,58 @@
 	</div>
 	</c:if>
 	<div class="tab_detail" id="manageSchedule" style="display: block">
-		<div class="margin-top margin-btm">
+		<div class="border-btm v-padding">
 			<span class="title-btw">경기 일정</span>
-			<button class="btn_write" id="btn_write"
-				onclick="location.href='${pageContext.request.contextPath}/match/writeForm.do'">
+			<button class="btn_write" id="btn_write" onclick="location.href='${pageContext.request.contextPath}/match/writeForm.do'">
 				<span>매치 작성</span><i class="fas fa-pen margin-left"></i>
 			</button>
 		</div>
-		<hr class="hr">
 		<c:if test="${empty match_list }">
-			<div class="row">
-				<div class="empty-wrapper">
-					<i class="far fa-grimace empty"> </i> <span class="gray small-font">예정된
-						경기가 없습니다.</span>
-				</div>
+		<div class="row">
+			<div class="empty-wrapper">
+				<i class="far fa-grimace empty"> </i> <span class="gray small-font">예정된
+					경기가 없습니다.</span>
 			</div>
+		</div>
 		</c:if>
 		<c:if test="${not empty match_list }">
 			<ul class="ul-list">
 				<c:forEach var="match" items="${match_list}">
 					<li class="li-list">
-						<div class="main-row margin-top">
-							<c:if test="${match.type==1 }">
-							<span class="match-item last soccer">
-							축구
-							</span>	
-							</c:if>
-							<c:if test="${match.type==2 }">
-							<span class="match-item last futsal">
-							풋살
-							</span>	
-							</c:if>
-							<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}" target="_blank">
-								<span class="match-item">${match.address}</span>
-							</a>
-							<c:if test="${empty match.cancel }">
-								<c:if test="${myClub.club_auth==4 }">
-								<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',false)">more_vert</span>
+						<div class="match-info-wrapper">
+							<div class="main-row ">
+								<c:if test="${match.type==1 }">
+								<span class="match-item last soccer">
+								축구
+								</span>	
 								</c:if>
-								<c:if test="${myClub.club_auth==5 && (myClub.club_num==match.home || match.home==match.away)}">
-								<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',true)">more_vert</span>
+								<c:if test="${match.type==2 }">
+								<span class="match-item last futsal">
+								풋살
+								</span>	
 								</c:if>
-								<c:if test="${myClub.club_auth==5 && (myClub.club_num==match.away && match.home!=match.away) }">
-								<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',false)">more_vert</span>
+								<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}" target="_blank">
+									<span class="match-item">${match.address}</span>
+								</a>
+								<c:if test="${empty match.cancel }">
+									<c:if test="${myClub.club_auth==4 }">
+									<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',false)">more_vert</span>
+									</c:if>
+									<c:if test="${myClub.club_auth==5 && (myClub.club_num==match.home || match.home==match.away)}">
+									<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',true)">more_vert</span>
+									</c:if>
+									<c:if test="${myClub.club_auth==5 && (myClub.club_num==match.away && match.home!=match.away) }">
+									<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',false)">more_vert</span>
+									</c:if>
 								</c:if>
-							</c:if>
-							<c:if test="${not empty match.cancel }">
-							<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
-							</c:if>
-						</div>
-						<div class="row gray">
-							<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
-							<span class="match-item">${match.start_time }~${match.end_time }</span>
+								<c:if test="${not empty match.cancel }">
+								<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
+								</c:if>
+							</div>
+							<div class="row gray">
+								<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
+								<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>${match.start_time }~${match.end_time }</span>
+							</div>
 						</div>
 						<div class="row small-font margin-top margin-btm">
 							<c:if test="${empty match.home_name }">
@@ -472,62 +476,68 @@
 								</div>
 							</c:if>
 							<c:if test="${not empty match.home_name }">
-								<div class="team-info col cursor"
-									onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.home }'">
-									<div class="row margin-top margin-btm">
-										<div class="centered">
-											<c:if test="${not empty match.home_filename }">
-												<img
-													src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.home}"
-													alt="Avatar" class="avatar emblem">
-											</c:if>
-											<c:if test="${empty match.home_filename  }">
-												<img
-													src="${pageContext.request.contextPath }/resources/images/blank_emblem.png"
-													alt="Avatar" class="avatar emblem">
-											</c:if>
-											<span class="disp-inbl margin-top">${match.home_name}</span>
-										</div>
+							<div class="team-info col cursor"
+								onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.home }'">
+								<div class="row margin-top margin-btm">
+									<div class="centered">
+										<c:if test="${not empty match.home_filename }">
+											<img
+												src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.home}"
+												alt="Avatar" class="avatar emblem">
+										</c:if>
+										<c:if test="${empty match.home_filename  }">
+											<img
+												src="${pageContext.request.contextPath }/resources/images/blank_emblem.png"
+												alt="Avatar" class="avatar emblem">
+										</c:if>
+										<span class="disp-inbl margin-top">${match.home_name}</span>
 									</div>
-									매너 <span class="star-rating"> <span
-										style="width:${match.home_manner*20}%"></span>
-									</span> ${match.home_manner*2}<br> 실력 <span class="star-rating">
-										<span style="width:${match.home_perform*20}%"></span>
-									</span> ${match.home_perform*2}
 								</div>
+								<div class="centered">
+									<span class="margin-right">매너</span> 
+									<span class="star-rating">
+										<span style="width:${match.home_manner*20}%"></span>
+									</span>
+									<span>${match.home_manner*2}</span>
+								</div>
+								<div class="centered">
+									<span class="margin-right">실력</span> 
+									<span class="star-rating">
+										<span style="width:${match.home_perform*20}%"></span>
+									</span>
+									${match.home_perform*2}
+								</div>
+							</div>
 							</c:if>
 							<span class="from-to">VS</span>
-							<c:if test="${match.away != 0 }">
-								<c:if test="${not empty match.away_name }">
-									<div class="team-info col cursor"
-										onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
-										<div class="row margin-top margin-btm">
-											<div class="centered">
-												<c:if test="${not empty match.away_filename }">
-													<img
-														src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}"
-														alt="Avatar" class="avatar emblem">
-												</c:if>
-												<c:if test="${empty match.away_filename  }">
-													<img
-														src="${pageContext.request.contextPath }/resources/images/blank_emblem.png"
-														alt="Avatar" class="avatar emblem">
-												</c:if>
-												<span class="disp-inbl margin-top">${match.away_name}</span>
-											</div>
-										</div>
-										매너 <span class="star-rating"> <span
-											style="width:${match.away_manner*20}%"></span>
-										</span> ${match.away_manner*2}<br> 실력 <span class="star-rating">
-											<span style="width:${match.away_perform*20}%"></span>
-										</span> ${match.away_perform*2}
+							<c:if test="${not empty match.away_name && match.away != 0}">
+							<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
+								<div class="row margin-top margin-btm">
+									<div class="centered">
+										<c:if test="${not empty match.away_filename }">
+										<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}" alt="Avatar" class="avatar emblem">
+										</c:if>
+										<c:if test="${empty match.away_filename  }">
+										<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+										</c:if>
+										<span class="disp-inbl margin-top">${match.away_name}</span>
 									</div>
-								</c:if>
-								<c:if test="${empty match.away_name }">
-									<div class="team-info col">
-										<span class="disp-inbl margin-top">삭제된 팀</span>
-									</div>
-								</c:if>
+								</div>
+								<div class="centered">
+									<span class="margin-right">매너</span> 
+									<span class="star-rating">
+										<span style="width:${match.away_manner*20}%"></span>
+									</span>
+									<span>${match.away_manner*2}</span>
+								</div>
+								<div class="centered">
+									<span class="margin-right">실력</span> 
+									<span class="star-rating">
+										<span style="width:${match.away_perform*20}%"></span>
+									</span>
+									${match.away_perform*2}
+								</div>
+							</div>
 							</c:if>
 							<c:if test="${match.away == 0 }">
 							<div class="team-info col">
@@ -539,8 +549,7 @@
 							</div>
 							</c:if>
 						</div>
-						<div class="cursor"
-							onclick="location.href='${pageContext.request.contextPath}/main/vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num }&home_name=${match.home_name }&away_name=${match.away_name }'">
+						<div class="cursor" onclick="location.href='${pageContext.request.contextPath}/main/vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num }&home_name=${match.home_name }&away_name=${match.away_name }'">
 							<div class="row">
 								<span class="vote-rating">
 									<span class="voted" id="voted-attend-${match.match_num }" style="width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%">
@@ -595,97 +604,103 @@
 			</div>
 		</c:if>
 		<c:if test="${not empty past_match }">
-			<ul class="ul-list non-border-btm">
-				<c:forEach var="match" items="${past_match}">
-					<c:if test="${match.home!=match.away && !fn:contains(match.away_name,'미등록팀')}">
-						<li class="li-list">
-							<div class="main-row margin-top gray">
-								<c:if test="${match.type==1 }">
-								<span class="match-item last soccer">
-								축구
-								</span>	
-								</c:if>
-								<c:if test="${match.type==2 }">
-								<span class="match-item last futsal">
-								풋살
-								</span>	
-								</c:if>
-								<span class="match-item">${match.address}</span>
-								<c:if test="${not empty match.cancel }">
-								<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
-								</c:if>
-							</div>
-							<div class="row gray">
-								<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
-								<span class="match-item">${match.start_time }~${match.end_time }</span>
-							</div>
-							<div class="match-info">
-								<div class="main-row small-font">
-									<div class="team-info col cursor"
-										onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.home }'">
-										<div class="row margin-top margin-btm">
-											<div class="centered">
-												<c:if test="${not empty match.home_filename }">
-													<img
-														src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.home}"
-														alt="Avatar" class="avatar emblem">
-												</c:if>
-												<c:if test="${empty match.home_filename  }">
-													<img
-														src="${pageContext.request.contextPath }/resources/images/blank_emblem.png"
-														alt="Avatar" class="avatar emblem">
-												</c:if>
-												<span class="disp-inbl margin-top">${match.home_name}</span>
-											</div>
-										</div>
-										매너 <span class="star-rating"> <span
-											style="width:${match.home_manner*20}%"></span>
-										</span> ${match.home_manner*2}<br> 실력 <span class="star-rating">
-											<span style="width:${match.home_perform*20}%"></span>
-										</span> ${match.home_perform*2}
-									</div>
-									<span class="from-to">VS</span>
-									<div class="team-info col cursor"
-										onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
-										<div class="row margin-top margin-btm">
-											<div class="centered">
-												<c:if test="${not empty match.away_filename }">
-													<img
-														src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}"
-														alt="Avatar" class="avatar emblem">
-												</c:if>
-												<c:if test="${empty match.away_filename  }">
-													<img
-														src="${pageContext.request.contextPath }/resources/images/blank_emblem.png"
-														alt="Avatar" class="avatar emblem">
-												</c:if>
-												<span class="disp-inbl margin-top">${match.away_name}</span>
-											</div>
-										</div>
-										매너 <span class="star-rating"> <span
-											style="width:${match.away_manner*20}%"></span>
-										</span> ${match.away_manner*2}<br> 실력 <span class="star-rating">
-											<span style="width:${match.away_perform*20}%"></span>
-										</span> ${match.away_perform*2}
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<c:if test="${match.home==match.club_num}">
-									<button class="block margin-top"
-										onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }'">${match.away_name }
-										평점 작성 하기</button>
-								</c:if>
-								<c:if test="${match.away==match.club_num }">
-									<button class="block margin-top"
-										onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }'">${match.home_name }
-										평점 작성 하기</button>
-								</c:if>
-							</div>
-						</li>
+		<ul class="ul-list non-border-btm">
+		<c:forEach var="match" items="${past_match}">
+		<c:if test="${match.home!=match.away && !fn:contains(match.away_name,'미등록팀')}">
+		<li class="li-list">
+			<div class="match-info-wrapper">
+				<div class="main-row margin-top gray">
+					<c:if test="${match.type==1 }">
+					<span class="match-item last soccer">
+					축구
+					</span>	
 					</c:if>
-				</c:forEach>
-			</ul>
+					<c:if test="${match.type==2 }">
+					<span class="match-item last futsal">
+					풋살
+					</span>	
+					</c:if>
+					<span class="match-item">${match.address}</span>
+					<c:if test="${not empty match.cancel }">
+					<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
+					</c:if>
+				</div>
+				<div class="row gray">
+					<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
+					<span class="match-item"><i class="far fa-clock margin-right"></i>${match.start_time }~${match.end_time }</span>
+				</div>
+			</div>
+			<div class="match-info">
+				<div class="main-row small-font margin-top margin-btm">
+					<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.home }'">
+						<div class="row margin-top margin-btm">
+							<div class="centered">
+								<c:if test="${not empty match.home_filename }">
+								<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.home}" alt="Avatar" class="avatar emblem">
+								</c:if>
+								<c:if test="${empty match.home_filename  }">
+								<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+								</c:if>
+								<span class="disp-inbl margin-top">${match.home_name}</span>
+							</div>
+						</div>
+						<div class="centered">
+							<span class="margin-right">매너</span> 
+							<span class="star-rating">
+								<span style="width:${match.home_manner*20}%"></span>
+							</span>
+							<span>${match.home_manner*2}</span>
+						</div>
+						<div class="centered">
+							<span class="margin-right">실력</span> 
+							<span class="star-rating">
+								<span style="width:${match.home_perform*20}%"></span>
+							</span>
+							${match.home_perform*2}
+						</div>
+					</div>
+					<span class="from-to">VS</span>
+					<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
+						<div class="row margin-top margin-btm">
+							<div class="centered">
+								<c:if test="${not empty match.away_filename }">
+								<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}" alt="Avatar" class="avatar emblem">
+								</c:if>
+								<c:if test="${empty match.away_filename  }">
+								<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+								</c:if>
+								<span class="disp-inbl margin-top">${match.away_name}</span>
+							</div>
+						</div>
+						<div class="centered">
+							<span class="margin-right">매너</span> 
+							<span class="star-rating">
+								<span style="width:${match.away_manner*20}%"></span>
+							</span>
+							<span>${match.away_manner*2}</span>
+						</div>
+						<div class="centered">
+							<span class="margin-right">실력</span> 
+							<span class="star-rating">
+								<span style="width:${match.away_perform*20}%"></span>
+							</span>
+							<span>${match.away_perform*2}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<c:if test="${match.home==match.club_num}">
+				<button class="block margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }'">${match.away_name } 평점 작성 하기</button>
+				</c:if>
+				<c:if test="${match.away==match.club_num }">
+				<button class="block margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }'">${match.home_name } 평점 작성 하기</button>
+				</c:if>
+			</div>
+		</li>
+		</c:if>
+		</c:forEach>
+		</ul>
 		</c:if>
 
 	</div>

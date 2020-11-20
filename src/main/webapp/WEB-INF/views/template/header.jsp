@@ -40,15 +40,17 @@
 <div id="team-sel-modal" class="modals">
   <!-- Modal content -->
   	
-	<div class="modals-content">
+	<div class="modals-content align-center">
 	<span class="close_mod">&times;</span>
-		<h6 class="mod-h6">소속팀 설정</h6>
-		<c:if test="${!empty myClubs }">
-		<c:forEach items="${myClubs }" var="club">
-		<hr>
-	  	<span onclick="setMyClub(${club.club_num })" class="margin-top bold disp-bl cursor" >${club.club_name }</span>
-	  	</c:forEach>
-	  	</c:if>
+		<div class="modal-wrapper">
+			<h6 class="mod-h6 margin-top">소속팀 설정</h6>
+			<c:if test="${!empty myClubs }">
+			<c:forEach items="${myClubs }" var="club">
+			<hr>
+		  	<span onclick="setMyClub(${club.club_num })" class="margin-top bold disp-bl cursor" >${club.club_name }</span>
+		  	</c:forEach>
+		  	</c:if>
+	  	</div>
 	</div>
 </div>
 

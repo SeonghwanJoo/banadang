@@ -25,41 +25,27 @@
 	<c:if test="${empty match.cancel }">
 	<li class="li-list">
 		<div class="row">
-			<div class="half_col smaller">
+			<div class="col">
 				<label class="custom">
 					<input type="radio" value="${match.match_num }" name="match_num" checked="checked">
 					<span class="checkmark"></span>
 				</label>
-			</div>
-			<div class="half_col bigger">
-				<div class="row">
-					<span class="match-item">${match.match_date }</span>
-					<span class="match-item">${match.start_time } ~ ${match.end_time }</span>
+				<div class="main-row margin-btm">
+					<c:if test="${match.type==1 }">
+					<span class="match-item last soccer">
+					축구
+					</span>	
+					</c:if>
+					<c:if test="${match.type==2 }">
+					<span class="match-item last futsal">
+					풋살
+					</span>	
+					</c:if>
 					<span class="match-item">${match.address}</span>
 				</div>
-				<div class="main-row">
-					<!-- myClub이 home과 같은 경우 =>vs Away -->
-					<!-- myClub이 away과 같은 경우 =>vs Home -->
-					<!-- 셋다 같은 경우 자체 경기-->
-					<span class="from-to">VS&nbsp;</span>
-					<c:if test="${myClub.club_num == match.home && myClub.club_num != match.away}">
-					<span class="from-to">
-					<c:if test="${match.away != 0 }">
-						${match.away_name}
-					</c:if>
-					<c:if test="${match.away == 0 }">
-						<span>모집중</span>
-					</c:if>
-					</span>
-					</c:if>
-					<c:if test="${myClub.club_num == match.away && myClub.club_num !=match.home}">
-					<span class="from-to">
-						${match.home_name}
-					</span>
-					</c:if>
-					<c:if test="${myClub.club_num == match.away && myClub.club_num == match.home }">
-					<span class="from-to">자체 경기</span>
-					</c:if>
+				<div>
+					<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>${match.match_date}</span>
+					<span class="match-item"><i class="far fa-clock margin-right"></i>${match.start_time }~${match.end_time }</span>
 				</div>
 			</div>
 		</div>

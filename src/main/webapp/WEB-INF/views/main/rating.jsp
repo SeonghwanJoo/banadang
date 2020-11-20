@@ -15,7 +15,8 @@
 </div>
 <div class="blank_div"></div>
 <ul class="ul-list non-border-btm">
-	<li class="li-list">	
+	<li class="li-list">
+		<div class="match-info-wrapper">	
 			<div class="row">
 				<c:if test="${match.type==1 }">
 				<span class="match-item last soccer">
@@ -30,9 +31,10 @@
 				<span class="match-item">${match.address}</span>
 			</div>
 			<div class="row gray">
-				<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
-				<span class="match-item">${match.start_time }~${match.end_time }</span>
+				<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
+				<span class="match-item"><i class="far fa-clock margin-right"></i>${match.start_time }~${match.end_time }</span>
 			</div>
+		</div>
 			<div class="row small-font margin-top margin-btm">
 			<c:if test="${empty match.home_name }">
 			<div class="team-info col">
