@@ -17,10 +17,10 @@
 					<c:if test="${empty myClub.club_img }">
 					<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
 					</c:if>
-					<span class="club_name">${myClub.club_name }</span><br>
+					<span class="disp-inbl margin-top">${myClub.club_name }</span><br>
 				</div>
 				<div class="col club_sub">
-					<span id="club_loc">${myClub.club_address}</span>
+					<span class="disp-inbl margin-top">${myClub.club_address}</span>
 				</div>
 			</div>
 		</li>

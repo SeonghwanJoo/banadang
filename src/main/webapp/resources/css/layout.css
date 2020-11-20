@@ -73,11 +73,21 @@ html{
 	padding-bottom:0.5rem;
 }
 .header-logo{
+	padding:0 0.4rem 0.2rem 0.2rem;
+	font-family: 'Encode Sans Semi Condensed';
+	font-style:oblique;
+	font-size:1.5rem;
+	font-weight:900;
+	display:inline-block;
+	margin-bottom:-1rem;
+	margin-top:-0.5rem;
+	background-color:#a4d3a6;
+	color:#fff;
 }
 .header-wrapper{
 	display:inline-block;
 	margin-right:1rem;
-	padding: 0.7rem 0.2rem 0 1rem;
+	padding: 0.7rem 0.2rem 0 0.3rem;
 	font-size:1.3rem;
 	font-weight:bold;
 }
@@ -447,10 +457,6 @@ div.half_col{
 	background-color: #fff;
 	border-bottom: 1px solid #d4d4d4;
 }
-/* .club_loc{
-	padding-left: 30px;
-	font-size: 14px;
-} */
 
 /*when hovering an item:*/
 .autocomplete-items div:hover {
@@ -569,7 +575,7 @@ input[type=text]:focus, select:focus{
 	padding: 0.3rem;
 	opacity:0.95;
 	border-radius:0.5rem;
-	width: 93%;
+	width: 90%;
 }
 body.body, body.body btn{
     font-family: Noto Sans KR,sans-serif;
@@ -1551,7 +1557,6 @@ img.emblem{
 }
 div.detail-item{
 	padding:8px;
-	padding-left:20px;
 	min-height:3em;
 }
 .tab_detail{

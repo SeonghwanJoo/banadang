@@ -3,16 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="main-row filter-wrapper margin-btm">
-	<div class="filter">
-		<span class="material-icons cursor l-font filter-icon" id="filter">filter_alt</span>
+	<div class="filter cursor"  id="filter">
+		<span class="material-icons cursor l-font filter-icon" >filter_alt</span>
 		<c:if test="${type==1 }">
-		<span>축구</span>
+		<span class="filter-txt">축구</span>
 		</c:if>
 		<c:if test="${type==2 }">
-		<span>풋살</span>
+		<span class="filter-txt">풋살</span>
 		</c:if>
 		<c:if test="${type==3 }">
-		<span>전체</span>
+		<span class="filter-txt">전체</span>
 		</c:if>
 	</div>
 </div>
@@ -54,6 +54,76 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+function createListInHTML(matchs){
+	var itemStr='';
+	for(var i=0;i<matchs.length;i++){
+		
+		itemStr+=
+			"<li class='li-list cursor' onclick='location.href=\"${pageContext.request.contextPath}/member/clubRecruitDetail.do?clubRecruit_num="+matchs[i].clubRecruit_num+"\"'>"
+				+"<div class='match-info-wrapper'>"
+					+"<div class='main-row'>"
+		if(matchs[i].type==1){
+			itemStr+=
+					"<span class='match-item last soccer'>"
+						+"축구"
+					+"</span>";
+		}else if(matchs[i].type==2){
+			itemStr+=
+					"<span class='match-item last futsal'>"
+							+"풋살"
+					+"</span>";
+		}
+		itemStr+=
+					"<span class='match-item'>"+matchs[i].club_address+"</span>"
+				+"</div>"
+				+"<div class='row'>"
+					+"<span class='match-item'><i class='far fa-calendar-alt margin-right'></i>주 활동 요일 "+matchs[i].act_day+" |</span>"
+					+"<span class='match-item'><i class='far fa-clock margin-right'></i>시간대 "+matchs[i].act_time+"</span>"
+				+"</div>"
+				+"</div>"
+				+"<div class='row small-font margin-top margin-btm'>"
+					+"<div class='col club_main'>";
+		if(matchs[i].club_img ==""){
+		itemStr+=	
+						"<img src='"+"${pageContext.request.contextPath}"+"/resources/images/blank_emblem.png' class='avatar emblem'>";
+		}else if(matchs[i].club_img !=""){
+		itemStr+=
+						"<img src='"+"${pageContext.request.contextPath}"+"/club/imageView.do?club_num="+matchs[i].club_num+"' class='avatar emblem'>"
+		}
+		itemStr+=
+						"<span class='club_name'>"+matchs[i].club_name+"</span><br>"
+						+"<span class='uniform'>"
+							+"유니폼";
+		if(matchs[i].club_color!=""){
+		itemStr+=
+							"<span class='color' style='background-color:"+matchs[i].club_color+"'></span>";
+		}else if(matchs[i].club_color==""){
+		itemStr+=
+							" 미정";
+		}
+		itemStr+=
+						"</span>"
+					+"</div>"
+					+"<div class='col'>"
+						+"<div class='flex-start'>"
+						+"<span class='rating'>매너</span>"
+							+"<span class='star-rating'>"
+								+"<span style='width:"+matchs[i].manner*20+"%'></span>"
+							+"</span>"
+							+Number(matchs[i].manner*2).toFixed(1)+"</div>"
+						+"<div class='flex-start'>"
+							+"<span class='rating'>실력</span>"
+							+"<span class='star-rating'>"
+								+"<span style='width:"+matchs[i].perform*20+"%'></span>"
+							+"</span>"
+							+Number(matchs[i].perform*2).toFixed(1)+"</div>"
+						+"연령대"+ "<span class='xs-font'>"+matchs[i].club_age+"</span>"
+					+"</div>"			
+				+"</div>"
+			+"</li>";
+	}
+	return itemStr;
+}
 function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
     function deg2rad(deg) {
         return deg * (Math.PI/180)
@@ -81,76 +151,7 @@ function createListOrderByDistance(latitude,longitude,matchs){
 	matchs.sort(function (a,b){
 		return a.distance - b.distance;
 	});
-	for(var i=0;i<matchs.length;i++){
-		
-		itemStr+=
-			"<a class='detail' href='${pageContext.request.contextPath}/member/clubRecruitDetail.do?clubRecruit_num="
-			+matchs[i].clubRecruit_num+"'>"
-			+"<li class='li-list'>"
-				+"<div class='main-row'>"
-					/* +"<span class='match-item'>주 활동 요일 "+matchs[i].act_day+" | </span>"
-					+"<span class='match-item'>시간대 "+matchs[i].act_time+" | </span>"
-					+"<span class='match-item'>지역 "+matchs[i].club_address+" | </span>"; */
-		if(matchs[i].type==1){
-			itemStr+=
-					"<span class='match-item last soccer'>"
-						+"축구"
-					+"</span>";
-		}else if(matchs[i].type==2){
-			itemStr+=
-					"<span class='match-item last futsal'>"
-							+"풋살"
-					+"</span>";
-		}
-		itemStr+=
-					"<span class='match-item'>"+matchs[i].club_address+"</span>"
-				+"</div>"
-				+"<div class='row'>"
-					+"<span class='match-item'>주 활동 요일 "+matchs[i].act_day+" |</span>"
-					+"<span class='match-item'>시간대 "+matchs[i].act_time+"</span>"
-				+"</div>"
-				+"<div class='row small-font margin-top margin-btm'>"
-					+"<div class='col club_main'>";
-		if(matchs[i].club_img ==""){
-		itemStr+=	
-						"<img src='"+"${pageContext.request.contextPath}"+"/resources/images/blank_emblem.png' class='avatar emblem'>";
-		}else if(matchs[i].club_img !=""){
-		itemStr+=
-						"<img src='"+"${pageContext.request.contextPath}"+"/club/imageView.do?club_num="+matchs[i].club_num+"' class='avatar emblem'>"
-		}
-		itemStr+=
-						"<span class='club_name'>"+matchs[i].club_name+"</span><br>"
-						+"<span class='uniform'>"
-							+"유니폼";
-		if(matchs[i].club_color!=""){
-		itemStr+=
-							"<span class='color' style='background-color:"+matchs[i].club_color+"'></span>";
-		}else if(matchs[i].club_color==""){
-		itemStr+=
-							" 미정";
-		}
-		itemStr+=
-						"</span>"
-					+"</div>"
-					+"<div class='col'>"
-						+"<span class='rating'>매너 "+"</span>"
-						+"<span class='star-wrap'>"
-							+"<span class='star-rating'>"
-								+"<span style='width:"+matchs[i].manner*20+"%'></span>"
-							+"</span>"
-							+Number(matchs[i].manner*2).toFixed(1)+"<br>"
-						+"<span class='rating'>실력 "+"</span>"
-							+"<span class='star-rating'>"
-								+"<span style='width:"+matchs[i].perform*20+"%'></span>"
-							+"</span>"
-							+Number(matchs[i].perform*2).toFixed(1)+"<br>"
-						+"</span>"
-						+"연령대"+ "<span class='xs-font'>"+matchs[i].club_age+"</span>"
-					+"</div>"			
-				+"</div>"
-			+"</li>"
-			+"</a>";
-	}
+	itemStr+=createListInHTML(matchs);
 	ul.innerHTML+=itemStr;
 	div.appendChild(ul);
 }
@@ -187,70 +188,7 @@ function moreList(){
 				var addContent="";
 				var matches=new Array();
 				matches=data.matches;
-				for(var i=0; i<matches.length; i++){
-					addContent+=
-					addContent+=
-						"<a class='detail' href='${pageContext.request.contextPath}/member/clubRecruitDetail.do?clubRecruit_num="
-						+matches[i].clubRecruit_num+"'>"
-						+"<li class='li-list'>"
-							+"<div class='main-row'>"
-								+"<span class='match-item'>주 활동 요일 "+matches[i].act_day+" | </span>"
-								+"<span class='match-item'>시간대 "+matches[i].act_time+" | </span>"
-								+"<span class='match-item'>지역 "+matches[i].club_address+" | </span>"
-								+"<span class='match-item'>";
-					if(matches[i].type.includes('1')){
-					addContent+=
-								"축구";
-					}
-					if(matches[i].type.includes('2')){
-					addContent+=			
-								"풋살";
-					}
-					addContent+=
-								"</span>"
-							+"</div>"
-							+"<div class='row small-font'>"
-								+"<div class='col club_main'>";
-					if(matches[i].club_img ==""){
-					addContent+=	
-									"<img src='"+"${pageContext.request.contextPath}"+"/resources/images/blank_emblem.png' class='avatar emblem'>";
-					}else if(matches[i].club_img !=""){
-					addContent+=
-									"<img src='"+"${pageContext.request.contextPath}"+"/club/imageView.do?club_num="+matches[i].club_num+"' class='avatar emblem'>"
-					}
-					addContent+=
-									"<span class='club_name'>"+matches[i].club_name+"</span><br>"
-									+"<span class='uniform'>"
-										+"유니폼";
-					if(matches[i].club_color!=""){
-					addContent+=
-										"<span class='color' style='background-color:"+matches[i].club_color+"'></span>";
-					}else if(matches[i].club_color==""){
-					addContent+=
-										" 미정";
-					}
-					addContent+=
-									"</span>"
-								+"</div>"
-								+"<div class='col'>"
-									+"<span class='rating'>매너 "+"</span>"
-									+"<span class='star-wrap'>"
-										+"<span class='star-rating'>"
-											+"<span style='width:"+matches[i].manner*20+"%'></span>"
-										+"</span>"
-										+Number(matches[i].manner*2).toFixed(1)+"<br>"
-									+"<span class='rating'>실력 "+"</span>"
-										+"<span class='star-rating'>"
-											+"<span style='width:"+matches[i].perform*20+"%'></span>"
-										+"</span>"
-										+Number(matches[i].perform*2).toFixed(1)+"<br>"
-									+"</span>"
-									+"주 연령대"+matches[i].club_age
-								+"</div>"			
-							+"</div>"
-						+"</li>"
-						+"</a>";
-				}
+				addContent+=createListInHTML(matches);
 				$(addContent).appendTo('.ul-list');
 				window.scroll({ top: scrollTop, left: 0, behavior: 'smooth' });
 				if(!matches.length){

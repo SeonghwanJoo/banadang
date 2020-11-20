@@ -10,7 +10,7 @@
 	</c:if>
 	<div class="header-wrapper">
 	    <c:if test="${title eq 'main'}">
-	    <img src="${pageContext.request.contextPath }/resources/images/logo.jpg" class="header-logo">
+	    <span class="header-logo">Gentlepro</span>
 	    </c:if>
 	    <c:if test="${title ne 'main' }">
 	    ${title}

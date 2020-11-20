@@ -37,14 +37,14 @@
 			<hr class="hr">
 			<div class="row">
 				<c:forEach items="${atdance }" var="atdance">
-					<div class="detail-item col-sm-6 col-lg-3">
+					<div class="detail-item  col-6 col-lg-3d">
 						<c:if test="${empty atdance.thumbnail_image }">
 						<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
 						</c:if>
 						<c:if test="${not empty atdance.thumbnail_image }">
 						<img src="${atdance.thumbnail_image }" alt="Avatar" class="avatar">
 						</c:if>
-						<span>${atdance.nickname}</span>
+						<span class="disp-inbl margin-top">${atdance.nickname}</span>
 					</div>
 				</c:forEach>
 			</div>
@@ -66,14 +66,14 @@
 			<hr class="hr">
 			<div class="row">
 				<c:forEach items="${no_atdance }" var="no_atdance">
-					<div class="detail-item col-sm-6 col-lg-3">
+					<div class="detail-item col-6 col-lg-3">
 						<c:if test="${empty no_atdance.thumbnail_image }">
 						<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
 						</c:if>
 						<c:if test="${not empty no_atdance.thumbnail_image }">
 						<img src="${no_atdance.thumbnail_image }" alt="Avatar" class="avatar">
 						</c:if>
-						<span >${no_atdance.nickname}</span>
+						<span class="disp-inbl margin-top">${no_atdance.nickname}</span>
 					</div>
 				</c:forEach>
 			</div>
@@ -95,14 +95,14 @@
 			<hr class="hr">
 			<div class="row">
 				<c:forEach items="${undefined_atdance }" var="undefined_atdance">
-					<div class="detail-item col-sm-6 col-lg-3">
+					<div class="detail-item  col-6 col-lg-3">
 						<c:if test="${empty undefined_atdance.thumbnail_image }">
 						<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
 						</c:if>
 						<c:if test="${not empty undefined_atdance.thumbnail_image }">
 						<img src="${undefined_atdance.thumbnail_image }" alt="Avatar" class="avatar">
 						</c:if>
-						<span>${undefined_atdance.nickname}</span>
+						<span class="disp-inbl margin-top">${undefined_atdance.nickname}</span>
 					</div>
 				</c:forEach>
 			</div>
@@ -133,7 +133,7 @@
 						<c:if test="${not empty not_voted.thumbnail_image }">
 						<img src="${not_voted.thumbnail_image }" alt="Avatar" class="avatar">
 						</c:if>
-						<span>${not_voted.nickname}</span>
+						<span class="disp-inbl margin-top">${not_voted.nickname}</span>
 					</div>
 				</c:forEach>
 			</div>

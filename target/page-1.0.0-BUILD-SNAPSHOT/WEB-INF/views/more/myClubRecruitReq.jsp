@@ -18,33 +18,35 @@
 	<c:if test="${not empty matches }">
 	<c:forEach items="${matches }" var="match">
 	<li class="li-list">
-		<div class="main-row">
-			<c:if test="${match.type==1 }">
-			<span class="match-item last soccer">
-			축구
-			</span>	
-			</c:if>
-			<c:if test="${match.type==2 }">
-			<span class="match-item last futsal">
-			풋살
-			</span>	
-			</c:if>
-			<span class="match-item small-font">지역 ${match.club_address }</span>
-			<c:if test="${match.clubRecruit_accept==1 }">
-			<span class="status neutral">대기 중</span>
-			</c:if>
-			<c:if test="${match.clubRecruit_accept==2 }">
-			<span class="status positive">수락 완료</span>
-			</c:if>
-			<c:if test="${match.clubRecruit_accept==3 }">
-			<span class="status negative">거절 완료</span>
-			</c:if>
-			<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.clubRecruit_req_num})">more_vert</span>
-			<span class="status negative full" id="recruit-cancel-${match.clubRecruit_req_num }" style="display:none">팀 가입 신청 취소 완료</span>
-		</div>
-		<div class="row gray">
-			<span class="match-item">주 활동 요일 ${match.act_day } | </span>
-			<span class="match-item">시간대 ${match.act_time}</span>
+		<div class="match-info-wrapper">
+			<div class="main-row">
+				<c:if test="${match.type==1 }">
+				<span class="match-item last soccer">
+				축구
+				</span>	
+				</c:if>
+				<c:if test="${match.type==2 }">
+				<span class="match-item last futsal">
+				풋살
+				</span>	
+				</c:if>
+				<span class="match-item small-font">지역 ${match.club_address }</span>
+				<c:if test="${match.clubRecruit_accept==1 }">
+				<span class="status neutral">대기 중</span>
+				</c:if>
+				<c:if test="${match.clubRecruit_accept==2 }">
+				<span class="status positive">수락 완료</span>
+				</c:if>
+				<c:if test="${match.clubRecruit_accept==3 }">
+				<span class="status negative">거절 완료</span>
+				</c:if>
+				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.clubRecruit_req_num})">more_vert</span>
+				<span class="status negative full" id="recruit-cancel-${match.clubRecruit_req_num }" style="display:none">팀 가입 신청 취소 완료</span>
+			</div>
+			<div class="row gray">
+				<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>주 활동 요일 ${match.act_day } | </span>
+				<span class="match-item"><i class="far fa-clock margin-right"></i>시간대 ${match.act_time}</span>
+			</div>
 		</div>
 		<div class="row small-font gray margin-top">
 			<div class="col club_main">

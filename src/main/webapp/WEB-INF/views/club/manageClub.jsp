@@ -88,7 +88,7 @@
 			<c:forEach items="${away_club }" var="away">
 			<li class="li-list">
 				<div class="match-info-wrapper">
-				<div class="main-row gray">
+				<div class="main-row ">
 					<c:if test="${away.type==1 }">
 					<span class="match-item last soccer">
 					축구
@@ -119,12 +119,12 @@
 					<span class="status negative full" id="${away.request_num }" style="display:none">${away.club_name }팀에 의해 경기 신청 취소 처리됨</span>
 					</c:if>
 				</div>
-				<div class="row gray">
+				<div class="row ">
 					<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${away.match_date}" pattern="MM월 dd일"/></span>
 					<span class="match-item"><i class="far fa-clock margin-right"></i>${away.start_time }~${away.end_time }</span>
 				</div>
 				</div>
-				<div class="row small-font gray margin-top margin-btm">
+				<div class="row small-font  margin-top margin-btm">
 					<div class="col club_main">
 						<c:if test="${!empty away.club_img }">
 							<img src="imageView.do?club_num=${away.club_num }" class="avatar emblem">
@@ -184,7 +184,7 @@
 			<c:if test="${home.club_num != myClub.club_num }">
 			<li class="li-list">
 				<div class="match-info-wrapper">
-					<div class="main-row margin-btm gray">
+					<div class="main-row margin-btm ">
 						<c:if test="${home.type==1 }">
 						<span class="match-item last soccer">
 						축구
@@ -215,12 +215,12 @@
 						<span class="status negative full" id="${home.request_num }" style="display:none">경기 신청 취소 처리됨</span>
 						</c:if>
 					</div>
-					<div class="row gray">
+					<div class="row ">
 						<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${home.match_date}" pattern="MM월 dd일"/></span>
 						<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>${home.start_time }~${home.end_time }</span>
 					</div>
 				</div>
-				<div class="row small-font gray margin-top margin-btm">
+				<div class="row small-font  margin-top margin-btm">
 					<div class="col club_main">
 						<c:if test="${!empty home.club_img }">
 							<img src="imageView.do?club_num=${home.club_num}"  class="avatar emblem">
@@ -284,7 +284,7 @@
 			<c:forEach items="${recruits }" var="recruit">
 			<li class="li-list">
 				<div class="match-info-wrapper">
-					<div class="main-row gray">
+					<div class="main-row ">
 						<c:if test="${recruit.type==1 }">
 						<span class="match-item last soccer">
 						축구
@@ -309,7 +309,7 @@
 						<span class="status negative full" >${recruit.nickname }님이 용병 신청을 취소하셨습니다.</span>
 						</c:if>
 					</div>
-					<div class="row gray">
+					<div class="row ">
 						<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${recruit.match_date}" pattern="MM월 dd일"/></span>
 						<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>${recruit.start_time }~${recruit.end_time }</span>
 					</div>
@@ -360,7 +360,7 @@
 			<li class="li-list">
 				<div class="match-info-wrapper  margin-btm v-padding">
 					<div class="main-row">
-						<span class="match-item margin-left"><span class="gray margin-right"><i class="far fa-calendar-alt margin-right"></i>모집 마감일</span><fmt:formatDate value="${recruit.recruit_due}" pattern="yy.MM.dd"/></span>
+						<span class="match-item margin-left"><span class=" margin-right"><i class="far fa-calendar-alt margin-right"></i>모집 마감일</span><fmt:formatDate value="${recruit.recruit_due}" pattern="yy.MM.dd"/></span>
 						<c:if test="${recruit.clubRecruit_accept==1 }">
 						<span id="club-status-${recruit.clubRecruit_req_num}"class="status neutral">대기 중</span>
 						</c:if>
@@ -425,7 +425,7 @@
 		<c:if test="${empty match_list }">
 		<div class="row">
 			<div class="empty-wrapper">
-				<i class="far fa-grimace empty"> </i> <span class="gray small-font">예정된
+				<i class="far fa-grimace empty"> </i> <span class=" small-font">예정된
 					경기가 없습니다.</span>
 			</div>
 		</div>
@@ -464,7 +464,7 @@
 								<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
 								</c:if>
 							</div>
-							<div class="row gray">
+							<div class="row ">
 								<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
 								<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>${match.start_time }~${match.end_time }</span>
 							</div>
@@ -543,7 +543,7 @@
 							<div class="team-info col">
 								<div class="row margin-top">
 									<div class="margin-top centered">
-										<span class="disp-bl gray">모집 중</span>
+										<span class="disp-bl ">모집 중</span>
 									</div>
 								</div>
 							</div>
@@ -598,7 +598,7 @@
 		<c:if test="${empty past_match }">
 			<div class="row">
 				<div class="empty-wrapper">
-					<i class="far fa-grimace empty"> </i> <span class="gray small-font">최근
+					<i class="far fa-grimace empty"> </i> <span class=" small-font">최근
 						2주간 경기가 없습니다.</span>
 				</div>
 			</div>
@@ -609,7 +609,7 @@
 		<c:if test="${match.home!=match.away && !fn:contains(match.away_name,'미등록팀')}">
 		<li class="li-list">
 			<div class="match-info-wrapper">
-				<div class="main-row margin-top gray">
+				<div class="main-row margin-top ">
 					<c:if test="${match.type==1 }">
 					<span class="match-item last soccer">
 					축구
@@ -625,7 +625,7 @@
 					<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
 					</c:if>
 				</div>
-				<div class="row gray">
+				<div class="row ">
 					<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
 					<span class="match-item"><i class="far fa-clock margin-right"></i>${match.start_time }~${match.end_time }</span>
 				</div>
@@ -702,7 +702,6 @@
 		</c:forEach>
 		</ul>
 		</c:if>
-
 	</div>
 	<div class="tab_detail" id="manageMember" >
 		<div class="main-row">

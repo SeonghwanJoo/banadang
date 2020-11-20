@@ -18,46 +18,48 @@
 	<c:if test="${not empty matches }">
 	<c:forEach items="${matches }" var="match">
 	<li class="li-list">
-		<div class="main-row margin-btm">
-			<c:if test="${match.type==1 }">
-			<span class="match-item last soccer">
-			축구
-			</span>	
-			</c:if>
-			<c:if test="${match.type==2 }">
-			<span class="match-item last futsal">
-			풋살
-			</span>	
-			</c:if>
-			<span class="match-item">${match.address }</span>
-			<c:if test="${match.recruit_accept==1 }">
-			<span class="status neutral">대기 중</span>
-			</c:if>
-			<c:if test="${match.recruit_accept==2 }">
-			<span class="status positive">수락 완료</span>
-			</c:if>
-			<c:if test="${match.recruit_accept==3 }">
-			<span class="status negative">거절 완료</span>
-			</c:if>
-			<c:if test="${empty match.isCanceled }">
-			<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.recruit_req_num},${match.recruit_accept })">more_vert</span>
-			</c:if>
-			<c:if test="${not empty match.isCanceled }">
-			<span class="status negative full" id="recruit-cancel-${match.recruit_req_num }" >용병 신청 취소 완료</span>
-			</c:if>
-			<c:if test="${not empty match.cancel }">
-			<span class="status negative full" id="match-cancel-${match.recruit_req_num }" >${match.cancel }팀에 의해 경기 취소됨</span>
-			</c:if>
-			<c:if test="${empty match.isCanceled }">
-			<span class="status negative full" id="recruit-cancel-${match.recruit_req_num }" style="display:none">용병 신청 취소 완료</span>
-			</c:if>
-			<c:if test="${empty match.cancel }">
-			<span class="status negative full" id="match-cancel-${match.recruit_req_num }" style="display:none">${match.cancel }팀에 의해 경기 취소됨</span>
-			</c:if>
-		</div>
-		<div class="row gray">
-			<span class="match-item"><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
-			<span class="match-item">${match.start_time }~${match.end_time }</span>
+		<div class="match-info-wrapper">
+			<div class="main-row">
+				<c:if test="${match.type==1 }">
+				<span class="match-item last soccer">
+				축구
+				</span>	
+				</c:if>
+				<c:if test="${match.type==2 }">
+				<span class="match-item last futsal">
+				풋살
+				</span>	
+				</c:if>
+				<span class="match-item">${match.address }</span>
+				<c:if test="${match.recruit_accept==1 }">
+				<span class="status neutral">대기 중</span>
+				</c:if>
+				<c:if test="${match.recruit_accept==2 }">
+				<span class="status positive">수락 완료</span>
+				</c:if>
+				<c:if test="${match.recruit_accept==3 }">
+				<span class="status negative">거절 완료</span>
+				</c:if>
+				<c:if test="${empty match.isCanceled }">
+				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.recruit_req_num},${match.recruit_accept })">more_vert</span>
+				</c:if>
+				<c:if test="${not empty match.isCanceled }">
+				<span class="status negative full" id="recruit-cancel-${match.recruit_req_num }" >용병 신청 취소 완료</span>
+				</c:if>
+				<c:if test="${not empty match.cancel }">
+				<span class="status negative full" id="match-cancel-${match.recruit_req_num }" >${match.cancel }팀에 의해 경기 취소됨</span>
+				</c:if>
+				<c:if test="${empty match.isCanceled }">
+				<span class="status negative full" id="recruit-cancel-${match.recruit_req_num }" style="display:none">용병 신청 취소 완료</span>
+				</c:if>
+				<c:if test="${empty match.cancel }">
+				<span class="status negative full" id="match-cancel-${match.recruit_req_num }" style="display:none">${match.cancel }팀에 의해 경기 취소됨</span>
+				</c:if>
+			</div>
+			<div class="row">
+				<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
+				<span class="match-item"><i class="far fa-clock margin-right"></i>${match.start_time }~${match.end_time }</span>
+			</div>
 		</div>
 		<div class="row small-font gray">
 			<div class="col club_main">

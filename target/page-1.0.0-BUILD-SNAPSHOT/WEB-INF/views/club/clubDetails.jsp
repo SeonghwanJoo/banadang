@@ -45,14 +45,14 @@
 			</div>
 			<span class="rating_count">총 ${club.rating_count }명의 평가</span>
 			<div class="row small-font gray">
-				<div class="col">
-					매너 
+				<div class="col flex-start">
+					<span>매너</span> 
 					<span class="star-rating">
 						<span style="width:${club.manner*20}%"></span>
 					</span><fmt:formatNumber value="${club.manner*2}" pattern="0.0"/>
 				</div>
-				<div class="col">
-					실력  
+				<div class="col flex-start">
+					<span>실력</span>  
 					<span class="star-rating">
 						<span style="width:${club.perform*20}%"></span>
 					</span><fmt:formatNumber value="${club.perform*2}" pattern="0.0"/>
@@ -66,22 +66,22 @@
 		<c:forEach items="${ratings }" var="rating">
 		<li class="li-list">
 			<div class="main-row">
-				<span class="match-item">${rating.match_date}</span>
+				<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>${rating.match_date}</span>
 				<span class="match-item">${rating.address}</span>
 				<span>매치의 평가</span>
 			</div>
 			<div class="row small-font gray">
-				<div class="col">
-				<span class='rating'>매너</span>
-					<span class='star-rating'><span style='width:${rating.manner*20 }%'></span>
-				</span>
-				<fmt:formatNumber value="${rating.manner*2}" pattern="0.0" />
+				<div class="col flex-start">
+					<span class='rating'>매너</span>
+						<span class='star-rating'><span style='width:${rating.manner*20 }%'></span>
+					</span>
+					<fmt:formatNumber value="${rating.manner*2}" pattern="0.0" />
 				</div>
-				<div class="col">
-				<span class='rating'>실력</span>
-					<span class='star-rating'><span style='width:${rating.perform*20 }%'></span>
-				</span>
-				<fmt:formatNumber value="${rating.perform*2}" pattern="0.0" /><br>
+				<div class="col flex-start">
+					<span class='rating'>실력</span>
+						<span class='star-rating'><span style='width:${rating.perform*20 }%'></span>
+					</span>
+					<fmt:formatNumber value="${rating.perform*2}" pattern="0.0" /><br>
 				</div>
 			</div>
 			<div class="row">

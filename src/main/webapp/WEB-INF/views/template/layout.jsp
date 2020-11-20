@@ -17,6 +17,8 @@
 .star-rating span{ background-position:left bottom; line-height:0; vertical-align:top; }
 
 </style>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@900&display=swap" rel="stylesheet">
 <!-- Google icon -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- Latest compiled and minified CSS -->
