@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
-		<a href="#" onclick="history.go(-1)">
+		<a onclick="location.href=document.referrer">
 		<span class="material-icons" id="cancel" >close</span>
 		</a>
 		<div class="topnav-centered">

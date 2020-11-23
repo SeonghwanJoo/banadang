@@ -47,7 +47,7 @@
 	
 }
 html{
-	font-size:14px;
+	font-size:15px;
 	overflow-x:hidden;
 }
 /* noto-sans-kr-regular - korean */
@@ -64,14 +64,7 @@ html{
        url('../fonts/noto-sans-kr-v12-korean-regular.svg#NotoSansKR') format('svg'); /* Legacy iOS */
 }
 /* Add a black background color to the top navigation */
-.topnav {
-	position: relative;
-	overflow: hidden;
-	background-color:#fff;
-	color:#000;
-	border-bottom:1px solid #ccc;
-	padding-bottom:0.5rem;
-}
+
 .header-logo{
 	padding:0 0.4rem 0.2rem 0.2rem;
 	font-family: 'Encode Sans Semi Condensed';
@@ -87,7 +80,7 @@ html{
 .header-wrapper{
 	display:inline-block;
 	margin-right:1rem;
-	padding: 0.7rem 0.2rem 0 0.3rem;
+	padding: 0.1rem 0.2rem 0 0.3rem;
 	font-size:1.3rem;
 	font-weight:bold;
 }
@@ -96,16 +89,24 @@ div.row{
 	margin-left:0;
 }
 /* Style the links inside the navigation bar */
-.topnav a,.topnav a:visited,#myTopnav a {
-	color:#000;
-	text-align: center;
-	padding: 2rem 1rem 0 1rem; 
-	text-decoration: none;
-	font-size: 1.2rem;
-}
+
 .fixed_top .topnav-right{
-    margin-right: 1rem;
+    position:absolute;
+    right:1rem;
+    top:1.5rem;
     font-size: 2rem;
+}
+.fixed_top .topnav-right-main{
+    position:absolute;
+    right:1rem;
+    top:-0.3rem;
+    font-size: 2rem;
+}
+.topnav-right a{
+	position:absolute;
+	top:-1rem;
+	right:0;
+	
 }
 .fixed_top .topnav-right a:hover{
 	background-color:#fff;
@@ -116,37 +117,31 @@ div.row{
 	color:#b5b5b5;
 }
 
-/* Change the color of links on hover */
-/* .topnav a:hover, div.topnav-right a:hover {
-	background-color: #000;
-	color: #FFF;
-} 
+
 
 /* Add a color to the active/current link */
-.topnav a.active .tapnav-right a:active{
-	color: #fff;
-}
+
 .cursor, li.cursor{
 	cursor:pointer;
 }
 
 /* Centered section inside the top navigation */
-.topnav-centered a.active {
+.fixed_top a.active {
 	float: none;
 	position: absolute;
-	top: 50%;
+	top: 0.5rem;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	text-decoration:none;
 	font-weight:bold;
 	font-size: 1.2rem;
+	text-align:center;
 }
-
+.topnav-centered{
+	height:1rem;
+}
 
 /* Right-aligned section inside the top navigation */
-.topnav-right {
-	float: right;
-}
 .topnav-right a:hover{
 	background-color:#FFF;
 }
@@ -155,73 +150,7 @@ div.row{
 }
 
 
-/* Hide the link that should open and close the topnav on small screens */
-.topnav .icon {
-	display: none;
-}
-/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
-@media screen and (max-width: 990px) {
-	.topnav a.icon {
-		float: left;
-		display: block;
-		font-size: 30px;
-		background:none;
-	}
-	.topnav .headerLink {
-		display: none;
-	}
-}
-/* ((((((((((((((((((((((sidebar-start))))))))))))))))))*/
-/* The Overlay (background) */
-.overlay {
-	/* Height & width depends on how you want to reveal the overlay (see JS below) */
-	height: 100%;
-	width: 0;
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	left: 0;
-	top: 0;
-	background-color: rgb(0, 0, 0); /* Black fallback color */
-	background-color: rgba(0, 0, 0, 0.9); /* Black w/opacity */
-	overflow-x: hidden; /* Disable horizontal scroll */
-	transition: 0.2s;
-	/* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
-}
 
-/* Position the content inside the overlay */
-.overlay-content {
-	position: relative;
-	top: 25%; /* 25% from the top */
-	width: 100%; /* 100% width */
-	text-align: center; /* Centered text/links */
-	margin-top: 30px;
-	/* 30px top margin to avoid conflict with the close button on smaller screens */
-}
-
-/* The navigation links inside the overlay */
-.overlay a {
-	padding: 8px;
-	text-decoration: none;
-	font-size: 36px;
-	color: #818181;
-	display: block; /* Display block instead of inline */
-	transition: 0.3s; /* Transition effects on hover (color) */
-	overflow: hidden;
-}
-
-
-/* When you mouse over the navigation links, change their color */
-.overlay a:hover, .overlay a:focus {
-	color: #f1f1f1;
-}
-
-/* Position the close button (top right corner) */
-.overlay .closebtn {
-	position: absolute;
-	top: 20px;
-	right: 45px;
-	font-size: 60px;
-}
 
 /* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
 @media screen and (max-height: 450px) {
@@ -346,16 +275,16 @@ div.team-info.cursor{
 	display:inline-block; 
 	height:2.5rem;
 	background-color:#f2f2f2;
-	border-radius:0.3rem;
+	border-radius:0.2rem;
 }
 .vote-rating .voted {
 	background-color:#bfbfbf;
 	
 }
 .vote-label{
-	width:5rem;
-	padding:5px;
-	margin-right:10px;
+	position:absolute;
+	left:0.7rem;
+	top:0.7rem;
 	display:inline-block;
 }
 .vote-rating .person{
@@ -409,17 +338,20 @@ div.half_col{
 	display:none;
 	margin-left:5px;
 }
-.person{
+/* .person{
 	position:absolute;
-	top:10px;
+	top:0.7rem;
 	right:10%;
+} */
+.vote-wrapper{
+	position:absolute;
+	top:0.7rem;
+	right:0.7rem;
+	display:flex;
+	
 }
 .vote_num{
 	color:#7f7f7f;
-	font-size:inherit;
-	position:absolute;
-	top:10px;
-	right:8%;
 }
 
 .btn-group {
@@ -719,10 +651,6 @@ body.body, body.body btn{
 .margin-top, span.margin-top, li .margin-top{
 	margin-top:0.5rem;
 }
-.topnav span.align{
-	position:absolute;
-	top:1.4rem;
-}
 .neutral{background-color:#878787;}
 .positive{background-color:#a4d3a6;}
 .positive-color{color:#a4d3a6;}
@@ -897,10 +825,10 @@ body.body, body.body btn{
   background-color: #FFFFFF;
   position:fixed;
   display:block;
-  left:1%;
-  right:1%;
   z-index:50;
   height:3rem;
+  left: 0.1%;
+  right: 0.1%;
   margin:0 auto;
   font-size:18px;
   border-bottom: 1px solid #d4d4d4;
@@ -920,11 +848,23 @@ a:visited { color: #a0a0a0; text-decoration: none;}
 a:hover, div.col a:hover { color:#a0a0a0;text-decoration: none; }
 .fixed_top a{
 	cursor:pointer;
+	height:0;
+	display:inline-block;
 }
-#submit, .fixed_top span.more{
+
+#submit{
 	position:absolute;
-	right:5%;
-	top:0rem;
+	right:1rem;
+	top:0.5rem;
+	margin:2px;
+	border: none;
+	background:transparent;
+	font-weight:bold;
+}
+.fixed_top span.more{
+	position:absolute;
+	right:1rem;
+	top:0.2rem;
 	margin:2px;
 	border: none;
 	background:transparent;
@@ -1359,10 +1299,10 @@ button.small-font{
 .m-font, .main-row span.m-font{
 	font-size:1.2rem;
 }
-.l-font,.topnav span.l-font, .main-row .l-font{
+.l-font, .main-row .l-font{
 	font-size:2rem;
 }
-.xl-font, .fixed_top span.xl-font,.topnav span.xl-font, .filter .xl-font{
+.xl-font, .fixed_top span.xl-font, .filter .xl-font{
 	font-size:2.5rem;
 }
 .filter-icon{
@@ -1386,7 +1326,7 @@ button.small-font{
 .sel-team{
 	position:relative;
 	display:inline-block;
-	margin:0.9rem 1.5rem 0rem 1rem;
+	margin:0 1.5rem 0rem 1rem;
 	font-size:1.2rem;
 	font-weight:bold;
 	cursor:pointer;
@@ -1415,11 +1355,14 @@ button.small-font{
 	margin-top:0.5rem;
 	display:block;
 }
+div.tab-row.bottom-padding{
+	padding:0.1rem 0;
+}
 div.col .bottom-icon {
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: 2.5em;  /* Preferred icon size */
+  font-size: 1.7rem;  /* Preferred icon size */
   display: block;
   line-height: 1;
   text-transform: none;
@@ -1428,7 +1371,6 @@ div.col .bottom-icon {
   white-space: nowrap;
   direction: ltr;
   margin-bottom:-0.4rem;
-  padding:0;
   color:inherit;
 
   /* Support for all WebKit browsers. */
@@ -1782,6 +1724,7 @@ button.chip-btn{
 .padding-right{
 	padding-right:0.5rem;
 }
+
 
 .chip{
   display: inline-block;

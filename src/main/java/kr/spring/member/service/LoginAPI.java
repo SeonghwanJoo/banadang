@@ -82,6 +82,7 @@ public class LoginAPI {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            return "errors";
         } 
         
         return access_Token;
@@ -98,7 +99,8 @@ public class LoginAPI {
             //    요청에 필요한 Header에 포함될 내용
             conn.setRequestProperty("Authorization", "Bearer " + access_Token);
             
-            int responseCode = conn.getResponseCode();
+            Integer responseCode = conn.getResponseCode();
+            memberVO.setResponseCode(responseCode);
             System.out.println("responseCode : " + responseCode);
             
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));

@@ -35,6 +35,13 @@ public class MemberVO {
 	private Integer mem_auth;
 	private Date join_date;
 	private String reason;
+	private Integer responseCode;
+	public Integer getResponseCode() {
+		return responseCode;
+	}
+	public void setResponseCode(Integer responseCode) {
+		this.responseCode = responseCode;
+	}
 	public String getReason() {
 		return reason;
 	}

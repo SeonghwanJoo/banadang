@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>  
-<div class="topnav" id=myTopnav>
+<div class="fixed_top" id=myTopnav>
 
   <!-- Left-aligned links (default) -->
 	<c:if test="${title eq '팀원 모집' }">
@@ -18,24 +18,24 @@
     </div>
 
   <!-- Right-aligned links -->
-  <div class="topnav-right">
-    <c:if test="${!empty myClub }">
-	<span class="sel-team" id="sel-team">
+  <div class="topnav-right-main">
+   	<span class="sel-team" id="sel-team">
+   	<c:if test="${!empty myClub }">
 		<span id="myClub_name">${myClub.club_name}</span>
 		<span class="drop-down material-icons">
 			arrow_drop_down
 		</span>
-	</span>
 	</c:if>
+	</span>
     <a id="write" href="${pageContext.request.contextPath }/match/writeForm.do">
     	<i class="fas fa-edit" id="topIcon"></i>
     	<c:if test="${title eq '나의 페이지' && count_msg!=0 }">
 		<span class="count-msg-page">${count_msg }</span>
 		</c:if>
     </a>
-  </div>
 </div>
-
+</div>
+<div class="blank_div"></div>
 <!-- The Modal -->
 <div id="team-sel-modal" class="modals">
   <!-- Modal content -->

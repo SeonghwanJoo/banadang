@@ -154,8 +154,10 @@
 							<i class="fas fa-check sign"  id="attend_sign" ></i>
 						</span>
 					</span>
-					<span id="num_attend" class="vote_num">${match.attend}</span>
-					<span class="person material-icons">person</span>
+					<span class="vote-wrapper">
+						<span class="person material-icons">person</span>
+						<span id="num_attend" class="vote_num">${match.attend}</span>
+					</span>
 				</span>
 			</div>
 			<div class="row">
@@ -165,8 +167,10 @@
 							<i class="fas fa-check sign"  id="not_attend_sign" ></i>
 						</span>
 					</span>
-					<span id="num_nattend" class="vote_num">${match.not_attend}</span>
-					<span class="person material-icons">person</span>
+					<span class="vote-wrapper">
+						<span class="person material-icons">person</span>
+						<span id="num_nattend" class="vote_num">${match.not_attend}</span>
+					</span>
 				</span>
 			</div>	
 			<div class="row">
@@ -176,8 +180,10 @@
 							<i class="fas fa-check sign"  id="undefined_sign" ></i>
 						</span>
 					</span>
-					<span id="num_undefined" class="vote_num">${match.undefined}</span>
-					<span class="person material-icons">person</span>
+					<span class="vote-wrapper">
+						<span class="person material-icons">person</span>
+						<span id="num_undefined" class="vote_num">${match.undefined}</span>
+					</span>
 				</span>
 			</div>
 		</div>

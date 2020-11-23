@@ -3,22 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<div class="row" id="top_wrap">
-	<div class="fixed_top">
-		<a href="club.do" >
-		<span class="material-icons" id="cancel">close</span>
-		</a>
-		<div class="topnav-centered inner">
-			<a href="javascript:location.reload()" class="active cursor">${title }</a>
-		</div>
-		<c:if test="${myClub.club_auth>4 }">
-		<div class="topnav-right relative">
-			<a id="write" href="${pageContext.request.contextPath }/club/modifyClub.do">
-				<i class="fas fa-edit down"></i>
-			</a>
-		</div>
-		</c:if>
+<div class="fixed_top">
+	<a href="club.do" >
+	<span class="material-icons" id="cancel">close</span>
+	</a>
+	<div class="topnav-centered inner">
+		<a href="javascript:location.reload()" class="active cursor">${title }</a>
 	</div>
+	<c:if test="${myClub.club_auth>4 }">
+	<div class="topnav-right">
+		<a id="write" href="${pageContext.request.contextPath }/club/modifyClub.do">
+			<i class="fas fa-edit down"></i>
+		</a>
+	</div>
+	</c:if>
 </div>
 <div class="blank_div"></div>
 <div class="invite-wrapper" id="invite-wrapper">
@@ -466,7 +464,7 @@
 							</div>
 							<div class="row ">
 								<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
-								<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>${match.start_time }~${match.end_time }</span>
+								<span class="match-item"><i class="far fa-clock margin-right"></i>${match.start_time }~${match.end_time }</span>
 							</div>
 						</div>
 						<div class="row small-font margin-top margin-btm">
@@ -555,8 +553,10 @@
 									<span class="voted" id="voted-attend-${match.match_num }" style="width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%">
 										<span class="vote-label">참석</span>
 									</span>
-									<span id="num_attend" class="vote_num">${match.attend}</span>
-									<span class="person material-icons">person</span>
+									<span class="vote-wrapper">
+										<span class="person material-icons">person</span>
+										<span id="num_attend" class="vote_num">${match.attend}</span>
+									</span>
 								</span>
 							</div>	
 							<div class="row" >
@@ -564,8 +564,10 @@
 									<span class="voted" id="voted-not_attend-${match.match_num }" style="width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%">
 										<span class="vote-label">불참</span>
 									</span>
-									<span id="num_nattend" class="vote_num">${match.not_attend}</span>
-									<span class="person material-icons">person</span>
+									<span class="vote-wrapper">
+										<span class="person material-icons">person</span>
+										<span id="num_nattend" class="vote_num">${match.not_attend}</span>
+									</span>
 								</span>
 							</div>	
 							<div class="row">
@@ -573,8 +575,10 @@
 									<span class="voted" id="voted-not_fixed-${match.match_num }" style="width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%">
 										<span class="vote-label">미정</span>
 									</span>
-									<span id="num_undefined" class="vote_num">${match.undefined}</span>
-									<span class="person material-icons">person</span>
+									<span class="vote-rating">
+										<span class="person material-icons">person</span>
+										<span id="num_undefined" class="vote_num">${match.undefined}</span>
+									</span>
 								</span>
 								<c:if test="${empty match.cancel}">
 							</c:if>
@@ -609,7 +613,7 @@
 		<c:if test="${match.home!=match.away && !fn:contains(match.away_name,'미등록팀')}">
 		<li class="li-list">
 			<div class="match-info-wrapper">
-				<div class="main-row margin-top ">
+				<div class="main-row">
 					<c:if test="${match.type==1 }">
 					<span class="match-item last soccer">
 					축구

@@ -215,6 +215,11 @@ public class MainController {
 
 		return "posterCheck";
 	}
+	@RequestMapping("/main/loginFailure.do")
+	public String loginFailure() {
+
+		return "loginFailure";
+	}
 
 	@RequestMapping("/main/myClubCheck.do")
 	public String checkmyClub() {

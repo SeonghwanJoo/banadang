@@ -4,7 +4,7 @@
 <div class="row blank_div"></div>
 <div class="row">
 	<div class="bottom_menu">
-		<div class="tab-row">
+		<div class="tab-row bottom-padding">
 			<div class="col">
 				<a class="menu-item" href="${pageContext.request.contextPath }/main/main.do">
 				<span class="main material-icons bottom-icon">home</span>
