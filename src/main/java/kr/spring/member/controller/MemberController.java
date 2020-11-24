@@ -52,10 +52,11 @@ public class MemberController {
 		
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_Token);
-        String user_id=memberVO.getId();
         if(memberVO.getResponseCode()!=200) {
         	return "redirect:/main/loginFailure.do";
         }
+        String user_id=memberVO.getId();
+        
         //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
         try {
             if (memberVO != null) {
@@ -121,7 +122,9 @@ public class MemberController {
 		String access_Token = loginAPI.getAccessToken(code,0,uri);
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_Token);
-        
+        if(memberVO.getResponseCode()!=200) {
+        	return "redirect:/main/loginFailure.do";
+        }
         String user_id=memberVO.getId();
         
         //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
@@ -182,7 +185,9 @@ public class MemberController {
 	    String access_Token = loginAPI.getAccessToken(code,2,uri);
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_Token);
-        
+        if(memberVO.getResponseCode()!=200) {
+        	return "redirect:/main/loginFailure.do";
+        }
         String user_id=memberVO.getId();
         
         

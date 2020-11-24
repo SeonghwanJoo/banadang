@@ -309,6 +309,7 @@ div.team-info.cursor{
 	right:1rem;
 }
 
+
 div.row{
 	position:relative;
 }
@@ -1212,10 +1213,14 @@ h6.ages{
 .half_col .admin{
 	font-size:1rem;
 	display:none;
-	float:none;
+	position:absolute;
+	top:1.8rem;
+	left:1.5rem;
 }
 .half_col .visible{
 	display:inline-block;
+	background-color:#fff;
+	border-radius:50%;
 }
 .center{
 	display:block;
@@ -1255,6 +1260,9 @@ h6.ages{
 .float-right{
 	position:absolute;
 	right:0rem;
+}
+.float-left{
+	float:left;
 }
 .span-link-reverse{
 	background-color:#A4D3A6;

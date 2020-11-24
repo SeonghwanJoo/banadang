@@ -124,7 +124,9 @@ public class LoginAPI {
             memberVO.setThumbnail_image(properties.getAsJsonObject().get("thumbnail_image").getAsString());
             
             memberVO.setEmail(kakao_account.getAsJsonObject().get("email").getAsString());
-            memberVO.setAge_range(kakao_account.getAsJsonObject().get("age_range").getAsString());
+            if(kakao_account.getAsJsonObject().get("age_range")!=null) {
+            	memberVO.setAge_range(kakao_account.getAsJsonObject().get("age_range").getAsString());
+            }
             
             memberVO.setId(element.getAsJsonObject().get("id").getAsString());
             

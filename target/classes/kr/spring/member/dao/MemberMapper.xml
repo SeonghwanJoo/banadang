@@ -5,9 +5,12 @@
 	insert into gentlepro.member_detail
 		(id,nickname,profile_image,thumbnail_image,email,age_range) 
 	values
-		(#{id},#{nickname},#{profile_image},#{thumbnail_image},#{email}
+		(#{id},#{nickname},#{profile_image},#{thumbnail_image},#{email},
 		<if test="age_range != null">
-			,#{age_range}
+			#{age_range}
+		</if>
+		<if test="age_range == null">
+			''
 		</if>
 		)
 	</insert>

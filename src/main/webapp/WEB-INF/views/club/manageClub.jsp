@@ -758,22 +758,29 @@
 					<c:if test="${empty member.thumbnail_image }">
 					<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
 					</c:if>
-					<c:if test="${not empty member.thumbnail_image }">
-					<img src="${member.thumbnail_image }" alt="Avatar" class="avatar">
+					<div class="relative disp-inbl float-left">
+						<c:if test="${not empty member.thumbnail_image }">
+						<img src="${member.thumbnail_image }" alt="Avatar" class="avatar">
+						</c:if>
+						<c:if test="${ member.club_auth>4}">
+						<i class="fas fa-crown admin visible" id="${member.id}">
+						</i>
+						</c:if>
+						<c:if test="${ member.club_auth<5}">
+						<i class="fas fa-crown admin" id="${member.id}">
+						</i>
 					</c:if>
-					<span style="display:inline-block">
-					<c:if test="${ member.club_auth>4}">
-					<i class="fas fa-crown admin visible" id="${member.id}">
-					</i>
-					</c:if>
-					<c:if test="${ member.club_auth<5}">
-					<i class="fas fa-crown admin" id="${member.id}">
-					</i>
-					</c:if>
+					</div>
+					<span class="float-left">
 					${member.nickname} | <span class="gray small-font">가입일 <fmt:formatDate value="${member.join_date}" pattern="yy.MM.dd"/> </span>
 					</span>
 					<br>
+					<c:if test="${not empty member.age_range }">
 					<span class="gray small-font">${fn:substring(member.age_range,0,1)}0대 |</span>
+					</c:if>
+					<c:if test="${empty member.age_range }">
+					<span class="gray small-font">비공개 |</span>
+					</c:if>
 					<span class="gray small-font">참석 투표율<fmt:formatNumber value="${member.attendance_rate*100}" pattern="0"/>%</span>
 				</div>
 				<div class="half_col smaller">

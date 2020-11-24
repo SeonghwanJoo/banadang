@@ -72,9 +72,9 @@
 	</select>
 	<select id="selectAttendanceRate" parameterType="memberVO" resultType="float">
 	select b.b/a.a attendance_rate from
-    (select count(match_num) a, #{club_num} club_num from gentlepro.match where (home=#{club_num} or away=#{club_num}) and match_date>(select join_date from club_join where id=#{id} and club_num=37) )a 
+    (select count(match_num) a, #{club_num} club_num from gentlepro.match where (home=#{club_num} or away=#{club_num}) and match_date>(select join_date from gentlepro.club_join where id=#{id} and club_num=#{club_num}) )a 
     join
-    (select count(match_num) b,club_num from gentlepro.match_vote where id=#{id} and status=1 group by club_num having club_num=37) b on a.club_num=b.club_num
+    (select count(match_num) b,club_num from gentlepro.match_vote where id=#{id} and status=1 group by club_num having club_num=#{club_num}) b on a.club_num=b.club_num;
 	</select>
 	<select id="selectMyClubDetails" parameterType="clubVO" resultType="clubVO">
 	       select * from 
