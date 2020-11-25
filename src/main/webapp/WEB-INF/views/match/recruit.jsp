@@ -19,8 +19,8 @@
 		</c:if>
 	</div>
 </div>
-<div class="invite-wrapper" id="invite-wrapper">
-</div>
+<ul class="ul-list non-border-btm">
+</ul>
 <div class="row margin-top margin-btm" id="moreList">
 	<button class="seemore margin-top" onclick="moreList()">더보기</button>
 </div>
@@ -100,7 +100,7 @@ function createListInHTML(matchs){
 					"<span class='match-item'>"+matchs[i].address+"</span>"
 				+"</div>"
 				+"<div class='row'>"
-					+"<span class='match-item'><i class='far fa-calendar-alt margin-right'></i>"+matchs[i].match_date+"</span>"
+					+"<span class='match-item'><i class='far fa-calendar-alt margin-right'></i>"+new Date(matchs[i].match_date).format('yy.MM.dd')+"</span>"
 					+"<span class='match-item'><i class='far fa-clock margin-right'></i>"+matchs[i].start_time+"~"+matchs[i].end_time+"</span>"
 				+"</div>"
 				+"</div>"
@@ -149,53 +149,12 @@ function createListInHTML(matchs){
 	}
 	return itemStr;
 }
-function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
-    function deg2rad(deg) {
-        return deg * (Math.PI/180)
-    }
-
-    const R = 6371; // Radius of the earth in km
-    let dLat = deg2rad(lat2-lat1);  // deg2rad below
-    let dLon = deg2rad(lng2-lng1);
-    let a = (Math.sin(dLat/2) * Math.sin(dLat/2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
-    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    let d = R * c; // Distance in km
-    return d;
-}
-function createListOrderByDistance(latitude,longitude,matchs){
-	var div=document.getElementById("invite-wrapper");
-	var ul=document.createElement("UL");
-	ul.setAttribute("class","ul-list");
-	ul.classList.add('non-border-btm');
-	var itemStr="";
-	
-	for(var i=0;i<matchs.length;i++){
-		
-		matchs[i].distance=getDistanceFromLatLonInKm(latitude,longitude,matchs[i].address_y,matchs[i].address_x);
-	}
-	matchs.sort(function (a,b){
-		return a.distance - b.distance;
-	});
-	
-	itemStr+=createListInHTML(matchs);
-	ul.innerHTML+=itemStr;
-	div.appendChild(ul);
-}
-let position;
-if("${myClub.club_loc}"!=""){
-	position={latitude:'${myClub.club_locY}',longitude:'${myClub.club_locY}'}//사용자 소속팀의 주소  받아서 넣어주기
-}else if(navigator.geolocation){
-	navigator.geolocation.getCurrentPosition(function(pos) {
-		position={latitude:pos.coords.latitude,longitude:pos.coords.longitude}
-	},
-	function(){
-		position={latitude:37.5668260054857,longitude:126.978656785931};
-	});	
-}
 let pageCount=0;
+let latitude;
+let longitude;
 function moreList(){
 	
-	pageCount++;;
+	
 	console.log("pageCount : "+pageCount);
 	var scrollTop=$(window).scrollTop();
 	console.log("scrolTop : "+scrollTop);
@@ -207,6 +166,8 @@ function moreList(){
 			type: ${match.type},
 			period: '${match.period}',
 			pageCount: pageCount*30,
+			club_locY:latitude,
+			club_locX:longitude
 		},
 		dataType:'json',
 		cache:false,
@@ -232,6 +193,7 @@ function moreList(){
 			alert('네트워크 오류 발생');
 		}
 	});
+	pageCount++;
 }
 Date.prototype.format = function(f) {
     if (!this.valueOf()) return " ";
@@ -319,30 +281,28 @@ $(function(){
 		 modal.style.display = "none";
 	});
 	
+	if("${myClub.club_loc}"!=""){
+		console.log('position by myClub 진입');
+		latitude='${myClub.club_locY}';
+		longitude='${myClub.club_locX}';
+	}else if(navigator.geolocation){
+		navigator.geolocation.getCurrentPosition(function(pos) {
+			console.log('position by geolocation 진입');
+			latitude=pos.coords.latitude;
+			longitude:pos.coords.longitude
+		},
+		function(){
+			console.log('position by geolocation error 진입');
+			alert('사용자 위치 접근 허용이 필요합니다');
+			latitude=37.5668260054857;
+			longitude=126.978656785931;
+		});	
+	}else{
+		latitude=37.5668260054857;
+		longitude=126.978656785931;
+	}	
 	
-	let matchs=new Array();
-	<c:forEach items="${matches}" var="match">
-		var obj={};
-		obj.type="${match.type}"
-		obj.start_time="${match.start_time}";
-		obj.end_time="${match.end_time}";
-		obj.address="${match.address}";
-		obj.match_detail="${match.match_detail}";
-		obj.match_date="<fmt:formatDate value="${match.match_date}" pattern="yy.MM.dd"/>";
-		obj.address_x="${match.address_x}";
-		obj.address_y="${match.address_y}";
-		obj.club_num="${match.club_num}";
-		obj.club_color="${match.club_color}";
-		obj.club_name="${match.club_name}";
-		obj.club_img="${match.club_img}";
-		obj.club_age="${match.club_age}";
-		obj.manner="${match.manner}";
-		obj.perform="${match.perform}";
-		obj.recruit_num="${match.recruit_num}";
-		matchs.push(obj);
-	</c:forEach>
-	
-	createListOrderByDistance(position.latitude, position.longitude, matchs);
+	moreList();
 	
 });
 

@@ -62,19 +62,10 @@ public class MatchController {
 	public ModelAndView inviteList(MatchVO match) {
 		
 		ModelAndView mav=new ModelAndView();
-		String period=match.getPeriod();
-		if(period!="" && period!=null) {
-			
-			String[] values=period.split(" ~ ");
-			match.setStart(java.sql.Date.valueOf(values[0]));
-			match.setEnd(java.sql.Date.valueOf(values[1]));
-		}
-		List<MatchVO> matchVO=matchService.selectMatchToInviteWithFilter(match);
 		
 		mav.setViewName("invite_match");
 		mav.addObject("title","경기 매치");
 		mav.addObject("match", match);
-		mav.addObject("matchVO", matchVO);
 		
 		return mav;
 	}
@@ -93,21 +84,12 @@ public class MatchController {
 	}
 	@RequestMapping("/match/recruit.do")
 	public ModelAndView recruitPlayer(MatchVO match) {
+		
 		ModelAndView mav=new ModelAndView();
-		String period=match.getPeriod();
-		if(period!="" && period!=null) {
-			
-			String[] values=period.split(" ~ ");
-			match.setStart(java.sql.Date.valueOf(values[0]));
-			match.setEnd(java.sql.Date.valueOf(values[1]));
-		}
-		List<MatchVO> matches=matchService.selectRecruitWithFilter(match);
 		
 		mav.setViewName("recruit");
 		mav.addObject("title","용병 모집");
 		mav.addObject("match", match);
-		mav.addObject("matches", matches);
-		
 		
 		return mav;
 	}

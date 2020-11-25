@@ -262,10 +262,10 @@ public class MemberController {
 	}
 	@RequestMapping("/member/clubRecruit.do")
 	public ModelAndView clubRecruit(MatchVO match) {
+		
 		ModelAndView mav=new ModelAndView();
+		
 		mav.addObject("title","팀원 모집");
-		List<MatchVO> matches=memberService.selectClubRecruits(match);
-		mav.addObject("matches", matches);
 		mav.addObject("type",match.getType());
 		mav.setViewName("clubRecruit");
 		
