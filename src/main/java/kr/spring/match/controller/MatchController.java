@@ -79,27 +79,6 @@ public class MatchController {
 		return mav;
 	}
 
-	@RequestMapping("/match/filterRecruit.do")
-	public ModelAndView filterRecruit(MatchVO match) {
-		
-		ModelAndView mav=new ModelAndView();
-		String period=match.getPeriod();
-		if(period!="" && period!=null) {
-			
-			String[] values=period.split(" ~ ");
-			match.setStart(java.sql.Date.valueOf(values[0]));
-			match.setEnd(java.sql.Date.valueOf(values[1]));
-		}
-		List<MatchVO> matches=matchService.selectRecruitWithFilter(match);
-		
-		mav.setViewName("recruit");
-		mav.addObject("title","용병 모집");
-		mav.addObject("match", match);
-		mav.addObject("matches", matches);
-		
-		
-		return mav;
-	}
 	@RequestMapping("/match/invite_detail.do")
 	public ModelAndView inviteDetail(@RequestParam Integer match_num) {
 		

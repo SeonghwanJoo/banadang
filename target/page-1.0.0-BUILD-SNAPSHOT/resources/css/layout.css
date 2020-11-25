@@ -309,6 +309,7 @@ div.team-info.cursor{
 	right:1rem;
 }
 
+
 div.row{
 	position:relative;
 }
@@ -821,6 +822,7 @@ body.body, body.body btn{
 	margin:0 0.5rem;
 }
 .fixed_top{
+  text-overflow: ellipsis;
   overflow: hidden;
   background-color: #FFFFFF;
   position:fixed;
@@ -1212,10 +1214,14 @@ h6.ages{
 .half_col .admin{
 	font-size:1rem;
 	display:none;
-	float:none;
+	position:absolute;
+	top:1.8rem;
+	left:1.5rem;
 }
 .half_col .visible{
 	display:inline-block;
+	background-color:#fff;
+	border-radius:50%;
 }
 .center{
 	display:block;
@@ -1256,6 +1262,9 @@ h6.ages{
 	position:absolute;
 	right:0rem;
 }
+.float-left{
+	float:left;
+}
 .span-link-reverse{
 	background-color:#A4D3A6;
 	color:#FFF;
@@ -1286,11 +1295,11 @@ h6.ages{
 	margin:0 auto;
 }
 	
-button.small-font{
+.small-font, .main-row span.small-font,button.small-font, a.active.small-font{
 	font-size:0.9rem;
 }
-.small-font, .main-row span.small-font{
-	font-size:0.9rem;
+a.active.small-font{
+	margin-top:0.3rem;
 }
 .xs-font{
 	font-size:0.6rem;

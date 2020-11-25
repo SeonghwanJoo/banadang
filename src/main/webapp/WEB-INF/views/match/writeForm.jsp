@@ -259,11 +259,13 @@ $( function() {
 	$('#exist').click(function(){
 		$('#away-wrapper').css('display','block');
 		$('#cost-wrapper').css('display','none');
+		$('#away_name').val('');
 	});
 	$('#non-exist').click(function(){
 		$('#away-wrapper').css('display','none');
 		$('#cost-wrapper').css('display','block');
 		$('#away').val('0');
+		$('#away_name').val('모집 중');
 		
 	});
 	$('#soccer').click(function(){

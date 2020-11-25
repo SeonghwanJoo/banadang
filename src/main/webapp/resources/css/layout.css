@@ -822,6 +822,7 @@ body.body, body.body btn{
 	margin:0 0.5rem;
 }
 .fixed_top{
+  text-overflow: ellipsis;
   overflow: hidden;
   background-color: #FFFFFF;
   position:fixed;
@@ -1294,11 +1295,11 @@ h6.ages{
 	margin:0 auto;
 }
 	
-button.small-font{
+.small-font, .main-row span.small-font,button.small-font, a.active.small-font{
 	font-size:0.9rem;
 }
-.small-font, .main-row span.small-font{
-	font-size:0.9rem;
+a.active.small-font{
+	margin-top:0.3rem;
 }
 .xs-font{
 	font-size:0.6rem;

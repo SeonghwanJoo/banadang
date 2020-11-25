@@ -216,6 +216,7 @@ public class MemberController {
                 session.setAttribute("myClubs", myClubs);
                 if(myClubs.size()>0) {
                 	
+                	logger.info("clubsize>0 진입");
                 	for(ClubVO myClub:myClubs) {
                 		
                 		if(myClub.getClub_num()==club_num) {
@@ -234,7 +235,7 @@ public class MemberController {
         	
         }
 
-        return "redirect:/main/membercheck.do";
+        return "redirect:/main/membercheck.do?club_num="+club_num;
 	}
 	@RequestMapping("/member/logout.do")
 	public String kakaoLogout(HttpSession session) {

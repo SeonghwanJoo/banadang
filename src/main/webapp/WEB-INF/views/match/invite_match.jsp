@@ -184,9 +184,10 @@ if("${myClub.club_loc}"!=""){
 }else if(navigator.geolocation){
 	navigator.geolocation.getCurrentPosition(function(pos) {
 		position={latitude:pos.coords.latitude,longitude:pos.coords.longitude}
+	},
+	function(){
+		position={latitude:37.5668260054857,longitude:126.978656785931};
 	});	
-}else{
-	position={latitude:37.5668260054857,longitude:126.978656785931};
 }
 let pageCount=0;
 function moreList(){
