@@ -5,10 +5,10 @@
 <div class="blank_div"></div>
 <div class="row">
 	<div class="col align-center">
-		<c:if test="${not empty club.club_img }">
+		<c:if test="${club.filename ne 'undefined'  }">
 			<img src="imageView.do?club_num=${club.club_num }"	class="emblem blocked">
 		</c:if>
-		<c:if test="${empty club.club_img }">
+		<c:if test="${club.filename eq 'undefined'  }">
 			<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" class="emblem blocked">
 		</c:if>
 		<br>
@@ -24,10 +24,10 @@
 		<div class="certify-modal-content">
 			<div class="col">
 				<div class="sub-content">
-					<c:if test="${not empty club.club_img }">
+					<c:if test="${club.filename ne 'undefined'  }">
 						<img src="imageView.do?club_num=${club.club_num }" class="emblem blocked">
 					</c:if>
-					<c:if test="${empty club.club_img }">
+					<c:if test="${club.filename eq 'undefined'  }">
 						<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" class="emblem blocked">
 					</c:if>
 					<br>

@@ -153,12 +153,7 @@ let pageCount=0;
 let latitude;
 let longitude;
 function moreList(){
-	
-	
-	console.log("pageCount : "+pageCount);
 	var scrollTop=$(window).scrollTop();
-	console.log("scrolTop : "+scrollTop);
-	
 	$.ajax({
 		url:'nextRecruitPage.do',
 		type:'post',
@@ -174,15 +169,23 @@ function moreList(){
 		timeout:30000,
 		success:function(data){
 			if(data.result=='success'){
+				
+				
+				
 				var addContent="";
 				var matches=new Array();
 				matches=data.matches;
 				addContent+=createListInHTML(matches);
 				$(addContent).appendTo('.ul-list');
-				window.scroll({ top: scrollTop, left: 0, behavior: 'smooth' });
+				
+				
+				
 				if(!matches.length){
 					$('#moreList').css('display','none');
 				}
+				pageCount++;
+				
+				window.scroll({ top: scrollTop, left: 0, behavior: 'smooth' });
 			}	
 			if(data.result=='errors'){
 				alert('오류 발생');
@@ -193,7 +196,8 @@ function moreList(){
 			alert('네트워크 오류 발생');
 		}
 	});
-	pageCount++;
+	
+	
 }
 Date.prototype.format = function(f) {
     if (!this.valueOf()) return " ";

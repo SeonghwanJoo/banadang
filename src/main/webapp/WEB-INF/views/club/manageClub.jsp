@@ -24,10 +24,10 @@
 		<li class="li-list cursor" onclick="location.href='club_details.do?club_num=${myClub.club_num}'">
 			<div class="row">
 				<div class="col club_main">
-					<c:if test="${!empty myClub.filename }">
+					<c:if test="${myClub.filename ne 'undefined' }">
 					<img src="imageView.do?club_num=${myClub.club_num}" alt="Avatar" class="avatar emblem">
 					</c:if>
-					<c:if test="${empty myClub.filename }">
+					<c:if test="${myClub.filename eq 'undefined' }">
 					<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
 					</c:if>
 					<span class="club_name">${myClub.club_name }</span><br>
@@ -108,13 +108,13 @@
 					<span id="status-${away.request_num}"class="status negative">거절 완료</span>
 					</c:if>
 					<c:if test="${not empty away.cancel }">
-					<span class="status negative full">${away.cancel}팀에 의해 취소됨</span>
+					<span class="cancel negative full">${away.cancel}팀에 의해 취소됨</span>
 					</c:if>
 					<c:if test="${not empty away.match_req_cancel }">
-					<span class="status negative full" id="${away.request_num }">${away.club_name }팀에 의해 경기 신청 취소 처리됨</span>
+					<span class="cancel negative full" id="${away.request_num }">${away.club_name }팀에 의해 경기 신청 취소 처리됨</span>
 					</c:if>
 					<c:if test="${empty away.match_req_cancel }">
-					<span class="status negative full" id="${away.request_num }" style="display:none">${away.club_name }팀에 의해 경기 신청 취소 처리됨</span>
+					<span class="cancel negative full" id="${away.request_num }" style="display:none">${away.club_name }팀에 의해 경기 신청 취소 처리됨</span>
 					</c:if>
 				</div>
 				<div class="row ">
@@ -124,10 +124,10 @@
 				</div>
 				<div class="row small-font  margin-top margin-btm">
 					<div class="col club_main">
-						<c:if test="${!empty away.club_img }">
+						<c:if test="${ away.filename ne 'undefined' }">
 							<img src="imageView.do?club_num=${away.club_num }" class="avatar emblem">
 						</c:if>
-						<c:if test="${empty away.club_img }">
+						<c:if test="${away.filename eq 'undefined' }">
 							<img src="${pageContext.request.contextPath}/resources/images/blank_emblem.png" class="avatar emblem">
 						</c:if>
 						<span class="club_name">${away.club_name }</span><br>
@@ -204,13 +204,13 @@
 						<span class="status negative">거절 완료</span>
 						</c:if>
 						<c:if test="${not empty home.cancel }">
-						<span class="status negative full">${home.cancel}팀에 의해 취소됨</span>
+						<span class="cancel negative full">${home.cancel}팀에 의해 취소됨</span>
 						</c:if>
 						<c:if test="${not empty home.match_req_cancel }">
-						<span class="status negative full" id="${home.request_num }">경기 신청 취소 처리됨</span>
+						<span class="cancel negative full" id="${home.request_num }">경기 신청 취소 처리됨</span>
 						</c:if>
 						<c:if test="${empty home.match_req_cancel }">
-						<span class="status negative full" id="${home.request_num }" style="display:none">경기 신청 취소 처리됨</span>
+						<span class="cancel negative full" id="${home.request_num }" style="display:none">경기 신청 취소 처리됨</span>
 						</c:if>
 					</div>
 					<div class="row ">
@@ -220,10 +220,10 @@
 				</div>
 				<div class="row small-font  margin-top margin-btm">
 					<div class="col club_main">
-						<c:if test="${!empty home.club_img }">
+						<c:if test="${home.filename ne 'undefined'}">
 							<img src="imageView.do?club_num=${home.club_num}"  class="avatar emblem">
 						</c:if>
-						<c:if test="${empty home.club_img }">
+						<c:if test="${home.filename eq 'undefined' }">
 							<img src="${pageContext.request.contextPath}/resources/images/blank_emblem.png" class="avatar emblem">
 						</c:if>
 						<span class="club_name">${home.club_name }</span><br>
@@ -304,7 +304,7 @@
 						<span id="recruit-status-${recruit.recruit_req_num}"class="status negative">거절 완료</span>
 						</c:if>
 						<c:if test="${not empty recruit.isCanceled }">
-						<span class="status negative full" >${recruit.nickname }님이 용병 신청을 취소하셨습니다.</span>
+						<span class="cancel negative full" >${recruit.nickname }님이 용병 신청을 취소하셨습니다.</span>
 						</c:if>
 					</div>
 					<div class="row ">
@@ -459,7 +459,7 @@
 									</c:if>
 								</c:if>
 								<c:if test="${not empty match.cancel }">
-								<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
+								<span class="cancel negative full">${match.cancel}팀에 의해 취소됨</span>
 								</c:if>
 							</div>
 							<div class="row ">
@@ -478,12 +478,12 @@
 								onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.home }'">
 								<div class="row margin-top margin-btm">
 									<div class="centered">
-										<c:if test="${not empty match.home_filename }">
+										<c:if test="${match.home_filename ne 'undefined'  }">
 											<img
 												src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.home}"
 												alt="Avatar" class="avatar emblem">
 										</c:if>
-										<c:if test="${empty match.home_filename  }">
+										<c:if test="${match.home_filename eq 'undefined'  }">
 											<img
 												src="${pageContext.request.contextPath }/resources/images/blank_emblem.png"
 												alt="Avatar" class="avatar emblem">
@@ -512,10 +512,10 @@
 							<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
 								<div class="row margin-top margin-btm">
 									<div class="centered">
-										<c:if test="${not empty match.away_filename }">
+										<c:if test="${match.away_filename ne 'undefined' }">
 										<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}" alt="Avatar" class="avatar emblem">
 										</c:if>
-										<c:if test="${empty match.away_filename  }">
+										<c:if test="${match.away_filename eq 'undefined'  }">
 										<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
 										</c:if>
 										<span class="disp-inbl margin-top">${match.away_name}</span>
@@ -600,17 +600,16 @@
 		</div>
 		<hr class="hr">
 		<c:if test="${empty past_match }">
-			<div class="row">
+			<div class="row margin-btm">
 				<div class="empty-wrapper">
-					<i class="far fa-grimace empty"> </i> <span class=" small-font">최근
-						2주간 경기가 없습니다.</span>
+					<i class="far fa-grimace empty"> </i>
+					 <span class=" small-font">최근 2주간 경기 중 평가할 상대팀이 없습니다.</span>
 				</div>
 			</div>
 		</c:if>
 		<c:if test="${not empty past_match }">
 		<ul class="ul-list non-border-btm">
 		<c:forEach var="match" items="${past_match}">
-		<c:if test="${match.home!=match.away && !fn:contains(match.away_name,'미등록팀')}">
 		<li class="li-list">
 			<div class="match-info-wrapper">
 				<div class="main-row">
@@ -625,9 +624,6 @@
 					</span>	
 					</c:if>
 					<span class="match-item">${match.address}</span>
-					<c:if test="${not empty match.cancel }">
-					<span class="status negative full">${match.cancel}팀에 의해 취소됨</span>
-					</c:if>
 				</div>
 				<div class="row ">
 					<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
@@ -639,10 +635,10 @@
 					<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.home }'">
 						<div class="row margin-top margin-btm">
 							<div class="centered">
-								<c:if test="${not empty match.home_filename }">
+								<c:if test="${match.home_filename ne 'undefined' }">
 								<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.home}" alt="Avatar" class="avatar emblem">
 								</c:if>
-								<c:if test="${empty match.home_filename  }">
+								<c:if test="${match.home_filename eq 'undefined' }">
 								<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
 								</c:if>
 								<span class="disp-inbl margin-top">${match.home_name}</span>
@@ -667,10 +663,10 @@
 					<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
 						<div class="row margin-top margin-btm">
 							<div class="centered">
-								<c:if test="${not empty match.away_filename }">
+								<c:if test="${match.away_filename ne 'undefined' }">
 								<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}" alt="Avatar" class="avatar emblem">
 								</c:if>
-								<c:if test="${empty match.away_filename  }">
+								<c:if test="${match.away_filename eq 'undefined' }">
 								<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
 								</c:if>
 								<span class="disp-inbl margin-top">${match.away_name}</span>
@@ -702,7 +698,6 @@
 				</c:if>
 			</div>
 		</li>
-		</c:if>
 		</c:forEach>
 		</ul>
 		</c:if>

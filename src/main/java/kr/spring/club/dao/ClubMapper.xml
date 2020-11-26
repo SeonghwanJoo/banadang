@@ -61,7 +61,7 @@
     		 on d.club_num=e.club_num) f join club c on f.club_num=c.club_num
 	</select>
 	<select id="selectHomeDetailsForRequestedMatch" parameterType="integer" resultType="clubVO">
-	select request_num,match_num,c.club_num,acceptance,request_detail,match_req_cancel,match_date,start_time,end_time,address,cancel,type,home,match_detail,manner,perform,club_name,club_img,club_color,club_age,club_address from
+	select request_num,match_num,c.club_num,acceptance,request_detail,match_req_cancel,match_date,start_time,end_time,address,cancel,type,home,match_detail,manner,perform,club_name,filename,club_color,club_age,club_address from
 	(select * from
     	(select  request_num,a.match_num,acceptance,request_detail,match_req_cancel,match_date,a.away,start_time,end_time,address,cancel,type,home,match_detail from
     		(select request_num,match_num,away,acceptance,request_detail,match_req_cancel from gentlepro.match_request where away=#{club_num} ) a 

@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import kr.spring.member.service.MemberService;
@@ -13,7 +12,6 @@ import kr.spring.member.service.MemberService;
 public class MsgCheckInterceptor 
                         extends HandlerInterceptorAdapter{
 	
-	private Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource
 	private MemberService memberService;
@@ -22,15 +20,12 @@ public class MsgCheckInterceptor
 	public boolean preHandle(HttpServletRequest request,
 			                 HttpServletResponse response,
 			               Object handler)throws Exception {
-		//로그 표시
-		if(log.isDebugEnabled()) {
-			log.debug("<<MsgCheckInterceptor 진입>>");
-		}
-		//로그인 여부 체크
+		//濡쒓렇 �몴�떆
+		//濡쒓렇�씤 �뿬遺� 泥댄겕
 		HttpSession session = request.getSession();
 		String user_id=(String)session.getAttribute("user_id");
 		if(user_id!=null) {
-			//신규 메시지 수 session설정
+			//�떊洹� 硫붿떆吏� �닔 session�꽕�젙
 			Integer count_msg=memberService.selectCountMsg(user_id);
 	    	session.setAttribute("count_msg", count_msg);
 		}

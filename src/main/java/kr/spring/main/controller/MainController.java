@@ -1,7 +1,9 @@
 package kr.spring.main.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import kr.spring.board.domain.BoardVO;
 import kr.spring.board.service.BoardService;
@@ -58,8 +61,13 @@ public class MainController {
 
 			}
 			ArrayList<MatchVO> past_ratings = new ArrayList<MatchVO>();
-			for (MatchVO match : past_match) {
-				addRatingResult(match, past_ratings);
+
+			for(int i=past_match.size()-1;i>=0;i--) {
+				
+				Map<String,Object> map=addRatingResult(past_match.get(i), past_ratings);
+				if(map.get("away_count").equals(0) || map.get("home_count").equals(0)) {
+					past_match.remove(i);
+				}
 			}
 			mav.addObject("match_list", matchVO);
 			mav.addObject("past_match", past_match);
@@ -250,27 +258,39 @@ public class MainController {
 		}
 	}
 
-	public void addRatingResult(MatchVO match, ArrayList<MatchVO> clubs_rating) {
-		clubs_rating = matchService.selectAverageRating(match);
+	public Map<String,Object> addRatingResult(MatchVO match, ArrayList<MatchVO> clubs_rating) {
+		clubs_rating = matchService.selectAverageRating(match);//클럽이 삭제되었다면 해당 클럽번호의 결과가 없음
 		match.setHome_manner(0.0);
 		match.setHome_perform(0.0);
 		match.setAway_manner(0.0);
 		match.setAway_name(match.getAway_name() + "(미등록팀)");// DB에 away_name추가
 		match.setAway_perform(0.0);
-
+		
+		int away_count=0;
+		int home_count=0;
+		
 		for (MatchVO club_rating : clubs_rating) {
-			if (match.getHome() == club_rating.getClub_num()) {
+			if (match.getHome() == club_rating.getClub_num()) {//if문으로 들어가지 못함
 				match.setHome_manner(club_rating.getManner());
 				match.setHome_name(club_rating.getClub_name());
 				match.setHome_perform(club_rating.getPerform());
 				match.setHome_filename(club_rating.getFilename());
+				home_count++;
 			}
 			if (match.getAway() == club_rating.getClub_num()) {
+				away_count++;
 				match.setAway_manner(club_rating.getManner());
 				match.setAway_name(club_rating.getClub_name());
 				match.setAway_perform(club_rating.getPerform());
 				match.setAway_filename(club_rating.getFilename());
 			}
 		}
+		Map<String, Object> map=new HashMap<String,Object>();
+		map.put("away_count", away_count);
+		map.put("home_count", home_count);
+		
+		return map;
+		
+		
 	}
 }

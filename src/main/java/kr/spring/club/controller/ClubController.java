@@ -100,8 +100,12 @@ public class ClubController {
 			
 		}
 		ArrayList<MatchVO> past_ratings=new ArrayList<MatchVO> ();
-		for(MatchVO match : past_match) {
-			addRatingResult(match,past_ratings);
+		for(int i=past_match.size()-1;i>=0;i--) {
+			
+			Map<String,Object> map=addRatingResult(past_match.get(i), past_ratings);
+			if(map.get("away_count").equals(0) || map.get("home_count").equals(0)) {
+				past_match.remove(i);
+			}
 		}
 		mav.addObject("match_list",matchVO);
 		mav.addObject("past_match",past_match);
@@ -237,7 +241,7 @@ public class ClubController {
 		}
 	}
 	
-	public void addRatingResult(MatchVO match, ArrayList<MatchVO> clubs_rating) {
+	public Map<String,Object> addRatingResult(MatchVO match, ArrayList<MatchVO> clubs_rating) {
 		clubs_rating=matchService.selectAverageRating(match);
 		match.setHome_manner(0.0);
 		match.setHome_perform(0.0);
@@ -245,19 +249,31 @@ public class ClubController {
 		match.setAway_name(match.getAway_name()+"(미등록팀)");//DB에 away_name추가
 		match.setAway_perform(0.0);
 		
+		int away_count=0;
+		int home_count=0;
+		
+		
 		for(MatchVO club_rating:clubs_rating) {
 			if(match.getHome()==club_rating.getClub_num()) {
 				match.setHome_manner(club_rating.getManner());
 				match.setHome_name(club_rating.getClub_name());
 				match.setHome_perform(club_rating.getPerform());
 				match.setHome_filename(club_rating.getFilename());
+				home_count++;
 			}
 			if(match.getAway()==club_rating.getClub_num()) {
 				match.setAway_manner(club_rating.getManner());
 				match.setAway_name(club_rating.getClub_name());
 				match.setAway_perform(club_rating.getPerform());
 				match.setAway_filename(club_rating.getFilename());
+				away_count++;
 			}
 		}
+		
+		Map<String, Object> map=new HashMap<String,Object>();
+		map.put("away_count", away_count);
+		map.put("home_count", home_count);
+		
+		return map;
 	}
 }

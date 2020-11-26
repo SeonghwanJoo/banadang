@@ -19,10 +19,10 @@
 		<li class="li-list">
 			<div class="row small-font gray">
 				<div class="col club_main">
-					<c:if test="${!empty club.club_img }">
+					<c:if test="${club.filename ne 'undefined' }">
 					<img src="imageView.do?club_num=${club.club_num}" alt="Avatar" class="avatar emblem">
 					</c:if>
-					<c:if test="${empty club.club_img }">
+					<c:if test="${club.filename eq 'undefined' }">
 					<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
 					</c:if>
 					<span class="club_name">${club.club_name }</span><br>

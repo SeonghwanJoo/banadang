@@ -24,7 +24,7 @@
 	</update>   
 	<select id="selectMyRecruitReq" parameterType="string" resultType="matchVO">
 		select * from 
-    (select recruit_req_num,isCanceled,c.id,c.match_num,c.club_num,recruit_position,recruit_accept,type,start_time,end_time,cancel,address,match_date,address_x,address_y,club_name,club_img,club_color,club_age from
+    (select recruit_req_num,isCanceled,c.id,c.match_num,c.club_num,recruit_position,recruit_accept,type,start_time,end_time,cancel,address,match_date,address_x,address_y,club_name,filename,club_color,club_age from
         (select recruit_req_num,isCanceled,a.match_num,a.id,club_num,recruit_accept,recruit_position,type,start_time,end_time,cancel,address,match_date,address_x,address_y from
             (select * from gentlepro.recruit_req where id=1459494566) a join (select * from gentlepro.match where match_date>date_sub(now(), interval 1 day)) b on a.match_num=b.match_num)c join gentlepro.club d on c.club_num=d.club_num) e left outer join
     (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from gentlepro.club_rating group by club_num) f on e.club_num=f.club_num
@@ -46,19 +46,19 @@
 	</insert>
 	<select id="selectClubRecruitWithClubDetail" parameterType="integer" resultType="matchVO">
 		  select * from 
-    (select club_num,clubRecruit_num,act_day,act_time,register_cost,month_cost,type,recruit_position,clubRecruit_detail,a.id,club_name,club_img,club_color,club_age,club_address,club_loc,club_locX,club_locY from
+    (select club_num,clubRecruit_num,act_day,act_time,register_cost,month_cost,type,recruit_position,clubRecruit_detail,a.id,club_name,filename,club_color,club_age,club_address,club_loc,club_locX,club_locY from
         (select * from gentlepro.club_recruit where clubRecruit_num=#{clubRecruit_num})a join gentlepro.club b using(club_num)) b left outer join 
     (select avg(manner) manner,avg(perform) perform,count(*) count,club_num from gentlepro.club_rating group by club_num)c using(club_num)
 	</select>
 	<select id="selectClubRecruits" parameterType="matchVO" resultType="matchVO">
-		select * from 
-			(select club_num,clubRecruit_num,act_day,act_time,type,a.id,club_name,club_img,club_color,club_age,club_address,club_locX,club_locY,@rownum := @rownum+1 as rnum from
+		select * from (select *,@rownum := @rownum+1 as rnum from 
+			(select club_num,clubRecruit_num,act_day,act_time,type,a.id,club_name,club_img,club_color,club_age,club_address,getDistance(#{club_locY},#{club_locX},club_locY,club_locX) distance from
 				 (select * from gentlepro.club_recruit,(select @rownum :=0) rownum where recruit_due>date_sub(now(), interval 1 day)
 		<if test="type!=3 and type!=0">
 			and	type=#{type}
 		</if>
-		 ) a join gentlepro.club b using(club_num)) d left outer join 
-    (select avg(manner) manner,avg(perform) perform,club_num from gentlepro.club_rating group by club_num)c using(club_num)
+		 ) a join gentlepro.club b using(club_num) order by distance) d left outer join 
+    (select avg(manner) manner,avg(perform) perform,club_num from gentlepro.club_rating group by club_num)c using(club_num))f
 		 <![CDATA[
 			where (rnum>#{pageCount} and rnum<=#{pageCount}+30)
 		 ]]>  

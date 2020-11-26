@@ -186,8 +186,8 @@ function removeWhiteSpace(obj){
 			e.preventDefault();
 			let club_img=dataURLToBlob($("#img-pre").attr("src"));
 			var formData = new FormData($('#club_form')[0]);
-			formData.append("upload", club_img); 
-			formData.append("filename",$("#img-pre").attr("alt"));
+				formData.append("upload", club_img); 
+				formData.append("filename",$("#img-pre").attr("alt"));
 			if(!$('#club_name').val().replace(/^\s+|\s+$/g, '')){
 				$('#club_name_msg').css('color','red').text('팀명을 입력해주세요.');
 				return false;
@@ -277,6 +277,7 @@ function removeWhiteSpace(obj){
 					// 미리보기 위해서 마크업 추가.
 					$("#img-pre").attr("src",dataUrl);
 					$("#img-pre").attr("alt",filename);
+					
 		        }
 		       
 		    };

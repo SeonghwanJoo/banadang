@@ -153,8 +153,6 @@ let latitude;
 let longitude;
 function moreList(){
 	
-	var scrollTop=$(window).scrollTop();
-	
 	$.ajax({
 		url:'nextPage.do',
 		type:'post',
@@ -171,12 +169,14 @@ function moreList(){
 		success:function(data){
 			if(data.result=='success'){
 				
+				var scrollTop=$(window).scrollTop();
 				
 				var addContent="";
 				var matches=new Array();
 				matches=data.matches;
 				addContent+=createListInHTML(matches);
 				$(addContent).appendTo('.ul-list');
+				
 				window.scroll({ top: scrollTop, left: 0, behavior: 'smooth' });
 				if(!matches.length){
 					$('#moreList').css('display','none');

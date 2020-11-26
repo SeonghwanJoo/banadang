@@ -614,6 +614,15 @@ body.body, body.body btn{
 	right:2rem;
 	text-align:center;
 }
+.cancel{
+	display:block;
+	border-radius:0.2rem;
+	color:#FFF;
+	padding:0.1rem 0.2rem;
+	position:absolute;
+	left:0;
+	text-align:center;
+}
 #manageMatch .status{
 	right:0.3rem;
 }
@@ -696,7 +705,6 @@ body.body, body.body btn{
 	z-index:99;
 	padding-bottom:1rem;
 	text-align:center;
-	vertical-align:top;
 	background-color:#a5d6a7;
 	width:2.7rem;
 	height:2.7rem;
@@ -776,7 +784,7 @@ body.body, body.body btn{
   font-size: 1.1rem;
   font-weight:bold;
   cursor: pointer;
-  background-color:#000;
+  background-color:#555;
   text-align: center;
   border-color:#FFF;
   border-style:solid;
@@ -810,7 +818,7 @@ body.body, body.body btn{
 	outline: none;
 }
 .seemore.margin-top:hover{
-	bacground-color:#ccc;
+	background-color:#ccc;
 }
 .block-btn{
 	padding-right:8px;
@@ -890,7 +898,7 @@ a:hover, div.col a:hover { color:#a0a0a0;text-decoration: none; }
 	padding-right: 0px;
 	padding-left: 0px;
 }
-/* 토글 스위치 */
+
 
 .switch {
   position: relative;
@@ -1012,9 +1020,6 @@ a.detail{
 	margin-top:0.5rem;
 	margin-bottom:0.5rem;
 }
-.invisible{
-	
-}
 .sub-h6{
 	font-size:0.9rem;
 	color:#757575;
@@ -1128,8 +1133,6 @@ a.detail{
 }
 .btn-modal{
 	display:inline;
-	width:49%;
-	height:2rem;
 	border:none;
 	border-radius:0.2rem;
 }
@@ -1188,7 +1191,6 @@ btn-wrapper{
 	flex-basis: 0;
 	flex-grow: 1;
 	max-width: 100%;
-	width:auto;
 	padding:0;
 	margin:0;
 }
@@ -1717,7 +1719,7 @@ button.chip-btn{
 .flex-start{
 	display:flex;
 	flex-direction:row;
-	justfiy-content:flex-start;
+	justify-content:flex-start;
 }
 .space-around{
 	flex-direction:row;
@@ -1786,7 +1788,6 @@ label.chip.m-wider{
 
 
 .custom {
-	display: inline-block;
 	float:left;
 	margin: 0.5rem 1rem;
 	position: relative;
@@ -1880,7 +1881,7 @@ label.chip.m-wider{
     border-radius:0.3rem;
 }
 
-/* 가상 선택자를 활용 화살표 대체 */
+/* 媛��긽 �꽑�깮�옄瑜� �솢�슜 �솕�궡�몴 ��泥� */
 .selectbox:before {
     content: "";
     position: absolute;
@@ -1896,23 +1897,23 @@ label.chip.m-wider{
 
 .selectbox label {
     position: absolute;
-    top: 1px;  /* 위치정렬 */
-    left: 5px;  /* 위치정렬 */
-    padding: .2rem .3rem;  /* select의 여백 크기 만큼 */
+    top: 1px;  /* �쐞移섏젙�젹 */
+    left: 5px;  /* �쐞移섏젙�젹 */
+    padding: .2rem .3rem;  /* select�쓽 �뿬諛� �겕湲� 留뚰겮 */
     color: #999;
-    z-index: -1;  /* IE8에서 label이 위치한 곳이 클릭되지 않는 것 해결 */
+    z-index: -1;  /* IE8�뿉�꽌 label�씠 �쐞移섑븳 怨녹씠 �겢由��릺吏� �븡�뒗 寃� �빐寃� */
 }
 
 .selectbox select {
     width: 100%;
-    height: auto;  /* 높이 초기화 */
-    line-height: normal;  /* line-height 초기화 */
-    font-family: inherit;  /* 폰트 상속 */
-    padding: .2rem .3rem;  /* 여백과 높이 결정 */
+    height: auto;  /* �넂�씠 珥덇린�솕 */
+    line-height: normal;  /* line-height 珥덇린�솕 */
+    font-family: inherit;  /* �룿�듃 �긽�냽 */
+    padding: .2rem .3rem;  /* �뿬諛깃낵 �넂�씠 寃곗젙 */
     border: 0;
-    opacity: 0;  /* 숨기기 */
-    filter:alpha(opacity=0);  /* IE8 숨기기 */
-    -webkit-appearance: none; /* 네이티브 외형 감추기 */
+    opacity: 0;  /* �닲湲곌린 */
+    filter:alpha(opacity=0);  /* IE8 �닲湲곌린 */
+    -webkit-appearance: none; /* �꽕�씠�떚釉� �쇅�삎 媛먯텛湲� */
     -moz-appearance: none;
     appearance: none;
 }

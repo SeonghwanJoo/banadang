@@ -11,10 +11,10 @@
 		<li class="select li-list gray" onclick="location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}'">
 			<div class="row">
 				<div class="col club_main">
-					<c:if test="${!empty myClub.club_img }">
+					<c:if test="${myClub.filename ne 'undefined' }">
 					<img src="imageView.do?club_num=${myClub.club_num}" alt="Avatar" class="avatar emblem">
 					</c:if>
-					<c:if test="${empty myClub.club_img }">
+					<c:if test="${myClub.filename eq 'undefined'}">
 					<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
 					</c:if>
 					<span class="disp-inbl margin-top">${myClub.club_name }</span><br>

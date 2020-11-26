@@ -44,16 +44,16 @@
 				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.recruit_req_num},${match.recruit_accept })">more_vert</span>
 				</c:if>
 				<c:if test="${not empty match.isCanceled }">
-				<span class="status negative full" id="recruit-cancel-${match.recruit_req_num }" >용병 신청 취소 완료</span>
+				<span class="cancel negative full" id="recruit-cancel-${match.recruit_req_num }" >용병 신청 취소 완료</span>
 				</c:if>
 				<c:if test="${not empty match.cancel }">
-				<span class="status negative full" id="match-cancel-${match.recruit_req_num }" >${match.cancel }팀에 의해 경기 취소됨</span>
+				<span class="cancel negative full" id="match-cancel-${match.recruit_req_num }" >${match.cancel }팀에 의해 경기 취소됨</span>
 				</c:if>
 				<c:if test="${empty match.isCanceled }">
-				<span class="status negative full" id="recruit-cancel-${match.recruit_req_num }" style="display:none">용병 신청 취소 완료</span>
+				<span class="cancel negative full" id="recruit-cancel-${match.recruit_req_num }" style="display:none">용병 신청 취소 완료</span>
 				</c:if>
 				<c:if test="${empty match.cancel }">
-				<span class="status negative full" id="match-cancel-${match.recruit_req_num }" style="display:none">${match.cancel }팀에 의해 경기 취소됨</span>
+				<span class="cancel negative full" id="match-cancel-${match.recruit_req_num }" style="display:none">${match.cancel }팀에 의해 경기 취소됨</span>
 				</c:if>
 			</div>
 			<div class="row">
@@ -63,10 +63,10 @@
 		</div>
 		<div class="row small-font gray">
 			<div class="col club_main">
-				<c:if test="${empty match.club_img }">
-				<img src="${pageContext.request.contextPath }/resources//resources/images/blank_emblem.png" class="avatar emblem">
+				<c:if test="${match.filename eq 'undefined' }">
+				<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" class="avatar emblem">
 				</c:if>
-				<c:if test="${not empty match.club_img}">
+				<c:if test="${match.filename ne 'undefined'}">
 				<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.club_num}" class="avatar emblem">
 				</c:if>
 				<span class="club_name">${match.club_name } | ${fn:toUpperCase(match.recruit_position)}</span>

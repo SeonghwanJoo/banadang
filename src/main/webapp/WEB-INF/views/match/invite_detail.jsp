@@ -39,10 +39,10 @@
 			</div>
 			<div class="row small-font gray">
 				<div class="col club_main">
-					<c:if test="${!empty match.club_img }">
+					<c:if test="${match.filename ne 'undefined'}">
 					<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.club_num}" alt="Avatar" class="avatar emblem">
 					</c:if>
-					<c:if test="${empty match.club_img }">
+					<c:if test="${match.filename eq 'undefined'}">
 					<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
 					</c:if>
 					<span class="club_name">${match.club_name }</span><br>
