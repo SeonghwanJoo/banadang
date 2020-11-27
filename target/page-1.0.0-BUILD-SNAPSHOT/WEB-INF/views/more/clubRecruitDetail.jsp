@@ -200,7 +200,6 @@
 	// 이미지 지도를 생성합니다
 	var map = new kakao.maps.Map(mapContainer, mapOption);
 	marker.setMap(map); 
-	console.log('clubRecruit_num : '+${clubRecruit.clubRecruit_num})
 	$(function(){
 		$('#more').click(function(){
 			$('#more_modal').css('display','block');

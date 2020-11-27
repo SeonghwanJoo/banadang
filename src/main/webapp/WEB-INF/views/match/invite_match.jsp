@@ -22,7 +22,7 @@
 <ul class="ul-list non-border-btm">
 </ul>
 <div class="row margin-top margin-btm" id="moreList">
-	<button class="seemore margin-top" onclick="moreList()">더보기</button>
+	<button class="seemore margin-top" id="moreBtn" onclick="moreList()">더보기</button>
 </div>
 <!-- The Modal -->
 <div id="myModals" class="modals">
@@ -169,18 +169,19 @@ function moreList(){
 		success:function(data){
 			if(data.result=='success'){
 				
-				var scrollTop=$(window).scrollTop();
 				
 				var addContent="";
 				var matches=new Array();
 				matches=data.matches;
 				addContent+=createListInHTML(matches);
-				$(addContent).appendTo('.ul-list');
+				$('.ul-list').append(addContent);
 				
-				window.scroll({ top: scrollTop, left: 0, behavior: 'smooth' });
-				if(!matches.length){
+				if(matches.length<30){
 					$('#moreList').css('display','none');
 				}
+				$('#moreBtn').blur();
+				
+				pageCount++;
 			}	
 			if(data.result=='errors'){
 				alert('오류 발생');
@@ -191,7 +192,7 @@ function moreList(){
 			alert('네트워크 오류 발생');
 		}
 	});
-	pageCount++;
+	
 }
 Date.prototype.format = function(f) {
     if (!this.valueOf()) return " ";
@@ -281,27 +282,28 @@ $(function(){
 	});
 	
 	if("${myClub.club_loc}"!=""){
-		console.log('position by myClub 진입');
 		latitude='${myClub.club_locY}';
 		longitude='${myClub.club_locX}';
+		moreList();
 	}else if(navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(function(pos) {
-			console.log('position by geolocation 진입');
 			latitude=pos.coords.latitude;
-			longitude:pos.coords.longitude
+			longitude=pos.coords.longitude;
+			moreList();
 		},
 		function(){
-			console.log('position by geolocation error 진입');
 			alert('사용자 위치 접근 허용이 필요합니다');
 			latitude=37.5668260054857;
 			longitude=126.978656785931;
+			moreList();
 		});	
 	}else{
 		latitude=37.5668260054857;
 		longitude=126.978656785931;
+		moreList();
 	}	
 	
-	moreList();
+	
 
 });
 

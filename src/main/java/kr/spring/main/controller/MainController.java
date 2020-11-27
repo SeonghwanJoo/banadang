@@ -106,7 +106,9 @@ public class MainController {
 	}
 
 	@RequestMapping("/main/ratingForm.do")
-	public ModelAndView rating(@RequestParam int match_num, @RequestParam Integer club_num, HttpSession session) {
+	public ModelAndView rating(@RequestParam int match_num, 
+							   @RequestParam Integer club_num,
+							   @RequestParam boolean isMain,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		ArrayList<MatchVO> clubs_rating = new ArrayList<MatchVO>();
 		String user_id = (String) session.getAttribute("user_id");
@@ -120,6 +122,7 @@ public class MainController {
 		}
 		mav.setViewName("rating");
 		mav.addObject("title", "지난 경기 상대팀 평가");
+		mav.addObject("isMain",isMain);
 		return mav;
 	}
 

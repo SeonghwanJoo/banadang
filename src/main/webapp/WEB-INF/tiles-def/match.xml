@@ -50,6 +50,12 @@
        <put-attribute name="body" value="/WEB-INF/views/match/modifyMatch.jsp"/>
        <put-attribute name="footer" value=""/>
     </definition>
+    <definition name="matchDetail" extends="main">
+       <put-attribute name="title" value="경기 상세"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/match/matchDetail.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
 </tiles-definitions>
 
 

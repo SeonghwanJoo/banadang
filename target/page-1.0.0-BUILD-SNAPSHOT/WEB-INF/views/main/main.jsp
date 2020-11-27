@@ -237,7 +237,7 @@
 	<span class="title-btw">지난 경기 상대팀 평점 작성</span>
 </div>
 <c:if test="${empty past_match }">
-<div class="row">
+<div class="row margin-btm">
 	<div class="empty-wrapper">
 		<i class="far fa-grimace empty">
 		</i>
@@ -248,7 +248,6 @@
 <c:if test="${not empty past_match }">
 <ul class="ul-list non-border-btm">
 <c:forEach var="match" items="${past_match}">
-<c:if test="${match.home!=match.away && not empty match.home_name && not empty match.away_name}">
 <li class="li-list">
 	<div class="match-info-wrapper">
 		<div class="main-row ">
@@ -302,10 +301,10 @@
 			<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
 				<div class="row margin-top margin-btm">
 					<div class="centered">
-						<c:if test="${match.away_filename ne 'undefined'  }">
+						<c:if test="${match.away_filename ne 'undefined'}">
 						<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}" alt="Avatar" class="avatar emblem">
 						</c:if>
-						<c:if test="${match.away_filename eq 'undefined'   }">
+						<c:if test="${match.away_filename eq 'undefined'}">
 						<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
 						</c:if>
 						<span class="disp-inbl margin-top">${match.away_name}</span>
@@ -330,14 +329,13 @@
 	</div>
 	<div class="row">
 		<c:if test="${match.home==match.club_num}">
-		<button class="block margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }'">${match.away_name } 평점 작성 하기</button>
+		<button class="block margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }&isMain=true'">${match.away_name } 평점 작성 하기</button>
 		</c:if>
 		<c:if test="${match.away==match.club_num }">
-		<button class="block margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }'">${match.home_name } 평점 작성 하기</button>
+		<button class="block margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }&isMain=true'">${match.home_name } 평점 작성 하기</button>
 		</c:if>
 	</div>
 </li>
-</c:if>
 </c:forEach>
 </ul>
 </c:if>
@@ -347,6 +345,8 @@
 	<div class="confirm-modal-content">
 		<div class="sub-content" id="option">
 			<button id="share" class="pos-btn">투표 링크 공유</button>
+			<hr class="hr">
+			<button id="detail" class="pos-btn">경기 상세</button>
 		</div>
 		<div class="sub-content">
 			<button id="more-cancel-btn" class="neg-btn">취소</button>
@@ -372,7 +372,6 @@ function sendLinkForVote(match_num,club_num,match_date,address,start_time) {
 function openMore(match_num,club_name,club_num,match_date,address,start_time,modify){
 		var itemStr='';
 		if(modify){
-			console.log('if modify 진입');
 			
 			itemStr+=
 				'<div id="options">'
@@ -395,6 +394,9 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 		$('#share').click(function(){
 			sendLinkForVote(match_num,club_num,match_date,address,start_time);
 			$('#more_modal').css('display','none');
+		});
+		$('#detail').click(function(){
+			location.href='${pageContext.request.contextPath}/match/matchDetail.do?match_num='+match_num;
 		});
 		$('#more-cancel-btn').click(function(){
 			$('#more_modal').css('display','none');
@@ -420,10 +422,7 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 	 	var attend=matches[i].attend;
 	 	var not_attend=matches[i].not_attend;
 	 	var not_fixed=matches[i].undefined;
-	 	console.log("undefined : "+not_fixed);
-	 	console.log("not_attend : "+not_attend);
 	 	var match_num=matches[i].match_num;
-	 	console.log("max/attend/not_attend/undefined/match_num : "+max+"/"+attend+"/"+not_attend+"/"+not_fixed+"/"+match_num);
 	 	 if(max==0){
 	 		$('#voted-attend-'+matches[i].match_num).css('background-color','transparent');
 	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','transparent');
@@ -442,15 +441,12 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#a4d3a6');
 	 	}
 	 	if(attend==0){
-	 		console.log("attend==0 진입");
 	 		$('#voted-attend-'+matches[i].match_num).css('background-color','transparent');
 	 	}
 	 	if(not_attend==0){
-	 		console.log("not_attend==0 진입");
 	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','transparent');
 	 	}
 	 	if(not_fixed==0){
-	 		console.log("undefined==0 진입");
 	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','transparent');
 	 	}
 	  }

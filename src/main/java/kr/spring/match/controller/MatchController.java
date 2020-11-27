@@ -176,6 +176,22 @@ public class MatchController {
 		return mav;
 	}
 	
+	@RequestMapping("/match/matchDetail.do")
+	public ModelAndView matchDetail(@RequestParam Integer match_num) {
+		
+		ModelAndView mav=new ModelAndView();
+		ArrayList<MatchVO> clubs_rating = new ArrayList<MatchVO>();
+		MatchVO match = matchService.selectMatchByMatch_num(match_num);
+		
+		addRatingResult(match, clubs_rating);
+		
+		mav.addObject("match", match);
+		mav.addObject("title", "경기 상세");
+		mav.setViewName("matchDetail");
+		
+		return mav;
+	}
+	
 	
 	public void addVoteResult(MatchVO match,ArrayList<MatchVO> vote_status) {
 		Integer myVote=matchService.selectMyVoteStatus(match);

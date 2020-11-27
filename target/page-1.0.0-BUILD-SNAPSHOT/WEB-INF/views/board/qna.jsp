@@ -2,29 +2,27 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<div class="row" id="top_wrap">
-	<div class="fixed_top">
-		<a href="javascript:location.href='${pageContext.request.contextPath }/member/myPage.do'">
-		<span class="material-icons" id="cancel">close</span>
+<div class="fixed_top">
+	<a href="javascript:location.href='${pageContext.request.contextPath }/member/myPage.do'">
+	<span class="material-icons" id="cancel">close</span>
+	</a>
+	<div class="topnav-centered inner">
+		<a href="javascript:document.reload()" class="active">
+			<c:if test="${empty fromUser }">	
+				${title }
+			</c:if>
+			<c:if test="${not empty fromUser }">	
+				나의 문의사항
+			</c:if>
 		</a>
-		<div class="topnav-centered">
-			<a href="javascript:document.reload()" class="active">
-				<c:if test="${empty fromUser }">	
-					${title }
-				</c:if>
-				<c:if test="${not empty fromUser }">	
-					나의 문의사항
-				</c:if>
-			</a>
-		</div>
-		<c:if test="${mem_auth==2 && empty fromUser}">
-		<div class="topnav-right">
-			<a id="write" href="${pageContext.request.contextPath }/board/writeQna.do">
-				<i class="fas fa-edit"></i>
-			</a>
-		</div>
-		</c:if>
 	</div>
+	<c:if test="${mem_auth==2 && empty fromUser}">
+	<div class="topnav-right">
+		<a id="write" href="${pageContext.request.contextPath }/board/writeQna.do">
+			<i class="fas fa-edit down"></i>
+		</a>
+	</div>
+	</c:if>
 </div>
 <div class="blank_div"></div>
 <ul class="ul-list">

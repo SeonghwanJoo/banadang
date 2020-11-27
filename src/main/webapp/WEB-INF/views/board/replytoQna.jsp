@@ -13,7 +13,7 @@
 	</div>
 </div>
 <div class="blank_div"></div>
-<div class="main-row cursor" onclick="location.href='qnaDetail.do?qna_num=${board.qna_num}'">
+<div class="main-row margin-top cursor" onclick="location.href='qnaDetail.do?qna_num=${board.qna_num}'">
 	<span class="m-font">${board.title }</span>
 	<span class="material-icons float-right l-font gray">
 		chevron_right
@@ -30,8 +30,8 @@
 	<button id="register" class="f-r register-btn">등록</button>
 	<span id="counter" class="gray small-font f-r">0 / 최대 500자</span>
 </div>
-<c:if test="${not empty answers }">
 <div id="answer-wrapper" class="border-top">
+<c:if test="${not empty answers }">
 <ul class="ul-list">
 <c:forEach items="${answers }" var="answer">
 <li class="li-list">
@@ -48,8 +48,8 @@
 </li>
 </c:forEach>
 </ul>
-</div>
 </c:if>
+</div>
 <div id="more_modal" class="confirm-modals">
 	<!-- Modal content -->
 	<div class="confirm-modal-content">

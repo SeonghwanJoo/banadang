@@ -332,7 +332,6 @@ function setVoteStyle(max,attend,not_attend,undefined,status){
 		$('#not_attend').css('background-color','transparent');
 		$('#undefined').css('background-color','transparent');
 	}else if (max==attend){
-		console.log('max==attend 진입');
 		$('#attend').css('background-color','#a4d3a6');
 		$('#not_attend').css('background-color','#bfbfbf');
 		$('#undefined').css('background-color','#bfbfbf');

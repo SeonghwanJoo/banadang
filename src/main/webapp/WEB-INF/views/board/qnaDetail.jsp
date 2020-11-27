@@ -26,9 +26,9 @@
 			<span class="m-font">${board.title }</span>
 		</div>
 		<hr class="hr">
-		<p class="detail">
+		<textarea class="detail">
 			${board.content}
-		</p>
+		</textarea>
 	</li>
 </ul>
 <c:if test="${board.fromUser==1}">

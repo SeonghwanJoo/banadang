@@ -9,12 +9,7 @@ insert into gentlepro.notice (id,content,title) values (#{id},#{content},#{title
 </insert>
 <insert id="insertQna" parameterType="boardVO" useGeneratedKeys="true" keyProperty="qna_num">
 insert into gentlepro.qna (id,content,title,fromUser) values (#{id},#{content},#{title},
-	<if test="fromUser==null">
-		'')
-	</if>
-	<if test="fromUser!=null">
 		#{fromUser})
-	</if>
 	<selectKey keyProperty="qna_num" resultType="integer" order="AFTER">
 		select max(qna_num) as qna_num from gentlepro.qna
 	</selectKey>

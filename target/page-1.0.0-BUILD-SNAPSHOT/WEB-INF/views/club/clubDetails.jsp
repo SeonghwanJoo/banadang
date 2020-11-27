@@ -59,6 +59,11 @@
 				</div>			
 			</div>
 		</li>
+		<c:if test="${not empty club.club_detail }">
+		<li class="li-list">
+			<textarea class="detail">${club.club_detail }</textarea>
+		</li>
+		</c:if>
 	</ul>
 	<h6 class="middle-title">상대팀의 평가 내역</h6>
 	<ul class="ul-list non-border-btm">

@@ -158,8 +158,8 @@
 				</div>
 				<span class="material-icons collapsible">add_circle</span>
 				<div class="collapsible-content">
-					<p>${away.request_detail}
-					</p>
+					<textarea class="detail">${away.request_detail}
+					</textarea>
 					<c:if test="${away.acceptance==1 && empty away.cancel }">
 					<div class="row" id="match-btn-${away.request_num }">
 						<div class="half_col">
@@ -254,8 +254,8 @@
 				</div>
 				<span class="material-icons collapsible">add_circle</span>
 				<div class="collapsible-content">
-					<p>${home.match_detail}
-					</p>
+					<textarea class="detail">${home.match_detail}
+					</textarea>
 					<c:if test="${empty home.cancel}">
 					<div class="row">
 					<c:if test="${empty home.match_req_cancel }">
@@ -600,17 +600,16 @@
 		</div>
 		<hr class="hr">
 		<c:if test="${empty past_match }">
-			<div class="row">
+			<div class="row margin-btm">
 				<div class="empty-wrapper">
-					<i class="far fa-grimace empty"> </i> <span class=" small-font">최근
-						2주간 경기가 없습니다.</span>
+					<i class="far fa-grimace empty"> </i>
+					 <span class=" small-font">최근 2주간 경기 중 평가할 상대팀이 없습니다.</span>
 				</div>
 			</div>
 		</c:if>
 		<c:if test="${not empty past_match }">
 		<ul class="ul-list non-border-btm">
 		<c:forEach var="match" items="${past_match}">
-		<c:if test="${match.home!=match.away && !fn:contains(match.away_name,'미등록팀')}">
 		<li class="li-list">
 			<div class="match-info-wrapper">
 				<div class="main-row">
@@ -692,14 +691,13 @@
 			</div>
 			<div class="row">
 				<c:if test="${match.home==match.club_num}">
-				<button class="block margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }'">${match.away_name } 평점 작성 하기</button>
+				<button class="block margin-top" onclick="location.href='${pageContext.request.contextPath }/main/ratingForm.do?match_num=${match.match_num}&club_num=${match.away }&isMain=false'">${match.away_name } 평점 작성 하기</button>
 				</c:if>
 				<c:if test="${match.away==match.club_num }">
-				<button class="block margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }'">${match.home_name } 평점 작성 하기</button>
+				<button class="block margin-top" onclick="location.href='${pageContext.request.contextPath }/main/ratingForm.do?match_num=${match.match_num}&club_num=${match.home }&isMain=false'">${match.home_name } 평점 작성 하기</button>
 				</c:if>
 			</div>
 		</li>
-		</c:if>
 		</c:forEach>
 		</ul>
 		</c:if>
@@ -881,6 +879,8 @@
 	<div class="confirm-modal-content">
 		<div class="sub-content" id="option">
 			<button id="share" class="pos-btn">투표 링크 공유</button>
+			<hr class="hr">
+			<button id="detail" class="pos-btn">경기 상세</button>
 		</div>
 		<div class="sub-content">
 			<button id="more-cancel-btn" class="neg-btn">취소</button>
@@ -952,6 +952,9 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 	$('#share').click(function(){
 		sendLinkForVote(match_num,club_num,match_date,address,start_time);
 		$('#more_modal').css('display','none');
+	});
+	$('#detail').click(function(){
+		location.href='${pageContext.request.contextPath}/match/matchDetail.do?match_num='+match_num;
 	});
 	$('#more-cancel-btn').click(function(){
 		$('#more_modal').css('display','none');
@@ -1027,7 +1030,6 @@ function answerForClubRecruitReq(clubRecruit_req_num,nickname,clubRecruit_accept
 						status.innerText='거절 완료';
 					}
 					$('#clubRecruit_modal').css('display','none');
-					console.log('btn-'+clubRecruit_req_num);
 					document.getElementById('club-btn-'+clubRecruit_req_num).style.display="none";
 				}
 				if(data.result=='errors'){
@@ -1075,7 +1077,6 @@ function answerForRecruitReq(recruit_req_num,nickname,recruit_accept){
 						status.classList.add('positive');
 						status.innerText='수락 완료';
 					}else if(recruit_accept==3){
-						console.log('recruit_accept : '+recruit_accept);
 						status.classList.add('negative');
 						status.innerText='거절 완료';
 					}
@@ -1417,10 +1418,7 @@ $(function(){
 	 	var attend=matches[i].attend;
 	 	var not_attend=matches[i].not_attend;
 	 	var not_fixed=matches[i].undefined;
-	 	console.log("undefined : "+not_fixed);
-	 	console.log("not_attend : "+not_attend);
 	 	var match_num=matches[i].match_num;
-	 	console.log("max/attend/not_attend/undefined/match_num : "+max+"/"+attend+"/"+not_attend+"/"+not_fixed+"/"+match_num);
 	 	 if(max==0){
 	 		$('#voted-attend-'+matches[i].match_num).css('background-color','transparent');
 	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','transparent');
@@ -1439,15 +1437,12 @@ $(function(){
 	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#a4d3a6');
 	 	}
 	 	if(attend==0){
-	 		console.log("attend==0 진입");
 	 		$('#voted-attend-'+matches[i].match_num).css('background-color','transparent');
 	 	}
 	 	if(not_attend==0){
-	 		console.log("not_attend==0 진입");
 	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','transparent');
 	 	}
 	 	if(not_fixed==0){
-	 		console.log("undefined==0 진입");
 	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','transparent');
 	 	}
 	  }

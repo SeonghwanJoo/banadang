@@ -144,7 +144,7 @@
 <div class="row"><div class="col"><span class="msg" id="due_msg"></span></div></div>
 <div class="row">
 	<div class="text input-container col">
-		<textarea class="detail input-field" name="clubRecruit_detail" placeholder="추가적으로 공유할 내용이 있으면 입력해주세요."></textarea>
+		<textarea class="detail input-field" name="clubRecruit_detail" id="clubRecruit_detail" placeholder="추가적으로 공유할 내용이 있으면 입력해주세요."></textarea>
 	</div>
 </div>
 </form:form>
@@ -153,6 +153,16 @@
 <script>
 
 $(function(){
+	
+	$('#clubRecruit_detail').keyup(function (){
+		
+		var str=$(this).val();
+		if(str.length>500){
+			alert("최대 500자 까지 입력 가능합니다.");
+			$(this).val(str.substring(0,500));
+		}
+		
+	});
 	
 
 	$('#soccer').click(function(){

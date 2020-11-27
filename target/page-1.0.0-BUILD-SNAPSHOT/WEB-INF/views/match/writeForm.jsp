@@ -237,7 +237,23 @@
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+
+
+		
+
+
 $( function() {
+	
+	$('#match_detail').keyup(function (){
+		
+		var str=$(this).val();
+		if(str.length>500){
+			alert("최대 500자 까지 입력 가능합니다.");
+			$(this).val(str.substring(0,500));
+		}
+		
+	});
+	
 	
 	var selectTarget = $('.selectbox select');
 

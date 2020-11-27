@@ -95,8 +95,31 @@
 				 where cancel is null and 
 				 <![CDATA[
 				(rnum>#{pageCount} and rnum<=#{pageCount}+30)
-				]]>  
+				]]>  order by distance, match_date
 				
+	</select>
+	<select id="selectRecruitWithFilter" resultType="matchVO">
+		select * from (select *,@rownum := @rownum+1 as rnum from(select recruit_num,c.club_num,recruit_position, recruit_count, recruit_cost,cancel,recruit_detail,type,start_time,end_time,address,match_date,distance,club_name,club_img,club_color,club_age from
+    		(select * from (select * from gentlepro.match_recruit,(select @rownum :=0) rownum ) a join (select match_num,cancel,type,start_time,end_time,address,match_date,getDistance(#{club_locY},#{club_locX},address_y,address_x) distance from gentlepro.match 
+    			where
+                <if test="start==null">
+					match_date>date_sub(now(), interval 1 day)
+                </if>
+				<if test="start!=null">
+					<![CDATA[	
+				 		(match_date>=#{start} and match_date<=#{end}) 
+					]]>
+				</if>
+				<if test="type !=3 and type!=0">
+					and	type=#{type}
+				</if>
+				 ) b using(match_num))c join club d using(club_num) order by distance, match_date)z) e
+				left outer join (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from gentlepro.club_rating group by club_num) f using(club_num)
+				where cancel is null
+				and 
+				<![CDATA[
+				(rnum>#{pageCount} and rnum<=#{pageCount}+30)
+				]]>  
 	</select>
 	<select id="selectMatchToInviteByMatch_num" parameterType="Integer" resultType="matchVO">
 		select * from 
@@ -136,28 +159,6 @@
 			'')
 			</if>
 	</insert>
-	<select id="selectRecruitWithFilter" resultType="matchVO">
-		select * from (select recruit_num,c.club_num,recruit_position, recruit_count, recruit_cost,cancel,recruit_detail,type,start_time,end_time,address,match_date,distance,club_name,club_img,club_color,club_age,@rownum := @rownum+1 as rnum from
-    		(select * from (select * from gentlepro.match_recruit) a join (select match_num,cancel,type,start_time,end_time,address,match_date,getDistance(#{club_locY},#{club_locX},address_y,address_x) distance from gentlepro.match,(select @rownum :=0) rownum where
-                <if test="start==null">
-					match_date>date_sub(now(), interval 1 day)
-                </if>
-				<if test="start!=null">
-					<![CDATA[	
-				 		(match_date>=#{start} and match_date<=#{end}) 
-					]]>
-				</if>
-				<if test="type !=3 and type!=0">
-					and	type=#{type}
-				</if>
-				order by distance, match_date ) b using(match_num))c join club d on c.club_num=d.club_num) e
-				left outer join (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from gentlepro.club_rating group by club_num) f on e.club_num=f.club_num
-				where cancel is null
-				and 
-				<![CDATA[
-				(rnum>#{pageCount} and rnum<=#{pageCount}+30)
-				]]>  
-	</select>
 	<select id="selectRecruit" resultType="matchVO">
 		select * from (select recruit_num,c.club_num,recruit_position, recruit_count, recruit_cost,cancel,recruit_detail,type,start_time,end_time,address,match_date,address_x,address_y,club_name,club_img,club_color,club_age from
 			(select * from 

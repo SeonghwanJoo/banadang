@@ -4,9 +4,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
-		<a onclick="location.href=document.referrer">
-		<span class="material-icons" id="cancel" >close</span>
+		<c:if test="${isMain }">
+		<a href="${pageContext.request.contextPath}/main/main.do">
+			<span class="material-icons" id="cancel" >close</span>
 		</a>
+		</c:if>
+		<c:if test="${isMain }">
+		<a href="${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}">
+			<span class="material-icons" id="cancel" >close</span>
+		</a>
+		</c:if>
 		<div class="topnav-centered">
 			<a href="#home" class="active">${title }</a>
 		</div>
@@ -175,6 +182,15 @@
 <script>
  $(function(){
 	
+		$('#rating_detail').keyup(function (){
+			
+			var str=$(this).val();
+			if(str.length>500){
+				alert("최대 500자 까지 입력 가능합니다.");
+				$(this).val(str.substring(0,500));
+			}
+			
+		});
 	 
 	$('#manner_1').click(function(){
 		$('.manner_rating').css('color','#d6d6d6');
@@ -340,10 +356,18 @@
 				
 				$('#toast').css('display','block');
 				$('#confirm').click(function(){
-					location.href=document.referrer;
+					if(${isMain}){
+						location.href='${pageContext.request.contextPath}/main/main.do';
+					}else{
+						location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num='+${myClub.club_num};
+					}
 				});
 				$(window).click(function(){
-					location.href=document.referrer;
+					if(${isMain}){
+						location.href='${pageContext.request.contextPath}/main/main.do';
+					}else{
+						location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num='+${myClub.club_num};
+					}
 				});
 			},
 			error:function(){

@@ -78,7 +78,7 @@
 	</select>
 	<select id="selectMyClubDetails" parameterType="clubVO" resultType="clubVO">
 	       select * from 
-	(select * from (select club_num,club_name,club_color,club_age,club_address,club_loc,filename,club_locX,club_locY from gentlepro.club where club_num=#{club_num}) c join 
+	(select * from (select club_num,club_name,club_color,club_age,club_address,club_detail,club_loc,filename,club_locX,club_locY from gentlepro.club where club_num=#{club_num}) c join 
 		(select * from gentlepro.club_join where id=#{id})d using(club_num))a left outer join         
 			(select avg(manner) manner,avg(perform) perform, COUNT(*) rating_count,club_num from gentlepro.club_rating group by club_num) b using(club_num)
 	</select>

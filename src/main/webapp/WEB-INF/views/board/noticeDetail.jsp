@@ -17,16 +17,16 @@
 	</div>
 </div>
 <div class="blank_div"></div>
-<div class="main-row">
+<div class="main-row margin-top">
 	<span class="small-font bold gray">${board.register_date }</span>
 </div>
 <div class="main-row">
 	<span class="m-font">${board.title }</span>
 </div>
 <hr class="hr">
-<p class="detail">
+<textarea class="detail">
 	${board.content}
-</p>
+</textarea>
 <div id="more_modal" class="confirm-modals">
 	<!-- Modal content -->
 	<div class="confirm-modal-content">

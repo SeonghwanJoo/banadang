@@ -253,8 +253,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
+
 $( function() {
 	
+	$('#match_detail').keyup(function (){
+		
+		var str=$(this).val();
+		if(str.length>500){
+			alert("최대 500자 까지 입력 가능합니다.");
+			$(this).val(str.substring(0,500));
+		}
+		
+	});
 
 	$('#exist').attr('disabled',true);
 	$('#non-exist').attr('disabled',true);
@@ -281,7 +291,6 @@ $( function() {
 					$("#club_msg").text("경기 일정 수정 완료");
 					$("#toast").css("display","block");
 					$("#confirm").click(function(){
-						console.log("confirm 클릭 진입");
 						location.href="${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}";
 					});
 					$(window).click(function(){

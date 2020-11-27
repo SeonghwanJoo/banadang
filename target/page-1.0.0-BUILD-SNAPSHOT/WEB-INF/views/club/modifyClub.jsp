@@ -199,11 +199,50 @@
 	
 	
 function removeWhiteSpace(obj){
-    var a = $('#club_name').val().replace(/ /gi, '');
+    var a =  $('#club_name').val().replace(/ /gi, '');
     $('#club_name').val(a);
+    var maxByte = 16; //최대 입력 바이트 수
+ 
+    var rbyte = 0;
+    var rlen = 0;
+    var one_char = "";
+    var str2 = "";
+ 
+    for (var i = 0; i < a.length; i++) {
+        one_char = a.charAt(i);
+ 
+        if (escape(one_char).length > 4) {
+            rbyte += 2; //한글2Byte
+        } else {
+            rbyte++; //영문 등 나머지 1Byte
+        }
+ 
+        if (rbyte <= maxByte) {
+            rlen = i + 1; //return할 문자열 갯수
+        }
+    }
+ 
+    if (rbyte > maxByte) {
+        alert("한글 " + (maxByte / 2) + "자 / 영문 " + maxByte + "자를 초과 입력할 수 없습니다.");
+        str2 = a.substr(0, rlen); //문자열 자르기
+        obj.value = str2;
+    } 
+
+
 }
 		
 	$(function(){
+		
+		$('#club_detail').keyup(function (){
+			
+			var str=$(this).val();
+			if(str.length>500){
+				alert("최대 500자 까지 입력 가능합니다.");
+				$(this).val(str.substring(0,500));
+			}
+			
+		});
+		
 		
 		let isChanged=0;
 		

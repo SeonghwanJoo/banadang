@@ -89,7 +89,7 @@
 		</li>
 		<c:if test="${!empty match.match_detail }">
 		<li class="li-list">
-			<p>${match.match_detail }</p>
+			<textarea class="detail">${match.match_detail }</textarea>
 		</li>
 		</c:if>
 		<li class="li-list">
@@ -168,7 +168,6 @@
 		$('#submit').click(function(){
 		
 			postMatchRequest( ${match.match_num}, ${user_id}, '${myClub.club_num}', $('#request_detail').val());
-			console.log( '${match.match_num}'+ '${user_id}'+' ${myClub.club_num}'+ $('#request_detail').val());
 			
 			function postMatchRequest(a,b,c,d){
 				if(c==''||${myClub.club_auth<5}){
@@ -191,7 +190,6 @@
 					cache:false,
 					timeout:30000,
 					success:function(data){
-						console.log(data.result);
 						if(data.result=='requested'){
 							$('#matchRequest_msg').text('경기 신청  완료');
 						}else if(data.result=='duplicated'){
