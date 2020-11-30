@@ -1800,12 +1800,19 @@ label.chip.m-wider{
 .vert{margin: 1.1rem auto;}
 
 /* Hide the browser's default checkbox */
-.chip input, .custom input[type=radio] {
+.chip input, .custom input[type=radio],.custom input[type=checkbox] {
   position: absolute;
   opacity: 0;
   cursor: pointer;
   height: 0;
   width: 0;
+}
+.agreement{
+	margin-top:0.7rem;
+	
+}
+.agreement-content{
+	padding:3rem 0.5rem;
 }
 
 /* Create a custom checkbox */

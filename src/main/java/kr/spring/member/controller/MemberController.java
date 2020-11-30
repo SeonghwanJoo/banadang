@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,7 +43,7 @@ public class MemberController {
 	private MatchService matchService;
 
 	@RequestMapping("/member/login.do")
-	public String kakaoLogin(@RequestParam String code,HttpSession session,HttpServletRequest request)throws IOException {	
+	public String kakaoLogin(@RequestParam String code,HttpSession session,HttpServletRequest request,Model model)throws IOException {	
 		
 		String uri="http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
 		String access_Token = loginAPI.getAccessToken(code,1,uri);
@@ -66,23 +67,32 @@ public class MemberController {
             	//등록되어 있으면 session setting
             	if(existingMember !=null && existingMember.getMem_auth()!=3) {
             		session.setAttribute("mem_auth", existingMember.getMem_auth());
-            	}else if(existingMember == null){
+            	}else{
+            		
             		//기존회원이 아니면
-            		//회원 정보,state,login.do인지,invitedlogin인지 votelogin인지 구별 값을 담아  addAttribute한다
+            		//회원 정보,state,code,login.do,재가입회원인지,invitedlogin인지 votelogin인지 구별 값을 담아  model에 addAttribute한다
+            		if(existingMember==null) {
+            			session.setAttribute("newMember",memberVO);
+            		}else {
+            			session.setAttribute("reMember",memberVO);
+            		}
+            		
+            		session.setAttribute("code",code);
+            		session.setAttribute("loginType",1);
+            		return "redirect:/member/agreement.do";
             		// 약간 동의 페이지로 redirect한다
-            		// 약관 동의 페이지에서 필수 항목 선택시 회원정보를 insert할 수 있도록
-            		// 
-            		
-            		
-            		memberService.insertMember(memberVO);
-            		session.setAttribute("mem_auth", 1);
+            		// 약관 동의 페이지에서 필수 항목 선택시 화면 회원 가입 버튼을 disable속성을 없앤다
+            		//가입버튼을 누르면 해당 멤버 정보르 insert/update하고 code와 state값을 담아 login.do로 redirect한다
+					
+            		/* memberService.insertMember(memberVO); 
+            		 * session.setAttribute("mem_auth", 1);
+					 */
             	}
-            	else if(existingMember.getMem_auth()==3) {
-            		memberService.updateMemberForReValidation(memberVO);
-            		session.setAttribute("mem_auth", 1);
-            	}
-            	Integer count_msg=memberService.selectCountMsg(user_id);
-            	session.setAttribute("count_msg", count_msg);
+            	session.removeAttribute("newMember");
+            	session.removeAttribute("reMember");
+            	session.removeAttribute("code");
+            	session.removeAttribute("loginType");
+            	
             	List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
             	session.setAttribute("user_id", user_id);
                 session.setAttribute("access_Token", access_Token);
@@ -133,8 +143,6 @@ public class MemberController {
             		session.setAttribute("mem_auth", 1);
             	}
             	
-            	Integer count_msg=memberService.selectCountMsg(user_id);
-            	session.setAttribute("count_msg", count_msg);
             	List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
             	session.setAttribute("user_id", user_id);
                 session.setAttribute("access_Token", access_Token);
@@ -196,8 +204,6 @@ public class MemberController {
             		session.setAttribute("mem_auth", 1);
             	}
             	
-            	Integer count_msg=memberService.selectCountMsg(user_id);
-            	session.setAttribute("count_msg", count_msg);
             	List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
             	session.setAttribute("user_id", user_id);
                 session.setAttribute("access_Token", access_Token);
@@ -244,7 +250,17 @@ public class MemberController {
 		
 		return "redirect:/member/myPage.do";
 	}
-
+	@RequestMapping("/member/agreement.do")
+	public ModelAndView agreement() {
+		
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("title", "약관 및 이용 동의");
+		mav.setViewName("agreement");
+		
+		return mav;
+	}
+	
 	@RequestMapping("/member/logout.do")
 	public String kakaoLogout(HttpSession session) {
 		loginAPI.kakaoLogout((String)session.getAttribute("access_Token"));
