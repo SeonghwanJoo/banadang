@@ -67,6 +67,13 @@ public class MemberController {
             	if(existingMember !=null && existingMember.getMem_auth()!=3) {
             		session.setAttribute("mem_auth", existingMember.getMem_auth());
             	}else if(existingMember == null){
+            		//기존회원이 아니면
+            		//회원 정보,state,login.do인지,invitedlogin인지 votelogin인지 구별 값을 담아  addAttribute한다
+            		// 약간 동의 페이지로 redirect한다
+            		// 약관 동의 페이지에서 필수 항목 선택시 회원정보를 insert할 수 있도록
+            		// 
+            		
+            		
             		memberService.insertMember(memberVO);
             		session.setAttribute("mem_auth", 1);
             	}
@@ -93,25 +100,6 @@ public class MemberController {
         }
         
 		return "redirect:/main/main.do";
-	}
-	@RequestMapping("/member/kakaoSync.do")
-	public String kakaoSync(HttpSession session) {
-		String access_Token=(String)session.getAttribute("access_Token");
-		MemberVO member=new MemberVO();
-		MemberVO profile=new MemberVO();
-		member=loginAPI.getUserInfo(access_Token);
-		profile=loginAPI.getUpdatedUserInfo(access_Token);
-		member.setNickname(profile.getNickname());
-		member.setThumbnail_image(profile.getThumbnail_image());
-		member.setProfile_image(profile.getProfile_image());
-		try {
-			memberService.updateMember_detail(member);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-		return "redirect:/member/myPage.do";
 	}
 	@RequestMapping("/member/invitedLogin.do")
 	public String invitedKakaoLogin(@RequestParam String code,
@@ -237,6 +225,26 @@ public class MemberController {
 
         return "redirect:/main/membercheck.do?club_num="+club_num;
 	}
+	@RequestMapping("/member/kakaoSync.do")
+	public String kakaoSync(HttpSession session) {
+		String access_Token=(String)session.getAttribute("access_Token");
+		MemberVO member=new MemberVO();
+		MemberVO profile=new MemberVO();
+		member=loginAPI.getUserInfo(access_Token);
+		profile=loginAPI.getUpdatedUserInfo(access_Token);
+		member.setNickname(profile.getNickname());
+		member.setThumbnail_image(profile.getThumbnail_image());
+		member.setProfile_image(profile.getProfile_image());
+		try {
+			memberService.updateMember_detail(member);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return "redirect:/member/myPage.do";
+	}
+
 	@RequestMapping("/member/logout.do")
 	public String kakaoLogout(HttpSession session) {
 		loginAPI.kakaoLogout((String)session.getAttribute("access_Token"));

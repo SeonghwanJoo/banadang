@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
 <title><tiles:getAsString name="title"/></title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/layout.css">
 <style>
 .star-rating { width:85px; text-align: left;margin:0 0.2rem; }
 .star-rating,.star-rating span {
