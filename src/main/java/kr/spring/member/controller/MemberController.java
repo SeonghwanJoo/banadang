@@ -43,13 +43,14 @@ public class MemberController {
 	private MatchService matchService;
 
 	@RequestMapping("/member/login.do")
-	public String kakaoLogin(@RequestParam String code,HttpSession session,HttpServletRequest request,Model model)throws IOException {	
+	public String kakaoLogin(@RequestParam String code,HttpSession session,HttpServletRequest request)throws IOException {	
 		
 		String uri="http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
 		String access_Token = loginAPI.getAccessToken(code,1,uri);
 		if(access_Token.equals("errors")) {
 			return "redirect:/main/loginFailure.do";
 		}
+		session.setAttribute("access_Token", access_Token);
 		
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_Token);
@@ -58,7 +59,6 @@ public class MemberController {
         }
         String user_id=memberVO.getId();
         
-        //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
         try {
             if (memberVO != null) {
                 
@@ -69,16 +69,20 @@ public class MemberController {
             		session.setAttribute("mem_auth", existingMember.getMem_auth());
             	}else{
             		
+            		int loginType=0;
             		//기존회원이 아니면
             		//회원 정보,state,code,login.do,재가입회원인지,invitedlogin인지 votelogin인지 구별 값을 담아  model에 addAttribute한다
             		if(existingMember==null) {
-            			session.setAttribute("newMember",memberVO);
+            			loginType=1;
             		}else {
-            			session.setAttribute("reMember",memberVO);
+            			loginType=2;
             		}
-            		
+            		//loginType 1,2 login.do&&각각 신규회원/재가입회원
+            		//loginType 3,4 invitedLogin.do&&각각 신규회원/재가입회원
+            		//loginType 5,6 votedLogin.do&&각각 신규회원/재가입회원
+            		session.setAttribute("member",memberVO);
             		session.setAttribute("code",code);
-            		session.setAttribute("loginType",1);
+            		session.setAttribute("loginType",loginType);
             		return "redirect:/member/agreement.do";
             		// 약간 동의 페이지로 redirect한다
             		// 약관 동의 페이지에서 필수 항목 선택시 화면 회원 가입 버튼을 disable속성을 없앤다
@@ -88,14 +92,9 @@ public class MemberController {
             		 * session.setAttribute("mem_auth", 1);
 					 */
             	}
-            	session.removeAttribute("newMember");
-            	session.removeAttribute("reMember");
-            	session.removeAttribute("code");
-            	session.removeAttribute("loginType");
             	
             	List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
             	session.setAttribute("user_id", user_id);
-                session.setAttribute("access_Token", access_Token);
                 session.setAttribute("myClubs", myClubs);
                 
                 if(myClubs.size()>0) {

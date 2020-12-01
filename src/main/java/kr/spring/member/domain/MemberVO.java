@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class MemberVO {
 	
+	private Integer marketing;
 	private String nickname;
 	private String cancel;
 	private String profile_image;
@@ -36,6 +37,12 @@ public class MemberVO {
 	private Date join_date;
 	private String reason;
 	private Integer responseCode;
+	public Integer getMarketing() {
+		return marketing;
+	}
+	public void setMarketing(Integer marketing) {
+		this.marketing = marketing;
+	}
 	public Integer getResponseCode() {
 		return responseCode;
 	}

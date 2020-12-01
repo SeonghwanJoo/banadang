@@ -78,4 +78,10 @@
        <put-attribute name="body" value="/WEB-INF/views/more/appSetting.jsp"/>
        <put-attribute name="footer" value=""/>
     </definition>
+    <definition name="agreement" extends="main">
+       <put-attribute name="title" value="약관 및 이용동의"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/agreement.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
 </tiles-definitions>

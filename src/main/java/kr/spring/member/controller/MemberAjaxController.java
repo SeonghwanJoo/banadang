@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.spring.club.domain.ClubVO;
 import kr.spring.club.service.ClubService;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
@@ -198,6 +199,35 @@ public class MemberAjaxController {
 		}catch(Exception e) {
 			map.put("result", "errors");
 		}
+		
+		return map;
+	}
+	@RequestMapping("/member/insertMember.do")
+	@ResponseBody
+	public Map<String,Object> insertMember(@RequestParam(defaultValue = "2") Integer marketing,HttpSession session){
+		
+		Integer loginType=(Integer) session.getAttribute("loginType");
+		Map<String,Object> map=new HashMap<String,Object>();
+		MemberVO member=(MemberVO) session.getAttribute("member");
+		try {
+			if(loginType%2==1) {
+				memberService.insertMember(member);
+			}else {
+				memberService.updateMemberForReValidation(member);
+			}
+			session.removeAttribute("member");
+    		session.removeAttribute("code");
+    		session.removeAttribute("loginType");
+			String user_id=member.getId();
+			session.setAttribute("user_id", user_id);
+			session.setAttribute("mem_auth", 1);
+			map.put("result", "success");
+			
+		}catch(Exception e) {
+			
+			map.put("result", "errors");
+		}
+		
 		
 		return map;
 	}

@@ -492,6 +492,7 @@ input[type=text]:focus, select:focus{
 	position: fixed; /* Stay in place */
 	z-index:98; /* Sit on top */
 	padding-top:10%;
+	padding-bottom:2%;
 	left: 0;
 	top: 0;
 	width: 100%; /* Full width */
