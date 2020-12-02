@@ -1,6 +1,7 @@
 package kr.spring.club.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -211,9 +212,13 @@ public class ClubAjaxController {
 			
 			clubService.insertClubMember(club);
 			ClubVO myClub=clubService.selectMyClubDetails(club);
-			List<ClubVO> myClubs=null;
-			myClubs=(List)session.getAttribute("myClubs");
+			List<ClubVO> myClubs = new ArrayList<ClubVO> ();
 			myClubs.add(myClub);
+			List<ClubVO> clubs=(List)session.getAttribute("myClubs");
+			if(clubs!=null) {
+				myClubs.addAll(clubs);
+			}
+			
 			session.setAttribute("myClubs", myClubs);
 			session.setAttribute("myClub", myClub);
 			map.put("result", "success");

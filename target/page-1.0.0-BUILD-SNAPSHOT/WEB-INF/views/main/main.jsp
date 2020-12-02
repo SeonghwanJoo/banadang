@@ -145,10 +145,10 @@
 			<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
 				<div class="row margin-top margin-btm">
 					<div class="centered">
-						<c:if test="${ match.away_filename ne 'undefined'  }">
+						<c:if test="${ not empty match.away_filename && match.away_filename ne 'undefined'  }">
 						<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}" alt="Avatar" class="avatar emblem">
 						</c:if>
-						<c:if test="${ match.away_filename eq 'undefined'   }">
+						<c:if test="${ empty match.away_filename || match.away_filename eq 'undefined'   }">
 						<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
 						</c:if>
 						<span class="disp-inbl margin-top">${match.away_name}</span>

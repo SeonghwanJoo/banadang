@@ -485,8 +485,11 @@
 						$("#club_msg").text("가입 완료");
 						$("#toast").css("display","block");
 						$(".alert-btn").click(function(){
+							let str;
 							if(${not empty state}){
-								let str='${state}'.split('-');
+								
+								str='${state}'.split('-');
+								
 							}
 							if(${loginType==1 || loginType ==2}){
 								location.href='${pageContext.request.contextPath}/main/main.do';
