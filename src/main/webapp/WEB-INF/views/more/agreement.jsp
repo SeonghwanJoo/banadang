@@ -485,12 +485,15 @@
 						$("#club_msg").text("가입 완료");
 						$("#toast").css("display","block");
 						$(".alert-btn").click(function(){
+							if(${not empty state}){
+								let str='${state}'.split('-');
+							}
 							if(${loginType==1 || loginType ==2}){
 								location.href='${pageContext.request.contextPath}/main/main.do';
 							}else if(${loginType==3 || loginType ==4}){
-								
+								location.href='${pageContext.request.contextPath}/club/inviteMember.do?club_num='+str[0]+'&nickname='+str[1];
 							}else{
-								
+								location.href='${pageContext.request.contextPath}/main/voteForm.do?match_num='+str[0]+'&club_num='+str[1]+'&isMain='+str[2];
 							}
 						});
 						

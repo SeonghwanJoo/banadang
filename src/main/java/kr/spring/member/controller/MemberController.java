@@ -69,7 +69,7 @@ public class MemberController {
             		session.setAttribute("mem_auth", existingMember.getMem_auth());
             	}else{
             		
-            		int loginType=0;
+            		int loginType;
             		//기존회원이 아니면
             		//회원 정보,state,code,login.do,재가입회원인지,invitedlogin인지 votelogin인지 구별 값을 담아  model에 addAttribute한다
             		if(existingMember==null) {
@@ -122,6 +122,7 @@ public class MemberController {
         if(memberVO.getResponseCode()!=200) {
         	return "redirect:/main/loginFailure.do";
         }
+        session.setAttribute("access_Token", access_Token);
         String user_id=memberVO.getId();
         
         //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
@@ -131,20 +132,24 @@ public class MemberController {
             	//memberVO의 아이디가 DB에 기 등록된 id인지 확인
             	MemberVO existingMember=memberService.getMember(user_id);
             	//등록되어 있으면 session setting
-            	if(existingMember !=null && existingMember.getMem_auth()!=3) {
+            	if(existingMember !=null && existingMember.getMem_auth()!=3)  {
             		session.setAttribute("mem_auth", existingMember.getMem_auth());
-            	}else if(existingMember == null){
-            		memberService.insertMember(memberVO);
-            		session.setAttribute("mem_auth", 1);
-            	}
-            	else if(existingMember.getMem_auth()==3) {
-            		memberService.updateMemberForReValidation(memberVO);
-            		session.setAttribute("mem_auth", 1);
+            	}else{
+            		int loginType;
+            		if(existingMember==null) {
+            			loginType=3;
+            		}else {
+            			loginType=4;
+            		}
+            		session.setAttribute("member",memberVO);
+            		session.setAttribute("code",code);
+            		session.setAttribute("loginType",loginType);
+            		session.setAttribute("state", state);
+            		return "redirect:/member/agreement.do";
             	}
             	
             	List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
             	session.setAttribute("user_id", user_id);
-                session.setAttribute("access_Token", access_Token);
                 session.setAttribute("myClubs", myClubs);
                 if(myClubs.size()>0) {
                 	ClubVO club=new ClubVO();
@@ -171,10 +176,7 @@ public class MemberController {
 								 @RequestParam String state,
 								 HttpSession session,
 								 HttpServletRequest request)throws IOException {	
-		String[] values=state.split("-");
-		Integer match_num=Integer.parseInt(values[0]);
-	    Integer club_num=Integer.parseInt(values[1]);
-	    Boolean isMain=Boolean.valueOf(values[2]);
+		
 	    String uri="http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
 		
 	    String access_Token = loginAPI.getAccessToken(code,2,uri);
@@ -183,8 +185,12 @@ public class MemberController {
         if(memberVO.getResponseCode()!=200) {
         	return "redirect:/main/loginFailure.do";
         }
+        session.setAttribute("access_Token", access_Token);
         String user_id=memberVO.getId();
-        
+        String[] values=state.split("-");
+		Integer match_num=Integer.parseInt(values[0]);
+	    Integer club_num=Integer.parseInt(values[1]);
+	    Boolean isMain=Boolean.valueOf(values[2]);
         
         try {
             if (memberVO != null) {
@@ -194,22 +200,25 @@ public class MemberController {
             	//등록되어 있으면 session setting
             	if(existingMember !=null && existingMember.getMem_auth()!=3) {
             		session.setAttribute("mem_auth", existingMember.getMem_auth());
-            	}else if(existingMember == null){
-            		memberService.insertMember(memberVO);
-            		session.setAttribute("mem_auth", 1);
-            	}
-            	else if(existingMember.getMem_auth()==3) {
-            		memberService.updateMemberForReValidation(memberVO);
-            		session.setAttribute("mem_auth", 1);
+            	}else{
+            		int loginType;
+            		if(existingMember==null) {
+            			loginType=5;
+            		}else {
+            			loginType=6;
+            		}
+            		session.setAttribute("member",memberVO);
+            		session.setAttribute("code",code);
+            		session.setAttribute("loginType",loginType);
+            		session.setAttribute("state", state);
+            		return "redirect:/member/agreement.do";
             	}
             	
             	List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
             	session.setAttribute("user_id", user_id);
-                session.setAttribute("access_Token", access_Token);
                 session.setAttribute("myClubs", myClubs);
                 if(myClubs.size()>0) {
                 	
-                	logger.info("clubsize>0 진입");
                 	for(ClubVO myClub:myClubs) {
                 		
                 		if(myClub.getClub_num()==club_num) {
@@ -227,8 +236,9 @@ public class MemberController {
         	return "redirect:/main/loginFailure.do";
         	
         }
-
         return "redirect:/main/membercheck.do?club_num="+club_num;
+
+       
 	}
 	@RequestMapping("/member/kakaoSync.do")
 	public String kakaoSync(HttpSession session) {
