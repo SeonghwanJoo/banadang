@@ -9,13 +9,15 @@
 		</a>
 		<div class="topnav-centered">
 			
-			<a href="#home" class="active small-font">${match.home_name } VS 
-			<c:if test="${!fn:contains(match.away_name,'모집') }">
-			${match.away_name}
+			<a href="#home" class="active small-font">
+			<c:if test="${empty match.home_name }">
+				삭제된 팀
 			</c:if>
-			<c:if test="${fn:contains(match.away_name,'모집') }">
-			모집 중
+			<c:if test="${not empty match.home_name }">
+			${match.home_name }
 			</c:if>
+			 VS 
+			  ${match.away_name}
 			</a>
 		</div>
 	</div>

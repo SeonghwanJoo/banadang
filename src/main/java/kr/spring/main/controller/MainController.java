@@ -127,14 +127,9 @@ public class MainController {
 	}
 
 	@RequestMapping("/main/vote_detail.do")
-	public ModelAndView vote_detail(@RequestParam Integer club_num, @RequestParam Integer match_num,
-			@RequestParam String home_name, @RequestParam String away_name) {
+	public ModelAndView vote_detail(MatchVO match) {
+		
 		ModelAndView mav = new ModelAndView();
-		MatchVO match = new MatchVO();
-		match.setClub_num(club_num);
-		match.setMatch_num(match_num);
-		match.setHome_name(home_name);
-		match.setAway_name(away_name);
 		List<MemberVO> members = new ArrayList<MemberVO>();
 		List<MemberVO> atdance = new ArrayList<MemberVO>();
 		List<MemberVO> no_atdance = new ArrayList<MemberVO>();
@@ -144,19 +139,13 @@ public class MainController {
 		// 클럽의 전체 회원 명단을 받는다
 		// 전체 회원의 닉네임과 프로필 사진을 받기 위해 mem_detail과 조인한다
 		members = matchService.selectVote_detail(match);
-		logger.info("<<members>> : " + members);
-		int i = 0;
 		for (MemberVO member : members) {
-			i++;
-			logger.info("<<count>> : " + i);
+			
 			if (member.getStatus() == 1) {
-				logger.info("<<member>> : 1" + member);
 				atdance.add(member);
 			} else if (member.getStatus() == 2) {
-				logger.info("<<member>> : 2" + member);
 				no_atdance.add(member);
 			} else if (member.getStatus() == 3) {
-				logger.info("<<member>> : 3" + member);
 				undefined_atdance.add(member);
 			} else if (member.getStatus() == 0) {
 				not_voted.add(member);
@@ -263,16 +252,15 @@ public class MainController {
 
 	public Map<String,Object> addRatingResult(MatchVO match, ArrayList<MatchVO> clubs_rating) {
 		clubs_rating = matchService.selectAverageRating(match);//클럽이 삭제되었다면 해당 클럽번호의 결과가 없음
-		match.setHome_manner(0.0);
-		match.setHome_perform(0.0);
-		match.setAway_manner(0.0);
-		match.setAway_name(match.getAway_name() + "(미등록팀)");// DB에 away_name추가
-		match.setAway_perform(0.0);
+		if(match.getAway()==-1) {
+			match.setAway_name(match.getAway_name() + "(미등록)");// DB에 away_name추가
+		}
 		
 		int away_count=0;
 		int home_count=0;
 		
 		for (MatchVO club_rating : clubs_rating) {
+			
 			if (match.getHome() == club_rating.getClub_num()) {//if문으로 들어가지 못함
 				match.setHome_manner(club_rating.getManner());
 				match.setHome_name(club_rating.getClub_name());
@@ -280,13 +268,19 @@ public class MainController {
 				match.setHome_filename(club_rating.getFilename());
 				home_count++;
 			}
+			
 			if (match.getAway() == club_rating.getClub_num()) {
-				away_count++;
+				
 				match.setAway_manner(club_rating.getManner());
 				match.setAway_name(club_rating.getClub_name());
 				match.setAway_perform(club_rating.getPerform());
 				match.setAway_filename(club_rating.getFilename());
+				match.setClub_loc(club_rating.getClub_loc());
+				away_count++;
 			}
+		}
+		if(match.getClub_loc()==null&&match.getAway()>0) {
+			match.setAway_name("삭제된 팀");
 		}
 		Map<String, Object> map=new HashMap<String,Object>();
 		map.put("away_count", away_count);

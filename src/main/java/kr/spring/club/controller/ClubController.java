@@ -243,11 +243,9 @@ public class ClubController {
 	
 	public Map<String,Object> addRatingResult(MatchVO match, ArrayList<MatchVO> clubs_rating) {
 		clubs_rating=matchService.selectAverageRating(match);
-		match.setHome_manner(0.0);
-		match.setHome_perform(0.0);
-		match.setAway_manner(0.0);
-		match.setAway_name(match.getAway_name()+"(미등록팀)");//DB에 away_name추가
-		match.setAway_perform(0.0);
+		if(match.getAway()==-1) {
+			match.setAway_name(match.getAway_name() + "(미등록)");// DB에 away_name추가
+		}
 		
 		int away_count=0;
 		int home_count=0;
@@ -266,10 +264,13 @@ public class ClubController {
 				match.setAway_name(club_rating.getClub_name());
 				match.setAway_perform(club_rating.getPerform());
 				match.setAway_filename(club_rating.getFilename());
+				match.setClub_loc(club_rating.getClub_loc());
 				away_count++;
 			}
 		}
-		
+		if(match.getClub_loc()==null&&match.getAway()>0) {
+			match.setAway_name("삭제된 팀");
+		}
 		Map<String, Object> map=new HashMap<String,Object>();
 		map.put("away_count", away_count);
 		map.put("home_count", home_count);

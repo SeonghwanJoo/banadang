@@ -52,11 +52,7 @@ public class ClubMemberCheckInterceptor  extends HandlerInterceptorAdapter {
 				}
 				
 			}
-			/*else if(myClubs==null) {
-				response.sendRedirect(
-						request.getContextPath()+"/main/myClubCheck.do");
-				return false;
-			}*/
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

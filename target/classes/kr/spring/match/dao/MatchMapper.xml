@@ -35,7 +35,7 @@
 			</selectKey>
 	</insert>
 	<select id="selectAverageRating" parameterType="matchVO" resultType="matchVO">
-		select a.club_num,a.club_name,filename,b.perform,b.manner from (select club_num, club_name,filename from gentlepro.club where club_num=#{home} or club_num=#{away} ) a 
+		select a.club_num,a.club_name,filename,club_loc,b.perform,b.manner from (select club_num, club_name,filename,club_loc from gentlepro.club where club_num=#{home} or club_num=#{away} ) a 
 	    left outer join
 	    (select club_num, avg(perform) as perform, avg(manner) as manner
 			 from gentlepro.club_rating group by club_num) b
@@ -61,9 +61,9 @@
 		where clubrating_num=#{clubrating_num}
 	</update>
 	<select id="selectVote_detail" parameterType="matchVO" resultType="memberVO">
-		select a.club_num,a.id,a.nickname,a.thumbnail_image,a.profile_image,b.status from
+		select a.club_num,a.id,a.nickname,a.thumbnail_image,b.status from
 			(select * from gentlepro.match_vote where club_num=#{club_num} and match_num=#{match_num})b right outer join 
-    		(select c.club_num club_num,c.id,m.nickname,m.thumbnail_image,m.profile_image from gentlepro.member_detail m join gentlepro.club_join c on m.id=c.id where c.club_num=#{club_num} and c.club_auth>3)
+    		(select c.club_num club_num,c.id,m.nickname,m.thumbnail_image from gentlepro.member_detail m join gentlepro.club_join c on m.id=c.id where c.club_num=#{club_num})
     		a on b.id=a.id
 	</select>
 	<select id="selectMatchToInvite" resultType="matchVO">

@@ -101,12 +101,7 @@ public class MatchController {
 		//
 		ClubVO myClub=(ClubVO)session.getAttribute("myClub");
 		List<MatchVO> matches=matchService.selectMyMatch(myClub.getClub_num());
-		ArrayList<MatchVO> vote_status=new ArrayList<MatchVO>();
-		ArrayList<MatchVO> clubs_rating=new ArrayList<MatchVO>();
-		for(MatchVO match: matches) {
-			addVoteResult(match, vote_status);
-			addRatingResult(match, clubs_rating);
-		}
+		
 		mav.addObject("matches", matches);
 		mav.addObject("title","용병 모집");
 		mav.setViewName("writeRecruit");
@@ -177,7 +172,8 @@ public class MatchController {
 	}
 	
 	@RequestMapping("/match/matchDetail.do")
-	public ModelAndView matchDetail(@RequestParam Integer match_num) {
+	public ModelAndView matchDetail(@RequestParam Integer match_num,
+									@RequestParam boolean isMain) {
 		
 		ModelAndView mav=new ModelAndView();
 		ArrayList<MatchVO> clubs_rating = new ArrayList<MatchVO>();
@@ -187,54 +183,36 @@ public class MatchController {
 		
 		mav.addObject("match", match);
 		mav.addObject("title", "경기 상세");
+		mav.addObject("isMain",isMain);
 		mav.setViewName("matchDetail");
 		
 		return mav;
 	}
 	
 	
-	public void addVoteResult(MatchVO match,ArrayList<MatchVO> vote_status) {
-		Integer myVote=matchService.selectMyVoteStatus(match);
-		
-		if(myVote != null) {
-			match.setStatus(myVote);
-		}
-		
-		//matchVO에 해당 경기,해당 팀의 투표 현황을 받는다
-		vote_status=matchService.selectVoteStatusByGroup(match);
-		for(MatchVO vote_result: vote_status) {
-			if(vote_result.getStatus()==1) {
-				match.setAttend(vote_result.getCount());
-			}
-			if(vote_result.getStatus()==2) {
-				match.setNot_attend(vote_result.getCount());
-			}
-			if(vote_result.getStatus()==3) {
-				match.setUndefined(vote_result.getCount());
-			}
-			match.setMax();
-		}
-	}
-	
 	public void addRatingResult(MatchVO match, ArrayList<MatchVO> clubs_rating) {
 		clubs_rating=matchService.selectAverageRating(match);
-		match.setHome_manner(0.0);
-		match.setHome_perform(0.0);
-		match.setAway_manner(0.0);
-		match.setAway_name(match.getAway_name()+"(미등록팀)");//DB에 away_name추가
-		match.setAway_perform(0.0);
+		if(match.getAway()==-1) {
+			match.setAway_name(match.getAway_name() + "(미등록)");// DB에 away_name추가
+		}
 		
 		for(MatchVO club_rating:clubs_rating) {
 			if(match.getHome()==club_rating.getClub_num()) {
 				match.setHome_manner(club_rating.getManner());
 				match.setHome_name(club_rating.getClub_name());
 				match.setHome_perform(club_rating.getPerform());
+				match.setHome_filename(club_rating.getFilename());
 			}
 			if(match.getAway()==club_rating.getClub_num()) {
 				match.setAway_manner(club_rating.getManner());
 				match.setAway_name(club_rating.getClub_name());
 				match.setAway_perform(club_rating.getPerform());
+				match.setAway_filename(club_rating.getFilename());
+				match.setClub_loc(club_rating.getClub_loc());
 			}
+		}
+		if(match.getClub_loc()==null&&match.getAway()>0) {
+			match.setAway_name("삭제된 팀");
 		}
 	}
 }
