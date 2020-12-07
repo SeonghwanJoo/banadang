@@ -45,7 +45,8 @@ public class MemberController {
 	@RequestMapping("/member/login.do")
 	public String kakaoLogin(@RequestParam String code,HttpSession session,HttpServletRequest request)throws IOException {	
 		
-		String uri="http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
+		String uri="http://"+request.getServerName()+request.getContextPath();
+		logger.info("uri : " + uri);
 		String access_Token = loginAPI.getAccessToken(code,1,uri);
 		if(access_Token.equals("errors")) {
 			return "redirect:/main/loginFailure.do";
@@ -115,7 +116,7 @@ public class MemberController {
 									@RequestParam String state,
 									HttpSession session,
 									HttpServletRequest request)throws IOException {	
-		String uri="http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
+		String uri="http://"+request.getServerName()+request.getContextPath();
 		String access_Token = loginAPI.getAccessToken(code,0,uri);
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_Token);
@@ -177,7 +178,8 @@ public class MemberController {
 								 HttpSession session,
 								 HttpServletRequest request)throws IOException {	
 		
-	    String uri="http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
+		String uri="http://"+request.getServerName()+request.getContextPath();
+		
 		
 	    String access_Token = loginAPI.getAccessToken(code,2,uri);
         MemberVO memberVO=new MemberVO();

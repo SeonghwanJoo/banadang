@@ -35,7 +35,7 @@
 		</a>
 		</c:if>
 		<div class="topnav-centered">
-			<a href="#home" class="active">${title }</a>
+			<span class="active">${title }</span>
 		</div>
 	</div>
 </div>
@@ -297,7 +297,7 @@ function sendLink(match_num,club_num,match_date,address,start_time) {
     })
   }
 function loginProcess(){
-	location.href="https://kauth.kakao.com/oauth/authorize?client_id=0646bcb11e5b9bbdb24fc9153f7693ae&redirect_uri=http://${pageContext.request.serverName }:${pageContext.request.serverPort}${pageContext.request.contextPath}/member/voteLogin.do&response_type=code&state=${match.match_num }-${match.club_num}-${isMain}";
+	location.href="https://kauth.kakao.com/oauth/authorize?client_id=0646bcb11e5b9bbdb24fc9153f7693ae&redirect_uri=http://${pageContext.request.serverName }${pageContext.request.contextPath}/member/voteLogin.do&response_type=code&state=${match.match_num }-${match.club_num}-${isMain}";
 };
 function modifyAnswer(voteAnswer_num){
 	$('#more_modal').css('display','block');
@@ -336,11 +336,7 @@ function modifyAnswer(voteAnswer_num){
 }
 function setVoteStyle(max,attend,not_attend,undefined,status){
 	
-	if(max==0){
-		$('#attend').css('background-color','transparent');
-		$('#not_attend').css('background-color','transparent');
-		$('#undefined').css('background-color','transparent');
-	}else if (max==attend){
+	if (max==attend){
 		$('#attend').css('background-color','#a4d3a6');
 		$('#not_attend').css('background-color','#bfbfbf');
 		$('#undefined').css('background-color','#bfbfbf');
@@ -374,6 +370,7 @@ function setVoteStyle(max,attend,not_attend,undefined,status){
 
 	$(function(){
 		
+		
 		$('#more').click(function(){
 			
 			$('#more_modal').css('display','block');
@@ -398,7 +395,7 @@ function setVoteStyle(max,attend,not_attend,undefined,status){
 				url:'vote.do',
 				type:'post',
 				data:{
-					id:${user_id},
+					id:'${user_id}',
 					match_num:${match.match_num},
 					club_num:${match.club_num},
 					status:status

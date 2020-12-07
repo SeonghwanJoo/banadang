@@ -7,7 +7,7 @@
 			<span class="material-icons" id="chevron_left" >chevron_left</span>
 		</a>
 		<div class="topnav-centered">
-			<a href="javascript:document.reload()" class="active">${title }</a>
+			<span class="active">${title }</span>
 		</div>
 		<input type="submit" id="submit" value="등록">
 	</div>

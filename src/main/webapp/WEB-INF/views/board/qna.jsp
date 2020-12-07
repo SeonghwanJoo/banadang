@@ -7,14 +7,14 @@
 	<span class="material-icons" id="cancel">close</span>
 	</a>
 	<div class="topnav-centered inner">
-		<a href="javascript:document.reload()" class="active">
+		<span class="active">
 			<c:if test="${empty fromUser }">	
 				${title }
 			</c:if>
 			<c:if test="${not empty fromUser }">	
 				나의 문의사항
 			</c:if>
-		</a>
+		</span>
 	</div>
 	<c:if test="${mem_auth==2 && empty fromUser}">
 	<div class="topnav-right">

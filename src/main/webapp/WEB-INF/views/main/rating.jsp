@@ -15,7 +15,7 @@
 		</a>
 		</c:if>
 		<div class="topnav-centered">
-			<a href="#home" class="active">${title }</a>
+			<span class="active">${title }</span>
 		</div>
 		<input type="submit" id="submit" value="완료">
 	</div>

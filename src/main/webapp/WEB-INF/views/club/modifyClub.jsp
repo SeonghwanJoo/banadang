@@ -13,7 +13,7 @@
 		<span class="material-icons" id="cancel">close</span>
 		</a>
 		<div class="topnav-centered">
-			<a href="javascript:location.reload" class="active">${title }</a>
+			<span class="active">${title }</span>
 		</div>
 		<input type="submit" id="submit" value="완료">
 	</div>

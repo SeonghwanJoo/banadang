@@ -8,7 +8,7 @@
 		<span class="material-icons" id="cancel">close</span>
 		</a>
 		<div class="topnav-centered">
-			<a href="javascript:document.reload()" class="active">${title }</a>
+			<span class="active">${title }</span>
 		</div>
 	</div>
 </div>

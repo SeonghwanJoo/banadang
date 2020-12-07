@@ -9,7 +9,7 @@
 		<span class="material-icons" id="cancel">close</span>
 		</a>
 		<div class="topnav-centered">
-			<a href="javascript:document.reload()" class="active">${title }</a>
+			<span class="active">${title }</span>
 		</div>
 		<c:if test="${clubRecruit.club_num!=myClub.club_num }">
 		<input type="submit" id="submit" value="신청">

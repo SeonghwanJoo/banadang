@@ -7,7 +7,7 @@
 	<span class="material-icons" id="cancel">close</span>
 	</a>
 	<div class="topnav-centered inner">
-		<a href="javascript:document.reload()" class="active">${title }</a>
+		<span class="active">${title }</span>
 	</div>
 	<c:if test="${mem_auth==2 }">
 	<div class="topnav-right">

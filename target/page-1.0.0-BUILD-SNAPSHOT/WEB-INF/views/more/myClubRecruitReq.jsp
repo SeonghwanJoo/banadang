@@ -9,7 +9,7 @@
 		<span class="material-icons" id="cancel">close</span>
 		</a>
 		<div class="topnav-centered">
-			<a href="javascript:location.reload()" class="active cursor">${title }</a>
+			<span class="active cursor">${title }</span>
 		</div>
 	</div>
 </div>

@@ -7,13 +7,13 @@
 		<span class="material-icons" id="cancel">close</span>
 		</a>
 		<div class="topnav-centered">
-			<a id="sel" class="active cursor gray">
+			<span id="sel" class="active cursor gray">
 				<i class="fas fa-inbox margin-right"></i>
 				${title }
 				<span class="drop-down material-icons">
 					arrow_drop_down
 				</span>
-			</a>
+			</span>
 		</div>
 	</div>
 </div>

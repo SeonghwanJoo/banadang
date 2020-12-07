@@ -41,7 +41,7 @@
 		<a
 			href="https://kauth.kakao.com/oauth/authorize?
 	client_id=0646bcb11e5b9bbdb24fc9153f7693ae
-	&redirect_uri=http://${pageContext.request.serverName }:${pageContext.request.serverPort}${pageContext.request.contextPath}/member/login.do
+	&redirect_uri=http://${pageContext.request.serverName }${pageContext.request.contextPath}/member/login.do
 	&response_type=code">
 			<img class="login_btn"
 			src="${pageContext.request.contextPath}/resources/images/kakao_login/ko/kakao_login_medium_wide.png">
@@ -381,6 +381,8 @@ function sendLinkForVote(match_num,club_num,match_date,address,start_time) {
 	    })
 }
 function openMore(match_num,club_name,club_num,match_date,address,start_time,modify){
+		
+		$('#options').replaceWith('');
 		var itemStr='';
 		if(modify){
 			
@@ -411,13 +413,14 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 		});
 		$('#more-cancel-btn').click(function(){
 			$('#more_modal').css('display','none');
-			if(modify){
-				$('#options').replaceWith('');
-			}
+			
 		});
+		
  }
  $(function(){
+	 
 	 let matches=new Array();
+	 
 	 <c:forEach items="${match_list}" var="match">
 	 	var obj={};
 	 	obj.match_num="${match.match_num}";
@@ -434,32 +437,14 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 	 	var not_attend=matches[i].not_attend;
 	 	var not_fixed=matches[i].undefined;
 	 	var match_num=matches[i].match_num;
-	 	 if(max==0){
-	 		$('#voted-attend-'+matches[i].match_num).css('background-color','transparent');
-	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','transparent');
-	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','transparent');
-	 	}else if (max==attend){
-	 		$('#voted-attend-'+matches[i].match_num).css('background-color','#a4d3a6');
-	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#bfbfbf');
-	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#bfbfbf');
+	 	if (max==attend){
+	 		$('#voted-attend-'+matches[i].match_num).css('background-color','#A4d3a6');
 	 	}else if(max==not_attend){
-	 		$('#voted-attend-'+matches[i].match_num).css('background-color','#bfbfbf');
-	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#a4d3a6');
-	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#bfbfbf')
+	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#A4d3a6');
 	 	}else if(max==not_fixed){
-	 		$('#voted-attend-'+matches[i].match_num).css('background-color','#bfbfbf');
-	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#bfbfbf');
-	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#a4d3a6');
+	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#A4d3a6');
 	 	}
-	 	if(attend==0){
-	 		$('#voted-attend-'+matches[i].match_num).css('background-color','transparent');
-	 	}
-	 	if(not_attend==0){
-	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','transparent');
-	 	}
-	 	if(not_fixed==0){
-	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','transparent');
-	 	}
+	 	
 	  }
 	 
 	 

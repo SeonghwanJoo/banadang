@@ -7,8 +7,8 @@
 	<a href="club.do" >
 	<span class="material-icons" id="cancel">close</span>
 	</a>
-	<div class="topnav-centered inner">
-		<a href="javascript:location.reload()" class="active cursor">${title }</a>
+	<div class="topnav-centered">
+		<span class="active cursor">${title }</span>
 	</div>
 	<c:if test="${myClub.club_auth>4 }">
 	<div class="topnav-right">
@@ -944,6 +944,8 @@ function sendLinkForVote(match_num,club_num,match_date,address,start_time) {
     })
   }
 function openMore(match_num,club_name,club_num,match_date,address,start_time,modify){
+	
+	$('#options').replaceWith('');
 	var itemStr='';
 	if(modify){
 		
@@ -974,9 +976,7 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 	});
 	$('#more-cancel-btn').click(function(){
 		$('#more_modal').css('display','none');
-		if(modify){
-			$('#options').replaceWith('');
-		}
+		
 	});
 }
 function cancelMatchReq(request_num,acceptance,match_num){

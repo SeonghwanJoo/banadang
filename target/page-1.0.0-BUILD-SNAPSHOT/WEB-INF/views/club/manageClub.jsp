@@ -7,8 +7,8 @@
 	<a href="club.do" >
 	<span class="material-icons" id="cancel">close</span>
 	</a>
-	<div class="topnav-centered inner">
-		<a href="javascript:location.reload()" class="active cursor">${title }</a>
+	<div class="topnav-centered">
+		<span class="active cursor">${title }</span>
 	</div>
 	<c:if test="${myClub.club_auth>4 }">
 	<div class="topnav-right">
@@ -469,8 +469,13 @@
 						</div>
 						<div class="row small-font margin-top margin-btm">
 							<c:if test="${empty match.home_name }">
-								<div class="team-info col">
-									<span class="disp-inbl margin-top">삭제된 팀</span>
+								<div class="team-info col margin-top">
+									<div class="centered margin-top">
+										<span class="material-icons">
+										error
+										</span>
+										삭제된 팀
+									</div>
 								</div>
 							</c:if>
 							<c:if test="${not empty match.home_name }">
@@ -508,14 +513,14 @@
 							</div>
 							</c:if>
 							<span class="from-to">VS</span>
-							<c:if test="${not empty match.away_name && match.away != 0}">
+							<c:if test="${ not empty match.club_loc}">
 							<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
 								<div class="row margin-top margin-btm">
 									<div class="centered">
-										<c:if test="${ not empty match.away_filename && match.away_filename ne 'undefined' }">
+										<c:if test="${ not empty match.away_filename && match.away_filename ne 'undefined'  }">
 										<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}" alt="Avatar" class="avatar emblem">
 										</c:if>
-										<c:if test="${ empty match.away_filename || match.away_filename eq 'undefined'  }">
+										<c:if test="${ empty match.away_filename || match.away_filename eq 'undefined'   }">
 										<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
 										</c:if>
 										<span class="disp-inbl margin-top">${match.away_name}</span>
@@ -537,12 +542,23 @@
 								</div>
 							</div>
 							</c:if>
-							<c:if test="${match.away == 0 }">
-							<div class="team-info col">
-								<div class="row margin-top">
-									<div class="margin-top centered">
-										<span class="disp-bl ">모집 중</span>
-									</div>
+							<c:if test="${empty match.club_loc}">
+							<div class="team-info col margin-top">
+								<div class="centered margin-top">
+									<c:if test="${match.away>0 }">
+									<span class="material-icons">
+									error
+									</span>
+									</c:if>
+									<c:if test="${match.away==0 }">
+									<span class="material-icons">
+										campaign
+										</span>
+									</c:if>
+									<c:if test="${ match.away==-1}">
+									<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+									</c:if>
+									${match.away_name }
 								</div>
 							</div>
 							</c:if>
@@ -928,6 +944,8 @@ function sendLinkForVote(match_num,club_num,match_date,address,start_time) {
     })
   }
 function openMore(match_num,club_name,club_num,match_date,address,start_time,modify){
+	
+	$('#options').replaceWith('');
 	var itemStr='';
 	if(modify){
 		
@@ -954,13 +972,11 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 		$('#more_modal').css('display','none');
 	});
 	$('#detail').click(function(){
-		location.href='${pageContext.request.contextPath}/match/matchDetail.do?match_num='+match_num;
+		location.href='${pageContext.request.contextPath}/match/matchDetail.do?match_num='+match_num+'&isMain=false';
 	});
 	$('#more-cancel-btn').click(function(){
 		$('#more_modal').css('display','none');
-		if(modify){
-			$('#options').replaceWith('');
-		}
+		
 	});
 }
 function cancelMatchReq(request_num,acceptance,match_num){

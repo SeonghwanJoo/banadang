@@ -8,8 +8,7 @@
 		<span class="material-icons" id="chevron_left" >chevron_left</span>
 		</a>
 		<div class="topnav-centered">
-			
-			<a href="#home" class="active small-font">
+			<span class="active small-font">
 			<c:if test="${empty match.home_name }">
 				삭제된 팀
 			</c:if>
@@ -18,7 +17,7 @@
 			</c:if>
 			 VS 
 			  ${match.away_name}
-			</a>
+			</span>
 		</div>
 	</div>
 </div>
