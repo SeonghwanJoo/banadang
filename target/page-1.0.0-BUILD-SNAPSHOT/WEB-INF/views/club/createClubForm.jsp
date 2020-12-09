@@ -161,6 +161,9 @@
 		</div>
 	</div>
 </div>
+<div id="loader-toast" class="loader_toast">
+	<img src="${pageContext.request.contextPath }/resources/images/ajax-loader.gif" class="loader">
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -221,6 +224,9 @@ function removeWhiteSpace(obj){
 		
 		
 		$("#submit").click(function(e){
+			
+			$('#loader-toast').css('display','block');
+			
 			e.preventDefault();
 			let club_img=dataURLToBlob($("#img-pre").attr("src"));
 			var formData = new FormData($('#club_form')[0]);
@@ -247,7 +253,11 @@ function removeWhiteSpace(obj){
 				cache:false,
 				timeout:30000,
 				success:function(data){
+					
+					$('#loader-toast').css('display','none');
+					
 					if(data.result=="inserted"){
+						
 						$("#club_msg").text("팀 생성 완료");
 						$("#toast").css("display","block");
 						$("#confirm").click(function(){
@@ -272,6 +282,8 @@ function removeWhiteSpace(obj){
 					
 				},
 				error:function(){
+					
+					$('#loader-toast').css('display','none');
 					alert('네트워크 오류 발생');
 				}
 			});

@@ -8,6 +8,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
 <title><tiles:getAsString name="title"/></title>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6W9GZKN1FV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6W9GZKN1FV');
+</script>
+<!-- Google Adsense -->
+<script data-ad-client="ca-pub-8355155789819718" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/layout.css">
 <style>
 .star-rating { width:85px; text-align: left;margin:0 0.2rem; }
@@ -17,6 +28,7 @@
 .star-rating span{ background-position:left bottom; line-height:0; vertical-align:top; }
 
 </style>
+<script data-ad-client="ca-pub-8355155789819718" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@900&display=swap" rel="stylesheet">
 <!-- Google icon -->

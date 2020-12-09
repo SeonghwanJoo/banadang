@@ -67,7 +67,7 @@
 </div>
 </c:if>
 <c:if test="${not empty match_list }">
-<ul class="ul-list">
+<ul class="ul-list non-border-btm">
 <c:forEach var="match" items="${match_list}">
 	<li class="li-list">
 		<div class="match-info-wrapper">
@@ -244,6 +244,13 @@
 </c:forEach>
 </ul>
 </c:if>
+<div class="mid-banner">
+	<ins class="kakao_ad_area" style="display:none;" 
+	 data-ad-unit    = "DAN-gCSwQUEFuriXnEOA" 
+	 data-ad-width   = "320" 
+	 data-ad-height  = "100"></ins>
+ </div>
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 <div class="border-btm v-padding">
 	<span class="title-btw">지난 경기 상대팀 평점 작성</span>
 </div>

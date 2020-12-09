@@ -111,7 +111,7 @@
 			<mapping path="/club/club.do"/>
 			<mapping path="/match/match_toInvite.do"/>
 			<mapping path="/match/recruit.do"/>
-			<mapping path="/match/member/myPage.do"/>
+			<mapping path="/member/myPage.do"/>
 			<beans:bean class="kr.spring.interceptor.MsgCheckInterceptor"/>
 		</interceptor>
 		<!-- 팀 운영진 권한 체크 -->

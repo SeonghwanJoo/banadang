@@ -24,6 +24,13 @@
 <div class="row margin-top margin-btm" id="moreList">
 	<button class="seemore margin-top" id="moreBtn" onclick="moreList()">더보기</button>
 </div>
+<div class="mid-banner">
+	<ins class="kakao_ad_area" style="display:none;" 
+	 data-ad-unit    = "DAN-gCSwQUEFuriXnEOA" 
+	 data-ad-width   = "320" 
+	 data-ad-height  = "100"></ins>
+ </div>
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 <!-- The Modal -->
 <div id="myModals" class="modals">
 	<!-- Modal content -->

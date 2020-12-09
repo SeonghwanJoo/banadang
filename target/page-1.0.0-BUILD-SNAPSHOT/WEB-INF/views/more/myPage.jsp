@@ -94,6 +94,13 @@
 		</div>
 	</li>
 </ul>
+<div class="mid-banner">
+	<ins class="kakao_ad_area" style="display:none;" 
+	 data-ad-unit    = "DAN-gCSwQUEFuriXnEOA" 
+	 data-ad-width   = "320" 
+	 data-ad-height  = "100"></ins>
+ </div>
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">

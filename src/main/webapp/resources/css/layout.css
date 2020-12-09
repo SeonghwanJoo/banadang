@@ -236,6 +236,10 @@ ul.carousel-indicators {
 .underline{
 	text-decoration:underline;
 }
+.loader{
+	display: block;
+	margin: 50% auto;
+}
 .end {
 	clear: both;
 }
@@ -990,8 +994,10 @@ div.col{
 }
 .count-msg{
 	position:absolute;
-	right:1.2rem;
-	top:0.3rem;
+	padding-top:0.2rem;	
+	text-align:center;
+	right:-0.5rem;
+	bottom:1rem;
 	font-size:0.7rem;
 	font-weight:bold;
 	width:1.2rem;
@@ -1002,8 +1008,9 @@ div.col{
 }
 .count-msg-page{
 	position:absolute;
-	right:0.4rem;
-	top:0.3rem;
+	text-align:center;
+	right:-0.2rem;
+	top:0.4rem;
 	font-size:0.7rem;
 	font-weight:bold;
 	width:1.2rem;
@@ -1043,8 +1050,8 @@ a.detail{
 }
 
 .container{
-	padding-right:8px !important;
-	padding-left:8px !important;
+	padding-right:0px !important;
+	padding-left:0px !important;
 }
 .wrapper{
 	text-align:center;
@@ -1080,12 +1087,22 @@ a.detail{
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   -webkit-animation-name: fadeIn; 
   -webkit-animation-duration: 0.4s;
   animation-name: fadeIn;
   animation-duration: 0.4s
+}
+.loader_toast {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 98; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(255, 255, 255, 0.4);
 }
 /* toast Content */
 .submit_toast_content {
@@ -1386,6 +1403,18 @@ a.active.small-font{
 div.tab-row.bottom-padding{
 	padding:0.1rem 0;
 }
+div.col .more-icon{
+  margin-top:0.5rem;
+  font-size: 1.7rem;  /* Preferred icon size */
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  color:inherit;
+  position:relative;
+}
 div.col .bottom-icon {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -1570,7 +1599,7 @@ div.detail-item{
 ul.ul-list{
 	padding-inline-start: 0px;
 	width:100%;
-	border-bottom:15px solid #eee;
+	border-bottom:10px solid #efefef;
 	margin-bottom:0;
 }
 ul.non-border-btm{
@@ -1580,9 +1609,15 @@ li.li-list{
 	margin:0 auto ;
 	list-style: none;
 	display:block;
-	border-bottom:1px solid #dddddd;
-	padding:0.5rem 0.2rem;
+	border-bottom:1px solid #eee;
+	padding:0.5rem 0.5rem;
 	position:relative;
+}
+.mid-banner{
+	padding:10px 0;
+	background-color:#eee;
+	margin:0 auto;
+	width:100vw;
 }
 .match-info-wrapper{
 	padding:0.4rem 0.2rem;

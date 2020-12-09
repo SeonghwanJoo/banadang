@@ -112,10 +112,10 @@
 			엠블럼 사진 업로드 -->
 	<div class="half_col">
 		<div class="row">
-			<c:if test="${empty myClub.club_img }">
+			<c:if test="${empty myClub.filename }">
 			<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" id="img-pre">
 			</c:if>
-			<c:if test="${!empty myClub.club_img }">
+			<c:if test="${!empty myClub.filename }">
 			<img src="imageView.do?club_num=${myClub.club_num}" alt="${myClub.filename }"id="img-pre">
 			</c:if>
 		</div>
@@ -193,6 +193,14 @@
 		</div>
 	</div>
 </div>
+<!-- The Modal -->
+<div id="loader-toast" class="submit_toast">
+
+  <!-- Modal content -->
+  	<div id="loader_toast_content" class="submit_toast_content">
+		<img src="${pageContext.request.contextPath }/resources/images/ajax-loader.gif" class="loader">
+	</div>
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -247,6 +255,9 @@ function removeWhiteSpace(obj){
 		let isChanged=0;
 		
 		$("#submit").click(function(e){
+			
+			$('#loader-toast').css('display','block');
+			
 			e.preventDefault();
 			//파일이 변경되었을 때->O
 			
@@ -269,6 +280,9 @@ function removeWhiteSpace(obj){
 				cache:false,
 				timeout:30000,
 				success:function(data){
+					
+					$('#loader-toast').css('display','none');
+					
 					if(data.result=="updated"){
 						$("#club_msg").text("팀 정보 수정 완료");
 						$("#toast").css("display","block");
@@ -284,9 +298,6 @@ function removeWhiteSpace(obj){
 						
 						$("#club_msg").text("팀 정보 수정 실패");
 						$("#toast").css("display","block");
-						$('#confirm').click(function(){
-							$("#toast").css("display","none");
-						});
 						$(window).click(function(){
 							$("#toast").css("display","none");
 						});
@@ -294,6 +305,8 @@ function removeWhiteSpace(obj){
 					
 				},
 				error:function(){
+				
+					$('#loader-toast').css('display','none');
 					alert('네트워크 오류 발생');
 				}
 			});

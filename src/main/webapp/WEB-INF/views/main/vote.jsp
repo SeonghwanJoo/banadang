@@ -278,6 +278,20 @@
 		</div>
 	</div>
 </div>
+
+<!-- The Modal -->
+<div id="toast" class="submit_toast">
+
+  <!-- Modal content -->
+  	<div id="toast_content" class="submit_toast_content">
+		<div class="row centered margin-btm centered-padding">
+			<span id="club_msg">투표 완료했습니다.</span>
+		</div>
+		<div class="row margin-top centered">
+			<button class="alert-btn">확인</button>
+		</div>
+	</div>
+</div>
 </c:if>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -417,10 +431,15 @@ function setVoteStyle(max,attend,not_attend,undefined,status){
 						var max=Math.max(data.attend,data.not_attend,data.undefined);
 						setVoteStyle(max,data.attend,data.not_attend,data.undefined,status)
 						
+						$('#toast').css('display','block');
+						
 					},
 					error:function(){
 						alert('네트워크 오류 발생');
 					}
+			});
+			$(window).click(function(){
+				$("#toast").css("display","none");
 			});
 		});
 	});

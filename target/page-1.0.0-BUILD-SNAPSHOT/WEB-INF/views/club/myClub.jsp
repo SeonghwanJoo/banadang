@@ -27,6 +27,13 @@
 		</c:forEach>
 	</ul>
 </div>
+<div class="mid-banner">
+	<ins class="kakao_ad_area" style="display:none;" 
+	 data-ad-unit    = "DAN-gCSwQUEFuriXnEOA" 
+	 data-ad-width   = "320" 
+	 data-ad-height  = "100"></ins>
+ </div>
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 </c:if>
 <c:if test="${empty myClubs }">
 <!-- The Modal -->
