@@ -228,20 +228,26 @@ function removeWhiteSpace(obj){
 			$('#loader-toast').css('display','block');
 			
 			e.preventDefault();
+			
+			if(!$('#club_name').val().replace(/^\s+|\s+$/g, '')){
+				$('#club_name_msg').css('color','red').text('팀명을 입력해주세요.');
+				$('#loader-toast').css('display','none');
+				return false;
+			}else if(!$('#club_loc').val().replace(/^\s+|\s+$/g, '')){
+				$('#club_loc_msg').css('color','red').text('주 활동 구장을 입력해주세요.');
+				$('#loader-toast').css('display','none');
+				return false;
+			}else if(!$("input[name='club_ages']").is(":checked")){
+				$('#club_ages_msg').css('color','red').text('주 연령대를 선택해주세요.');
+				$('#loader-toast').css('display','none');
+				return false;
+			}
+			
 			let club_img=dataURLToBlob($("#img-pre").attr("src"));
 			var formData = new FormData($('#club_form')[0]);
 				formData.append("upload", club_img); 
 				formData.append("filename",$("#img-pre").attr("alt"));
-			if(!$('#club_name').val().replace(/^\s+|\s+$/g, '')){
-				$('#club_name_msg').css('color','red').text('팀명을 입력해주세요.');
-				return false;
-			}else if(!$('#club_loc').val().replace(/^\s+|\s+$/g, '')){
-				$('#club_loc_msg').css('color','red').text('주 활동 구장을 입력해주세요.');
-				return false;
-			}else if(!$("input[name='club_ages']").is(":checked")){
-				$('#club_ages_msg').css('color','red').text('주 연령대를 선택해주세요.');
-				return false;
-			}
+			
 			
 			$.ajax({
 				url:'createClub.do',

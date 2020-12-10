@@ -259,6 +259,20 @@ function removeWhiteSpace(obj){
 			$('#loader-toast').css('display','block');
 			
 			e.preventDefault();
+			
+			if(!$('#club_name').val().replace(/^\s+|\s+$/g, '')){
+				$('#club_name_msg').css('color','red').text('팀명을 입력해주세요.');
+				$('#loader-toast').css('display','none');
+				return false;
+			}else if(!$('#club_loc').val().replace(/^\s+|\s+$/g, '')){
+				$('#club_loc_msg').css('color','red').text('주 활동 구장을 입력해주세요.');
+				$('#loader-toast').css('display','none');
+				return false;
+			}else if(!$("input[name='club_ages']").is(":checked")){
+				$('#club_ages_msg').css('color','red').text('주 연령대를 선택해주세요.');
+				$('#loader-toast').css('display','none');
+				return false;
+			}
 			//파일이 변경되었을 때->O
 			
 			//파일이 변경되지 않았을 때->DB를 업데이트하지 않도록하는 방법?
@@ -268,6 +282,8 @@ function removeWhiteSpace(obj){
 				formData.append("upload", club_img); 
 				formData.append("filename",$("#img-pre").attr("alt"));
 			}
+			
+			
 			
 			
 			$.ajax({
