@@ -255,9 +255,10 @@ ul.carousel-indicators {
 }
 .modal-wrapper{
 	margin:0.8rem 0;
+	text-align:center;
 }
 #team-sel-modal, #sel-modal{
-	padding-top:40%;
+	padding-top:6rem;
 }
 div.team-info.cursor{
 	padding-right: 0;
@@ -509,11 +510,11 @@ input[type=text]:focus, select:focus{
 .modals-content {
 	background-color: #fefefe;
 	position:relative;
-	margin: 0 1rem;
+	margin: 0 1.5rem;
 	padding: 0.3rem;
 	opacity:0.95;
 	border-radius:0.5rem;
-	width: 90%;
+	width: 85%;
 }
 body.body, body.body btn{
     font-family: Noto Sans KR,sans-serif;
@@ -1026,6 +1027,7 @@ div.col{
 }
 .align-center{
 	text-align:center;
+	margin:0 auto;
 }
 .msg-status{
 	position: absolute;
@@ -1158,9 +1160,6 @@ a.detail{
 }
 .disp-bl{
 	display:block;
-}
-.align-center{
-	text-align:center;
 }
 .disp-inbl{
 	display:inline-block;
@@ -1327,10 +1326,7 @@ h6.ages{
 .set-team-opt{
 	cursor:pointer;
 }
-.align-center{
-	margin:0 auto;
-}
-	
+
 .small-font, .main-row span.small-font,button.small-font, a.active.small-font{
 	font-size:0.9rem;
 }
@@ -1496,9 +1492,6 @@ a.menu-item:active{
 } */
 div.one-col{
 	position:relative;
-}
-.align-center{
-	text-align:center;
 }
 .col img.blocked{
 	width:10rem;

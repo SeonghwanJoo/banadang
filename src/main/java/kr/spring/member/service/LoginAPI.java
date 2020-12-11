@@ -120,19 +120,27 @@ public class LoginAPI {
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
             
             memberVO.setNickname(properties.getAsJsonObject().get("nickname").getAsString()); 
-            memberVO.setProfile_image(properties.getAsJsonObject().get("profile_image").getAsString());
-            memberVO.setThumbnail_image(properties.getAsJsonObject().get("thumbnail_image").getAsString());
+            memberVO.setId(element.getAsJsonObject().get("id").getAsString());
+            String profile_image=properties.getAsJsonObject().get("profile_image").getAsString();
+            String thumbnail_image=properties.getAsJsonObject().get("profile_image").getAsString();
             
+            if (profile_image!=null) {
+            	
+            	if(profile_image.indexOf("http://:")>0) {
+            		profile_image.replaceAll("http", "https");
+            	}
+            	memberVO.setProfile_image(profile_image);
+            }
+            if ( thumbnail_image!=null){
+            	if(thumbnail_image.indexOf("http://:")>0) {
+            		thumbnail_image.replaceAll("http://", "https://");
+            	}
+            	memberVO.setThumbnail_image(thumbnail_image);
+            }
             memberVO.setEmail(kakao_account.getAsJsonObject().get("email").getAsString());
             if(kakao_account.getAsJsonObject().get("age_range")!=null) {
             	memberVO.setAge_range(kakao_account.getAsJsonObject().get("age_range").getAsString());
             }
-            
-            memberVO.setId(element.getAsJsonObject().get("id").getAsString());
-            
-            
-
-            
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -167,9 +175,23 @@ public class LoginAPI {
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
             
+            String profile_image=element.getAsJsonObject().get("profile_image").getAsString();
+            String thumbnail_image=element.getAsJsonObject().get("profile_image").getAsString();
+            
+            if (profile_image!=null) {
+            	
+            	if(profile_image.indexOf("http://:")>0) {
+            		profile_image.replaceAll("http", "https");
+            	}
+            	member.setProfile_image(profile_image);
+            }
+            if ( thumbnail_image!=null){
+            	if(thumbnail_image.indexOf("http://:")>0) {
+            		thumbnail_image.replaceAll("http://", "https://");
+            	}
+            	member.setThumbnail_image(thumbnail_image);
+            }
             member.setNickname(element.getAsJsonObject().get("nickName").getAsString());
-            member.setProfile_image(element.getAsJsonObject().get("profileImageURL").getAsString());
-            member.setThumbnail_image(element.getAsJsonObject().get("thumbnailURL").getAsString());
             
         } catch (IOException e) {
             e.printStackTrace();

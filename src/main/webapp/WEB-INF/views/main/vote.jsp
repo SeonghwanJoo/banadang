@@ -311,7 +311,7 @@ function sendLink(match_num,club_num,match_date,address,start_time) {
     })
   }
 function loginProcess(){
-	location.href="https://kauth.kakao.com/oauth/authorize?client_id=0646bcb11e5b9bbdb24fc9153f7693ae&redirect_uri=http://${pageContext.request.serverName }${pageContext.request.contextPath}/member/voteLogin.do&response_type=code&state=${match.match_num }-${match.club_num}-${isMain}";
+	location.href="https://kauth.kakao.com/oauth/authorize?client_id=0646bcb11e5b9bbdb24fc9153f7693ae&redirect_uri=https://${pageContext.request.serverName }${pageContext.request.contextPath}/member/voteLogin.do&response_type=code&state=${match.match_num }-${match.club_num}-${isMain}";
 };
 function modifyAnswer(voteAnswer_num){
 	$('#more_modal').css('display','block');

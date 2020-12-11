@@ -26,9 +26,7 @@
 	display:inline-block; height:1.2rem;overflow:hidden; background:url('${pageContext.request.contextPath}/resources/images/star4.png')no-repeat;
 }
 .star-rating span{ background-position:left bottom; line-height:0; vertical-align:top; }
-
 </style>
-<script data-ad-client="ca-pub-8355155789819718" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@900&display=swap" rel="stylesheet">
 <!-- Google icon -->

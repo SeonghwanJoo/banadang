@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -45,7 +44,7 @@ public class MemberController {
 	@RequestMapping("/member/login.do")
 	public String kakaoLogin(@RequestParam String code,HttpSession session,HttpServletRequest request)throws IOException {	
 		
-		String uri="http://"+request.getServerName()+request.getContextPath();
+		String uri="https://"+request.getServerName()+request.getContextPath();
 		logger.info("uri : " + uri);
 		String access_Token = loginAPI.getAccessToken(code,1,uri);
 		if(access_Token.equals("errors")) {
@@ -116,7 +115,7 @@ public class MemberController {
 									@RequestParam String state,
 									HttpSession session,
 									HttpServletRequest request)throws IOException {	
-		String uri="http://"+request.getServerName()+request.getContextPath();
+		String uri="https://"+request.getServerName()+request.getContextPath();
 		String access_Token = loginAPI.getAccessToken(code,0,uri);
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_Token);
@@ -178,7 +177,7 @@ public class MemberController {
 								 HttpSession session,
 								 HttpServletRequest request)throws IOException {	
 		
-		String uri="http://"+request.getServerName()+request.getContextPath();
+		String uri="https://"+request.getServerName()+request.getContextPath();
 		
 		
 	    String access_Token = loginAPI.getAccessToken(code,2,uri);

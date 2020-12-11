@@ -41,7 +41,7 @@
 		<a
 			href="https://kauth.kakao.com/oauth/authorize?
 	client_id=0646bcb11e5b9bbdb24fc9153f7693ae
-	&redirect_uri=http://${pageContext.request.serverName }${pageContext.request.contextPath}/member/login.do
+	&redirect_uri=https://${pageContext.request.serverName }${pageContext.request.contextPath}/member/login.do
 	&response_type=code">
 			<img class="login_btn"
 			src="${pageContext.request.contextPath}/resources/images/kakao_login/ko/kakao_login_medium_wide.png">
