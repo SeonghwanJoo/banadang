@@ -6,7 +6,7 @@
   <!-- Modal content -->
 	<div id="submit_toast_content" class="submit_toast_content">
 		<div class="row centered margin-btm centered-padding">
-			<span id="club_msg">팀의 소속된 회원만 접근 가능합니다.</span>
+			<span id="club_msg">로그인 상태의 팀 소속 회원만 접근 가능합니다.</span>
 		</div>
 		<div class="row margin-top centered">
 			<div class="col">

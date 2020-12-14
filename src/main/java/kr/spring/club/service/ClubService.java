@@ -40,5 +40,6 @@ public interface ClubService {
 	public void updateClubRecruitReq(MemberVO member);
 	public void insertClubMemberWithMemberVO(MemberVO member);
 	public Integer selectClubJoinForDuplicate(MemberVO member);
+	public Integer selectClubJoinForDuplicateByClubVO(ClubVO club);
 	
 }

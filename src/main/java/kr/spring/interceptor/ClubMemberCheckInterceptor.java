@@ -39,16 +39,10 @@ public class ClubMemberCheckInterceptor  extends HandlerInterceptorAdapter {
 		
 		try {
 			if(myClubs!=null) {
-				int count=0;
 				for(ClubVO myClub : myClubs) {
 					if(myClub.getClub_num().equals(club_num)) {
-						count++;
+						return true;
 					}
-				}
-				if(count==0) {
-					response.sendRedirect(
-							request.getContextPath()+"/main/membercheck.do?club_num="+club_num);
-					return false;
 				}
 				
 			}
@@ -57,6 +51,7 @@ public class ClubMemberCheckInterceptor  extends HandlerInterceptorAdapter {
 			e.printStackTrace();
 		}
 		
-		return true;
+		response.sendRedirect(request.getContextPath()+"/main/membercheck.do?club_num="+club_num);
+		return false;
 	}
 }

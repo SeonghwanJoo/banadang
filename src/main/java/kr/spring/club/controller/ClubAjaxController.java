@@ -210,7 +210,10 @@ public class ClubAjaxController {
 		Map<String,Object> map=new HashMap<String,Object>();
 		try {
 			
-			clubService.insertClubMember(club);
+			Integer clubJoin_num=clubService.selectClubJoinForDuplicateByClubVO(club);
+			if (clubJoin_num==null) {
+				clubService.insertClubMember(club);
+			}
 			ClubVO myClub=clubService.selectMyClubDetails(club);
 			List<ClubVO> myClubs = new ArrayList<ClubVO> ();
 			myClubs.add(myClub);

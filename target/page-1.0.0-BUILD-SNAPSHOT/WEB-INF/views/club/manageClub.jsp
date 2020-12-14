@@ -591,7 +591,7 @@
 									<span class="voted" id="voted-not_fixed-${match.match_num }" style="width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%">
 										<span class="vote-label">미정</span>
 									</span>
-									<span class="vote-rating">
+									<span class="vote-wrapper">
 										<span class="person material-icons">person</span>
 										<span id="num_undefined" class="vote_num">${match.undefined}</span>
 									</span>

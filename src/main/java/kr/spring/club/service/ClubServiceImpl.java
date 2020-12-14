@@ -195,6 +195,12 @@ public class ClubServiceImpl implements ClubService {
 		return clubMapper.selectClubJoinForDuplicate(member);
 	}
 
+	@Override
+	public Integer selectClubJoinForDuplicateByClubVO(ClubVO club) {
+		
+		return clubMapper.selectClubJoinForDuplicateByClubVO(club);
+	}
+
 	
 
 

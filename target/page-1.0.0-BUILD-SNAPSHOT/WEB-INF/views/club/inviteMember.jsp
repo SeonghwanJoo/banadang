@@ -13,7 +13,7 @@
 		</c:if>
 		<br>
 		<span>${club.club_name}(${club.club_address })</span>
-		<p>${nickname}님이 당신을 ${club.club_name } 팀으로 초대합니다</p>
+		<p><c:if test="${not empty nickname }">${nickname}님이</c:if> 당신을 ${club.club_name } 팀으로 초대합니다</p>
 		<button onclick="inviteMember()" class="block">가입 하기</button>
 	</div>
 </div>
