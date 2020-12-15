@@ -9,7 +9,7 @@
 			<span class="material-icons" id="cancel" >close</span>
 		</a>
 		</c:if>
-		<c:if test="${isMain }">
+		<c:if test="${!isMain }">
 		<a href="${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}">
 			<span class="material-icons" id="cancel" >close</span>
 		</a>

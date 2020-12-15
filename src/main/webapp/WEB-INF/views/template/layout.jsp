@@ -76,7 +76,21 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script type="text/javascript">
+console.log(navigator.userAgent);
+function back() {
+	if (navigator.userAgent.indexOf('Android')>0) {
+		history.go(-1);
+	}else if (navigator.userAgent.indexOf('iOS')>0) {
+		window.webkit.messageHandlers.back.postMessage(null);
+	}else{
+		location.href=document.referrer;
+	} 
 
+} 
+
+
+</script>
 </body>
 </html>
 

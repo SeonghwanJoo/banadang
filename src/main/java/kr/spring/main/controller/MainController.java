@@ -127,7 +127,7 @@ public class MainController {
 	}
 
 	@RequestMapping("/main/vote_detail.do")
-	public ModelAndView vote_detail(MatchVO match) {
+	public ModelAndView vote_detail(MatchVO match,@RequestParam boolean isMain) {
 		
 		ModelAndView mav = new ModelAndView();
 		List<MemberVO> members = new ArrayList<MemberVO>();
@@ -156,6 +156,7 @@ public class MainController {
 		mav.addObject("no_atdance", no_atdance);
 		mav.addObject("undefined_atdance", undefined_atdance);
 		mav.addObject("not_voted", not_voted);
+		mav.addObject("isMain",isMain);
 		mav.addObject("match", match);
 		mav.setViewName("vote_detail");
 

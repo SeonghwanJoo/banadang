@@ -9,7 +9,7 @@
 		<input type="hidden" name="id" value="${user_id }">
 		<div class="row" id="top_wrap">
 			<div class="fixed_top">
-				<a href="#" onclick="history.go(-1); return false;">
+				<a href="#" onclick="back()">
 				<span class="material-icons" id="cancel">close</span>
 				</a>
 				<div class="topnav-centered">

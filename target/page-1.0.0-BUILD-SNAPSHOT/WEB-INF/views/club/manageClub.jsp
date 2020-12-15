@@ -563,7 +563,7 @@
 							</div>
 							</c:if>
 						</div>
-						<div class="cursor" onclick="location.href='${pageContext.request.contextPath}/main/vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num }&home_name=${match.home_name }&away_name=${match.away_name }'">
+						<div class="cursor" onclick="location.href='${pageContext.request.contextPath}/main/vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num }&home_name=${match.home_name }&away_name=${match.away_name }&isMain=false'">
 							<div class="row">
 								<span class="vote-rating">
 									<span class="voted" id="voted-attend-${match.match_num }" style="width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%">
@@ -723,7 +723,7 @@
 		<h6 class="margin-left margin-right" id="total">
 			총 회원 ${fn:length(members)}명
 		</h6>
-		<h6 class="sub-h6 small-font" id="ages">
+		<%-- <h6 class="sub-h6 small-font" id="ages">
 			 ( 
 			<c:if test="${ages.ten!=0 }">
 			 10대:${ages.ten }명 
@@ -750,7 +750,7 @@
 			 기타:${ages.others }명
 			</c:if> 
 			)
-		</h6>
+		</h6> --%>
 		</div>
 		<div class="col-sm-12 one-col">
 			<div class="col">
@@ -1271,7 +1271,7 @@ function updateMember(id,auth,club_num){
 					location.href='${pageContext.request.contextPath}/club/club.do';
 				}
 				$('#manage_modal').css('display','none');
-				updateMembers_num(data.ten,data.twent,data.thirt,data.fourt,data.fift,data.sixt,data.sevent,data.others);
+				/* updateMembers_num(data.ten,data.twent,data.thirt,data.fourt,data.fift,data.sixt,data.sevent,data.others); */
 				var member_row=document.getElementById(id+'-row');
 				member_row.remove();
 			}
@@ -1300,7 +1300,7 @@ function toggleClass(element, className) {
 		element.className += " " + className;
 	}
 }
-function updateMembers_num(ten,twent,thirt,fourt,fift,sixt,sevent,others){
+/* function updateMembers_num(ten,twent,thirt,fourt,fift,sixt,sevent,others){
 	var total=ten+twent+thirt+fourt+fift+sixt+sevent+others;
 	var num=" ( ";
 	if(ten!=0){num+="10대:"+ten+"명 "}
@@ -1314,7 +1314,7 @@ function updateMembers_num(ten,twent,thirt,fourt,fift,sixt,sevent,others){
 	num+=")"
 	$('#ages').text(num);
 	$('#total').text("총 회원 "+total+"명");
-}
+} */
 
 function answerForMatchReq(request_num,club_name,acceptance,club_num,match_num){
 	if(acceptance==2){

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
-		<a onclick="location.href=document.referrer">
+		<a onclick="back()">
 			<span class="material-icons" id="chevron_left" >chevron_left</span>
 		</a>
 		<div class="topnav-centered">

@@ -867,7 +867,6 @@ body.body, body.body btn{
 	position:absolute;
 	top:0.1rem;
 	text-overflow:ellipsis;
-	overflow:hidden;
 	white-space: nowrap;
 	font-weight:bold;
 }
@@ -1372,10 +1371,14 @@ a.active.small-font{
 	font-weight:bold;
 	cursor:pointer;
 }
-.drop-down{
+
+.drop-down.material-icons{
 	position:absolute;
 	top:0.1rem;
 	display:inline-block;
+}
+#sel .drop-down.material-icons{
+	top:-0.3rem;
 }
 #topIcon{
 	position:relative;
@@ -1396,7 +1399,7 @@ a.active.small-font{
 	margin-top:0.5rem;
 	display:block;
 }
-div.tab-row.bottom-padding{
+div.tab-row.bottom-padding .col{
 	padding:0.1rem 0;
 }
 div.col .more-icon{
@@ -1607,10 +1610,11 @@ li.li-list{
 	position:relative;
 }
 .mid-banner{
+	width:100%;
 	padding:10px 0;
 	background-color:#eee;
 	margin:0 auto;
-	width:100vw;
+	max-width: 1130px;
 }
 .match-info-wrapper{
 	padding:0.4rem 0.2rem;
@@ -1715,7 +1719,7 @@ button.chip-btn{
 }
 .chip-txt{
 	position:absolute;
-	top:-0.8rem;
+	top:-0.7rem;
 	left:2.2rem;
 }
 #img-pre{
@@ -1787,7 +1791,7 @@ button.chip-btn{
   position: relative;
   padding-left:1.5rem;
   height:2rem;
-  width:6rem;
+  width:5.5rem;
   margin:0.5rem 0.2rem;
   cursor: pointer;
   line-height: 50px;

@@ -155,7 +155,7 @@
 		<input type="hidden" id="id" value="${user_id }">
 		<input type="hidden" id="match_num" value="${match.match_num }">
 		<input type="hidden" id="club_num" value="${myClub.club_num }">
-		<div class="cursor" onclick="location.href='${pageContext.request.contextPath}/main/vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num }&home_name=${match.home_name }&away_name=${match.away_name }'">
+		<div class="cursor" onclick="location.href='${pageContext.request.contextPath}/main/vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num }&home_name=${match.home_name }&away_name=${match.away_name }&isMain=${isMain }'">
 			<div class="row">
 				<span class="vote-rating">
 					<span class="voted" id="attend" style="width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%">
@@ -217,7 +217,7 @@
 		</div>
 		<hr class="hr">
 		<div class="total_wrapper margin-btm">
-			<span class="cursor" onclick="location.href='vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num}&home_name=${match.home_name}&away_name=${match.away_name}'">
+			<span class="cursor" onclick="location.href='vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num}&home_name=${match.home_name}&away_name=${match.away_name}&isMain=${isMain }'">
 			<span class="total_person material-icons">person</span>
 			<span id="total" class="total">${match.attend+match.not_attend+match.undefined}</span><span class="unit"> 명 투표 </span>
 			<i class="total fas fa-chevron-right"></i>
@@ -229,7 +229,7 @@
 		</div>
 	</li>
 </ul>
-<button class="reply-btn" onclick="location.href='replyToVote.do?match_num=${match.match_num}&club_num=${match.club_num }&isMain=${isMain }'">
+<button class="reply-btn" onclick="location.href='replyToVote.do?match_num=${match.match_num}&club_num=${match.club_num }'">
 	<span class="material-icons icon-margin gray">
 	account_circle
 	</span>

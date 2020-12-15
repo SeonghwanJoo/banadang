@@ -5,7 +5,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
-		<a onclick="location.href=document.referrer">
+		<a onclick="back()">
 		<span class="material-icons" id="cancel">close</span>
 		</a>
 		<div class="topnav-centered">

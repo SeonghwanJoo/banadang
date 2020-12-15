@@ -165,14 +165,9 @@ public class MemberController {
         	return "redirect:/main/loginFailure.do";
         	
         }
-        String[] values=state.split("-");
-        Integer club_num=Integer.parseInt(values[0]);
-        String nickname="";
-        if (values.length>1) {
-        	nickname=URLEncoder.encode(values[1],"utf-8");
-        }
+       
         
-		return "redirect:/club/inviteMember.do?club_num="+club_num+"&nickname="+nickname;
+		return "redirect:/club/inviteMember.do?club_num="+state;
    
 	}
 	@RequestMapping("/member/voteLogin.do")

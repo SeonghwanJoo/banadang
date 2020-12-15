@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
-		<a onclick="location.href=document.referrer">
+		<a onclick="back()">
 			<span class="material-icons" id="chevron_left" >close</span>
 		</a>
 		<div class="topnav-centered">
@@ -13,7 +13,7 @@
 </div>
 
 <div class="blank_div"></div><!-- match_num이 없을 때,club_num이 없을 때, 아이디가 없을 때-->
-<div class="main-row margin-top">
+<div class="main-row margin-top centered-padding">
 	<div class="x-smaller">
 		<c:if test="${!empty msg.club_img }">
 		<img src="${pageContext.request.contextPath}/club/imageView.do?club_num=${msg.club_num}" alt="Avatar" class="avatar">

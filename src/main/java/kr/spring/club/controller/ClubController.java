@@ -1,6 +1,8 @@
 package kr.spring.club.controller;
 
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -153,8 +155,7 @@ public class ClubController {
 	}
 	@RequestMapping("/club/inviteMember.do")
 	public ModelAndView inviteMember(@RequestParam Integer club_num,
-									 @RequestParam(required=false) String nickname,
-									 HttpSession session) {
+									 HttpSession session) throws UnsupportedEncodingException {
 		
 		ModelAndView mav=new ModelAndView();
 		ClubVO club=clubService.selectClubDetailWithClub_num(club_num);
@@ -167,7 +168,6 @@ public class ClubController {
 				}
 			}
 		}
-		mav.addObject("nickname",nickname);
 		mav.addObject("club",club);
 		mav.setViewName("inviteMember");
 		

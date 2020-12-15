@@ -196,7 +196,7 @@
 			</div>
 			</c:if>
 		</div>
-		<div class="cursor" onclick="location.href='${pageContext.request.contextPath}/main/vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num }&home_name=${match.home_name }&away_name=${match.away_name }'">
+		<div class="cursor" onclick="location.href='${pageContext.request.contextPath}/main/vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num }&home_name=${match.home_name }&away_name=${match.away_name }&isMain=true'">
 			<div class="row">
 				<span class="vote-rating">
 					<span class="voted" id="voted-attend-${match.match_num }" style="width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%">
@@ -249,7 +249,7 @@
 	 data-ad-unit    = "DAN-gCSwQUEFuriXnEOA" 
 	 data-ad-width   = "320" 
 	 data-ad-height  = "100"></ins>
- </div>
+</div>
 <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 <div class="border-btm v-padding">
 	<span class="title-btw">지난 경기 상대팀 평점 작성</span>

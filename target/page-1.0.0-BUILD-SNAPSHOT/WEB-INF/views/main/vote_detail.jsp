@@ -4,9 +4,16 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
-		<a onclick="location.href=document.referrer">
-		<span class="material-icons" id="chevron_left" >chevron_left</span>
+		<c:if test="${isMain }">
+		<a href="${pageContext.request.contextPath}/main/main.do">
+			<span class="material-icons" id="cancel" >close</span>
 		</a>
+		</c:if>
+		<c:if test="${!isMain }">
+		<a href="${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}">
+			<span class="material-icons" id="cancel" >close</span>
+		</a>
+		</c:if>
 		<div class="topnav-centered">
 			<span class="active small-font">
 			<c:if test="${empty match.home_name }">
