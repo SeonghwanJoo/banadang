@@ -123,19 +123,20 @@ public class LoginAPI {
             memberVO.setId(element.getAsJsonObject().get("id").getAsString());
             memberVO.setEmail(kakao_account.getAsJsonObject().get("email").getAsString());
             
-            String profile_image=properties.getAsJsonObject().get("profile_image").getAsString();
-            String thumbnail_image=properties.getAsJsonObject().get("profile_image").getAsString();
+            String profile_image="";
+            String thumbnail_image="";
             
-            if (profile_image!=null) {
-            	
-            	if(profile_image.indexOf("http://")>0) {
+            if (properties.getAsJsonObject().get("profile_image")!=null) {
+            	 profile_image=properties.getAsJsonObject().get("profile_image").getAsString();
+            	if(profile_image.indexOf("http")>0) {
             		profile_image.replaceAll("http", "https");
             	}
             	memberVO.setProfile_image(profile_image);
             }
-            if ( thumbnail_image!=null){
-            	if(thumbnail_image.indexOf("http://")>0) {
-            		thumbnail_image.replaceAll("http://", "https://");
+            if ( properties.getAsJsonObject().get("thumbnail_image")!=null){
+            	thumbnail_image=properties.getAsJsonObject().get("thumbnail_image").getAsString();
+            	if(thumbnail_image.indexOf("http")>0) {
+            		thumbnail_image.replaceAll("http", "https");
             	}
             	memberVO.setThumbnail_image(thumbnail_image);
             }
@@ -176,19 +177,20 @@ public class LoginAPI {
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
             
-            String profile_image=element.getAsJsonObject().get("profileImageURL").getAsString();
-            String thumbnail_image=element.getAsJsonObject().get("thumbnailURL").getAsString();
+            String profile_image="";
+            String thumbnail_image="";
             
-            if (profile_image!=null) {
-            	
-            	if(profile_image.indexOf("http://")>0) {
+            if (element.getAsJsonObject().get("profileImageURL")!=null) {
+            	profile_image=element.getAsJsonObject().get("profileImageURL").getAsString();
+            	if(profile_image.indexOf("http")>0) {
             		profile_image.replaceAll("http", "https");
             	}
             	member.setProfile_image(profile_image);
             }
-            if ( thumbnail_image!=null){
-            	if(thumbnail_image.indexOf("http://")>0) {
-            		thumbnail_image.replaceAll("http://", "https://");
+            if ( element.getAsJsonObject().get("thumbnailURL")!=null){
+            	thumbnail_image=element.getAsJsonObject().get("thumbnailURL").getAsString();
+            	if(thumbnail_image.indexOf("http")>0) {
+            		thumbnail_image.replaceAll("http", "https");
             	}
             	member.setThumbnail_image(thumbnail_image);
             }

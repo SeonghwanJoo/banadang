@@ -1399,7 +1399,7 @@ a.active.small-font{
 	margin-top:0.5rem;
 	display:block;
 }
-div.tab-row.bottom-padding{
+div.tab-row.bottom-padding .col{
 	padding:0.1rem 0;
 }
 div.col .more-icon{

@@ -92,7 +92,6 @@ function inviteMember(){
 	
 };
 function loginProcess(){
-	var nickname=encodeURI('${nickname}');
 	location.href="https://kauth.kakao.com/oauth/authorize?client_id=0646bcb11e5b9bbdb24fc9153f7693ae&redirect_uri=https://${pageContext.request.serverName }${pageContext.request.contextPath}/member/invitedLogin.do&response_type=code&state=${club.club_num }";
 };
 $(function(){
