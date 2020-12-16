@@ -10,7 +10,7 @@
 		</div>
 		<div class="row margin-top centered">
 			<div class="col">
-				<button class="alert-btn border-right" id="confirm">확인</button>
+				<button class="alert-btn border-right" id="confirm">로그인하기</button>
 			</div>
 			<div class="col">
 				<button class="alert-btn yellow" id="join">팀 가입하기</button>

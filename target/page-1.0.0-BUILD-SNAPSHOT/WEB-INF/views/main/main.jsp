@@ -37,7 +37,7 @@
 <c:if test="${empty user_id }">
 <div class="main-row">
 	<div class="login">
-		<p>간편 로그인하고 GentlePro에서 우리팀을 관리해보세요</p>
+		<p>간편 로그인하고 우리팀을 관리해보세요</p>
 		<a
 			href="https://kauth.kakao.com/oauth/authorize?
 	client_id=0646bcb11e5b9bbdb24fc9153f7693ae
@@ -59,7 +59,7 @@
 </div>
 <c:if test="${empty match_list }">
 <div class="row">
-	<div class="empty-wrapper">
+	<div class="empty-wrapper margin-btm">
 		<i class="far fa-grimace empty">
 		</i>
 		<span class=" small-font">예정된 경기가 없습니다.</span>

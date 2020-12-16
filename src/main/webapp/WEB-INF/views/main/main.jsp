@@ -37,11 +37,11 @@
 <c:if test="${empty user_id }">
 <div class="main-row">
 	<div class="login">
-		<p>간편 로그인하고 GentlePro에서 우리팀을 관리해보세요</p>
+		<p>간편 로그인하고 우리팀을 관리해보세요</p>
 		<a
 			href="https://kauth.kakao.com/oauth/authorize?
 	client_id=0646bcb11e5b9bbdb24fc9153f7693ae
-	&redirect_uri=https://${pageContext.request.serverName }${pageContext.request.contextPath}/member/login.do
+	&redirect_uri=http://${pageContext.request.serverName }${pageContext.request.contextPath}/member/login.do
 	&response_type=code">
 			<img class="login_btn"
 			src="${pageContext.request.contextPath}/resources/images/kakao_login/ko/kakao_login_medium_wide.png">
@@ -59,7 +59,7 @@
 </div>
 <c:if test="${empty match_list }">
 <div class="row">
-	<div class="empty-wrapper">
+	<div class="empty-wrapper margin-btm">
 		<i class="far fa-grimace empty">
 		</i>
 		<span class=" small-font">예정된 경기가 없습니다.</span>
@@ -362,7 +362,10 @@
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
 		<div class="sub-content" id="option">
-			<button id="share" class="pos-btn">투표 링크 공유</button>
+			<button id="share" class="pos-btn">
+			투표 링크 공유
+			<img class="kakaolink-share" src="${pageContext.request.contextPath }/resources/images/kakaolink_btn.png">
+			</button>
 			<hr class="hr">
 			<button id="detail" class="pos-btn">경기 상세</button>
 		</div>

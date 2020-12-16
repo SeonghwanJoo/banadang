@@ -1559,7 +1559,7 @@ div.detail-item{
 }
 .tab-active{
 	border-bottom: 3px solid #00643c;
-	color:black;
+	color:#00643c;
 }
 .sticky{
 	position:sticky;
@@ -1732,7 +1732,7 @@ button.chip-btn{
 .input-label{
 	padding-left:1rem;
 	display:block;
-	color:#827C75;
+	color:#00643c;
 	margin-top:1rem;
 }
 .centered-padding{

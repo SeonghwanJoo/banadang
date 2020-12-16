@@ -121,24 +121,27 @@ public class LoginAPI {
             
             memberVO.setNickname(properties.getAsJsonObject().get("nickname").getAsString()); 
             memberVO.setId(element.getAsJsonObject().get("id").getAsString());
-            memberVO.setEmail(kakao_account.getAsJsonObject().get("email").getAsString());
+            
             
             String profile_image="";
             String thumbnail_image="";
             
             if (properties.getAsJsonObject().get("profile_image")!=null) {
             	 profile_image=properties.getAsJsonObject().get("profile_image").getAsString();
-            	if(profile_image.indexOf("http")>0) {
-            		profile_image.replaceAll("http", "https");
+            	if(profile_image.indexOf("http:")>-1) {
+            		profile_image=profile_image.replace("http:", "https:");
             	}
             	memberVO.setProfile_image(profile_image);
             }
             if ( properties.getAsJsonObject().get("thumbnail_image")!=null){
             	thumbnail_image=properties.getAsJsonObject().get("thumbnail_image").getAsString();
-            	if(thumbnail_image.indexOf("http")>0) {
-            		thumbnail_image.replaceAll("http", "https");
+            	if(thumbnail_image.indexOf("http:")>-1) {
+            		thumbnail_image=thumbnail_image.replace("http:", "https:");
             	}
             	memberVO.setThumbnail_image(thumbnail_image);
+            }
+            if(kakao_account.getAsJsonObject().get("email")!=null) {
+            	memberVO.setEmail(kakao_account.getAsJsonObject().get("email").getAsString());
             }
             if(kakao_account.getAsJsonObject().get("age_range")!=null) {
             	memberVO.setAge_range(kakao_account.getAsJsonObject().get("age_range").getAsString());
@@ -182,15 +185,15 @@ public class LoginAPI {
             
             if (element.getAsJsonObject().get("profileImageURL")!=null) {
             	profile_image=element.getAsJsonObject().get("profileImageURL").getAsString();
-            	if(profile_image.indexOf("http")>0) {
-            		profile_image.replaceAll("http", "https");
+            	if(profile_image.indexOf("http:")>-1) {
+            		profile_image=profile_image.replaceAll("http:", "https:");
             	}
             	member.setProfile_image(profile_image);
             }
             if ( element.getAsJsonObject().get("thumbnailURL")!=null){
             	thumbnail_image=element.getAsJsonObject().get("thumbnailURL").getAsString();
-            	if(thumbnail_image.indexOf("http")>0) {
-            		thumbnail_image.replaceAll("http", "https");
+            	if(thumbnail_image.indexOf("http:")>-1) {
+            		thumbnail_image=thumbnail_image.replaceAll("http:", "https:");
             	}
             	member.setThumbnail_image(thumbnail_image);
             }

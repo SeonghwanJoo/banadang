@@ -72,10 +72,10 @@
 		</div>
 		</c:if>
 		<div class="tab-col">
-			<button class="tab-btn small-font bold tab-active" onclick="openTap(event,'manageSchedule')">경기 일정</button>
+			<button class="tab-btn small-font bold " onclick="openTap(event,'manageSchedule')">경기 일정</button>
 		</div>
 		<div class="tab-col">
-			<button class="tab-btn small-font bold" onclick="openTap(event,'manageMember')">회원 관리</button>
+			<button class="tab-btn small-font bold tab-active" onclick="openTap(event,'manageMember')">회원 관리</button>
 		</div>
 	</div>
 	<c:if test="${myClub.club_auth>4 }">
@@ -413,7 +413,7 @@
 		</c:if>
 	</div>
 	</c:if>
-	<div class="tab_detail" id="manageSchedule" style="display: block">
+	<div class="tab_detail" id="manageSchedule">
 		<div class="border-btm v-padding">
 			<span class="title-btw">경기 일정</span>
 			<button class="btn_write" id="btn_write" onclick="location.href='${pageContext.request.contextPath}/match/writeForm.do'">
@@ -422,7 +422,7 @@
 		</div>
 		<c:if test="${empty match_list }">
 		<div class="row">
-			<div class="empty-wrapper">
+			<div class="empty-wrapper margin-btm">
 				<i class="far fa-grimace empty"> </i> <span class=" small-font">예정된
 					경기가 없습니다.</span>
 			</div>
@@ -611,6 +611,13 @@
 				</c:forEach>
 			</ul>
 		</c:if>
+		<div class="mid-banner">
+			<ins class="kakao_ad_area" style="display:none;" 
+			 data-ad-unit    = "DAN-gCSwQUEFuriXnEOA" 
+			 data-ad-width   = "320" 
+			 data-ad-height  = "100"></ins>
+		</div>
+		<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 		<div class="match-head">
 			<span class="title-btw">지난 경기 상대팀 평점 작성</span>
 		</div>
@@ -718,7 +725,7 @@
 		</ul>
 		</c:if>
 	</div>
-	<div class="tab_detail" id="manageMember" >
+	<div class="tab_detail" id="manageMember" style="display: block">
 		<div class="main-row">
 		<h6 class="margin-left margin-right" id="total">
 			총 회원 ${fn:length(members)}명
@@ -756,8 +763,10 @@
 			<div class="col">
 				<a href="javascript:sendLink()">
 					<span class="material-icons person_add">person_add</span>
-					<span class="text-by-icon">카카오톡으로 팀원 초대하기</span>
-					<img class="kakaolink" src="${pageContext.request.contextPath }/resources/images/kakaolink_btn.png">
+					<span class="text-by-icon">카카오톡으로 팀원 초대하기
+					<img class="kakaolink-share" src="${pageContext.request.contextPath }/resources/images/kakaolink_btn.png">
+					</span>
+					
 				</a>
 			</div>    
 		</div>
@@ -807,6 +816,13 @@
 		</c:if>
 		</c:forEach>
 		</div>
+		<div class="mid-banner">
+			<ins class="kakao_ad_area" style="display:none;" 
+			 data-ad-unit    = "DAN-gCSwQUEFuriXnEOA" 
+			 data-ad-width   = "320" 
+			 data-ad-height  = "100"></ins>
+		</div>
+		<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 	</div>
 </div>
 <div id="answer_modal" class="confirm-modals">

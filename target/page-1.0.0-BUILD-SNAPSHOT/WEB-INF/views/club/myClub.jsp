@@ -44,7 +44,12 @@
 			<span id="club_msg">소속팀이 없습니다.</span>
 		</div>
 		<div class="row margin-top centered">
-			<button class="alert-btn">확인</button>
+			<div class="col">
+				<button class="alert-btn border-right" id="confirm">닫기</button>
+			</div>
+			<div class="col">
+				<button class="alert-btn yellow" id="create">팀 만들기</button>
+			</div>
 		</div>
 	</div>
 </div>
@@ -54,9 +59,12 @@
 <script>
 	$(function(){
 		$("#toast").css("display","block");
-		$("#submit_toast_content").click(function(){
+		$("#confirm").click(function(){
 			$("#toast").css("display","none");
-		})
+		});
+		$('#create').click(function(){
+			location.href='createClubForm.do';
+		});
 	});
 
 </script>

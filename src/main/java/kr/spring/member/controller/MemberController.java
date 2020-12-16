@@ -44,7 +44,7 @@ public class MemberController {
 	@RequestMapping("/member/login.do")
 	public String kakaoLogin(@RequestParam String code,HttpSession session,HttpServletRequest request)throws IOException {	
 		
-		String uri="https://"+request.getServerName()+request.getContextPath();
+		String uri="http://"+request.getServerName()+request.getContextPath();
 		logger.info("uri : " + uri);
 		String access_Token = loginAPI.getAccessToken(code,1,uri);
 		if(access_Token.equals("errors")) {
@@ -266,6 +266,30 @@ public class MemberController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("title", "약관 및 이용 동의");
 		mav.setViewName("agreement");
+		
+		return mav;
+	}
+	@RequestMapping("/member/policy.do")
+	public ModelAndView policy() {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("title", "약관 및 정책");
+		mav.setViewName("policy");
+		
+		return mav;
+	}
+	@RequestMapping("/member/service.do")
+	public ModelAndView service() {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("title", "서비스 이용 약관");
+		mav.setViewName("service");
+		
+		return mav;
+	}
+	@RequestMapping("/member/privacy.do")
+	public ModelAndView privacy() {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("title", "개인정보 보호 정책");
+		mav.setViewName("privacy");
 		
 		return mav;
 	}

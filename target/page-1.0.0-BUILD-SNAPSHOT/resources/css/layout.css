@@ -1559,7 +1559,7 @@ div.detail-item{
 }
 .tab-active{
 	border-bottom: 3px solid #00643c;
-	color:black;
+	color:#00643c;
 }
 .sticky{
 	position:sticky;

@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
 		<a href="${pageContext.request.contextPath }/main/main.do">
@@ -67,7 +65,7 @@
 			<div class="col">
 				<div class="main-row ">
 				<label class="custom">
-					<input type="checkbox" name="marketing">
+					<input type="checkbox" name="marketing" value="1">
 					<span class="checkmark"></span>
 				</label>
 					<span class="agreement">

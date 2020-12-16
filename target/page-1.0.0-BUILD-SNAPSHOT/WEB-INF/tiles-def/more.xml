@@ -84,4 +84,22 @@
        <put-attribute name="body" value="/WEB-INF/views/more/agreement.jsp"/>
        <put-attribute name="footer" value=""/>
     </definition>
+    <definition name="policy" extends="main">
+       <put-attribute name="title" value="약관 및 정책"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/policy.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="service" extends="main">
+       <put-attribute name="title" value="서비스 이용 약관"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/service.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="privacy" extends="main">
+       <put-attribute name="title" value="개인 정보 보호 정책"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/privacy.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
 </tiles-definitions>

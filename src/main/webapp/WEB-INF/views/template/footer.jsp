@@ -31,7 +31,7 @@
 			</div>
 			<div class="col">
 				<a class="menu-item" href="${pageContext.request.contextPath }/member/myPage.do">
-				<i class="fas fa-ellipsis-h more-icon">
+				<i class="myPage fas fa-ellipsis-h more-icon">
 				<c:if test="${count_msg!=0 && not empty count_msg }">
 				<span class="count-msg">${count_msg }</span>
 				</c:if>
@@ -39,7 +39,6 @@
 				
 				<!-- <span class="myPage material-icons bottom-icon relative">more_horiz
 				</span> -->
-				<span class="myPage bottom-icon-txt"></span>
 				</a>
 			</div>
 		</div>
@@ -50,15 +49,15 @@
 
 	$(function(){
 		if(${ title eq 'main'}){
-			$('.main').css('color','black');
+			$('.main').css('color','#00643c');
 		}else if(${title eq '경기 매치'}){
-			$('.invite').css('color','black');
+			$('.invite').css('color','#00643c');
 		}else if(${title eq '용병 모집'}){
-			$('.join').css('color','black');
+			$('.join').css('color','#00643c');
 		}else if(${title eq '팀 관리'}){
-			$('.club').css('color','black');
+			$('.club').css('color','#00643c');
 		}else if(${title eq '나의 페이지'}){
-			$('.myPage').css('color','black');
+			$('.myPage').css('color','#00643c');
 		}
 		
 	});

@@ -94,6 +94,16 @@
 		</div>
 	</li>
 </ul>
+<ul class="ul-list non-border-btm gray">
+	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/member/policy.do'">
+		<div class="row">
+			<div class="col">
+				<i class="fas fa-file-contract m-font"></i>
+				<span>약관 및 정책</span>
+			</div>
+		</div>
+	</li>
+</ul>
 <div class="mid-banner">
 	<ins class="kakao_ad_area" style="display:none;" 
 	 data-ad-unit    = "DAN-gCSwQUEFuriXnEOA" 

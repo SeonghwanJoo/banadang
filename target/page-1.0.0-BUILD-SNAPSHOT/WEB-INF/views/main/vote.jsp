@@ -197,7 +197,7 @@
 			</div>
 		</div>
 		<hr>
-		<span class="input-label">참석 여부 선택</span>
+		<span class="input-label positive-color">참석 여부 선택</span>
 		<div class="row space-around">
 			<label class="chip m-wider">
 				<span class="chip-txt">참석</span>
