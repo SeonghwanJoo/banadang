@@ -429,7 +429,7 @@
 		</div>
 		</c:if>
 		<c:if test="${not empty match_list }">
-			<ul class="ul-list">
+			<ul class="ul-list non-border-btm">
 				<c:forEach var="match" items="${match_list}">
 					<li class="li-list">
 						<div class="match-info-wrapper">

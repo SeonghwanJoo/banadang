@@ -107,12 +107,16 @@
 		</div>
 		<div class="row small-font margin-top margin-btm">
 			<c:if test="${empty match.home_name }">
-			<div class="team-info col margin-top">
-				<div class="centered margin-top">
-					<span class="material-icons">
-					error
-					</span>
-					삭제된 팀
+			<div class="team-info col">
+				<div class="row margin-top margin-btm">
+					<div class="centered">
+						<div class="row padding-top">
+						<span class="material-icons">
+						error
+						</span>
+						<span class="disp-inbl margin-smtop">삭제된 팀</span>
+						</div>
+					</div>
 				</div>
 			</div>
 			</c:if>
@@ -176,22 +180,31 @@
 			</div>
 			</c:if>
 			<c:if test="${empty match.club_loc}">
-			<div class="team-info col margin-top">
-				<div class="centered margin-top">
-					<c:if test="${match.away>0 }">
-					<span class="material-icons">
-					error
-					</span>
-					</c:if>
-					<c:if test="${match.away==0 }">
-					<span class="material-icons">
+			<div class="team-info col">
+				<div class="row margin-top margin-btm">
+					<div class="centered">
+						<c:if test="${match.away>0 }">
+						<div class="row padding-top">
+						<span class="material-icons">
+						error
+						</span>
+						<span class="disp-inbl margin-smtop">${match.away_name }</span>
+						</div>
+						</c:if>
+						<c:if test="${match.away==0 }">
+						<div class="row padding-top">
+						<span class="material-icons">
 						campaign
 						</span>
-					</c:if>
-					<c:if test="${ match.away==-1}">
-					<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
-					</c:if>
-					${match.away_name }
+						<span class="disp-inbl margin-smtop">${match.away_name }</span>
+						</div>
+						</c:if>
+						<c:if test="${ match.away==-1}">
+						<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+						<span class="disp-inbl margin-top">${match.away_name }</span>
+						</c:if>
+						
+					</div>
 				</div>
 			</div>
 			</c:if>
@@ -362,7 +375,10 @@
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
 		<div class="sub-content" id="option">
-			<button id="share" class="pos-btn">투표 링크 공유</button>
+			<button id="share" class="pos-btn">
+			투표 링크 공유
+			<img class="kakaolink-share" src="${pageContext.request.contextPath }/resources/images/kakaolink_btn.png">
+			</button>
 			<hr class="hr">
 			<button id="detail" class="pos-btn">경기 상세</button>
 		</div>
@@ -445,11 +461,11 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 	 	var not_fixed=matches[i].undefined;
 	 	var match_num=matches[i].match_num;
 	 	if (max==attend){
-	 		$('#voted-attend-'+matches[i].match_num).css('background-color','#A4d3a6');
+	 		$('#voted-attend-'+matches[i].match_num).css('background-color','#81c784');
 	 	}else if(max==not_attend){
-	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#A4d3a6');
+	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#81c784');
 	 	}else if(max==not_fixed){
-	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#A4d3a6');
+	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#81c784');
 	 	}
 	 	
 	  }

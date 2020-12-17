@@ -429,7 +429,7 @@
 		</div>
 		</c:if>
 		<c:if test="${not empty match_list }">
-			<ul class="ul-list">
+			<ul class="ul-list non-border-btm">
 				<c:forEach var="match" items="${match_list}">
 					<li class="li-list">
 						<div class="match-info-wrapper">
@@ -763,8 +763,10 @@
 			<div class="col">
 				<a href="javascript:sendLink()">
 					<span class="material-icons person_add">person_add</span>
-					<span class="text-by-icon">카카오톡으로 팀원 초대하기</span>
-					<img class="kakaolink" src="${pageContext.request.contextPath }/resources/images/kakaolink_btn.png">
+					<span class="text-by-icon">카카오톡으로 팀원 초대하기
+					<img class="kakaolink-share" src="${pageContext.request.contextPath }/resources/images/kakaolink_btn.png">
+					</span>
+					
 				</a>
 			</div>    
 		</div>

@@ -275,6 +275,7 @@ $( function() {
 	$('#exist').click(function(){
 		$('#away-wrapper').css('display','block');
 		$('#cost-wrapper').css('display','none');
+		$('#away').val('-1');
 		$('#away_name').val('');
 	});
 	$('#non-exist').click(function(){

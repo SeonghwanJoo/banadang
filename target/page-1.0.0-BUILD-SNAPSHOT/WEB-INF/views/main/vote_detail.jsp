@@ -134,7 +134,7 @@
 			<hr class="hr">
 			<div class="row">
 				<c:forEach items="${not_voted }" var="not_voted">
-					<div class="detail-item col-sm-6 col-lg-3">
+					<div class="detail-item  col-6 col-lg-3d">
 						<c:if test="${empty not_voted.thumbnail_image }">
 						<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
 						</c:if>

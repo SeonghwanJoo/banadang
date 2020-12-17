@@ -196,9 +196,12 @@ ul.carousel-indicators {
 	margin: 0 auto;
 	cursor:pointer;
 }
+.blue{
+	color:#007bff;
+}
 /* Style buttons */
 .btn_write {
-	background-color: #6d6d6d;
+	background-color: #00643c;
 	color:white;
 	border: none; /* Remove borders */
 	padding: 0.3rem; /* Some padding */
@@ -253,6 +256,14 @@ ul.carousel-indicators {
 	font-weight:bold;
 	padding-right:1rem;
 }
+.vote-sel{
+	background-color:#f1f8e9;
+	border-radius:0.2rem;
+	padding:0.3rem 0;
+}
+a .match-item{
+	color:#007bff;
+}
 .modal-wrapper{
 	margin:0.8rem 0;
 	text-align:center;
@@ -264,7 +275,6 @@ div.team-info.cursor{
 	padding-right: 0;
 	padding-left:0;
 	text-align: center;
-	color:#7a7a7a;
 }
 
 .main-row{
@@ -278,7 +288,6 @@ div.team-info.cursor{
 .vote-rating {
 	margin:0.2rem auto;
 	width:100%;
-	color:#555;
  }
 .vote-rating, .voted{
 	display:inline-block; 
@@ -356,6 +365,7 @@ div.half_col{
 	top:0.7rem;
 	right:0.7rem;
 	display:flex;
+	color:#555;
 	
 }
 
@@ -650,7 +660,7 @@ body.body, body.body btn{
 	padding:0 0.5rem;
 }
 .futsal{
-	background-color:#A4d3a6;
+	background-color:#00c853;
 	color:#fff;
 	padding:0 0.5rem;
 	
@@ -784,15 +794,15 @@ body.body, body.body btn{
   width:100%;
   height:2.6rem;
   margin:0.2rem auto;
-  color:#FFFFFF;
+  color:#000;
   border-radius:0.5rem;
   padding: 0.2rem 1.2rem;
   font-size: 1.1rem;
   font-weight:bold;
   cursor: pointer;
-  background-color:#555;
+  background-color:#fff;
   text-align: center;
-  border-color:#FFF;
+  border-color:#000;
   border-style:solid;
 }
 #submit_delete{
@@ -814,7 +824,6 @@ body.body, body.body btn{
   font-size: 16px;
   font-weight:bold;
   cursor: pointer;
-  
   background-color:#eee;
   text-align: center;
   border-color:#FFF;
@@ -1273,19 +1282,25 @@ h6.ages{
 	font-weight:bold;
 }
 .reply-btn{
-	width:100%;
-	border:1px solid #9E9E9E;
+	color:#777;
+	display:block;
+	width:95%;
+	margin:0.5rem auto;
+	border:1px solid #777;
 	border-radius:0.2rem;
 	padding:0.5rem;
 	text-align:left;
-	margin-top:0.5rem;
 	background-color:transparent;
+}
+.reply-txt{
+	position:relative;
+	bottom:0.2rem;
 }
 #answer-wrapper{
 	background-color:#f7f7f7;
 }
 .nickname{
-	color:#00643c;
+	color:#007bff;
 	margin-right:1rem;
 }
 .icon-margin{
@@ -1595,7 +1610,7 @@ div.detail-item{
 ul.ul-list{
 	padding-inline-start: 0px;
 	width:100%;
-	border-bottom:10px solid #efefef;
+	border-bottom:10px solid #F0F4F8;
 	margin-bottom:0;
 }
 ul.non-border-btm{
@@ -1612,7 +1627,7 @@ li.li-list{
 .mid-banner{
 	width:100%;
 	padding:10px 0;
-	background-color:#eee;
+	background-color:#F2F5F7;
 	margin:0 auto;
 	max-width: 1130px;
 }
@@ -1732,7 +1747,6 @@ button.chip-btn{
 .input-label{
 	padding-left:1rem;
 	display:block;
-	color:#827C75;
 	margin-top:1rem;
 }
 .centered-padding{
@@ -1784,8 +1798,12 @@ button.chip-btn{
 .padding-right{
 	padding-right:0.5rem;
 }
-
-
+.padding-top{
+	padding-top:0.5rem;
+}
+.margin-smtop{
+	margin-top:0.1rem;
+}
 .chip{
   display: inline-block;
   position: relative;

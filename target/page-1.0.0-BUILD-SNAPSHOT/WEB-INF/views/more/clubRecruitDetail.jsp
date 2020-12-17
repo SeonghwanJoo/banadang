@@ -46,7 +46,7 @@
 					<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
 					</c:if>
 					<span class="club_name">${clubRecruit.club_name }</span><br>
-					<span class="relative positive-color cursor" onclick="location.href='${pageContext.request.contextPath}/member/writeMsg.do?club_num=${clubRecruit.club_num }&id=${clubRecruit.id }'" >
+					<span class="relative blue cursor" onclick="location.href='${pageContext.request.contextPath}/member/writeMsg.do?club_num=${clubRecruit.club_num }&id=${clubRecruit.id }'" >
 						<b>메시지 보내기</b>
 						<i class="fas fa-comment bubble"></i>
 					</span>

@@ -56,7 +56,7 @@
 				</c:if>
 				<span class="match-item">${match.address}</span>
 			</div>
-			<div class="row gray">
+			<div class="row">
 				<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
 				<span class="match-item"><i class="far fa-clock margin-right"></i>${match.start_time }~${match.end_time }</span>
 			</div>
@@ -132,22 +132,30 @@
 			</div>
 			</c:if>
 			<c:if test="${empty match.club_loc}">
-			<div class="team-info col margin-top">
-				<div class="centered margin-top">
-					<c:if test="${match.away>0 }">
-					<span class="material-icons">
-					error
-					</span>
-					</c:if>
-					<c:if test="${match.away==0 }">
-					<span class="material-icons">
+			<div class="team-info col">
+				<div class="row margin-top margin-btm">
+					<div class="centered">
+						<c:if test="${match.away>0 }">
+						<div class="row padding-top">
+						<span class="material-icons">
+						error
+						</span>
+						<span class="disp-inbl margin-smtop">${match.away_name }</span>
+						</div>
+						</c:if>
+						<c:if test="${match.away==0 }">
+						<div class="row padding-top">
+						<span class="material-icons">
 						campaign
 						</span>
-					</c:if>
-					<c:if test="${ match.away==-1}">
-					<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
-					</c:if>
-					${match.away_name }
+						<span class="disp-inbl margin-smtop">${match.away_name }</span>
+						</div>
+						</c:if>
+						<c:if test="${ match.away==-1}">
+						<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+						<span class="disp-inbl margin-top">${match.away_name }</span>
+						</c:if>
+					</div>
 				</div>
 			</div>
 			</c:if>
@@ -196,9 +204,9 @@
 				</span>
 			</div>
 		</div>
-		<hr>
-		<span class="input-label">참석 여부 선택</span>
-		<div class="row space-around">
+		<hr class="hr">
+		<span class="input-label bold">참석 여부 선택</span>
+		<div class="row space-around ">
 			<label class="chip m-wider">
 				<span class="chip-txt">참석</span>
 				<input type="radio" name="vote" value="1" id="attend_radio" class="vote">
@@ -219,7 +227,7 @@
 		<div class="total_wrapper margin-btm">
 			<span class="cursor" onclick="location.href='vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num}&home_name=${match.home_name}&away_name=${match.away_name}&isMain=${isMain }'">
 			<span class="total_person material-icons">person</span>
-			<span id="total" class="total">${match.attend+match.not_attend+match.undefined}</span><span class="unit"> 명 투표 </span>
+			<span id="total" class="total blue">${match.attend+match.not_attend+match.undefined}</span><span class="unit"> 명 투표 </span>
 			<i class="total fas fa-chevron-right"></i>
 			</span>
 			<span class="share cursor" onclick="sendLink('${match.match_num}','${match.club_num}','${match.match_date}','${match.address}','${match.start_time}')">
@@ -230,10 +238,10 @@
 	</li>
 </ul>
 <button class="reply-btn" onclick="location.href='replyToVote.do?match_num=${match.match_num}&club_num=${match.club_num }'">
-	<span class="material-icons icon-margin gray">
-	account_circle
-	</span>
-	<span class="gray small-font">댓글 입력</span>
+		<span class="material-icons icon-margin">
+		account_circle
+		</span>
+		<span class="small-font reply-txt">댓글 입력</span>
 </button>
 <c:if test="${not empty answers }">
 <div id="answer-wrapper" class="margin-top">
@@ -265,6 +273,13 @@
 </ul>
 </div>
 </c:if>
+<div class="mid-banner">
+	<ins class="kakao_ad_area" style="display:none;" 
+	 data-ad-unit    = "DAN-gCSwQUEFuriXnEOA" 
+	 data-ad-width   = "320" 
+	 data-ad-height  = "100"></ins>
+</div>
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 <div id="more_modal" class="confirm-modals">
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
@@ -351,17 +366,17 @@ function modifyAnswer(voteAnswer_num){
 function setVoteStyle(max,attend,not_attend,undefined,status){
 	
 	if (max==attend){
-		$('#attend').css('background-color','#a4d3a6');
+		$('#attend').css('background-color','#81c784');
 		$('#not_attend').css('background-color','#bfbfbf');
 		$('#undefined').css('background-color','#bfbfbf');
 	}else if(max==not_attend){
 		$('#attend').css('background-color','#bfbfbf');
-		$('#not_attend').css('background-color','#a4d3a6');
+		$('#not_attend').css('background-color','#81c784');
 		$('#undefined').css('background-color','#bfbfbf')
 	}else if(max==undefined){
 		$('#attend').css('background-color','#bfbfbf');
 		$('#not_attend').css('background-color','#bfbfbf');
-		$('#undefined').css('background-color','#a4d3a6');
+		$('#undefined').css('background-color','#81c784');
 	}
 	if( status ==  1){
 		$('#attend_sign').css('display','inline-block');

@@ -44,7 +44,7 @@ public class MemberController {
 	@RequestMapping("/member/login.do")
 	public String kakaoLogin(@RequestParam String code,HttpSession session,HttpServletRequest request)throws IOException {	
 		
-		String uri="http://"+request.getServerName()+request.getContextPath();
+		String uri="https://"+request.getServerName()+request.getContextPath();
 		logger.info("uri : " + uri);
 		String access_Token = loginAPI.getAccessToken(code,1,uri);
 		if(access_Token.equals("errors")) {
