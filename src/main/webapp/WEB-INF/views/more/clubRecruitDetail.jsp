@@ -37,7 +37,7 @@
 				<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>주 활동 요일 ${clubRecruit.act_day}</span>
 				<span class="match-item"><i class="far fa-clock margin-right"></i>시간대 ${clubRecruit.act_time }</span>
 			</div>
-			<div class="row small-font gray">
+			<div class="row small-font">
 				<div class="col club_main">
 					<c:if test="${clubRecruit.filename ne 'undefined' }">
 					<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${clubRecruit.club_num}" alt="Avatar" class="avatar emblem">
@@ -52,8 +52,8 @@
 					</span>
 				</div>
 				<div class="col">
-					<span class="age"><span class="gray">주 연령대 </span>${clubRecruit.club_age }</span><br>
-					<span class="uniform gray">
+					<span class="age">연령대<span class="xs-font margin-left">${clubRecruit.club_age }</span></span><br>
+					<span class="uniform">
 						유니폼
 						<c:if test="${!empty clubRecruit.club_color }">
 						<span class="color" style="background-color:${clubRecruit.club_color}"></span>
@@ -67,7 +67,7 @@
 		</li>
 		<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${clubRecruit.club_num }'">
 			<span class="rating_count">총 ${clubRecruit.count }명의 평가 <i class="fas fa-chevron-right"></i></span>
-			<div class="row small-font gray">
+			<div class="row small-font">
 				<div class="col flex-start">
 					매너 
 					<span class="star-rating">
@@ -93,12 +93,12 @@
 		</c:if>
 		<li class="li-list">
 			<div class="row">
-				<span class="col"><span class="gray">가입비</span> <span>${clubRecruit.register_cost }</span></span>
-				<span class="col"><span class="gray">월 회비</span> <span>${clubRecruit.month_cost }</span></span>
+				<span class="col">가입비 <span>${clubRecruit.register_cost }</span></span>
+				<span class="col">월 회비 <span>${clubRecruit.month_cost }</span></span>
 			</div>
 			<!-- 포지션 -->
 			<div class="row">
-				<span class="center gray">필요 포지션</span>
+				<span class="center">필요 포지션</span>
 				<c:if test="${fn:contains(clubRecruit.recruit_position,'G') }">
 				<span class="chip">
 					<span class="chip-txt">GK</span>

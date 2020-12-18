@@ -53,7 +53,7 @@
 					</span>
 				</div>
 				<div class="col">
-					<span class="age">주 연령대 ${match.club_age }</span><br>
+					<span class="age">연령대 <span class="xs-font margin-left">${match.club_age }</span></span><br>
 					<span class="uniform">
 						유니폼
 						<c:if test="${!empty match.club_color }">

@@ -35,7 +35,7 @@
 				</div>
 				<div class="col">
 					<span class="age">
-						연령대<span class="xs-font">${myClub.club_age }</span>
+						연령대<span class="xs-font margin-left">${myClub.club_age }</span>
 					</span><br>
 					<span class="uniform">
 						유니폼
@@ -153,7 +153,7 @@
 									<span style='width:${away.perform*20 }%'></span>
 								</span><fmt:formatNumber value="${away.perform*2}" pattern="0.0"/>
 						</div>
-						<span class="age">연령대 <span class="xs-font">${away.club_age }</span></span>
+						<span class="age">연령대 <span class="xs-font margin-left">${away.club_age }</span></span>
 					</div>
 				</div>
 				<span class="material-icons collapsible">add_circle</span>
@@ -249,7 +249,7 @@
 									<span style='width:${home.perform*20 }%'></span>
 								</span><fmt:formatNumber value="${home.perform*2}" pattern="0.0"/>
 						</div>
-						<span class="age">연령대 <span class="xs-font">${home.club_age }</span></span>
+						<span class="age">연령대 <span class="xs-font margin-left">${home.club_age }</span></span>
 					</div>
 				</div>
 				<span class="material-icons collapsible">add_circle</span>
@@ -259,12 +259,12 @@
 					<c:if test="${empty home.cancel}">
 					<div class="row">
 					<c:if test="${empty home.match_req_cancel }">
-					<button class="block" id="${home.request_num }-btn" onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num })">
+					<button class="block gray-bg" id="${home.request_num }-btn" onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num })">
 						경기 신청 취소
 					</button>
 					</c:if>
 					<c:if test="${not empty home.match_req_cancel }">
-					<button class="block" id="${home.request_num }-btn" style="display:none"  onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num})">
+					<button class="block gray-bg" id="${home.request_num }-btn" style="display:none"  onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num})">
 						경기 신청 취소
 					</button>
 					</c:if>
@@ -601,7 +601,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<button class="block"
+							<button class="block white-bg"
 								onclick="location.href='${pageContext.request.contextPath}/main/voteForm.do?match_num=${match.match_num}&club_num=${myClub.club_num }&isMain=false'">
 								<c:if test="${ match.status !=0}">다시 투표하기</c:if>
 								<c:if test="${match.status ==0 }">투표하기</c:if>
@@ -714,10 +714,10 @@
 			</div>
 			<div class="row">
 				<c:if test="${match.home==match.club_num}">
-				<button class="block margin-top" onclick="location.href='${pageContext.request.contextPath }/main/ratingForm.do?match_num=${match.match_num}&club_num=${match.away }&isMain=false'">${match.away_name } 평점 작성 하기</button>
+				<button class="block white-bg margin-top" onclick="location.href='${pageContext.request.contextPath }/main/ratingForm.do?match_num=${match.match_num}&club_num=${match.away }&isMain=false'">${match.away_name } 평점 작성 하기</button>
 				</c:if>
 				<c:if test="${match.away==match.club_num }">
-				<button class="block margin-top" onclick="location.href='${pageContext.request.contextPath }/main/ratingForm.do?match_num=${match.match_num}&club_num=${match.home }&isMain=false'">${match.home_name } 평점 작성 하기</button>
+				<button class="block white-bg margin-top" onclick="location.href='${pageContext.request.contextPath }/main/ratingForm.do?match_num=${match.match_num}&club_num=${match.home }&isMain=false'">${match.home_name } 평점 작성 하기</button>
 				</c:if>
 			</div>
 		</li>
@@ -1446,37 +1446,18 @@ $(function(){
 	 </c:forEach>
 	  for(var i=0; i<matches.length;i++){
 	 	
-	 	var max=matches[i].max;
-	 	var attend=matches[i].attend;
-	 	var not_attend=matches[i].not_attend;
-	 	var not_fixed=matches[i].undefined;
-	 	var match_num=matches[i].match_num;
-	 	 if(max==0){
-	 		$('#voted-attend-'+matches[i].match_num).css('background-color','transparent');
-	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','transparent');
-	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','transparent');
-	 	}else if (max==attend){
-	 		$('#voted-attend-'+matches[i].match_num).css('background-color','#a4d3a6');
-	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#bfbfbf');
-	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#bfbfbf');
-	 	}else if(max==not_attend){
-	 		$('#voted-attend-'+matches[i].match_num).css('background-color','#bfbfbf');
-	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#a4d3a6');
-	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#bfbfbf')
-	 	}else if(max==not_fixed){
-	 		$('#voted-attend-'+matches[i].match_num).css('background-color','#bfbfbf');
-	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#bfbfbf');
-	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#a4d3a6');
-	 	}
-	 	if(attend==0){
-	 		$('#voted-attend-'+matches[i].match_num).css('background-color','transparent');
-	 	}
-	 	if(not_attend==0){
-	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','transparent');
-	 	}
-	 	if(not_fixed==0){
-	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','transparent');
-	 	}
+		  var max=matches[i].max;
+		 	var attend=matches[i].attend;
+		 	var not_attend=matches[i].not_attend;
+		 	var not_fixed=matches[i].undefined;
+		 	var match_num=matches[i].match_num;
+		 	if (max==attend){
+		 		$('#voted-attend-'+matches[i].match_num).css('background-color','#81c784');
+		 	}else if(max==not_attend){
+		 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#81c784');
+		 	}else if(max==not_fixed){
+		 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#81c784');
+		 	}
 	  }
 	
 });

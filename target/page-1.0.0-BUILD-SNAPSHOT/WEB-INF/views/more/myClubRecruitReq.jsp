@@ -81,7 +81,7 @@
 						<span style='width:${match.perform*20 }%'></span>
 					</span><fmt:formatNumber value="${match.perform*2}" pattern="0.0"/>
 				</div>
-				<span class="age">연령대 <span class="xs-font">${match.club_age }</span></span>
+				<span class="age">연령대 <span class="xs-font margin-left">${match.club_age }</span></span>
 			</div>
 		</div>
 	</li>

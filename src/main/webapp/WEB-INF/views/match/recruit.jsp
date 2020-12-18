@@ -77,7 +77,7 @@
 		</div>
 		<hr class="hr">
 		<div class="row margin-top">
-			<input type="submit" class="block modal-block" id="apply-filter" value="필터 적용">
+			<input type="submit" class="block black-bg" id="apply-filter" value="필터 적용">
 		</div>
 	</div>
 	</form:form>
@@ -105,6 +105,7 @@ function createListInHTML(matchs){
 		}
 		itemStr+=
 					"<span class='match-item'>"+matchs[i].address+"</span>"
+					+"<span class='distance'><span class='blue'>"+matchs[i].distance.toFixed(1)+"</span> km</span>"
 				+"</div>"
 				+"<div class='row'>"
 					+"<span class='match-item'><i class='far fa-calendar-alt margin-right'></i>"+new Date(matchs[i].match_date).format('yy.MM.dd')+"</span>"
@@ -149,7 +150,7 @@ function createListInHTML(matchs){
 								+"</span>"
 								+Number(matchs[i].perform*2).toFixed(1)+"</div>"
 							+"</span>"
-							+"연령대" + "<span class='xs-font'>"+matchs[i].club_age+"</span>"
+							+"연령대<span class='xs-font margin-left'>"+matchs[i].club_age+"</span>"
 						+"</div>"			
 					+"</div>"
 				+"</li>";

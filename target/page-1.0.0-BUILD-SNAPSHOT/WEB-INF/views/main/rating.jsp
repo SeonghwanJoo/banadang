@@ -138,7 +138,8 @@
 				<i class="manner_rating fas fa-star"  id="manner_4"></i>
 				<i class="manner_rating fas fa-star"  id="manner_5"></i>
 			</div>
-		<span id="manner_msg">선택하세요</span>
+		<span class="disp-bl" id="manner_msg">선택하세요</span>
+		<span class="msg no-margin" id="manner_valid"></span>
 		<input type="hidden" name="manner" id="manner">
 		</div>
 		<div class="wrapper">
@@ -151,7 +152,8 @@
 				<i class="perform_rating fas fa-star" id="perform_4"></i>
 				<i class="perform_rating fas fa-star" id="perform_5"></i>
 			</div>
-		<span id="perform_msg">선택하세요</span>
+		<span class="disp-bl" id="perform_msg">선택하세요</span>
+		<span class="msg no-margin" id="perform_valid"></span>
 		<input type="hidden" name="perform" id="perform">
 		</div>
 		<div class="row">
@@ -193,146 +195,177 @@
 		});
 	 
 	$('#manner_1').click(function(){
+		$('#manner_valid').css('color','red').text('');
 		$('.manner_rating').css('color','#d6d6d6');
-		$('#manner_1').css('color','#f9e936'); 
+		$('#manner_1').css('color','#FFC000'); 
 		$('#manner_msg').text('다시 경기하고 싶지 않아요');
 		$('#manner').val(1);
 	});
 	$('#manner_2').click(function(){
+		$('#manner_valid').css('color','red').text('');
 		$('.manner_rating').css('color','#d6d6d6');
-		$('#manner_1').css('color','#f9e936'); 
-		$('#manner_2').css('color','#f9e936'); 
+		$('#manner_1').css('color','#FFC000'); 
+		$('#manner_2').css('color','#FFC000'); 
 		$('#manner_msg').text('별로에요');
 		$('#manner').val(2);
 	});
 	$('#manner_3').click(function(){
+		$('#manner_valid').css('color','red').text('');
 		$('.manner_rating').css('color','#d6d6d6');
-		$('#manner_1').css('color','#f9e936'); 
-		$('#manner_2').css('color','#f9e936'); 
-		$('#manner_3').css('color','#f9e936');
+		$('#manner_1').css('color','#FFC000'); 
+		$('#manner_2').css('color','#FFC000'); 
+		$('#manner_3').css('color','#FFC000');
 		$('#manner_msg').text('괜찮아요');
 		$('#manner').val(3);
 	});
 	$('#manner_4').click(function(){
+		$('#manner_valid').css('color','red').text('');
 		$('.manner_rating').css('color','#d6d6d6');
-		$('#manner_1').css('color','#f9e936'); 
-		$('#manner_2').css('color','#f9e936'); 
-		$('#manner_3').css('color','#f9e936');
-		$('#manner_4').css('color','#f9e936');
+		$('#manner_1').css('color','#FFC000'); 
+		$('#manner_2').css('color','#FFC000'); 
+		$('#manner_3').css('color','#FFC000');
+		$('#manner_4').css('color','#FFC000');
 		$('#manner_msg').text('좋아요');
 		$('#manner').val(4);
 	});
 	$('#manner_5').click(function(){
-		$('.manner_rating').css('color','#f9e936');
+		$('#manner_valid').css('color','red').text('');
+		$('.manner_rating').css('color','#FFC000');
 		$('#manner_msg').text('매너 최상이에요');
 		$('#manner').val(5);
 	});
 	$('#manner_1').hover(function(){
+		$('#manner_valid').css('color','red').text('');
 		$('.manner_rating').css('color','#d6d6d6');
-		$('#manner_1').css('color','#f9e936'); 
+		$('#manner_1').css('color','#FFC000'); 
 		$('#manner_msg').text('다시 경기하고 싶지 않아요');
 		$('#manner').val(1);
 	});
 	$('#manner_2').hover(function(){
+		$('#manner_valid').css('color','red').text('');
 		$('.manner_rating').css('color','#d6d6d6');
-		$('#manner_1').css('color','#f9e936'); 
-		$('#manner_2').css('color','#f9e936'); 
+		$('#manner_1').css('color','#FFC000'); 
+		$('#manner_2').css('color','#FFC000'); 
 		$('#manner_msg').text('별로에요');
 		$('#manner').val(2);
 	});
 	$('#manner_3').hover(function(){
+		$('#manner_valid').css('color','red').text('');
 		$('.manner_rating').css('color','#d6d6d6');
-		$('#manner_1').css('color','#f9e936'); 
-		$('#manner_2').css('color','#f9e936'); 
-		$('#manner_3').css('color','#f9e936');
+		$('#manner_1').css('color','#FFC000'); 
+		$('#manner_2').css('color','#FFC000'); 
+		$('#manner_3').css('color','#FFC000');
 		$('#manner_msg').text('괜찮아요');
 		$('#manner').val(3);
 	});
 	$('#manner_4').hover(function(){
+		$('#manner_valid').css('color','red').text('');
 		$('.manner_rating').css('color','#d6d6d6');
-		$('#manner_1').css('color','#f9e936'); 
-		$('#manner_2').css('color','#f9e936'); 
-		$('#manner_3').css('color','#f9e936');
-		$('#manner_4').css('color','#f9e936');
+		$('#manner_1').css('color','#FFC000'); 
+		$('#manner_2').css('color','#FFC000'); 
+		$('#manner_3').css('color','#FFC000');
+		$('#manner_4').css('color','#FFC000');
 		$('#manner_msg').text('좋아요');
 		$('#manner').val(4);
 	});
 	$('#manner_5').hover(function(){
-		$('.manner_rating').css('color','#f9e936');
+		$('#manner_valid').css('color','red').text('');
+		$('.manner_rating').css('color','#FFC000');
 		$('#manner_msg').text('매너 최상이에요');
 		$('#manner').val(5);
 	});
 	$('#perform_1').click(function(){
+		$('#perform_valid').css('color','red').text('');
 		$('.perform_rating').css('color','#d6d6d6');
-		$('#perform_1').css('color','#f9e936'); 
+		$('#perform_1').css('color','#FFC000'); 
 		$('#perform_msg').text('처음 시작하신 듯');
 		$('#perform').val(1);
 	});
 	$('#perform_2').click(function(){
+		$('#perform_valid').css('color','red').text('');
 		$('.perform_rating').css('color','#d6d6d6');
-		$('#perform_1').css('color','#f9e936'); 
-		$('#perform_2').css('color','#f9e936'); 
+		$('#perform_1').css('color','#FFC000'); 
+		$('#perform_2').css('color','#FFC000'); 
 		$('#perform_msg').text('아직 부족');
 		$('#perform').val(2);
 	});
 	$('#perform_3').click(function(){
+		$('#perform_valid').css('color','red').text('');
 		$('.perform_rating').css('color','#d6d6d6');
-		$('#perform_1').css('color','#f9e936'); 
-		$('#perform_2').css('color','#f9e936'); 
-		$('#perform_3').css('color','#f9e936');
+		$('#perform_1').css('color','#FFC000'); 
+		$('#perform_2').css('color','#FFC000'); 
+		$('#perform_3').css('color','#FFC000');
 		$('#perform_msg').text('보통이에요');
 		$('#perform').val(3);
 	});
 	$('#perform_4').click(function(){
+		$('#perform_valid').css('color','red').text('');
 		$('.perform_rating').css('color','#d6d6d6');
-		$('#perform_1').css('color','#f9e936'); 
-		$('#perform_2').css('color','#f9e936'); 
-		$('#perform_3').css('color','#f9e936');
-		$('#perform_4').css('color','#f9e936');
+		$('#perform_1').css('color','#FFC000'); 
+		$('#perform_2').css('color','#FFC000'); 
+		$('#perform_3').css('color','#FFC000');
+		$('#perform_4').css('color','#FFC000');
 		$('#perform_msg').text('잘하시네요');
 		$('#perform').val(4);
 	});
 	$('#perform_5').click(function(){
-		$('.perform_rating').css('color','#f9e936');
+		$('#perform_valid').css('color','red').text('');
+		$('.perform_rating').css('color','#FFC000');
 		$('#perform_msg').text('모두 선출 같아요');
 		$('#perform').val(5);
 	});
 	$('#perform_1').hover(function(){
+		$('#perform_valid').css('color','red').text('');
 		$('.perform_rating').css('color','#d6d6d6');
-		$('#perform_1').css('color','#f9e936'); 
+		$('#perform_1').css('color','#FFC000'); 
 		$('#perform_msg').text('처음 시작하신 듯');
 		$('#perform').val(1);
 	});
 	$('#perform_2').hover(function(){
+		$('#perform_valid').css('color','red').text('');
 		$('.perform_rating').css('color','#d6d6d6');
-		$('#perform_1').css('color','#f9e936'); 
-		$('#perform_2').css('color','#f9e936'); 
+		$('#perform_1').css('color','#FFC000'); 
+		$('#perform_2').css('color','#FFC000'); 
 		$('#perform_msg').text('아직 부족');
 		$('#perform').val(2);
 	});
 	$('#perform_3').hover(function(){
+		$('#perform_valid').css('color','red').text('');
 		$('.perform_rating').css('color','#d6d6d6');
-		$('#perform_1').css('color','#f9e936'); 
-		$('#perform_2').css('color','#f9e936'); 
-		$('#perform_3').css('color','#f9e936');
+		$('#perform_1').css('color','#FFC000'); 
+		$('#perform_2').css('color','#FFC000'); 
+		$('#perform_3').css('color','#FFC000');
 		$('#perform_msg').text('보통이에요');
 		$('#perform').val(3);
 	});
 	$('#perform_4').hover(function(){
+		$('#perform_valid').css('color','red').text('');
 		$('.perform_rating').css('color','#d6d6d6');
-		$('#perform_1').css('color','#f9e936'); 
-		$('#perform_2').css('color','#f9e936'); 
-		$('#perform_3').css('color','#f9e936');
-		$('#perform_4').css('color','#f9e936');
+		$('#perform_1').css('color','#FFC000'); 
+		$('#perform_2').css('color','#FFC000'); 
+		$('#perform_3').css('color','#FFC000');
+		$('#perform_4').css('color','#FFC000');
 		$('#perform_msg').text('잘하시네요');
 		$('#perform').val(4);
 	});
 	$('#perform_5').hover(function(){
-		$('.perform_rating').css('color','#f9e936');
+		$('#perform_valid').css('color','red').text('');
+		$('.perform_rating').css('color','#FFC000');
 		$('#perform_msg').text('모두 선출 같아요');
 		$('#perform').val(5);
 	});
 	$('#submit').click(function(){
+		
+		if($('#manner').val()==''){
+			$('#manner_valid').css('color','red').text('매너 별점을 선택해주세요');
+			return false;
+		}
+		if($('#perform').val()==''){
+			$('#perform_valid').css('color','red').text('실력 별점을 선택해주세요');
+			return false;
+		}
+		
+		
 		$.ajax({
 			url:'rating.do',
 			type:'post',

@@ -112,10 +112,10 @@
 			엠블럼 사진 업로드 -->
 	<div class="half_col">
 		<div class="row">
-			<c:if test="${empty myClub.filename }">
+			<c:if test="${ myClub.filename eq 'undefined' }">
 			<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" id="img-pre">
 			</c:if>
-			<c:if test="${!empty myClub.filename }">
+			<c:if test="${ myClub.filename ne 'undefined' }">
 			<img src="imageView.do?club_num=${myClub.club_num}" alt="${myClub.filename }"id="img-pre">
 			</c:if>
 		</div>

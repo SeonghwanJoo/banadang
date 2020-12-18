@@ -17,7 +17,7 @@
 <div class="invite-wrapper" id="invite-wrapper">
  	<ul class="ul-list">
 		<li class="li-list">
-			<div class="row small-font gray">
+			<div class="row small-font ">
 				<div class="col club_main">
 					<c:if test="${club.filename ne 'undefined' }">
 					<img src="imageView.do?club_num=${club.club_num}" alt="Avatar" class="avatar emblem">
@@ -30,7 +30,7 @@
 				</div>
 				<div class="col">
 					<span class="age">
-						연령대 ${club.club_age }
+						연령대 <span class="xs-font margin-left">${club.club_age }</span>
 					</span><br>
 					<span class="uniform">
 						유니폼
@@ -44,7 +44,7 @@
 				</div>
 			</div>
 			<span class="rating_count">총 ${club.rating_count }명의 평가</span>
-			<div class="row small-font gray">
+			<div class="row small-font ">
 				<div class="col flex-start">
 					<span>매너</span> 
 					<span class="star-rating">
@@ -75,7 +75,7 @@
 				<span class="match-item">${rating.address}</span>
 				<span>매치의 평가</span>
 			</div>
-			<div class="row small-font gray">
+			<div class="row small-font ">
 				<div class="col flex-start">
 					<span class='rating'>매너</span>
 						<span class='star-rating'><span style='width:${rating.manner*20 }%'></span>
@@ -86,14 +86,16 @@
 					<span class='rating'>실력</span>
 						<span class='star-rating'><span style='width:${rating.perform*20 }%'></span>
 					</span>
-					<fmt:formatNumber value="${rating.perform*2}" pattern="0.0" /><br>
+					<fmt:formatNumber value="${rating.perform*2}" pattern="0.0" />
 				</div>
 			</div>
+			<c:if test="${not empty rating.rating_detail }">
 			<div class="row">
 				<div class="col margin">
-					${rating.rating_detail }
+					<textarea class="detail">${rating.rating_detail }</textarea>
 				</div>
 			</div>
+			</c:if>
 		</li>
 		</c:forEach>
 		</c:if>

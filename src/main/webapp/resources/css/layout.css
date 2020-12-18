@@ -30,7 +30,7 @@
 		width:993px;
 	}
 	.carousel-inner img{
-		height:14rem;
+		height:20rem;
 	} 
 	
 }
@@ -39,7 +39,7 @@
 		width:1130px;
 	}
 	.carousel-inner img{
-		height:16rem;
+		height:20rem;
 	} 
 	html{
 		font-size:19px;
@@ -255,6 +255,8 @@ ul.carousel-indicators {
 .match-item{
 	font-weight:bold;
 	padding-right:1rem;
+	white-space:nowrap;
+	text-overflow: ellipsis;
 }
 .vote-sel{
 	background-color:#f1f8e9;
@@ -473,11 +475,18 @@ div.half_col{
 	opacity: 1;
 }
 .detail{
-	background-color:#fcfcfc;
-	height:150px;
+	background-color:#F9FAFC;
+	min-height:3rem;
 	resize:none;
 	border:none;
 	width:100%;
+	border-radius:0.3rem;
+}
+.distance{
+	position:absolute;
+	font-size:0.9rem;
+	right: 0.5rem;
+	top:0rem;
 }
 .detail::placeholder{
 	color:#cecece;
@@ -794,16 +803,34 @@ body.body, body.body btn{
   width:100%;
   height:2.6rem;
   margin:0.2rem auto;
-  color:#000;
   border-radius:0.5rem;
   padding: 0.2rem 1.2rem;
   font-size: 1.1rem;
   font-weight:bold;
   cursor: pointer;
-  background-color:#fff;
+  
   text-align: center;
-  border-color:#000;
   border-style:solid;
+}
+.white-bg{
+	color:#000;
+	background-color:#fff;
+	border-color:#000;
+}
+.gray-bg{
+	color:#000;
+	background-color:#eee;
+	border-color:#fff;
+}
+.black-bg{
+	color:#fff;
+	background-color:#000;
+	border-color:#fff;
+}
+.green-bg{
+	color:#fff;
+	background-color:#00643c;
+	border-color:#fff;
 }
 #submit_delete{
 	background-color:#dc3545;
@@ -1573,8 +1600,8 @@ div.detail-item{
 	display:none;	
 }
 .tab-active{
-	border-bottom: 3px solid #00643c;
-	color:#00643c;
+	border-bottom: 3px solid #000;
+	color:#000;
 }
 .sticky{
 	position:sticky;

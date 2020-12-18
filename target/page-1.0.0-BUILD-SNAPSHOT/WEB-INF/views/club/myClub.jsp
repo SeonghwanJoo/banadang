@@ -8,7 +8,7 @@
 <div class="invite-wrapper" id="invite-wrapper">
  	<ul class="ul-list non-border-btm">
  		<c:forEach items="${myClubs }" var="myClub">
-		<li class="select li-list gray" onclick="location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}'">
+		<li class="select li-list" onclick="location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}'">
 			<div class="row">
 				<div class="col club_main">
 					<c:if test="${myClub.filename ne 'undefined' }">
@@ -19,7 +19,7 @@
 					</c:if>
 					<span class="disp-inbl margin-top">${myClub.club_name }</span><br>
 				</div>
-				<div class="col club_sub">
+				<div class="col club_sub gray">
 					<span class="disp-inbl margin-top">${myClub.club_address}</span>
 				</div>
 			</div>

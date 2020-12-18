@@ -100,7 +100,14 @@ public class ClubVO implements Serializable {
 	}
 	public void setClub_ages(String[] club_ages) {
 		this.club_ages = club_ages;
-		setClub_age(Arrays.toString(club_ages));
+		String club_age="";
+		for(String age : club_ages) {
+			
+			club_age+="·"+age;
+			
+		}
+		club_age=club_age.replaceFirst("·", "");
+		setClub_age(club_age);
 	}
 	public String getClub_address() {
 		return club_address;

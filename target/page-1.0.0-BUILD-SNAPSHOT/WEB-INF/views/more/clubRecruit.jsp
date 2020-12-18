@@ -47,7 +47,7 @@
 		</div>
 		<hr class="hr">
 		<div class="row margin-top">
-			<input type="submit" class="block modal-block" id="apply-filter" value="필터 적용">
+			<input type="submit" class="block black-bg" id="apply-filter" value="필터 적용">
 		</div>
 	</div>
 	</form:form>
@@ -75,6 +75,7 @@ function createListInHTML(matchs){
 		}
 		itemStr+=
 					"<span class='match-item'>"+matchs[i].club_address+"</span>"
+					+"<span class='distance'><span class='blue'>"+matchs[i].distance.toFixed(1)+"</span> km</span>"
 				+"</div>"
 				+"<div class='row'>"
 					+"<span class='match-item'><i class='far fa-calendar-alt margin-right'></i>주 활동 요일 "+matchs[i].act_day+" |</span>"
@@ -117,7 +118,7 @@ function createListInHTML(matchs){
 								+"<span style='width:"+matchs[i].perform*20+"%'></span>"
 							+"</span>"
 							+Number(matchs[i].perform*2).toFixed(1)+"</div>"
-						+"연령대"+ "<span class='xs-font'>"+matchs[i].club_age+"</span>"
+						+"연령대<span class='xs-font margin-left'>"+matchs[i].club_age+"</span>"
 					+"</div>"			
 				+"</div>"
 			+"</li>";

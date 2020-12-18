@@ -503,6 +503,14 @@ public class MatchVO {
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
 	}
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+	
 	private int pageCount;
 	private Date start;
 	private Date end;
@@ -574,6 +582,7 @@ public class MatchVO {
 	private String club_loc;
 	private double club_locX;
 	private double club_locY;
+	private double distance;
 	
 	@Override
 	public String toString() {
