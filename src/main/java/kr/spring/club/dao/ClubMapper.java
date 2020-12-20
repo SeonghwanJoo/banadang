@@ -65,6 +65,9 @@ public interface ClubMapper {
 	@Delete("delete from gentlepro.club_join where id=#{id} and club_num=#{club_num}")
 	public void deleteMemberFromClub(MemberVO memberVO);
 	
+	@Delete("delete from gentlepro.match_vote where id=#{id} and club_num=#{club_num}")
+	public void deleteVoteWhenLeftClub(MemberVO memberVO);
+	
 	@Select("select count(*) from gentlepro.club_join where club_num=#{club_num} and club_auth>3")
 	public Integer selectNumberOfMembers(Integer club_num);
 	

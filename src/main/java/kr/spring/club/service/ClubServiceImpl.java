@@ -103,6 +103,7 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public void deleteMemberFromClub(MemberVO memberVO) {
 		clubMapper.deleteMemberFromClub(memberVO);
+		clubMapper.deleteVoteWhenLeftClub(memberVO);
 		
 	}
 
