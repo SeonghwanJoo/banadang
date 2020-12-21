@@ -20,12 +20,9 @@ public class MsgCheckInterceptor
 	public boolean preHandle(HttpServletRequest request,
 			                 HttpServletResponse response,
 			               Object handler)throws Exception {
-		//濡쒓렇 �몴�떆
-		//濡쒓렇�씤 �뿬遺� 泥댄겕
 		HttpSession session = request.getSession();
 		String user_id=(String)session.getAttribute("user_id");
 		if(user_id!=null) {
-			//�떊洹� 硫붿떆吏� �닔 session�꽕�젙
 			Integer count_msg=memberService.selectCountMsg(user_id);
 	    	session.setAttribute("count_msg", count_msg);
 		}

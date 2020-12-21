@@ -38,14 +38,17 @@
 <div class="main-row">
 	<div class="login">
 		<p>간편 로그인하고 우리팀을 관리해보세요</p>
-		<a
-			href="https://kauth.kakao.com/oauth/authorize?
-	client_id=0646bcb11e5b9bbdb24fc9153f7693ae
-	&redirect_uri=https://${pageContext.request.serverName }${pageContext.request.contextPath}/member/login.do
-	&response_type=code">
+		<a onclick="login()" >
 			<img class="login_btn"
 			src="${pageContext.request.contextPath}/resources/images/kakao_login/ko/kakao_login_medium_wide.png">
 		</a>
+		<div class="row centered margin-top">
+			<label class="custom-login">
+				<input type="checkbox" id="keptLogin">
+				<span class="checkmark"></span>
+			</label>
+			<span class="margin-top">로그인 상태 유지</span>
+		</div>
 	</div>
 </div>
 </c:if>
@@ -439,6 +442,17 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 			
 		});
 		
+ }
+ function login(){
+	 var uri="";
+		 uri+="https://kauth.kakao.com/oauth/authorize?client_id=0646bcb11e5b9bbdb24fc9153f7693ae"
+			+"&redirect_uri="+$(location).attr('protocol')+"//"+"${pageContext.request.serverName }${pageContext.request.contextPath}/member/login.do"
+			+"&response_type=code";
+		console.log(uri);
+	if($('input:checkbox').is(':checked')){
+		uri+="&state=true";
+	}
+	location.href=uri;
  }
  $(function(){
 	 
