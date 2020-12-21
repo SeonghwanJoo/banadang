@@ -42,7 +42,10 @@ public class MemberController {
 	private MatchService matchService;
 
 	@RequestMapping("/member/login.do")
-	public String kakaoLogin(@RequestParam String code,HttpSession session,HttpServletRequest request)throws IOException {	
+	public String kakaoLogin(@RequestParam String code,
+							 @RequestParam String state,
+							 HttpSession session,
+							 HttpServletRequest request)throws IOException {	
 		
 		String uri="";
 		if(request.getProtocol().indexOf("HTTP")>-1) {

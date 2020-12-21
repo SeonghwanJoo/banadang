@@ -24,7 +24,9 @@ public class LoginAPI {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public String getAccessToken (String authorize_code,int invited,String uri) {
-        String access_Token = "";
+        
+		
+		String access_Token = "";
         String refresh_Token = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
         
