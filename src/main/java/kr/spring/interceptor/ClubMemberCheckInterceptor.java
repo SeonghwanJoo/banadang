@@ -41,6 +41,10 @@ public class ClubMemberCheckInterceptor  extends HandlerInterceptorAdapter {
 			if(myClubs!=null) {
 				for(ClubVO myClub : myClubs) {
 					if(myClub.getClub_num().equals(club_num)) {
+						ClubVO club=new ClubVO();
+						club.setId((String)session.getAttribute("user_id"));
+						club.setClub_num(club_num);
+						session.setAttribute("myClub", clubService.selectMyClubDetails(club));
 						return true;
 					}
 				}

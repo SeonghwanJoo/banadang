@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,11 +25,9 @@ public class LoginAPI {
     
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public String getAccessToken (String authorize_code,int invited,String uri) {
+	public Map<String,String> getAccessToken (String authorize_code,int invited,String uri) {
         
-		
-		String access_Token = "";
-        String refresh_Token = "";
+		Map<String, String> map = new HashMap<String, String>();
         String reqURL = "https://kauth.kakao.com/oauth/token";
         
         try {
@@ -73,23 +73,24 @@ public class LoginAPI {
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
             
-            access_Token = element.getAsJsonObject().get("access_token").getAsString();
-            refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
+            map.put("access_token", element.getAsJsonObject().get("access_token").getAsString());
+            map.put("refresh_token", element.getAsJsonObject().get("refresh_token").getAsString());
             
-            logger.info("access_token : " + access_Token);
-            logger.info("refresh_token : " + refresh_Token);
+            logger.info("access_token : " + map.get("access_token"));
+            logger.info("refresh_token : " + map.get("refresh_token"));
             
             br.close();
             bw.close();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            return "errors";
+            map.put("result", "errors");
+            return map;
         } 
         
-        return access_Token;
+        return map;
     }
-    public MemberVO getUserInfo (String access_Token) {
+    public MemberVO getUserInfo (String access_token) {
         
         MemberVO memberVO = new MemberVO ();
         String reqURL = "https://kapi.kakao.com/v2/user/me";
@@ -99,10 +100,14 @@ public class LoginAPI {
             conn.setRequestMethod("POST");
             
             //    요청에 필요한 Header에 포함될 내용
-            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+            conn.setRequestProperty("Authorization", "Bearer " + access_token);
             
             Integer responseCode = conn.getResponseCode();
-            memberVO.setResponseCode(responseCode);
+            if (responseCode != 200) {
+            	memberVO.setResponseCode(responseCode);
+            	return memberVO;
+            }
+            
             System.out.println("responseCode : " + responseCode);
             
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -154,7 +159,7 @@ public class LoginAPI {
         }
         return memberVO;
     }
-    public MemberVO getUpdatedUserInfo (String access_Token) {
+    public MemberVO getUpdatedUserInfo (String access_token) {
     	
         MemberVO member = new MemberVO ();
         String reqURL = "https://kapi.kakao.com/v1/api/talk/profile";
@@ -164,7 +169,7 @@ public class LoginAPI {
             conn.setRequestMethod("POST");
             
             //    요청에 필요한 Header에 포함될 내용
-            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+            conn.setRequestProperty("Authorization", "Bearer " + access_token);
             
             int responseCode = conn.getResponseCode();
             System.out.println("responseCode : " + responseCode);
@@ -206,14 +211,69 @@ public class LoginAPI {
         }
         return member;
     }
+    public Map<String, Object> refreshTokens (String refresh_token){
+    	
+    	Map<String, Object> map = new HashMap<String ,Object>();
+    	String reqURL = "https://kauth.kakao.com/oauth/token";
+    	try {
+    		URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            
+            //    POST 요청을 위해 기본값이 false인 setDoOutput을 true로
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+            
+            //    POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+            StringBuilder sb = new StringBuilder();
+            sb.append("grant_type=refresh_token");
+            sb.append("&client_id=0646bcb11e5b9bbdb24fc9153f7693ae");
+            sb.append("&refresh_token=" + refresh_token);
+            bw.write(sb.toString());
+            bw.flush();
+            
+            //    결과 코드가 200이라면 성공
+            int responseCode = conn.getResponseCode();
+            System.out.println("responseCode : " + responseCode);
+ 
+            //    요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = "";
+            String result = "";
+            
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            System.out.println("response body : " + result);
+            
+            //    Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(result);
+    		map.put("access_token", element.getAsJsonObject().get("access_token").getAsString());
+    		if(element.getAsJsonObject().get("refresh_token")!=null) {
+    			map.put("refresh_token", element.getAsJsonObject().get("refresh_token").getAsString());
+    		}
+    		if(element.getAsJsonObject().get("refresh_token_expires_in")!=null) {
+    			map.put("expires_in", element.getAsJsonObject().get("refresh_token_expires_in"));
+    		}
+    		map.put("result", "success");
+    		
+    		
+    	} catch (Exception e) {
+    		map.put("result", "errors");
+    		e.printStackTrace();
+    	}
+    	return map;
+    	
+    }
     
-    public void kakaoLogout(String access_Token) {
+    public void kakaoLogout(String access_token) {
         String reqURL = "https://kapi.kakao.com/v1/user/logout";
         try {
             URL url = new URL(reqURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
-            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+            conn.setRequestProperty("Authorization", "Bearer " + access_token);
             
             int responseCode = conn.getResponseCode();
             System.out.println("responseCode : " + responseCode);
@@ -232,13 +292,13 @@ public class LoginAPI {
             e.printStackTrace();
         }
     }
-    public void kakaoUnlink(String access_Token) {
+    public void kakaoUnlink(String access_token) {
     	String reqURL = "https://kapi.kakao.com/v1/user/unlink";
     	try {
     		URL url = new URL(reqURL);
     		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
     		 conn.setRequestMethod("POST");
-             conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+             conn.setRequestProperty("Authorization", "Bearer " + access_token);
              
              int responseCode = conn.getResponseCode();
              System.out.println("responseCode : " + responseCode);

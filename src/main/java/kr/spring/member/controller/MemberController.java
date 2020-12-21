@@ -3,9 +3,12 @@ package kr.spring.member.controller;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -43,9 +46,10 @@ public class MemberController {
 
 	@RequestMapping("/member/login.do")
 	public String kakaoLogin(@RequestParam String code,
-							 @RequestParam String state,
+							 @RequestParam(required=false) boolean state,
 							 HttpSession session,
-							 HttpServletRequest request)throws IOException {	
+							 HttpServletRequest request,
+							 HttpServletResponse response)throws IOException {	
 		
 		String uri="";
 		if(request.getProtocol().indexOf("HTTP")>-1) {
@@ -54,15 +58,26 @@ public class MemberController {
 			uri="https://"+request.getServerName()+request.getContextPath();
 		}
 		
-		String access_Token = loginAPI.getAccessToken(code,1,uri);
-		if(access_Token.equals("errors")) {
+		Map<String, String> map = loginAPI.getAccessToken(code,1,uri);
+		if(map.get("result")!=null && map.get("result").equals("errors")) {
 			return "redirect:/main/loginFailure.do";
 		}
-		session.setAttribute("access_Token", access_Token);
+		String access_token=map.get("access_token");
+		String refresh_token=map.get("refresh_token");
+		
+		session.setAttribute("access_token", access_token);
+		if(state) {
+			Cookie loginCookie=new Cookie("GpFHzB",refresh_token);
+			loginCookie.setPath("/");
+			loginCookie.setMaxAge(60*60*24*60);
+			response.addCookie(loginCookie);
+		}
+		
+		
 		
         MemberVO memberVO=new MemberVO();
-        memberVO = loginAPI.getUserInfo(access_Token);
-        if(memberVO.getResponseCode()!=200) {
+        memberVO = loginAPI.getUserInfo(access_token);
+        if(memberVO.getResponseCode()!=null && memberVO.getResponseCode()!=200) {
         	return "redirect:/main/loginFailure.do";
         }
         String user_id=memberVO.getId();
@@ -123,14 +138,25 @@ public class MemberController {
 									@RequestParam String state,
 									HttpSession session,
 									HttpServletRequest request)throws IOException {	
-		String uri="https://"+request.getServerName()+request.getContextPath();
-		String access_Token = loginAPI.getAccessToken(code,0,uri);
+		String uri="";
+		if(request.getProtocol().indexOf("HTTP")>-1) {
+			uri="http://"+request.getServerName()+request.getContextPath();
+		}else {
+			uri="https://"+request.getServerName()+request.getContextPath();
+		}
+		
+		Map<String, String> map = loginAPI.getAccessToken(code,0,uri);
+		if(map.get("result").equals("errors")) {
+			return "redirect:/main/loginFailure.do";
+		}
+		String access_token=map.get("access_token");
+		String refresh_token=map.get("refresh_token");
         MemberVO memberVO=new MemberVO();
-        memberVO = loginAPI.getUserInfo(access_Token);
+        memberVO = loginAPI.getUserInfo(access_token);
         if(memberVO.getResponseCode()!=200) {
         	return "redirect:/main/loginFailure.do";
         }
-        session.setAttribute("access_Token", access_Token);
+        session.setAttribute("access_token", access_token);
         String user_id=memberVO.getId();
         
         //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
@@ -184,16 +210,25 @@ public class MemberController {
 								 HttpSession session,
 								 HttpServletRequest request)throws IOException {	
 		
-		String uri="https://"+request.getServerName()+request.getContextPath();
+		String uri="";
+		if(request.getProtocol().indexOf("HTTP")>-1) {
+			uri="http://"+request.getServerName()+request.getContextPath();
+		}else {
+			uri="https://"+request.getServerName()+request.getContextPath();
+		}
 		
-		
-	    String access_Token = loginAPI.getAccessToken(code,2,uri);
+		Map<String, String> map = loginAPI.getAccessToken(code,2,uri);
+		if(map.get("result").equals("errors")) {
+			return "redirect:/main/loginFailure.do";
+		}
+		String access_token=map.get("access_token");
+		String refresh_token=map.get("refresh_token");
         MemberVO memberVO=new MemberVO();
-        memberVO = loginAPI.getUserInfo(access_Token);
+        memberVO = loginAPI.getUserInfo(access_token);
         if(memberVO.getResponseCode()!=200) {
         	return "redirect:/main/loginFailure.do";
         }
-        session.setAttribute("access_Token", access_Token);
+        session.setAttribute("access_token", access_token);
         String user_id=memberVO.getId();
         String[] values=state.split("-");
 		Integer match_num=Integer.parseInt(values[0]);
@@ -250,11 +285,11 @@ public class MemberController {
 	}
 	@RequestMapping("/member/kakaoSync.do")
 	public String kakaoSync(HttpSession session) {
-		String access_Token=(String)session.getAttribute("access_Token");
+		String access_token=(String)session.getAttribute("access_token");
 		MemberVO member=new MemberVO();
 		MemberVO profile=new MemberVO();
-		member=loginAPI.getUserInfo(access_Token);
-		profile=loginAPI.getUpdatedUserInfo(access_Token);
+		member=loginAPI.getUserInfo(access_token);
+		profile=loginAPI.getUpdatedUserInfo(access_token);
 		member.setNickname(profile.getNickname());
 		member.setThumbnail_image(profile.getThumbnail_image());
 		member.setProfile_image(profile.getProfile_image());
@@ -304,7 +339,7 @@ public class MemberController {
 	
 	@RequestMapping("/member/logout.do")
 	public String kakaoLogout(HttpSession session) {
-		loginAPI.kakaoLogout((String)session.getAttribute("access_Token"));
+		loginAPI.kakaoLogout((String)session.getAttribute("access_token"));
 	    session.invalidate();
 	    return "redirect:/main/main.do";
 	}
