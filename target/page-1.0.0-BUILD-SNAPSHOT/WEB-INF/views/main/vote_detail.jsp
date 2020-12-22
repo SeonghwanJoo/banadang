@@ -45,7 +45,7 @@
 			<hr class="hr">
 			<div class="row">
 				<c:forEach items="${atdance }" var="atdance">
-					<div class="detail-item  col-6 col-lg-3d">
+					<div class="detail-item  col-6 col-lg-3">
 						<c:if test="${empty atdance.thumbnail_image }">
 						<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
 						</c:if>
@@ -134,7 +134,7 @@
 			<hr class="hr">
 			<div class="row">
 				<c:forEach items="${not_voted }" var="not_voted">
-					<div class="detail-item  col-6 col-lg-3d">
+					<div class="detail-item  col-6 col-lg-3">
 						<c:if test="${empty not_voted.thumbnail_image }">
 						<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
 						</c:if>

@@ -116,38 +116,27 @@ public class ClubController {
 		List<MemberVO> members=clubService.selectClubMembers(club_num);
 		//해당 클럽의 전체 회원정보를 받아 memberVO list로 받는다
 		//memberVO list가 루프를 돌면서 attendatacerate를 set한다
-		int ten=0,twent=0,thirt=0,fourt=0,fift=0,sixt=0,sevent=0,others=0;
+		/* int ten=0,twent=0,thirt=0,fourt=0,fift=0,sixt=0,sevent=0,others=0; */
 		Map<String,Integer> ages=new HashMap<String,Integer>();
 		for(MemberVO member:members) {
-			if(member.getAge_range().startsWith("1")){
-				ten++;
-			}else if(member.getAge_range().startsWith("2")) {
-				twent++;
-			}else if(member.getAge_range().startsWith("3")) {
-				thirt++;
-			}else if(member.getAge_range().startsWith("4")) {
-				fourt++;
-			}else if(member.getAge_range().startsWith("5")) {
-				fift++;
-			}else if(member.getAge_range().startsWith("6")) {
-				sixt++;
-			}else if(member.getAge_range().startsWith("7")) {
-				sevent++;
-			}else{
-				others++;
-			}
+			/*
+			 * if(member.getAge_range().startsWith("1")){ ten++; }else
+			 * if(member.getAge_range().startsWith("2")) { twent++; }else
+			 * if(member.getAge_range().startsWith("3")) { thirt++; }else
+			 * if(member.getAge_range().startsWith("4")) { fourt++; }else
+			 * if(member.getAge_range().startsWith("5")) { fift++; }else
+			 * if(member.getAge_range().startsWith("6")) { sixt++; }else
+			 * if(member.getAge_range().startsWith("7")) { sevent++; }else{ others++; }
+			 */
 			member.setAttendance_rate(clubService.selectAttendanceRate(member));
 		}
-		ages.put("ten", ten);
-		ages.put("twent", twent);
-		ages.put("thirt", thirt);
-		ages.put("fourt", fourt);
-		ages.put("fift", fift);
-		ages.put("sixt", sixt);
-		ages.put("sevent", sevent);
-		ages.put("others", others);
+		/*
+		 * ages.put("ten", ten); ages.put("twent", twent); ages.put("thirt", thirt);
+		 * ages.put("fourt", fourt); ages.put("fift", fift); ages.put("sixt", sixt);
+		 * ages.put("sevent", sevent); ages.put("others", others);
+		 */
 		
-		mav.addObject("ages",ages);
+		/* mav.addObject("ages",ages); */
 		mav.addObject("members",members);
 		mav.setViewName("manageClub");
 		

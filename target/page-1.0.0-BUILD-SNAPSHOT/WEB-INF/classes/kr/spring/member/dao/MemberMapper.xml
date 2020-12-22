@@ -3,7 +3,7 @@
 <mapper  namespace="kr.spring.member.dao.MemberMapper">
 	<insert id="insertMember_detail" parameterType="memberVO">
 	insert into gentlepro.member_detail
-		(id,nickname,profile_image,thumbnail_image,email,age_range) 
+		(id,nickname,profile_image,thumbnail_image,email,age_range,marketing) 
 	values
 		(#{id},#{nickname},#{profile_image},#{thumbnail_image},#{email},
 		<if test="age_range != null">
@@ -12,7 +12,7 @@
 		<if test="age_range == null">
 			''
 		</if>
-		)
+		,#{marketing})
 	</insert>
 	<update id="updateMember_detail" parameterType="memberVO">
 	update gentlepro.member_detail set 

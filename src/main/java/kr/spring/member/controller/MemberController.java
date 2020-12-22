@@ -51,13 +51,8 @@ public class MemberController {
 							 HttpServletRequest request,
 							 HttpServletResponse response)throws IOException {	
 		
-		String uri="";
-		if(request.getProtocol().indexOf("HTTP")>-1) {
-			uri="http://"+request.getServerName()+request.getContextPath();
-		}else {
-			uri="https://"+request.getServerName()+request.getContextPath();
-		}
-		
+		String uri="https://"+request.getServerName()+request.getContextPath();
+		logger.info("protocol : "+request.getProtocol());
 		Map<String, String> map = loginAPI.getAccessToken(code,1,uri);
 		if(map.get("result")!=null && map.get("result").equals("errors")) {
 			return "redirect:/main/loginFailure.do";
@@ -138,24 +133,17 @@ public class MemberController {
 									@RequestParam String state,
 									HttpSession session,
 									HttpServletRequest request)throws IOException {	
-		String uri="";
-		if(request.getProtocol().indexOf("HTTP")>-1) {
-			uri="http://"+request.getServerName()+request.getContextPath();
-		}else {
-			uri="https://"+request.getServerName()+request.getContextPath();
-		}
+		
+		String uri="https://"+request.getServerName()+request.getContextPath();
 		
 		Map<String, String> map = loginAPI.getAccessToken(code,0,uri);
-		if(map.get("result").equals("errors")) {
+		if(map.get("result")!=null && map.get("result").equals("errors")) {
 			return "redirect:/main/loginFailure.do";
 		}
 		String access_token=map.get("access_token");
 		String refresh_token=map.get("refresh_token");
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_token);
-        if(memberVO.getResponseCode()!=200) {
-        	return "redirect:/main/loginFailure.do";
-        }
         session.setAttribute("access_token", access_token);
         String user_id=memberVO.getId();
         
@@ -185,12 +173,7 @@ public class MemberController {
             	List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
             	session.setAttribute("user_id", user_id);
                 session.setAttribute("myClubs", myClubs);
-                if(myClubs.size()>0) {
-                	ClubVO club=new ClubVO();
-                    club.setId(user_id);
-                    club.setClub_num(myClubs.get(0).getClub_num());
-                	session.setAttribute("myClub", clubService.selectMyClubDetails(club));
-                }
+                
             }
             
     		
@@ -210,12 +193,7 @@ public class MemberController {
 								 HttpSession session,
 								 HttpServletRequest request)throws IOException {	
 		
-		String uri="";
-		if(request.getProtocol().indexOf("HTTP")>-1) {
-			uri="http://"+request.getServerName()+request.getContextPath();
-		}else {
-			uri="https://"+request.getServerName()+request.getContextPath();
-		}
+		String uri="https://"+request.getServerName()+request.getContextPath();
 		
 		Map<String, String> map = loginAPI.getAccessToken(code,2,uri);
 		if(map.get("result").equals("errors")) {
@@ -225,7 +203,7 @@ public class MemberController {
 		String refresh_token=map.get("refresh_token");
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_token);
-        if(memberVO.getResponseCode()!=200) {
+        if(map.get("result")!=null && map.get("result").equals("errors")) {
         	return "redirect:/main/loginFailure.do";
         }
         session.setAttribute("access_token", access_token);

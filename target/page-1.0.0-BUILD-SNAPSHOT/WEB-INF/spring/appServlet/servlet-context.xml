@@ -54,6 +54,15 @@
 	
 	
 	<interceptors>
+		<!-- 자동 로그인(로그인 여부 체크 제외된 클래스에 한해) -->
+		<interceptor>
+			<mapping path="/main/main.do"/>
+			<mapping path="/club/inviteMember.do"/>
+			<mapping path="/main/voteForm.do"/>
+			<mapping path="/match/match_toInvite.do"/>
+			<mapping path="/match/recruit.do"/>
+			<beans:bean class="kr.spring.interceptor.AutoLoginInterceptor"/>
+		</interceptor>
 		<!-- 로그인 여부 체크-->
 		<interceptor>
 			<mapping path="/board/deleteNotice.do"/>

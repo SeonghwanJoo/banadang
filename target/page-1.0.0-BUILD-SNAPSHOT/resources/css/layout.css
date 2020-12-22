@@ -1891,10 +1891,22 @@ label.chip.m-wider{
  	cursor: pointer;
  	border-radius:50%;
 }
+.custom-login {
+	float:left;
+	margin: 0.5rem 1rem;
+	position: relative;
+	height: 30px;
+ 	width: 30px;
+ 	cursor: pointer;
+ 	border-radius:50%;
+}
+.custom-login input ~ .checkmark {
+  	background-color: #ddd;
+}
 .vert{margin: 1.1rem auto;}
 
 /* Hide the browser's default checkbox */
-.chip input, .custom input[type=radio],.custom input[type=checkbox] {
+.chip input, .custom input[type=radio],.custom input[type=checkbox],.custom-login input[type=checkbox] {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -1947,12 +1959,13 @@ label.chip.m-wider{
 }
 
 /* Show the checkmark when checked */
-.chip input:checked ~ .checkmark:after,.custom input:checked ~ .checkmark:after {
+.chip input:checked ~ .checkmark:after,.custom input:checked ~ .checkmark:after,.custom-login input:checked ~ .checkmark:after {
   display: block;
 }
+	
 
 /* Style the checkmark/indicator */
-.chip .checkmark:after,.custom .checkmark:after {
+.chip .checkmark:after,.custom .checkmark:after,.custom-login .checkmark:after {
   left: 9px;
   top: 5px;
   width: 5px;
@@ -1963,6 +1976,7 @@ label.chip.m-wider{
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
 /* color options */
 .color_opt{
 	text-align:center;
@@ -1982,7 +1996,6 @@ label.chip.m-wider{
     border-radius:0.3rem;
 }
 
-/* 媛��긽 �꽑�깮�옄瑜� �솢�슜 �솕�궡�몴 ��泥� */
 .selectbox:before {
     content: "";
     position: absolute;
