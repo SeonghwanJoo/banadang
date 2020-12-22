@@ -41,7 +41,7 @@
 	<ul class="ul-list">
 		<c:if test="${!empty atdance }">
 		<li class="li-list">
-			<div class="col"><span class="positive-color bold">참석 : ${fn:length(atdance)}</span></div>
+			<div class="col">참석 : <span class="point">${fn:length(atdance)}</span></div>
 			<hr class="hr">
 			<div class="row">
 				<c:forEach items="${atdance }" var="atdance">
@@ -60,7 +60,7 @@
 		</c:if>
 		<c:if test="${empty atdance }">
 		<li class="li-list">
-			<div class="col"><span class="positive-color bold">참석 : 0</span></div>
+			<div class="col">참석 : <span class="point">0</span></div>
 			<hr class="hr">
 			<div class="detail-item">
 			아직 투표한 사람이 없습니다</div>
@@ -70,7 +70,7 @@
 	<ul class="ul-list">
 		<c:if test="${!empty no_atdance }">
 		<li class="li-list">
-			<div class="col"><span class="positive-color bold">불참 : ${fn:length(no_atdance)}</span></div>
+			<div class="col">불참 : <span class="point">${fn:length(no_atdance)}</span></div>
 			<hr class="hr">
 			<div class="row">
 				<c:forEach items="${no_atdance }" var="no_atdance">
@@ -89,7 +89,7 @@
 		</c:if>
 		<c:if test="${empty no_atdance }">
 		<li class="li-list">
-			<div class="col"><span class="positive-color bold">불참 : 0</span></div>
+			<div class="col">불참 : <span class="point">0</span></div>
 			<hr class="hr">
 			<div class="detail-item">
 			아직 투표한 사람이 없습니다</div>
@@ -99,7 +99,7 @@
 	<ul class="ul-list non-border-btm">
 		<c:if test="${!empty undefined_atdance }">
 		<li class="li-list">
-			<div class="col"><span class="positive-color bold">미정 : ${fn:length(undefined_atdance)}</span></div>
+			<div class="col">미정 : <span class="point">${fn:length(undefined_atdance)}</span></div>
 			<hr class="hr">
 			<div class="row">
 				<c:forEach items="${undefined_atdance }" var="undefined_atdance">
@@ -118,7 +118,7 @@
 		</c:if>
 		<c:if test="${empty undefined_atdance }">
 		<li class="li-list">
-			<div class="col"><span class="positive-color bold">미정 : 0</span></div>
+			<div class="col">미정 : <span class="point">0</span></div>
 			<hr class="hr">
 			<div class="detail-item">
 			아직 투표한 사람이 없습니다</div>
@@ -130,7 +130,7 @@
 	<ul class="ul-list non-border-btm">
 		<c:if test="${!empty not_voted }">
 		<li class="li-list">
-			<div class="col"><span class="positive-color bold">미투표자 : ${fn:length(not_voted)}</span></div>
+			<div class="col">미투표자 : <span class="point">${fn:length(not_voted)}</span></div>
 			<hr class="hr">
 			<div class="row">
 				<c:forEach items="${not_voted }" var="not_voted">

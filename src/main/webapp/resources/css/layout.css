@@ -201,13 +201,15 @@ ul.carousel-indicators {
 }
 /* Style buttons */
 .btn_write {
-	background-color: #00643c;
-	color:white;
-	border: none; /* Remove borders */
-	padding: 0.3rem; /* Some padding */
+	background-color: #fff;
+	color:#000;
+	border: 2px solid #42DA6E; /* Remove borders */
+	padding: 0.3rem 0.5rem; /* Some padding */
 	margin: 0.3rem 0.5rem;
-	border-radius: 0.3rem;
+	border-radius: 1.1rem;
 	float: right;
+	color: #42DA6E;
+	font-size:0.9rem;
 	position:relative;
 }
 .btn_write .first-child{
@@ -1287,6 +1289,7 @@ h6.ages{
 	position:absolute;
 	top:1.8rem;
 	left:1.5rem;
+	color:#00CD3C;
 }
 .half_col .visible{
 	display:inline-block;
@@ -1397,6 +1400,9 @@ a.active.small-font{
 }
 .red{
 	color:#dc3545;
+}
+.point{
+	color:#00cd3c;
 }
 .relative{
 	position:relative;
@@ -1554,7 +1560,6 @@ div.one-col{
 .half_col i{
 	position:relative;
 	font-size:1.6rem;
-	color:#00643c;
 	float:right;
 	margin-left:0.5rem;
 }
@@ -1879,8 +1884,62 @@ label.chip.m-wider{
 .bold{
 	font-weight:bold;
 }
+.rating_icon{
+	position:absolute;
+	top:0.35rem;
+	left:6rem;
+}
+/* login-custom start */
+.login-wrapper{
+	width: 20rem;
+	margin:0 auto
+}
+.login-label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.login-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.6rem;
+  width: 1.6rem;
+  background-color: #fff;
+  border-radius:50%;
+  border: 2px solid #ccc;
+}
+.login-label input:checked ~ .login-checkmark {
+  background-color: #00643c;
+  border-color:#00643c;
+}
+.login-checkmark:after{
+  content: "";
+  position: absolute;
+  left: 0.4rem;
+  top: 0.2rem;
+  width: 0.3rem;
+  height: 0.6rem;
+  border: solid #ccc;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  box-sizing:content-box;
+}
+.login-label input:checked ~ .login-checkmark:after{
+	border-color:#fff;
+}
 
 
+/* login-custom end */
 .custom {
 	float:left;
 	margin: 0.5rem 1rem;
@@ -1891,34 +1950,15 @@ label.chip.m-wider{
  	cursor: pointer;
  	border-radius:50%;
 }
-.custom-login {
-	float:left;
-	margin: 0.5rem 1rem;
-	position: relative;
-	height: 30px;
- 	width: 30px;
- 	cursor: pointer;
- 	border-radius:50%;
-}
-.custom-login input ~ .checkmark {
-  	background-color: #ddd;
-}
 .vert{margin: 1.1rem auto;}
 
 /* Hide the browser's default checkbox */
-.chip input, .custom input[type=radio],.custom input[type=checkbox],.custom-login input[type=checkbox] {
+.chip input, .custom input[type=radio],.custom input[type=checkbox],.login-label input[type=checkbox] {
   position: absolute;
   opacity: 0;
   cursor: pointer;
   height: 0;
   width: 0;
-}
-.agreement{
-	margin-top:0.7rem;
-	
-}
-.agreement-content{
-	padding:3rem 0.5rem;
 }
 
 /* Create a custom checkbox */
@@ -1938,10 +1978,9 @@ label.chip.m-wider{
 .chip input ~ .checkmark,.custom input ~ .checkmark {
   	background-color: #ddd;
 }
-
 /* When the checkbox is checked, add a blue background */
 .chip input:checked ~ .checkmark,.custom input:checked ~ .checkmark {
-  	background-color: #00643c;
+  	background-color: #63C726;
 }
  .chip input:disabled:checked ~ .checkmark,.custom input:disabled:checked ~ .checkmark,
   .chip:hover input:disabled:checked ~ .checkmark,.custom:hover input:disabled:checked ~ .checkmark{
@@ -1955,20 +1994,9 @@ label.chip.m-wider{
 .checkmark:after {
   content: "";
   position: absolute;
-  display: none;
-}
-
-/* Show the checkmark when checked */
-.chip input:checked ~ .checkmark:after,.custom input:checked ~ .checkmark:after,.custom-login input:checked ~ .checkmark:after {
-  display: block;
-}
-	
-
-/* Style the checkmark/indicator */
-.chip .checkmark:after,.custom .checkmark:after,.custom-login .checkmark:after {
   left: 9px;
-  top: 5px;
-  width: 5px;
+  top: 6px;
+  width: 6px;
   height: 10px;
   border: solid white;
   border-width: 0 3px 3px 0;
@@ -1977,6 +2005,17 @@ label.chip.m-wider{
   transform: rotate(45deg);
 }
 
+	
+
+/* Style the checkmark/indicator */
+
+.agreement{
+	margin-top:0.7rem;
+	
+}
+.agreement-content{
+	padding:3rem 0.5rem;
+}
 /* color options */
 .color_opt{
 	text-align:center;

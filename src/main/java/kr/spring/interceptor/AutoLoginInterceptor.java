@@ -47,7 +47,8 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 				map=loginAPI.refreshTokens(refresh_token);
 				if (map.get("result").equals("success")) {
 					MemberVO member=new MemberVO();
-					member = loginAPI.getUserInfo((String)map.get("access_token"));
+					String access_token=(String)map.get("access_token");
+					member = loginAPI.getUserInfo(access_token);
 					try {
 						
 						if (member!=null) {
@@ -58,14 +59,17 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 			            		List<ClubVO> myClubs=clubService.selectMyClubs(id);
 			                	session.setAttribute("user_id", id);
 			                    session.setAttribute("myClubs", myClubs);
+			                    session.setAttribute("access_token", access_token );
 			                    
-			                    int expires_in=Integer.parseInt((String)map.get("expires_in"));
-			                    if(expires_in<(60*60*24*30)) {
-			                    	logger.info("refresh_token refreshed");
-			                    	Cookie refreshCookie=new Cookie("GpFHzB",refresh_token);
-			                    	refreshCookie.setPath("/");
-			                    	refreshCookie.setMaxAge(60*60*24*60);
-			            			response.addCookie(refreshCookie);
+			                    if ((String)map.get("expires_in")!=null) {
+			                    	int expires_in=Integer.parseInt((String)map.get("expires_in"));
+			                    	if(expires_in<(60*60*24*30)) {
+				                    	logger.info("refresh_token refreshed");
+				                    	Cookie refreshCookie=new Cookie("GpFHzB",refresh_token);
+				                    	refreshCookie.setPath("/");
+				                    	refreshCookie.setMaxAge(60*60*24*60);
+				            			response.addCookie(refreshCookie);
+				                    }
 			                    }
 			                    
 			                    if(myClubs.size()>0) {

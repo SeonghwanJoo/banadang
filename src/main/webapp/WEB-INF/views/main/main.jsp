@@ -38,16 +38,18 @@
 <div class="main-row">
 	<div class="login">
 		<p>간편 로그인하고 우리팀을 관리해보세요</p>
-		<a onclick="login()" >
-			<img class="login_btn"
-			src="${pageContext.request.contextPath}/resources/images/kakao_login/ko/kakao_login_medium_wide.png">
-		</a>
-		<div class="row centered margin-top">
-			<label class="custom-login">
-				<input type="checkbox" id="keptLogin">
-				<span class="checkmark"></span>
-			</label>
-			<span class="margin-top">로그인 상태 유지</span>
+		<div class="login-wrapper">
+			<a onclick="login()" >
+				<img class="login_btn"
+				src="${pageContext.request.contextPath}/resources/images/kakao_login/ko/kakao_login_medium_wide.png">
+			</a>
+			<div class="row margin-top" id="sel_login">
+				<label class="login-label">
+					로그인 상태 유지
+				  <input type="checkbox">
+				  <span class="login-checkmark"></span>
+				</label>
+			</div>
 		</div>
 	</div>
 </div>
@@ -455,6 +457,14 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 	location.href=uri;
  }
  $(function(){
+	 
+	 var userAgent=navigator.userAgent.toLowerCase();
+
+		if (userAgent.indexOf('android')>-1 || navigator.userAgent.indexOf('ios')>-1) {
+			$('#sel_login').css('display','none');
+			$('input:checkbox').prop('checked','true');
+		}
+	 
 	 
 	 let matches=new Array();
 	 

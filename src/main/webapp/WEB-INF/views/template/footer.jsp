@@ -49,15 +49,15 @@
 
 	$(function(){
 		if(${ title eq 'main'}){
-			$('.main').css('color','#00643c');
+			$('.main').css('color','#00cd3c');
 		}else if(${title eq '경기 매치'}){
-			$('.invite').css('color','#00643c');
+			$('.invite').css('color','#00cd3c');
 		}else if(${title eq '용병 모집'}){
-			$('.join').css('color','#00643c');
+			$('.join').css('color','#00cd3c');
 		}else if(${title eq '팀 관리'}){
-			$('.club').css('color','#00643c');
+			$('.club').css('color','#00cd3c');
 		}else if(${title eq '나의 페이지'}){
-			$('.myPage').css('color','#00643c');
+			$('.myPage').css('color','#00cd3c');
 		}
 		
 	});

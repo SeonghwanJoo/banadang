@@ -79,9 +79,11 @@
 <script type="text/javascript">
 console.log(navigator.userAgent);
 function back() {
-	if (navigator.userAgent.indexOf('Android')>0) {
+	var userAgent=navigator.userAgent.toLowerCase();
+
+	if (userAgent.indexOf('android')>-1) {
 		history.go(-1);
-	}else if (navigator.userAgent.indexOf('iOS')>0) {
+	}else if (navigator.userAgent.indexOf('ios')>-1) {
 		window.webkit.messageHandlers.back.postMessage(null);
 	}else{
 		location.href=document.referrer;

@@ -48,7 +48,10 @@
 					</span>
 				</div>
 			</div>
-			<span class="rating_count">총 ${myClub.rating_count }명의 평가</span>
+			<div class="row">
+				총 <span class="point margin-left"> ${myClub.rating_count }</span>명의 평가
+				<i class="rating_icon fas fa-chevron-right"></i>
+			</div>
 			<div class="row">
 				<div class="col flex-start">
 					매너 

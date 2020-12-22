@@ -7,7 +7,7 @@
 		<span class="material-icons" id="cancel">close</span>
 		</a>
 		<div class="topnav-centered">
-			<span id="sel" class="active cursor gray relative">
+			<span id="sel" class="active cursor relative">
 				<i class="fas fa-inbox margin-right"></i>
 				${title }
 				<span class="drop-down material-icons">

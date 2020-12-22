@@ -43,7 +43,7 @@
 					</span>
 				</div>
 			</div>
-			<span class="rating_count">총 ${club.rating_count }명의 평가</span>
+			<span class="rating_count">총 <span class="point">${club.rating_count }</span>명의 평가</span>
 			<div class="row small-font ">
 				<div class="col flex-start">
 					<span>매너</span> 
