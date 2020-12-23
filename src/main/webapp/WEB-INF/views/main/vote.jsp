@@ -11,10 +11,19 @@
 			<div class="main-row">
 				<div class="login">
 					<p>간편 로그인하고 GentlePro에서 우리팀을 관리해보세요</p>
-					<a onclick="loginProcess()">
-						<img class="login_btn"
-						src="${pageContext.request.contextPath}/resources/images/kakao_login/ko/kakao_login_medium_narrow.png">
-					</a>
+					<div class="login-wrapper narrow">
+						<a onclick="loginProcess()">
+							<img class="login_btn"
+							src="${pageContext.request.contextPath}/resources/images/kakao_login/ko/kakao_login_medium_narrow.png">
+						</a>
+						<div class="row margin-top" style="display:none" id="sel_login">
+							<label class="login-label">
+								로그인 상태 유지
+							  <input type="checkbox" checked="checked">
+							  <span class="login-checkmark"></span>
+							</label>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

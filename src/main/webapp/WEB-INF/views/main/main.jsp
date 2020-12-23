@@ -43,10 +43,10 @@
 				<img class="login_btn"
 				src="${pageContext.request.contextPath}/resources/images/kakao_login/ko/kakao_login_medium_wide.png">
 			</a>
-			<div class="row margin-top" id="sel_login">
+			<div class="row margin-top" style="display:none" id="sel_login">
 				<label class="login-label">
 					로그인 상태 유지
-				  <input type="checkbox">
+				  <input type="checkbox" checked="checked">
 				  <span class="login-checkmark"></span>
 				</label>
 			</div>
@@ -445,7 +445,7 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 		});
 		
  }
- function login(){
+function login(){
 	 var uri="";
 		 uri+="https://kauth.kakao.com/oauth/authorize?client_id=0646bcb11e5b9bbdb24fc9153f7693ae"
 			+"&redirect_uri="+$(location).attr('protocol')+"//"+"${pageContext.request.serverName }${pageContext.request.contextPath}/member/login.do"
@@ -460,26 +460,25 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 	 
 	 var userAgent=navigator.userAgent.toLowerCase();
 
-		if (userAgent.indexOf('android')>-1 || navigator.userAgent.indexOf('ios')>-1) {
-			$('#sel_login').css('display','none');
-			$('input:checkbox').prop('checked','true');
-		}
+	if (userAgent.indexOf('android')==-1 && navigator.userAgent.indexOf('ios')==-1) {
+		$('#sel_login').css('display','block');
+		$('input:checkbox').prop('checked',false);
+	}
 	 
+	let matches=new Array();
 	 
-	 let matches=new Array();
-	 
-	 <c:forEach items="${match_list}" var="match">
-	 	var obj={};
-	 	obj.match_num="${match.match_num}";
+	<c:forEach items="${match_list}" var="match">
+		var obj={};
+		obj.match_num="${match.match_num}";
 	 	obj.max="${match.max}";
 	 	obj.attend="${match.attend}";
 	 	obj.not_attend="${match.not_attend}";
 	 	obj.undefined="${match.undefined}";
 	 	matches.push(obj);
-	 </c:forEach>
-	  for(var i=0; i<matches.length;i++){
+	</c:forEach>
+	for(var i=0; i<matches.length;i++){
 	 	
-	 	var max=matches[i].max;
+		var max=matches[i].max;
 	 	var attend=matches[i].attend;
 	 	var not_attend=matches[i].not_attend;
 	 	var not_fixed=matches[i].undefined;
