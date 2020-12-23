@@ -59,10 +59,19 @@
 			<div class="main-row">
 				<div class="login">
 					<p>간편 로그인하고 GentlePro에서 우리팀을 관리해보세요</p>
-					<a onclick="loginProcess()">
-						<img class="login_btn"
-						src="${pageContext.request.contextPath}/resources/images/kakao_login/ko/kakao_login_medium_narrow.png">
-					</a>
+					<div class="login-wrapper narrow">
+						<a onclick="loginProcess()">
+							<img class="login_btn"
+							src="${pageContext.request.contextPath}/resources/images/kakao_login/ko/kakao_login_medium_narrow.png">
+						</a>
+						<div class="row margin-top" style="display:none" id="sel_login">
+							<label class="login-label">
+								로그인 상태 유지
+							  <input type="checkbox" checked="checked">
+							  <span class="login-checkmark"></span>
+							</label>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -94,9 +103,23 @@ function inviteMember(){
 	
 };
 function loginProcess(){
-	location.href="https://kauth.kakao.com/oauth/authorize?client_id=0646bcb11e5b9bbdb24fc9153f7693ae&redirect_uri=https://${pageContext.request.serverName }${pageContext.request.contextPath}/member/invitedLogin.do&response_type=code&state=${club.club_num }";
+	
+	var uri="";
+	uri+="https://kauth.kakao.com/oauth/authorize?client_id=0646bcb11e5b9bbdb24fc9153f7693ae"
+	   +"&redirect_uri=https://${pageContext.request.serverName }${pageContext.request.contextPath}/member/invitedLogin.do&response_type=code&state=${club.club_num }";
+   if($('input:checkbox').is(':checked')){
+		uri+="&-true";
+	}
+	location.href=uri;
 };
 $(function(){
+	 var userAgent=navigator.userAgent.toLowerCase();
+
+	if (userAgent.indexOf('android')==-1 && navigator.userAgent.indexOf('ios')==-1) {
+		$('#sel_login').css('display','block');
+		$('input:checkbox').prop('checked',false);
+	}
+		
 	$('#login-cancel-btn').click(function(){
 		$('#login_modal').css('display','none');
 	});

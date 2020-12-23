@@ -262,13 +262,13 @@
 </c:forEach>
 </ul>
 </c:if>
-<div class="mid-banner">
+<!-- <div class="mid-banner">
 	<ins class="kakao_ad_area" style="display:none;" 
 	 data-ad-unit    = "DAN-gCSwQUEFuriXnEOA" 
 	 data-ad-width   = "320" 
 	 data-ad-height  = "100"></ins>
 </div>
-<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script> -->
 <div class="border-btm v-padding">
 	<span class="title-btw">지난 경기 상대팀 평점 작성</span>
 </div>
@@ -446,11 +446,10 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 		
  }
 function login(){
-	 var uri="";
+	var uri="";
 		 uri+="https://kauth.kakao.com/oauth/authorize?client_id=0646bcb11e5b9bbdb24fc9153f7693ae"
 			+"&redirect_uri="+$(location).attr('protocol')+"//"+"${pageContext.request.serverName }${pageContext.request.contextPath}/member/login.do"
 			+"&response_type=code";
-		console.log(uri);
 	if($('input:checkbox').is(':checked')){
 		uri+="&state=true";
 	}

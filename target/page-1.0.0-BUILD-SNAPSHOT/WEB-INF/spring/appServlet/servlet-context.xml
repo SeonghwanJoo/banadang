@@ -54,7 +54,7 @@
 	
 	
 	<interceptors>
-		<!-- 자동 로그인(로그인 여부 체크 제외된 클래스에 한해) -->
+		<!-- 자동 로그인(로그인 여부 체크 인터셉터 제외된 클래스에 한해) -->
 		<interceptor>
 			<mapping path="/main/main.do"/>
 			<mapping path="/club/inviteMember.do"/>

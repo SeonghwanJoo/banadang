@@ -1894,17 +1894,25 @@ label.chip.m-wider{
 	width: 20rem;
 	margin:0 auto
 }
+.login-wrapper.narrow{
+	width: 183px;
+	margin:0 auto
+}
 .login-label {
   display: block;
   position: relative;
   padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
+  text-align:left;
   font-size: 1rem;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+.display-none{
+	display:none;
 }
 .login-checkmark {
   position: absolute;
@@ -1917,8 +1925,8 @@ label.chip.m-wider{
   border: 2px solid #ccc;
 }
 .login-label input:checked ~ .login-checkmark {
-  background-color: #00643c;
-  border-color:#00643c;
+  background-color: #00CD3C;
+  border-color:#00CD3C;
 }
 .login-checkmark:after{
   content: "";

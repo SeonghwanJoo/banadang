@@ -51,7 +51,7 @@ public class MemberController {
 							 HttpServletRequest request,
 							 HttpServletResponse response)throws IOException {	
 		
-		String uri="https://"+request.getServerName()+request.getContextPath();
+		String uri="http://"+request.getServerName()+request.getContextPath();
 		logger.info("protocol : "+request.getProtocol());
 		Map<String, String> map = loginAPI.getAccessToken(code,1,uri);
 		if(map.get("result")!=null && map.get("result").equals("errors")) {
@@ -132,7 +132,8 @@ public class MemberController {
 	public String invitedKakaoLogin(@RequestParam String code,
 									@RequestParam String state,
 									HttpSession session,
-									HttpServletRequest request)throws IOException {	
+									HttpServletRequest request,
+									HttpServletResponse response)throws IOException {	
 		
 		String uri="https://"+request.getServerName()+request.getContextPath();
 		
@@ -140,11 +141,18 @@ public class MemberController {
 		if(map.get("result")!=null && map.get("result").equals("errors")) {
 			return "redirect:/main/loginFailure.do";
 		}
+		String[] values=state.split("-");
 		String access_token=map.get("access_token");
 		String refresh_token=map.get("refresh_token");
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_token);
         session.setAttribute("access_token", access_token);
+        if(values.length>1) {
+			Cookie loginCookie=new Cookie("GpFHzB",refresh_token);
+			loginCookie.setPath("/");
+			loginCookie.setMaxAge(60*60*24*60);
+			response.addCookie(loginCookie);
+		}
         String user_id=memberVO.getId();
         
         //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
@@ -166,7 +174,7 @@ public class MemberController {
             		session.setAttribute("member",memberVO);
             		session.setAttribute("code",code);
             		session.setAttribute("loginType",loginType);
-            		session.setAttribute("state", state);
+            		session.setAttribute("state", values[0]);
             		return "redirect:/member/agreement.do";
             	}
             	
@@ -184,83 +192,10 @@ public class MemberController {
         }
        
         
-		return "redirect:/club/inviteMember.do?club_num="+state;
+		return "redirect:/club/inviteMember.do?club_num="+values[0];
    
 	}
-	@RequestMapping("/member/voteLogin.do")
-	public String voteKakaoLogin(@RequestParam String code,
-								 @RequestParam String state,
-								 HttpSession session,
-								 HttpServletRequest request)throws IOException {	
-		
-		String uri="https://"+request.getServerName()+request.getContextPath();
-		
-		Map<String, String> map = loginAPI.getAccessToken(code,2,uri);
-		if(map.get("result").equals("errors")) {
-			return "redirect:/main/loginFailure.do";
-		}
-		String access_token=map.get("access_token");
-		String refresh_token=map.get("refresh_token");
-        MemberVO memberVO=new MemberVO();
-        memberVO = loginAPI.getUserInfo(access_token);
-        if(map.get("result")!=null && map.get("result").equals("errors")) {
-        	return "redirect:/main/loginFailure.do";
-        }
-        session.setAttribute("access_token", access_token);
-        String user_id=memberVO.getId();
-        String[] values=state.split("-");
-		Integer match_num=Integer.parseInt(values[0]);
-	    Integer club_num=Integer.parseInt(values[1]);
-	    Boolean isMain=Boolean.valueOf(values[2]);
-        
-        try {
-            if (memberVO != null) {
-                
-            	//memberVO의 아이디가 DB에 기 등록된 id인지 확인
-            	MemberVO existingMember=memberService.getMember(user_id);
-            	//등록되어 있으면 session setting
-            	if(existingMember !=null && existingMember.getMem_auth()!=3) {
-            		session.setAttribute("mem_auth", existingMember.getMem_auth());
-            	}else{
-            		int loginType;
-            		if(existingMember==null) {
-            			loginType=5;
-            		}else {
-            			loginType=6;
-            		}
-            		session.setAttribute("member",memberVO);
-            		session.setAttribute("code",code);
-            		session.setAttribute("loginType",loginType);
-            		session.setAttribute("state", state);
-            		return "redirect:/member/agreement.do";
-            	}
-            	
-            	List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
-            	session.setAttribute("user_id", user_id);
-                session.setAttribute("myClubs", myClubs);
-                if(myClubs.size()>0) {
-                	
-                	for(ClubVO myClub:myClubs) {
-                		
-                		if(myClub.getClub_num()==club_num) {
-                			ClubVO club=new ClubVO();
-                            club.setId(user_id);
-                            club.setClub_num(club_num);
-                			session.setAttribute("myClub", clubService.selectMyClubDetails(club));
-                			return "redirect:/main/voteForm.do?match_num="+match_num+"&club_num="+club_num+"&isMain="+isMain;
-                		}
-                	}
-                }
-            }
-        }catch(Exception e) {
-        	
-        	return "redirect:/main/loginFailure.do";
-        	
-        }
-        return "redirect:/main/membercheck.do?club_num="+club_num;
 
-       
-	}
 	@RequestMapping("/member/kakaoSync.do")
 	public String kakaoSync(HttpSession session) {
 		String access_token=(String)session.getAttribute("access_token");

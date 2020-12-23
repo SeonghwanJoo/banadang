@@ -1,26 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:if test="${empty user_id }">
-<div id="login_modal" class="certify-modals" style="display:block">
-	<!-- Modal content -->
-	<div class="certify-modal-content">
-		<div class="sub-content">
-			<div class="main-row">
-				<div class="login">
-					<p>간편 로그인하고 GentlePro에서 우리팀을 관리해보세요</p>
-					<a onclick="loginProcess()">
-						<img class="login_btn"
-						src="${pageContext.request.contextPath}/resources/images/kakao_login/ko/kakao_login_medium_narrow.png">
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-</c:if>
 <c:if test="${not empty user_id }">
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
@@ -325,9 +306,6 @@ function sendLink(match_num,club_num,match_date,address,start_time) {
     	}
     })
   }
-function loginProcess(){
-	location.href="https://kauth.kakao.com/oauth/authorize?client_id=0646bcb11e5b9bbdb24fc9153f7693ae&redirect_uri=https://${pageContext.request.serverName }${pageContext.request.contextPath}/member/voteLogin.do&response_type=code&state=${match.match_num }-${match.club_num}-${isMain}";
-};
 function modifyAnswer(voteAnswer_num){
 	$('#more_modal').css('display','block');
 	$('#delete').click(function(){
