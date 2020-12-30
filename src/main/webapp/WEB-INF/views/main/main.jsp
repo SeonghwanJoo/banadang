@@ -262,13 +262,13 @@
 </c:forEach>
 </ul>
 </c:if>
-<!-- <div class="mid-banner">
+<div class="mid-banner">
 	<ins class="kakao_ad_area" style="display:none;" 
 	 data-ad-unit    = "DAN-gCSwQUEFuriXnEOA" 
 	 data-ad-width   = "320" 
 	 data-ad-height  = "100"></ins>
 </div>
-<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script> -->
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 <div class="border-btm v-padding">
 	<span class="title-btw">지난 경기 상대팀 평점 작성</span>
 </div>
@@ -459,7 +459,7 @@ function login(){
 	 
 	 var userAgent=navigator.userAgent.toLowerCase();
 
-	if (userAgent.indexOf('android')==-1 && navigator.userAgent.indexOf('ios')==-1) {
+	if (userAgent.indexOf('android')==-1 && navigator.userAgent.indexOf('iphone')==-1) {
 		$('#sel_login').css('display','block');
 		$('input:checkbox').prop('checked',false);
 	}
