@@ -56,10 +56,10 @@ public interface MemberMapper {
 	
 	public void insertMsg(MsgVO msg);
 	
-	@Select("select * from(select * from (select * from gentlepro.msg where sender=#{sender} and s_del=1 order by register_date desc)a left outer join gentlepro.member_detail b on a.receiver=b.id )c join gentlepro.club using(club_num) ")
+	@Select("select * from (select * from gentlepro.msg where sender=#{sender} and s_del=1 )a left outer join gentlepro.member_detail b on a.receiver=b.id order by register_date desc")
 	public List<MsgVO> selectSentMsg(String sender);
 	
-	@Select("select * from(select * from (select * from gentlepro.msg where receiver=#{receiver} and r_del=1 order by register_date desc) a left outer join gentlepro.member_detail b on a.sender=b.id)c join gentlepro.club using(club_num)")
+	@Select("select * from (select * from gentlepro.msg where receiver=#{receiver} and r_del=1 ) a left outer join gentlepro.member_detail b on a.sender=b.id order by register_date desc")
 	public List<MsgVO> selectReceivedMsg(String receiver);
 	
 	@Update("update gentlepro.msg set r_del=2 where msg_num=#{msg_num}")

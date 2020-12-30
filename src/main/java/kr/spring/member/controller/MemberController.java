@@ -51,7 +51,7 @@ public class MemberController {
 							 HttpServletRequest request,
 							 HttpServletResponse response)throws IOException {	
 		
-		String uri="http://"+request.getServerName()+request.getContextPath();
+		String uri="https://"+request.getServerName()+request.getContextPath();
 		logger.info("protocol : "+request.getProtocol());
 		Map<String, String> map = loginAPI.getAccessToken(code,1,uri);
 		if(map.get("result")!=null && map.get("result").equals("errors")) {

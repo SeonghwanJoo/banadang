@@ -33,7 +33,7 @@
 			</div>
 			<div class="x-bigger">
 				<div class="main-row">
-					<span class="match-item">${msg.club_name } </span>
+					<%-- <span class="match-item">${msg.club_name } </span> --%>
 					<c:if test="${not empty msg.nickname }">
 					<span class="nickname bold">${msg.nickname }</span>
 					</c:if>

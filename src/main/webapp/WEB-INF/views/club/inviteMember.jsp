@@ -113,9 +113,11 @@ function loginProcess(){
 	location.href=uri;
 };
 $(function(){
-	 var userAgent=navigator.userAgent.toLowerCase();
-
-	if (userAgent.indexOf('android')==-1 && navigator.userAgent.indexOf('iphone')==-1) {
+	
+	var userAgent=navigator.userAgent.toLowerCase();
+	
+	
+	if (userAgent.indexOf('android')==-1 && userAgent.indexOf('iphone')==-1) {
 		$('#sel_login').css('display','block');
 		$('input:checkbox').prop('checked',false);
 	}
