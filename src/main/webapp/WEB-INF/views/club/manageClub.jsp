@@ -71,7 +71,7 @@
 	<div class="tab-row" id="tab-row">
 		<c:if test="${myClub.club_auth>4}">
 		<div class="tab-col">
-			<button class="tab-btn small-font bold " onclick="openTap(event,'manageMatch')">매칭 현황</button>
+			<button class="tab-btn small-font bold " id="fromMsg" onclick="openTap(event,'manageMatch')">매칭 현황</button>
 		</div>
 		</c:if>
 		<div class="tab-col">
@@ -1422,6 +1422,16 @@ function myFunction(){
 }
 
 $(function(){
+	
+	if(${myClub.club_auth >4 && isMsg}){
+		$('.tab_detail').css('display','none');
+		$('.tab-btn').removeClass(' tab-active');
+		var tap=document.getElementById('manageMatch');
+		tap.style.display="block";
+		$('#fromMsg').addClass(' tab-active');
+	};
+	
+	
 	var collap = document.getElementsByClassName("collapsible");
 	var i;
 

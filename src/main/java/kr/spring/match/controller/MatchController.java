@@ -1,7 +1,9 @@
 package kr.spring.match.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -148,12 +150,15 @@ public class MatchController {
 		//recruit이 신청되어 있는 경우 =>상태표시로 취소됨 표시
 		//match_request가 신청되어 있는 경우=>상태표시로 취소됨 표시
 		//투표가 되어 잇는 경우 =>운영진 권한에 따라 삭제 OK
-		MatchVO match=matchService.selectPKsforMatch(match_num);
-		if(match.getRequest_num()==null&&(match.getAway()==-1||match.getAway()==0)&&match.getRecruit_num()==null) {
+		List<MatchVO> matches=matchService.selectPKsforMatch(match_num);
+		if(matches!=null && matches.get(0).getRequest_num()==null&&(matches.get(0).getAway()==-1||matches.get(0).getAway()==0)&&matches.get(0).getRecruit_num()==null) {
 			matchService.deleteMatch(match_num);
+			//용병을 신청한 상태에서 매치를 지우면 어케 되지?
 		}else {
-			match.setCancel(club_name);
-			matchService.updateMatchForCancel(match);
+			Map<String,Object> map=new HashMap<String,Object> ();
+			map.put("match_num", match_num);
+			map.put("cancel", club_name);
+			matchService.updateMatchForCancel(map);
 		}
 		
 		return "redirect:/main/main.do";

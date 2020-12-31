@@ -128,5 +128,8 @@ public interface MemberMapper {
 	@Update("update gentlepro.member set mem_auth=1 where id=#{id}")
 	public void updateMemberForReValidation(MemberVO member);
 	
+	@Insert("insert into gentlepro.msg (sender,receiver,content,club_num) values (#{id},#{home_name},'팀 가입 신청합니다.   ',#{club_num})")
+	public void insertMsgForClubRecruitReq(MatchVO match);
+	
 	
 }

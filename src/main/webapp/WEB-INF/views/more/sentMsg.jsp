@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
 		<a href="myPage.do" >
@@ -43,7 +44,9 @@
 					<c:if test="${msg.status==2 }">
 					<span class="msg-status">읽음</span>
 					</c:if>
-					<span class="small-font bold gray right">${msg.register_date }</span>
+					<span class="small-font bold gray right">
+						<fmt:formatDate value="${msg.register_date }" type="both" pattern="yy.MM.dd HH:mm"/>
+					</span>
 					<span class="material-icons more cursor m-font gray" id="more" onclick="openOption(${msg.msg_num})" >more_vert</span>
 				</div>
 				<p class="gray">${msg.content }</p>

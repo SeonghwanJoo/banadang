@@ -71,7 +71,7 @@ public interface MatchMapper {
 	@Delete("delete from gentlepro.match_recruit where recruit_num=#{recruit_num}")
 	public void deleteRecruit(Integer recruit_num);
 	
-	public MatchVO selectPKsforMatch(Integer match_num);
+	public List<MatchVO> selectPKsforMatch(Integer match_num);
 	
 	@Delete("delete from gentlepro.match where match_num=#{match_num}")
 	public void deleteMatch(Integer match_num);
@@ -80,11 +80,15 @@ public interface MatchMapper {
 	public void deleteVote(Integer match_num);
 	
 	@Update("update gentlepro.match set cancel=#{cancel} where match_num=#{match_num} ")
-	public void updateMatchForCancel(MatchVO match);
+	public void updateMatchForCancel(Map<String,Object> map);
 	
 	public void updateMatch(MatchVO match);
 	
+	@Insert("insert into gentlepro.msg (sender,receiver,content,match_num,club_num) values (#{id},#{home_name},'경기 신청합니다.   ',#{match_num},#{club_num})")
+	public void insertMsgForMatchRequest(MatchVO match);
 	
+	@Insert("insert into gentlepro.msg (sender,receiver,content,match_num,club_num) values (#{id},#{home_name},'용병 신청합니다.   ',#{match_num},#{club_num})")
+	public void insertMsgForMatchRecruit(MatchVO match);
 	
 	
 

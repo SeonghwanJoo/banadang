@@ -35,9 +35,9 @@ public interface MatchService {
 	public List<MatchVO> selectRecruit();
 	public void updateRecruit(MatchVO match);
 	public void deleteRecruit(Integer recruit_num);
-	public MatchVO selectPKsforMatch(Integer match_num);
+	public List<MatchVO> selectPKsforMatch(Integer match_num);
 	public void deleteMatch(Integer match_num);
-	public void updateMatchForCancel(MatchVO match);
+	public void updateMatchForCancel(Map<String,Object> map);
 	public void updateMatch(MatchVO match);
 	public List<MemberVO> selectRecruitByClub_num(Integer club_num);
 	public List<MatchVO> selectMatchToInviteWithFilter(MatchVO match);

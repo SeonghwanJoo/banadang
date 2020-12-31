@@ -219,7 +219,8 @@
 						club_num:'${clubRecruit.club_num}',
 						recruit_position:position,
 						clubRecruit_req_detail:$('#clubRecruit_req_detail').val(),
-						clubRecruit_num:${clubRecruit.clubRecruit_num}
+						clubRecruit_num:${clubRecruit.clubRecruit_num},
+						home_name:${clubRecruit.id}
 					},
 					dataType:'json',
 					cache:false,

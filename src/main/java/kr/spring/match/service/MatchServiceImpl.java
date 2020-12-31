@@ -120,6 +120,7 @@ public class MatchServiceImpl implements MatchService {
 	public void insertMyRequestForMatchToInvite(MatchVO match) {
 		
 		matchMapper.insertMyRequestForMatchToInvite(match);
+		matchMapper.insertMsgForMatchRequest(match);
 		
 	}
 
@@ -144,7 +145,7 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	public void insertRecruitRequest(MatchVO match) {
 		matchMapper.insertRecruitRequest(match);
-		
+		matchMapper.insertMsgForMatchRecruit(match);
 	}
 
 	@Override
@@ -172,7 +173,7 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public MatchVO selectPKsforMatch(Integer match_num) {
+	public List<MatchVO> selectPKsforMatch(Integer match_num) {
 		
 		return matchMapper.selectPKsforMatch(match_num);
 	}
@@ -186,9 +187,9 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public void updateMatchForCancel(MatchVO match) {
+	public void updateMatchForCancel(Map<String,Object> map) {
 		
-		matchMapper.updateMatchForCancel(match);
+		matchMapper.updateMatchForCancel(map);
 		
 	}
 

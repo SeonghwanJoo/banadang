@@ -220,7 +220,8 @@
 						id:'${user_id}',
 						club_num:'${match.club_num}',
 						recruit_position:position,
-						recruit_req_detail:$('#recruit_req_detail').val()
+						recruit_req_detail:$('#recruit_req_detail').val(),
+						home_name:'${match.id}'
 					},
 					dataType:'json',
 					cache:false,

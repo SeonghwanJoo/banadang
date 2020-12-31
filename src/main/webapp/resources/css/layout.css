@@ -697,6 +697,13 @@ body.body, body.body btn{
 	width:95%;
 	margin: 0 auto;
 }
+.cancel.negative.full{
+	width:100%;
+}
+.right{
+	position:absolute;
+	right:4rem;
+}
 
 @keyframes slideFromBot{
 	from{
@@ -916,9 +923,9 @@ body.body, body.body btn{
 	font-size:30px;
 	
 }
-a:link { color: #a0a0a0; text-decoration: none;}
-a:visited { color: #a0a0a0; text-decoration: none;}
-a:hover, div.col a:hover { color:#a0a0a0;text-decoration: none; }
+a:link { color: #007bff; text-decoration: none;}
+a:visited { color: #007bff; text-decoration: none;}
+a:hover, div.col a:hover { color:#007bff;text-decoration: none; }
 
 
 #submit{
@@ -1070,7 +1077,10 @@ div.col{
 	position: absolute;
 	right:2rem;
 	font-size:0.8rem;
-	color:#007bff;
+	color:#00CD3C;
+}
+p.gray a{
+	color:#00CD3C;
 }
 a.detail:hover{
 	color:#7f7f7f;
@@ -1523,6 +1533,7 @@ a.menu-item:active{
 }
 .one-col .person_add{
 	font-size:3rem;
+	color:#999;
 }
 .kakaolink{
 	border-radius:50%;
@@ -1553,8 +1564,8 @@ div.one-col{
 }
 .text-by-icon{
 	position:absolute;
-	top:1rem;
-	left:5rem;
+	top:0.5rem;
+	left:4rem;
 }
 
 .half_col i{

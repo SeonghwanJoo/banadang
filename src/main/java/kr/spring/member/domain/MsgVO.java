@@ -1,6 +1,7 @@
 package kr.spring.member.domain;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Arrays;
 
 public class MsgVO {
@@ -11,7 +12,7 @@ public class MsgVO {
 	private Integer r_del;
 	private Integer s_del;
 	private String content;
-	private Date register_date;
+	private Timestamp register_date;
 	private String club_name;
 	private Integer match_num;
 	private String address;
@@ -131,10 +132,10 @@ public class MsgVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getRegister_date() {
+	public Timestamp getRegister_date() {
 		return register_date;
 	}
-	public void setRegister_date(Date register_date) {
+	public void setRegister_date(Timestamp register_date) {
 		this.register_date = register_date;
 	}
 	@Override

@@ -29,13 +29,20 @@ public class MatchAjaxController {
 		Map<String,String> map=new HashMap<String,String>();
 		
 		//해당 매치에 해당클럽의 매치 신청이 있는지 확인
-		Integer request_num=matchService.selectMyRequestForMatchToInvite(match);
-		if(request_num!=null) {
-			map.put("result", "duplicated");
-		}else if(request_num==null) {
-			matchService.insertMyRequestForMatchToInvite(match);
-			map.put("result", "requested");
+		
+		try {
+			Integer request_num=matchService.selectMyRequestForMatchToInvite(match);
+			if(request_num!=null) {
+				map.put("result", "duplicated");
+			}else if(request_num==null) {
+				matchService.insertMyRequestForMatchToInvite(match);
+				map.put("result", "requested");
+			}
+		}catch (Exception e) {
+			
+			map.put("result", "errors");
 		}
+		
 		
 		return map;
 	}

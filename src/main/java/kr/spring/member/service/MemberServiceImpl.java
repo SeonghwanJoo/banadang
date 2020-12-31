@@ -93,6 +93,7 @@ public class MemberServiceImpl implements MemberService{
 	public void insertClubRecruitReq(MatchVO match) {
 		
 		memberMapper.insertClubRecruitReq(match);
+		memberMapper.insertMsgForClubRecruitReq(match);
 		
 	}
 
