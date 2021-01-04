@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
 		<a href="myPage.do" >
@@ -40,10 +41,12 @@
 					<c:if test="${empty msg.nickname }">
 					<span class="gray bold">탈퇴 회원</span>
 					</c:if>
-					<span class="small-font bold gray right">${msg.register_date }</span>
+					<span class="xs-font gray right">
+						<fmt:formatDate value="${msg.register_date }" type="both" pattern="yy.MM.dd HH:mm"/>
+					</span>
 					<span class="material-icons more cursor m-font gray" id="more" onclick="openOption(${msg.msg_num},'${msg.match_num }','${msg.club_num }','${msg.sender }')" >more_vert</span>
 				</div>
-				<p class="gray">${msg.content }</p>
+				<p class="gray" id="${msg.msg_num }" data-club="${msg.club_num }">${msg.content }</p>
 			</div>
 		</div>
 	</li>
@@ -107,6 +110,7 @@ window.onclick = function(event) {
 	}
 }
 
+
 function openOption(msg_num,match_num,club_num,sender){
 	$('#more_modal').css('display','block');
 	$('#delete').click(function(){
@@ -142,36 +146,50 @@ function openOption(msg_num,match_num,club_num,sender){
 		location.href='writeMsg.do?match_num='+match_num+'&club_num='+club_num+'&id='+sender;
 	});
 }
-	$(function(){
-		$.ajax({
-			url:'updateMsgStatus.do',
-			type:'post',
-			data:{
-				receiver: ${user_id},
-			},
-			dataType:'json',
-			cache:false,
-			timeout:30000,
-			success:function(data){
-				if(data.result=='errors'){
-					
-					alert('오류 발생');
-				}
+
+
+$(function(){
+	
+	$.ajax({
+		url:'updateMsgStatus.do',
+		type:'post',
+		data:{
+			receiver: ${user_id},
+		},
+		dataType:'json',
+		cache:false,
+		timeout:30000,
+		success:function(data){
+			if(data.result=='errors'){
 				
-			},
-			error:function(){
-				alert('네트워크 오류 발생');
+				alert('오류 발생');
 			}
-		});
-		$('#more').click(function(){
 			
-			$('#more_modal').css('display','block');
-		});
-		$('#more-cancel-btn').click(function(){
-			$('#more_modal').css('display','none');
-		});
+		},
+		error:function(){
+			alert('네트워크 오류 발생');
+		}
+	});
+	$('#more').click(function(){
 		
-	})
+		$('#more_modal').css('display','block');
+	});
+	$('#more-cancel-btn').click(function(){
+		$('#more_modal').css('display','none');
+	});
+	
+	var msgs=$('p:contains(신청합니다.   )');
+	for (var i=0; i<msgs.length; i++){
+		var club_num=document.getElementById(msgs[i].id).getAttribute('data-club');
+		$('#'+msgs[i].id).append(
+			'<a href="${pageContext.request.contextPath}/club/manageClub.do?club_num='+club_num+'&clubManageFrom=2">'
+			+	'<span class="togo">확인하기</span>'
+			+ '</a>'	
+		);
+		
+	}
+	
+})
 
 
 </script>

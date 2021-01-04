@@ -83,26 +83,12 @@ function back() {
 
 	if (userAgent.indexOf('android')>-1) {
 		history.go(-1);
-	}else if (navigator.userAgent.indexOf('ios')>-1) {
-		window.webkit.messageHandlers.back.postMessage(null);
-	}else{
+	}else {
 		location.href=document.referrer;
 	} 
 
 };
-function adjustHeight() {
-	  var textEle = $('textarea');
-	  textEle[0].style.height = 'auto';
-	  var textEleHeight = textEle.prop('scrollHeight');
-	  textEle.css('height', textEleHeight);
-};
-$(function(){
-	adjustHeight();
-	var textEle = $('textarea');
-	textEle.on('keyup', function() {
-	  adjustHeight();
-	});
-});
+
 
 
 </script>

@@ -99,7 +99,7 @@ public class ClubAjaxController {
 		
 		return map;
 	}
-	@RequestMapping("/club/cancelMatchReq")
+	@RequestMapping("/club/cancelMatchReq.do")
 	@ResponseBody
 	public Map<String,Object> cancelMatchReq(@RequestParam Integer request_num,@RequestParam Integer acceptance,@RequestParam Integer match_num){
 		

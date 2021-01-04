@@ -5,33 +5,33 @@
 <div class="row">
 	<div class="bottom_menu">
 		<div class="tab-row bottom-padding">
-			<div class="col">
+			<div class="col" id="main-bottom">
 				<a class="menu-item" href="${pageContext.request.contextPath }/main/main.do">
 				<span class="main material-icons bottom-icon">home</span>
 				<span class="main bottom-icon-txt">홈</span>
 				</a>
 			</div>
-			<div class="col">
+			<div class="col" id="club">
 				<a class="menu-item" href="${pageContext.request.contextPath }/club/club.do">
 				<span class="club material-icons bottom-icon">groups</span>
 				<span class="club bottom-icon-txt">팀 관리</span>
 				</a>
 			</div>
-			<div class="col">
+			<div class="col" id="invite">
 				<a class="menu-item" href="${pageContext.request.contextPath }/match/match_toInvite.do">
 				<span class="invite material-icons bottom-icon">sports_soccer</span>
 				<span class="invite bottom-icon-txt">상대 매칭</span>
 				</a>
 			</div>
-			<div class="col">
+			<div class="col" id="join">
 				<a class="menu-item" href="${pageContext.request.contextPath }/match/recruit.do">
 				<span class="join material-icons bottom-icon">person_add</span>
 				<span class="join bottom-icon-txt">용병 모집</span>
 				</a>
 			</div>
-			<div class="col">
+			<div class="col" id="myPage">
 				<a class="menu-item" href="${pageContext.request.contextPath }/member/myPage.do">
-				<i class="myPage fas fa-ellipsis-h more-icon">
+				<i class="myPage margin-top fas fa-ellipsis-h more-icon">
 				<c:if test="${count_msg!=0 && not empty count_msg }">
 				<span class="count-msg">${count_msg }</span>
 				</c:if>
@@ -46,18 +46,23 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-
+	/* #00cd3c */
 	$(function(){
 		if(${ title eq 'main'}){
-			$('.main').css('color','#00cd3c');
+			$('.main').css('color','#000');
+			$('#main-bottom').css('border-top','3px solid #00cd3c');
 		}else if(${title eq '경기 매치'}){
-			$('.invite').css('color','#00cd3c');
+			$('.invite').css('color','#000');
+			$('#invite').css('border-top','3px solid #00cd3c');
 		}else if(${title eq '용병 모집'}){
-			$('.join').css('color','#00cd3c');
+			$('.join').css('color','#000');
+			$('#join').css('border-top','3px solid #00cd3c');
 		}else if(${title eq '팀 관리'}){
-			$('.club').css('color','#00cd3c');
+			$('.club').css('color','#000');
+			$('#club').css('border-top','3px solid #00cd3c');
 		}else if(${title eq '나의 페이지'}){
-			$('.myPage').css('color','#00cd3c');
+			$('.myPage').css('color','#000');
+			$('#myPage').css('border-top','3px solid #00cd3c');
 		}
 		
 	});

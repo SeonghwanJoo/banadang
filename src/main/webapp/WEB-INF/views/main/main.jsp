@@ -47,7 +47,7 @@
 				<label class="login-label">
 					로그인 상태 유지
 				  <input type="checkbox" checked="checked">
-				  <span class="login-checkmark"></span>
+				  <span class="checkmark"></span>
 				</label>
 			</div>
 		</div>

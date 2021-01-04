@@ -71,14 +71,14 @@
 	<div class="tab-row" id="tab-row">
 		<c:if test="${myClub.club_auth>4}">
 		<div class="tab-col">
-			<button class="tab-btn small-font bold " onclick="openTap(event,'manageMatch')">매칭 현황</button>
+			<button class="tab-btn small-font bold " id="manageMatch-btn" onclick="openTap(event,'manageMatch')">매칭 현황</button>
 		</div>
 		</c:if>
 		<div class="tab-col">
-			<button class="tab-btn small-font bold " onclick="openTap(event,'manageSchedule')">경기 일정</button>
+			<button class="tab-btn small-font bold " id="manageSchedule-btn" onclick="openTap(event,'manageSchedule')">경기 일정</button>
 		</div>
 		<div class="tab-col">
-			<button class="tab-btn small-font bold tab-active" onclick="openTap(event,'manageMember')">회원 관리</button>
+			<button class="tab-btn small-font bold " id="manageMember-btn" onclick="openTap(event,'manageMember')">회원 관리</button>
 		</div>
 	</div>
 	<c:if test="${myClub.club_auth>4 }">
@@ -161,8 +161,7 @@
 				</div>
 				<span class="material-icons collapsible">add_circle</span>
 				<div class="collapsible-content">
-					<textarea class="detail">${away.request_detail}
-					</textarea>
+					<textarea class="detail" readonly>${away.request_detail}</textarea>
 					<c:if test="${away.acceptance==1 && empty away.cancel }">
 					<div class="row" id="match-btn-${away.request_num }">
 						<div class="half_col">
@@ -257,8 +256,7 @@
 				</div>
 				<span class="material-icons collapsible">add_circle</span>
 				<div class="collapsible-content">
-					<textarea class="detail">${home.match_detail}
-					</textarea>
+					<textarea readonly class="detail">${home.match_detail}</textarea>
 					<c:if test="${empty home.cancel}">
 					<div class="row">
 					<c:if test="${empty home.match_req_cancel }">
@@ -961,7 +959,13 @@ function sendLinkForVote(match_num,club_num,match_date,address,start_time) {
     		'isMain': true
     	}
     })
-  }
+ }
+function adjustHeight() {
+	  var textEle = $('textarea');
+	  textEle[0].style.height = 'auto';
+	  var textEleHeight = textEle.prop('scrollHeight');
+	  textEle.css('height', textEleHeight);
+};
 function openMore(match_num,club_name,club_num,match_date,address,start_time,modify){
 	
 	$('#options').replaceWith('');
@@ -1364,7 +1368,7 @@ function answerForMatchReq(request_num,club_name,acceptance,club_num,match_num){
 					var status=document.getElementById('status-'+request_num);
 					status.className = status.className.replace(/\bneutral\b/g, "");
 					if(acceptance==2){
-						location.reload();
+						location.href='manageClub.do?club_num=${myClub.club_num}&clubManageFrom=3'
 					}else if(acceptance==3){
 						status.classList.add('negative');
 						status.innerText='거절 완료';
@@ -1421,7 +1425,31 @@ function myFunction(){
 	}
 }
 
+function blockTap(blockedTap) {
+	$('.tab_detail').css('display','none');
+	$('.tab-btn').removeClass(' tab-active');
+	var tap=document.getElementById(blockedTap);
+	tap.style.display="block";
+	document.getElementById(blockedTap+'-btn').className +=' '+ 'tab-active';
+	
+}
+
 $(function(){
+	
+	if(${myClub.club_auth>4}){
+		adjustHeight();
+	}
+	
+	var clubManageFrom='${clubManageFrom}';
+	if(clubManageFrom==2){
+		blockTap('manageMatch');
+	}else if(clubManageFrom == 3){
+		blockTap('manageSchedule');
+	}else {
+		blockTap('manageMember');
+	};
+	
+	
 	var collap = document.getElementsByClassName("collapsible");
 	var i;
 

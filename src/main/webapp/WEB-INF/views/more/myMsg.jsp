@@ -41,7 +41,7 @@
 					<c:if test="${empty msg.nickname }">
 					<span class="gray bold">탈퇴 회원</span>
 					</c:if>
-					<span class="small-font bold gray right">
+					<span class="xs-font gray right">
 						<fmt:formatDate value="${msg.register_date }" type="both" pattern="yy.MM.dd HH:mm"/>
 					</span>
 					<span class="material-icons more cursor m-font gray" id="more" onclick="openOption(${msg.msg_num},'${msg.match_num }','${msg.club_num }','${msg.sender }')" >more_vert</span>
@@ -180,10 +180,11 @@ $(function(){
 	
 	var msgs=$('p:contains(신청합니다.   )');
 	for (var i=0; i<msgs.length; i++){
-		console.log('msgs');
 		var club_num=document.getElementById(msgs[i].id).getAttribute('data-club');
 		$('#'+msgs[i].id).append(
-			'<a href="${pageContext.request.contextPath}/club/manageClub.do?club_num='+club_num+'&isMsg=true">수락하러가기</a>'	
+			'<a href="${pageContext.request.contextPath}/club/manageClub.do?club_num='+club_num+'&clubManageFrom=2">'
+			+	'<span class="togo">확인하기</span>'
+			+ '</a>'	
 		);
 		
 	}

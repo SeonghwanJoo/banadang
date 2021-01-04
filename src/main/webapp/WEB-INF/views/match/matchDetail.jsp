@@ -139,7 +139,7 @@
 		</li>
 		<c:if test="${!empty match.match_detail }">
 		<li class="li-list">
-			<textarea class="detail">${match.match_detail }</textarea>
+			<textarea class="detail" readonly="readonly">${match.match_detail }</textarea>
 		</li>
 		</c:if>
 	</ul>

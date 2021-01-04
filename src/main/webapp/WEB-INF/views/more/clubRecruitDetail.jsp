@@ -88,7 +88,7 @@
 		</li>
 		<c:if test="${!empty clubRecruit.clubRecruit_detail }">
 		<li class="li-list">
-			<p>${clubRecruit.clubRecruit_detail }</p>
+			<textarea class="detail readonly" readonly>${clubRecruit.clubRecruit_detail }</textarea>
 		</li>
 		</c:if>
 		<li class="li-list">
@@ -181,6 +181,12 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+function adjustHeight() {
+	  var textEle = $('textarea');
+	  textEle[0].style.height = 'auto';
+	  var textEleHeight = textEle.prop('scrollHeight');
+	  textEle.css('height', textEleHeight);
+};
 	//이미지 지도에서 마커가 표시될 위치입니다 
 	var markerPosition  = new kakao.maps.LatLng(${clubRecruit.club_locY}, ${clubRecruit.club_locX}); 
 	
@@ -208,6 +214,13 @@
 			$('#more_modal').css('display','none');
 		});
 		$('#submit').click(function(){
+			
+			adjustHeight();
+			var textEle = $('textarea');
+			textEle.on('keyup', function() {
+			  adjustHeight();
+			});
+			
 			$('#recruit_modal').css('display','block');
 			$('.pos-btn').click(function(){
 				var position=$(this).val();

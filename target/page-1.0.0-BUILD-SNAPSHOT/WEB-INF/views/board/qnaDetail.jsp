@@ -26,9 +26,7 @@
 			<span class="m-font">${board.title }</span>
 		</div>
 		<hr class="hr">
-		<textarea class="detail">
-			${board.content}
-		</textarea>
+		<textarea class="detail" readonly>${board.content}</textarea>
 	</li>
 </ul>
 <c:if test="${board.fromUser==1}">
@@ -83,6 +81,12 @@ ${answer.content }
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+function adjustHeight() {
+	  var textEle = $('textarea');
+	  textEle[0].style.height = 'auto';
+	  var textEleHeight = textEle.prop('scrollHeight');
+	  textEle.css('height', textEleHeight);
+};
 function modifyAnswer(answer_num){
 	$('#reply-more_modal').css('display','block');
 	$('#reply-delete').click(function(){
@@ -119,6 +123,13 @@ function modifyAnswer(answer_num){
 	});
 }
 	$(function(){
+		
+		adjustHeight();
+		var textEle = $('textarea');
+		textEle.on('keyup', function() {
+		  adjustHeight();
+		});
+		
 		$('#more').click(function(){
 			
 			$('#more_modal').css('display','block');

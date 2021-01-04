@@ -241,7 +241,7 @@
 		<div class="x-bigger">
 			<div class="main-row">
 			<span class="nickname">${answer.nickname }</span>
-			<span class="small-font bold gray right">${answer.register_date }</span>
+			<span class="xs-font gray right">${answer.register_date }</span>
 			<c:if test="${answer.id==user_id }">
 			<span class="material-icons more cursor m-font gray" id="more" onclick="modifyAnswer(${answer.voteAnswer_num})" >more_vert</span>
 			</c:if>

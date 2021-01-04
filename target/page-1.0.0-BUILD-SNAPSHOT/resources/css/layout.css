@@ -484,6 +484,9 @@ div.half_col{
 	width:100%;
 	border-radius:0.3rem;
 }
+.detail.readonly{
+	background-color:#fff;
+}
 .distance{
 	position:absolute;
 	font-size:0.9rem;
@@ -697,6 +700,14 @@ body.body, body.body btn{
 	width:95%;
 	margin: 0 auto;
 }
+.cancel.negative.full{
+	width:100%;
+}
+.right{
+	position:absolute;
+	top:0.2rem;
+	right:2rem;
+}
 
 @keyframes slideFromBot{
 	from{
@@ -877,6 +888,7 @@ body.body, body.body btn{
   text-overflow: ellipsis;
   overflow: hidden;
   background-color: #FFFFFF;
+  opacity:0.95;
   position:fixed;
   white-space: nowrap;
   z-index:50;
@@ -885,7 +897,6 @@ body.body, body.body btn{
   right: 0;
   margin:0 auto;
   font-size:18px;
-  border-bottom: 1px solid #d4d4d4;
   padding-top:5px;
   padding-bottom:5px;
 
@@ -916,9 +927,9 @@ body.body, body.body btn{
 	font-size:30px;
 	
 }
-a:link { color: #a0a0a0; text-decoration: none;}
-a:visited { color: #a0a0a0; text-decoration: none;}
-a:hover, div.col a:hover { color:#a0a0a0;text-decoration: none; }
+a:link { color: #007bff; text-decoration: none;}
+a:visited { color: #007bff; text-decoration: none;}
+a:hover, div.col a:hover { color:#007bff;text-decoration: none; }
 
 
 #submit{
@@ -1068,9 +1079,13 @@ div.col{
 }
 .msg-status{
 	position: absolute;
-	right:2rem;
-	font-size:0.8rem;
-	color:#007bff;
+	top:0.2rem;
+	right:7.5rem;
+	font-size:0.7rem;
+	color:#00CD3C;
+}
+body a:hover{
+	text-decoration:none;
 }
 a.detail:hover{
 	color:#7f7f7f;
@@ -1378,7 +1393,7 @@ a.active.small-font{
 	margin-top:0.3rem;
 }
 .xs-font{
-	font-size:0.6rem;
+	font-size:0.7rem;
 }
 
 .m-font, .main-row span.m-font{
@@ -1443,14 +1458,14 @@ a.active.small-font{
   	z-index:66;
   	margin:0 auto;
 }
-.myPage{
-	margin-top:0.5rem;
-	display:block;
+.tab-row.bottom-padding .col{
+	border-top:3px solid #fff;
 }
+
 div.tab-row.bottom-padding .col{
 	padding:0.1rem 0;
 }
-div.col .more-icon{
+.fas.more-icon{
   margin-top:0.5rem;
   font-size: 1.7rem;  /* Preferred icon size */
   line-height: 1;
@@ -1523,6 +1538,7 @@ a.menu-item:active{
 }
 .one-col .person_add{
 	font-size:3rem;
+	color:#999;
 }
 .kakaolink{
 	border-radius:50%;
@@ -1537,10 +1553,7 @@ a.menu-item:active{
 	width:2rem;
 	height:2rem;
 }
-/* .right{
-	position:absolute;
-	right:3rem;
-} */
+
 div.one-col{
 	position:relative;
 }
@@ -1553,8 +1566,8 @@ div.one-col{
 }
 .text-by-icon{
 	position:absolute;
-	top:1rem;
-	left:5rem;
+	top:0.5rem;
+	left:4rem;
 }
 
 .half_col i{
@@ -1653,8 +1666,11 @@ li.li-list{
 	list-style: none;
 	display:block;
 	border-bottom:1px solid #eee;
-	padding:0.5rem 0.5rem;
+	padding:1rem 0.5rem;
 	position:relative;
+}
+.li-list.cursor .row .col i{
+	margin:0 0.8rem;
 }
 .mid-banner{
 	width:100%;
@@ -1675,13 +1691,21 @@ li.li-list{
 	margin:0 auto;
 }
 .color{
-	width:1.1rem;height:1.1rem;
+	width:0.6rem;height:0.6rem;
 	border-radius:50%;
 	display:inline-block;
 	position:absolute;
-	top:0.2rem;
+	top:0.35rem;
 	left:3.2rem;
-	
+}
+.togo{
+	border-radius:1rem;
+	font-size:0.8rem;
+	color:#000;
+	text-decoration:none;
+	font-weight:bold;
+	background-color:#eee;
+	padding: 0.2rem 0.7rem;
 }
 #myTeam_msg{
 	display:block;
@@ -1914,21 +1938,23 @@ label.chip.m-wider{
 .display-none{
 	display:none;
 }
-.login-checkmark {
+
+.checkmark {
   position: absolute;
+  border-radius:50%;
   top: 0;
   left: 0;
   height: 1.6rem;
   width: 1.6rem;
   background-color: #fff;
-  border-radius:50%;
   border: 2px solid #ccc;
 }
-.login-label input:checked ~ .login-checkmark {
+
+input:checked ~ .checkmark, .chip input:checked ~ .checkmark {
   background-color: #00CD3C;
   border-color:#00CD3C;
 }
-.login-checkmark:after{
+.checkmark:after{
   content: "";
   position: absolute;
   left: 0.4rem;
@@ -1942,7 +1968,10 @@ label.chip.m-wider{
   transform: rotate(45deg);
   box-sizing:content-box;
 }
-.login-label input:checked ~ .login-checkmark:after{
+.chip .checkmark:after{
+	border-color:#fff;
+}
+input:checked ~ .checkmark:after{
 	border-color:#fff;
 }
 
@@ -1954,10 +1983,9 @@ label.chip.m-wider{
 	position: relative;
 	height: 30px;
  	width: 30px;
- 	background-color: #f1f1f1;
  	cursor: pointer;
  	border-radius:50%;
-}
+} 
 .vert{margin: 1.1rem auto;}
 
 /* Hide the browser's default checkbox */
@@ -1968,49 +1996,23 @@ label.chip.m-wider{
   height: 0;
   width: 0;
 }
-
-/* Create a custom checkbox */
-.checkmark {
-  position: absolute;
-  border-radius:50%;
+.chip .checkmark{
   top: 0.2rem;
   left: 0.2rem;
-  height: 24px;
-  width: 24px;
 }
 
-/* On mouse-over, add a grey background color */
-.chip:hover input ~ .checkmark,.custom:hover input ~ .checkmark {
+.chip input ~ .checkmark{
   	background-color: #ccc;
-}
-.chip input ~ .checkmark,.custom input ~ .checkmark {
-  	background-color: #ddd;
+  	border-color:#ccc;
 }
 /* When the checkbox is checked, add a blue background */
-.chip input:checked ~ .checkmark,.custom input:checked ~ .checkmark {
-  	background-color: #63C726;
-}
+
  .chip input:disabled:checked ~ .checkmark,.custom input:disabled:checked ~ .checkmark,
   .chip:hover input:disabled:checked ~ .checkmark,.custom:hover input:disabled:checked ~ .checkmark{
 	background-color: #ccc;
 }
  .chip:hover input:disabled ~ .checkmark,.custom:hover input:disabled ~ .checkmark {
 	background-color:transparent;
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  left: 9px;
-  top: 6px;
-  width: 6px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
 }
 
 	

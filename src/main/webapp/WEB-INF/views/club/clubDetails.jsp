@@ -61,7 +61,7 @@
 		</li>
 		<c:if test="${not empty club.club_detail }">
 		<li class="li-list">
-			<textarea class="detail">${club.club_detail }</textarea>
+			<textarea class="detail" readonly="readonly">${club.club_detail }</textarea>
 		</li>
 		</c:if>
 	</ul>
@@ -92,7 +92,7 @@
 			<c:if test="${not empty rating.rating_detail }">
 			<div class="row">
 				<div class="col margin">
-					<textarea class="detail">${rating.rating_detail }</textarea>
+					<textarea class="detail" readonly="readonly" >${rating.rating_detail }</textarea>
 				</div>
 			</div>
 			</c:if>
@@ -101,3 +101,21 @@
 		</c:if>
 	</ul>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+function adjustHeight() {
+	  var textEle = $('textarea');
+	  textEle[0].style.height = 'auto';
+	  var textEleHeight = textEle.prop('scrollHeight');
+	  textEle.css('height', textEleHeight);
+};
+$(function(){
+	adjustHeight();
+	var textEle = $('textarea');
+	textEle.on('keyup', function() {
+	  adjustHeight();
+	});
+});
+
+</script>
+

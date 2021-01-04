@@ -89,7 +89,7 @@
 		</li>
 		<c:if test="${!empty match.match_detail }">
 		<li class="li-list">
-			<textarea class="detail">${match.match_detail }</textarea>
+			<textarea class="detail readonly" readonly>${match.match_detail }</textarea>
 		</li>
 		</c:if>
 		<li class="li-list">
@@ -136,7 +136,12 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-
+function adjustHeight() {
+	  var textEle = $('textarea');
+	  textEle[0].style.height = 'auto';
+	  var textEleHeight = textEle.prop('scrollHeight');
+	  textEle.css('height', textEleHeight);
+};
 	//이미지 지도에서 마커가 표시될 위치입니다 
 	var markerPosition  = new kakao.maps.LatLng(${match.address_y}, ${match.address_x}); 
 	
@@ -158,6 +163,12 @@
 	marker.setMap(map); 
 	$(function(){
 		
+		adjustHeight();
+		var textEle = $('textarea');
+		textEle.on('keyup', function() {
+		  adjustHeight();
+		});
+		
 		$('#more').click(function(){
 			$('#more_modal').css('display','block');
 		});
@@ -167,50 +178,55 @@
 		
 		$('#submit').click(function(){
 		
-			postMatchRequest( ${match.match_num}, ${user_id}, '${myClub.club_num}', $('#request_detail').val());
+			postMatchRequest( ${match.match_num}, ${user_id}, '${myClub.club_num}', $('#request_detail').val(),'${match.id}','${match.club_num}');
 			
-			function postMatchRequest(a,b,c,d){
-				if(c==''||${myClub.club_auth<5}){
-					$('#myClub-toast').css('display','block');
-					$('#myClub-toast').click(function(){
-						$('#myClub-toast').css('display','none');
-					})
-					return;
-				}
-				$.ajax({
-					url:'postMatchRequest.do',
-					type:'post', 
-					data:{
-						match_num: a,
-						id:b,
-						away:c,
-						request_detail:d
-					},
-					dataType:'json',
-					cache:false,
-					timeout:30000,
-					success:function(data){
-						if(data.result=='requested'){
-							$('#matchRequest_msg').text('경기 신청  완료');
-						}else if(data.result=='duplicated'){
-							$('#matchRequest_msg').text('이미 경기 신청하셨습니다');
-						}
-						
-						$('#toast').css('display','block');
-						$('#confirm').click(function(){
-							location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}';
-						});
-						$(window).click(function(){
-							location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}';
-						});
-					},
-					error:function(){
-						alert('네트워크 오류 발생');
-					}
-				});
-			}
 
 		});
 	});
+	
+	function postMatchRequest(a,b,c,d,e,f){
+		if(c==''||${myClub.club_auth<5}){
+			$('#myClub-toast').css('display','block');
+			$('#myClub-toast').click(function(){
+				$('#myClub-toast').css('display','none');
+			})
+			return;
+		}
+		$.ajax({
+			url:'postMatchRequest.do',
+			type:'post', 
+			data:{
+				match_num: a,
+				id:b,
+				away:c,
+				request_detail:d,
+				home_name:e,
+				club_num:f
+			},
+			dataType:'json',
+			cache:false,
+			timeout:30000,
+			success:function(data){
+				if(data.result=='requested'){
+					$('#matchRequest_msg').text('경기 신청  완료');
+				}else if(data.result=='duplicated'){
+					$('#matchRequest_msg').text('이미 경기 신청하셨습니다');
+				}else{
+					$('#matchRequest_msg').text('경기 신청 오류');
+				}
+				
+				$('#toast').css('display','block');
+				$('#confirm').click(function(){
+					location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}&clubManageFrom=2';
+				});
+				$(window).click(function(){
+					location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}&clubManageFrom=2';
+				});
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+	}
   	
 </script>

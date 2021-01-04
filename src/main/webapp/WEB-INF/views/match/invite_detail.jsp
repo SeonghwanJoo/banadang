@@ -89,12 +89,9 @@
 		</li>
 		<c:if test="${!empty match.match_detail }">
 		<li class="li-list">
-			<textarea class="detail">${match.match_detail }</textarea>
+			<textarea class="detail readonly" readonly>${match.match_detail }</textarea>
 		</li>
 		</c:if>
-		<li class="li-list">
-			<textarea class="detail" id="requested">경기 신청합니다</textarea>
-		</li>
 		<li class="li-list">
 			<textarea class="detail input-field" id="request_detail" name="request_detail" placeholder="매치 신청 시 ${match.club_name } 팀에 추가적으로 전달할 내용 입력"></textarea>
 		</li>
@@ -139,7 +136,12 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-
+function adjustHeight() {
+	  var textEle = $('textarea');
+	  textEle[0].style.height = 'auto';
+	  var textEleHeight = textEle.prop('scrollHeight');
+	  textEle.css('height', textEleHeight);
+};
 	//이미지 지도에서 마커가 표시될 위치입니다 
 	var markerPosition  = new kakao.maps.LatLng(${match.address_y}, ${match.address_x}); 
 	
@@ -160,6 +162,12 @@
 	var map = new kakao.maps.Map(mapContainer, mapOption);
 	marker.setMap(map); 
 	$(function(){
+		
+		adjustHeight();
+		var textEle = $('textarea');
+		textEle.on('keyup', function() {
+		  adjustHeight();
+		});
 		
 		$('#more').click(function(){
 			$('#more_modal').css('display','block');
@@ -209,10 +217,10 @@
 				
 				$('#toast').css('display','block');
 				$('#confirm').click(function(){
-					location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}';
+					location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}&clubManageFrom=2';
 				});
 				$(window).click(function(){
-					location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}';
+					location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}&clubManageFrom=2';
 				});
 			},
 			error:function(){

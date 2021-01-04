@@ -66,7 +66,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
+function adjustHeight() {
+	  var textEle = $('textarea');
+	  textEle[0].style.height = 'auto';
+	  var textEleHeight = textEle.prop('scrollHeight');
+	  textEle.css('height', textEleHeight);
+};
+
 function modifyAnswer(answer_num){
+	
+	adjustHeight();
+	var textEle = $('textarea');
+	textEle.on('keyup', function() {
+	  adjustHeight();
+	});
+	
 	$('#more_modal').css('display','block');
 	$('#delete').click(function(){
 		$.ajax({

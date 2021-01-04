@@ -78,7 +78,7 @@ function createListInHTML(matchs){
 					+"<span class='distance'><span class='blue'>"+matchs[i].distance.toFixed(1)+"</span> km</span>"
 				+"</div>"
 				+"<div class='row'>"
-					+"<span class='match-item'><i class='far fa-calendar-alt margin-right'></i>주 활동 요일 "+matchs[i].act_day+" |</span>"
+					+"<span class='match-item'><i class='far fa-calendar-alt margin-right'></i>주 활동 요일 "+matchs[i].act_day+" </span>"
 					+"<span class='match-item'><i class='far fa-clock margin-right'></i>시간대 "+matchs[i].act_time+"</span>"
 				+"</div>"
 				+"</div>"
@@ -95,10 +95,14 @@ function createListInHTML(matchs){
 						"<span class='club_name'>"+matchs[i].club_name+"</span><br>"
 						+"<span class='uniform'>"
 							+"유니폼";
-		if(matchs[i].club_color!=""){
+		if(matchs[i].club_color =="rgb(255, 255, 255)") {
 		itemStr+=
-							"<span class='color' style='background-color:"+matchs[i].club_color+"'></span>";
+							"<span class='color' style='background-color:#fff; border:1px solid #ccc;'></span>";					
+		}else if(matchs[i].club_color!=""){
+			itemStr+=
+				"<span class='color' style='background-color:"+matchs[i].club_color+"'></span>";
 		}else if(matchs[i].club_color==""){
+		
 		itemStr+=
 							" 미정";
 		}

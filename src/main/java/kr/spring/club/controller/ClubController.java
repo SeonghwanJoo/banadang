@@ -63,7 +63,7 @@ public class ClubController {
 	}
 	@RequestMapping("/club/manageClub.do")
 	public ModelAndView manageClub(@RequestParam Integer club_num,
-								   @RequestParam(defaultValue="false") boolean isMsg,
+								   @RequestParam(defaultValue="1") Integer clubManageFrom,
 									HttpSession session) {
 		ModelAndView mav=new ModelAndView();
 		//팀명,연령,주소,유니폼,매너평가,실력평가,평가수
@@ -139,7 +139,7 @@ public class ClubController {
 		 */
 		
 		/* mav.addObject("ages",ages); */
-		mav.addObject("isMsg",isMsg);
+		mav.addObject("clubManageFrom",clubManageFrom);
 		mav.addObject("members",members);
 		mav.setViewName("manageClub");
 		

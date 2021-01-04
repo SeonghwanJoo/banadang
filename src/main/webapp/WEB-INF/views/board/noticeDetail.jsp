@@ -17,16 +17,16 @@
 	</div>
 </div>
 <div class="blank_div"></div>
-<div class="main-row margin-top">
+<div class="main-row margin-top centered-padding">
 	<span class="small-font bold gray">${board.register_date }</span>
 </div>
-<div class="main-row">
+<div class="main-row centered-padding">
 	<span class="m-font">${board.title }</span>
 </div>
 <hr class="hr">
-<textarea class="detail">
-	${board.content}
-</textarea>
+<div class="centered-padding">
+	<textarea class="detail" readonly>${board.content}</textarea>
+</div>
 <div id="more_modal" class="confirm-modals">
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
@@ -42,16 +42,29 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	$(function(){
-		$('#more').click(function(){
-			
-			$('#more_modal').css('display','block');
-		});
-		$('#more-cancel-btn').click(function(){
-			$('#more_modal').css('display','none');
-		});
+function adjustHeight() {
+	  var textEle = $('textarea');
+	  textEle[0].style.height = 'auto';
+	  var textEleHeight = textEle.prop('scrollHeight');
+	  textEle.css('height', textEleHeight);
+};
+
+$(function(){
+	adjustHeight();
+	var textEle = $('textarea');
+	textEle.on('keyup', function() {
+	  adjustHeight();
+	});
+	
+	$('#more').click(function(){
 		
-	})
+		$('#more_modal').css('display','block');
+	});
+	$('#more-cancel-btn').click(function(){
+		$('#more_modal').css('display','none');
+	});
+	
+})
 
 
 </script>

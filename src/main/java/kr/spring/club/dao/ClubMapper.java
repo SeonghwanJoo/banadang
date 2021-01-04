@@ -99,7 +99,7 @@ public interface ClubMapper {
 	@Update("update gentlepro.match_request set match_req_cancel=1")
 	public void updateMatchReqForCancel(Integer request_num);
 	
-	@Update("update gentlepro.match set away=0,away_name='' where match_num=#{match_num}")
+	@Update("update gentlepro.match set away=0,away_name='모집 중' where match_num=#{match_num}")
 	public void updateMatchForMatchReqCancel(Integer match_num);
 	
 	public List<MemberVO> selectClubRecruitReqForRequestor(Integer club_num);

@@ -125,10 +125,15 @@ function createListInHTML(matchs){
 						"<span class='club_name'>"+matchs[i].club_name+"</span><br>"
 						+"<span class='uniform'>"
 							+"유니폼";
-		if(matchs[i].club_color!=""){
+		
+		if(matchs[i].club_color =="rgb(255, 255, 255)") {
 		itemStr+=
-							"<span class='color' style='background-color:"+matchs[i].club_color+"'></span>";
+							"<span class='color' style='background-color:#fff; border:1px solid #ccc;'></span>";					
+		}else if(matchs[i].club_color!=""){
+			itemStr+=
+				"<span class='color' style='background-color:"+matchs[i].club_color+"'></span>";
 		}else if(matchs[i].club_color==""){
+		
 		itemStr+=
 							" 미정";
 		}

@@ -89,7 +89,7 @@
 		</li>
 		<c:if test="${!empty match.recruit_detail }">
 		<li class="li-list">
-			<p>${match.recruit_detail }</p>
+			<textarea class="detail readonly" readonly>${match.recruit_detail }</textarea>
 		</li>
 		</c:if>
 		<li class="li-list">
@@ -182,6 +182,13 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+
+function adjustHeight() {
+	  var textEle = $('textarea');
+	  textEle[0].style.height = 'auto';
+	  var textEleHeight = textEle.prop('scrollHeight');
+	  textEle.css('height', textEleHeight);
+};
 	//이미지 지도에서 마커가 표시될 위치입니다 
 	var markerPosition  = new kakao.maps.LatLng(${match.address_y}, ${match.address_x}); 
 	
@@ -202,6 +209,13 @@
 	var map = new kakao.maps.Map(mapContainer, mapOption);
 	marker.setMap(map); 
 	$(function(){
+		
+		adjustHeight();
+		var textEle = $('textarea');
+		textEle.on('keyup', function() {
+		  adjustHeight();
+		});
+		
 		$('#more').click(function(){
 			$('#more_modal').css('display','block');
 		});
@@ -220,7 +234,8 @@
 						id:'${user_id}',
 						club_num:'${match.club_num}',
 						recruit_position:position,
-						recruit_req_detail:$('#recruit_req_detail').val()
+						recruit_req_detail:$('#recruit_req_detail').val(),
+						home_name:'${match.id}'
 					},
 					dataType:'json',
 					cache:false,
