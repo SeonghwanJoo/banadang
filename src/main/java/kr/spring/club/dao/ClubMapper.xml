@@ -58,7 +58,7 @@
     		join gentlepro.match b on a.match_num=b.match_num where b.match_date>date_sub(now(), interval 1 day) and b.home=#{club_num})d
     left outer join 
     	(select avg(manner) manner,avg(perform) perform,club_num from gentlepro.club_rating group by club_num)e
-    		 on d.club_num=e.club_num) f join club c on f.club_num=c.club_num
+    		 on d.club_num=e.club_num) f join club c on f.club_num=c.club_num order by cancel is not null, match_req_cancel is not null
 	</select>
 	<select id="selectHomeDetailsForRequestedMatch" parameterType="integer" resultType="clubVO">
 	select request_num,match_num,c.club_num,acceptance,request_detail,match_req_cancel,match_date,start_time,end_time,address,cancel,type,home,match_detail,manner,perform,club_name,filename,club_color,club_age,club_address from
@@ -68,7 +68,7 @@
     		join gentlepro.match b on a.match_num=b.match_num where b.match_date>date_sub(now(), interval 1 day))d
     left outer join 
     	(select avg(manner) manner,avg(perform) perform,count(*) rating_count,club_num from gentlepro.club_rating group by club_num)e 
-    	on d.home=e.club_num) f join club c on f.home=c.club_num
+    	on d.home=e.club_num) f join club c on f.home=c.club_num order by cancel is not null, match_req_cancel is not null
 	</select>
 	<select id="selectAttendanceRate" parameterType="memberVO" resultType="float">
 	select b.b/a.a attendance_rate from

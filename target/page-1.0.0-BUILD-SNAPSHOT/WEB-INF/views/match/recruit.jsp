@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<div class="main-row filter-wrapper margin-btm">
+<div class="filter-wrapper sticky">
 	<div class="filter cursor"  id="filter">
 		<span class="material-icons l-font filter-icon">filter_alt</span>
 		<span class="filter-txt">
@@ -32,7 +32,7 @@
  </div>
 <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 <!-- The Modal -->
-<div id="myModals" class="modals">
+<div id="myModals" class="modals middle">
 	<!-- Modal content -->
 	<form:form class="col s12" id="form" action="recruit.do" commandName="matchVO" autocomplete="off">
 	<div class="modals-content">

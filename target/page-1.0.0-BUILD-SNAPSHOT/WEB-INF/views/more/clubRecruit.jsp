@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<div class="main-row filter-wrapper margin-btm">
+<div class="filter-wrapper sticky">
 	<div class="filter cursor"  id="filter">
 		<span class="material-icons cursor l-font filter-icon" >filter_alt</span>
 		<c:if test="${type==1 }">
@@ -22,7 +22,7 @@
 	<button class="seemore margin-top" id="moreBtn" onclick="moreList()">더보기</button>
 </div>
 <!-- The Modal -->
-<div id="myModals" class="modals">
+<div id="myModals" class="modals middle">
 	<!-- Modal content -->
 	<form:form class="col s12" id="form" action="clubRecruit.do" commandName="matchVO" autocomplete="off">
 	<div class="modals-content">

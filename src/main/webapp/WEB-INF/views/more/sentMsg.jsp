@@ -44,7 +44,7 @@
 					<c:if test="${msg.status==2 }">
 					<span class="msg-status">읽음</span>
 					</c:if>
-					<span class="xs-font gray right">
+					<span class="xs-font gray right nowrap">
 						<fmt:formatDate value="${msg.register_date }" type="both" pattern="yy.MM.dd HH:mm"/>
 					</span>
 					<span class="material-icons more cursor m-font gray" id="more" onclick="openOption(${msg.msg_num})" >more_vert</span>

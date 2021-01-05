@@ -28,9 +28,9 @@
 	</c:if>
 	</span>
     <a id="write" href="${pageContext.request.contextPath }/match/writeForm.do">
-    	<i class="fas fa-edit" id="topIcon"></i>
+    	<i class="far fa-edit" id="topIcon"></i>
     	<c:if test="${title eq '나의 페이지' && count_msg!=0 }">
-		<span class="count-msg-page">${count_msg }</span>
+		<span class="count-msg fas">${count_msg }</span>
 		</c:if>
     </a>
 </div>
@@ -95,7 +95,7 @@
 		}else if(${title eq '나의 페이지'}){
 			$('#write').attr('href','${pageContext.request.contextPath}/member/myMsg.do');
 			$('#topIcon').removeClass('fas fa-edit');
-			$('#topIcon').addClass('fas fa-comment-dots');
+			$('#topIcon').addClass('far fa-comment');
 		}else if(${title eq '팀원 모집'}){
 			$('#write').attr('href','${pageContext.request.contextPath}/member/writeClubRecruit.do');
 		}

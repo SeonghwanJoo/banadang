@@ -114,10 +114,10 @@
 					<span class="cancel negative full">${away.cancel}팀에 의해 취소됨</span>
 					</c:if>
 					<c:if test="${not empty away.match_req_cancel }">
-					<span class="cancel negative full" id="${away.request_num }">${away.club_name }팀에 의해 경기 신청 취소 처리됨</span>
+					<span class="cancel negative full" id="${away.request_num }">${away.club_name }팀에 의해 경기 신청 취소됨</span>
 					</c:if>
 					<c:if test="${empty away.match_req_cancel }">
-					<span class="cancel negative full" id="${away.request_num }" style="display:none">${away.club_name }팀에 의해 경기 신청 취소 처리됨</span>
+					<span class="cancel negative full" id="${away.request_num }" style="display:none">${away.club_name }팀에 의해 경기 신청 취소됨</span>
 					</c:if>
 				</div>
 				<div class="row ">
@@ -160,19 +160,7 @@
 					</div>
 				</div>
 				<span class="material-icons collapsible">add_circle</span>
-				<div class="collapsible-content">
-					<textarea class="detail" readonly>${away.request_detail}</textarea>
-					<c:if test="${away.acceptance==1 && empty away.cancel }">
-					<div class="row" id="match-btn-${away.request_num }">
-						<div class="half_col">
-							<button class="first-btn" onclick="answerForMatchReq(${away.request_num},'${away.club_name }',3,${away.club_num },${away.match_num })">거절</button>
-						</div>
-						<div class="half_col">
-							<button class="second-btn" onclick="answerForMatchReq(${away.request_num},'${away.club_name }',2,${away.club_num },${away.match_num })">수락</button>
-						</div>
-					</div>
-					</c:if>
-				</div>
+				<div class="collapsible-content"><p class="detail" >${away.request_detail}</p><c:if test="${away.acceptance==1 && empty away.cancel }"><div class="row" id="match-btn-${away.request_num }"><div class="half_col"><button class="first-btn" onclick="answerForMatchReq(${away.request_num},'${away.club_name }',3,${away.club_num },${away.match_num })">거절</button></div><div class="half_col"><button class="second-btn" onclick="answerForMatchReq(${away.request_num},'${away.club_name }',2,${away.club_num },${away.match_num })">수락</button></div></div></c:if></div>
 			</li>
 			</c:forEach>
 		</ul>
@@ -209,10 +197,10 @@
 						<span class="cancel negative full">${home.cancel}팀에 의해 취소됨</span>
 						</c:if>
 						<c:if test="${not empty home.match_req_cancel }">
-						<span class="cancel negative full" id="${home.request_num }">경기 신청 취소 처리됨</span>
+						<span class="cancel negative full" id="${home.request_num }">경기 신청 취소됨</span>
 						</c:if>
 						<c:if test="${empty home.match_req_cancel }">
-						<span class="cancel negative full" id="${home.request_num }" style="display:none">경기 신청 취소 처리됨</span>
+						<span class="cancel negative full" id="${home.request_num }" style="display:none">경기 신청 취소됨</span>
 						</c:if>
 					</div>
 					<div class="row ">
@@ -255,23 +243,7 @@
 					</div>
 				</div>
 				<span class="material-icons collapsible">add_circle</span>
-				<div class="collapsible-content">
-					<textarea readonly class="detail">${home.match_detail}</textarea>
-					<c:if test="${empty home.cancel}">
-					<div class="row">
-					<c:if test="${empty home.match_req_cancel }">
-					<button class="block gray-bg" id="${home.request_num }-btn" onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num })">
-						경기 신청 취소
-					</button>
-					</c:if>
-					<c:if test="${not empty home.match_req_cancel }">
-					<button class="block gray-bg" id="${home.request_num }-btn" style="display:none"  onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num})">
-						경기 신청 취소
-					</button>
-					</c:if>
-					</div>
-					</c:if>
-				</div>
+				<div class="collapsible-content"><p class="detail">${home.match_detail}</p><c:if test="${empty home.cancel}"><div class="row"><c:if test="${empty home.match_req_cancel }"><button class="block gray-bg" id="${home.request_num }-btn" onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num })">경기 신청 취소</button></c:if><c:if test="${not empty home.match_req_cancel }"><button class="block gray-bg" id="${home.request_num }-btn" style="display:none"  onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num})">	경기 신청 취소</button>	</c:if></div></c:if></div>
 			</li>
 			</c:if>
 			</c:forEach>
@@ -960,12 +932,12 @@ function sendLinkForVote(match_num,club_num,match_date,address,start_time) {
     	}
     })
  }
-function adjustHeight() {
+/* function adjustHeight() {
 	  var textEle = $('textarea');
 	  textEle[0].style.height = 'auto';
 	  var textEleHeight = textEle.prop('scrollHeight');
 	  textEle.css('height', textEleHeight);
-};
+}; */
 function openMore(match_num,club_name,club_num,match_date,address,start_time,modify){
 	
 	$('#options').replaceWith('');
@@ -1436,10 +1408,7 @@ function blockTap(blockedTap) {
 
 $(function(){
 	
-	if(${myClub.club_auth>4}){
-		adjustHeight();
-	}
-	
+		
 	var clubManageFrom='${clubManageFrom}';
 	if(clubManageFrom==2){
 		blockTap('manageMatch');
@@ -1456,12 +1425,17 @@ $(function(){
 	for (i = 0; i < collap.length; i++) {
 		collap[i].addEventListener("click", function() {
 	    var panel = this.nextElementSibling;
+	    var detail = panel.firstChild;
 	    if (panel.style.maxHeight) {
 	    	panel.style.maxHeight = null;
 	    	$(this).text("add_circle");
 	    } else {
 	    	$(this).text("remove_circle");
 	      	panel.style.maxHeight = panel.scrollHeight + "px";
+	      	if (detail.firstChild!=null){
+	      		detail.style.padding = "5px";
+	      	}
+	      	
 	    } 
 	  });
 	}

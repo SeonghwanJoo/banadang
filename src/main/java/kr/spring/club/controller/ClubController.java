@@ -193,7 +193,7 @@ public class ClubController {
 		List<ClubVO> ratings=clubService.selectRatings(club_num);
 		mav.addObject("club",club);
 		mav.addObject("ratings",ratings);
-		mav.addObject("title","팀 평점");
+		mav.addObject("title","팀 프로필");
 		mav.setViewName("clubDetails");		
 		
 		return mav;

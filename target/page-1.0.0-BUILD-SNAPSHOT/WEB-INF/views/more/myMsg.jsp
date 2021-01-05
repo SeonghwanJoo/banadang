@@ -41,7 +41,7 @@
 					<c:if test="${empty msg.nickname }">
 					<span class="gray bold">탈퇴 회원</span>
 					</c:if>
-					<span class="xs-font gray right">
+					<span class="xs-font gray right nowrap">
 						<fmt:formatDate value="${msg.register_date }" type="both" pattern="yy.MM.dd HH:mm"/>
 					</span>
 					<span class="material-icons more cursor m-font gray" id="more" onclick="openOption(${msg.msg_num},'${msg.match_num }','${msg.club_num }','${msg.sender }')" >more_vert</span>
