@@ -550,10 +550,7 @@ body.body, body.body btn{
     word-break:keep-all;
     word-wrap:break-word;
 }
-body.body{
-	background-color:#000;
-	color:#fff;
-}
+
 .certify-modals{
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
