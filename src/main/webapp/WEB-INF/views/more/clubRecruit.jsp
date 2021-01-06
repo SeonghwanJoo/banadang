@@ -2,17 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<div class="filter-wrapper sticky">
-	<div class="filter cursor"  id="filter">
-		<span class="material-icons cursor l-font filter-icon" >filter_alt</span>
-		<c:if test="${type==1 }">
+<div class="filter-wrapper sticky padding-btm padding-top">
+	<div class="row filter cursor"  id="filter">
+		<span class="material-icons l-font  filter-icon">filter_alt</span>
+		<c:if test="${match.type==1 }">
 		<span class="filter-txt">축구</span>
 		</c:if>
-		<c:if test="${type==2 }">
+		<c:if test="${match.type==2 }">
 		<span class="filter-txt">풋살</span>
 		</c:if>
-		<c:if test="${type==3 }">
-		<span class="filter-txt">전체</span>
+		<c:if test="${not empty match.period }">
+		<span class="filter-txt"><i class="far fa-calendar-alt margin-right"></i>${match.period}</span>
 		</c:if>
 	</div>
 </div>

@@ -128,12 +128,12 @@
 				<div class="row small-font  margin-top margin-btm">
 					<div class="col club_main">
 						<c:if test="${ away.filename ne 'undefined' }">
-							<img src="imageView.do?club_num=${away.club_num }" class="avatar emblem">
+							<img src="imageView.do?club_num=${away.club_num }" class="emblem">
 						</c:if>
 						<c:if test="${away.filename eq 'undefined' }">
-							<img src="${pageContext.request.contextPath}/resources/images/blank_emblem.png" class="avatar emblem">
+							<img src="${pageContext.request.contextPath}/resources/images/blank_emblem.png" class="emblem">
 						</c:if>
-						<span class="club_name">${away.club_name }</span><br>
+						<span class="club_name">${away.club_name }<i class="margin-left fas fa-chevron-right"></i></span><br>
 						<span class="uniform">유니폼
 							<c:if test="${!empty away.club_color }">
 								<span class="color" style="background-color:${away.club_color}"></span>
@@ -141,7 +141,8 @@
 							<c:if test="${empty away.club_color }">
 								 미정
 							</c:if>
-						</span>
+						</span><br>
+						<span>연령대 <span class="xs-font margin-left">${away.club_age }</span></span>
 					</div>
 					<div class="col">
 						<div class="row">
@@ -156,10 +157,10 @@
 									<span style='width:${away.perform*20 }%'></span>
 								</span><fmt:formatNumber value="${away.perform*2}" pattern="0.0"/>
 						</div>
-						<span class="age">연령대 <span class="xs-font margin-left">${away.club_age }</span></span>
+						
 					</div>
 				</div>
-				<span class="material-icons collapsible">add_circle</span>
+				<span class="material-icons collapsible">add_circle_outline</span>
 				<div class="collapsible-content"><p class="detail" >${away.request_detail}</p><c:if test="${away.acceptance==1 && empty away.cancel }"><div class="row" id="match-btn-${away.request_num }"><div class="half_col"><button class="first-btn" onclick="answerForMatchReq(${away.request_num},'${away.club_name }',3,${away.club_num },${away.match_num })">거절</button></div><div class="half_col"><button class="second-btn" onclick="answerForMatchReq(${away.request_num},'${away.club_name }',2,${away.club_num },${away.match_num })">수락</button></div></div></c:if></div>
 			</li>
 			</c:forEach>
@@ -242,7 +243,7 @@
 						<span class="age">연령대 <span class="xs-font margin-left">${home.club_age }</span></span>
 					</div>
 				</div>
-				<span class="material-icons collapsible">add_circle</span>
+				<span class="material-icons collapsible">add_circle_outline</span>
 				<div class="collapsible-content"><p class="detail">${home.match_detail}</p><c:if test="${empty home.cancel}"><div class="row"><c:if test="${empty home.match_req_cancel }"><button class="block gray-bg" id="${home.request_num }-btn" onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num })">경기 신청 취소</button></c:if><c:if test="${not empty home.match_req_cancel }"><button class="block gray-bg" id="${home.request_num }-btn" style="display:none"  onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num})">	경기 신청 취소</button>	</c:if></div></c:if></div>
 			</li>
 			</c:if>
@@ -1428,9 +1429,9 @@ $(function(){
 	    var detail = panel.firstChild;
 	    if (panel.style.maxHeight) {
 	    	panel.style.maxHeight = null;
-	    	$(this).text("add_circle");
+	    	$(this).text("add_circle_outline");
 	    } else {
-	    	$(this).text("remove_circle");
+	    	$(this).text("remove_circle_outline");
 	      	panel.style.maxHeight = panel.scrollHeight + "px";
 	      	if (detail.firstChild!=null){
 	      		detail.style.padding = "5px";

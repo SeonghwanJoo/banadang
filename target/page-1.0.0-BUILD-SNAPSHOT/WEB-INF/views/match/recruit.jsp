@@ -3,19 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<div class="filter-wrapper sticky">
-	<div class="filter cursor"  id="filter">
-		<span class="material-icons l-font filter-icon">filter_alt</span>
-		<span class="filter-txt">
-			<c:if test="${not empty match.period }">
-			<i class="far fa-calendar-alt margin-right"></i>${match.period}
-			</c:if>
-		</span>
+<div class="filter-wrapper sticky padding-btm padding-top">
+	<div class="row filter cursor"  id="filter">
+		<span class="material-icons l-font  filter-icon">filter_alt</span>
 		<c:if test="${match.type==1 }">
-		<span class="filter-txt margin-right">축구</span>
+		<span class="filter-txt">축구</span>
 		</c:if>
 		<c:if test="${match.type==2 }">
-		<span class="filter-txt margin-right">풋살</span>
+		<span class="filter-txt">풋살</span>
+		</c:if>
+		<c:if test="${not empty match.period }">
+		<span class="filter-txt"><i class="far fa-calendar-alt margin-right"></i>${match.period}</span>
 		</c:if>
 	</div>
 </div>
@@ -243,9 +241,10 @@ $(function(){
 		$('#period-filter').css('display','none');
 		$('#datepicker').val('');
 	});
+	
 	let today=new Date();
 	let endDate=new Date();
-	endDate.setDate(endDate.getDate()+31);
+	endDate.setDate(endDate.getDate()+30);
 	
 	$('#datepicker').daterangepicker({
 		"minDate": today,
