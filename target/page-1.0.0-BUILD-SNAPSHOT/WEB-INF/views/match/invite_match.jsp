@@ -75,7 +75,7 @@
 		</div>
 		<hr class="hr">
 		<div class="row margin-top">
-			<input type="submit" class="block black-bg" id="apply-filter" value="필터 적용">
+			<input type="submit" class="block white-bg" id="apply-filter" value="필터 적용">
 		</div>
 	</div>
 	</form:form>

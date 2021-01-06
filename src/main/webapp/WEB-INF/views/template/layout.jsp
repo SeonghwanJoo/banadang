@@ -23,7 +23,7 @@
 <style>
 .star-rating { width:85px; text-align: left;margin:0 0.2rem; }
 .star-rating,.star-rating span {
-	display:inline-block; height:1.2rem;overflow:hidden; background:url('${pageContext.request.contextPath}/resources/images/star.png')no-repeat;
+	display:inline-block; height:1.2rem;overflow:hidden; background:url('${pageContext.request.contextPath}/resources/images/star-dark.png')no-repeat;
 }
 .star-rating span{ background-position:left bottom; line-height:0; vertical-align:top; }
 </style>

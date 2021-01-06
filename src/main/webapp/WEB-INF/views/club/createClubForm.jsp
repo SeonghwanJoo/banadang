@@ -121,7 +121,7 @@
         </div>
 	</div>
 </div>
-<div id="color_sel" class="modals">
+<div id="color_sel" class="modals middle">
 	<div class="modals-content">
 		<span class="close_mod">&times;<br></span>
 		<div class="row">

@@ -128,12 +128,12 @@
 				<div class="row small-font  margin-top margin-btm">
 					<div class="col club_main">
 						<c:if test="${ away.filename ne 'undefined' }">
-							<img src="imageView.do?club_num=${away.club_num }" class="avatar emblem">
+							<img src="imageView.do?club_num=${away.club_num }" class="emblem">
 						</c:if>
 						<c:if test="${away.filename eq 'undefined' }">
-							<img src="${pageContext.request.contextPath}/resources/images/blank_emblem.png" class="avatar emblem">
+							<img src="${pageContext.request.contextPath}/resources/images/blank_emblem.png" class="emblem">
 						</c:if>
-						<span class="club_name">${away.club_name }</span><br>
+						<span class="club_name">${away.club_name }<i class="margin-left fas fa-chevron-right"></i></span><br>
 						<span class="uniform">유니폼
 							<c:if test="${!empty away.club_color }">
 								<span class="color" style="background-color:${away.club_color}"></span>
@@ -141,7 +141,8 @@
 							<c:if test="${empty away.club_color }">
 								 미정
 							</c:if>
-						</span>
+						</span><br>
+						<span>연령대 <span class="xs-font margin-left">${away.club_age }</span></span>
 					</div>
 					<div class="col">
 						<div class="row">
@@ -156,7 +157,7 @@
 									<span style='width:${away.perform*20 }%'></span>
 								</span><fmt:formatNumber value="${away.perform*2}" pattern="0.0"/>
 						</div>
-						<span class="age">연령대 <span class="xs-font margin-left">${away.club_age }</span></span>
+						
 					</div>
 				</div>
 				<span class="material-icons collapsible">add_circle_outline</span>
