@@ -188,6 +188,9 @@ ul.carousel-indicators {
 	margin: 6rem auto;
 	text-align: center;
 }
+.certify-modal-content{
+	color:#000;
+}
 
 .login_btn {
 	margin: 0 auto;
@@ -880,7 +883,7 @@ body.body, .filter-wrapper{
 .green-bg{
 	color:#fff;
 	background-color:#00643c;
-	border-color:#fff;
+	border-color:#00643c;
 }
 #submit_delete{
 	background-color:#dc3545;
@@ -1973,7 +1976,9 @@ label.chip.m-wider{
   background-color: #000;
   border: 2px solid #999;
 }
-
+.certify-modal-content .checkmark{
+	background-color:#fff;
+}
 input:checked ~ .checkmark, .chip input:checked ~ .checkmark,.modals .chip input:checked ~ .checkmark {
   background-color: #00CD3C;
   border-color:#00CD3C;
