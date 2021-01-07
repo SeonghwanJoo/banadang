@@ -26,12 +26,12 @@
 		<div class="match-info-wrapper">
 			<div class="row">
 				<c:if test="${match.type==1 }">
-				<span class="match-item last soccer">
+				<span class="match-item s-chip white-bg">
 				축구
 				</span>	
 				</c:if>
 				<c:if test="${match.type==2 }">
-				<span class="match-item last futsal">
+				<span class="match-item s-chip black-bg">
 				풋살
 				</span>	
 				</c:if>
@@ -344,17 +344,17 @@ function modifyAnswer(voteAnswer_num){
 function setVoteStyle(max,attend,not_attend,undefined,status){
 	
 	if (max==attend){
-		$('#attend').css('background-color','#81c784');
+		$('#attend').css('background-color','#00643c');
 		$('#not_attend').css('background-color','#bfbfbf');
 		$('#undefined').css('background-color','#bfbfbf');
 	}else if(max==not_attend){
 		$('#attend').css('background-color','#bfbfbf');
-		$('#not_attend').css('background-color','#81c784');
+		$('#not_attend').css('background-color','#00643c');
 		$('#undefined').css('background-color','#bfbfbf')
 	}else if(max==undefined){
 		$('#attend').css('background-color','#bfbfbf');
 		$('#not_attend').css('background-color','#bfbfbf');
-		$('#undefined').css('background-color','#81c784');
+		$('#undefined').css('background-color','#00643c');
 	}
 	if( status ==  1){
 		$('#attend_sign').css('display','inline-block');

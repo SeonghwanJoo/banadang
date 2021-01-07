@@ -39,17 +39,20 @@
 					</span><br>
 					<span class="uniform">
 						유니폼
-						<c:if test="${!empty myClub.club_color }">
-						<span class="color" style="background-color:${myClub.club_color}"></span>
+						<c:if test="${myClub.club_color eq 'rgb(0, 0, 0)'}">
+							<span class="color" style="background-color:${myClub.club_color}; border:1px solid #fff"></span>
+						</c:if>
+						<c:if test="${not empty myClub.club_color && myClub.club_color ne 'rgb(0, 0, 0)'}">
+							<span class="color" style="background-color:${myClub.club_color}"></span>
 						</c:if>
 						<c:if test="${empty myClub.club_color }">
-						미정
+							&nbsp;미정
 						</c:if>
 					</span>
 				</div>
 			</div>
 			<div class="row">
-				총 <span class="point margin-left"> ${myClub.rating_count }</span>명의 평가
+				총 <span class="point margin-left margin-right"> ${myClub.rating_count } </span>명의 평가
 				<i class="rating_icon fas fa-chevron-right"></i>
 			</div>
 			<div class="row">
@@ -91,12 +94,12 @@
 				<div class="match-info-wrapper">
 				<div class="main-row ">
 					<c:if test="${away.type==1 }">
-					<span class="match-item last soccer">
+					<span class="match-item s-chip white-bg">
 					축구
 					</span>	
 					</c:if>
 					<c:if test="${away.type==2 }">
-					<span class="match-item last futsal">
+					<span class="match-item s-chip black-bg">
 					풋살
 					</span>	
 					</c:if>
@@ -133,16 +136,20 @@
 						<c:if test="${away.filename eq 'undefined' }">
 							<img src="${pageContext.request.contextPath}/resources/images/blank_emblem.png" class="emblem">
 						</c:if>
-						<span class="club_name">${away.club_name }<i class="margin-left fas fa-chevron-right"></i></span><br>
-						<span class="uniform">유니폼
-							<c:if test="${!empty away.club_color }">
+						<span class="club_name">${away.club_name }</span><br>
+						<span class="uniform">
+							유니폼
+							<c:if test="${away.club_color eq 'rgb(0, 0, 0)'}">
+								<span class="color" style="background-color:${away.club_color}; border:1px solid #fff"></span>
+							</c:if>
+							<c:if test="${not empty away.club_color && away.club_color ne 'rgb(0, 0, 0)'}">
 								<span class="color" style="background-color:${away.club_color}"></span>
 							</c:if>
 							<c:if test="${empty away.club_color }">
-								 미정
+								&nbsp;미정
 							</c:if>
 						</span><br>
-						<span>연령대 <span class="xs-font margin-left">${away.club_age }</span></span>
+						<span class="xs-chip position-below-emblem cursor" onclick="location.href='club_details.do?club_num=${away.club_num}'">팀 평가 조회</span>
 					</div>
 					<div class="col">
 						<div class="row">
@@ -157,7 +164,7 @@
 									<span style='width:${away.perform*20 }%'></span>
 								</span><fmt:formatNumber value="${away.perform*2}" pattern="0.0"/>
 						</div>
-						
+						<span>연령대 <span class="xs-font margin-left">${away.club_age }</span></span>
 					</div>
 				</div>
 				<span class="material-icons collapsible">add_circle_outline</span>
@@ -175,12 +182,12 @@
 				<div class="match-info-wrapper">
 					<div class="main-row margin-btm ">
 						<c:if test="${home.type==1 }">
-						<span class="match-item last soccer">
+						<span class="match-item s-chip white-bg">
 						축구
 						</span>	
 						</c:if>
 						<c:if test="${home.type==2 }">
-						<span class="match-item last futsal">
+						<span class="match-item s-chip black-bg">
 						풋살
 						</span>	
 						</c:if>
@@ -218,14 +225,19 @@
 							<img src="${pageContext.request.contextPath}/resources/images/blank_emblem.png" class="avatar emblem">
 						</c:if>
 						<span class="club_name">${home.club_name }</span><br>
-						<span class="uniform">유니폼
-							<c:if test="${!empty home.club_color }">
+						<span class="uniform">
+							유니폼
+							<c:if test="${home.club_color eq 'rgb(0, 0, 0)'}">
+								<span class="color" style="background-color:${home.club_color}; border:1px solid #fff"></span>
+							</c:if>
+							<c:if test="${not empty home.club_color && home.club_color ne 'rgb(0, 0, 0)'}">
 								<span class="color" style="background-color:${home.club_color}"></span>
 							</c:if>
 							<c:if test="${empty home.club_color }">
-								 미정
+								&nbsp;미정
 							</c:if>
-						</span>
+						</span><br>
+						<span class="xs-chip position-below-emblem cursor" onclick="location.href='club_details.do?club_num=${home.club_num}'">팀 평가 조회</span>
 					</div>
 					<div class="col">
 						<div class="row">
@@ -244,7 +256,7 @@
 					</div>
 				</div>
 				<span class="material-icons collapsible">add_circle_outline</span>
-				<div class="collapsible-content"><p class="detail">${home.match_detail}</p><c:if test="${empty home.cancel}"><div class="row"><c:if test="${empty home.match_req_cancel }"><button class="block gray-bg" id="${home.request_num }-btn" onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num })">경기 신청 취소</button></c:if><c:if test="${not empty home.match_req_cancel }"><button class="block gray-bg" id="${home.request_num }-btn" style="display:none"  onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num})">	경기 신청 취소</button>	</c:if></div></c:if></div>
+				<div class="collapsible-content"><p class="detail">${home.match_detail}</p><c:if test="${empty home.cancel}"><div class="row"><c:if test="${empty home.match_req_cancel }"><button class="block white-bg" id="${home.request_num }-btn" onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num })">경기 신청 취소</button></c:if><c:if test="${not empty home.match_req_cancel }"><button class="block gray-bg" id="${home.request_num }-btn" style="display:none"  onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num})">	경기 신청 취소</button>	</c:if></div></c:if></div>
 			</li>
 			</c:if>
 			</c:forEach>
@@ -258,12 +270,12 @@
 				<div class="match-info-wrapper">
 					<div class="main-row ">
 						<c:if test="${recruit.type==1 }">
-						<span class="match-item last soccer">
+						<span class="match-item s-chip white-bg">
 						축구
 						</span>	
 						</c:if>
 						<c:if test="${recruit.type==2 }">
-						<span class="match-item last futsal">
+						<span class="match-item s-chip black-bg">
 						풋살
 						</span>	
 						</c:if>
@@ -283,33 +295,39 @@
 					</div>
 					<div class="row ">
 						<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${recruit.match_date}" pattern="MM월 dd일"/></span>
-						<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>${recruit.start_time }~${recruit.end_time }</span>
+						<span class="match-item"><i class="far fa-clock margin-right"></i>${recruit.start_time }~${recruit.end_time }</span>
 					</div>
 				</div>
 				<div class="row margin-top">
-					<c:if test="${empty recruit.thumbnail_image }">
-					<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
+					<div class="x-smaller">
+						<c:if test="${empty recruit.thumbnail_image }">
+						<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
+						</c:if>
+						<c:if test="${not empty recruit.thumbnail_image }">
+						<img src="${recruit.thumbnail_image }" alt="Avatar" class="avatar">
 					</c:if>
-					<c:if test="${not empty recruit.thumbnail_image }">
-					<img src="${recruit.thumbnail_image }" alt="Avatar" class="avatar">
-					</c:if>
-					<span>${recruit.nickname }</span>
-					<span>${fn:substring(recruit.age_range,0,1)}0대 |</span>
-					<span class="small-chip">
-					<c:if test="${fn:contains(recruit.recruit_position,'g') }">
-						<span>GK</span>
-					</c:if>
-					<c:if test="${fn:contains(recruit.recruit_position,'d') }">
-						<span>DF</span>
-					</c:if>
-					<c:if test="${fn:contains(recruit.recruit_position,'m') }">
-						<span>MF</span>
-					</c:if>
-					<c:if test="${fn:contains(recruit.recruit_position,'w') }">
-						<span>FW</span>
-					</c:if>
-					</span><br>
-					<span>${recruit.recruit_req_detail }</span>
+					</div>
+					<div class="x-bigger">
+						<div class="col">
+						<span>${recruit.nickname }</span>
+						<span>${fn:substring(recruit.age_range,0,1)}0대 |</span>
+						<span class="small-chip">
+						<c:if test="${fn:contains(recruit.recruit_position,'g') }">
+							<span>GK</span>
+						</c:if>
+						<c:if test="${fn:contains(recruit.recruit_position,'d') }">
+							<span>DF</span>
+						</c:if>
+						<c:if test="${fn:contains(recruit.recruit_position,'m') }">
+							<span>MF</span>
+						</c:if>
+						<c:if test="${fn:contains(recruit.recruit_position,'w') }">
+							<span>FW</span>
+						</c:if>
+						</span>
+						</div>
+						<p>${recruit.recruit_req_detail }</p>
+					</div>
 				</div>
 				<c:if test="${recruit.recruit_accept==1 }">
 				<div class="row" id="btn-${recruit.recruit_req_num }">
@@ -345,30 +363,34 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col">
-					<c:if test="${empty recruit.thumbnail_image }">
-					<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
-					</c:if>
-					<c:if test="${not empty recruit.thumbnail_image }">
-					<img src="${recruit.thumbnail_image }" alt="Avatar" class="avatar">
-					</c:if>
-					<span>${recruit.nickname }</span>
-					<span>${fn:substring(recruit.age_range,0,1)}0대 |</span>
-					<span class="small-chip">
-					<c:if test="${fn:contains(recruit.recruit_position,'g') }">
-						<span>GK</span>
-					</c:if>
-					<c:if test="${fn:contains(recruit.recruit_position,'d') }">
-						<span>DF</span>
-					</c:if>
-					<c:if test="${fn:contains(recruit.recruit_position,'m') }">
-						<span>MF</span>
-					</c:if>
-					<c:if test="${fn:contains(recruit.recruit_position,'w') }">
-						<span>FW</span>
-					</c:if>
-					</span><br>
-					<span>${recruit.clubRecruit_req_detail }</span>
+					<div class="x-smaller">
+						<c:if test="${empty recruit.thumbnail_image }">
+						<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
+						</c:if>
+						<c:if test="${not empty recruit.thumbnail_image }">
+						<img src="${recruit.thumbnail_image }" alt="Avatar" class="avatar">
+						</c:if>
+					</div>
+					<div class="x-bigger">
+						<div class="col">
+						<span>${recruit.nickname }</span>
+						<span>${fn:substring(recruit.age_range,0,1)}0대 |</span>
+						<span class="small-chip">
+						<c:if test="${fn:contains(recruit.recruit_position,'g') }">
+							<span>GK</span>
+						</c:if>
+						<c:if test="${fn:contains(recruit.recruit_position,'d') }">
+							<span>DF</span>
+						</c:if>
+						<c:if test="${fn:contains(recruit.recruit_position,'m') }">
+							<span>MF</span>
+						</c:if>
+						<c:if test="${fn:contains(recruit.recruit_position,'w') }">
+							<span>FW</span>
+						</c:if>
+						</span>
+						</div>
+						<p>${recruit.clubRecruit_req_detail }</p>
 					</div>
 				</div>
 				<c:if test="${recruit.clubRecruit_accept==1 }">
@@ -409,12 +431,12 @@
 						<div class="match-info-wrapper">
 							<div class="main-row ">
 								<c:if test="${match.type==1 }">
-								<span class="match-item last soccer">
+								<span class="match-item s-chip white-bg">
 								축구
 								</span>	
 								</c:if>
 								<c:if test="${match.type==2 }">
-								<span class="match-item last futsal">
+								<span class="match-item s-chip black-bg">
 								풋살
 								</span>	
 								</c:if>
@@ -611,12 +633,12 @@
 			<div class="match-info-wrapper">
 				<div class="main-row">
 					<c:if test="${match.type==1 }">
-					<span class="match-item last soccer">
+					<span class="match-item s-chip white-bg">
 					축구
 					</span>	
 					</c:if>
 					<c:if test="${match.type==2 }">
-					<span class="match-item last futsal">
+					<span class="match-item s-chip black-bg">
 					풋살
 					</span>	
 					</c:if>
@@ -1458,11 +1480,11 @@ $(function(){
 		 	var not_fixed=matches[i].undefined;
 		 	var match_num=matches[i].match_num;
 		 	if (max==attend){
-		 		$('#voted-attend-'+matches[i].match_num).css('background-color','#81c784');
+		 		$('#voted-attend-'+matches[i].match_num).css('background-color','#00643c');
 		 	}else if(max==not_attend){
-		 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#81c784');
+		 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#00643c');
 		 	}else if(max==not_fixed){
-		 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#81c784');
+		 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#00643c');
 		 	}
 	  }
 	

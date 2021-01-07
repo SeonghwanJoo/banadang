@@ -18,15 +18,15 @@
 	<c:if test="${not empty matches }">
 	<c:forEach items="${matches }" var="match">
 	<li class="li-list">
-		<div class="match-info-wrapper">
+		<div class="match-info-wrapper margin-btm">
 			<div class="main-row">
 				<c:if test="${match.type==1 }">
-				<span class="match-item last soccer">
+				<span class="match-item s-chip white-bg">
 				축구
 				</span>	
 				</c:if>
 				<c:if test="${match.type==2 }">
-				<span class="match-item last futsal">
+				<span class="match-item s-chip black-bg">
 				풋살
 				</span>	
 				</c:if>
@@ -39,9 +39,6 @@
 				</c:if>
 				<c:if test="${match.recruit_accept==3 }">
 				<span class="status negative">거절 완료</span>
-				</c:if>
-				<c:if test="${empty match.isCanceled }">
-				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.recruit_req_num},${match.recruit_accept })">more_vert</span>
 				</c:if>
 				<c:if test="${not empty match.isCanceled }">
 				<span class="cancel negative full" id="recruit-cancel-${match.recruit_req_num }" >용병 신청 취소 완료</span>
@@ -73,7 +70,10 @@
 				<br>
 				<span class="uniform">
 					유니폼
-					<c:if test="${not empty match.club_color }">
+					<c:if test="${match.club_color eq 'rgb(0, 0, 0)'}">
+						<span class="color" style="background-color:${match.club_color}; border:1px solid #fff"></span>
+					</c:if>
+					<c:if test="${not empty match.club_color && match.club_color ne 'rgb(0, 0, 0)'}">
 						<span class="color" style="background-color:${match.club_color}"></span>
 					</c:if>
 					<c:if test="${empty match.club_color }">
@@ -97,6 +97,9 @@
 				<span class="age">연령대 <span class="xs-font margin-left">${match.club_age }</span></span>
 			</div>
 		</div>
+		<c:if test="${empty match.isCanceled }">
+		<button class="block white-bg" id="more" onclick="openMore(${match.recruit_req_num},${match.recruit_accept })">용병 신청 취소</button>
+		</c:if>
 	</li>
 	</c:forEach>
 	</c:if>
@@ -129,6 +132,7 @@
 				if(data.result=='success'){
 					$('#recruit-cancel-'+recruit_req_num).css('display','block');
 					$('#recruit_modal').css('display','none');
+					$('#more').css('display','none');
 				}
 				if(data.result=='errors'){
 					

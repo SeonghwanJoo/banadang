@@ -19,7 +19,7 @@
 <ul class="ul-list non-border-btm">
 </ul>
 <div class="row margin-top margin-btm" id="moreList">
-	<button class="seemore margin-top" id="moreBtn" onclick="moreList()">더보기</button>
+	<button class="block white-bg margin-top" id="moreBtn" onclick="moreList()">더보기</button>
 </div>
 <!-- The Modal -->
 <div id="myModals" class="modals middle">
@@ -64,12 +64,12 @@ function createListInHTML(matchs){
 					+"<div class='main-row'>"
 		if(matchs[i].type==1){
 			itemStr+=
-					"<span class='match-item last soccer'>"
+					"<span class='match-item s-chip white-bg'>"
 						+"축구"
 					+"</span>";
 		}else if(matchs[i].type==2){
 			itemStr+=
-					"<span class='match-item last futsal'>"
+					"<span class='match-item s-chip black-bg'>"
 							+"풋살"
 					+"</span>";
 		}
@@ -95,9 +95,9 @@ function createListInHTML(matchs){
 						"<span class='club_name'>"+matchs[i].club_name+"</span><br>"
 						+"<span class='uniform'>"
 							+"유니폼";
-		if(matchs[i].club_color =="rgb(255, 255, 255)") {
+		if(matchs[i].club_color =="rgb(0, 0, 0)") {
 		itemStr+=
-							"<span class='color' style='background-color:#fff; border:1px solid #ccc;'></span>";					
+							"<span class='color' style='background-color:#000; border:1px solid #ccc;'></span>";					
 		}else if(matchs[i].club_color!=""){
 			itemStr+=
 				"<span class='color' style='background-color:"+matchs[i].club_color+"'></span>";

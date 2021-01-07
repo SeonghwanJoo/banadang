@@ -27,12 +27,14 @@
 		</span>
 	</c:if>
 	</span>
+    <c:if test="${!empty user_id }">
     <a id="write" href="${pageContext.request.contextPath }/match/writeForm.do">
     	<i class="far fa-edit" id="topIcon"></i>
     	<c:if test="${title eq '나의 페이지' && count_msg!=0 }">
 		<span class="count-msg fas">${count_msg }</span>
 		</c:if>
     </a>
+    </c:if>
 </div>
 </div>
 <div class="blank_div"></div>
@@ -46,7 +48,7 @@
 			<h6 class="mod-h6 margin-top">소속팀 설정</h6>
 			<c:if test="${!empty myClubs }">
 			<c:forEach items="${myClubs }" var="club">
-			<hr>
+			<hr class="hr">
 		  	<span onclick="setMyClub(${club.club_num })" class="margin-top bold disp-bl cursor" >${club.club_name }</span>
 		  	</c:forEach>
 		  	</c:if>

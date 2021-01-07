@@ -27,12 +27,12 @@
 			<div class="match-info-wrapper">
 				<div class="main-row">
 					<c:if test="${match.type==1 }">
-					<span class="match-item last soccer">
+					<span class="match-item s-chip white-bg">
 					축구
 					</span>	
 					</c:if>
 					<c:if test="${match.type==2 }">
-					<span class="match-item last futsal">
+					<span class="match-item s-chip black-bg">
 					풋살
 					</span>	
 					</c:if>

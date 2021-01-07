@@ -25,12 +25,12 @@
 		<li class="li-list">
 			<div class="main-row margin-btm">
 				<c:if test="${clubRecruit.type==1 }">
-				<span class="match-item last soccer">
+				<span class="match-item s-chip white-bg">
 				축구
 				</span>	
 				</c:if>
 				<c:if test="${clubRecruit.type==2 }">
-				<span class="match-item last futsal">
+				<span class="match-item s-chip black-bg">
 				풋살
 				</span>	
 				</c:if>
@@ -46,13 +46,6 @@
 					<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
 					</c:if>
 					<span class="club_name">${clubRecruit.club_name }</span><br>
-					<span class="relative blue cursor" onclick="location.href='${pageContext.request.contextPath}/member/writeMsg.do?club_num=${clubRecruit.club_num }&id=${clubRecruit.id }'" >
-						<b>메시지 보내기</b>
-						<i class="fas fa-comment bubble"></i>
-					</span>
-				</div>
-				<div class="col">
-					<span class="age">연령대<span class="xs-font margin-left">${clubRecruit.club_age }</span></span><br>
 					<span class="uniform">
 						유니폼
 						<c:if test="${!empty clubRecruit.club_color }">
@@ -61,6 +54,13 @@
 						<c:if test="${empty clubRecruit.club_color }">
 						미정
 						</c:if>
+					</span>
+				</div>
+				<div class="col">
+					<span class="age">연령대<span class="xs-font margin-left">${clubRecruit.club_age }</span></span><br>
+					<span class="send-msg cursor" onclick="location.href='${pageContext.request.contextPath}/member/writeMsg.do?club_num=${clubRecruit.club_num }&id=${clubRecruit.id }'" >
+						<b>메시지 보내기</b>
+						<i class="fas fa-comment"></i>
 					</span>
 				</div>
 			</div>
@@ -84,7 +84,7 @@
 		</li>
 		<li class="li-list">
 			<span>${clubRecruit.club_address}(주 활동 경기장 : ${clubRecruit.club_loc })</span>
-			<div id="map" style="width:100%;height:300px;"></div>
+			<div id="map"></div>
 		</li>
 		<c:if test="${!empty clubRecruit.clubRecruit_detail }">
 		<li class="li-list">
@@ -92,33 +92,35 @@
 		</li>
 		</c:if>
 		<li class="li-list">
-			<div class="row">
-				<span class="col">가입비 <span>${clubRecruit.register_cost }</span></span>
-				<span class="col">월 회비 <span>${clubRecruit.month_cost }</span></span>
-			</div>
 			<!-- 포지션 -->
 			<div class="row">
-				<span class="center">필요 포지션</span>
-				<c:if test="${fn:contains(clubRecruit.recruit_position,'G') }">
-				<span class="chip">
-					<span class="chip-txt">GK</span>
-				</span>
-				</c:if>
-				<c:if test="${fn:contains(clubRecruit.recruit_position,'D') }">
-				<span class="chip">
-					<span class="chip-txt">DF</span>
-				</span>
-				</c:if>
-				<c:if test="${fn:contains(clubRecruit.recruit_position,'M') }">
-				<span class="chip">
-					<span class="chip-txt">MF</span>
-				</span> 
-				</c:if>
-				<c:if test="${fn:contains(clubRecruit.recruit_position,'W') }">
-				<span class="chip">
-					<span class="chip-txt">FW</span>
-				</span>
-				</c:if>
+				<div class="col flex-start">
+					<span class="margin-n-v disp-inbl">필요 포지션</span>
+					<c:if test="${fn:contains(clubRecruit.recruit_position,'G') }">
+					<span class="small-chip">
+						<span>GK</span>
+					</span>
+					</c:if>
+					<c:if test="${fn:contains(clubRecruit.recruit_position,'D') }">
+					<span class="small-chip">
+						<span>DF</span>
+					</span>
+					</c:if>
+					<c:if test="${fn:contains(clubRecruit.recruit_position,'M') }">
+					<span class="small-chip">
+						<span>MF</span>
+					</span> 
+					</c:if>
+					<c:if test="${fn:contains(clubRecruit.recruit_position,'W') }">
+					<span class="small-chip">
+						<span>FW</span>
+					</span>
+					</c:if>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">가입비 <span>${clubRecruit.register_cost }</span></div>
+				<div class="col">월 회비 <span>${clubRecruit.month_cost }</span></div>
 			</div>
 		</li>
 		<li class="li-list">
@@ -207,6 +209,11 @@ function adjustHeight() {
 	var map = new kakao.maps.Map(mapContainer, mapOption);
 	marker.setMap(map); 
 	$(function(){
+		
+		if (${clubRecruit.club_color eq 'rgb(0, 0, 0)'}){
+			$(".color").css("border","1px solid #fff");
+		}
+		
 		$('#more').click(function(){
 			$('#more_modal').css('display','block');
 		});

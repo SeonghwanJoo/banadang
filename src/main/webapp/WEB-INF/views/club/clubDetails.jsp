@@ -73,7 +73,7 @@
 			<div class="main-row">
 				<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>${rating.match_date}</span>
 				<span class="match-item">${rating.address}</span>
-				<span>매치의 평가</span>
+				<span class="gray small-font">매치의 평가</span>
 			</div>
 			<div class="row small-font ">
 				<div class="col flex-start">
@@ -115,6 +115,10 @@ $(function(){
 	textEle.on('keyup', function() {
 	  adjustHeight();
 	});
+	if (${club.club_color eq 'rgb(0, 0, 0)'}){
+		$(".color").css("border","1px solid #fff");
+	}
+	
 });
 
 </script>

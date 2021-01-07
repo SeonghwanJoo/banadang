@@ -26,12 +26,12 @@
 		<li class="li-list">
 			<div class="main-row margin-btm">
 				<c:if test="${match.type==1 }">
-				<span class="match-item last soccer">
+				<span class="match-item s-chip white-bg">
 				축구
 				</span>	
 				</c:if>
 				<c:if test="${match.type==2 }">
-				<span class="match-item last futsal">
+				<span class="match-item s-chip black-bg">
 				풋살
 				</span>	
 				</c:if>
@@ -47,13 +47,6 @@
 					<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
 					</c:if>
 					<span class="club_name">${match.club_name }</span><br>
-					<span class="relative blue cursor" onclick="location.href='${pageContext.request.contextPath}/member/writeMsg.do?match_num=${match.match_num }&club_num=${match.club_num }&id=${match.id }'" >
-						<b>메시지 보내기</b>
-						<i class="fas fa-comment bubble"></i>
-					</span>
-				</div>
-				<div class="col">
-					<span class="age">연령대 <span class="xs-font margin-left">${match.club_age }</span></span><br>
 					<span class="uniform">
 						유니폼
 						<c:if test="${!empty match.club_color }">
@@ -62,6 +55,13 @@
 						<c:if test="${empty match.club_color }">
 						미정
 						</c:if>
+					</span>
+				</div>
+				<div class="col">
+					<span class="age">연령대 <span class="xs-font margin-left">${match.club_age }</span></span><br>
+					<span class="send-msg cursor" onclick="location.href='${pageContext.request.contextPath}/member/writeMsg.do?match_num=${match.match_num }&club_num=${match.club_num }&id=${match.id }'" >
+						<b>메시지 보내기</b>
+						<i class="fas fa-comment"></i>
 					</span>
 				</div>
 			</div>
@@ -85,41 +85,43 @@
 		</li>
 		<li class="li-list">
 			<span>${match.address}</span>
-			<div id="map" style="width:100%;height:300px;"></div>
+			<div id="map"></div>
 		</li>
 		<c:if test="${!empty match.recruit_detail }">
 		<li class="li-list">
-			<textarea class="detail readonly" readonly>${match.recruit_detail }</textarea>
+			<p class="detail readonly">${match.recruit_detail }</p>
 		</li>
 		</c:if>
 		<li class="li-list">
-			<div class="row">
-				<span class="col">참가 비용 &nbsp; <span class="underline">${match.recruit_cost }</span></span>
-				<span class="col">필요 인원 &nbsp; <span class="underline">${match.recruit_count }</span></span>
-			</div>
 			<!-- 포지션 -->
 			<div class="row">
-				<span class="center">필요 포지션</span>
-				<c:if test="${fn:contains(match.recruit_position,'G') }">
-				<span class="chip">
-					<span class="chip-txt">GK</span>
-				</span>
-				</c:if>
-				<c:if test="${fn:contains(match.recruit_position,'D') }">
-				<span class="chip">
-					<span class="chip-txt">DF</span>
-				</span>
-				</c:if>
-				<c:if test="${fn:contains(match.recruit_position,'M') }">
-				<span class="chip">
-					<span class="chip-txt">MF</span>
-				</span> 
-				</c:if>
-				<c:if test="${fn:contains(match.recruit_position,'W') }">
-				<span class="chip">
-					<span class="chip-txt">FW</span>
-				</span>
-				</c:if>
+				<div class="col flex-start">
+				<span class="margin-n-v disp-inbl">필요 포지션</span>
+					<c:if test="${fn:contains(match.recruit_position,'G') }">
+					<span class="small-chip">
+						<span>GK</span>
+					</span>
+					</c:if>
+					<c:if test="${fn:contains(match.recruit_position,'D') }">
+					<span class="small-chip">
+						<span>DF</span>
+					</span>
+					</c:if>
+					<c:if test="${fn:contains(match.recruit_position,'M') }">
+					<span class="small-chip">
+						<span>MF</span>
+					</span> 
+					</c:if>
+					<c:if test="${fn:contains(match.recruit_position,'W') }">
+					<span class="small-chip">
+						<span>FW</span>
+					</span>
+					</c:if>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">참가 비용 &nbsp; <span class="underline">${match.recruit_cost }</span></div>
+				<div class="col">필요 인원 &nbsp; <span class="underline">${match.recruit_count }</span></div>
 			</div>
 		</li>
 		<li class="li-list">
@@ -215,6 +217,10 @@ function adjustHeight() {
 		textEle.on('keyup', function() {
 		  adjustHeight();
 		});
+		
+		if (${match.club_color eq 'rgb(0, 0, 0)'}){
+			$(".color").css("border","1px solid #fff");
+		}
 		
 		$('#more').click(function(){
 			$('#more_modal').css('display','block');

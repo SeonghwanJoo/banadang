@@ -21,12 +21,12 @@
 		<div class="match-info-wrapper">
 			<div class="main-row">
 				<c:if test="${match.type==1 }">
-				<span class="match-item last soccer">
+				<span class="match-item s-chip white-bg">
 				축구
 				</span>	
 				</c:if>
 				<c:if test="${match.type==2 }">
-				<span class="match-item last futsal">
+				<span class="match-item s-chip black-bg">
 				풋살
 				</span>	
 				</c:if>
@@ -40,7 +40,6 @@
 				<c:if test="${match.clubRecruit_accept==3 }">
 				<span class="status negative">거절 완료</span>
 				</c:if>
-				<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.clubRecruit_req_num})">more_vert</span>
 				<span class="cancel negative full" id="recruit-cancel-${match.clubRecruit_req_num }" style="display:none">팀 가입 신청 취소 완료</span>
 			</div>
 			<div class="row gray">
@@ -60,7 +59,10 @@
 				<br>
 				<span class="uniform">
 					유니폼
-					<c:if test="${not empty match.club_color }">
+					<c:if test="${match.club_color eq 'rgb(0, 0, 0)'}">
+						<span class="color" style="background-color:${match.club_color}; border:1px solid #fff"></span>
+					</c:if>
+					<c:if test="${not empty match.club_color && match.club_color ne 'rgb(0, 0, 0)'}">
 						<span class="color" style="background-color:${match.club_color}"></span>
 					</c:if>
 					<c:if test="${empty match.club_color }">
@@ -84,6 +86,7 @@
 				<span class="age">연령대 <span class="xs-font margin-left">${match.club_age }</span></span>
 			</div>
 		</div>
+		<button class="block white-bg"  id="more" onclick="openMore(${match.clubRecruit_req_num})">팀 가입 신청 취소</button>
 	</li>
 	</c:forEach>
 	</c:if>

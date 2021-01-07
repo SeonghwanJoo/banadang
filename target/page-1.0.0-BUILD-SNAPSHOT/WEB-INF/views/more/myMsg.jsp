@@ -46,7 +46,7 @@
 					</span>
 					<span class="material-icons more cursor m-font gray" id="more" onclick="openOption(${msg.msg_num},'${msg.match_num }','${msg.club_num }','${msg.sender }')" >more_vert</span>
 				</div>
-				<p class="gray" id="${msg.msg_num }" data-club="${msg.club_num }">${msg.content }</p>
+				<p id="${msg.msg_num }" data-club="${msg.club_num }">${msg.content }</p>
 			</div>
 		</div>
 	</li>

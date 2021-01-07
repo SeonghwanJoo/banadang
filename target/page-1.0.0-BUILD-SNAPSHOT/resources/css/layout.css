@@ -256,15 +256,18 @@ ul.carousel-indicators {
 	border-radius:0.2rem;
 	padding:0.3rem 0;
 }
-a .match-item{
-	color:#007bff;
-}
 .modal-wrapper{
 	margin:0.8rem 0;
 	text-align:center;
 }
 #team-sel-modal, #sel-modal{
 	padding-top:6rem;
+}
+#team-sel-modal .modals-content{
+	color:#007bff;
+}
+.modals-content hr.hr{
+	margin:1rem 0;
 }
 div.team-info.cursor{
 	padding-right: 0;
@@ -361,9 +364,12 @@ div.half_col{
 }
 
 
-
+div.daterangepicker{
+	color:#000;
+}
 /*(((((autocomplete))))))))*/
 .autocomplete-items {
+	color:#000;
 	position: absolute;
 	border: 1px solid #d4d4d4;
 	border-bottom: none;
@@ -453,6 +459,7 @@ div.half_col{
 }
 .detail{
 	background-color:#444;
+	color:#fff;
 	min-height:3rem;
 	resize:none;
 	border:none;
@@ -467,7 +474,7 @@ div.half_col{
 	white-space:pre-wrap;
 } 
 .detail.readonly{
-	background-color:#fff;
+	background-color:#000;
 }
 .distance{
 	position:absolute;
@@ -508,7 +515,7 @@ input[type=text]:focus, select:focus{
 	color:#000;
 	text-decoration:none;
 	font-weight:bold;
-	background-color:#333;
+	background-color:#fff;
 	padding: 0.2rem 0.7rem;
 	float:right;
 	margin-right:2rem;
@@ -538,8 +545,8 @@ input[type=text]:focus, select:focus{
 
 /* Modal Content */
 .modals-content {
-	background-color: #000;
-	border:1px solid #777;
+	background-color:#fff;
+	color:#000;
 	position:relative;
 	margin: 0 1.5rem;
 	padding: 0.3rem;
@@ -655,23 +662,20 @@ body.body, .filter-wrapper{
 	color:#FFF;
 	padding:0.1rem 0.2rem;
 	position:absolute;
-	right:2rem;
+	right:0.3rem;
 	text-align:center;
 }
 .cancel{
 	display:block;
 	border-radius:0.2rem;
 	color:#FFF;
-	height:3.5rem;
+	height:3.8rem;
 	padding:1rem 0.2rem;
 	position:absolute;
-	left:-0.2rem;
+	left:-0.4rem;
 	top:-0.3rem;
 	text-align:center;
 	z-index:10;
-}
-#manageMatch .status{
-	right:0.3rem;
 }
 .main-row span.more{
 	position:absolute;
@@ -683,30 +687,39 @@ body.body, .filter-wrapper{
 .nowrap{
 	white-space:nowrap;
 }
-.last{
+.s-chip{
 	display:inline-block;
-	border-radius:2rem;	
+	border-radius:0.3rem;	
 	margin-right:1rem;
+	margin-bottom:0.2rem;
 	font-size:0.9rem;
 	padding:0.1rem 0.8rem;
 }
-.soccer{
-	background-color:#00643c;
-	color:#fff;
-}
-.futsal{
-	background-color:#00c853;
-	color:#fff;
-	
-}
+
 .margin-btm{
 	margin-bottom:0.5rem;
 }
-.bubble{
-	position:absolute;
-	right:-1.7rem;
-	top:-0.2rem;
-	font-size:1.5rem;
+.send-msg{
+	font-size:0.7rem;
+	color:#00cd3c;
+	border:1px solid #00cd3c;
+	padding:0.1rem 0.5rem;
+	border-radius:0.8rem;
+	margin-top:0.1rem;
+	display:inline-block;
+}
+.xs-chip{
+	display:inline-block;
+	border: 1px solid #ddd;
+	color:#ddd;
+	border-radius:1rem;
+	font-size:0.7rem;
+	padding:0.1rem 0.5rem;
+	
+}
+.position-below-emblem{
+	margin:0 0 0 3rem;
+	
 }
 .margin-top, span.margin-top, li .margin-top{
 	margin-top:0.5rem;
@@ -714,16 +727,15 @@ body.body, .filter-wrapper{
 .neutral{background-color:#878787;}
 .positive{background-color:#00643c;}
 .positive-color{color:#00643c;}
-.negative{background-color:#fff;}
+.negative{background-color:#000; color:#fff; border:1px solid #fff}
 .negative-color{background-color:#000;}
 .full{
 	width:95%;
 	margin: 0 auto;
 }
 .cancel.negative.full{
-	width:100%;
+	width:103%;
 	opacity:0.8;
-	color:#000;
 }
 .right-date{
 	position:absolute;
@@ -783,7 +795,10 @@ body.body, .filter-wrapper{
 	float: left;
 	width: 80%;
 	border: 1px solid grey;
-	background: #444;
+	background: #eee;
+}
+.modals-content input[type=text]::placeholder{
+	color:#555;
 }
 .modals-content button {
 	float: left;
@@ -860,7 +875,7 @@ body.body, .filter-wrapper{
 .black-bg{
 	color:#fff;
 	background-color:#000;
-	border-color:#fff;
+	border:1px solid #fff;
 }
 .green-bg{
 	color:#fff;
@@ -874,28 +889,6 @@ body.body, .filter-wrapper{
 }
 #submit_delete:focus{
 	outline:none;
-}
-.seemore{
-  display: block;
-  width:100%;
-  height:2.6rem;
-  margin:0.2rem;
-  color:#000;
-  border-radius:0.5rem;
-  padding: 4px 28px;
-  font-size: 16px;
-  font-weight:bold;
-  cursor: pointer;
-  background-color:#333;
-  text-align: center;
-  border-color:#FFF;
-  border-style:solid;
-}
-.seemore:focus{
-	outline: none;
-}
-.seemore.margin-top:hover{
-	background-color:#777;
 }
 .block-btn{
 	padding-right:8px;
@@ -911,7 +904,6 @@ body.body, .filter-wrapper{
   overflow: hidden;
   background-color: #000;
   color:#fff;
-  opacity:0.95;
   position:fixed;
   white-space: nowrap;
   z-index:50;
@@ -950,8 +942,8 @@ body.body, .filter-wrapper{
 	font-size:30px;
 	
 }
-a:link { color: #007bff; text-decoration: none;}
-a:visited { color: #007bff; text-decoration: none;}
+a:link { color: #fff; text-decoration: none;}
+a:visited { color: #fff; text-decoration: none;}
 a:hover, div.col a:hover { color:#fff;text-decoration: none; }
 
 
@@ -978,7 +970,7 @@ a:hover, div.col a:hover { color:#fff;text-decoration: none; }
 	padding-top: 75px;
 }
 div hr{
-	border-top:1px solid #777;
+	border-top:1px solid #ccc;
 }
 .sub-content hr{
 	border-top:1px solid #ccc;
@@ -1070,6 +1062,9 @@ input:checked + .slider:before {
 div.col{
 	padding-left:0px;
 	padding-right:0px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .count-msg{
 	position:absolute;
@@ -1190,9 +1185,8 @@ a.detail{
   cursor:pointer;
   bottom: 50%;
   left:20%;
-  background-color: black;
-  opacity:0.8;
-  color:white;
+  background-color: #fff;
+  color:#000;
   width: 60%;
   padding:1rem 0 0 0;
   -webkit-animation-name: fadeIn;
@@ -1206,10 +1200,10 @@ a.detail{
 }
 .alert-btn{
 	border:none;
-	border-top:1px solid #fff;
+	border-top:1px solid #000;
 	background-color:transparent;
 	margin-top:2rem;
-	color:#fff;
+	color:#000;
 	padding:0.8rem;
 	width:100%;
 }
@@ -1245,10 +1239,13 @@ a.detail{
 	border:none;
 	border-radius:0.2rem;
 }
+.confirm-modals span{
+	color:#555;
+}
 #close, button.first-btn{
-	background-color:#fff;
-	color:#000;
-	border:1px solid #555;
+	background-color:#000;
+	color:#fff;
+	border:1px solid #fff;
 	width:95%;
 	border-radius:2rem;
 	padding:0.5rem;
@@ -1259,9 +1256,9 @@ btn-wrapper{
 	margin:0 auto;
 }
 #team_confirm, button.second-btn{
-	background-color:#000;
-	color:#FFF;
-	border:none;
+	background-color:#fff;
+	color:#000;
+	border:1px solid #fff;
 	width:95%;
 	border-radius:2rem;
 	padding:0.5rem;
@@ -1339,13 +1336,9 @@ h6.ages{
 	background-color:#fff;
 	border-radius:50%;
 }
-.center{
-	display:block;
-	margin:1rem 1rem;
-}
 
 .mod-h6{
-	color:#9E9E9E;
+	color:#777;
 	font-weight:bold;
 }
 .span-link{
@@ -1370,7 +1363,7 @@ h6.ages{
 	bottom:0.2rem;
 }
 #answer-wrapper{
-	background-color:#333;
+	background-color:#222;
 }
 .nickname{
 	color:#007bff;
@@ -1647,7 +1640,7 @@ div.detail-item{
 	position:sticky;
 	z-index:95;
 	top:3rem;
-	opacity:0.95;
+	background-color:#000;
 }
 .sticky+tab_detail{
 	padding-top: 160px;
@@ -1701,7 +1694,7 @@ li.li-list{
 	max-width: 1130px;
 }
 .match-info-wrapper{
-	padding:0.4rem 0.2rem;
+	padding:0.4rem;
 	background-color:#222;
 	border-radius:0.5rem;
 }
@@ -1710,6 +1703,8 @@ li.li-list{
 }
 #map{
 	margin:0 auto;
+	width:100%;
+	height:14rem;
 }
 .color{
 	width:0.6rem;height:0.6rem;
@@ -1823,6 +1818,10 @@ button.chip-btn{
 	display:block;
 	margin-top:1rem;
 }
+.margin-n-v{
+	margin:0.3rem 0;
+	
+}
 .centered-padding{
 	padding:0 2%;
 }
@@ -1896,18 +1895,24 @@ button.chip-btn{
   -ms-user-select: none;
   user-select: none;
 }
+.modals-content .chip{
+	background-color:#ddd;
+}
+.modals-content i{
+	background-color:#fff;
+}
+.modals-content input::placeholder{
+	color:#555;
+}
 .small-chip{
-  max-width:48px;
   display: inline-block;
-  position: relative;
   text-align:center;
-  height:1.3rem;
-  padding:0.1rem;
-  width:17%;
+  width:3rem;
+  padding:0.2rem;
   cursor: pointer;
   border-radius: 25px;
   margin:0.3rem;
- font-weight:bold;	
+  font-weight:bold;	
   font-size: 0.7rem;
   background-color: #444;
   -webkit-user-select: none;
@@ -1965,22 +1970,22 @@ label.chip.m-wider{
   left: 0;
   height: 1.6rem;
   width: 1.6rem;
-  background-color: #fff;
-  border: 2px solid #777;
+  background-color: #000;
+  border: 2px solid #999;
 }
 
-input:checked ~ .checkmark, .chip input:checked ~ .checkmark {
+input:checked ~ .checkmark, .chip input:checked ~ .checkmark,.modals .chip input:checked ~ .checkmark {
   background-color: #00CD3C;
   border-color:#00CD3C;
 }
 .checkmark:after{
   content: "";
   position: absolute;
-  left: 0.4rem;
+  left: 0.45rem;
   top: 0.2rem;
   width: 0.3rem;
   height: 0.6rem;
-  border: solid #777;
+  border: solid #999;
   border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -2023,6 +2028,10 @@ input:checked ~ .checkmark:after{
 .chip input ~ .checkmark{
   	background-color: #777;
   	border-color:#777;
+}
+.modals .chip input ~ .checkmark{
+  	background-color: #999;
+  	border-color:#999;
 }
 /* When the checkbox is checked, add a blue background */
 

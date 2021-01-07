@@ -49,7 +49,7 @@
 					</span>
 					<span class="material-icons more cursor m-font gray" id="more" onclick="openOption(${msg.msg_num})" >more_vert</span>
 				</div>
-				<p class="gray">${msg.content }</p>
+				<p>${msg.content }</p>
 			</div>
 		</div>
 	</li>

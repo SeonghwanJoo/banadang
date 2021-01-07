@@ -128,7 +128,7 @@
 	</div>
 </div>
 <hr class="hr">
-<div class="row">
+<div class="row centered-padding">
 	<div class="text input-container col">
 		<textarea class="detail" id="club_detail" name="club_detail" placeholder="팀 소개글 입력">${myClub.club_detail }</textarea>
 	</div>
@@ -153,7 +153,7 @@
         </div>
 	</div>
 </div>
-<div id="color_sel" class="modals">
+<div id="color_sel" class="modals middle">
 	<div class="modals-content">
 		<span class="close_mod">&times;<br></span>
 		<div class="row">
@@ -252,6 +252,9 @@ function removeWhiteSpace(obj){
 		textEle.on('keyup', function() {
 		  adjustHeight();
 		});
+		if (${myClub.club_color eq 'rgb(0, 0, 0)'}){
+			$(".uni-view").css("background-color","#7a7a7a");
+		}
 		
 		$('#club_detail').keyup(function (){
 			
@@ -715,8 +718,9 @@ function removeWhiteSpace(obj){
 
 		// When the user clicks anywhere outside of the modal, close it
 		$(".color_opt").click(function(){
+			$(".uni-view").css("background-color","#000");
 			var clickedColor=$(this).css("color");
-			if(clickedColor=="rgb(255, 255, 255)"){
+			if(clickedColor=="rgb(0, 0, 0)"){
 				$(".uni-view").css("background-color","#7a7a7a");
 			}
 			$(".uni-view").css("color",clickedColor);

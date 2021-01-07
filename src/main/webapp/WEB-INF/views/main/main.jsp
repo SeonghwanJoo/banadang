@@ -78,17 +78,17 @@
 		<div class="match-info-wrapper">
 			<div class="main-row ">
 				<c:if test="${match.type==1 }">
-				<span class="match-item last soccer">
+				<span class="match-item s-chip white-bg">
 				축구
 				</span>	
 				</c:if>
 				<c:if test="${match.type==2 }">
-				<span class="match-item last futsal">
+				<span class="match-item s-chip black-bg">
 				풋살
 				</span>	
 				</c:if>
 				<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}" target="_blank">
-					<span class="match-item">${match.address}</span>
+					<span class="match-item">${match.address}</span><i class="fas fa-chevron-right"></i>
 				</a>
 				<c:if test="${empty match.cancel }">
 					<c:if test="${myClub.club_auth==4 }">
@@ -253,7 +253,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<button class="block gray-bg" 
+			<button class="block white-bg" 
 				onclick="location.href='voteForm.do?match_num=${match.match_num}&club_num=${myClub.club_num }&isMain=true'">
 				<c:if test="${ match.status !=0}">다시 투표하기</c:if><c:if test="${match.status ==0 }">투표하기</c:if>
 			</button>
@@ -288,12 +288,12 @@
 	<div class="match-info-wrapper">
 		<div class="main-row ">
 			<c:if test="${match.type==1 }">
-			<span class="match-item last soccer">
+			<span class="match-item s-chip white-bg">
 			축구
 			</span>	
 			</c:if>
 			<c:if test="${match.type==2 }">
-			<span class="match-item last futsal">
+			<span class="match-item s-chip black-bg">
 			풋살
 			</span>	
 			</c:if>
@@ -365,10 +365,10 @@
 	</div>
 	<div class="row">
 		<c:if test="${match.home==match.club_num}">
-		<button class="block gray-bg margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }&isMain=true'">${match.away_name } 평점 작성 하기</button>
+		<button class="block white-bg margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }&isMain=true'">${match.away_name } 평점 작성 하기</button>
 		</c:if>
 		<c:if test="${match.away==match.club_num }">
-		<button class="block gray-bg margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }&isMain=true'">${match.home_name } 평점 작성 하기</button>
+		<button class="block white-bg margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }&isMain=true'">${match.home_name } 평점 작성 하기</button>
 		</c:if>
 	</div>
 </li>
