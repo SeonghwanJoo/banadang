@@ -1252,7 +1252,7 @@ a.detail{
 	width:95%;
 	border-radius:2rem;
 	padding:0.5rem;
-	margin:1rem;
+	margin:0.5rem;
 	font-weight:bold;
 }
 btn-wrapper{
@@ -1265,7 +1265,7 @@ btn-wrapper{
 	width:95%;
 	border-radius:2rem;
 	padding:0.5rem;
-	margin:1rem;
+	margin:0.5rem;
 	font-weight:bold;
 }
 .team-info .material-icons{
@@ -1656,7 +1656,7 @@ div.detail-item{
 	color:#00c73c;
 	position:absolute;
 	right:1rem;
-	top:9.2rem;
+	top:9.4rem;
 	font-size:2rem;
 	cursor:pointer;
 	transition: 0.4s;
@@ -1665,7 +1665,7 @@ div.detail-item{
 .collapsible-content{
 	max-height: 0;
 	transition: max-height 0.2s ease-out;
-	margin:2rem 0 0 0;
+	margin-top:1.5rem;
 	padding:0;
 	overflow: hidden;
 }

@@ -168,7 +168,7 @@
 					</div>
 				</div>
 				<span class="material-icons collapsible">add_circle_outline</span>
-				<div class="collapsible-content"><p class="detail" >${away.request_detail}</p><c:if test="${away.acceptance==1 && empty away.cancel }"><div class="row" id="match-btn-${away.request_num }"><div class="half_col"><button class="first-btn" onclick="answerForMatchReq(${away.request_num},'${away.club_name }',3,${away.club_num },${away.match_num })">거절</button></div><div class="half_col"><button class="second-btn" onclick="answerForMatchReq(${away.request_num},'${away.club_name }',2,${away.club_num },${away.match_num })">수락</button></div></div></c:if></div>
+				<div class="collapsible-content"><p class="detail" >${away.request_detail}</p><c:if test="${away.acceptance==1 && empty away.cancel }"><div class="row" id="match-btn-${away.request_num }"><div class="col"><button class="first-btn" onclick="answerForMatchReq(${away.request_num},'${away.club_name }',3,${away.club_num },${away.match_num })">거절</button></div><div class="col"><button class="second-btn" onclick="answerForMatchReq(${away.request_num},'${away.club_name }',2,${away.club_num },${away.match_num })">수락</button></div></div></c:if></div>
 			</li>
 			</c:forEach>
 		</ul>
@@ -180,7 +180,7 @@
 			<c:if test="${home.club_num != myClub.club_num }">
 			<li class="li-list">
 				<div class="match-info-wrapper">
-					<div class="main-row margin-btm ">
+					<div class="main-row">
 						<c:if test="${home.type==1 }">
 						<span class="match-item s-chip white-bg">
 						축구
@@ -331,10 +331,10 @@
 				</div>
 				<c:if test="${recruit.recruit_accept==1 }">
 				<div class="row" id="btn-${recruit.recruit_req_num }">
-					<div class="half_col">
+					<div class="col">
 						<button class="first-btn" onclick="answerForRecruitReq(${recruit.recruit_req_num},'${recruit.nickname }',3)">거절</button>
 					</div>
-					<div class="half_col">
+					<div class="col">
 						<button class="second-btn" onclick="answerForRecruitReq(${recruit.recruit_req_num},'${recruit.nickname }',2)">수락</button>
 					</div>
 				</div>
@@ -395,10 +395,10 @@
 				</div>
 				<c:if test="${recruit.clubRecruit_accept==1 }">
 				<div class="row" id="club-btn-${recruit.clubRecruit_req_num }">
-					<div class="half_col">
+					<div class="col">
 						<button class="first-btn" onclick="answerForClubRecruitReq(${recruit.clubRecruit_req_num},'${recruit.nickname }',3,'${recruit.id }')">거절</button>
 					</div>
-					<div class="half_col">
+					<div class="col">
 						<button class="second-btn" onclick="answerForClubRecruitReq(${recruit.clubRecruit_req_num},'${recruit.nickname }',2,'${recruit.id }')">수락</button>
 					</div>
 				</div>
@@ -441,7 +441,7 @@
 								</span>	
 								</c:if>
 								<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}" target="_blank">
-									<span class="match-item">${match.address}</span>
+									<span class="match-item">${match.address}</span><i class="fas fa-chevron-right"></i>
 								</a>
 								<c:if test="${empty match.cancel }">
 									<c:if test="${myClub.club_auth==4 }">
@@ -1454,10 +1454,11 @@ $(function(){
 	    	$(this).text("add_circle_outline");
 	    } else {
 	    	$(this).text("remove_circle_outline");
-	      	panel.style.maxHeight = panel.scrollHeight + "px";
 	      	if (detail.firstChild!=null){
 	      		detail.style.padding = "5px";
 	      	}
+	    	panel.style.maxHeight = panel.scrollHeight + "px";
+
 	      	
 	    } 
 	  });
