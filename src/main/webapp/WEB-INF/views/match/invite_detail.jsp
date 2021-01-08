@@ -92,7 +92,7 @@
 			<p class="detail readonly">${match.match_detail }</p>
 		</li>
 		</c:if>
-		<li class="li-list">
+		<li class="li-list ta-wrap">
 			<textarea class="detail input-field" id="request_detail" name="request_detail" placeholder="매치 신청 시 ${match.club_name } 팀에 추가적으로 전달할 내용 입력"></textarea>
 		</li>
 	</ul>
@@ -136,12 +136,10 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function adjustHeight() {
-		console.log('adjustHeight function');
-	  var textEle = $('textarea');
-	  textEle[0].style.height = 'auto';
-	  var textEleHeight = textEle.prop('scrollHeight');
-	  textEle.css('height', textEleHeight);
+function adjustHeight(obj) {
+	console.log('adjustHeight function');
+	 $(obj).css('height', 'auto' );
+	 $(obj).height( this.scrollHeight );
 };
 	//이미지 지도에서 마커가 표시될 위치입니다 
 	var markerPosition  = new kakao.maps.LatLng(${match.address_y}, ${match.address_x}); 
@@ -162,13 +160,57 @@ function adjustHeight() {
 	// 이미지 지도를 생성합니다
 	var map = new kakao.maps.Map(mapContainer, mapOption);
 	marker.setMap(map); 
+	
+	
+	var observe;
+	if (window.attachEvent) {
+	    observe = function (element, event, handler) {
+	        element.attachEvent('on'+event, handler);
+	    };
+	}
+	else {
+	    observe = function (element, event, handler) {
+	        element.addEventListener(event, handler, false);
+	    };
+	}
+	function init () {
+	    var text = document.getElementsByTagName('textarea');
+	    function resize () {
+	        text[0].style.height = 'auto';
+	        text[0].style.height = text[0].scrollHeight+'px';
+	        text[0].focus();
+	    }
+	    /* 0-timeout to get the already changed text */
+	    function delayedResize () {
+	        window.setTimeout(resize, 1000);
+	    }
+	   
+	    observe(text[0], 'keydown', delayedResize);
+
+	    text[0].focus();
+	    text[0].select();
+	    resize();
+	}
 	$(function(){
 		
-		adjustHeight();
-		var textEle = $('textarea');
-		textEle.on('keyup', function() {
-		  adjustHeight();
-		});
+		
+		init();
+		/* adjustHeight();  */
+		/*  var textEle = $('textarea');
+		textEle.on('keydown', function() {
+			$(this).css('height', 'auto' );
+			$(this).css('height', this.scrollHeight );
+			var str=$(this).val();
+				if(str.length>500){
+					alert("최대 500자 까지 입력 가능합니다.");
+					$(this).val(str.substring(0,500));
+				}
+		});  
+		textEle.on('keyup',function(){
+			console.log('keyup');
+			$(this).focus();
+		}); */
+		
 		
 		if (${match.club_color eq 'rgb(0, 0, 0)'}){
 			$(".color").css("border","1px solid #fff");

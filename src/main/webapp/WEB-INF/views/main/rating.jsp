@@ -193,19 +193,15 @@ function adjustHeight() {
 	 
 		adjustHeight();
 		var textEle = $('textarea');
-		textEle.on('keyup', function() {
+		textEle.on('keydown', function() {
 		  adjustHeight();
-		});
-		
-		$('#rating_detail').keyup(function (){
-			
 			var str=$(this).val();
 			if(str.length>500){
 				alert("최대 500자 까지 입력 가능합니다.");
 				$(this).val(str.substring(0,500));
 			}
-			
 		});
+		
 	 
 	$('#manner_1').click(function(){
 		$('#manner_valid').css('color','red').text('');

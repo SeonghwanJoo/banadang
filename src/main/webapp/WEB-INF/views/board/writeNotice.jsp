@@ -48,8 +48,13 @@ $(function(){
 	
 	adjustHeight();
 	var textEle = $('textarea');
-	textEle.on('keyup', function() {
+	textEle.on('keydown', function() {
 	  adjustHeight();
+	  var str=$(this).val();
+		if(str.length>500){
+			alert("최대 500자 까지 입력 가능합니다.");
+			$(this).val(str.substring(0,500));
+		}
 	});
 	
 	$('#title').click(function(){
@@ -57,16 +62,6 @@ $(function(){
 	});
 	$('#content').click(function(){
 		$('#content_msg').text('');
-	});
-	
-	$('#content').keyup(function (){
-		
-		var str=$(this).val();
-		if(str.length>500){
-			alert("최대 500자 까지 입력 가능합니다.");
-			$(this).val(str.substring(0,500));
-		}
-		
 	});
 	
 	$('#title').keyup(function (){

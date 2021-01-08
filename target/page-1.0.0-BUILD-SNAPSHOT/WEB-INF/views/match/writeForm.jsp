@@ -252,18 +252,13 @@ $( function() {
 	
 	adjustHeight();
 	var textEle = $('textarea');
-	textEle.on('keyup', function() {
+	textEle.on('keydown', function() {
 	  adjustHeight();
-	});
-	
-	$('#match_detail').keyup(function (){
-		
-		var str=$(this).val();
+	  var str=$(this).val();
 		if(str.length>500){
 			alert("최대 500자 까지 입력 가능합니다.");
 			$(this).val(str.substring(0,500));
 		}
-		
 	});
 	
 	

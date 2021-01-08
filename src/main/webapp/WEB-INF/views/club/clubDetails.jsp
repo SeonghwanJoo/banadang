@@ -112,7 +112,7 @@ function adjustHeight() {
 $(function(){
 	adjustHeight();
 	var textEle = $('textarea');
-	textEle.on('keyup', function() {
+	textEle.on('keydown', function() {
 	  adjustHeight();
 	});
 	if (${club.club_color eq 'rgb(0, 0, 0)'}){

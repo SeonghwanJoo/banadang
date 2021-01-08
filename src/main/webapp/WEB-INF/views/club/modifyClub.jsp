@@ -249,22 +249,19 @@ function removeWhiteSpace(obj){
 		
 		adjustHeight();
 		var textEle = $('textarea');
-		textEle.on('keyup', function() {
+		textEle.on('keydown', function() {
 		  adjustHeight();
-		});
-		if (${myClub.club_color eq 'rgb(0, 0, 0)'}){
-			$(".uni-view").css("background-color","#7a7a7a");
-		}
-		
-		$('#club_detail').keyup(function (){
-			
-			var str=$(this).val();
+		  var str=$(this).val();
 			if(str.length>500){
 				alert("최대 500자 까지 입력 가능합니다.");
 				$(this).val(str.substring(0,500));
 			}
-			
 		});
+		
+		if (${myClub.club_color eq 'rgb(0, 0, 0)'}){
+			$(".uni-view").css("background-color","#7a7a7a");
+		}
+		
 		
 		
 		let isChanged=0;

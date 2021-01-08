@@ -467,7 +467,6 @@ div.daterangepicker{
 	resize:none;
 	border:none;
 	width:100%;
-	border-radius:0.3rem;
 }
 .collapsible-content .detail{
 	
@@ -1254,6 +1253,9 @@ a.detail{
 	padding:0.5rem;
 	margin:0.5rem;
 	font-weight:bold;
+}
+textarea.detail{
+	overflow-y:hidden; resize:none;height:auto;
 }
 btn-wrapper{
 	margin:0 auto;

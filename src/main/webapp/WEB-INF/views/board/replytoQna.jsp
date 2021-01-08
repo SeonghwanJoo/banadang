@@ -75,12 +75,6 @@ function adjustHeight() {
 
 function modifyAnswer(answer_num){
 	
-	adjustHeight();
-	var textEle = $('textarea');
-	textEle.on('keyup', function() {
-	  adjustHeight();
-	});
-	
 	$('#more_modal').css('display','block');
 	$('#delete').click(function(){
 		$.ajax({
@@ -211,12 +205,15 @@ Number.prototype.zf = function(len){return this.toString().zf(len);};
 	$(function(){
 		
 		$('#content').focus();
-		$('#content').keyup(function(){
-			
-			var content=$(this).val();
+		
+		adjustHeight();
+		var textEle = $('textarea');
+		textEle.on('keydown', function() {
+		  adjustHeight();
+		  var content=$(this).val();
 			$('#counter').html(content.length+ '/ 최대 500자');
 			
-			if(counter.length>500){
+			if(content.length>500){
 				alert("최대 500자 까지 입력 가능합니다.");
 				$(this).val(content.substring(0,500));
 				$('#counter').html("500 / 최대 500자");

@@ -52,7 +52,7 @@ function adjustHeight() {
 $(function(){
 	adjustHeight();
 	var textEle = $('textarea');
-	textEle.on('keyup', function() {
+	textEle.on('keydown', function() {
 	  adjustHeight();
 	});
 	

@@ -126,7 +126,7 @@ function modifyAnswer(answer_num){
 		
 		adjustHeight();
 		var textEle = $('textarea');
-		textEle.on('keyup', function() {
+		textEle.on('keydown', function() {
 		  adjustHeight();
 		});
 		

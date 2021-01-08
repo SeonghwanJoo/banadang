@@ -214,8 +214,13 @@ function adjustHeight() {
 		
 		adjustHeight();
 		var textEle = $('textarea');
-		textEle.on('keyup', function() {
+		textEle.on('keydown', function() {
 		  adjustHeight();
+		  var str=$(this).val();
+			if(str.length>500){
+				alert("최대 500자 까지 입력 가능합니다.");
+				$(this).val(str.substring(0,500));
+			}
 		});
 		
 		if (${match.club_color eq 'rgb(0, 0, 0)'}){

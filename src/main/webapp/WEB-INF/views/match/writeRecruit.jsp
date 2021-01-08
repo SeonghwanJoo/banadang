@@ -151,48 +151,44 @@ $(function(){
 		
 	adjustHeight();
 	var textEle = $('textarea');
-	textEle.on('keyup', function() {
+	textEle.on('keydown', function() {
 	  adjustHeight();
+	  var str=$(this).val();
+		if(str.length>500){
+			alert("최대 500자 까지 입력 가능합니다.");
+			$(this).val(str.substring(0,500));
+		}
 	});
 	
-		$('#recruit_detail').keyup(function (){
-			
-			var str=$(this).val();
-			if(str.length>500){
-				alert("최대 500자 까지 입력 가능합니다.");
-				$(this).val(str.substring(0,500));
-			}
-			
-		});
 		
-		var selectTarget = $('.selectbox select');
+	var selectTarget = $('.selectbox select');
 
-	    selectTarget.change(function(){
-	        var select_name = $(this).children('option:selected').text();
-	        $(this).siblings('label').text(select_name);
-	    });
+	selectTarget.change(function(){
+		var select_name = $(this).children('option:selected').text();
+	    $(this).siblings('label').text(select_name);
+	});
 	    
-	    selectTarget.on({
-	        'focus' : function () {
-	            $(this).parent().addClass('focus');
-	        },
-	        'blur' : function () {
-	            $(this).parent().removeClass('focus');
-	        }
-	    });
+	selectTarget.on({
+		'focus' : function () {
+	    	$(this).parent().addClass('focus');
+	    },
+	    'blur' : function () {
+	    	$(this).parent().removeClass('focus');
+	    }
+	});
 		
-		$('input:checkbox').click(function(){
-			$('#position_msg').text('');
-		});
-		$('#recruit_count').click(function(){
-			$('#count_msg').text('');
-		});
-		$('#recruit_cost').click(function(){
-			$('#cost_msg').text('');
-		});
+	$('input:checkbox').click(function(){
+		$('#position_msg').text('');
+	});
+	$('#recruit_count').click(function(){
+		$('#count_msg').text('');
+	});
+	$('#recruit_cost').click(function(){
+		$('#cost_msg').text('');
+	});
 		
-		$('#submit').click(function(e){
-			e.preventDefault();
+	$('#submit').click(function(e){
+		e.preventDefault();
 			if(!$('input:checkbox').is(':checked')){
 				$('#position_msg').css('color','red').text('포지션을 선택해주세요');
 				$('#position_msg').focus();
