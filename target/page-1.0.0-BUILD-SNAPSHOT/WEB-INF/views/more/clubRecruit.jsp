@@ -75,7 +75,7 @@ function createListInHTML(matchs){
 		}
 		itemStr+=
 					"<span class='match-item'>"+matchs[i].club_address+"</span>"
-					+"<span class='distance'><span class='blue'>"+matchs[i].distance.toFixed(1)+"</span> km</span>"
+					+"<span class='distance'><span class='point'>"+matchs[i].distance.toFixed(1)+"</span> km</span>"
 				+"</div>"
 				+"<div class='row'>"
 					+"<span class='match-item'><i class='far fa-calendar-alt margin-right'></i>주 활동 요일 "+matchs[i].act_day+" </span>"
