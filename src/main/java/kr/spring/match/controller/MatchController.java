@@ -123,7 +123,7 @@ public class MatchController {
 		return mav;
 	}
 	@RequestMapping("/match/modifyRecruit.do")
-	public ModelAndView modifyRecruit(@RequestParam Integer recruit_num) {
+	public ModelAndView modifyRecruit(@RequestParam Integer recruit_num, @RequestParam Integer club_num) {
 		ModelAndView mav=new ModelAndView();
 		MatchVO match=matchService.selectRecruitDetail(recruit_num);
 		mav.addObject("match", match);
@@ -133,7 +133,7 @@ public class MatchController {
 		return mav;
 	}
 	@RequestMapping("/match/deleteRecruit.do")
-	public String deleteRecruit(@RequestParam Integer recruit_num) {
+	public String deleteRecruit(@RequestParam Integer recruit_num, @RequestParam Integer club_num) {
 		
 		matchService.deleteRecruit(recruit_num);
 		
@@ -142,7 +142,9 @@ public class MatchController {
 	}
 	@RequestMapping("/match/deleteMatch.do")
 	public String deleteMatch(@RequestParam Integer match_num,
-							  @RequestParam String club_name) {
+							  @RequestParam String club_name,
+							  @RequestParam Integer club_num,
+							  @RequestParam(required=false) boolean isFromClub) {
 		
 		//해당 매치로 생성되어 있는 match/match_recruit/match_request/match_vote 삭제해야 함
 		//아무것도 없는 상태라면 match 삭제 처리
@@ -160,17 +162,24 @@ public class MatchController {
 			map.put("cancel", club_name);
 			matchService.updateMatchForCancel(map);
 		}
+		if(isFromClub) {
+			return "redirect:/club/manageClub.do?club_num="+club_num+"&clubManageFrom=3";
+		}
 		
 		return "redirect:/main/main.do";
 		
 	}
 	@RequestMapping("/match/modifyMatch.do")
-	public ModelAndView modifyMatch(@RequestParam Integer match_num) {
+	public ModelAndView modifyMatch(@RequestParam Integer match_num,
+									@RequestParam Integer club_num,
+									@RequestParam(required=false) boolean isFromClub) {
 		
 		ModelAndView mav=new ModelAndView();
 		MatchVO match=matchService.selectMatchToInviteByMatch_num(match_num);
 		
 		mav.setViewName("modifyMatch");
+		mav.addObject("isFromClub",isFromClub);
+		logger.info("isFromClub : "+isFromClub);
 		mav.addObject("title","경기 수정");
 		mav.addObject("match", match);
 		return mav;

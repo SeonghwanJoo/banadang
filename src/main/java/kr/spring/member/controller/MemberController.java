@@ -318,7 +318,7 @@ public class MemberController {
 		return mav;
 	}
 	@RequestMapping("/member/modifyClubRecruit.do")
-	public ModelAndView modifyRecruit(@RequestParam Integer clubRecruit_num) {
+	public ModelAndView modifyRecruit(@RequestParam Integer clubRecruit_num,@RequestParam Integer club_num) {
 		ModelAndView mav=new ModelAndView();
 		MatchVO match=memberService.selectClubRecruitWithClubDetail(clubRecruit_num);
 		mav.addObject("match", match);
@@ -328,7 +328,7 @@ public class MemberController {
 		return mav;
 	}
 	@RequestMapping("/member/deleteClubRecruit.do")
-	public String deleteRecruit(@RequestParam Integer clubRecruit_num) {
+	public String deleteRecruit(@RequestParam Integer clubRecruit_num,@RequestParam Integer club_num) {
 		
 		memberService.deleteClubRecruit(clubRecruit_num);
 		

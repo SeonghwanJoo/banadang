@@ -81,12 +81,6 @@ ${answer.content }
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function adjustHeight() {
-	  var textEle = $('textarea');
-	  textEle[0].style.height = 'auto';
-	  var textEleHeight = textEle.prop('scrollHeight');
-	  textEle.css('height', textEleHeight);
-};
 function modifyAnswer(answer_num){
 	$('#reply-more_modal').css('display','block');
 	$('#reply-delete').click(function(){
@@ -122,25 +116,20 @@ function modifyAnswer(answer_num){
 		location.href='modifyAnswer.do?answer_num='+answer_num;
 	});
 }
-	$(function(){
+$(function(){
+	
+	
+	$('#more').click(function(){
 		
-		adjustHeight();
-		var textEle = $('textarea');
-		textEle.on('keydown', function() {
-		  adjustHeight();
-		});
-		
-		$('#more').click(function(){
-			
-			$('#more_modal').css('display','block');
-		
-		});
-			
-		$('#reply-more-cancel-btn').click(function(){
-			$('#reply-more_modal').css('display','none');
-		});
-		
+		$('#more_modal').css('display','block');
+	
 	});
+		
+	$('#reply-more-cancel-btn').click(function(){
+		$('#reply-more_modal').css('display','none');
+	});
+	
+});
 
 
 </script>

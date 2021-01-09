@@ -906,12 +906,14 @@
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
 		<div class="sub-content" id="option">
-			<button id="share" class="pos-btn">투표 링크 공유</button>
+			<button id="share" class="pos-btn">투표 링크 공유
+			<img class="kakaolink-share" src="${pageContext.request.contextPath }/resources/images/kakaolink_btn.png">
+			</button>
 			<hr class="hr">
 			<button id="detail" class="pos-btn">경기 상세</button>
 		</div>
 		<div class="sub-content">
-			<button id="more-cancel-btn" class="neg-btn">취소</button>
+			<button id="more-cancel-btn" class="neg-btn">닫기</button>
 		</div>
 	</div>
 </div>
@@ -980,10 +982,10 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 	$('#more_modal').css('display','block');
 	 
 	$('#modify').click(function(){
-		 location.href='${pageContext.request.contextPath}/match/modifyMatch.do?match_num='+match_num;
+		 location.href='${pageContext.request.contextPath}/match/modifyMatch.do?match_num='+match_num+'&club_num='+club_num+'&isFromClub=true';
 	});
 	$('#delete').click(function(){
-		location.href='${pageContext.request.contextPath}/match/deleteMatch.do?match_num='+match_num+'&club_name='+club_name;
+		location.href='${pageContext.request.contextPath}/match/deleteMatch.do?match_num='+match_num+'&club_name='+club_name+'&club_num='+club_num+'&isFromClub=true';
 	});
 	$('#share').click(function(){
 		sendLinkForVote(match_num,club_num,match_date,address,start_time);

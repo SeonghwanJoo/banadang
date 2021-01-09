@@ -128,24 +128,8 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function adjustHeight() {
-	  var textEle = $('textarea');
-	  textEle[0].style.height = 'auto';
-	  var textEleHeight = textEle.prop('scrollHeight');
-	  textEle.css('height', textEleHeight);
-};
 	$(function(){
 		
-		adjustHeight();
-		var textEle = $('textarea');
-		textEle.on('keydown', function() {
-		  adjustHeight();
-		  var str=$(this).val();
-			if(str.length>500){
-				alert("최대 500자 까지 입력 가능합니다.");
-				$(this).val(str.substring(0,500));
-			}
-		});
 		
 		$('input:checkbox').click(function(){
 			$('#position_msg').text('');

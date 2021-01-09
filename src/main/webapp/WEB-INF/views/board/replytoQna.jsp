@@ -59,19 +59,12 @@
 			<button id="delete" class="pos-btn red">삭제</button>
 		</div>
 		<div class="sub-content">
-			<button id="more-cancel-btn" class="neg-btn">취소</button>
+			<button id="more-cancel-btn" class="neg-btn">닫기</button>
 		</div>
 	</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-
-function adjustHeight() {
-	  var textEle = $('textarea');
-	  textEle[0].style.height = 'auto';
-	  var textEleHeight = textEle.prop('scrollHeight');
-	  textEle.css('height', textEleHeight);
-};
 
 function modifyAnswer(answer_num){
 	
@@ -206,19 +199,6 @@ Number.prototype.zf = function(len){return this.toString().zf(len);};
 		
 		$('#content').focus();
 		
-		adjustHeight();
-		var textEle = $('textarea');
-		textEle.on('keydown', function() {
-		  adjustHeight();
-		  var content=$(this).val();
-			$('#counter').html(content.length+ '/ 최대 500자');
-			
-			if(content.length>500){
-				alert("최대 500자 까지 입력 가능합니다.");
-				$(this).val(content.substring(0,500));
-				$('#counter').html("500 / 최대 500자");
-			}
-		});
 		
 		$('#more').click(function(){
 			

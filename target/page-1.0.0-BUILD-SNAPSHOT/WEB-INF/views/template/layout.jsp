@@ -88,6 +88,31 @@ function back() {
 	} 
 
 };
+function adjustHeight() {
+	  var textEle = $('textarea');
+	  var textEleHeight = textEle.prop('scrollHeight');
+	  textEle.css('height', textEleHeight);
+};
+$(function(){
+	
+	var textEle = $('textarea');
+	if(textEle){
+		adjustHeight();
+		textEle.on('keyup', function() {
+			adjustHeight();
+			$(this).focus();
+			var str=$(this).val();
+			var counter=$('#counter');
+			if(counter){
+				counter.html(str.length+ '/ 최대 500자');
+			}
+			if(str.length>500){
+				alert("최대 500자 까지 입력 가능합니다.");
+				$(this).val(str.substring(0,500));
+			}
+		});
+	}
+});
 
 
 

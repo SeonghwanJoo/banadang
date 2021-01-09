@@ -147,80 +147,26 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
-	//이미지 지도에서 마커가 표시될 위치입니다 
-	var markerPosition  = new kakao.maps.LatLng(${match.address_y}, ${match.address_x}); 
-	
-	// 이미지 지도에 표시할 마커입니다
-	// 이미지 지도에 표시할 마커는 Object 형태입니다
-	var marker = new kakao.maps.Marker({
-	    position: markerPosition,
-	    text:'${match.address}'
-	});
-	
-	
-	var mapContainer  = document.getElementById('map'), // 이미지 지도를 표시할 div  
-	    mapOption = { 
-	        center: new kakao.maps.LatLng(${match.address_y}, ${match.address_x}), // 이미지 지도의 중심좌표
-	        level: 3, // 이미지 지도의 확대 레벨
-	    };    
-	// 이미지 지도를 생성합니다
-	var map = new kakao.maps.Map(mapContainer, mapOption);
-	marker.setMap(map); 
 	$(function(){
+		//이미지 지도에서 마커가 표시될 위치입니다 
+		var markerPosition  = new kakao.maps.LatLng(${match.address_y}, ${match.address_x}); 
 		
-		$('#more').click(function(){
-			$('#more_modal').css('display','block');
-		});
-		$('#more-cancel-btn').click(function(){
-			$('#more_modal').css('display','none');
+		// 이미지 지도에 표시할 마커입니다
+		// 이미지 지도에 표시할 마커는 Object 형태입니다
+		var marker = new kakao.maps.Marker({
+		    position: markerPosition,
+		    text:'${match.address}'
 		});
 		
-		$('#submit').click(function(){
 		
-			postMatchRequest( ${match.match_num}, ${user_id}, '${myClub.club_num}', $('#request_detail').val());
-			
-			function postMatchRequest(a,b,c,d){
-				if(c==''||${myClub.club_auth<5}){
-					$('#myClub-toast').css('display','block');
-					$('#myClub-toast').click(function(){
-						$('#myClub-toast').css('display','none');
-					})
-					return;
-				}
-				$.ajax({
-					url:'postMatchRequest.do',
-					type:'post', 
-					data:{
-						match_num: a,
-						id:b,
-						away:c,
-						request_detail:d
-					},
-					dataType:'json',
-					cache:false,
-					timeout:30000,
-					success:function(data){
-						if(data.result=='requested'){
-							$('#matchRequest_msg').text('경기 신청  완료');
-						}else if(data.result=='duplicated'){
-							$('#matchRequest_msg').text('이미 경기 신청하셨습니다');
-						}
-						
-						$('#toast').css('display','block');
-						$('#confirm').click(function(){
-							location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}';
-						});
-						$(window).click(function(){
-							location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}';
-						});
-					},
-					error:function(){
-						alert('네트워크 오류 발생');
-					}
-				});
-			}
-
-		});
+		var mapContainer  = document.getElementById('map'), // 이미지 지도를 표시할 div  
+		    mapOption = { 
+		        center: new kakao.maps.LatLng(${match.address_y}, ${match.address_x}), // 이미지 지도의 중심좌표
+		        level: 3, // 이미지 지도의 확대 레벨
+		    };    
+		// 이미지 지도를 생성합니다
+		var map = new kakao.maps.Map(mapContainer, mapOption);
+		marker.setMap(map); 
 	});
   	
 </script>

@@ -37,9 +37,7 @@ public class ClubAuthCheckInterceptor
 			return false;
 		}
 		if(myClub!=null) {
-			myClub.setId(id);
-			int club_auth=clubService.selectClubAuth(myClub);
-			if(club_auth==4) {
+			if(myClub.getClub_auth()==4) {
 				//포워드 방식으로 view 호출
 				response.sendRedirect(
 						request.getContextPath()+"/main/authcheck.do");

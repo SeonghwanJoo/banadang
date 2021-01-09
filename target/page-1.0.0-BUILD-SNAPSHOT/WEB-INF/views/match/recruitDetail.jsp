@@ -22,7 +22,7 @@
 </div>
 <div class="blank_div"></div>
 <div class="invite-wrapper" id="invite-wrapper">
- 	<ul class="ul-list">
+ 	<ul class="ul-list non-border-btm">
 		<li class="li-list">
 			<div class="main-row margin-btm">
 				<c:if test="${match.type==1 }">
@@ -124,7 +124,7 @@
 				<div class="col">필요 인원 &nbsp; <span class="underline">${match.recruit_count }</span></div>
 			</div>
 		</li>
-		<li class="li-list">
+		<li class="li-list non-border-btm">
 			<textarea class="detail input-field" id="recruit_req_detail" name="recruit_req_detail" placeholder="용병 신청 시 ${match.club_name } 팀에 추가적으로 전달할 내용 입력"></textarea>
 		</li>
 	</ul>
@@ -161,12 +161,12 @@
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
 		<div class="sub-content">
-			<button id="modify" class="pos-btn" onclick="location.href='modifyRecruit.do?recruit_num=${match.recruit_num}'">수정</button>
+			<button id="modify" class="pos-btn" onclick="location.href='modifyRecruit.do?recruit_num=${match.recruit_num}&club_num=${match.club_num }'">수정</button>
 			<hr>
-			<button id="delete" class="pos-btn red" onclick="location.href='deleteRecruit.do?recruit_num=${match.recruit_num}'">삭제</button>
+			<button id="delete" class="pos-btn red" onclick="location.href='deleteRecruit.do?recruit_num=${match.recruit_num}&club_num=${match.club_num }'">삭제</button>
 		</div>
 		<div class="sub-content">
-			<button id="more-cancel-btn" class="neg-btn">취소</button>
+			<button id="more-cancel-btn" class="neg-btn">닫기</button>
 		</div>
 	</div>
 </div>
@@ -185,12 +185,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
-function adjustHeight() {
-	  var textEle = $('textarea');
-	  textEle[0].style.height = 'auto';
-	  var textEleHeight = textEle.prop('scrollHeight');
-	  textEle.css('height', textEleHeight);
-};
 	//이미지 지도에서 마커가 표시될 위치입니다 
 	var markerPosition  = new kakao.maps.LatLng(${match.address_y}, ${match.address_x}); 
 	
@@ -211,17 +205,6 @@ function adjustHeight() {
 	var map = new kakao.maps.Map(mapContainer, mapOption);
 	marker.setMap(map); 
 	$(function(){
-		
-		adjustHeight();
-		var textEle = $('textarea');
-		textEle.on('keydown', function() {
-		  adjustHeight();
-		  var str=$(this).val();
-			if(str.length>500){
-				alert("최대 500자 까지 입력 가능합니다.");
-				$(this).val(str.substring(0,500));
-			}
-		});
 		
 		if (${match.club_color eq 'rgb(0, 0, 0)'}){
 			$(".color").css("border","1px solid #fff");

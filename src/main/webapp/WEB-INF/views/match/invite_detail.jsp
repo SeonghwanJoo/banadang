@@ -21,7 +21,7 @@
 </div>
 <div class="blank_div"></div>
 <div class="invite-wrapper" id="invite-wrapper">
- 	<ul class="ul-list">
+ 	<ul class="ul-list non-border-btm">
 		<li class="li-list">
 			<div class="main-row margin-btm">
 				<c:if test="${match.type==1 }">
@@ -92,7 +92,7 @@
 			<p class="detail readonly">${match.match_detail }</p>
 		</li>
 		</c:if>
-		<li class="li-list ta-wrap">
+		<li class="li-list non-border-btm">
 			<textarea class="detail input-field" id="request_detail" name="request_detail" placeholder="매치 신청 시 ${match.club_name } 팀에 추가적으로 전달할 내용 입력"></textarea>
 		</li>
 	</ul>
@@ -130,17 +130,13 @@
 			<button id="delete" class="pos-btn red" onclick="location.href='deleteMatch.do?match_num=${match.match_num}&club_name=${myClub.club_name }'">삭제</button>
 		</div>
 		<div class="sub-content">
-			<button id="more-cancel-btn" class="neg-btn">취소</button>
+			<button id="more-cancel-btn" class="neg-btn">닫기</button>
 		</div>
 	</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function adjustHeight(obj) {
-	console.log('adjustHeight function');
-	 $(obj).css('height', 'auto' );
-	 $(obj).height( this.scrollHeight );
-};
+
 	//이미지 지도에서 마커가 표시될 위치입니다 
 	var markerPosition  = new kakao.maps.LatLng(${match.address_y}, ${match.address_x}); 
 	
@@ -162,54 +158,7 @@ function adjustHeight(obj) {
 	marker.setMap(map); 
 	
 	
-	var observe;
-	if (window.attachEvent) {
-	    observe = function (element, event, handler) {
-	        element.attachEvent('on'+event, handler);
-	    };
-	}
-	else {
-	    observe = function (element, event, handler) {
-	        element.addEventListener(event, handler, false);
-	    };
-	}
-	function init () {
-	    var text = document.getElementsByTagName('textarea');
-	    function resize () {
-	        text[0].style.height = 'auto';
-	        text[0].style.height = text[0].scrollHeight+'px';
-	        text[0].focus();
-	    }
-	    /* 0-timeout to get the already changed text */
-	    function delayedResize () {
-	        window.setTimeout(resize, 1000);
-	    }
-	   
-	    observe(text[0], 'keydown', delayedResize);
-
-	    text[0].focus();
-	    text[0].select();
-	    resize();
-	}
 	$(function(){
-		
-		
-		init();
-		/* adjustHeight();  */
-		/*  var textEle = $('textarea');
-		textEle.on('keydown', function() {
-			$(this).css('height', 'auto' );
-			$(this).css('height', this.scrollHeight );
-			var str=$(this).val();
-				if(str.length>500){
-					alert("최대 500자 까지 입력 가능합니다.");
-					$(this).val(str.substring(0,500));
-				}
-		});  
-		textEle.on('keyup',function(){
-			console.log('keyup');
-			$(this).focus();
-		}); */
 		
 		
 		if (${match.club_color eq 'rgb(0, 0, 0)'}){

@@ -78,7 +78,7 @@
 			<button id="delete" class="pos-btn red">삭제</button>
 		</div>
 		<div class="sub-content">
-			<button id="more-cancel-btn" class="neg-btn">취소</button>
+			<button id="more-cancel-btn" class="neg-btn">닫기</button>
 		</div>
 	</div>
 </div>

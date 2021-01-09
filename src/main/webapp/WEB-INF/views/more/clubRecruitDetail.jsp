@@ -21,7 +21,7 @@
 </div>
 <div class="blank_div"></div>
 <div class="invite-wrapper" id="invite-wrapper">
- 	<ul class="ul-list">
+ 	<ul class="ul-list non-border-btm">
 		<li class="li-list">
 			<div class="main-row margin-btm">
 				<c:if test="${clubRecruit.type==1 }">
@@ -88,7 +88,7 @@
 		</li>
 		<c:if test="${!empty clubRecruit.clubRecruit_detail }">
 		<li class="li-list">
-			<textarea class="detail readonly" readonly>${clubRecruit.clubRecruit_detail }</textarea>
+			<p class="detail readonly">${clubRecruit.clubRecruit_detail }</p>
 		</li>
 		</c:if>
 		<li class="li-list">
@@ -123,7 +123,7 @@
 				<div class="col">월 회비 <span>${clubRecruit.month_cost }</span></div>
 			</div>
 		</li>
-		<li class="li-list">
+		<li class="li-list non-border-btm">
 			<textarea class="detail input-field" id="clubRecruit_req_detail" name="clubRecruit_req_detail" placeholder="가입 신청 시 ${clubRecruit.club_name } 팀에 추가적으로 전달할 내용 입력"></textarea>
 		</li>
 	</ul>
@@ -160,12 +160,12 @@
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
 		<div class="sub-content">
-			<button id="modify" class="pos-btn" onclick="location.href='modifyClubRecruit.do?clubRecruit_num=${clubRecruit.clubRecruit_num}'">수정</button>
+			<button id="modify" class="pos-btn" onclick="location.href='modifyClubRecruit.do?clubRecruit_num=${clubRecruit.clubRecruit_num}&club_num=${clubRecruit.club_num }'">수정</button>
 			<hr>
-			<button id="delete" class="pos-btn red" onclick="location.href='deleteClubRecruit.do?clubRecruit_num=${clubRecruit.clubRecruit_num}'">삭제</button>
+			<button id="delete" class="pos-btn red" onclick="location.href='deleteClubRecruit.do?clubRecruit_num=${clubRecruit.clubRecruit_num}&club_num=${clubRecruit.club_num }'">삭제</button>
 		</div>
 		<div class="sub-content">
-			<button id="more-cancel-btn" class="neg-btn">취소</button>
+			<button id="more-cancel-btn" class="neg-btn">닫기</button>
 		</div>
 	</div>
 </div>
@@ -183,12 +183,6 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function adjustHeight() {
-	  var textEle = $('textarea');
-	  textEle[0].style.height = 'auto';
-	  var textEleHeight = textEle.prop('scrollHeight');
-	  textEle.css('height', textEleHeight);
-};
 	//이미지 지도에서 마커가 표시될 위치입니다 
 	var markerPosition  = new kakao.maps.LatLng(${clubRecruit.club_locY}, ${clubRecruit.club_locX}); 
 	
@@ -222,11 +216,6 @@ function adjustHeight() {
 		});
 		$('#submit').click(function(){
 			
-			adjustHeight();
-			var textEle = $('textarea');
-			textEle.on('keyup', function() {
-			  adjustHeight();
-			});
 			
 			$('#recruit_modal').css('display','block');
 			$('.pos-btn').click(function(){

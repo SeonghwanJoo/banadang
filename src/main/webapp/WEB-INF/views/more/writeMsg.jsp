@@ -60,13 +60,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
-function adjustHeight() {
-	  var textEle = $('textarea');
-	  textEle[0].style.height = 'auto';
-	  var textEleHeight = textEle.prop('scrollHeight');
-	  textEle.css('height', textEleHeight);
-};
-
 function submitContent(){
 	
 	if(!$('#content').val().replace(/^\s+|\s+$/g, '')){
@@ -107,25 +100,8 @@ function submitContent(){
 
 $(function(){
 	
-	adjustHeight();
-	var textEle = $('textarea');
-	textEle.on('keyup', function() {
-	  adjustHeight();
-	});
 	
 	$('#content').focus();
-	$('#content').keyup(function(){
-		
-		var content=$(this).val();
-		$('#counter').html(content.length+ '/ 최대 500자');
-		
-		if(content.length>500){
-			
-			alert("최대 500자 까지 입력 가능합니다.");
-			$(this).val(content.substring(0,500));
-			$('#counter').html("500 / 최대 500자");
-		}
-	});
 	
 	$('#submit').click(function(){
 		submitContent();

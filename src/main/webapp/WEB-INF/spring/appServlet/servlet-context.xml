@@ -123,27 +123,33 @@
 			<mapping path="/member/myPage.do"/>
 			<beans:bean class="kr.spring.interceptor.MsgCheckInterceptor"/>
 		</interceptor>
-		<!-- 팀 운영진 권한 체크 -->
-		<interceptor>
-			<mapping path="/club/modifyClub.do"/>
-			<mapping path="/match/deleteMatch.do"/>
-			<mapping path="/match/deleteRecruit.do"/>
-			<mapping path="/match/modifyMatch.do"/>
-			<mapping path="/match/modifyRecruit.do"/>
-			<mapping path="/match/writeForm.do"/>
-			<mapping path="/match/writeRecruit.do"/>
-			<mapping path="/member/deleteClubRecruit.do"/>
-			<mapping path="/member/modifyClubRecruit.do"/>
-			<mapping path="/member/writeClubRecruit.do"/>
-			<beans:bean class="kr.spring.interceptor.ClubAuthCheckInterceptor"/>
-		</interceptor>
 		<!-- 팀 소속회원 체크 -->
 		<interceptor>
 			<mapping path="/club/manageClub.do"/>
 			<mapping path="/main/vote_detail.do"/>
 			<mapping path="/main/voteForm.do"/>
 			<mapping path="/main/replyToVote.do"/>
+			<mapping path="/match/modifyRecruit.do"/><!-- 해당 클럽의 운영자만 -->
+			<mapping path="/match/deleteRecruit.do"/><!-- 해당 클럽의 운영자만 -->
+			<mapping path="/member/deleteClubRecruit.do"/><!-- 해당 클럽의 운영자만 -->
+			<mapping path="/member/modifyClubRecruit.do"/><!-- 해당 클럽의 운영자만 -->
+			<mapping path="/match/modifyMatch.do"/><!-- 해당 클럽의 운영자만 -->
+			<mapping path="/match/deleteMatch.do"/><!-- 해당 클럽의 운영자만 -->
 			<beans:bean class="kr.spring.interceptor.ClubMemberCheckInterceptor"/>
+		</interceptor>
+		<!-- 팀 운영진 권한 체크 -->
+		<interceptor>
+			<mapping path="/match/deleteMatch.do"/><!-- 해당 클럽의 운영자만 -->
+			<mapping path="/match/deleteRecruit.do"/><!-- 해당 클럽의 운영자만 -->
+			<mapping path="/match/modifyMatch.do"/><!-- 해당 클럽의 운영자만 -->
+			<mapping path="/match/modifyRecruit.do"/><!-- 해당 클럽의 운영자만 -->
+			<mapping path="/member/deleteClubRecruit.do"/><!-- 해당 클럽의 운영자만 -->
+			<mapping path="/member/modifyClubRecruit.do"/><!-- 해당 클럽의 운영자만 -->
+			<mapping path="/club/modifyClub.do"/>
+			<mapping path="/match/writeForm.do"/>
+			<mapping path="/match/writeRecruit.do"/>
+			<mapping path="/member/writeClubRecruit.do"/>
+			<beans:bean class="kr.spring.interceptor.ClubAuthCheckInterceptor"/>
 		</interceptor>
 		<!-- 관리자 권한 체크 -->
 		<interceptor>

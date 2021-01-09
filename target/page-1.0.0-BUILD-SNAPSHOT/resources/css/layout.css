@@ -442,8 +442,8 @@ div.daterangepicker{
 
 
 .time{
-	color: #948B82;
-	font-size:0.7rem;
+	color: #bbb;
+	font-size:0.9rem;
 }
 
 
@@ -467,6 +467,12 @@ div.daterangepicker{
 	resize:none;
 	border:none;
 	width:100%;
+}
+p.detail {
+	white-space: pre-wrap;
+}
+p.padding{
+	padding:5px;
 }
 .collapsible-content .detail{
 	
@@ -1677,9 +1683,10 @@ ul.ul-list{
 	border-bottom:10px solid #333;
 	margin-bottom:0;
 }
-ul.non-border-btm{
+ul.non-border-btm, li.li-list.non-border-btm{
 	border-bottom:none;
 }
+
 li.li-list{
 	margin:0 auto ;
 	list-style: none;
@@ -2042,12 +2049,16 @@ input:checked ~ .checkmark:after{
 }
 /* When the checkbox is checked, add a blue background */
 
- .chip input:disabled:checked ~ .checkmark,.custom input:disabled:checked ~ .checkmark,
-  .chip:hover input:disabled:checked ~ .checkmark,.custom:hover input:disabled:checked ~ .checkmark{
+ .chip input:disabled:checked ~.checkmark,.custom input:disabled:checked ~ .checkmark,
+  .chip:hover input:disabled:checked ~.checkmark,.custom:hover input:disabled:checked ~ .checkmark{
 	background-color: #777;
+	border-color:#777;
 }
- .chip:hover input:disabled ~ .checkmark,.custom:hover input:disabled ~ .checkmark {
-	background-color:transparent;
+.chip input:checked:disabled ~.checkmark:after{
+	border-color:#ddd;
+}
+.chip input:disabled ~.checkmark:after{
+	border-color:#777;
 }
 
 	

@@ -36,25 +36,14 @@
 			<button id="delete" class="pos-btn red" onclick="location.href='deleteNotice.do?notice_num=${board.notice_num}'">삭제</button>
 		</div>
 		<div class="sub-content">
-			<button id="more-cancel-btn" class="neg-btn">취소</button>
+			<button id="more-cancel-btn" class="neg-btn">닫기</button>
 		</div>
 	</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function adjustHeight() {
-	  var textEle = $('textarea');
-	  textEle[0].style.height = 'auto';
-	  var textEleHeight = textEle.prop('scrollHeight');
-	  textEle.css('height', textEleHeight);
-};
 
 $(function(){
-	adjustHeight();
-	var textEle = $('textarea');
-	textEle.on('keydown', function() {
-	  adjustHeight();
-	});
 	
 	$('#more').click(function(){
 		

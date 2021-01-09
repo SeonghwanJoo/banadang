@@ -61,7 +61,7 @@
 		</li>
 		<c:if test="${not empty club.club_detail }">
 		<li class="li-list">
-			<textarea class="detail" readonly="readonly">${club.club_detail }</textarea>
+			<p class="detail padding">${club.club_detail }</p>
 		</li>
 		</c:if>
 	</ul>
@@ -92,7 +92,7 @@
 			<c:if test="${not empty rating.rating_detail }">
 			<div class="row">
 				<div class="col margin">
-					<textarea class="detail" readonly="readonly" >${rating.rating_detail }</textarea>
+					<p class="detail padding">${rating.rating_detail }</p>
 				</div>
 			</div>
 			</c:if>
@@ -103,18 +103,7 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function adjustHeight() {
-	  var textEle = $('textarea');
-	  textEle[0].style.height = 'auto';
-	  var textEleHeight = textEle.prop('scrollHeight');
-	  textEle.css('height', textEleHeight);
-};
 $(function(){
-	adjustHeight();
-	var textEle = $('textarea');
-	textEle.on('keydown', function() {
-	  adjustHeight();
-	});
 	if (${club.club_color eq 'rgb(0, 0, 0)'}){
 		$(".color").css("border","1px solid #fff");
 	}
