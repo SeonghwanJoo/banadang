@@ -396,6 +396,12 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
 Kakao.init('32776969383e4a77d92f6e18dd233bc5');
+function setPushToken(pushToken,device_id){
+	console.log('pushToken : '+pushToken+'/'+device_id);
+	//기존 쿠키와 비교 한다
+	//기존 쿠키가 없거나 새로 받은 쿠키가 새로우면 새로운 쿠키로 생성한다
+	//새로운쿠키의 값을 ajax로 보내서 ajaxController에서 토큰을 등록한다
+}
 function sendLinkForVote(match_num,club_num,match_date,address,start_time) {
 	    Kakao.Link.sendCustom({
 	    	templateId: 39879,
