@@ -20,6 +20,7 @@ import kr.spring.club.domain.ClubVO;
 import kr.spring.club.service.ClubService;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
+import kr.spring.member.service.LoginAPI;
 
 @Controller
 public class MatchController {
@@ -31,6 +32,9 @@ public class MatchController {
 	
 	@Resource
 	private ClubService clubService; 
+	
+	@Resource
+	private LoginAPI loginAPI;
 	
 	@ModelAttribute
 	public MatchVO initCommand() {
@@ -54,10 +58,19 @@ public class MatchController {
 	@RequestMapping("/match/write.do")
 	public String registerMatch(MatchVO matchVO) {
 		
+		
 		matchService.insertMatch(matchVO);
+		List<String> uid_list=matchService.selectMembersForPostedMatch(matchVO);
+		logger.info("log matchservice selectMemberForselectedMatch below");
+		if(!uid_list.isEmpty()) {
+			loginAPI.sendMessage(uid_list, "경기 일정이 게시되었습니다.");
+		}
+		
 		if(matchVO.getAway()==0) {
 			return "redirect:/match/match_toInvite.do";
 		}
+		//홈팀의 클럽번호나 어웨이팀의 클럽번호에 소속된 모든 id를 list로 받음
+		
 		return "redirect:/main/main.do";
 	}
 	@RequestMapping("/match/match_toInvite.do")

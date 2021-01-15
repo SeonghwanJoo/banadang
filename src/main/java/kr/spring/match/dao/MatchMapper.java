@@ -90,6 +90,8 @@ public interface MatchMapper {
 	@Insert("insert into gentlepro.msg (sender,receiver,content,match_num,club_num) values (#{id},#{home_name},'용병 신청합니다.   ',#{match_num},#{club_num})")
 	public void insertMsgForMatchRecruit(MatchVO match);
 	
+	@Select("select id from gentlepro.club_join where club_num=#{home} or club_num=#{away}")
+	public List<String> selectMembersForPostedMatch(MatchVO match);
 	
 
 }

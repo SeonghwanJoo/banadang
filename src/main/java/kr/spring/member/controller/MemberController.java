@@ -148,6 +148,7 @@ public class MemberController {
         memberVO = loginAPI.getUserInfo(access_token);
         session.setAttribute("access_token", access_token);
         if(values.length>1) {
+        	
 			Cookie loginCookie=new Cookie("GpFHzB",refresh_token);
 			loginCookie.setPath("/");
 			loginCookie.setMaxAge(60*60*24*60);

@@ -214,6 +214,12 @@ public class MatchServiceImpl implements MatchService {
 	public List<MatchVO> selectRecruitWithFilter(MatchVO match){
 		
 		return matchMapper.selectRecruitWithFilter(match);
+	}
+
+	@Override
+	public List<String> selectMembersForPostedMatch(MatchVO match) {
+		
+		return matchMapper.selectMembersForPostedMatch(match);
 	};
 
 }

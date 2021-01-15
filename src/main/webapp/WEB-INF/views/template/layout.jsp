@@ -93,8 +93,34 @@ function adjustHeight() {
 	  var textEleHeight = textEle.prop('scrollHeight');
 	  textEle.css('height', textEleHeight);
 };
-$(function(){
+function setPushToken(pushToken,device_id,push_type){
+	console.log('pushToken : '+pushToken+'/'+device_id);
+	setCookie('nPT_01', pushToken, 60);
+	setCookie('nPT_02', device_id, 60);
+	setCookie('nPT_03', push_type, 60);
+	//뉴 쿠키를 생성한다
+	//로그인 한다
+	// 기존 쿠키와 뉴 쿠키를 비교한다
+	//기존 쿠키가 없거나 기존 크키와 뉴쿠키가 다를 때는 토큰을 등록한다
+	//이미 등록된 토큰을 또 등록하면 어케되는지 확인 필요
 	
+	//기존 쿠키와 비교 한다
+	//기존 쿠키가 없거나 새로 받은 쿠키가 새로우면 새로운 쿠키로 생성한다
+	//쿠키를 생성했을 때는 id가 없는 상태 토큰은 로그인 된 상태에서 등록이 가능하다
+	//로그인 한다
+	//토큰이 업데이트 된지 여부를 판별
+	
+}
+function setCookie(cName, cValue, cDay){
+	var expire = new Date();
+	expire.setDate(expire.getDate() + cDay);
+	cookies = cName + '=' + escape(cValue) + '; path=/ '; // 한글 깨짐을 막기위해 escape(cValue)를 합니다.
+	if(typeof cDay != 'undefined') cookies += ';expires=' + expire.toGMTString() + ';';
+	document.cookie = cookies;
+}
+
+$(function(){
+
 	var textEle = $('textarea');
 	if(textEle){
 		adjustHeight();

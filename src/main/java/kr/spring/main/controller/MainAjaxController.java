@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import kr.spring.board.domain.BoardVO;
 import kr.spring.board.service.BoardService;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
+import kr.spring.member.service.LoginAPI;
 
 
 @Controller
@@ -29,6 +31,9 @@ public class MainAjaxController {
 	
 	@Resource
 	private BoardService boardService;
+	
+	@Resource
+	private LoginAPI loginAPI;
 	
 	@RequestMapping("/main/vote.do")
 	@ResponseBody
@@ -101,6 +106,7 @@ public class MainAjaxController {
 		}
 		return map;
 	}
+	
 	@RequestMapping("/main/registerAnswerToVote.do")
 	@ResponseBody
 	public Map<String,Object> registerAnswerToVote(BoardVO board){

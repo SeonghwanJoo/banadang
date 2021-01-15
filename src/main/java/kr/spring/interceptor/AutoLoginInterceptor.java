@@ -88,7 +88,53 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 				}
 			}
 		
+		}else {//pushToken 등록 or 업데이트
+			
+			Cookie pushCookie = WebUtils.getCookie(request, "nPT_01");
+			
+			if (pushCookie!=null) {//새로운 push 토큰이 접수되었을 때 
+				
+				logger.info("pushToekn intercept 진입");
+				
+				String n_push_token = pushCookie.getValue();
+				
+				pushCookie = WebUtils.getCookie(request, "ePT_01");
+				String e_push_token=null;
+
+				if(pushCookie!=null) e_push_token=pushCookie.getValue();
+				
+				
+				if(e_push_token==null || !e_push_token.equals(n_push_token)) {
+					
+					pushCookie = WebUtils.getCookie(request, "nPT_02");
+					String device_id = pushCookie.getValue();
+					
+					pushCookie = WebUtils.getCookie(request, "nPT_03");
+					String push_type = pushCookie.getValue();
+					
+					loginAPI.registerPushTokenAPI(user_id, device_id, push_type, n_push_token);
+					
+					//신규 token 유효한 토큰으로 쿠키 생성
+					Cookie refreshCookie=new Cookie("ePT_01",n_push_token);
+					refreshCookie.setPath("/");
+					refreshCookie.setMaxAge(60*60*24*60);
+					response.addCookie(refreshCookie);
+					
+					//뉴 푸시쿠키 삭제
+					removeCookie("nPT_01", response);
+					removeCookie("nPT_02", response);
+					removeCookie("nPT_03", response);
+				}
+			}
+				
+			
 		}
 		return true;
+	}
+	
+	public void removeCookie(String cookieKey,HttpServletResponse response) {
+		Cookie cookieToRemove = new Cookie(cookieKey,null);
+		cookieToRemove.setMaxAge(0);
+		response.addCookie(cookieToRemove);
 	}
 }

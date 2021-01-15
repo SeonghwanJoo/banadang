@@ -396,9 +396,7 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
 Kakao.init('32776969383e4a77d92f6e18dd233bc5');
-function setPushToken(pushToken,device_id){
-	console.log('pushToken : '+pushToken+'/'+device_id);
-}
+
 function sendLinkForVote(match_num,club_num,match_date,address,start_time) {
 	    Kakao.Link.sendCustom({
 	    	templateId: 39879,
