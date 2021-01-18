@@ -87,8 +87,8 @@
 				풋살
 				</span>	
 				</c:if>
-				<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}" target="_blank">
-					<span class="match-item">${match.address}</span><i class="fas fa-chevron-right"></i>
+				<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}">
+				<span class="match-item">${match.address}<i class="fas fa-chevron-right margin-left"></i></span>
 				</a>
 				<c:if test="${empty match.cancel }">
 					<c:if test="${myClub.club_auth==4 }">
@@ -208,7 +208,6 @@
 						<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
 						<span class="disp-inbl margin-top">${match.away_name }</span>
 						</c:if>
-						
 					</div>
 				</div>
 			</div>

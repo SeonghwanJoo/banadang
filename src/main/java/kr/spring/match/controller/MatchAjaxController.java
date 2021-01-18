@@ -104,10 +104,16 @@ public class MatchAjaxController {
 	@ResponseBody
 	public Map<String,Object> postRecruitRequest(MatchVO match){
 		
+		logger.info("postRecruitRequest 호출");
+		logger.info("match.home_name : "+ match.getHome_name());
+		logger.info("match.match_num : "+ match.getMatch_num());
+		logger.info("match id : "+ match.getId());
+		
 		Map<String,Object> map=new HashMap<String,Object>();
 		
 		try {
 			Integer recruit_req_num=matchService.selectRecruit_req_num(match);
+			logger.info("recuirt_req_num : "+ recruit_req_num);
 			if(recruit_req_num!=null) {
 				map.put("result", "duplicated");
 			}else {

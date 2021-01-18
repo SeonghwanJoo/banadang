@@ -175,7 +175,7 @@
   <!-- Modal content -->
   	<div id="submit_toast_content" class="submit_toast_content">
 		<div class="row centered margin-btm centered-padding">
-			<span id="club_msg">용병 신청 완료</span>
+			<span id="club_msg"></span>
 		</div>
 		<div class="row margin-top centered">
 			<button class="alert-btn">확인</button>
@@ -235,10 +235,11 @@
 					cache:false,
 					timeout:30000,
 					success:function(data){
+						console.log(data.result);
 						if(data.result=='requested'){
-							$('#recruitRequest_msg').text('용병 신청  완료');
+							$('#club_msg').text('용병 신청  완료');
 						}else if(data.result=='duplicated'){
-							$('#recruitRequest_msg').text('이미 용병 신청하셨습니다');
+							$('#club_msg').text('이미 용병 신청하셨습니다');
 						}
 						$('#toast').css('display','block');
 						$('#confirm').click(function(){

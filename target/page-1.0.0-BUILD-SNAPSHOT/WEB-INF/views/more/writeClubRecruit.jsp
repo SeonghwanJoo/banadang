@@ -38,37 +38,37 @@
 <div class="row centered-padding">
 	<label class="chip">
 		<span class="chip-txt">월</span>
-		<input type="checkbox" name="act_day" value="월" checked="checked">
+		<input type="checkbox" name="act_days" value="월" checked="checked">
 		<span class="checkmark"></span>
 	</label> 
 	<label class="chip">
 		<span class="chip-txt">화</span>
-		<input type="checkbox" name="act_day" value="화">
+		<input type="checkbox" name="act_days" value="화">
 		<span class="checkmark"></span>
 	</label>
 	<label class="chip">
 		<span class="chip-txt">수</span>
-		<input type="checkbox" name="act_day" value="수">
+		<input type="checkbox" name="act_days" value="수">
 		<span class="checkmark"></span>
 	</label>
 	<label class="chip">
 		<span class="chip-txt">목</span>
-		<input type="checkbox" name="act_day" value="목">
+		<input type="checkbox" name="act_days" value="목">
 		<span class="checkmark"></span>
 	</label>
 	<label class="chip">
 		<span class="chip-txt">금</span>
-		<input type="checkbox" name="act_day" value="금">
+		<input type="checkbox" name="act_dayss" value="금">
 		<span class="checkmark"></span>
 	</label>
 	<label class="chip">
 		<span class="chip-txt">토</span>
-		<input type="checkbox" name="act_day" value="토">
+		<input type="checkbox" name="act_days" value="토">
 		<span class="checkmark"></span>
 	</label>
 	<label class="chip">
 		<span class="chip-txt">일</span>
-		<input type="checkbox" name="act_day" value="일">
+		<input type="checkbox" name="act_days" value="일">
 		<span class="checkmark"></span>
 	</label>
 </div>
@@ -78,17 +78,17 @@
 <div class="row centered-padding">
 	<label class="chip wider">
 		<span class="chip-txt small-font">오전 06~12</span>
-		<input type="checkbox" name="act_time" value="오전" checked="checked">
+		<input type="checkbox" name="act_times" value="오전" checked="checked">
 		<span class="checkmark"></span>
 	</label> 
 	<label class="chip wider">
 		<span class="chip-txt small-font">오후 12~18</span>
-		<input type="checkbox" name="act_time" value="오후">
+		<input type="checkbox" name="act_times" value="오후">
 		<span class="checkmark"></span>
 	</label>
 	<label class="chip wider">
 		<span class="chip-txt small-font">야간 18~24</span>
-		<input type="checkbox" name="act_time" value="야간">
+		<input type="checkbox" name="act_times" value="야간">
 		<span class="checkmark"></span>
 	</label>
 </div>
@@ -174,10 +174,10 @@ $(function(){
 		$('#type_msg').text('');
 		$('#type').val(2);
 	});
-	$('input[name=act_day]').click(function(){
+	$('input[name=act_days]').click(function(){
 		$('#day_msg').text('');
 	});
-	$('input[name=act_time]').click(function(){
+	$('input[name=act_times]').click(function(){
 		$('#time_msg').text('');
 	});
 	$('input[name=recruit_positions]').click(function(){
@@ -198,10 +198,10 @@ $(function(){
 		if(!$("input:checked[name='type']").is(":checked")){
 			$('#type_msg').css('color','red').text('축구/풋살을 선택해주세요.');
 			return false;
-		}else if(!$("input:checked[name='act_day']").is(":checked")){
+		}else if(!$("input:checked[name='act_days']").is(":checked")){
 			$('#day_msg').css('color','red').text('주 활동 요일을 선택해주세요.');
 			return false;
-		}else if(!$("input:checked[name='act_time']").is(":checked")){
+		}else if(!$("input:checked[name='act_times']").is(":checked")){
 			$('#time_msg').css('color','red').text('주 활동 시간대를 선택해주세요.');
 			return false;
 		}else if(!$("input:checked[name='recruit_positions']").is(":checked")){

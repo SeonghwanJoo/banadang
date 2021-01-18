@@ -337,6 +337,12 @@ public class MatchVO {
 
 	public void setAct_days(String[] act_days) {
 		this.act_days = act_days;
+		String act_day="";
+		for(String day : act_days) {
+			act_day+="·"+day;
+		}
+		act_day=act_day.replaceFirst("·", "");
+		setAct_day(act_day);
 	}
 
 	public String[] getAct_times() {
@@ -345,7 +351,12 @@ public class MatchVO {
 
 	public void setAct_times(String[] act_times) {
 		this.act_times = act_times;
-		setAct_time(Arrays.toString(act_times));
+		String act_time="";
+		for(String time : act_times) {
+			act_time+="·"+time;
+		}
+		act_time=act_time.replaceFirst("·", "");
+		setAct_time(act_time);
 	}
 	public String getRegister_cost() {
 		return register_cost;
@@ -583,32 +594,6 @@ public class MatchVO {
 	private double club_locX;
 	private double club_locY;
 	private double distance;
-	
-	@Override
-	public String toString() {
-		return "MatchVO [clubRecruit_req_detail=" + clubRecruit_req_detail + ", clubRecruit_accept="
-				+ clubRecruit_accept + ", recruit_positions=" + Arrays.toString(recruit_positions) + ", act_days="
-				+ Arrays.toString(act_days) + ", act_times=" + Arrays.toString(act_times) + ", act_day=" + act_day
-				+ ", act_time=" + act_time + ", recruit_due=" + recruit_due + ", register_cost=" + register_cost
-				+ ", month_cost=" + month_cost + ", clubRecruit_detail=" + clubRecruit_detail + ", clubRecruit_num="
-				+ clubRecruit_num + ", recruit_req_num=" + recruit_req_num + ", recruit_accept=" + recruit_accept
-				+ ", isCanceled=" + isCanceled + ", cancel=" + cancel + ", recruit_req_detail=" + recruit_req_detail
-				+ ", recruit_num=" + recruit_num + ", recruit_position=" + recruit_position + ", recruit_count="
-				+ recruit_count + ", recruit_cost=" + recruit_cost + ", recruit_detail=" + recruit_detail
-				+ ", request_num=" + request_num + ", cost=" + cost + ", attend=" + attend + ", not_attend="
-				+ not_attend + ", undefined=" + undefined + ", match_num=" + match_num + ", id=" + id + ", type=" + type
-				+ ", home=" + home + ", away=" + away + ", address=" + address + ", address_x=" + address_x
-				+ ", address_y=" + address_y + ", match_date=" + match_date + ", start_time=" + start_time
-				+ ", end_time=" + end_time + ", match_detail=" + match_detail + ", rating_detail=" + rating_detail
-				+ ", vote_num=" + vote_num + ", club_num=" + club_num + ", status=" + status + ", count=" + count
-				+ ", max=" + max + ", home_name=" + home_name + ", home_manner=" + home_manner + ", home_perform="
-				+ home_perform + ", away_name=" + away_name + ", away_manner=" + away_manner + ", away_perform="
-				+ away_perform + ", perform=" + perform + ", manner=" + manner + ", club_name=" + club_name
-				+ ", clubrating_num=" + clubrating_num + ", club_color="
-				+ club_color + ", club_age=" + club_age + ", request_detail=" + request_detail + ", club_address="
-				+ club_address + ", club_loc=" + club_loc + ", club_locX=" + club_locX + ", club_locY=" + club_locY
-				+ "]";
-	}
 	
 
 

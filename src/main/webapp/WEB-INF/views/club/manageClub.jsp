@@ -440,8 +440,8 @@
 								풋살
 								</span>	
 								</c:if>
-								<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}" target="_blank">
-									<span class="match-item">${match.address}</span><i class="fas fa-chevron-right"></i>
+								<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}">
+								<span class="match-item">${match.address}<i class="fas fa-chevron-right margin-left"></i></span>
 								</a>
 								<c:if test="${empty match.cancel }">
 									<c:if test="${myClub.club_auth==4 }">
@@ -539,22 +539,30 @@
 							</div>
 							</c:if>
 							<c:if test="${empty match.club_loc}">
-							<div class="team-info col margin-top">
-								<div class="centered margin-top">
-									<c:if test="${match.away>0 }">
-									<span class="material-icons">
-									error
-									</span>
-									</c:if>
-									<c:if test="${match.away==0 }">
-									<span class="material-icons">
+							<div class="team-info col">
+								<div class="row margin-top margin-btm">
+									<div class="centered">
+										<c:if test="${match.away>0 }">
+										<div class="row padding-top">
+										<span class="material-icons">
+										error
+										</span>
+										<span class="disp-inbl margin-smtop">${match.away_name }</span>
+										</div>
+										</c:if>
+										<c:if test="${match.away==0 }">
+										<div class="row padding-top">
+										<span class="material-icons">
 										campaign
 										</span>
-									</c:if>
-									<c:if test="${ match.away==-1}">
-									<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
-									</c:if>
-									${match.away_name }
+										<span class="disp-inbl margin-smtop">${match.away_name }</span>
+										</div>
+										</c:if>
+										<c:if test="${ match.away==-1}">
+										<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+										<span class="disp-inbl margin-top">${match.away_name }</span>
+										</c:if>
+									</div>
 								</div>
 							</div>
 							</c:if>

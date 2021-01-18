@@ -236,9 +236,9 @@
 					timeout:30000,
 					success:function(data){
 						if(data.result=='success'){
-							$('#recruitRequest_msg').text('팀원 가입 신청  완료');
+							$('#club_msg').text('팀원 가입 신청  완료');
 						}else if(data.result=='duplicated'){
-							$('#recruitRequest_msg').text('이미 가입 신청하셨습니다');
+							$('#club_msg').text('이미 가입 신청하셨습니다');
 						}
 						$('#toast').css('display','block');
 						$('#confirm').click(function(){

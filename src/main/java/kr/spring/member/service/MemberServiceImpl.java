@@ -1,5 +1,6 @@
 package kr.spring.member.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -18,8 +19,12 @@ import kr.spring.member.domain.MsgVO;
 public class MemberServiceImpl implements MemberService{
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Resource
 	private MemberMapper memberMapper;
+	
+	@Resource
+	private LoginAPI loginAPI;
 	
 	@Override
 	public MemberVO getMember(String id) {
@@ -94,6 +99,10 @@ public class MemberServiceImpl implements MemberService{
 		
 		memberMapper.insertClubRecruitReq(match);
 		memberMapper.insertMsgForClubRecruitReq(match);
+		List<String> uids= new ArrayList<String>();
+		uids.add(match.getHome_name());
+		loginAPI.sendMessage(uids, "팀 가입 신청이 접수되었습니다.");
+		
 		
 	}
 

@@ -1,41 +1,19 @@
-@media (min-width: 576px){
-	.fixed_top, div.bottom_menu, .sticky{
-		max-width:540px;
-	}
-	.carousel-inner img{
-		height:12rem;
-	} 
+.match-item{
+	font-weight:bold;
+	margin-right:1rem;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
+	max-width:10rem;
 }
-@media (min-width:768px){
-	.fixed_top, div.bottom_menu, .sticky{
-		max-width:720px;
-	}
-	.carousel-inner img{
-		height:14rem;
-	} 
-	html{
-		font-size:17px;
-	}
+.team-info.col span{
+	max-width:7rem;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
 }
-@media (min-width:992px){
-	.fixed_top, div.bottom_menu, .sticky{
-		max-width:960px;
-	}
-	.carousel-inner img{
-		height:20rem;
-	} 
-}
-@media (min-width:1200px){
-	.fixed_top, div.bottom_menu, .sticky{
-		max-width:1140px;
-	}
-	.carousel-inner img{
-		height:20rem;
-	} 
-	html{
-		font-size:19px;
-	}
-}
+
+
 
 .fixed_top, div.bottom_menu, .sticky{
 	width:100%;
@@ -247,12 +225,7 @@ ul.carousel-indicators {
 	margin: 0;
 	padding: 0;
 }
-.match-item{
-	font-weight:bold;
-	padding-right:1rem;
-	white-space:nowrap;
-	text-overflow: ellipsis;
-}
+
 .vote-sel{
 	background-color:#f1f8e9;
 	border-radius:0.2rem;
@@ -687,7 +660,7 @@ body.body, .filter-wrapper{
 }
 .main-row span.more{
 	position:absolute;
-	right:0.5rem;
+	right:0rem;
 	text-align:center;
 	display:block;
 	font-size:2rem;
@@ -1071,9 +1044,7 @@ input:checked + .slider:before {
 div.col{
 	padding-left:0px;
 	padding-right:0px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+
 }
 .count-msg{
 	position:absolute;
@@ -2142,3 +2113,47 @@ input:checked ~ .checkmark:after{
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
 }
 
+@media (min-width: 576px){
+	.fixed_top, div.bottom_menu, .sticky{
+		max-width:540px;
+	}
+	.carousel-inner .carousel-item img{
+		height:12rem;
+	} 
+	.match-item{
+		max-width:30rem;
+	}
+	.team-info.col span{
+	max-width:20rem;
+	}
+}
+@media (min-width:768px){
+	.fixed_top, div.bottom_menu, .sticky{
+		max-width:720px;
+	}
+	.carousel-inner .carousel-item img{
+		height:15rem;
+	} 
+	html{
+		font-size:17px;
+	}
+}
+@media (min-width:992px){
+	.fixed_top, div.bottom_menu, .sticky{
+		max-width:960px;
+	}
+	.carousel-inner .carousel-item img{
+		height:20rem;
+	} 
+}
+@media (min-width:1200px){
+	.fixed_top, div.bottom_menu, .sticky{
+		max-width:1140px;
+	}
+	.carousel-inner .carousel-item img{
+		height:24rem;
+	} 
+	html{
+		font-size:19px;
+	}
+}
