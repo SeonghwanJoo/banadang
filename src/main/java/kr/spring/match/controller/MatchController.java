@@ -61,9 +61,9 @@ public class MatchController {
 		
 		matchService.insertMatch(matchVO);
 		List<String> uid_list=matchService.selectMembersForPostedMatch(matchVO);
-		logger.info("log matchservice selectMemberForselectedMatch below");
+		
 		if(!uid_list.isEmpty()) {
-			loginAPI.sendMessage(uid_list, "경기 일정이 게시되었습니다.");
+			loginAPI.sendMessage(uid_list, "경기 일정이 게시되었습니다. 참석 투표하러 가볼까요?");
 		}
 		
 		if(matchVO.getAway()==0) {

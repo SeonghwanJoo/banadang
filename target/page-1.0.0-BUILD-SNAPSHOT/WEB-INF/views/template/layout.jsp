@@ -95,6 +95,8 @@ function adjustHeight() {
 };
 function setPushToken(pushToken,device_id,push_type){
 	console.log('pushToken : '+pushToken+'/'+device_id);
+	if(getCookie('nPT_01')==null){}
+	
 	setCookie('nPT_01', pushToken, 60);
 	setCookie('nPT_02', device_id, 60);
 	setCookie('nPT_03', push_type, 60);
@@ -110,6 +112,8 @@ function setPushToken(pushToken,device_id,push_type){
 	//로그인 한다
 	//토큰이 업데이트 된지 여부를 판별
 	
+	return "token in new cookie : "+getCookie('nPT_01');
+	
 }
 function setCookie(cName, cValue, cDay){
 	var expire = new Date();
@@ -117,6 +121,17 @@ function setCookie(cName, cValue, cDay){
 	cookies = cName + '=' + escape(cValue) + '; path=/ '; // 한글 깨짐을 막기위해 escape(cValue)를 합니다.
 	if(typeof cDay != 'undefined') cookies += ';expires=' + expire.toGMTString() + ';';
 	document.cookie = cookies;
+}
+function getCookie(cookieName){
+    var cookieValue=null;
+    if(document.cookie){
+        var array=document.cookie.split((escape(cookieName)+'='));
+        if(array.length >= 2){
+            var arraySub=array[1].split(';');
+            cookieValue=unescape(arraySub[0]);
+        }
+    }
+    return cookieValue;
 }
 
 $(function(){

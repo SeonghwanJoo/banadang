@@ -128,7 +128,7 @@ public class MatchServiceImpl implements MatchService {
 		matchMapper.insertMsgForMatchRequest(match);
 		List<String> uids= new ArrayList<String> ();
 		uids.add(match.getHome_name());
-		loginAPI.sendMessage(uids, "경기 신청이 접수되었습니다.");
+		loginAPI.sendMessage(uids, "경기 신청이 접수되었습니다. 수락하러 가볼까요?");
 		
 		
 	}
@@ -157,7 +157,7 @@ public class MatchServiceImpl implements MatchService {
 		matchMapper.insertMsgForMatchRecruit(match);
 		List<String> uids= new ArrayList<String>();
 		uids.add(match.getHome_name());
-		loginAPI.sendMessage(uids, "용병 신청이 접수되었습니다.");
+		loginAPI.sendMessage(uids, "용병 신청이 접수되었습니다. 수락하러 가볼까요?");
 	}
 
 	@Override

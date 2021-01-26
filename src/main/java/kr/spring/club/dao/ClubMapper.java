@@ -113,4 +113,7 @@ public interface ClubMapper {
 	@Select("select clubJoin_num from gentlepro.club_join where id=#{id} and club_num=#{club_num} and club_auth>3")
 	public Integer selectClubJoinForDuplicateByClubVO(ClubVO club);
 	
+	@Select("select id from gentlepro.club_join where club_num=#{club_num} and club_auth=5")
+	public List<String> selectClubExecutivesByClubNum(Integer club_num);
+	
 }

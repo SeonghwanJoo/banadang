@@ -343,7 +343,8 @@ public class LoginAPI {
 			
 			JsonObject for_apns = new JsonObject();
 			
-			for_apns.addProperty("message", message); 
+			for_apns.addProperty("message", message);
+			for_apns.addProperty("mutable-content", 1);
 			
 			pushMsgJson.add("for_fcm", for_fcm); pushMsgJson.add("for_apns", for_apns);
 			
@@ -355,13 +356,12 @@ public class LoginAPI {
 
 			}
 			
+			
 			String uidToStr=sb1.toString();
 			
 			logger.info("pshJsontoString : "+pushMsgJson.toString());
 			
-			uidToStr=uidToStr.substring(0, uidToStr.length()-1);//마지막 콤마 제거
-			uidToStr=uidToStr.concat("]");//배열의 마지막 ] 삽입
-			uidToStr="[".concat(uidToStr);//배열의 첫 [ 삽입
+			uidToStr="["+uidToStr.substring(0, uidToStr.length()-1)+"]";//마지막 콤마 제거
 			
 			logger.info("uidToStr : "+uidToStr);
 			logger.info("pushMsgJson : "+pushMsgJson);
@@ -460,18 +460,16 @@ public class LoginAPI {
             throw new UnsupportedOperationException(e);
         }
     }
-	public String arrToStr(String[] arr) {
-		
-		String toStr="{";
-		
-		for(int i=0; i<arr.length; i++) {
-			toStr+=arr[i]+",";
-		}
-		
-		toStr.substring(0, toStr.lastIndexOf("")-1);
-		toStr+="}";
-		
-		return toStr;
-	}
+	/*
+	 * public String arrToStr(String[] arr) {
+	 * 
+	 * String toStr="{";
+	 * 
+	 * for(int i=0; i<arr.length; i++) { toStr+=arr[i]+","; }
+	 * 
+	 * toStr.substring(0, toStr.lastIndexOf("")-1); toStr+="}";
+	 * 
+	 * return toStr; }
+	 */
 
 }

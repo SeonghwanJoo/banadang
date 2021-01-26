@@ -41,5 +41,6 @@ public interface ClubService {
 	public void insertClubMemberWithMemberVO(MemberVO member);
 	public Integer selectClubJoinForDuplicate(MemberVO member);
 	public Integer selectClubJoinForDuplicateByClubVO(ClubVO club);
+	public List<String> selectClubExecutivesByClubNum(Integer club_num);
 	
 }

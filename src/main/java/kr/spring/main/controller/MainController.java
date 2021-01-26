@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -226,6 +227,11 @@ public class MainController {
 	public String checkmyClub() {
 
 		return "myClubCheck";
+	}
+	@RequestMapping("/main/push_fail.do")
+	public void printPushFailResult(HttpServletRequest request) {
+		
+		logger.info("request in push_fail : "+request.toString());
 	}
 
 	public void addVoteResult(MatchVO match, ArrayList<MatchVO> vote_status) {

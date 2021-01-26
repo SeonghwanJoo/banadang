@@ -1,5 +1,6 @@
 package kr.spring.club.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,12 +12,16 @@ import kr.spring.club.dao.ClubMapper;
 import kr.spring.club.domain.ClubVO;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
+import kr.spring.member.service.LoginAPI;
 
 @Service("clubService")
 public class ClubServiceImpl implements ClubService {
 	
 	@Resource
 	private ClubMapper clubMapper;
+	
+	@Resource
+	private LoginAPI loginAPI;
 	
 	@Override
 	public List<ClubVO> selectMyClubs(String id) {
@@ -187,6 +192,9 @@ public class ClubServiceImpl implements ClubService {
 	public void insertClubMemberWithMemberVO(MemberVO member) {
 		
 		clubMapper.insertClubMemberWithMemberVO(member);
+		List<String> uids= new ArrayList<String>();
+		uids.add(member.getId());
+		loginAPI.sendMessage(uids, member.getClub_name()+"팀이 가입 신청을 수락하였습니다.");
 		
 	}
 
@@ -200,6 +208,12 @@ public class ClubServiceImpl implements ClubService {
 	public Integer selectClubJoinForDuplicateByClubVO(ClubVO club) {
 		
 		return clubMapper.selectClubJoinForDuplicateByClubVO(club);
+	}
+
+	@Override
+	public List<String> selectClubExecutivesByClubNum(Integer club_num) {
+		
+		return clubMapper.selectClubExecutivesByClubNum(club_num);
 	}
 
 	

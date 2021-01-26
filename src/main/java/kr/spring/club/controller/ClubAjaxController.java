@@ -21,8 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.spring.club.domain.ClubVO;
 import kr.spring.club.service.ClubService;
+import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
 import kr.spring.member.domain.MemberVO;
+import kr.spring.member.service.LoginAPI;
 
 @Controller
 public class ClubAjaxController {
@@ -34,6 +36,9 @@ public class ClubAjaxController {
 	
 	@Resource
 	private MatchService matchService;
+	
+	@Resource
+	private LoginAPI loginAPI;
 	
 	@RequestMapping("/club/createClub.do")
 	@ResponseBody
@@ -101,7 +106,11 @@ public class ClubAjaxController {
 	}
 	@RequestMapping("/club/cancelMatchReq.do")
 	@ResponseBody
-	public Map<String,Object> cancelMatchReq(@RequestParam Integer request_num,@RequestParam Integer acceptance,@RequestParam Integer match_num){
+	public Map<String,Object> cancelMatchReq(@RequestParam Integer request_num,
+											 @RequestParam Integer acceptance,
+											 @RequestParam Integer match_num,
+											 @RequestParam Integer club_num,
+											 @RequestParam String club_name){
 		
 		Map<String,Object> map=new HashMap<String,Object>();
 		
@@ -110,6 +119,10 @@ public class ClubAjaxController {
 				clubService.deleteMatchReqForCancel(request_num);
 			}else if (acceptance==2) {
 				clubService.updateMatchReqForCancel(request_num,match_num);
+				List<String> uid_list=clubService.selectClubExecutivesByClubNum(club_num);
+				if(!uid_list.isEmpty()) {
+					loginAPI.sendMessage(uid_list, club_name+"팀이 경기 신청을 취소하였습니다. 팀 관리에서 확인해보세요!");
+				}
 			}
 			map.put("result", "success");
 		}catch(Exception e) {
@@ -122,7 +135,7 @@ public class ClubAjaxController {
 	
 	@RequestMapping("/club/answerForMatch.do")
 	@ResponseBody
-	public Map<String,String> rejectMatch(ClubVO club){
+	public Map<String,String> rejectMatch(ClubVO club,@RequestParam Integer home){
 		Map<String,String> map=new HashMap<String,String>();
 		try {
 			clubService.updateAcceptance(club);
@@ -131,6 +144,13 @@ public class ClubAjaxController {
 				clubService.rejectOthers(club);
 				//match의 해당 매치의 away팀을 해당팀으로  처리한다
 				clubService.updateAwayforMatch(club);
+				MatchVO match=new MatchVO();
+				match.setHome(home);
+				match.setAway(club.getClub_num());
+				List<String> uid_list=matchService.selectMembersForPostedMatch(match);
+				if(!uid_list.isEmpty()) {
+					loginAPI.sendMessage(uid_list, "경기 매칭이 완료되었습니다. 참석 투표하러 가볼까요?");
+				}
 			}
 			map.put("result", "updated");
 		}catch(Exception e) {
@@ -170,34 +190,19 @@ public class ClubAjaxController {
 				List<MemberVO> members=clubService.selectClubMembers(club_num);
 				//해당 클럽의 전체 회원정보를 받아 memberVO list로 받는다
 				//memberVO list가 루프를 돌면서 attendatacerate를 set한다
-				int ten=0,twent=0,thirt=0,fourt=0,fift=0,sixt=0,sevent=0,others=0;
-				for(MemberVO mem:members) {
-					if(mem.getAge_range().startsWith("1")){
-						ten++;
-					}else if(mem.getAge_range().startsWith("2")) {
-						twent++;
-					}else if(mem.getAge_range().startsWith("3")) {
-						thirt++;
-					}else if(mem.getAge_range().startsWith("4")) {
-						fourt++;
-					}else if(mem.getAge_range().startsWith("5")) {
-						fift++;
-					}else if(mem.getAge_range().startsWith("6")) {
-						sixt++;
-					}else if(mem.getAge_range().startsWith("7")) {
-						sevent++;
-					}else{
-						others++;
-					}
-				}
-				map.put("ten", ten);
-				map.put("twent", twent);
-				map.put("thirt", thirt);
-				map.put("fourt", fourt);
-				map.put("fift", fift);
-				map.put("sixt", sixt);
-				map.put("sevent", sevent);
-				map.put("others", others);
+				/*
+				 * int ten=0,twent=0,thirt=0,fourt=0,fift=0,sixt=0,sevent=0,others=0;
+				 * for(MemberVO mem:members) { if(mem.getAge_range().startsWith("1")){ ten++;
+				 * }else if(mem.getAge_range().startsWith("2")) { twent++; }else
+				 * if(mem.getAge_range().startsWith("3")) { thirt++; }else
+				 * if(mem.getAge_range().startsWith("4")) { fourt++; }else
+				 * if(mem.getAge_range().startsWith("5")) { fift++; }else
+				 * if(mem.getAge_range().startsWith("6")) { sixt++; }else
+				 * if(mem.getAge_range().startsWith("7")) { sevent++; }else{ others++; } }
+				 * map.put("ten", ten); map.put("twent", twent); map.put("thirt", thirt);
+				 * map.put("fourt", fourt); map.put("fift", fift); map.put("sixt", sixt);
+				 * map.put("sevent", sevent); map.put("others", others);
+				 */
 				//auth정보를 각 line의 data attribute로 넣어서 받는다
 				//map으로 관련 정보를 담아서 넘긴다
 				//내 운영진 권한이 사라지면?reload가 불가피함

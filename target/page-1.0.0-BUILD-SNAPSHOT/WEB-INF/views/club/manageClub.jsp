@@ -256,7 +256,7 @@
 					</div>
 				</div>
 				<span class="material-icons collapsible">add_circle_outline</span>
-				<div class="collapsible-content"><p class="detail">${home.match_detail}</p><c:if test="${empty home.cancel}"><div class="row"><c:if test="${empty home.match_req_cancel }"><button class="block white-bg" id="${home.request_num }-btn" onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num })">경기 신청 취소</button></c:if><c:if test="${not empty home.match_req_cancel }"><button class="block gray-bg" id="${home.request_num }-btn" style="display:none"  onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num})">	경기 신청 취소</button>	</c:if></div></c:if></div>
+				<div class="collapsible-content"><p class="detail">${home.match_detail}</p><c:if test="${empty home.cancel}"><div class="row"><c:if test="${empty home.match_req_cancel }"><button class="block white-bg" id="${home.request_num }-btn" onclick="cancelMatchReq(${home.request_num},${home.acceptance},${home.match_num },${home.club_num },'${myClub.club_name }')">경기 신청 취소</button></c:if></div></c:if></div>
 			</li>
 			</c:if>
 			</c:forEach>
@@ -1007,13 +1007,13 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 		
 	});
 }
-function cancelMatchReq(request_num,acceptance,match_num){
+function cancelMatchReq(request_num, acceptance, match_num, club_num, club_name){
 	$('#match_modal').css('display','block');
 	$('#match-btn').click(function(){
 		$.ajax({
 			url:'cancelMatchReq.do',
 			type:'post',
-			data:{request_num:request_num, acceptance:acceptance,match_num:match_num},
+			data:{request_num:request_num, acceptance:acceptance,match_num:match_num,club_num:club_num,club_name:club_name},
 			dataType:'json',
 			cache:false,
 			timeout:30000,
@@ -1057,7 +1057,8 @@ function answerForClubRecruitReq(clubRecruit_req_num,nickname,clubRecruit_accept
 			data:{clubRecruit_req_num:clubRecruit_req_num, 
 				  clubRecruit_accept:clubRecruit_accept,
 				  id:id,
-				  club_num:${myClub.club_num}
+				  club_num:${myClub.club_num},
+				  club_name:${myClub.club_name}
 			},
 			dataType:'json',
 			cache:false,
@@ -1364,7 +1365,9 @@ function answerForMatchReq(request_num,club_name,acceptance,club_num,match_num){
 				acceptance:acceptance,
 				club_num:club_num,
 				club_name:club_name,
-				match_num:match_num},
+				match_num:match_num,
+				home:${myClub.club_num}
+				},
 			dataType:'json',
 			cache:false,
 			timeout:30000,

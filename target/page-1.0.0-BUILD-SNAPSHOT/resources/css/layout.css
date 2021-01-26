@@ -4,7 +4,6 @@
 	white-space:nowrap;
 	overflow:hidden;
 	text-overflow: ellipsis;
-	max-width:10rem;
 }
 .team-info.col span{
 	max-width:7rem;
@@ -255,6 +254,9 @@ div.team-info.cursor{
 	display:flex;
 	margin:0 auto;
 	flex-wrap:wrap;
+	text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 
@@ -529,11 +531,12 @@ input[type=text]:focus, select:focus{
 	background-color:#fff;
 	color:#000;
 	position:relative;
-	margin: 0 1.5rem;
+	margin: 0 auto;
 	padding: 0.3rem;
 	opacity:0.95;
 	border-radius:0.5rem;
 	width: 85%;
+	max-width: 450px;
 }
 body.body, body.body btn{
     font-family: Noto Sans KR,sans-serif;
@@ -720,7 +723,7 @@ body.body, .filter-wrapper{
 }
 .right-date{
 	position:absolute;
-	top:0.2rem;
+	top:0.1rem;
 	right:2rem;
 }
 
@@ -1923,7 +1926,7 @@ label.chip.m-wider{
 }
 /* login-custom start */
 .login-wrapper{
-	width: 20rem;
+	width: 300px;
 	margin:0 auto
 }
 .login-wrapper.narrow{
@@ -1933,7 +1936,7 @@ label.chip.m-wider{
 .login-label {
   display: block;
   position: relative;
-  padding-left: 35px;
+  padding-left: 2.5rem;
   margin-bottom: 12px;
   cursor: pointer;
   text-align:left;
@@ -2120,9 +2123,6 @@ input:checked ~ .checkmark:after{
 	.carousel-inner .carousel-item img{
 		height:12rem;
 	} 
-	.match-item{
-		max-width:30rem;
-	}
 	.team-info.col span{
 	max-width:20rem;
 	}

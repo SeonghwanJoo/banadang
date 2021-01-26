@@ -13,6 +13,7 @@ public class MemberVO {
 	private String age_range;
 	private String id;
 	private Integer club_num;
+	private String club_name;
 	private Integer match_num;
 	private Integer recruit_req_num;
 	private String recruit_req_detail;
@@ -37,6 +38,12 @@ public class MemberVO {
 	private Date join_date;
 	private String reason;
 	private Integer responseCode;
+	public String getClub_name() {
+		return club_name;
+	}
+	public void setClub_name(String club_name) {
+		this.club_name = club_name;
+	}
 	public Integer getMarketing() {
 		return marketing;
 	}

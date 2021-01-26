@@ -101,7 +101,7 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.insertMsgForClubRecruitReq(match);
 		List<String> uids= new ArrayList<String>();
 		uids.add(match.getHome_name());
-		loginAPI.sendMessage(uids, "팀 가입 신청이 접수되었습니다.");
+		loginAPI.sendMessage(uids, "팀 가입 신청이 접수되었습니다. 수락하러 가볼까요?");
 		
 		
 	}

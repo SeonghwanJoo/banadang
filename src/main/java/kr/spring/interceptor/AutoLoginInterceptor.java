@@ -31,12 +31,15 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 	@Resource
 	private LoginAPI loginAPI;
 	
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			                 HttpServletResponse response,
 			               Object handler)throws Exception {
 		HttpSession session = request.getSession();
-		Logger logger = LoggerFactory.getLogger(this.getClass());
+		
 		String user_id=(String)session.getAttribute("user_id");
 		if(user_id==null) {
 			
@@ -88,20 +91,26 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 				}
 			}
 		
-		}else {//pushToken 등록 or 업데이트
+		}
+		if(user_id!=null) {//pushToken 등록 or 업데이트
 			
 			Cookie pushCookie = WebUtils.getCookie(request, "nPT_01");
 			
 			if (pushCookie!=null) {//새로운 push 토큰이 접수되었을 때 
 				
-				logger.info("pushToekn intercept 진입");
+				logger.info("pushToken intercept 진입");
+				
 				
 				String n_push_token = pushCookie.getValue();
 				
 				pushCookie = WebUtils.getCookie(request, "ePT_01");
 				String e_push_token=null;
 
-				if(pushCookie!=null) e_push_token=pushCookie.getValue();
+				if(pushCookie!=null) {
+					e_push_token=pushCookie.getValue();
+					logger.info("newPushToken : "+n_push_token);
+					logger.info("e_push_Token : "+e_push_token);
+				}
 				
 				
 				if(e_push_token==null || !e_push_token.equals(n_push_token)) {
@@ -120,11 +129,13 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 					refreshCookie.setMaxAge(60*60*24*60);
 					response.addCookie(refreshCookie);
 					
-					//뉴 푸시쿠키 삭제
-					removeCookie("nPT_01", response);
-					removeCookie("nPT_02", response);
-					removeCookie("nPT_03", response);
+					
 				}
+				
+				//뉴 푸시쿠키 삭제
+				removeCookie("nPT_01", response);
+				removeCookie("nPT_02", response);
+				removeCookie("nPT_03", response);
 			}
 				
 			
@@ -132,9 +143,12 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 		return true;
 	}
 	
-	public void removeCookie(String cookieKey,HttpServletResponse response) {
-		Cookie cookieToRemove = new Cookie(cookieKey,null);
+	public void removeCookie(String cookieKey, HttpServletResponse response) {
+		Cookie cookieToRemove = new Cookie(cookieKey, null);
+		logger.info("currentAge in removeCookie : "+cookieToRemove.getMaxAge());
 		cookieToRemove.setMaxAge(0);
+		cookieToRemove.setPath("/");
 		response.addCookie(cookieToRemove);
+		logger.info("removeCookie : "+cookieKey);
 	}
 }
