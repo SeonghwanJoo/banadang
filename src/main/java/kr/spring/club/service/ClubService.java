@@ -1,5 +1,6 @@
 package kr.spring.club.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +42,6 @@ public interface ClubService {
 	public void insertClubMemberWithMemberVO(MemberVO member);
 	public Integer selectClubJoinForDuplicate(MemberVO member);
 	public Integer selectClubJoinForDuplicateByClubVO(ClubVO club);
-	public List<String> selectClubExecutivesByClubNum(Integer club_num);
+	public HashSet<String> selectClubExecutivesByClubNum(Integer club_num);
 	
 }

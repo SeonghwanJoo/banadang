@@ -80,6 +80,14 @@
 	</div>
 	</form:form>
 </div>
+<!-- The Modal -->
+<div id="loader-toast" class="submit_toast">
+
+  <!-- Modal content -->
+  	<div id="loader_toast_content" class="loader_toast_content">
+		<img src="${pageContext.request.contextPath }/resources/images/ajax-loader.gif" class="loader">
+	</div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 function createListInHTML(matchs){
@@ -163,6 +171,9 @@ let pageCount=0;
 let latitude;
 let longitude;
 function moreList(){
+	
+	$('#loader-toast').css('display','flex');
+	
 	$.ajax({
 		url:'nextRecruitPage.do',
 		type:'post',
@@ -185,6 +196,7 @@ function moreList(){
 				matches=data.matches;
 				addContent+=createListInHTML(matches);
 				$('.ul-list').append(addContent);//appendTo가 끝나고 scroll을 움직여야함
+				$('#loader-toast').css('display','none');
 				
 				if(matches.length<30){
 					$('#moreList').css('display','none');
@@ -197,11 +209,13 @@ function moreList(){
 				
 			}	
 			if(data.result=='errors'){
+				$('#loader-toast').css('display','none');
 				alert('오류 발생');
 			}
 			
 		},
 		error:function(){
+			$('#loader-toast').css('display','none');
 			alert('네트워크 오류 발생');
 		}
 	});
@@ -234,6 +248,9 @@ String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s
 String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
 Number.prototype.zf = function(len){return this.toString().zf(len);};
 $(function(){
+	
+	$('#loader-toast').css('display','flex');
+	
 	$('#specific-pr').click(function(){
 		$('#period-filter').css('display','block');
 	});

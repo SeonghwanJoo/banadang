@@ -1,6 +1,7 @@
 package kr.spring.match.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +43,6 @@ public interface MatchService {
 	public List<MemberVO> selectRecruitByClub_num(Integer club_num);
 	public List<MatchVO> selectMatchToInviteWithFilter(MatchVO match);
 	public List<MatchVO> selectRecruitWithFilter(MatchVO match);
-	public List<String> selectMembersForPostedMatch(MatchVO match);
+	public HashSet<String> selectMembersForPostedMatch(MatchVO match);
 
 }

@@ -219,7 +219,7 @@ function removeWhiteSpace(obj){
 		
 		$("#submit").click(function(e){
 			
-			$('#loader-toast').css('display','block');
+			$('#loader-toast').css('display','flex');
 			
 			e.preventDefault();
 			
@@ -259,7 +259,7 @@ function removeWhiteSpace(obj){
 					if(data.result=="inserted"){
 						
 						$("#club_msg").text("팀 생성 완료");
-						$("#toast").css("display","block");
+						$("#toast").css("display","flex");
 						$("#confirm").click(function(){
 							location.href="manageClub.do?club_num="+data.club_num;
 						});
@@ -271,7 +271,7 @@ function removeWhiteSpace(obj){
 					if(data.result=="errors"){
 						
 						$("#club_msg").text("팀 생성 실패");
-						$("#toast").css("display","block");
+						$("#toast").css("display","flex");
 						$('#confirm').click(function(){
 							$("#toast").css("display","none");
 						});

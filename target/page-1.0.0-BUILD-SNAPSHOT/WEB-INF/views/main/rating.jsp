@@ -390,7 +390,7 @@
 					$('#rating_msg').text('상대팀 평점 등록 완료');
 				}
 				
-				$('#toast').css('display','block');
+				$('#toast').css('display','flex');
 				$('#confirm').click(function(){
 					if(${isMain}){
 						location.href='${pageContext.request.contextPath}/main/main.do';

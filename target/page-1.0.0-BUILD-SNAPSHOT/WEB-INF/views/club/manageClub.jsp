@@ -440,8 +440,9 @@
 								풋살
 								</span>	
 								</c:if>
-								<a href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}">
-								<span class="match-item">${match.address}<i class="fas fa-chevron-right margin-left"></i></span>
+								<span class="match-item no-margin">${match.address}</span>
+								<a class="space-right" href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}">
+								<i class="fas fa-chevron-right margin-left"></i>
 								</a>
 								<c:if test="${empty match.cancel }">
 									<c:if test="${myClub.club_auth==4 }">
@@ -1058,7 +1059,7 @@ function answerForClubRecruitReq(clubRecruit_req_num,nickname,clubRecruit_accept
 				  clubRecruit_accept:clubRecruit_accept,
 				  id:id,
 				  club_num:${myClub.club_num},
-				  club_name:${myClub.club_name}
+				  club_name:'${myClub.club_name}'
 			},
 			dataType:'json',
 			cache:false,
@@ -1205,7 +1206,7 @@ function checkNumOfMember(club_num,memberDeleted,id,auth){
 				//modal 메시지 띄우고 프로세스 빠져나감
 				$('#manage_modal').css('display','none');
 				$('#club_msg').text('적어도 한명 이상은 운영진으로 지정되어야 합니다.');
-				$('#toast').css('display','block');
+				$('#toast').css('display','flex');
 				$(window).click(function(){
 					$('#toast').css('display','none');
 					return;

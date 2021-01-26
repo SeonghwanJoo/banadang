@@ -424,7 +424,7 @@ function setVoteStyle(max,attend,not_attend,undefined,status){
 						var max=Math.max(data.attend,data.not_attend,data.undefined);
 						setVoteStyle(max,data.attend,data.not_attend,data.undefined,status)
 						
-						$('#toast').css('display','block');
+						$('#toast').css('display','flex');
 						
 					},
 					error:function(){

@@ -125,9 +125,9 @@
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
 		<div class="sub-content">
-			<button id="modify" class="pos-btn" onclick="location.href='modifyMatch.do?match_num=${match.match_num}'">수정</button>
+			<button id="modify" class="pos-btn" onclick="location.href='modifyMatch.do?match_num=${match.match_num}&club_num=${myClub.club_num }'">수정</button>
 			<hr>
-			<button id="delete" class="pos-btn red" onclick="location.href='deleteMatch.do?match_num=${match.match_num}&club_name=${myClub.club_name }'">삭제</button>
+			<button id="delete" class="pos-btn red" onclick="location.href='deleteMatch.do?match_num=${match.match_num}&club_name=${myClub.club_name }&club_num=${myClub.club_num }'">삭제</button>
 		</div>
 		<div class="sub-content">
 			<button id="more-cancel-btn" class="neg-btn">닫기</button>
@@ -182,7 +182,7 @@
 	
 	function postMatchRequest(a,b,c,d,e,f){
 		if(c==''||${myClub.club_auth<5}){
-			$('#myClub-toast').css('display','block');
+			$('#myClub-toast').css('display','flex');
 			$('#myClub-toast').click(function(){
 				$('#myClub-toast').css('display','none');
 			})
@@ -211,7 +211,7 @@
 					$('#matchRequest_msg').text('경기 신청 오류');
 				}
 				
-				$('#toast').css('display','block');
+				$('#toast').css('display','flex');
 				$('#confirm').click(function(){
 					location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}&clubManageFrom=2';
 				});

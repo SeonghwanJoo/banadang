@@ -58,13 +58,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function(){
-		$("#toast").css("display","block");
-		$("#confirm").click(function(){
-			$("#toast").css("display","none");
-		});
-		$('#create').click(function(){
-			location.href='createClubForm.do';
-		});
+		if(${empty myClubs}){
+			
+			$("#toast").css("display","flex");
+			$("#confirm").click(function(){
+				$("#toast").css("display","none");
+			});
+			$('#create').click(function(){
+				location.href='createClubForm.do';
+			});
+		}
+		
 	});
 
 </script>

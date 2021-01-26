@@ -16,9 +16,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function(){
-		$("#toast").css("display","block");
-		$("#submit_toast_content").click(function(){
-			location.href="${pageContext.request.contextPath}/main/main.do";
+		$('#toast').css('display','flex');
+		$('#submit_toast_content').click(function(){
+			location.href='${pageContext.request.contextPath}/main/main.do';
 		})
 	});
 

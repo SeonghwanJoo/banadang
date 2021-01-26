@@ -196,32 +196,32 @@ $(function(){
 				cache:false,
 				timeout:30000,
 				success:function(data){
-					if(data.result=="inserted"){
-						$("#club_msg").text("용병 모집 글 생성 완료");
+					if(data.result=='inserted'){
+						$('#club_msg').text('용병 모집 글 생성 완료');
 						
 						
-					}else if(data.result=="duplicated"){
-						$("#club_msg").text("이미 해당 매치에 용병 모집 글을 작성하셨습니다");
+					}else if(data.result=='duplicated'){
+						$('#club_msg').text('이미 해당 매치에 용병 모집 글을 작성하셨습니다');
 					}
-					$("#toast").css("display","block");
-					$("#confirm").click(function(){
-						if(data.result=="inserted"){location.href="recruitDetail.do?recruit_num="+data.recruit_num;}
-						if(data.result=="duplicated"){ $('#toast').css('display','none');}
+					$('#toast').css('display','flex');
+					$('#confirm').click(function(){
+						if(data.result=='inserted'){location.href='recruitDetail.do?recruit_num='+data.recruit_num;}
+						if(data.result=='duplicated'){ $('#toast').css('display','none');}
 					});
 					$(window).click(function(){
-						if(data.result=="inserted") {location.href="recruitDetail.do?recruit_num="+data.recruit_num;}
-						if(data.result=="duplicated") {$('#toast').css('display','none');}
+						if(data.result=='inserted') {location.href='recruitDetail.do?recruit_num='+data.recruit_num;}
+						if(data.result=='duplicated') {$('#toast').css('display','none');}
 					});
 					
-					if(data.result=="errors"){
+					if(data.result=='errors'){
 						
-						$("#club_msg").text("용병 모집 글 생성 실패");
-						$("#toast").css("display","block");
+						$('#club_msg').text('용병 모집 글 생성 실패');
+						$('#toast').css('display','flex');
 						$('#confirm').click(function(){
-							$("#toast").css("display","none");
+							$('#toast').css('display','none');
 						});
 						$(window).click(function(){
-							$("#toast").css("display","none");
+							$('#toast').css('display','none');
 						});
 					}
 					

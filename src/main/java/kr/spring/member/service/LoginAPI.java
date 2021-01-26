@@ -11,6 +11,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -319,7 +320,7 @@ public class LoginAPI {
 		}
 	}
 
-	public void sendMessage(List<String> uid_list , String message) {
+	public void sendMessage(HashSet<String> uid_list , String message) {
 		String reqURL = "https://kapi.kakao.com/v2/push/send";
 
 		try {
@@ -390,7 +391,7 @@ public class LoginAPI {
 			String result = ""; String line = "";
 			  
 			while ((line = br.readLine()) != null) { result += line; }
-			System.out.println("registerTokenResult : " + result);
+			System.out.println("sendPushResult : " + result);
 			 
 
 		} catch (IOException e) {
@@ -460,16 +461,6 @@ public class LoginAPI {
             throw new UnsupportedOperationException(e);
         }
     }
-	/*
-	 * public String arrToStr(String[] arr) {
-	 * 
-	 * String toStr="{";
-	 * 
-	 * for(int i=0; i<arr.length; i++) { toStr+=arr[i]+","; }
-	 * 
-	 * toStr.substring(0, toStr.lastIndexOf("")-1); toStr+="}";
-	 * 
-	 * return toStr; }
-	 */
+
 
 }

@@ -3,6 +3,7 @@ package kr.spring.club.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -119,7 +120,7 @@ public class ClubAjaxController {
 				clubService.deleteMatchReqForCancel(request_num);
 			}else if (acceptance==2) {
 				clubService.updateMatchReqForCancel(request_num,match_num);
-				List<String> uid_list=clubService.selectClubExecutivesByClubNum(club_num);
+				HashSet<String> uid_list=clubService.selectClubExecutivesByClubNum(club_num);
 				if(!uid_list.isEmpty()) {
 					loginAPI.sendMessage(uid_list, club_name+"팀이 경기 신청을 취소하였습니다. 팀 관리에서 확인해보세요!");
 				}
@@ -147,7 +148,7 @@ public class ClubAjaxController {
 				MatchVO match=new MatchVO();
 				match.setHome(home);
 				match.setAway(club.getClub_num());
-				List<String> uid_list=matchService.selectMembersForPostedMatch(match);
+				HashSet<String> uid_list=matchService.selectMembersForPostedMatch(match);
 				if(!uid_list.isEmpty()) {
 					loginAPI.sendMessage(uid_list, "경기 매칭이 완료되었습니다. 참석 투표하러 가볼까요?");
 				}

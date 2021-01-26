@@ -241,7 +241,7 @@
 						}else if(data.result=='duplicated'){
 							$('#club_msg').text('이미 용병 신청하셨습니다');
 						}
-						$('#toast').css('display','block');
+						$('#toast').css('display','flex');
 						$('#confirm').click(function(){
 							location.href='${pageContext.request.contextPath}/member/myRecruitReq.do';
 						});

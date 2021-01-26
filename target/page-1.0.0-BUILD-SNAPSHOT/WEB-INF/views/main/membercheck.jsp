@@ -21,12 +21,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function(){
-		$("#toast").css("display","block");
-		$("#confirm").click(function(){
-			location.href="${pageContext.request.contextPath}/main/main.do";
+		$('#toast').css('display','flex');
+		$('#confirm').click(function(){
+			location.href='${pageContext.request.contextPath}/main/main.do';
 		})
 		$('#join').click(function(){
-			location.href="${pageContext.request.contextPath}/club/inviteMember.do?club_num=${club_num}"
+			location.href='${pageContext.request.contextPath}/club/inviteMember.do?club_num=${club_num}'
 		});
 	});
 

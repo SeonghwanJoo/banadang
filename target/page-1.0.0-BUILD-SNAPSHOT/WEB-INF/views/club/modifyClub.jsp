@@ -251,7 +251,7 @@ function removeWhiteSpace(obj){
 		
 		$("#submit").click(function(e){
 			
-			$('#loader-toast').css('display','block');
+			$('#loader-toast').css('display','flex');
 			
 			e.preventDefault();
 			
@@ -294,23 +294,23 @@ function removeWhiteSpace(obj){
 					
 					$('#loader-toast').css('display','none');
 					
-					if(data.result=="updated"){
-						$("#club_msg").text("팀 정보 수정 완료");
-						$("#toast").css("display","block");
-						$("#confirm").click(function(){
-							location.href="manageClub.do?club_num="+data.club_num;
+					if(data.result=='updated'){
+						$('#club_msg').text('팀 정보 수정 완료');
+						$('#toast').css('display','flex');
+						$('#confirm').click(function(){
+							location.href='manageClub.do?club_num='+data.club_num;
 						});
 						$(window).click(function(){
-							location.href="manageClub.do?club_num="+data.club_num;
+							location.href='manageClub.do?club_num='+data.club_num;
 						});
 						
 					}
-					if(data.result=="errors"){
+					if(data.result=='errors'){
 						
-						$("#club_msg").text("팀 정보 수정 실패");
-						$("#toast").css("display","block");
+						$('#club_msg').text('팀 정보 수정 실패');
+						$('#toast').css('display','flex');
 						$(window).click(function(){
-							$("#toast").css("display","none");
+							$('#toast').css('display','none');
 						});
 					}
 					

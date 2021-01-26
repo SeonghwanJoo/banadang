@@ -98,18 +98,15 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 			
 			if (pushCookie!=null) {//새로운 push 토큰이 접수되었을 때 
 				
-				logger.info("pushToken intercept 진입");
-				
 				
 				String n_push_token = pushCookie.getValue();
 				
 				pushCookie = WebUtils.getCookie(request, "ePT_01");
 				String e_push_token=null;
+				
 
 				if(pushCookie!=null) {
 					e_push_token=pushCookie.getValue();
-					logger.info("newPushToken : "+n_push_token);
-					logger.info("e_push_Token : "+e_push_token);
 				}
 				
 				
@@ -131,11 +128,7 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 					
 					
 				}
-				
-				//뉴 푸시쿠키 삭제
-				removeCookie("nPT_01", response);
-				removeCookie("nPT_02", response);
-				removeCookie("nPT_03", response);
+
 			}
 				
 			
@@ -143,12 +136,5 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 		return true;
 	}
 	
-	public void removeCookie(String cookieKey, HttpServletResponse response) {
-		Cookie cookieToRemove = new Cookie(cookieKey, null);
-		logger.info("currentAge in removeCookie : "+cookieToRemove.getMaxAge());
-		cookieToRemove.setMaxAge(0);
-		cookieToRemove.setPath("/");
-		response.addCookie(cookieToRemove);
-		logger.info("removeCookie : "+cookieKey);
-	}
+
 }

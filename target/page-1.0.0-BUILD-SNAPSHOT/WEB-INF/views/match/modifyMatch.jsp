@@ -278,28 +278,28 @@ $( function() {
 			timeout:30000,
 			success:function(data){
 				if(data.result=="updated"){
-					$("#club_msg").text("경기 일정 수정 완료");
-					$("#toast").css("display","block");
-					$("#confirm").click(function(){
+					$('#club_msg').text('경기 일정 수정 완료');
+					$('#toast').css('display','flex');
+					$('#confirm').click(function(){
 						if(${isFromClub}){
-							location.href="${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}&clubManageFrom=3";
+							location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}&clubManageFrom=3';
 							return;
 						}
-						location.href="${pageContext.request.contextPath}/main/main.do";
+						location.href='${pageContext.request.contextPath}/main/main.do';
 					});
 					$(window).click(function(){
 						if(${isFromClub}){
-							location.href="${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}&clubManageFrom=3";
+							location.href='${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}&clubManageFrom=3';
 							return;
 						}
-						location.href="${pageContext.request.contextPath}/main/main.do";
+						location.href='${pageContext.request.contextPath}/main/main.do';
 					});
 				}
 				
-				if(data.result=="errors"){
+				if(data.result=='errors'){
 					
-					$("#club_msg").text("경기 일정 에러 발생");
-					$("#toast").css("display","block");
+					$('#club_msg').text('경기 일정 에러 발생');
+					$('#toast').css('display','flex');
 					$('#confirm').click(function(){
 						$("#toast").css("display","none");
 					});

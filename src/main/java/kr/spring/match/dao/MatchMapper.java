@@ -1,6 +1,7 @@
 package kr.spring.match.dao;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -91,7 +92,7 @@ public interface MatchMapper {
 	public void insertMsgForMatchRecruit(MatchVO match);
 	
 	@Select("select id from gentlepro.club_join where club_num=#{home} or club_num=#{away}")
-	public List<String> selectMembersForPostedMatch(MatchVO match);
+	public HashSet<String> selectMembersForPostedMatch(MatchVO match);
 	
 
 }

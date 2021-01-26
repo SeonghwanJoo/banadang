@@ -1,5 +1,6 @@
 package kr.spring.club.dao;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -114,6 +115,6 @@ public interface ClubMapper {
 	public Integer selectClubJoinForDuplicateByClubVO(ClubVO club);
 	
 	@Select("select id from gentlepro.club_join where club_num=#{club_num} and club_auth=5")
-	public List<String> selectClubExecutivesByClubNum(Integer club_num);
+	public HashSet<String> selectClubExecutivesByClubNum(Integer club_num);
 	
 }

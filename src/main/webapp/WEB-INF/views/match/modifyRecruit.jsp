@@ -8,7 +8,7 @@
 <input type="hidden" name="recruit_num" value="${match.recruit_num }">
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
-		<a onclick="back" >
+		<a onclick="back()" >
 		<span class="material-icons" id="cancel">close</span>
 		</a>
 		<div class="topnav-centered">
@@ -170,7 +170,7 @@
 				success:function(data){
 					if(data.result=="updated"){
 						$("#club_msg").text("용병 모집 글 수정 완료");
-						$("#toast").css("display","block");
+						$("#toast").css("display","flex");
 						$("#confirm").click(function(){
 							location.href="recruitDetail.do?recruit_num="+data.recruit_num;
 						});
@@ -183,7 +183,7 @@
 					if(data.result=="errors"){
 						
 						$("#club_msg").text("용병 모집 글 수정 실패");
-						$("#toast").css("display","block");
+						$("#toast").css("display","flex");
 						$('#confirm').click(function(){
 							$("#toast").css("display","none");
 						});

@@ -1,6 +1,7 @@
 package kr.spring.club.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -192,7 +193,7 @@ public class ClubServiceImpl implements ClubService {
 	public void insertClubMemberWithMemberVO(MemberVO member) {
 		
 		clubMapper.insertClubMemberWithMemberVO(member);
-		List<String> uids= new ArrayList<String>();
+		HashSet<String> uids= new HashSet<String>();
 		uids.add(member.getId());
 		loginAPI.sendMessage(uids, member.getClub_name()+"팀이 가입 신청을 수락하였습니다.");
 		
@@ -211,7 +212,7 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public List<String> selectClubExecutivesByClubNum(Integer club_num) {
+	public HashSet<String> selectClubExecutivesByClubNum(Integer club_num) {
 		
 		return clubMapper.selectClubExecutivesByClubNum(club_num);
 	}

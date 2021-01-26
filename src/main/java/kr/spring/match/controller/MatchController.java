@@ -2,6 +2,7 @@ package kr.spring.match.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -60,7 +61,7 @@ public class MatchController {
 		
 		
 		matchService.insertMatch(matchVO);
-		List<String> uid_list=matchService.selectMembersForPostedMatch(matchVO);
+		HashSet<String> uid_list=matchService.selectMembersForPostedMatch(matchVO);
 		
 		if(!uid_list.isEmpty()) {
 			loginAPI.sendMessage(uid_list, "경기 일정이 게시되었습니다. 참석 투표하러 가볼까요?");

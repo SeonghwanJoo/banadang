@@ -1,6 +1,7 @@
 package kr.spring.member.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -99,7 +100,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		memberMapper.insertClubRecruitReq(match);
 		memberMapper.insertMsgForClubRecruitReq(match);
-		List<String> uids= new ArrayList<String>();
+		HashSet<String> uids= new HashSet<String>();
 		uids.add(match.getHome_name());
 		loginAPI.sendMessage(uids, "팀 가입 신청이 접수되었습니다. 수락하러 가볼까요?");
 		
