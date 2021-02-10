@@ -101,7 +101,6 @@
 			<mapping path="/member/modifyClubRecruit.do"/>
 			<mapping path="/member/myClubRecruitReq.do"/>
 			<mapping path="/member/myMsg.do"/>
-			<mapping path="/member/myPage.do"/>
 			<mapping path="/member/myRecruitReq.do"/>
 			<mapping path="/member/postClubRecruit.do"/>
 			<mapping path="/member/postUpdatedClubRecruit.do"/>

@@ -66,6 +66,11 @@
 		<input type="checkbox" value="60대" name="club_ages">
 		<span class="checkmark"></span>
 	</label>
+	<label class="chip">
+		<span class="chip-txt">70대</span>
+		<input type="checkbox" value="70대" name="club_ages">
+		<span class="checkmark"></span>
+	</label>
 </div>
 <div class="row"><div class="col"><span class="msg" id="club_ages_msg"></span></div></div>
 <hr>
@@ -81,8 +86,6 @@
 		</div>
 	</div>
 	<!-- 엠블럼 -->
-	<!-- <i class="fas fa-shield-alt icon"></i>
-			엠블럼 사진 업로드 -->
 	<div class="half_col">
 		<div class="row">
 			<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" id="img-pre">
@@ -161,8 +164,11 @@
 		</div>
 	</div>
 </div>
-<div id="loader-toast" class="loader_toast">
-	<img src="${pageContext.request.contextPath }/resources/images/ajax-loader.gif" class="loader">
+<div id="loader-toast" class="submit_toast">
+  <!-- Modal content -->
+  	<div id="loader_toast_content" class="loader_toast_content">
+		<img src="${pageContext.request.contextPath }/resources/images/ajax-loader.gif" class="loader">
+	</div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

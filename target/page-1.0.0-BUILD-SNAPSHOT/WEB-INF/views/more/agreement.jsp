@@ -460,13 +460,12 @@
 		$('#done').click(function(e){
 			e.preventDefault();
 			if($('input:checkbox[name=service]').is(':checked')==false ||$('input:checkbox[name=privacy]').is(':checked')==false){
-				$('#toast').css('display','block');
+				$('#toast').css('display','flex');
 				$("#submit_toast_content").click(function(){
 					$('#toast').css('display','none');
 				});
 				return false;
 			}
-			console.log('loginType : '+${loginType});
 			$.ajax({
 				url:'insertMember.do',
 				type:'post',
@@ -481,7 +480,7 @@
 				success:function(data){
 					if(data.result=="success"){
 						$("#club_msg").text("가입 완료");
-						$("#toast").css("display","block");
+						$("#toast").css("display","flex");
 						$(".alert-btn").click(function(){
 							let str;
 							if(${not empty state}){
@@ -502,7 +501,7 @@
 					if(data.result=="errors"){
 						
 						$("#club_msg").text("가입 실패. 잠시 후 다시 시도하세요.");
-						$("#toast").css("display","block");
+						$("#toast").css("display","flex");
 						$('.alert-btn').click(function(){
 							$("#toast").css("display","none");
 						});

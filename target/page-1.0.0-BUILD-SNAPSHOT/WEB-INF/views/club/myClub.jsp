@@ -45,7 +45,7 @@
 		</div>
 		<div class="row margin-top centered">
 			<div class="col">
-				<button class="alert-btn border-right" id="confirm">닫기</button>
+				<button class="alert-btn border-right-black" id="confirm">닫기</button>
 			</div>
 			<div class="col">
 				<button class="alert-btn yellow" id="create">팀 만들기</button>

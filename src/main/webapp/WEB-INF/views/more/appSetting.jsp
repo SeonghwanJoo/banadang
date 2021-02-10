@@ -35,12 +35,12 @@
 	<!-- Modal content -->
 	<div class="modals-content">
 		<span id="close_mod" class="close_mod">&times;</span>
-		<span class="m-font bold disp-bl align-center">계정 삭제하기</span>
+		<span class="m-font bold disp-bl align-center margin-top">계정 삭제하기</span>
 		<hr>
-		<span class="gray small-font disp-bl margin-top margin-btm">
+		<span class="gray small-font disp-bl margin-top margin-btm centered-padding">
 			계정을 삭제하면 상대팀 평가 및 작성한 경기 정보를 제외한 회원 정보,가입 팀 정보, 메시지, 게시글 등의
-			모든 활동 정보가 삭제됩니다.</span>
-		<span class="disp-bl bold margin-tbm">
+			활동 정보가 삭제됩니다.</span>
+		<span class="disp-bl bold margin-tbm centered-padding">
 			계정을 삭제하는 사유를 알려주시면 향후 서비스 개선에 큰 도움이 됩니다.
 		</span>
 		<div class="row margin-top padding-left">
@@ -90,7 +90,6 @@
 				cache:false,
 				timeout:30000,
 				success:function(data){
-					console.log("result : "+data.result);
 					if(data.result=='success'){
 						location.href="${pageContext.request.contextPath}/main/main.do";
 					}	

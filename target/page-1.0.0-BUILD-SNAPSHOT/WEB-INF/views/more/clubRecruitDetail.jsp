@@ -240,7 +240,7 @@
 						}else if(data.result=='duplicated'){
 							$('#club_msg').text('이미 가입 신청하셨습니다');
 						}
-						$('#toast').css('display','block');
+						$('#toast').css('display','flex');
 						$('#confirm').click(function(){
 							location.href='${pageContext.request.contextPath}/member/myClubRecruitReq.do';
 						});

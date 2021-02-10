@@ -88,4 +88,11 @@
         (select * from gentlepro.clubrecruit_req where club_num=#{club_num}) a
             join gentlepro.club_recruit b using(clubRecruit_num) where recruit_due>date_sub(now(), interval 1 day))a join member_detail b using(id)
 	</select>
+	<select id="selectRatings" parameterType="integer" resultType="clubVO">
+	select * from 
+	(select a.id,match_date,address,manner,perform,rating_detail from 
+		(select * from gentlepro.club_rating where club_num=#{club_num} ) a 
+			join gentlepro.match b using(match_num) ) c
+				join gentlepro.member_detail using(id) order by match_date desc ;
+	</select>
 </mapper>

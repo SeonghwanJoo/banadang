@@ -12,7 +12,7 @@
 	</div>
 </div>
 
-<div class="blank_div"></div><!-- match_num이 없을 때,club_num이 없을 때, 아이디가 없을 때-->
+<div class="blank_div"></div>
 <div class="main-row margin-top centered-padding">
 	<div class="x-smaller">
 		<c:if test="${!empty msg.club_img }">
@@ -23,28 +23,28 @@
 		</c:if>
 	</div>
 	<div class="x-bigger">
-		<div class="main-row">
+		<div class="row">
 			<c:if test="${not empty msg.club_name }">
 			<span class="match-item">${msg.club_name }</span>
 			</c:if>
 			<c:if test="${not empty msg.address }">
 			<span class="match-item">${msg.address }</span>
-			<div class="row">
-			<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>${msg.match_date }</span>
-			<span class="match-item"><i class="far fa-clock margin-right"></i>${msg.start_time }~${msg.end_time }</span>
-			</div>
 			</c:if>
 		</div>
+		<div class="row">
+			<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>${msg.match_date }</span>
+			<span class="match-item"><i class="far fa-clock margin-right"></i>${msg.start_time }~${msg.end_time }</span>
+		</div>
 	</div>
-	<div class="row margin-top">
-		<span class="gray margin-right">받는 사람</span>
-		<c:if test="${not empty msg.nickname }">
-		<span class="positive-color bold">${msg.nickname }</span>
-		</c:if>
-		<c:if test="${empty msg.nickname }">
-		<span class="gray bold">탈퇴 회원</span>
-		</c:if>
-	</div>
+</div>
+<div class="row margin-top padding-left">
+	<span class="gray m-margin-right">받는 사람 </span>
+	<c:if test="${not empty msg.nickname }">
+	<span class="point">${msg.nickname }</span>
+	</c:if>
+	<c:if test="${empty msg.nickname }">
+	<span class="gray bold">탈퇴 회원</span>
+	</c:if>
 </div>
 <hr class="hr">
 <div class="row">
@@ -85,7 +85,7 @@ function submitContent(){
 		timeout:30000,
 		success:function(data){
 			if(data.result=='success'){
-				location.href='sentMsg.do';//보낸 메시지함으로 이동
+				location.href='sentMsg.do';
 			}
 			if(data.result=='errors'){
 				alert('오류 발생');

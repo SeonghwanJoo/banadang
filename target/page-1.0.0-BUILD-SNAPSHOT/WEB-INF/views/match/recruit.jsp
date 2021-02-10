@@ -195,7 +195,7 @@ function moreList(){
 				var matches=new Array();
 				matches=data.matches;
 				addContent+=createListInHTML(matches);
-				$('.ul-list').append(addContent);//appendTo가 끝나고 scroll을 움직여야함
+				$('.ul-list').append(addContent);
 				$('#loader-toast').css('display','none');
 				
 				if(matches.length<30){

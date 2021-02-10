@@ -259,7 +259,6 @@ $(function(){
 			}
 		},
 		function(start, end, label) {
-			/* 자바스크립트 에러시 로그 추적 */
 			$('#datepicker').val(start.format('YYYY-MM-DD'));
 		});
 

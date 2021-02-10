@@ -64,7 +64,7 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 			                    session.setAttribute("myClubs", myClubs);
 			                    session.setAttribute("access_token", access_token );
 			                    
-			                    if ((String)map.get("expires_in")!=null) {
+			                    if (map.get("expires_in")!=null) {
 			                    	int expires_in=Integer.parseInt((String)map.get("expires_in"));
 			                    	if(expires_in<(60*60*24*30)) {
 				                    	logger.info("refresh_token refreshed");

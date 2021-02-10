@@ -23,7 +23,7 @@
  	<ul class="ul-list small-font">
 		<li class="li-list cursor" onclick="location.href='club_details.do?club_num=${myClub.club_num}'">
 			<div class="row">
-				<div class="col club_main">
+				<div class="col club_main nowrap">
 					<c:if test="${myClub.filename ne 'undefined' }">
 					<img src="imageView.do?club_num=${myClub.club_num}" alt="Avatar" class="avatar emblem">
 					</c:if>
@@ -33,7 +33,7 @@
 					<span class="club_name">${myClub.club_name }</span><br>
 					<span>${myClub.club_address }</span>
 				</div>
-				<div class="col">
+				<div class="col nowrap">
 					<span class="age">
 						연령대<span class="xs-font margin-left">${myClub.club_age }</span>
 					</span><br>
@@ -735,34 +735,6 @@
 		<h6 class="margin-left margin-right" id="total">
 			총 회원 ${fn:length(members)}명
 		</h6>
-		<%-- <h6 class="sub-h6 small-font" id="ages">
-			 ( 
-			<c:if test="${ages.ten!=0 }">
-			 10대:${ages.ten }명 
-			</c:if>
-			<c:if test="${ages.twent!=0 }">
-			 20대:${ages.twent }명 
-			</c:if>
-			<c:if test="${ages.thirt!=0 }">
-			 30대:${ages.thirt }명 
-			</c:if>
-			<c:if test="${ages.fourt!=0 }">
-			 40대:${ages.fourt }명 
-			</c:if> 
-			<c:if test="${ages.fift!=0 }">
-			 50대:${ages.fift }명 
-			</c:if> 
-			<c:if test="${ages.sixt!=0 }">
-			 60대:${ages.sixt }명 
-			</c:if> 
-			<c:if test="${ages.sevent!=0 }">
-			 70대:${ages.sevent }명 
-			</c:if>
-			<c:if test="${ages.others!=0 }">
-			 기타:${ages.others }명
-			</c:if> 
-			)
-		</h6> --%>
 		</div>
 		<div class="col-sm-12 one-col">
 			<div class="col">
@@ -966,12 +938,6 @@ function sendLinkForVote(match_num,club_num,match_date,address,start_time) {
     	}
     })
  }
-/* function adjustHeight() {
-	  var textEle = $('textarea');
-	  textEle[0].style.height = 'auto';
-	  var textEleHeight = textEle.prop('scrollHeight');
-	  textEle.css('height', textEleHeight);
-}; */
 function openMore(match_num,club_name,club_num,match_date,address,start_time,modify){
 	
 	$('#options').replaceWith('');
@@ -1301,7 +1267,6 @@ function updateMember(id,auth,club_num){
 					location.href='${pageContext.request.contextPath}/club/club.do';
 				}
 				$('#manage_modal').css('display','none');
-				/* updateMembers_num(data.ten,data.twent,data.thirt,data.fourt,data.fift,data.sixt,data.sevent,data.others); */
 				var member_row=document.getElementById(id+'-row');
 				member_row.remove();
 			}

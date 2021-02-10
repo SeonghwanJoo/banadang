@@ -24,6 +24,7 @@ import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
 import kr.spring.member.domain.MemberVO;
 import kr.spring.member.domain.MsgVO;
+import kr.spring.member.domain.ReportVO;
 import kr.spring.member.service.LoginAPI;
 import kr.spring.member.service.MemberService;
 
@@ -51,12 +52,21 @@ public class MemberController {
 							 HttpServletRequest request,
 							 HttpServletResponse response)throws IOException {	
 		
-		String uri="https://"+request.getServerName()+request.getContextPath();
-		logger.info("protocol : "+request.getProtocol());
+		String serverName = request.getServerName();
+		String path= request.getContextPath();
+		String uri=null;
+		
+		if (serverName.contains("gentle")) uri="https://";
+		else uri="http://";
+		
+		uri+=serverName+path;
+		
 		Map<String, String> map = loginAPI.getAccessToken(code,1,uri);
+		
 		if(map.get("result")!=null && map.get("result").equals("errors")) {
 			return "redirect:/main/loginFailure.do";
 		}
+		
 		String access_token=map.get("access_token");
 		String refresh_token=map.get("refresh_token");
 		
@@ -197,25 +207,6 @@ public class MemberController {
    
 	}
 
-	@RequestMapping("/member/kakaoSync.do")
-	public String kakaoSync(HttpSession session) {
-		String access_token=(String)session.getAttribute("access_token");
-		MemberVO member=new MemberVO();
-		MemberVO profile=new MemberVO();
-		member=loginAPI.getUserInfo(access_token);
-		profile=loginAPI.getUpdatedUserInfo(access_token);
-		member.setNickname(profile.getNickname());
-		member.setThumbnail_image(profile.getThumbnail_image());
-		member.setProfile_image(profile.getProfile_image());
-		try {
-			memberService.updateMember_detail(member);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-		return "redirect:/member/myPage.do";
-	}
 	@RequestMapping("/member/agreement.do")
 	public ModelAndView agreement() {
 		
@@ -354,7 +345,7 @@ public class MemberController {
 		MemberVO member=memberService.getMember(user_id);
 		mav.addObject("member",member);
 		mav.setViewName("myPage");
-		mav.addObject("title","나의 페이지");
+		mav.addObject("title","더보기");
 		return mav;
 	}
 	
@@ -405,6 +396,18 @@ public class MemberController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("title","앱 설정");
 		mav.setViewName("appSetting");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/member/writeReport.do")
+	public ModelAndView writeReport(ReportVO report) {
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("report", report);
+		mav.addObject("title", "신고하기");
+		mav.setViewName("writeReport");
 		
 		return mav;
 	}

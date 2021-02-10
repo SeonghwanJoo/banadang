@@ -122,11 +122,7 @@ $('#register').click(function(){
 		timeout:30000,
 		success:function(data){
 			if(data.result=='success'){
-				//data를 전달한다
-				//답글을 insert한다
-				//입력창의 높이를 한줄 높이로 줄인다,내용을 지운다
 				$('#content').height('2rem').val('');
-				//답글 리스트를 업데이트 한다
 				var answers=new Array();
 				answers=data.answers;
 				var el =document.createElement('ul');

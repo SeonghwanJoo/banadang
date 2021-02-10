@@ -93,6 +93,16 @@
 		</c:if>
 		<span class="checkmark"></span>
 	</label>
+	<label class="chip">
+		<span class="chip-txt">70대</span>
+		<c:if test="${fn:contains(myClub.club_age,'7') }">
+		<input type="checkbox" value="70대" name="club_ages" checked="checked">
+		</c:if>
+		<c:if test="${!fn:contains(myClub.club_age,'7') }">
+		<input type="checkbox" value="70대" name="club_ages">
+		</c:if>
+		<span class="checkmark"></span>
+	</label>
 </div>
 <hr>
 
@@ -108,8 +118,6 @@
 		</div>
 	</div>
 	<!-- 엠블럼 -->
-	<!-- <i class="fas fa-shield-alt icon"></i>
-			엠블럼 사진 업로드 -->
 	<div class="half_col">
 		<div class="row">
 			<c:if test="${ myClub.filename eq 'undefined' }">
@@ -270,7 +278,6 @@ function removeWhiteSpace(obj){
 			}
 			//파일이 변경되었을 때->O
 			
-			//파일이 변경되지 않았을 때->DB를 업데이트하지 않도록하는 방법?
 			var formData = new FormData($('#club_form')[0]);
 			if(isChanged==1){
 				let club_img=dataURLToBlob($("#img-pre").attr("src"));

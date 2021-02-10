@@ -123,7 +123,7 @@
 </c:if>
 <c:if test="${empty matches }">
 <!-- The Modal -->
-<div onclick="location.href=document.referrer" class="submit_toast" style="display:block">
+<div onclick="location.href=document.referrer" class="submit_toast" style="display:flex">
 
   <!-- Modal content -->
   <div onclick="location.href=document.referrer" class="submit_toast_content">

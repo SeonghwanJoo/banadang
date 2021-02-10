@@ -58,7 +58,7 @@ html{
 .header-wrapper{
 	display:inline-block;
 	margin-right:1rem;
-	padding: 0.1rem 0.2rem 0 0.3rem;
+	padding: 0.1rem 0.2rem 0 0.8rem;
 	font-size:1.3rem;
 	font-weight:bold;
 }
@@ -508,6 +508,7 @@ input[type=text]:focus, select:focus{
 /* modal */
 /* The Modal (background) */
 .modals {
+	
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
 	z-index:98; /* Sit on top */
@@ -526,15 +527,15 @@ input[type=text]:focus, select:focus{
 
 /* Modal Content */
 .modals-content {
+	position:relative;
 	background-color:#fff;
 	color:#000;
-	position:relative;
 	margin: 0 auto;
 	padding: 0.3rem;
 	opacity:0.95;
 	border-radius:0.5rem;
 	width: 85%;
-	max-width: 450px;
+	max-width: 370px;
 }
 body.body, body.body btn{
     font-family: Noto Sans KR,sans-serif;
@@ -668,6 +669,8 @@ body.body, .filter-wrapper{
 }
 .nowrap{
 	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
 }
 .s-chip{
 	min-width:3rem;
@@ -874,6 +877,7 @@ body.body, .filter-wrapper{
 	background-color:#dc3545;
 	color:#fff;
 	border-radius:0.4rem;
+	border:none;
 }
 #submit_delete:focus{
 	outline:none;
@@ -1134,6 +1138,9 @@ a.detail{
 .margin-right{
 	margin-right:0.3rem;
 }
+.m-margin-right{
+	margin-right:0.5rem;
+}
 
 
 /* The toast (background) */
@@ -1164,8 +1171,8 @@ a.detail{
   cursor:pointer;
   background-color: #fff;
   color:#000;
-  width: 60%;
-  padding:1rem 0 0 0;
+  width: 16rem;
+  padding-top:1rem;
   -webkit-animation-name: fadeIn;
   -webkit-animation-duration: 0.4s;
   animation-name: fadeIn;
@@ -1175,8 +1182,7 @@ a.detail{
 .loader_toast_content{
 	border-radius:6px;
 	background-color: #fff;
-	width:5rem;
-	height:5rem;
+	padding:1.6rem;
 	display: flex;
   	align-items: center;
   	flex-direction: column;
@@ -1197,8 +1203,8 @@ a.detail{
 	padding:0.8rem;
 	width:100%;
 }
-.border-right{
-	border-right: 1px solid #fff;
+.border-right-black{
+	border-right: 1px solid #000;
 }
 .border-btm{
 	border-bottom:1px solid #777;
@@ -1310,12 +1316,10 @@ btn-wrapper{
 .middle-title{
 	text-align:center;
 	font-weight: bold;
-	margin:0.5rem 0;
+	margin:1rem 0;
 }
-h6.ages{
-	display:inline-block;
-	text-align:left;
-}
+
+
 .half_col .admin{
 	font-size:1rem;
 	display:none;
@@ -1739,7 +1743,6 @@ div.x-bigger{
 	width:84%;
 }
 .sync{
-	position:relative;
 	border:none;
 	border-radius:0.5rem;
 	height:2.5rem;
@@ -1747,17 +1750,9 @@ div.x-bigger{
 	font-size:0.8rem;
 	background-color:#FFEB00;
 	color:#3C1E1E;
-	margin:0.5rem 1rem;
-	float:right;
-	padding-right:2.5rem;
-}
-.sync-icon{
-	position:absolute;
-	right:0.5rem;
-	top:0.3rem;
-}
-.sync-text{
-	font-size:0.9rem;
+	margin:0.5rem;
+	white-space:nowrap;
+	padding-right:10px;
 }
 
 .file-label{
@@ -1795,11 +1790,7 @@ button.chip-btn{
 	background-color:#fff;
 	color:#000;
 }
-.chip-txt{
-	position:absolute;
-	top:-0.7rem;
-	left:2.2rem;
-}
+
 #img-pre{
 	width:4.5rem;
 	height:4.5rem;
@@ -1863,6 +1854,9 @@ button.chip-btn{
 .padding-left{
 	padding-left:1rem;
 }
+.padding-btm{
+	padding-bottom:0.5rem;
+}
 .padding-right{
 	padding-right:0.5rem;
 }
@@ -1873,22 +1867,25 @@ button.chip-btn{
 	margin-top:0.1rem;
 }
 .chip{
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
-  padding-left:1.5rem;
   height:2rem;
   width:5.5rem;
   margin:0.5rem 0.2rem;
+  padding-left:1rem;
   cursor: pointer;
   line-height: 50px;
   border-radius: 25px;
-  font-size: 1rem;
   background-color: #444;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
+
 .modals-content .chip{
 	background-color:#ddd;
 }
@@ -1922,6 +1919,9 @@ label.chip.m-wider{
 }
 .gray{
 	color:#ccc;
+}
+.modals .gray{
+	color:#777;
 }
 .bold{
 	font-weight:bold;
@@ -2088,23 +2088,23 @@ input:checked ~ .checkmark:after{
 
 .selectbox label {
     position: absolute;
-    top: 1px;  /* �쐞移섏젙�젹 */
-    left: 5px;  /* �쐞移섏젙�젹 */
-    padding: .2rem .3rem;  /* select�쓽 �뿬諛� �겕湲� 留뚰겮 */
+    top: 1px; 
+    left: 5px; 
+    padding: .2rem .3rem;  
     color: #bbb;
-    z-index: -1;  /* IE8�뿉�꽌 label�씠 �쐞移섑븳 怨녹씠 �겢由��릺吏� �븡�뒗 寃� �빐寃� */
+    z-index: -1;  
 }
 
 .selectbox select {
     width: 100%;
-    height: auto;  /* �넂�씠 珥덇린�솕 */
-    line-height: normal;  /* line-height 珥덇린�솕 */
-    font-family: inherit;  /* �룿�듃 �긽�냽 */
-    padding: .2rem .3rem;  /* �뿬諛깃낵 �넂�씠 寃곗젙 */
+    height: auto;  
+    line-height: normal;  
+    font-family: inherit;  
+    padding: .2rem .3rem;  
     border: 0;
-    opacity: 0;  /* �닲湲곌린 */
-    filter:alpha(opacity=0);  /* IE8 �닲湲곌린 */
-    -webkit-appearance: none; /* �꽕�씠�떚釉� �쇅�삎 媛먯텛湲� */
+    opacity: 0;  
+    filter:alpha(opacity=0);  
+    -webkit-appearance: none; 
     -moz-appearance: none;
     appearance: none;
 }

@@ -7,7 +7,7 @@
 
 <tiles-definitions>
     <definition name="myPage" extends="main">
-       <put-attribute name="title" value="나의 페이지"/> 
+       <put-attribute name="title" value="더보기"/> 
        <put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
        <put-attribute name="body" value="/WEB-INF/views/more/myPage.jsp"/>
        <put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>

@@ -235,7 +235,6 @@
 					cache:false,
 					timeout:30000,
 					success:function(data){
-						console.log(data.result);
 						if(data.result=='requested'){
 							$('#club_msg').text('용병 신청  완료');
 						}else if(data.result=='duplicated'){

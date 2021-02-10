@@ -60,7 +60,7 @@
 		}else if(${title eq '팀 관리'}){
 			$('.club').css('color','#fff');
 			$('#club').css('border-top','3px solid #00cd3c');
-		}else if(${title eq '나의 페이지'}){
+		}else if(${title eq '더보기'}){
 			$('.myPage').css('color','#fff');
 			$('#myPage').css('border-top','3px solid #00cd3c');
 		}

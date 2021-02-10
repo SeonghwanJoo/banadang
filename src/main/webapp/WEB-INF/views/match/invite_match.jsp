@@ -38,17 +38,17 @@
 		<span class="input-label">경기 유형(축구/풋살) 선택</span>
 		<div class="row centered-padding">
 			<label class="chip">
-				<span class="chip-txt small-font">전체</span>
+				<span class="small-font">전체</span>
 				<input type="radio" name="type" id="soccer" value="3" checked="checked">
 				<span class="checkmark"></span>
 			</label> 
 			<label class="chip">
-				<span class="chip-txt small-font">축구</span>
+				<span class="small-font">축구</span>
 				<input type="radio" name="type" id="soccer" value="1">
 				<span class="checkmark"></span>
 			</label> 
 			<label class="chip">
-				<span class="chip-txt small-font">풋살</span>
+				<span class="small-font">풋살</span>
 				<input type="radio" name="type" id="futsal" value="2">
 				<span class="checkmark"></span>
 			</label>
@@ -57,12 +57,12 @@
 		<span class="input-label margin-btm">검색 기간 설정</span>
 		<div class="row centered-padding">
 			<label class="chip wider">
-					<span class="chip-txt">전체</span>
+					<span>전체</span>
 					<input type="radio" name="period-opt" id="entire-pr" checked="checked">
 					<span class="checkmark"></span>
 			</label> 
 			<label class="chip wider">
-				<span class="chip-txt">특정 기간</span>
+				<span>특정 기간</span>
 				<input type="radio" name="period-opt" id="specific-pr">
 				<span class="checkmark"></span>
 			</label>

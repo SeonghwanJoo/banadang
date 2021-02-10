@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<c:if test="${not empty user_id }">
 <ul class="ul-list">
 	<li class="li-list">
 		<div class="row">
-			<div class="col">
+			<div class="col nowrap">
 				<c:if test="${empty member.thumbnail_image }">
 				<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
 				</c:if>
@@ -23,8 +23,7 @@
 			<div class="col">
 				<button class="sync" onclick="location.href='${pageContext.request.contextPath}/member/kakaoSync.do'">
 					<img src="${pageContext.request.contextPath }/resources/images/kakao-logo.jpg">
-					<span class="sync-text">프로필</span>
-					<span class="material-icons sync-icon">sync</span>
+					<span>프로필 업데이트하기</span>
 				</button>
 			</div>
 		</div>
@@ -67,14 +66,6 @@
 		</div>
 	</li>
 	</c:if>
-	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/board/notice.do'">
-		<div class="row">
-			<div class="col">
-				<i class="fas fa-bullhorn"></i>
-				<span>공지 사항</span>
-			</div>
-		</div>
-	</li>
 	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/board/qna.do'">
 		<div class="row">
 			<div class="col">
@@ -83,8 +74,6 @@
 			</div>
 		</div>
 	</li>
-</ul>
-<ul class="ul-list non-border-btm ">
 	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/member/appSetting.do'">
 		<div class="row">
 			<div class="col">
@@ -94,7 +83,16 @@
 		</div>
 	</li>
 </ul>
+</c:if>
 <ul class="ul-list non-border-btm ">
+	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/board/notice.do'">
+		<div class="row">
+			<div class="col">
+				<i class="fas fa-bullhorn"></i>
+				<span>공지 사항</span>
+			</div>
+		</div>
+	</li>
 	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/member/policy.do'">
 		<div class="row">
 			<div class="col">

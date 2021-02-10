@@ -60,6 +60,33 @@ public class MemberAjaxController {
 		
 		return map;
 	}
+	@RequestMapping("/member/kakaoSync.do")
+	@ResponseBody
+	public Map<String,Object> kakaoSync(HttpSession session) {
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		
+		String access_token=(String)session.getAttribute("access_token");
+		MemberVO member=new MemberVO();
+		MemberVO profile=new MemberVO();
+		try {
+			
+			member=loginAPI.getUserInfo(access_token);
+			profile=loginAPI.getUpdatedUserInfo(access_token);
+			member.setNickname(profile.getNickname());
+			member.setThumbnail_image(profile.getThumbnail_image());
+			member.setProfile_image(profile.getProfile_image());
+			memberService.updateMember_detail(member);
+			
+			map.put("result", "success");
+			
+		}catch (Exception e) {
+			map.put("result", "errors");
+		}
+		
+		return map;
+	}
+	
 	@RequestMapping("/member/postClubRecruitRequest.do")
 	@ResponseBody
 	public Map<String,Object> postClubRecruitRequest(MatchVO match){

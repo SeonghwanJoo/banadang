@@ -213,19 +213,16 @@ $(function(){
 	});
 	
 	if("${myClub.club_loc}"!=""){
-		console.log('position by myClub 진입');
 		latitude='${myClub.club_locY}';
 		longitude='${myClub.club_locX}';
 		moreList();
 	}else if(navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(function(pos) {
-			console.log('position by geolocation 진입');
 			latitude=pos.coords.latitude;
 			longitude=pos.coords.longitude;
 			moreList();
 		},
 		function(){
-			console.log('position by geolocation error 진입');
 			alert('사용자 위치 접근 허용이 필요합니다');
 			latitude=37.5668260054857;
 			longitude=126.978656785931;

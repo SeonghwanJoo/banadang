@@ -18,7 +18,7 @@
  	<ul class="ul-list">
 		<li class="li-list">
 			<div class="row small-font ">
-				<div class="col club_main">
+				<div class="col club_main nowrap">
 					<c:if test="${club.filename ne 'undefined' }">
 					<img src="imageView.do?club_num=${club.club_num}" alt="Avatar" class="avatar emblem">
 					</c:if>
@@ -28,8 +28,8 @@
 					<span class="club_name">${club.club_name }</span><br>
 					<span>${club.club_address }</span>
 				</div>
-				<div class="col">
-					<span class="age">
+				<div class="col nowrap">
+					<span class="">
 						연령대 <span class="xs-font margin-left">${club.club_age }</span>
 					</span><br>
 					<span class="uniform">
@@ -70,10 +70,10 @@
 		<c:if test="${not empty ratings }">
 		<c:forEach items="${ratings }" var="rating">
 		<li class="li-list">
+			<span class="small-font gray">${fn:substring(rating.nickname, 0, 1) }****</span>
 			<div class="main-row">
-				<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>${rating.match_date}</span>
+				<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${rating.match_date}" pattern="yy.MM.dd"/></span>
 				<span class="match-item">${rating.address}</span>
-				<span class="gray small-font">매치의 평가</span>
 			</div>
 			<div class="row small-font ">
 				<div class="col flex-start">
@@ -91,7 +91,7 @@
 			</div>
 			<c:if test="${not empty rating.rating_detail }">
 			<div class="row">
-				<div class="col margin">
+				<div class="col margin-top">
 					<p class="detail padding">${rating.rating_detail }</p>
 				</div>
 			</div>

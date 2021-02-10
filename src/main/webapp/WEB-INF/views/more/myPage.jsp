@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<c:if test="${not empty user_id }">
 <ul class="ul-list">
 	<li class="li-list">
 		<div class="row">
-			<div class="col">
+			<div class="col nowrap">
 				<c:if test="${empty member.thumbnail_image }">
 				<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
 				</c:if>
@@ -21,10 +21,9 @@
 				<span class="xs-font ">${member.email }</span>
 			</div>
 			<div class="col">
-				<button class="sync" onclick="location.href='${pageContext.request.contextPath}/member/kakaoSync.do'">
+				<button class="sync" onclick="kakaoSync()">
 					<img src="${pageContext.request.contextPath }/resources/images/kakao-logo.jpg">
-					<span class="sync-text">프로필</span>
-					<span class="material-icons sync-icon">sync</span>
+					<span>프로필 업데이트하기</span>
 				</button>
 			</div>
 		</div>
@@ -67,14 +66,6 @@
 		</div>
 	</li>
 	</c:if>
-	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/board/notice.do'">
-		<div class="row">
-			<div class="col">
-				<i class="fas fa-bullhorn"></i>
-				<span>공지 사항</span>
-			</div>
-		</div>
-	</li>
 	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/board/qna.do'">
 		<div class="row">
 			<div class="col">
@@ -83,8 +74,6 @@
 			</div>
 		</div>
 	</li>
-</ul>
-<ul class="ul-list non-border-btm ">
 	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/member/appSetting.do'">
 		<div class="row">
 			<div class="col">
@@ -94,7 +83,16 @@
 		</div>
 	</li>
 </ul>
+</c:if>
 <ul class="ul-list non-border-btm ">
+	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/board/notice.do'">
+		<div class="row">
+			<div class="col">
+				<i class="fas fa-bullhorn"></i>
+				<span>공지 사항</span>
+			</div>
+		</div>
+	</li>
 	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/member/policy.do'">
 		<div class="row">
 			<div class="col">
@@ -110,6 +108,19 @@
 	 data-ad-width   = "320" 
 	 data-ad-height  = "100"></ins>
  </div>
+ <!-- The Modal -->
+<div id="toast" class="submit_toast">
+  <!-- Modal content -->
+    <div id="submit_toast_content" class="submit_toast_content">
+		<div class="row centered margin-btm centered-padding">
+			<span id="club_msg">카카오 프로필과 동기화되었습니다.</span>
+		</div>
+		<div class="row margin-top centered">
+			<button class="alert-btn" id="confirm">확인</button>
+		</div>
+	</div>
+</div>
+<!-- The Modal -->
 <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -125,6 +136,30 @@ function sendLink() {
     		'club_num': '${myClub.club_num}',
     		'nickname': '${member.nickname}'
     	}
-    })
-  }
+   })
+}
+function kakaoSync(){
+	$.ajax({
+		
+		url:'kakaoSync.do',
+		type: 'post',
+		dataType:'json',
+		cache:false,
+		success:function(data){
+			if(data.result=='success'){
+				$("#toast").css("display","flex");
+				$("#confirm").click(function(){
+					location.reload();
+				});
+			}else if (data.result=='errors'){
+				
+			}
+		},
+		error:function(){
+			alert('네트워크 오류 발생');
+		}
+		
+		
+	});
+}
 </script>

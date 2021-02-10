@@ -18,6 +18,7 @@ public class ClubVO implements Serializable {
 	private String match_detail;
 	private Integer request_num;
 	private Integer acceptance;
+	private String nickname;
 	private String[] club_ages;
 	private String club_address;
 	private Integer club_num;
@@ -41,6 +42,13 @@ public class ClubVO implements Serializable {
 	private String start_time;
 	private String end_time;
 	private String address;
+	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public String getCancel() {
 		return cancel;
 	}

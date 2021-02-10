@@ -271,7 +271,7 @@ public class LoginAPI {
 				map.put("refresh_token", element.getAsJsonObject().get("refresh_token").getAsString());
 			}
 			if (element.getAsJsonObject().get("refresh_token_expires_in") != null) {
-				map.put("expires_in", element.getAsJsonObject().get("refresh_token_expires_in"));
+				map.put("expires_in", element.getAsJsonObject().get("refresh_token_expires_in").getAsString());
 			}
 			map.put("result", "success");
 

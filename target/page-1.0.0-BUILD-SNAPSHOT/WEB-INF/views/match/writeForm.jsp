@@ -79,9 +79,8 @@
 		</div>
 		<div class="row"><div class="col"><span class="msg" id="date_msg"></span></div></div>
 		<hr class="hr">
-		<div class="row">
+		<div class="row centered-padding">
 			<div class="input-container col selectbox margin-top">
-				<!-- <i class="far fa-clock icon margin-top"></i> -->
 				<label for="start_time">시작 시간 선택</label>
 				<select class="time input-field" id="start_time" name="start_time">
 					<option value="" selected>시작 시간 선택</option>
