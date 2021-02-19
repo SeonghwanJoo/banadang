@@ -2,6 +2,7 @@ package kr.spring.member.controller;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,11 +18,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.nimbusds.jwt.ReadOnlyJWTClaimsSet;
+import com.nimbusds.jwt.SignedJWT;
 
 import kr.spring.club.domain.ClubVO;
 import kr.spring.club.service.ClubService;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
+import kr.spring.member.domain.AppleServicesResponse;
 import kr.spring.member.domain.MemberVO;
 import kr.spring.member.domain.MsgVO;
 import kr.spring.member.domain.ReportVO;
@@ -44,7 +53,45 @@ public class MemberController {
 	
 	@Resource
 	private MatchService matchService;
-
+	
+	@RequestMapping("/member/appleLogin.do")
+	public String appleLogin(AppleServicesResponse appleResp) {
+		
+		//code, id_token, state, user(name, email) 정보를 받는다 by ajax
+		//id_token으로 decode해서 validation check를 한다
+		//validation 이 false이면 로그인 실패로 process를 close한다
+		//validation이 true이면 sub, name, email, refresh token
+		//sub가 기존 유저 인지 아닌지 확인해서 신규 유저이면 신규 아이디로 등록한다
+		//기존 유저이면 로그인 처리한다
+		//애플 로그인 후 session이 만료되었을 때 자동 로그인 어떻게 처리 할지?
+		//1.refreshtoken 은 하루에 1회만 호출 가능, 2. sub 가 변하는 값인지?
+		//sub로 쿠키를 만든다. 해당 login interceptor에서 해당 아이디로 로그인한다.
+		
+		//로그아웃? session을 삭제 하고 쿠키도 삭제한다
+		//탈퇴
+		/*
+		 * logger.info("appleLogin.do 진입 " ); String id_token=appleResp.getId_token();
+		 * String id=null; try { SignedJWT signedJWT = SignedJWT.parse(id_token);
+		 * ReadOnlyJWTClaimsSet payload = signedJWT.getJWTClaimsSet();
+		 * id=payload.getStringClaim("sub"); }catch (ParseException e) {
+		 * e.printStackTrace(); }
+		 * 
+		 * 
+		 * 
+		 * JsonParser parser = new JsonParser(); JsonElement element =
+		 * parser.parse(appleResp.getUser()); JsonObject obj=element.getAsJsonObject();
+		 * String
+		 * nickname=obj.get("firstName").getAsString()+obj.get("lastName").getAsString()
+		 * ; String email=obj.get("email").getAsString();
+		 * 
+		 * 
+		 * logger.info("id : "+id); logger.info("nickname : "+nickname);
+		 * logger.info("email : "+email);
+		 */
+		
+		return "redirect:/main/main.do";
+	}
+	
 	@RequestMapping("/member/login.do")
 	public String kakaoLogin(@RequestParam String code,
 							 @RequestParam(required=false) boolean state,
@@ -109,7 +156,7 @@ public class MemberController {
             		//loginType 3,4 invitedLogin.do&&각각 신규회원/재가입회원
             		//loginType 5,6 votedLogin.do&&각각 신규회원/재가입회원
             		session.setAttribute("member",memberVO);
-            		session.setAttribute("code",code);
+            		//session.setAttribute("code",code);
             		session.setAttribute("loginType",loginType);
             		return "redirect:/member/agreement.do";
             		// 약간 동의 페이지로 redirect한다
@@ -243,8 +290,21 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/logout.do")
-	public String kakaoLogout(HttpSession session) {
-		loginAPI.kakaoLogout((String)session.getAttribute("access_token"));
+	public String kakaoLogout(HttpSession session,
+							  HttpServletRequest request,
+							  HttpServletResponse response) {
+		String access_token=(String)session.getAttribute("access_token");
+		Cookie appLoginCookie= WebUtils.getCookie(request, "AppSi");
+		if(access_token!=null) {
+			loginAPI.kakaoLogout(access_token);
+		}
+		if(appLoginCookie!=null) {
+			Cookie loginCookie=new Cookie("AppSi", "");
+			loginCookie.setPath("/");
+			loginCookie.setMaxAge(0);
+			response.addCookie(loginCookie);
+		}
+		
 	    session.invalidate();
 	    return "redirect:/main/main.do";
 	}

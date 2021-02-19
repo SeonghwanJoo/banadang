@@ -36,6 +36,7 @@
 				</c:if>
 				<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>주 활동 요일 ${clubRecruit.act_day}</span>
 				<span class="match-item"><i class="far fa-clock margin-right"></i>시간대 ${clubRecruit.act_time }</span>
+				<span class="material-icons float-right cursor" id="report_more">more_vert</span>
 			</div>
 			<div class="row small-font">
 				<div class="col club_main">
@@ -181,13 +182,23 @@
 		</div>
 	</div>
 </div>
+<!-- report modal -->
+<div id="report_more_modal" class="confirm-modals">
+	<!-- Modal content -->
+	<div class="confirm-modal-content">
+		<div class="sub-content">
+			<button id="report" class="pos-btn" onclick="location.href='${pageContext.request.contextPath }/member/writeReport.do?source=3&reported_id=${clubRecruit.id}&reporting_id=${user_id}&write_num=${clubRecruit.clubRecruit_num}&content=${clubRecruit.clubRecruit_detail }&name=${clubRecruit.club_name }'">신고하기</button>
+		</div>
+		<div class="sub-content">
+			<button id="report-more-cancel-btn" class="neg-btn">닫기</button>
+		</div>
+	</div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	//이미지 지도에서 마커가 표시될 위치입니다 
+
 	var markerPosition  = new kakao.maps.LatLng(${clubRecruit.club_locY}, ${clubRecruit.club_locX}); 
 	
-	// 이미지 지도에 표시할 마커입니다
-	// 이미지 지도에 표시할 마커는 Object 형태입니다
 	var marker = new kakao.maps.Marker({
 	    position: markerPosition,
 	    text:'${clubRecruit.club_loc}'
@@ -204,6 +215,7 @@
 	marker.setMap(map); 
 	$(function(){
 		
+		
 		if (${clubRecruit.club_color eq 'rgb(0, 0, 0)'}){
 			$(".color").css("border","1px solid #fff");
 		}
@@ -211,9 +223,19 @@
 		$('#more').click(function(){
 			$('#more_modal').css('display','block');
 		});
+		
 		$('#more-cancel-btn').click(function(){
 			$('#more_modal').css('display','none');
 		});
+		
+		$('#report_more').click(function(){
+			$('#report_more_modal').css('display','block');
+		});
+		
+		$('#report-more-cancel-btn').click(function(){
+			$('#report_more_modal').css('display','none');
+		});
+		
 		$('#submit').click(function(){
 			
 			

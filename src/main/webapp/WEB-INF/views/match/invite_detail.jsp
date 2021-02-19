@@ -15,7 +15,7 @@
 		<input type="submit" id="submit" value="신청">
 		</c:if>
 		<c:if test="${match.club_num==myClub.club_num && myClub.club_auth>4 }">
-		<span class="material-icons more cursor xl-font" id="report_more">more_horiz</span>
+		<span class="material-icons more cursor xl-font" id="more">more_horiz</span>
 		</c:if>
 	</div>
 </div>
@@ -193,7 +193,7 @@
 		
 		$('#submit').click(function(){
 		
-			postMatchRequest( ${match.match_num}, ${user_id}, '${myClub.club_num}', $('#request_detail').val(),'${match.id}','${match.club_num}');
+			postMatchRequest( ${match.match_num}, '${user_id}', '${myClub.club_num}', $('#request_detail').val(),'${match.id}','${match.club_num}');
 			
 
 		});

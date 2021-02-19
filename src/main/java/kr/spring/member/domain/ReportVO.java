@@ -10,6 +10,13 @@ public class ReportVO {
 	private String content;
 	private String reg_date;
 	private String name;
+	private Integer reason;
+	public Integer getReason() {
+		return reason;
+	}
+	public void setReason(Integer reason) {
+		this.reason = reason;
+	}
 	public String getName() {
 		return name;
 	}
@@ -57,6 +64,12 @@ public class ReportVO {
 	}
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
+	}
+	@Override
+	public String toString() {
+		return "ReportVO [report_num=" + report_num + ", source=" + source + ", reported_id=" + reported_id
+				+ ", reporting_id=" + reporting_id + ", write_num=" + write_num + ", content=" + content + ", reg_date="
+				+ reg_date + ", name=" + name + "]";
 	}
 	
 }

@@ -89,20 +89,25 @@ public class MainController {
 		String user_id = (String) session.getAttribute("user_id");
 
 		MatchVO match = matchService.selectMatchByMatch_num(match_num);
-		match.setClub_num(club_num);
-		if (user_id != null) {
+		if (match!=null) {
+			
+			match.setClub_num(club_num);
+			if (user_id != null) {
 
-			match.setId(user_id);
-			addVoteResult(match, vote_status);
-			addRatingResult(match, clubs_rating);
+				match.setId(user_id);
+				addVoteResult(match, vote_status);
+				addRatingResult(match, clubs_rating);
 
+			}
+			mav.addObject("match", match);
+			List<BoardVO> answers = boardService.selectVote_answer(match);
+			mav.addObject("answers", answers);
+			
 		}
-		mav.addObject("match", match);
-		List<BoardVO> answers = boardService.selectVote_answer(match);
-		mav.addObject("answers", answers);
 		mav.addObject("isMain", isMain);
 		mav.setViewName("vote");
 		mav.addObject("title", "경기 참불 투표");
+		
 		return mav;
 	}
 

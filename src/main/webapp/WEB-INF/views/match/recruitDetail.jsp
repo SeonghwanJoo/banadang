@@ -37,6 +37,7 @@
 				</c:if>
 				<span class="match-item"><i class="far fa-calendar-alt margin-right"></i>${match.match_date}</span>
 				<span class="match-item"><i class="far fa-clock margin-right"></i>${match.start_time }~${match.end_time }</span>
+				<span class="material-icons float-right cursor" id="report_more">more_vert</span>
 			</div>
 			<div class="row small-font gray">
 				<div class="col club_main">
@@ -182,6 +183,18 @@
 		</div>
 	</div>
 </div>
+<!-- report modal -->
+<div id="report_more_modal" class="confirm-modals">
+	<!-- Modal content -->
+	<div class="confirm-modal-content">
+		<div class="sub-content">
+			<button id="report" class="pos-btn" onclick="location.href='${pageContext.request.contextPath }/member/writeReport.do?source=2&reported_id=${match.id}&reporting_id=${user_id}&write_num=${match.recruit_num}&content=${match.recruit_detail }&name=${match.club_name }'">신고하기</button>
+		</div>
+		<div class="sub-content">
+			<button id="report-more-cancel-btn" class="neg-btn">닫기</button>
+		</div>
+	</div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
@@ -257,6 +270,14 @@
 		$('#cancel-btn').click(function(){
 			$('#recruit_modal').css('display','none');
 		});
+		
+		$('#report_more').click(function(){
+			$('#report_more_modal').css('display','block');
+		});
+		$('#report-more-cancel-btn').click(function(){
+			$('#report_more_modal').css('display','none');
+		});
+		
 	});
   	
 </script>

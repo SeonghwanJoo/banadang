@@ -1,7 +1,6 @@
 package kr.spring.member.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -11,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
 import kr.spring.member.domain.MsgVO;
+import kr.spring.member.domain.ReportVO;
 
 public interface MemberMapper {
 	
@@ -131,5 +131,7 @@ public interface MemberMapper {
 	@Insert("insert into gentlepro.msg (sender,receiver,content,club_num) values (#{id},#{home_name},'팀 가입 신청합니다.   ',#{club_num})")
 	public void insertMsgForClubRecruitReq(MatchVO match);
 	
+	@Insert("insert into gentlepro.report (source, reported_id, reporting_id, write_num, name, content, reason) values (#{source}, #{reported_id}, #{reporting_id}, #{write_num}, #{name}, #{content}, #{reason})")
+	public void insertReport(ReportVO report);
 	
 }

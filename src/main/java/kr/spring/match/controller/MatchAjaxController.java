@@ -1,6 +1,7 @@
 package kr.spring.match.controller;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
+import kr.spring.member.service.LoginAPI;
 
 @Controller
 public class MatchAjaxController {
@@ -22,6 +24,9 @@ public class MatchAjaxController {
 	
 	@Resource
 	private MatchService matchService;
+	
+	@Resource
+	private LoginAPI loginAPI;
 	
 	@RequestMapping("/match/postMatchRequest.do")
 	@ResponseBody
@@ -89,13 +94,21 @@ public class MatchAjaxController {
 	@ResponseBody
 	public Map<String,Object> updateMatch(MatchVO match){
 		
+		logger.info("update Match : "+match.getMatch_date());
 		Map<String,Object> map=new HashMap<String, Object>();
 		try {
+			
 			matchService.updateMatch(match);
+			HashSet<String> uid_list=matchService.selectMembersForPostedMatch(match);
+			
+			if(!uid_list.isEmpty()) {
+				loginAPI.sendMessage(uid_list, match.getMatch_date()+"일의 경기 내용이 수정되었습니다.");
+			}
 			map.put("result", "updated");
 		}catch(Exception e) {
 			map.put("result", "errors");
 		}
+		//알림 추가
 		return map;
 		
 	}

@@ -1,6 +1,5 @@
 package kr.spring.member.service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -15,6 +14,7 @@ import kr.spring.match.domain.MatchVO;
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.domain.MemberVO;
 import kr.spring.member.domain.MsgVO;
+import kr.spring.member.domain.ReportVO;
 
 @Service("memberService")
 public class MemberServiceImpl implements MemberService{
@@ -223,6 +223,11 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.updateMemberForReValidation(member);
 		memberMapper.insertMember_detail(member);
 		
+	}
+
+	@Override
+	public void insertReport(ReportVO report) {
+		memberMapper.insertReport(report);
 	}
 
 }

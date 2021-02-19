@@ -7,6 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
+<meta name="appleid-signin-client-id" content="com.gentlepro.services">
+<meta name="appleid-signin-redirect-uri" content="https://gentlepro.net/member/appleLogin.do">
+<meta name="appleid-signin-scope" content="name email">
+<meta name="appleid-signin-state" content="user authentication request">
+<meta name="appleid-signin-nonce" content="nonce">
+<meta name="appleid-signin-use-popup" content="true">
 <title><tiles:getAsString name="title"/></title>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6W9GZKN1FV"></script>
@@ -53,7 +59,7 @@
 <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
 <script src="https://kit.fontawesome.com/154da1ea0f.js" ></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0646bcb11e5b9bbdb24fc9153f7693ae&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32776969383e4a77d92f6e18dd233bc5&libraries=services"></script>
 </head>
 <body class="body">
 <div class="container">
@@ -100,17 +106,6 @@ function setPushToken(pushToken,device_id,push_type){
 	setCookie('nPT_01', pushToken, 60);
 	setCookie('nPT_02', device_id, 60);
 	setCookie('nPT_03', push_type, 60);
-	//뉴 쿠키를 생성한다
-	//로그인 한다
-	// 기존 쿠키와 뉴 쿠키를 비교한다
-	//기존 쿠키가 없거나 기존 크키와 뉴쿠키가 다를 때는 토큰을 등록한다
-	//이미 등록된 토큰을 또 등록하면 어케되는지 확인 필요
-	
-	//기존 쿠키와 비교 한다
-	//기존 쿠키가 없거나 새로 받은 쿠키가 새로우면 새로운 쿠키로 생성한다
-	//쿠키를 생성했을 때는 id가 없는 상태 토큰은 로그인 된 상태에서 등록이 가능하다
-	//로그인 한다
-	//토큰이 업데이트 된지 여부를 판별
 	
 	return "token in new cookie : "+getCookie('nPT_01');
 	
@@ -118,7 +113,7 @@ function setPushToken(pushToken,device_id,push_type){
 function setCookie(cName, cValue, cDay){
 	var expire = new Date();
 	expire.setDate(expire.getDate() + cDay);
-	cookies = cName + '=' + escape(cValue) + '; path=/ '; // 한글 깨짐을 막기위해 escape(cValue)를 합니다.
+	cookies = cName + '=' + escape(cValue) + '; path=/ '; 
 	if(typeof cDay != 'undefined') cookies += ';expires=' + expire.toGMTString() + ';';
 	document.cookie = cookies;
 }

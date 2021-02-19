@@ -279,9 +279,6 @@ $( function() {
 		$('#type_msg').text('');
 		$('#type').val(2);
 	});
-	$('#home').click(function(){
-		$('#home_msg').text('');
-	});
 	$('#address').click(function(){
 		$('#address_msg').text('');
 	});
@@ -299,10 +296,6 @@ $( function() {
 		
 		if($('#type').val()==''){
 			$('#type_msg').css('color','red').text('축구/풋살을 선택해주세요');
-			return false;
-		}
-		if($('#home').val()==''){
-			$('#home_msg').css('color','red').text('우리팀을 선택해주세요');
 			return false;
 		}
 		if(!$('#away').val().replace(/^\s+|\s+$/g, '')){

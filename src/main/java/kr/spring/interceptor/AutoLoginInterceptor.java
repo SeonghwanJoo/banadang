@@ -44,6 +44,7 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 		if(user_id==null) {
 			
 			Cookie loginCookie= WebUtils.getCookie(request, "GpFHzB");
+			Cookie appLoginCookie= WebUtils.getCookie(request, "AppSi");
 			if(loginCookie != null) {
 				String refresh_token=loginCookie.getValue();
 				Map<String,Object> map= new HashMap<String,Object>();
@@ -81,6 +82,7 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 			                        club.setClub_num(myClubs.get(0).getClub_num());
 			                    	session.setAttribute("myClub", clubService.selectMyClubDetails(club));
 			                    }
+			                    return true;
 			                    
 			            	}
 						}
@@ -89,6 +91,35 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 					}
 					
 				}
+			}
+			if(appLoginCookie != null) {
+				
+				String id=appLoginCookie.getValue();
+				MemberVO existingMember=memberService.getMember(id);
+				logger.info("appLoginCookieValue : "+id);
+				if(existingMember !=null && existingMember.getMem_auth()!=3) {
+					
+					session.setAttribute("mem_auth", existingMember.getMem_auth());
+            		List<ClubVO> myClubs=clubService.selectMyClubs(id);
+                	session.setAttribute("user_id", id);
+                    session.setAttribute("myClubs", myClubs);
+                    
+                    if(myClubs.size()>0) {
+                    	ClubVO club=new ClubVO();
+                        club.setId(id);
+                        club.setClub_num(myClubs.get(0).getClub_num());
+                    	session.setAttribute("myClub", clubService.selectMyClubDetails(club));
+                    }
+                    if(appLoginCookie.getMaxAge()<(60*60*24*30)) {
+                    	Cookie refreshCookie=new Cookie("AppSi", id);
+                    	refreshCookie.setPath("/");
+                    	refreshCookie.setMaxAge(60*60*24*60);
+            			response.addCookie(refreshCookie);
+                    }
+                    
+					
+				}
+				
 			}
 		
 		}

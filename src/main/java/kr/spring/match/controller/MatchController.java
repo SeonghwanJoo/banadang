@@ -35,7 +35,7 @@ public class MatchController {
 	private ClubService clubService; 
 	
 	@Resource
-	private LoginAPI loginAPI;
+	private LoginAPI loginAPI; 
 	
 	@ModelAttribute
 	public MatchVO initCommand() {
@@ -60,7 +60,7 @@ public class MatchController {
 	public String registerMatch(MatchVO matchVO) {
 		
 		
-		matchService.insertMatch(matchVO);
+		matchService.insertMatch(matchVO);  
 		HashSet<String> uid_list=matchService.selectMembersForPostedMatch(matchVO);
 		
 		if(!uid_list.isEmpty()) {
@@ -70,7 +70,6 @@ public class MatchController {
 		if(matchVO.getAway()==0) {
 			return "redirect:/match/match_toInvite.do";
 		}
-		//홈팀의 클럽번호나 어웨이팀의 클럽번호에 소속된 모든 id를 list로 받음
 		
 		return "redirect:/main/main.do";
 	}
@@ -191,11 +190,16 @@ public class MatchController {
 		ModelAndView mav=new ModelAndView();
 		MatchVO match=matchService.selectMatchToInviteByMatch_num(match_num);
 		
+		List<ClubVO> list = new ArrayList<ClubVO> ();
+		list=clubService.selectAllClubs();
+		
 		mav.setViewName("modifyMatch");
 		mav.addObject("isFromClub",isFromClub);
 		logger.info("isFromClub : "+isFromClub);
 		mav.addObject("title","경기 수정");
 		mav.addObject("match", match);
+		mav.addObject("list",list);
+		
 		return mav;
 	}
 	

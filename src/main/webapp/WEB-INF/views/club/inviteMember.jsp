@@ -58,7 +58,7 @@
 		<div class="sub-content">
 			<div class="main-row">
 				<div class="login">
-					<p>간편 로그인하고 GentlePro에서 우리팀을 관리해보세요</p>
+					<p>간편 로그인하고 Gentlepro에서 우리팀을 관리해보세요</p>
 					<div class="login-wrapper narrow">
 						<a onclick="loginProcess()">
 							<img class="login_btn"

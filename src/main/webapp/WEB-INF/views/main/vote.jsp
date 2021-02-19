@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:if test="${not empty user_id }">
+<c:if test="${not empty match }">
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
 		<c:if test="${isMain==true }">
@@ -285,6 +285,22 @@
 		</div>
 		<div class="row margin-top centered">
 			<button class="alert-btn">확인</button>
+		</div>
+	</div>
+</div>
+</c:if>
+<c:if test="${empty match }">
+<!-- The Modal -->
+<div id="toast" class="submit_toast" style="display:flex">
+  <!-- Modal content -->
+    <div id="submit_toast_content" class="submit_toast_content">
+		<div class="row centered margin-btm centered-padding">
+			<span id="club_msg">삭제된 경기입니다.</span>
+		</div>
+		<div class="row margin-top centered">
+			<div class="col">
+				<button class="alert-btn" id="confirm" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">닫기</button>
+			</div>
 		</div>
 	</div>
 </div>

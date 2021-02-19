@@ -43,6 +43,7 @@
 				<img class="login_btn"
 				src="${pageContext.request.contextPath}/resources/images/kakao_login/ko/kakao_login_medium_wide.png">
 			</a>
+			<div id="appleid-signin" class="signin-button" data-color="white" data-border="false" data-type="sign-in"></div>
 			<div class="row margin-top" style="display:none" id="sel_login">
 				<label class="login-label">
 					로그인 상태 유지
@@ -394,7 +395,10 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
 <script>
+
+
 Kakao.init('32776969383e4a77d92f6e18dd233bc5');
 
 function sendLinkForVote(match_num,club_num,match_date,address,start_time) {
@@ -446,12 +450,16 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 		});
 		
  }
+var state;
+if($('input:checkbox').is(':checked')){
+	state=true;
+}
 function login(){
 	var uri="";
 		 uri+="https://kauth.kakao.com/oauth/authorize?client_id=0646bcb11e5b9bbdb24fc9153f7693ae"
 			+"&redirect_uri="+$(location).attr('protocol')+"//"+"${pageContext.request.serverName }${pageContext.request.contextPath}/member/login.do"
 			+"&response_type=code";
-	if($('input:checkbox').is(':checked')){
+	if(state){
 		uri+="&state=true";
 	}
 	location.href=uri;
@@ -465,7 +473,52 @@ function login(){
 		$('input:checkbox').prop('checked',false);
 	}
 	 
+	if(userAgent.indexOf('iphone')==-1 && userAgent.indexOf('mac')==-1 && userAgent.indexOf('ipad')==-1 ){
+		$('#appleid-signin').css('display','none');
+	}
+	
+	 
 	let matches=new Array();
+	
+	document.addEventListener('AppleIDSignInOnSuccess', function(data) {
+	     
+		 var detail = data.detail;
+		 console.log(detail.authorization.id_token);
+	     console.log(detail.user);
+	     var nickname = '';
+	     var email='';
+	     if (detail.user != null){
+	    	 nickname=detail.user.name.firstName +' '+ detail.user.name.lastName;
+	    	 email=detail.user.email
+	     }
+	     //data를 ajax로 넘긴다
+	     $.ajax({
+	    	url:'${pageContext.request.contextPath}/member/signInWithApple.do',
+	    	type:'post',
+	    	data: {
+	    		id_token:detail.authorization.id_token,
+	    		nickname:nickname,
+	    		email:email,
+	    		state:state
+	    	},
+	    	timeout:30000,
+	    	dataType:'json',
+			cache:false,
+			success:function(res){
+				if(res.result='success'){
+					if(res.loginType>0){
+						location.href='${pageContext.request.contextPath}/member/agreement.do';
+					}else{
+						location.reload();
+					}
+					
+				}
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+	     });
+	});
 	 
 	<c:forEach items="${match_list}" var="match">
 		var obj={};

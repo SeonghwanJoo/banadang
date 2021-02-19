@@ -44,7 +44,7 @@
 					<span class="xs-font gray right-date nowrap">
 						<fmt:formatDate value="${msg.register_date }" type="both" pattern="yy.MM.dd HH:mm"/>
 					</span>
-					<span class="material-icons more cursor m-font gray" id="more" onclick="openOption(${msg.msg_num},'${msg.match_num }','${msg.club_num }','${msg.sender }')" >more_vert</span>
+					<span class="material-icons more cursor m-font gray" id="more" onclick="openOption(${msg.msg_num},'${msg.match_num }','${msg.club_num }','${msg.sender }','${msg.content }','${msg.nickname }')" >more_vert</span>
 				</div>
 				<p id="${msg.msg_num }" data-club="${msg.club_num }">${msg.content }</p>
 			</div>
@@ -75,6 +75,8 @@
 			<button id="reply" class="pos-btn">답장</button>
 			<hr>
 			<button id="delete" class="pos-btn red">삭제</button>
+			<hr>
+			<button id="report" class="neg-btn">신고하기</button>
 		</div>
 		<div class="sub-content">
 			<button id="more-cancel-btn" class="neg-btn">닫기</button>
@@ -111,7 +113,7 @@ window.onclick = function(event) {
 }
 
 
-function openOption(msg_num,match_num,club_num,sender){
+function openOption(msg_num,match_num,club_num,sender,content,nickname){
 	$('#more_modal').css('display','block');
 	$('#delete').click(function(){
 		$.ajax({
@@ -141,6 +143,9 @@ function openOption(msg_num,match_num,club_num,sender){
 			}
 		});
 		
+	});
+	$('#report').click(function(){
+		location.href='${pageContext.request.contextPath }/member/writeReport.do?source=4&'+'reported_id='+sender+'&reporting_id=${user_id}&write_num='+msg_num+'&content='+content+'&name='+nickname;
 	});
 	$('#reply').click(function(){
 		location.href='writeMsg.do?match_num='+match_num+'&club_num='+club_num+'&id='+sender;

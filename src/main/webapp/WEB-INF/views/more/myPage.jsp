@@ -14,18 +14,17 @@
 				<img src="${member.thumbnail_image }" alt="Avatar" class="avatar">
 				</c:if>
 				<span>${member.nickname }  </span>
-				<c:if test="${not empty member.age_range }">
-				<span> | ${fn:substring(member.age_range,0,1)}0대</span>
-				</c:if>
 				<br>
 				<span class="xs-font ">${member.email }</span>
 			</div>
+			<c:if test="${fn:length(user_id) lt 12 }">
 			<div class="col">
 				<button class="sync" onclick="kakaoSync()">
 					<img src="${pageContext.request.contextPath }/resources/images/kakao-logo.jpg">
 					<span>프로필 업데이트하기</span>
 				</button>
 			</div>
+			</c:if>
 		</div>
 	</li>
 </ul>

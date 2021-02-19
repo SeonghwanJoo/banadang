@@ -14,7 +14,13 @@
 	overflow:hidden;
 	text-overflow: ellipsis;
 }
-
+.signin-button {
+	
+	width:300px;
+	height:45px;
+	margin-top:10px;
+	
+}
 
 
 .fixed_top, div.bottom_menu, .sticky{
@@ -1952,6 +1958,7 @@ label.chip.m-wider{
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  white-space: nowrap;
 }
 .display-none{
 	display:none;

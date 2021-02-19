@@ -6,6 +6,7 @@ import java.util.Map;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
 import kr.spring.member.domain.MsgVO;
+import kr.spring.member.domain.ReportVO;
 
 public interface MemberService {
 	public MemberVO getMember(String id);
@@ -36,5 +37,6 @@ public interface MemberService {
 	public Integer selectCountMsg(String user_id);
 	public void deleteMember(MemberVO member);
 	public void updateMemberForReValidation(MemberVO member);
+	public void insertReport(ReportVO report);
 	
 }
