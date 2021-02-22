@@ -455,14 +455,23 @@ if($('input:checkbox').is(':checked')){
 	state=true;
 }
 function login(){
-	var uri="";
+	/* var uri="";
 		 uri+="https://kauth.kakao.com/oauth/authorize?client_id=0646bcb11e5b9bbdb24fc9153f7693ae"
 			+"&redirect_uri="+$(location).attr('protocol')+"//"+"${pageContext.request.serverName }${pageContext.request.contextPath}/member/login.do"
 			+"&response_type=code";
 	if(state){
 		uri+="&state=true";
 	}
-	location.href=uri;
+	location.href=uri; */
+	
+	Kakao.Auth.login({
+		  success: function(response) {
+		    console.log(response);
+		  },
+		  fail: function(error) {
+		    console.log(error);
+		  },
+		});
  }
  $(function(){
 	 
