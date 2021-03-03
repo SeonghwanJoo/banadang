@@ -102,7 +102,7 @@ public class MatchAjaxController {
 			HashSet<String> uid_list=matchService.selectMembersForPostedMatch(match);
 			
 			if(!uid_list.isEmpty()) {
-				loginAPI.sendMessage(uid_list, match.getMatch_date()+"일의 경기 내용이 수정되었습니다.");
+				loginAPI.sendMessage(uid_list, "예정된 경기("+match.getHome_name()+" Vs "+match.getAway_name()+")가 일부 수정되었습니다.");
 			}
 			map.put("result", "updated");
 		}catch(Exception e) {

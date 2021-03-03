@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper  namespace="kr.spring.board.dao.BoardMapper">
+<insert id="insertNotice" parameterType="boardVO" useGeneratedKeys="true" keyProperty="notice_num">
+insert into gentlepro.notice (id,content,title) values (#{id},#{content},#{title})
+	<selectKey keyProperty="notice_num" resultType="integer" order="AFTER">
+		select max(notice_num) as notice_num from gentlepro.notice
+	</selectKey>
+</insert>
+<insert id="insertQna" parameterType="boardVO" useGeneratedKeys="true" keyProperty="qna_num">
+insert into gentlepro.qna (id,content,title,fromUser) values (#{id},#{content},#{title},
+		#{fromUser})
+	<selectKey keyProperty="qna_num" resultType="integer" order="AFTER">
+		select max(qna_num) as qna_num from gentlepro.qna
+	</selectKey>
+</insert>
+</mapper>

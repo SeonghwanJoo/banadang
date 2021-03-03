@@ -1,8 +1,6 @@
 package kr.spring.member.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -20,17 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.nimbusds.jwt.ReadOnlyJWTClaimsSet;
-import com.nimbusds.jwt.SignedJWT;
 
 import kr.spring.club.domain.ClubVO;
 import kr.spring.club.service.ClubService;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.match.service.MatchService;
-import kr.spring.member.domain.AppleServicesResponse;
 import kr.spring.member.domain.MemberVO;
 import kr.spring.member.domain.MsgVO;
 import kr.spring.member.domain.ReportVO;
@@ -54,44 +46,6 @@ public class MemberController {
 	@Resource
 	private MatchService matchService;
 	
-	@RequestMapping("/member/appleLogin.do")
-	public String appleLogin(AppleServicesResponse appleResp) {
-		
-		//code, id_token, state, user(name, email) 정보를 받는다 by ajax
-		//id_token으로 decode해서 validation check를 한다
-		//validation 이 false이면 로그인 실패로 process를 close한다
-		//validation이 true이면 sub, name, email, refresh token
-		//sub가 기존 유저 인지 아닌지 확인해서 신규 유저이면 신규 아이디로 등록한다
-		//기존 유저이면 로그인 처리한다
-		//애플 로그인 후 session이 만료되었을 때 자동 로그인 어떻게 처리 할지?
-		//1.refreshtoken 은 하루에 1회만 호출 가능, 2. sub 가 변하는 값인지?
-		//sub로 쿠키를 만든다. 해당 login interceptor에서 해당 아이디로 로그인한다.
-		
-		//로그아웃? session을 삭제 하고 쿠키도 삭제한다
-		//탈퇴
-		/*
-		 * logger.info("appleLogin.do 진입 " ); String id_token=appleResp.getId_token();
-		 * String id=null; try { SignedJWT signedJWT = SignedJWT.parse(id_token);
-		 * ReadOnlyJWTClaimsSet payload = signedJWT.getJWTClaimsSet();
-		 * id=payload.getStringClaim("sub"); }catch (ParseException e) {
-		 * e.printStackTrace(); }
-		 * 
-		 * 
-		 * 
-		 * JsonParser parser = new JsonParser(); JsonElement element =
-		 * parser.parse(appleResp.getUser()); JsonObject obj=element.getAsJsonObject();
-		 * String
-		 * nickname=obj.get("firstName").getAsString()+obj.get("lastName").getAsString()
-		 * ; String email=obj.get("email").getAsString();
-		 * 
-		 * 
-		 * logger.info("id : "+id); logger.info("nickname : "+nickname);
-		 * logger.info("email : "+email);
-		 */
-		
-		return "redirect:/main/main.do";
-	}
-	
 	@RequestMapping("/member/login.do")
 	public String kakaoLogin(@RequestParam String code,
 							 @RequestParam(required=false) boolean state,
@@ -99,14 +53,7 @@ public class MemberController {
 							 HttpServletRequest request,
 							 HttpServletResponse response)throws IOException {	
 		
-		String serverName = request.getServerName();
-		String path= request.getContextPath();
-		String uri=null;
-		
-		if (serverName.contains("gentle")) uri="https://";
-		else uri="http://";
-		
-		uri+=serverName+path;
+		String uri= getUri(request);
 		
 		Map<String, String> map = loginAPI.getAccessToken(code,1,uri);
 		
@@ -116,16 +63,15 @@ public class MemberController {
 		
 		String access_token=map.get("access_token");
 		String refresh_token=map.get("refresh_token");
-		
-		session.setAttribute("access_token", access_token);
 		if(state) {
+        	
 			Cookie loginCookie=new Cookie("GpFHzB",refresh_token);
 			loginCookie.setPath("/");
 			loginCookie.setMaxAge(60*60*24*60);
 			response.addCookie(loginCookie);
 		}
 		
-		
+		session.setAttribute("access_token", access_token);
 		
         MemberVO memberVO=new MemberVO();
         memberVO = loginAPI.getUserInfo(access_token);
@@ -154,18 +100,14 @@ public class MemberController {
             		}
             		//loginType 1,2 login.do&&각각 신규회원/재가입회원
             		//loginType 3,4 invitedLogin.do&&각각 신규회원/재가입회원
-            		//loginType 5,6 votedLogin.do&&각각 신규회원/재가입회원
             		session.setAttribute("member",memberVO);
             		//session.setAttribute("code",code);
             		session.setAttribute("loginType",loginType);
             		return "redirect:/member/agreement.do";
             		// 약간 동의 페이지로 redirect한다
             		// 약관 동의 페이지에서 필수 항목 선택시 화면 회원 가입 버튼을 disable속성을 없앤다
-            		//가입버튼을 누르면 해당 멤버 정보르 insert/update하고 code와 state값을 담아 login.do로 redirect한다
-					
-            		/* memberService.insertMember(memberVO); 
-            		 * session.setAttribute("mem_auth", 1);
-					 */
+            		//가입버튼을 누르면 해당 멤버 정보르 insert/update한다
+            		
             	}
             	
             	List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
@@ -192,7 +134,7 @@ public class MemberController {
 									HttpServletRequest request,
 									HttpServletResponse response)throws IOException {	
 		
-		String uri="https://"+request.getServerName()+request.getContextPath();
+		String uri= getUri(request);
 		
 		Map<String, String> map = loginAPI.getAccessToken(code,0,uri);
 		if(map.get("result")!=null && map.get("result").equals("errors")) {
@@ -230,9 +172,8 @@ public class MemberController {
             			loginType=4;
             		}
             		session.setAttribute("member",memberVO);
-            		session.setAttribute("code",code);
             		session.setAttribute("loginType",loginType);
-            		session.setAttribute("state", values[0]);
+            		session.setAttribute("club_num", values[0]);
             		return "redirect:/member/agreement.do";
             	}
             	
@@ -305,6 +246,7 @@ public class MemberController {
 			response.addCookie(loginCookie);
 		}
 		
+		
 	    session.invalidate();
 	    return "redirect:/main/main.do";
 	}
@@ -314,10 +256,12 @@ public class MemberController {
 		
 		ModelAndView mav=new ModelAndView();
 		String user_id=(String)session.getAttribute("user_id");
+		logger.info("user_id in myRecruitReq : "+user_id);
 		try {
 			
 			List<MatchVO> matches=memberService.selectMyRecruitReq(user_id);
 			mav.addObject("matches",matches);
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -483,6 +427,20 @@ public class MemberController {
 		mav.setViewName("sentMsg");
 		
 		return mav;
+	}
+	
+	public String getUri(HttpServletRequest request) {
+		
+		String serverName = request.getServerName();
+		String path= request.getContextPath();
+		String uri=null;
+		
+		if (serverName.contains("gentle")) uri="https://";
+		else uri="http://";
+		
+		uri+=serverName+path;
+		
+		return uri;
 	}
 
 }

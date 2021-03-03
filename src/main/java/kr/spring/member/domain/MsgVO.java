@@ -21,9 +21,17 @@ public class MsgVO {
 	private String nickname;
 	private String id;
 	private byte[] club_img;
+	private String filename;
 	private Integer club_num;
 	private Date match_date;
 	private String thumbnail_image;
+	
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 	public String getEnd_time() {
 		return end_time;
 	}

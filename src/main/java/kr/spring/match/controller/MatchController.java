@@ -64,7 +64,7 @@ public class MatchController {
 		HashSet<String> uid_list=matchService.selectMembersForPostedMatch(matchVO);
 		
 		if(!uid_list.isEmpty()) {
-			loginAPI.sendMessage(uid_list, "경기 일정이 게시되었습니다. 참석 투표하러 가볼까요?");
+			loginAPI.sendMessage(uid_list, "경기 일정("+matchVO.getClub_name()+" Vs "+matchVO.getAway_name()+")이 게시되었습니다. 참석 투표하러 가볼까요?");
 		}
 		
 		if(matchVO.getAway()==0) {

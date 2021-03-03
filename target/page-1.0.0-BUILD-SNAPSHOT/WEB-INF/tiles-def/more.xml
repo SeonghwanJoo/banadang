@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+
+<tiles-definitions>
+    <definition name="myPage" extends="main">
+       <put-attribute name="title" value="더보기"/> 
+       <put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
+       <put-attribute name="body" value="/WEB-INF/views/more/myPage.jsp"/>
+       <put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
+    </definition>
+    <definition name="myRecruitReq" extends="main">
+       <put-attribute name="title" value="나의 용병 신청 현황"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/myRecruitReq.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="clubRecruit" extends="main">
+       <put-attribute name="title" value="팀원 모집"/> 
+       <put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
+       <put-attribute name="body" value="/WEB-INF/views/more/clubRecruit.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="writeClubRecruit" extends="main">
+       <put-attribute name="title" value="팀원 모집 작성"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/writeClubRecruit.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="clubRecruitDetail" extends="main">
+       <put-attribute name="title" value="팀원 모집"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/clubRecruitDetail.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="modifyClubRecruit" extends="main">
+       <put-attribute name="title" value="팀원 모집 수정"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/modifyClubRecruit.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="myClubRecruitReq" extends="main">
+       <put-attribute name="title" value="나의 팀 가입 신청 현황"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/myClubRecruitReq.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="myClubRecruitReq" extends="main">
+       <put-attribute name="title" value="나의 팀 가입 신청 현황"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/myClubRecruitReq.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="myMsg" extends="main">
+       <put-attribute name="title" value="받은 메시지"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/myMsg.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="writeMsg" extends="main">
+       <put-attribute name="title" value="메시지 작성"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/writeMsg.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="sentMsg" extends="main">
+       <put-attribute name="title" value="보낸 메시지"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/sentMsg.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="appSetting" extends="main">
+       <put-attribute name="title" value="앱 설정"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/appSetting.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="agreement" extends="main">
+       <put-attribute name="title" value="약관 및 이용동의"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/agreement.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="policy" extends="main">
+       <put-attribute name="title" value="약관 및 정책"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/policy.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="service" extends="main">
+       <put-attribute name="title" value="서비스 이용 약관"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/service.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="privacy" extends="main">
+       <put-attribute name="title" value="개인 정보 보호 정책"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/privacy.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+    <definition name="writeReport" extends="main">
+       <put-attribute name="title" value="작성자 신고하기"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/writeReport.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
+</tiles-definitions>

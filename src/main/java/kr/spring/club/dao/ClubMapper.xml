@@ -70,12 +70,6 @@
     	(select avg(manner) manner,avg(perform) perform,count(*) rating_count,club_num from gentlepro.club_rating group by club_num)e 
     	on d.home=e.club_num) f join club c on f.home=c.club_num order by cancel is not null, match_req_cancel is not null
 	</select>
-	<select id="selectAttendanceRate" parameterType="memberVO" resultType="float">
-	select b.b/a.a attendance_rate from
-    (select count(match_num) a, #{club_num} club_num from gentlepro.match where (home=#{club_num} or away=#{club_num}) and match_date>=date_sub((select join_date from gentlepro.club_join where id=#{id} and club_num=#{club_num}), interval 1 day) )a 
-    join
-    (select count(match_num) b,club_num from gentlepro.match_vote where id=#{id} and status=1 group by club_num having club_num=#{club_num}) b on a.club_num=b.club_num
-	</select>
 	<select id="selectMyClubDetails" parameterType="clubVO" resultType="clubVO">
 	       select * from 
 	(select * from (select club_num,club_name,club_color,club_age,club_address,club_detail,club_loc,filename,club_locX,club_locY from gentlepro.club where club_num=#{club_num}) c join 

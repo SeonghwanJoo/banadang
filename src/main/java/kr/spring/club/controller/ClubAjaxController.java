@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -87,12 +89,20 @@ public class ClubAjaxController {
 	}
 	@RequestMapping("/club/setMyClub.do")
 	@ResponseBody
-	public Map<String,String> setMyClub(@RequestParam Integer club_num,HttpSession session){
+	public Map<String,String> setMyClub(@RequestParam Integer club_num,
+										HttpSession session,
+										HttpServletResponse response,
+										HttpServletRequest request){
 		Map<String,String> map=new HashMap<String,String>();
 		String user_id=(String)session.getAttribute("user_id");
 		ClubVO club=new ClubVO();
 		club.setId(user_id);
 		club.setClub_num(club_num);
+		if(user_id.length()<11) {
+			clubService.setLoginCookie(club_num, response, request, true);
+		}else {
+			clubService.setLoginCookie(club_num, response, request, false);
+		}
 		ClubVO myClub=clubService.selectMyClubDetails(club);
 		try {
 			session.setAttribute("myClub", myClub);
@@ -136,7 +146,9 @@ public class ClubAjaxController {
 	
 	@RequestMapping("/club/answerForMatch.do")
 	@ResponseBody
-	public Map<String,String> rejectMatch(ClubVO club,@RequestParam Integer home){
+	public Map<String,String> rejectMatch(ClubVO club,
+										  @RequestParam Integer home,
+										  @RequestParam String home_name){
 		Map<String,String> map=new HashMap<String,String>();
 		try {
 			clubService.updateAcceptance(club);
@@ -150,7 +162,7 @@ public class ClubAjaxController {
 				match.setAway(club.getClub_num());
 				HashSet<String> uid_list=matchService.selectMembersForPostedMatch(match);
 				if(!uid_list.isEmpty()) {
-					loginAPI.sendMessage(uid_list, "경기 매칭이 완료되었습니다. 참석 투표하러 가볼까요?");
+					loginAPI.sendMessage(uid_list, "경기 매칭("+home_name+" Vs "+club.getClub_name()+")이 완료되었습니다. 참석 투표하러 가볼까요?");
 				}
 			}
 			map.put("result", "updated");
@@ -170,6 +182,7 @@ public class ClubAjaxController {
 										   HttpSession session){
 		Map<String,Object> map=new HashMap<String,Object>();
 		MemberVO member=new MemberVO();
+		String user_id=(String)session.getAttribute("user_id");
 		member.setId(id);
 		member.setClub_auth(auth);
 		member.setClub_num(club_num);
@@ -177,6 +190,7 @@ public class ClubAjaxController {
 			if(auth==0) {
 				//clubjoin에서 해당 아이디 삭제
 				clubService.deleteMemberFromClub(member);
+				if(user_id.equals(id)) {session.removeAttribute("myClub");}
 				map.put("result", "member_deleted");
 			}else if(auth>3) {
 				//clubjoin에서 권한 업데이트
@@ -188,7 +202,7 @@ public class ClubAjaxController {
 			map.put("result", "errors");
 		}
 		//클럽 회원 정보 Object에 추가
-				List<MemberVO> members=clubService.selectClubMembers(club_num);
+				//List<MemberVO> members=clubService.selectClubMembers(club_num);
 				//해당 클럽의 전체 회원정보를 받아 memberVO list로 받는다
 				//memberVO list가 루프를 돌면서 attendatacerate를 set한다
 				/*

@@ -2,6 +2,7 @@ package kr.spring.member.controller;
 
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -17,9 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.nimbusds.jwt.ReadOnlyJWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 
@@ -145,6 +143,9 @@ public class MemberAjaxController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			memberService.insertMsg(msg);
+			HashSet<String> uids= new HashSet<String>();
+			uids.add(msg.getReceiver());
+			loginAPI.sendMessage(uids, "메시지가 도착했습니다.");
 			map.put("result", "success");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -279,7 +280,6 @@ public class MemberAjaxController {
 				memberService.updateMemberForReValidation(member);
 			}
 			session.removeAttribute("member");
-			//session.removeAttribute("code");
 			session.removeAttribute("loginType");
 			String user_id = member.getId();
 			session.setAttribute("user_id", user_id);
@@ -293,6 +293,7 @@ public class MemberAjaxController {
 
 		return map;
 	}
+	
 
 	@RequestMapping("/member/signInWithApple.do")
 	@ResponseBody

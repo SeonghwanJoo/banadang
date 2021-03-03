@@ -2,13 +2,14 @@ package kr.spring.club.controller;
 
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -47,14 +48,6 @@ public class ClubController {
 		
 		if (myClub==null && !myClubs.isEmpty()) {//myClub이 session에 없다면
 			session.setAttribute("myClub", clubService.selectMyClubDetails(myClubs.get(0)));
-		}else if(myClub!=null && !myClubs.isEmpty()) {//myClub이 탈퇴했으나 session에 업데이트되지 않았다면
-			myClub.setId(id);
-			Integer auth=clubService.selectClubAuth(myClub);
-			if(auth==null) {
-				session.setAttribute("myClub", clubService.selectMyClubDetails(myClubs.get(0)));
-			}
-		}else if(myClub!=null && myClubs.isEmpty()) {//myClub탈퇴 후 소속된 팀이 하나도 없다면
-			session.removeAttribute("myClub");
 		}
 		mav.setViewName("myClub");
 		mav.addObject("title", "팀 관리");
@@ -64,7 +57,9 @@ public class ClubController {
 	@RequestMapping("/club/manageClub.do")
 	public ModelAndView manageClub(@RequestParam Integer club_num,
 								   @RequestParam(defaultValue="1") Integer clubManageFrom,
-									HttpSession session) {
+									HttpSession session,
+									HttpServletResponse response,
+									HttpServletRequest request) {
 		ModelAndView mav=new ModelAndView();
 		//팀명,연령,주소,유니폼,매너평가,실력평가,평가수
 		String user_id=(String)session.getAttribute("user_id");
@@ -72,6 +67,11 @@ public class ClubController {
 		club.setClub_num(club_num);
 		club.setId(user_id);
 		ClubVO myClub=clubService.selectMyClubDetails(club);
+		if(user_id.length()<11) {
+			clubService.setLoginCookie(club_num, response, request, true);
+		}else {
+			clubService.setLoginCookie(club_num, response, request, false);
+		}
 		
 		List<ClubVO> away_club=clubService.selectAwayDetailsForRequestedMatch(club_num);
 		List<ClubVO> home_club=clubService.selectHomeDetailsForRequestedMatch(club_num);
@@ -95,7 +95,6 @@ public class ClubController {
 			
 		matchVO.addAll(matchService.selectMyMatch(club_num));
 		past_match.addAll(matchService.selectMyPastMatch(club_num));
-			
 		
 		for(MatchVO match : matchVO) {
 			
@@ -119,19 +118,7 @@ public class ClubController {
 		//해당 클럽의 전체 회원정보를 받아 memberVO list로 받는다
 		//memberVO list가 루프를 돌면서 attendatacerate를 set한다
 		/* int ten=0,twent=0,thirt=0,fourt=0,fift=0,sixt=0,sevent=0,others=0; */
-		Map<String,Integer> ages=new HashMap<String,Integer>();
-		for(MemberVO member:members) {
-			/*
-			 * if(member.getAge_range().startsWith("1")){ ten++; }else
-			 * if(member.getAge_range().startsWith("2")) { twent++; }else
-			 * if(member.getAge_range().startsWith("3")) { thirt++; }else
-			 * if(member.getAge_range().startsWith("4")) { fourt++; }else
-			 * if(member.getAge_range().startsWith("5")) { fift++; }else
-			 * if(member.getAge_range().startsWith("6")) { sixt++; }else
-			 * if(member.getAge_range().startsWith("7")) { sevent++; }else{ others++; }
-			 */
-			member.setAttendance_rate(clubService.selectAttendanceRate(member));
-		}
+		//Map<String,Integer> ages=new HashMap<String,Integer>();
 		/*
 		 * ages.put("ten", ten); ages.put("twent", twent); ages.put("thirt", thirt);
 		 * ages.put("fourt", fourt); ages.put("fift", fift); ages.put("sixt", sixt);

@@ -1,17 +1,20 @@
 package kr.spring.club.service;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.WebUtils;
 
 import kr.spring.club.dao.ClubMapper;
 import kr.spring.club.domain.ClubVO;
-import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
 import kr.spring.member.service.LoginAPI;
 
@@ -158,8 +161,16 @@ public class ClubServiceImpl implements ClubService {
 
 	@Override
 	public void updateRecruitReq(MemberVO member) {
-		
 		clubMapper.updateRecruitReq(member);
+		HashSet<String> uids= new HashSet<String>();
+		uids.add(member.getId());
+		String text=member.getClub_name()+"팀이 용병 신청을 ";
+		if (member.getRecruit_accept()==2) {
+			text+="수락하였습니다.";
+		}else {
+			text+="거절하였습니다.";
+		}
+		loginAPI.sendMessage(uids, text);
 		
 	}
 
@@ -216,7 +227,44 @@ public class ClubServiceImpl implements ClubService {
 		
 		return clubMapper.selectClubExecutivesByClubNum(club_num);
 	}
-
+	
+	
+	public void setLoginCookie(Integer club_num, 
+							   HttpServletResponse response, 
+							   HttpServletRequest request,
+							   boolean isKakao) {
+		Cookie loginCookie;
+		if (isKakao) loginCookie=WebUtils.getCookie(request, "GpFHzB");
+		else loginCookie=WebUtils.getCookie(request, "AppSi");
+		
+		if(loginCookie != null) {
+			String token=loginCookie.getValue().split(":")[0];
+			loginCookie.setValue(token+":"+club_num);
+			loginCookie.setPath("/");
+			loginCookie.setMaxAge(60*60*24*60);
+		}
+		
+		response.addCookie(loginCookie);
+	}
+	public Map<String, String> getLoginCookie(HttpServletRequest request, boolean isKakao) {
+		
+		Cookie loginCookie;
+		if (isKakao) loginCookie=WebUtils.getCookie(request, "GpFHzB");
+		else loginCookie=WebUtils.getCookie(request, "AppSi");
+		
+		Map<String, String> map = new HashMap<String, String> ();
+		if (loginCookie!=null) {
+			String ckValues[]=loginCookie.getValue().split(":");
+			map.put("token", ckValues[0]);
+			if (ckValues.length>1) {
+				map.put("club_num", loginCookie.getValue().split(":")[1]);
+			}
+		}
+		
+		return map;
+		
+		
+	}
 	
 
 

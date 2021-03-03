@@ -26,7 +26,7 @@
 		select * from 
     (select recruit_req_num,isCanceled,c.id,c.match_num,c.club_num,recruit_position,recruit_accept,type,start_time,end_time,cancel,address,match_date,address_x,address_y,club_name,filename,club_color,club_age from
         (select recruit_req_num,isCanceled,a.match_num,a.id,club_num,recruit_accept,recruit_position,type,start_time,end_time,cancel,address,match_date,address_x,address_y from
-            (select * from gentlepro.recruit_req where id=1459494566) a join (select * from gentlepro.match where match_date>date_sub(now(), interval 1 day)) b on a.match_num=b.match_num)c join gentlepro.club d on c.club_num=d.club_num) e left outer join
+            (select * from gentlepro.recruit_req where id=#{user_id}) a join (select * from gentlepro.match where match_date>date_sub(now(), interval 1 day)) b on a.match_num=b.match_num)c join gentlepro.club d on c.club_num=d.club_num) e left outer join
     (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from gentlepro.club_rating group by club_num) f on e.club_num=f.club_num
 	</select>
 	<insert id="insertClubRecruit" parameterType="matchVO" useGeneratedKeys="true" keyProperty="clubRecruit_num">
@@ -80,11 +80,11 @@
 	<select id="selectMatchForMsg" parameterType="msgVO" resultType="msgVO">
 		<if test="match_num != null">
 			select * from
-   				 (select nickname,thumbnail_image,a.id,club_num,club_name,club_img,#{match_num} as match_num from
+   				 (select nickname,thumbnail_image,a.id,club_num,club_name,club_img,filename,#{match_num} as match_num from
        				 (select nickname,thumbnail_image,id,#{club_num} as club_num from gentlepro.member_detail where id=#{id})a left outer join gentlepro.club using(club_num))b left outer join gentlepro.match using(match_num)
 		</if>
 		<if test="match_num == null">
-    		select nickname,thumbnail_image,a.id,club_num,club_name,club_img from
+    		select nickname,thumbnail_image,a.id,club_num,club_name,club_img,filename from
        			(select nickname,thumbnail_image,id,#{club_num} as club_num from gentlepro.member_detail where id=#{id})a left outer join gentlepro.club using(club_num)
 		</if>
 	</select>

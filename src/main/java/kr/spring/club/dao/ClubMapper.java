@@ -2,7 +2,6 @@ package kr.spring.club.dao;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -10,7 +9,6 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.club.domain.ClubVO;
-import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
 
 public interface ClubMapper {
@@ -54,9 +52,7 @@ public interface ClubMapper {
 	@Update("update gentlepro.match set away=#{club_num}, away_name=#{club_name} where match_num=#{match_num}")
 	public void updateAwayforMatch(ClubVO club);
 	
-	public Float selectAttendanceRate(MemberVO member);
-	
-	@Select("select * from (select * from gentlepro.club_join where club_num=#{club_num} order by join_date asc, club_auth desc) a join gentlepro.member_detail b on a.id=b.id")
+	@Select("select * from (select *, GETATTENDANCE(id, club_num, join_date) as attendance_rate from gentlepro.club_join where club_num=#{club_num}) a join gentlepro.member_detail b on a.id=b.id order by club_auth desc")
 	public List<MemberVO> selectClubMembers(Integer club_num);
 	
 	

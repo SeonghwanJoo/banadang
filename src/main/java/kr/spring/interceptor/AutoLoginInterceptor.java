@@ -38,17 +38,17 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request,
 			                 HttpServletResponse response,
 			               Object handler)throws Exception {
-		HttpSession session = request.getSession();
 		
+		HttpSession session = request.getSession();
 		String user_id=(String)session.getAttribute("user_id");
+		
 		if(user_id==null) {
 			
-			Cookie loginCookie= WebUtils.getCookie(request, "GpFHzB");
-			Cookie appLoginCookie= WebUtils.getCookie(request, "AppSi");
-			if(loginCookie != null) {
-				String refresh_token=loginCookie.getValue();
+			Map<String, String> logMap=clubService.getLoginCookie(request, true);
+			
+			if(logMap.get("token") != null) {
 				Map<String,Object> map= new HashMap<String,Object>();
-				map=loginAPI.refreshTokens(refresh_token);
+				map=loginAPI.refreshTokens(logMap.get("token"));
 				if (map.get("result").equals("success")) {
 					MemberVO member=new MemberVO();
 					String access_token=(String)map.get("access_token");
@@ -58,7 +58,7 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 						if (member!=null) {
 							String id=member.getId();
 							MemberVO existingMember=memberService.getMember(id);
-							if(existingMember !=null && existingMember.getMem_auth()!=3) {
+							if(existingMember !=null && existingMember.getMem_auth()!=3) {//정상 회원이라면
 			            		session.setAttribute("mem_auth", existingMember.getMem_auth());
 			            		List<ClubVO> myClubs=clubService.selectMyClubs(id);
 			                	session.setAttribute("user_id", id);
@@ -69,7 +69,7 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 			                    	int expires_in=Integer.parseInt((String)map.get("expires_in"));
 			                    	if(expires_in<(60*60*24*30)) {
 				                    	logger.info("refresh_token refreshed");
-				                    	Cookie refreshCookie=new Cookie("GpFHzB",refresh_token);
+				                    	Cookie refreshCookie=new Cookie("GpFHzB", (String)map.get("refresh_token"));
 				                    	refreshCookie.setPath("/");
 				                    	refreshCookie.setMaxAge(60*60*24*60);
 				            			response.addCookie(refreshCookie);
@@ -79,7 +79,11 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 			                    if(myClubs.size()>0) {
 			                    	ClubVO club=new ClubVO();
 			                        club.setId(id);
-			                        club.setClub_num(myClubs.get(0).getClub_num());
+			                        
+			                        String club_num= logMap.get("club_num");
+			                        if (club_num != null) { club.setClub_num(Integer.parseInt(club_num));}               	
+			                        else { club.setClub_num(myClubs.get(0).getClub_num());}
+			                        
 			                    	session.setAttribute("myClub", clubService.selectMyClubDetails(club));
 			                    }
 			                    return true;
@@ -92,9 +96,10 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 					
 				}
 			}
-			if(appLoginCookie != null) {
+			Map<String, String> appleLogMap=clubService.getLoginCookie(request, false);
+			String id=appleLogMap.get("token");
+			if(id != null) {
 				
-				String id=appLoginCookie.getValue();
 				MemberVO existingMember=memberService.getMember(id);
 				logger.info("appLoginCookieValue : "+id);
 				if(existingMember !=null && existingMember.getMem_auth()!=3) {
@@ -104,13 +109,18 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
                 	session.setAttribute("user_id", id);
                     session.setAttribute("myClubs", myClubs);
                     
+                    
                     if(myClubs.size()>0) {
                     	ClubVO club=new ClubVO();
                         club.setId(id);
-                        club.setClub_num(myClubs.get(0).getClub_num());
+                        
+                        String club_num= appleLogMap.get("club_num");
+                        if (club_num != null) { club.setClub_num(Integer.parseInt(club_num));    }               	
+                        else { club.setClub_num(myClubs.get(0).getClub_num());}
+                        
                     	session.setAttribute("myClub", clubService.selectMyClubDetails(club));
                     }
-                    if(appLoginCookie.getMaxAge()<(60*60*24*30)) {
+                    if(WebUtils.getCookie(request, "AppSi").getMaxAge()<(60*60*24*30)) {
                     	Cookie refreshCookie=new Cookie("AppSi", id);
                     	refreshCookie.setPath("/");
                     	refreshCookie.setMaxAge(60*60*24*60);
@@ -149,6 +159,9 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 					pushCookie = WebUtils.getCookie(request, "nPT_03");
 					String push_type = pushCookie.getValue();
 					
+					if (user_id.length()>11) {
+						user_id=2+user_id.substring(0,6)+user_id.substring(user_id.length()-4,user_id.length());
+					}
 					loginAPI.registerPushTokenAPI(user_id, device_id, push_type, n_push_token);
 					
 					//신규 token 유효한 토큰으로 쿠키 생성
@@ -166,6 +179,8 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 		}
 		return true;
 	}
+	
+	
 	
 
 }

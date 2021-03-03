@@ -9,8 +9,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.sun.media.jfxmedia.logging.Logger;
-
 import kr.spring.match.dao.MatchMapper;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
@@ -129,7 +127,7 @@ public class MatchServiceImpl implements MatchService {
 		matchMapper.insertMsgForMatchRequest(match);
 		HashSet<String> uids= new HashSet<String>();
 		uids.add(match.getHome_name());
-		loginAPI.sendMessage(uids, "경기 신청이 접수되었습니다. 수락하러 가볼까요?");
+		loginAPI.sendMessage(uids, match.getClub_name()+"팀에게 경기 신청이 접수되었습니다. 수락하러 가볼까요?");
 		
 		
 	}
@@ -158,7 +156,7 @@ public class MatchServiceImpl implements MatchService {
 		matchMapper.insertMsgForMatchRecruit(match);
 		HashSet<String> uids= new HashSet<String>();
 		uids.add(match.getHome_name());
-		loginAPI.sendMessage(uids, "용병 신청이 접수되었습니다. 수락하러 가볼까요?");
+		loginAPI.sendMessage(uids, match.getClub_name()+"팀에 용병 신청이 접수되었습니다. 수락하러 가볼까요?");
 	}
 
 	@Override

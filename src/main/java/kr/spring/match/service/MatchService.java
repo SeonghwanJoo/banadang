@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import kr.spring.club.domain.ClubVO;
 import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
 

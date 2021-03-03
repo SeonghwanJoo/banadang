@@ -344,6 +344,17 @@ public class LoginAPI {
 			StringBuilder sb1 = new StringBuilder();
 			
 			for(String str : uid_list) {
+				
+				
+				
+				if (str.length()>11) {
+					
+					 logger.info("str length>11"+str);
+					 str=2+str.substring(0,6)+str.substring(str.length()-4,str.length());
+					 logger.info("uid length>11 : "+str);
+					 
+					
+				}
 
 				sb1.append(str+",");
 

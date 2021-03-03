@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Update;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 import kr.spring.club.domain.ClubVO;
-import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
 
 public interface ClubService {
@@ -43,5 +43,7 @@ public interface ClubService {
 	public Integer selectClubJoinForDuplicate(MemberVO member);
 	public Integer selectClubJoinForDuplicateByClubVO(ClubVO club);
 	public HashSet<String> selectClubExecutivesByClubNum(Integer club_num);
+	public void setLoginCookie(Integer club_num, HttpServletResponse response, HttpServletRequest request, boolean isKakao);
+	public Map<String, String> getLoginCookie(HttpServletRequest request, boolean isKakao);
 	
 }
