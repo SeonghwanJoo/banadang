@@ -32,7 +32,7 @@
 	<li class="li-list cursor" onclick="location.href='myRecruitReq.do'">
 		<div class="row">
 			<div class="col">
-				<i class="fas fa-user-plus"></i>
+				<i class="fas fa-user-friends"></i>
 				<span>나의 용병 신청 현황</span>
 			</div>
 		</div>
@@ -58,13 +58,21 @@
 	<c:if test="${not empty myClub }">
 	<li class="li-list cursor" onclick="sendLink()">
 		<div class="row">
-			<div class="col">
-				<i class="fas fa-share-alt"></i>
-				<span>카카오톡으로 팀원 초대하기</span>
+			<div class="col nowrap">
+				<i class="fas fa-user-plus"></i>
+				<span class="nowrap">카카오톡으로 ${myClub.club_name } 팀원 초대하기</span>
 			</div>
 		</div>
 	</li>
 	</c:if>
+	<li class="li-list cursor" onclick="shareApp()">
+		<div class="row">
+			<div class="col">
+				<i class="fas fa-share-alt"></i>
+				<span>카카오톡으로 앱 공유하기</span>
+			</div>
+		</div>
+	</li>
 	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/board/qna.do'">
 		<div class="row">
 			<div class="col">
@@ -135,6 +143,12 @@ function sendLink() {
     		'club_num': '${myClub.club_num}',
     		'nickname': '${member.nickname}'
     	}
+   })
+}
+function shareApp() {
+    Kakao.Link.sendCustom({
+    	templateId: 49043
+
    })
 }
 function kakaoSync(){

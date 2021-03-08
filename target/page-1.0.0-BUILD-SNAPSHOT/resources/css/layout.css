@@ -174,7 +174,8 @@ ul.carousel-indicators {
 	cursor:pointer;
 }
 .blue{
-	color:#007bff;
+	/* color:#2997FF; */
+	color:#2997FF;
 }
 /* Style buttons */
 .btn_write {
@@ -235,7 +236,7 @@ ul.carousel-indicators {
 	padding-top:6rem;
 }
 #team-sel-modal .modals-content{
-	color:#007bff;
+	color:#2997FF;
 }
 .modals-content hr.hr{
 	margin:1rem 0;
@@ -620,14 +621,26 @@ body.body, .filter-wrapper{
 .install-btn{
 	border:none;
 	margin:0 auto;
-	padding:0.5rem;
+	padding:0.5rem 3rem;
 	width: 100%;
-	font-weight:bold;
+	color:#fff;
 	font-size:0.8rem;
 	border-radius:3rem;
-	background-color:#eceff1;
+	background: linear-gradient(to right, #b57bee, #696eff);
+	/* background: linear-gradient(to right, #82f4b1, #30c67c); */
 	outline: 0;
 }
+span.close_install_btn{
+	position:relative;
+	bottom:3.1rem;
+	left:0.5rem;
+	cursor:pointer;
+	color:#fff;
+	font-size:1.3rem;
+	padding:0.5rem;
+	border-radius:50%;
+}
+
 button{
 	outline:none;
 }
@@ -640,7 +653,7 @@ button:focus{
 .slideup{
 	position:fixed;
 	animation:btn_slideFromBot 0.3s;
-	bottom:7rem;
+	bottom:4rem;
 }
 
 @keyframes btn_slideFromBot{
@@ -648,7 +661,7 @@ button:focus{
 		bottom:-15rem;
 	}
 	to{
-		bottom:7rem;
+		bottom:4rem;
 	}
 }
 .sub-content{
@@ -667,7 +680,7 @@ button:focus{
 	background-color:transparent;
 	font-size:1.2rem;
 	font-weight:bold;
-	color:#007bff;
+	color:#2997FF;
 }
 .neg-btn{
 	border:none;
@@ -1237,7 +1250,7 @@ a.detail{
 	border-top:1px solid #ccc;
 	background-color:transparent;
 	margin-top:2rem;
-	color:#007bff;
+	color:#2997FF;
 	font-weight:bold;
 	padding:0.8rem;
 	width:100%;
@@ -1402,7 +1415,7 @@ btn-wrapper{
 	background-color:#222;
 }
 .nickname{
-	color:#007bff;
+	color:#2997FF;
 	margin-right:1rem;
 }
 .icon-margin{

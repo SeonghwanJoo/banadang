@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="floating" id="floating">
-	<button class="install-btn">
-		<span class="blue m-font">앱 설치</span>
-		<br>
-		앱을 설치하고 알림 메시지를 받아보세요!
-	</button>
-	<span id="test"></span>
-</div>
 <div class="row blank_div"></div>
 <div class="row">
 	<div class="bottom_menu">
@@ -54,7 +46,7 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	/* #00cd3c */
+
 	$(function(){
 		if(${ title eq 'main'}){
 			$('.main').css('color','#fff');
@@ -72,39 +64,6 @@
 			$('.myPage').css('color','#fff');
 			$('#myPage').css('border-top','3px solid #00cd3c');
 		}
-		
-		var userAgent=navigator.userAgent.toLowerCase();
-		var inapp = userAgent.indexOf('inapp')>-1;
-		//if((userAgent.indexOf('android')>-1 || userAgent.indexOf('iphone')>-1) && !inapp){
-
-			var position = $(window).scrollTop();
-			
-			
-			$(window).scroll(function() {
-			    var scroll = $(window).scrollTop();
-			    if(scroll < position) {
-			    	$('#floating').addClass('slideup');
-			    } else {
-			    	$('#floating').removeClass('slideup');
-			    }
-			    position = scroll;
-			});
-			
-			$('.install-btn').click(function(){
-				
-				if(userAgent.indexOf('android')>-1){
-					location.href = 'intent://gentlepro#Intent;scheme=gentlepro;package=com.easycompany.gentlepro;end';
-				}else if (userAgent.indexOf('iphone')>-1){
-					location.href = 'itms-apps://apps.apple.com/kr/app/apple-store/id1552824630';
-				}
-					
-				
-			});
-		//} 
-		
-		
-		
-		
 		
 	});
 </script>

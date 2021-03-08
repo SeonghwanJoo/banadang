@@ -397,6 +397,16 @@
 		</div>
 	</div>
 </div>
+<div class="floating" id="floating">
+	<button class="install-btn nowrap">
+		<span class="m-font">앱 다운받기</span>
+		<br>
+		중요한 매칭 알림을 받을 수 있어요!
+	</button>
+	<span class="material-icons close_install_btn">
+	close
+	</span>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
@@ -553,6 +563,41 @@ function login(throughTalk){
 	 	}
 	 	
 	  }
+	
+	
+	$('.close_install_btn').click(function(){
+		$('#floating').css('display','none');
+	});
+	
+	if((userAgent.indexOf('android')>-1 || userAgent.indexOf('iphone')>-1) && !(userAgent.indexOf('inapp')>-1)){
+
+		
+		var position = $(window).scrollTop();
+		
+		
+		$(window).scroll(function() {
+		    var scroll = $(window).scrollTop();
+		    if(scroll < position) {
+		    	$('#floating').addClass('slideup');
+		    } else {
+		    	$('#floating').removeClass('slideup');
+		    }
+		    position = scroll;
+		});
+		
+		
+		
+		$('.install-btn').click(function(){
+			
+			if(userAgent.indexOf('android')>-1){
+				location.href = 'intent://gentlepro#Intent;scheme=gentlepro;package=com.easycompany.gentlepro;end';
+			}else if (userAgent.indexOf('iphone')>-1){
+				location.href = 'itms-apps://apps.apple.com/kr/app/apple-store/id1552824630';
+			}
+				
+			
+		});
+	} 
 	 
  });
 	
