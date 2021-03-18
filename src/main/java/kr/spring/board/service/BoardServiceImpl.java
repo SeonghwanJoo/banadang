@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.spring.board.dao.BoardMapper;
 import kr.spring.board.domain.BoardVO;
+import kr.spring.board.domain.EventVO;
 import kr.spring.match.domain.MatchVO;
 
 @Service("boardService")
@@ -151,6 +152,19 @@ public class BoardServiceImpl implements BoardService{
 	public void updateVote_Answer(BoardVO board) {
 		
 		boardMapper.updateVote_Answer(board);
+		
+	}
+
+	@Override
+	public String selectEventId(EventVO event) {
+		
+		return boardMapper.selectEventId(event);
+	}
+
+	@Override
+	public void insertEvent(EventVO event) {
+		
+		boardMapper.insertEvent(event);
 		
 	}
 	

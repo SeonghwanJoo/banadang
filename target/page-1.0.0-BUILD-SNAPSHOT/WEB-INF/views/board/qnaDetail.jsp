@@ -128,6 +128,9 @@ $(function(){
 	$('#reply-more-cancel-btn').click(function(){
 		$('#reply-more_modal').css('display','none');
 	});
+	$('#more-cancel-btn').click(function(){
+		$('#more_modal').css('display','none');
+	});
 	
 });
 

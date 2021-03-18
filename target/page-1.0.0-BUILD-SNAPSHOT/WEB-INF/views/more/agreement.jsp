@@ -76,7 +76,7 @@
 		</div>
 	</li>
 </ul>
-<input type="button" class="block modal-block" id="done" value="동의 완료">
+<input type="button" class="block white-bg" id="done" value="동의 완료">
 <!-- The Modal -->
 <div id="privacy-myModals" class="modals">
 	<!-- Modal content -->
@@ -469,10 +469,9 @@
 				type:'post',
 				data:
 					{
-					marketing: $('input:checkbox[name=marketing]:checked').val()
+					marketing: $('input[name=marketing]:checked').val()
 				},
 				dataType:'json',
-	            contentType: false,
 				cache:false,
 				timeout:30000,
 				success:function(data){
@@ -486,7 +485,9 @@
 								location.href='${pageContext.request.contextPath}/main/main.do';
 							} else if (${loginType==3 || loginType ==4}){
 								location.href='${pageContext.request.contextPath}/club/inviteMember.do?club_num=${club_num}';
-							} 
+							} else if (${loginType==5 || loginType ==6}){
+								location.href='${pageContext.request.contextPath}/match/recruitDetail.do?recruit_num=${recruit_num}';
+							}
 						});
 						
 					}

@@ -77,7 +77,7 @@
 		<div class="row">
 			<div class="col">
 				<i class="fas fa-headset"></i>
-				<span>자주 묻는 질문</span>
+				<span>자주 묻는 질문</span><span class="new">N</span>
 			</div>
 		</div>
 	</li>
@@ -97,6 +97,14 @@
 			<div class="col">
 				<i class="fas fa-bullhorn"></i>
 				<span>공지 사항</span>
+			</div>
+		</div>
+	</li>
+	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/board/event.do'">
+		<div class="row">
+			<div class="col">
+				<i class="fas fa-gift"></i>
+				<span>이벤트</span><span class="new">N</span>
 			</div>
 		</div>
 	</li>

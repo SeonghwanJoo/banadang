@@ -62,6 +62,8 @@
 			<mapping path="/main/voteForm.do"/>
 			<mapping path="/match/match_toInvite.do"/>
 			<mapping path="/match/recruit.do"/>
+			<mapping path="/match/recruitDetail.do"/>
+			<mapping path="/member/myPage.do"/>
 			<beans:bean class="kr.spring.interceptor.AutoLoginInterceptor"/>
 		</interceptor>
 		<!-- 로그인 여부 체크-->
@@ -92,7 +94,6 @@
 			<mapping path="/match/deleteRecruit.do"/>
 			<mapping path="/match/modifyMatch.do"/>
 			<mapping path="/match/modifyRecruit.do"/>
-			<mapping path="/match/recruitDetail.do"/>
 			<mapping path="/match/write.do"/>
 			<mapping path="/match/writeForm.do"/>
 			<mapping path="/match/writeRecruit.do"/>
@@ -162,7 +163,6 @@
 		<interceptor>
 			<mapping path="/board/deleteQna.do"/>
 			<mapping path="/board/modifyQna.do"/>
-			<mapping path="/board/qnaDetail.do"/>
 			<mapping path="/board/replytoQna.do"/>
 			<beans:bean class="kr.spring.interceptor.PosterCheckInterceptor"/>
 		</interceptor>

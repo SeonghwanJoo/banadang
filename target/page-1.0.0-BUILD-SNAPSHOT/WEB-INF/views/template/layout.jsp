@@ -68,7 +68,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32776969383e4a77d92f6e18dd233bc5&libraries=services"></script>
 </head>
 <body class="body">
-<div class="container">
+<div class="container" id="container">
 <div id="main">
 	<div id="main_header">
 		<tiles:insertAttribute name="header"/>

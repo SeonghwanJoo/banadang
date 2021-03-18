@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.board.domain.BoardVO;
+import kr.spring.board.domain.EventVO;
 import kr.spring.match.domain.MatchVO;
 
 public interface BoardMapper {
@@ -72,4 +73,10 @@ public interface BoardMapper {
 	
 	@Update("update gentlepro.vote_answer set content=#{content} where voteAnswer_num=#{voteAnswer_num}")
 	public void updateVote_Answer(BoardVO board);
+	
+	@Select("select idEvent from gentlepro.event where id = #{id}")
+	public String selectEventId(EventVO event);
+	
+	@Insert("insert into gentlepro.event (id, name, address, phone) values(#{id}, #{name}, #{address}, #{phone})")
+	public void insertEvent(EventVO event);
 }

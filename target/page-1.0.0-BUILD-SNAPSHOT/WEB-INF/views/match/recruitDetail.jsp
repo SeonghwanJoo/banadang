@@ -3,7 +3,48 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<c:if test="${empty match }">
+<!-- The Modal -->
+<div id="wrong_toast" class="submit_toast" style="display:flex">
+  <!-- Modal content -->
+  	<div id="wrong_toast_content" class="submit_toast_content">
+		<div class="row centered margin-btm centered-padding">
+			<span id="club_msg">만료된 글입니다.</span>
+		</div>
+		<div class="row margin-top centered">
+			<button class="alert-btn" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">확인</button>
+		</div>
+	</div>
+</div>
+</c:if>
+<c:if test="${not empty match }">
+<c:if test="${empty user_id }">
+<div class="confirm-modals" style="display:block">
+	<div class="confirm-modal-content">
+		<div class="login">
+			<div class="login-wrapper">
+				<p class="black-bg-op bold">로그인이 필요한 페이지 입니다</p>
+				<button class="signin-button kakao-btn" onclick="login(true)">
+					<img src="${pageContext.request.contextPath }/resources/images/kakao-logo.jpg">
+					<span>카카오톡으로 간편 로그인</span>
+				</button>
+				<button class="signin-button kakao-btn" onclick="login(false)">
+					<img class="round" src="${pageContext.request.contextPath }/resources/images/kakao_account.png">
+					<span>다른 카카오 계정으로 로그인</span>
+				</button>
+				<div id="appleid-signin" class="signin-button" data-color="white" data-border="false" data-type="sign-in"></div>
+				<div class="row margin-top" style="display:none" id="sel_login">
+					<label class="login-label">
+						로그인 상태 유지
+					  <input type="checkbox" checked="checked">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</c:if>
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
 		<a href="recruit.do">
@@ -195,15 +236,57 @@
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
 		<div class="sub-content">
-			<button id="report" class="pos-btn" onclick="location.href='${pageContext.request.contextPath }/member/writeReport.do?source=2&reported_id=${match.id}&reporting_id=${user_id}&write_num=${match.recruit_num}&content=${match.recruit_detail }&name=${match.club_name }'">신고하기</button>
+			<button id="share" class="pos-btn">
+			용병 신청 링크 공유
+			<img class="kakaolink-share" src="${pageContext.request.contextPath }/resources/images/kakaolink_btn.png">
+			</button>
+			<hr>
+			<button id="report" class="pos-btn red" onclick="location.href='${pageContext.request.contextPath }/member/writeReport.do?source=2&reported_id=${match.id}&reporting_id=${user_id}&write_num=${match.recruit_num}&content=${match.recruit_detail }&name=${match.club_name }'">신고하기</button>
 		</div>
 		<div class="sub-content">
 			<button id="report-more-cancel-btn" class="neg-btn">닫기</button>
 		</div>
 	</div>
 </div>
+</c:if>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
+
+	Kakao.init('32776969383e4a77d92f6e18dd233bc5');
+	
+	$('#share').click(function(){
+		
+		var type_num = '${match.type}';
+		var type;
+		if(type_num==1){type='축구'}
+		else{type='풋살'}
+		
+		Kakao.Link.sendCustom({
+	    	templateId: 49225,
+	    	templateArgs: {
+	    		'msg_title': '용병 모집 합니다.',
+	    		'msg_description': '${match.address} ${match.match_date}일 ${match.start_time}시 '+type+' 경기에 용병 구합니다. ',
+	    		'recruit_num': '${match.recruit_num}'
+	    	}
+	    });
+		$('#report_more_modal').css('display','none');
+		
+	});
+	
+	var state='';
+	if($('input:checkbox').is(':checked')){
+	 	state=true;
+	}
+	function login(throughTalk){
+		
+		Kakao.Auth.authorize({
+			  redirectUri: $(location).attr('protocol')+"//"+"${pageContext.request.serverName }${pageContext.request.contextPath}/member/recruitLogin.do"
+			  ,state: '${match.recruit_num}' + '-' + state
+			  ,throughTalk: throughTalk
+		});
+		
+	 }
 
 	//이미지 지도에서 마커가 표시될 위치입니다 
 	var markerPosition  = new kakao.maps.LatLng(${match.address_y}, ${match.address_x}); 
@@ -225,6 +308,16 @@
 	var map = new kakao.maps.Map(mapContainer, mapOption);
 	marker.setMap(map); 
 	$(function(){
+		
+		var userAgent=navigator.userAgent.toLowerCase();
+
+		if (userAgent.indexOf('android')==-1 && userAgent.indexOf('iphone')==-1) {
+			$('#sel_login').css('display','block');
+			$('input:checkbox').prop('checked',false);
+		}
+		if(userAgent.indexOf('iphone')==-1 && userAgent.indexOf('mac')==-1 && userAgent.indexOf('ipad')==-1 ){
+			$('#appleid-signin').css('display','none');
+		} 
 		
 		if (${match.club_color eq 'rgb(0, 0, 0)'}){
 			$(".color").css("border","1px solid #fff");
@@ -290,6 +383,7 @@
 		$('#report-more-cancel-btn').click(function(){
 			$('#report_more_modal').css('display','none');
 		});
+		
 		
 	});
   	

@@ -78,7 +78,18 @@ public class MainController {
 
 		return mav;
 	}
-
+	
+	@RequestMapping("/main/intro.do")
+	public ModelAndView intro() {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("title","젠틀프로 소개");
+		mav.setViewName("intro");
+		
+		return mav;
+	}
+	
+	
 	@RequestMapping("/main/voteForm.do")
 	public ModelAndView vote(@RequestParam int match_num, @RequestParam Integer club_num, @RequestParam boolean isMain,
 			HttpSession session) {

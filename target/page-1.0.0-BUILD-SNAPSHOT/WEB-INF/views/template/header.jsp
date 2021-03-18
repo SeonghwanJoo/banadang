@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>  
-<div class="fixed_top" id=myTopnav>
+<div class="fixed_top">
 
   <!-- Left-aligned links (default) -->
 	<c:if test="${title eq '팀원 모집' }">

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.board.domain.BoardVO;
+import kr.spring.board.domain.EventVO;
 import kr.spring.board.service.BoardService;
 
 @Controller
@@ -56,6 +57,28 @@ public class BoardAjaxController {
 			
 		}
 		return map;
+	}
+	@RequestMapping("/board/postEventReq.do")
+	@ResponseBody
+	public Map<String,Object> postEventReq(EventVO event){
+		
+		Map<String, Object> map=new HashMap<String,Object>();
+		try {
+			String eventId=boardService.selectEventId(event);
+			if (eventId!=null) {
+				logger.info("eventId != null 진입");
+				map.put("result", "duplicated");
+			}else {
+				boardService.insertEvent(event);
+				map.put("result", "success");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		
+		return map;
+		
 	}
 	@RequestMapping("/board/updateAnswer.do")
 	@ResponseBody

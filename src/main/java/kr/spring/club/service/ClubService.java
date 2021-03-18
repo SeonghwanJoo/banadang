@@ -24,7 +24,6 @@ public interface ClubService {
 	public void updateAcceptance(ClubVO club);
 	public void rejectOthers(ClubVO club);
 	public void updateAwayforMatch(ClubVO club);
-	public Float selectAttendanceRate(MemberVO member);
 	public List<MemberVO> selectClubMembers(Integer club_num);
 	public void deleteMemberFromClub(MemberVO memberVO);
 	public void updateMemberAuth(MemberVO memberVO);

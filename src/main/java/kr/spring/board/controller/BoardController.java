@@ -34,6 +34,16 @@ public class BoardController {
 		
 		return mav;
 	}
+	@RequestMapping("/board/event.do")
+	public ModelAndView event() {
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("title","이벤트");
+		mav.setViewName("event");
+		
+		return mav;
+	}
 	@RequestMapping("/board/qna.do")
 	public ModelAndView qna() {
 		

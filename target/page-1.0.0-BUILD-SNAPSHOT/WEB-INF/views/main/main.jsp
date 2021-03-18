@@ -381,6 +381,21 @@
 </ul>
 </c:if>
 </c:if>
+<!-- The Modal -->
+<div id="myModals" class="modals">
+	<!-- Modal content -->
+	<div class="modals-content">
+		<span class="close_mod">&times;</span>
+	    <img src="${pageContext.request.contextPath }/resources/images/event.png" class="event"/>
+	    <input type="button" class="block black-bg" onclick="location.href='${pageContext.request.contextPath}/board/event.do'" value="이벤트 참여하러 가기">
+	    <span class="noseen">
+				오늘 일주일 동안 닫기
+			  <input type="checkbox" name="noseen">
+	    </span>
+	</div>
+	
+	
+</div>
 <div id="more_modal" class="confirm-modals">
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
@@ -467,6 +482,8 @@ function openMore(match_num,club_name,club_num,match_date,address,start_time,mod
 var state='';
 if($('input:checkbox').is(':checked')){
  	state=true;
+}else{
+	state=false;
 }
 function login(throughTalk){
 	
@@ -477,12 +494,43 @@ function login(throughTalk){
 	});
 	
  }
+function setCookie(cName, cValue, cDay){
+	var expire = new Date();
+	expire.setDate(expire.getDate() + cDay);
+	cookies = cName + '=' + escape(cValue) + '; path=/ '; 
+	if(typeof cDay != 'undefined') cookies += ';expires=' + expire.toGMTString() + ';';
+	document.cookie = cookies;
+}
+function getCookie(cookieName){
+    var cookieValue=null;
+    if(document.cookie){
+        var array=document.cookie.split((escape(cookieName)+'='));
+        if(array.length >= 2){
+            var arraySub=array[1].split(';');
+            cookieValue=unescape(arraySub[0]);
+        }
+    }
+    return cookieValue;
+}
  $(function(){
-	 
+	 var cookieValue=getCookie('noseen');
+	 console.log(cookieValue);
+	 if(cookieValue==null||cookieValue==''){
+		 $('#myModals').css('display','block');
+	 }
+	$('input:checkbox[name="noseen"]').click(function(){
+		
+		$('#myModals').css('display','none');
+		setCookie('noseen','noseenForOneDay',7);
+		
+	});
+	$('.close_mod').click(function(){
+		
+		$('#myModals').css('display','none');
+		
+	});
 
-
-	 
-	 var userAgent=navigator.userAgent.toLowerCase();
+	var userAgent=navigator.userAgent.toLowerCase();
 
 	if (userAgent.indexOf('android')==-1 && userAgent.indexOf('iphone')==-1) {
 		$('#sel_login').css('display','block');

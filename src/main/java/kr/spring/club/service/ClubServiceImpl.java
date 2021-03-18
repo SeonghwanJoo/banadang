@@ -97,11 +97,7 @@ public class ClubServiceImpl implements ClubService {
 		
 	}
 
-	@Override
-	public Float selectAttendanceRate(MemberVO member) {
-		
-		return clubMapper.selectAttendanceRate(member);
-	}
+	
 
 	@Override
 	public List<MemberVO> selectClubMembers(Integer club_num) {

@@ -159,7 +159,7 @@ $(function(){
 			success:function(data){
 				if(data.result=="success"){
 					$('#invite_modal').css('display','none');
-					$('#toast').css('display','block');
+					$('#toast').css('display','flex');
 					$(window).click(function(){
 						location.href='manageClub.do?club_num=${club.club_num}';
 					})

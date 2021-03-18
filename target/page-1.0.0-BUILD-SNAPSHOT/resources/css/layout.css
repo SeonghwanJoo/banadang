@@ -14,7 +14,23 @@
 	overflow:hidden;
 	text-overflow: ellipsis;
 }
-
+.new{
+	width:8px;
+	height:8px;
+	border-radius:50%;
+	background-color:#FF4947;
+	font-size:5px;
+	padding:0 3px;
+	position:relative;
+	left:10px;
+}
+.event{
+	width:100%;
+	height:auto;
+	max-width:720px;
+	margin:0 auto;
+	
+}
 .fixed_top, div.bottom_menu, .sticky{
 	width:100%;
 }
@@ -547,6 +563,7 @@ body.body, .filter-wrapper{
 	color:#fff;
 }
 
+
 .certify-modals{
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
@@ -599,7 +616,13 @@ body.body, .filter-wrapper{
 	width: 100%; /* Full width */
 	height: 100%; /* Full height */
 	overflow: hidden; /* Enable scroll if needed */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+}
+.black-bg-op{
+	background-color: rgba(0, 0, 0, 0.7);
+	padding:1rem;
+	border-radius:1rem;
+	width:300px;
 }
 .confirm-modal-content{
 	text-align:center;
@@ -765,6 +788,16 @@ button:focus{
 .margin-top, span.margin-top, li .margin-top{
 	margin-top:0.5rem;
 }
+.margin-lg-top{
+	margin-top:3rem;
+}
+.store-btn{
+	margin:2rem 1rem 1rem 0;
+	width: 153px;
+	height:45px;
+}
+
+
 .neutral{background-color:#878787;}
 .positive{background-color:#00643c;}
 .positive-color{color:#00643c;}
@@ -904,6 +937,19 @@ button:focus{
   text-align: center;
   border-style:solid;
 }
+.screenshot{
+	width:17rem;
+	height:35rem;
+	margin:0 auto;
+	display: block;
+	border-radius: 2rem;
+	box-shadow: 10px 5px 5px rgba(0, 0, 0, .3);
+}
+.bold-hr{
+	height:2.5rem;
+	background:#eee;
+	border:0;
+}
 .white-bg{
 	color:#000;
 	background-color:#fff;
@@ -919,11 +965,19 @@ button:focus{
 	background-color:#000;
 	border:1px solid #fff;
 }
-.green-bg{
+.green-bg, #myTopnav{
 	color:#fff;
 	background-color:#00643c;
 	border-color:#00643c;
 }
+.noseen{
+	position:absolute;
+	bottom:-2rem;
+	right:0;
+	color:#fff;
+	font-weight:bold;
+}
+
 #submit_delete{
 	background-color:#dc3545;
 	color:#fff;
@@ -945,10 +999,10 @@ button:focus{
 .fixed_top{
   text-overflow: ellipsis;
   overflow: hidden;
-  background-color: #000;
   color:#fff;
   position:fixed;
   white-space: nowrap;
+  background-color:#000;
   z-index:50;
   height:3rem;
   left: 0;
@@ -957,7 +1011,16 @@ button:focus{
   font-size:18px;
   padding-top:5px;
   padding-bottom:5px;
-
+}
+#myTopnav{
+	position:fixed;
+	z-index:50;
+	  height:3.5rem;
+	  left: 0;
+	  right: 0;
+}
+.padding-lg-top{
+	padding-top:5rem;
 }
 .topnav-centered{
 
@@ -1163,8 +1226,6 @@ a.detail{
 .container{
 	padding-right:0px !important;
 	padding-left:0px !important;
-	color:#fff;
-	background-color:#000;
 }
 .wrapper{
 	text-align:center;
@@ -1192,6 +1253,12 @@ a.detail{
 .m-margin-right{
 	margin-right:0.5rem;
 }
+.margin-lg-btm{
+	
+	margin-bottom:3rem;
+	
+}
+ 
 
 
 /* The toast (background) */
@@ -1921,7 +1988,6 @@ button.chip-btn{
 	font-size:3rem;
 	display:block;
 	margin:1rem auto;
-	
 }
 
 .empty-wrapper{
@@ -1932,11 +1998,18 @@ button.chip-btn{
   	flex-direction: column;
   	justify-content: center;
 }
-.centered{
+.centered, .store-btns{
 	margin:0 auto;
 	display:flex;
 	flex-direction:row;
 	justify-content:center;
+}
+.mid_title{
+	text-align:center;
+	font-weight:bold;
+}
+.description{
+	text-align:center;
 }
 .flex-start{
 	display:flex;
@@ -2236,7 +2309,16 @@ input:checked ~ .checkmark:after{
 	}
 	.carousel-inner .carousel-item img{
 		height:18rem;
-	} 
+	}
+	.mid_title, .description{
+		text-align:left;
+	}
+	.mid_title{
+		margin-top:5rem;
+	}
+	.store-btns{
+		justify-content: flex-start;
+	}
 }
 @media (min-width:1200px){
 	.fixed_top, div.bottom_menu, .sticky{

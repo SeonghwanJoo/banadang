@@ -267,11 +267,14 @@ public class MemberAjaxController {
 
 	@RequestMapping("/member/insertMember.do")
 	@ResponseBody
-	public Map<String, Object> insertMember(@RequestParam(defaultValue = "2") Integer marketing, HttpSession session) {
+	public Map<String, Object> insertMember(@RequestParam(defaultValue = "2") Integer marketing,
+											HttpSession session) {
 
-		Integer loginType = (Integer) session.getAttribute("loginType");
+		Integer loginType= (Integer) session.getAttribute("loginType");
 		Map<String, Object> map = new HashMap<String, Object>();
 		MemberVO member = (MemberVO) session.getAttribute("member");
+		logger.info("marketing : "+marketing);
+		logger.info("member : "+marketing );
 		member.setMarketing(marketing);
 		try {
 			if (loginType % 2 == 1) {

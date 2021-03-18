@@ -4,6 +4,7 @@ package kr.spring.board.service;
 import java.util.List;
 
 import kr.spring.board.domain.BoardVO;
+import kr.spring.board.domain.EventVO;
 import kr.spring.match.domain.MatchVO;
 
 
@@ -29,5 +30,7 @@ public interface BoardService {
 	public void deleteVote_answer(Integer voteAnswer_num);
 	public BoardVO selectVote_AnswerByVoteAnswer_num(Integer voteAnswer_num);
 	public void updateVote_Answer(BoardVO board);
+	public String selectEventId(EventVO event);
+	public void insertEvent(EventVO event);
 
 }
