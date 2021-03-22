@@ -76,7 +76,8 @@ public class ClubAjaxController {
 		club.setClub_locY(club_locY);
 		try {
 			clubService.insertClub(club);
-			List<ClubVO> myClubs=(List<ClubVO>)session.getAttribute("myClubs");
+			List<ClubVO> myClubs=new ArrayList<ClubVO>();
+			myClubs.addAll((List<ClubVO>)session.getAttribute("myClubs"));
 			myClubs.add(club);
 			session.setAttribute("myClubs", myClubs);
 			map.put("result", "inserted");

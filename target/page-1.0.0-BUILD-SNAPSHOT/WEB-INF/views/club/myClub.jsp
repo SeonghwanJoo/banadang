@@ -4,7 +4,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:if test="${!empty myClubs }">
-<span class="margin-top disp-bl bold margin-left" >우리팀을 선택하세요</span>
+<div class="row">
+	<div class="col">
+		<span class="margin-m-top disp-bl bold margin-left" >우리팀을 선택하세요</span>
+	</div>
+	<div class="col centered">
+		<button class="margin-top blue-bg round-btn" onclick="location.href='createClubForm.do'">팀 만들기</button>
+	</div>
+</div>
 <div class="invite-wrapper" id="invite-wrapper">
  	<ul class="ul-list non-border-btm">
  		<c:forEach items="${myClubs }" var="myClub">
@@ -41,7 +48,11 @@
   <!-- Modal content -->
     <div id="submit_toast_content" class="submit_toast_content">
 		<div class="row centered margin-btm centered-padding">
-			<span id="club_msg">소속팀이 없습니다.</span>
+			<span id="club_msg">
+				소속팀이 없습니다.<br><br>
+				<b>지금 팀을 만들고 <br>
+				회원들을 초대해 보세요!</b>
+			</span>
 		</div>
 		<div class="row margin-top centered">
 			<div class="col">

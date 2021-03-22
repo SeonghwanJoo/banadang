@@ -37,5 +37,6 @@ public interface MemberService {
 	public void deleteMember(MemberVO member);
 	public void updateMemberForReValidation(MemberVO member);
 	public void insertReport(ReportVO report);
+	public void updateProfile(MemberVO member);
 	
 }

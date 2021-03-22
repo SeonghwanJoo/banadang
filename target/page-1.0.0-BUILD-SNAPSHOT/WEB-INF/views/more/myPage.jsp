@@ -7,12 +7,18 @@
 	<li class="li-list">
 		<div class="row">
 			<div class="col nowrap">
+				<div class="relative">
 				<c:if test="${empty member.thumbnail_image }">
 				<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
 				</c:if>
 				<c:if test="${not empty member.thumbnail_image }">
 				<img src="${member.thumbnail_image }" alt="Avatar" class="avatar">
 				</c:if>
+				<a href="editProfile.do">
+				<i class="fas fa-pen profile-edit blue" id="${member.id}"></i>
+				</a>
+				</div>
+				
 				<span>${member.nickname }  </span>
 				<br>
 				<span class="xs-font ">${member.email }</span>
@@ -77,7 +83,10 @@
 		<div class="row">
 			<div class="col">
 				<i class="fas fa-headset"></i>
-				<span>자주 묻는 질문</span><span class="new">N</span>
+				<span class="relative">
+					자주 묻는 질문
+					<span class="new"></span>
+				</span>
 			</div>
 		</div>
 	</li>
@@ -104,7 +113,10 @@
 		<div class="row">
 			<div class="col">
 				<i class="fas fa-gift"></i>
-				<span>이벤트</span><span class="new">N</span>
+				<span class="relative">
+					이벤트
+					<span class="new"></span>
+				</span>
 			</div>
 		</div>
 	</li>

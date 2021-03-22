@@ -13,7 +13,7 @@
 	<c:if test="${myClub.club_auth>4 }">
 	<div class="topnav-right">
 		<a id="write" href="${pageContext.request.contextPath }/club/modifyClub.do">
-			<i class="fas fa-edit down"></i>
+			<i class="fas fa-pen down"></i>
 		</a>
 	</div>
 	</c:if>
@@ -21,7 +21,7 @@
 <div class="blank_div"></div>
 <div class="invite-wrapper" id="invite-wrapper">
  	<ul class="ul-list small-font">
-		<li class="li-list cursor" onclick="location.href='club_details.do?club_num=${myClub.club_num}'">
+		<li class="li-list cursor non-border-btm" onclick="location.href='club_details.do?club_num=${myClub.club_num}'">
 			<div class="row">
 				<div class="col club_main nowrap">
 					<c:if test="${myClub.filename ne 'undefined' }">
@@ -412,8 +412,8 @@
 	<div class="tab_detail" id="manageSchedule">
 		<div class="border-btm v-padding">
 			<span class="title-btw">경기 일정</span>
-			<button class="btn_write" id="btn_write" onclick="location.href='${pageContext.request.contextPath}/match/writeForm.do'">
-				<span>매치 작성</span><i class="fas fa-pen margin-left"></i>
+			<button class="btn_write blue-bg round-btn" id="btn_write" onclick="location.href='${pageContext.request.contextPath}/match/writeForm.do'">
+				<span>매치 작성</span>
 			</button>
 		</div>
 		<c:if test="${empty match_list }">
@@ -429,7 +429,7 @@
 				<c:forEach var="match" items="${match_list}">
 					<li class="li-list">
 						<div class="match-info-wrapper">
-							<div class="main-row ">
+							<div class="main-row">
 								<c:if test="${match.type==1 }">
 								<span class="match-item s-chip white-bg">
 								축구

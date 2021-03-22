@@ -21,7 +21,15 @@
 		,age_range=#{age_range}
 		</if>
 		 where id=#{id}	
-	</update>   
+	</update>
+	<update id="updateProfile" parameterType="memberVO">
+	update gentlepro.member_detail set 
+		nickname=#{nickname}
+		<if test="age_range != null">
+		,age_range=#{age_range}
+		</if>
+		 where id=#{id}	
+	</update> 
 	<select id="selectMyRecruitReq" parameterType="string" resultType="matchVO">
 		select * from 
     (select recruit_req_num,isCanceled,c.id,c.match_num,c.club_num,recruit_position,recruit_accept,type,start_time,end_time,cancel,address,match_date,address_x,address_y,club_name,filename,club_color,club_age from

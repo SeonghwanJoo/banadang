@@ -12,6 +12,12 @@
        <put-attribute name="body" value="/WEB-INF/views/more/myPage.jsp"/>
        <put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
     </definition>
+    <definition name="editProfile" extends="main">
+       <put-attribute name="title" value="프로필 수정"/> 
+       <put-attribute name="header" value=""/>
+       <put-attribute name="body" value="/WEB-INF/views/more/editProfile.jsp"/>
+       <put-attribute name="footer" value=""/>
+    </definition>
     <definition name="myRecruitReq" extends="main">
        <put-attribute name="title" value="나의 용병 신청 현황"/> 
        <put-attribute name="header" value=""/>

@@ -15,21 +15,20 @@
 	text-overflow: ellipsis;
 }
 .new{
-	width:8px;
-	height:8px;
+	width:.4rem;
+	height:.4rem;
 	border-radius:50%;
 	background-color:#FF4947;
-	font-size:5px;
-	padding:0 3px;
-	position:relative;
-	left:10px;
+	/* font-size:0.6rem; */
+	position:absolute;
+	right:-1rem;
 }
 .event{
 	width:100%;
 	height:auto;
-	max-width:720px;
 	margin:0 auto;
-	
+	display:block;
+	max-width:720px;
 }
 .fixed_top, div.bottom_menu, .sticky{
 	width:100%;
@@ -190,31 +189,16 @@ ul.carousel-indicators {
 	cursor:pointer;
 }
 .blue{
-	/* color:#2997FF; */
 	color:#2997FF;
 }
 /* Style buttons */
-.btn_write {
-	background-color: #000;
-	color: #fff;
-	border: 1px solid #fff; 
-	padding: 0.3rem 0.5rem; 
-	margin: 0.3rem 0.5rem;
-	border-radius: 1.1rem;
-	float: right;
-
-	font-size:0.9rem;
-	position:relative;
-}
-.btn_write .first-child{
-	position:absolute;
-	top:0.2rem;
+.btn_write, .btn_write.blue-bg {
+	float:right;
+	margin:0.5rem 1rem 0 0;
+	padding:0.3rem 1rem;
 }
 
-/* Darker background on mouse-over */
-.btn_write:hover {
-	background-color: #000;
-}
+
 .margin-left{
 	margin-left:0.5rem;
 }
@@ -271,7 +255,9 @@ div.team-info.cursor{
 .tab_detail .main-row{
 	flex-wrap: wrap;
 }
-
+.tab_detail .match-info-wrapper .main-row{
+	flex-wrap:nowrap;
+}
 
 .vote-rating {
 	margin:0.2rem auto;
@@ -788,6 +774,9 @@ button:focus{
 .margin-top, span.margin-top, li .margin-top{
 	margin-top:0.5rem;
 }
+.margin-m-top{
+	margin-top:1rem;
+}
 .margin-lg-top{
 	margin-top:3rem;
 }
@@ -1190,8 +1179,9 @@ div.col{
 
 #write .down{
 	position:absolute;
-	top:0rem;
+	top:0.3rem;
 	right:0rem;
+	font-size:1.5rem;
 }
 .align-center{
 	text-align:center;
@@ -1437,7 +1427,16 @@ btn-wrapper{
 	font-weight: bold;
 	margin:1rem 0;
 }
-
+.profile-edit{
+	position:absolute;
+	left:1.8rem;
+	top:1.8rem;
+	font-size:3px;
+	background:#555;
+	border-radius:50%;
+	color:#ccc;
+	padding:0.4rem;
+}
 
 .half_col .admin{
 	font-size:1rem;
@@ -1493,6 +1492,17 @@ btn-wrapper{
 	position:absolute;
 	right:0rem;
 }
+.round-btn{
+	font-size:0.9rem;
+	border-radius:0.3rem;
+	border:none;
+	padding:0 0.5rem;
+}
+.blue-bg{
+	background-color:#2997FF;
+	color:#fff;
+}
+
 .float-left{
 	float:left;
 }
@@ -1578,6 +1588,7 @@ a.active.small-font{
 #topIcon{
 	position:relative;
 	top:0.2rem;
+	font-size:1.5rem;
 }
 .bottom_menu{
 	text-align:center;
@@ -1787,7 +1798,7 @@ div.detail-item{
 ul.ul-list{
 	padding-inline-start: 0px;
 	width:100%;
-	border-bottom:10px solid #333;
+	border-bottom:10px solid #212121;
 	margin-bottom:0;
 }
 ul.non-border-btm, li.li-list.non-border-btm{
@@ -1807,8 +1818,8 @@ li.li-list{
 }
 .mid-banner{
 	width:100%;
-	padding:10px 0;
-	background-color:#222222;
+	padding:10px 0 6px 0;
+	background-color:#212121;
 	margin:0 auto;
 	max-width: 1130px;
 }
@@ -1997,6 +2008,9 @@ button.chip-btn{
   	align-items: center;
   	flex-direction: column;
   	justify-content: center;
+  	background-color: #212121;
+  	border-radius: 1rem;
+  	margin:1rem 0.5rem;
 }
 .centered, .store-btns{
 	margin:0 auto;

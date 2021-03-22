@@ -29,7 +29,7 @@
 	</span>
     <c:if test="${!empty user_id }">
     <a id="write" href="${pageContext.request.contextPath }/match/writeForm.do">
-    	<i class="far fa-edit" id="topIcon"></i>
+    	<i class="fas fa-pen" id="topIcon"></i>
     	<c:if test="${title eq '더보기' && count_msg!=0 }">
 		<span class="count-msg fas">${count_msg }</span>
 		</c:if>
@@ -87,7 +87,7 @@
 			$('#write').attr('href','${pageContext.request.contextPath}/match/writeRecruit.do');
 		}else if(${title eq '더보기'}){
 			$('#write').attr('href','${pageContext.request.contextPath}/member/myMsg.do');
-			$('#topIcon').removeClass('fas fa-edit');
+			$('#topIcon').removeClass('fas fa-pen');
 			$('#topIcon').addClass('far fa-comment');
 		}else if(${title eq '팀원 모집'}){
 			$('#write').attr('href','${pageContext.request.contextPath}/member/writeClubRecruit.do');

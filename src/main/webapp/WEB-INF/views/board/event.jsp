@@ -18,11 +18,16 @@
 	</div>
 </div>
 <div class="blank_div"></div>
-<div class="centered">
-	<img src="${pageContext.request.contextPath }/resources/images/event.png" class="event"/>
-</div>
-<form:form class="col s12" id="form" action="write.do" commandName="matchVO" autocomplete="off">
-	<span class="input-label">상품 수령 정보 입력</span>
+<img src="${pageContext.request.contextPath }/resources/images/event1.png" class="event"/>
+<div class="event">
+<form:form class="col s12" id="form" action="write.do" autocomplete="off">
+	<div class="row">
+		<span class="input-label">상품 수령 정보 입력</span>
+		<span class="share cursor margin-m-top" onclick="sendLink()">
+		이벤트 공유하기
+		<img class="kakaolink-share" src="${pageContext.request.contextPath }/resources/images/kakaolink_btn.png">
+		</span>
+	</div>
 	<div class="row margin-top">
 		<div class="autocomplete input-container col">
 			<i class="fa fa-users icon"></i> <input class="input-field"
@@ -54,8 +59,9 @@
 		</div>
 	</div>
 	<div class="row"><div class="col"><span class="msg" id="phone_msg"></span></div></div>
-	<input type="submit" class="block white-bg" value="이벤트 참여 신청하기">
+	<input type="submit" class="block white-bg margin-lg-btm" value="이벤트 참여 신청하기">
 </form:form>
+</div>
 <!-- The Modal -->
 <div id="myModals" class="modals">
 	<!-- Modal content -->
@@ -125,22 +131,17 @@
 
 	Kakao.init('32776969383e4a77d92f6e18dd233bc5');
 	
-	$('#share').click(function(){
-		
-		var type_num = '${match.type}';
-		var type;
-		if(type_num==1){type='축구'}
-		else{type='풋살'}
+	function sendLink(){
 		
 		Kakao.Link.sendCustom({
-	    	templateId: 49225,
+	    	templateId: 49928,
 	    	templateArgs: {
 	    		
 	    	}
 	    });
 		$('#report_more_modal').css('display','none');
 		
-	});
+	};
 	var state='';
 	if($('input:checkbox').is(':checked')){
 	 	state=true;

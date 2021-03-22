@@ -230,4 +230,11 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.insertReport(report);
 	}
 
+	@Override
+	public void updateProfile(MemberVO member) {
+		
+		memberMapper.updateProfile(member);
+		
+	}
+
 }

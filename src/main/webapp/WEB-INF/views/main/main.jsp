@@ -63,8 +63,8 @@
 <c:if test="${not empty user_id }">
 <div class="border-btm v-padding">
 	<span class="title-btw">경기 일정</span>
-	<button class="btn_write" id="btn_write" onclick="location.href='${pageContext.request.contextPath}/match/writeForm.do'">
-		<span>매치 작성</span><i class="fas fa-pen margin-left"></i>
+	<button class="btn_write blue-bg round-btn " id="btn_write" onclick="location.href='${pageContext.request.contextPath}/match/writeForm.do'">
+		매치 작성
 	</button>
 </div>
 <c:if test="${empty match_list }">
@@ -77,11 +77,11 @@
 </div>
 </c:if>
 <c:if test="${not empty match_list }">
-<ul class="ul-list non-border-btm">
+<ul class="ul-list">
 <c:forEach var="match" items="${match_list}">
 	<li class="li-list">
 		<div class="match-info-wrapper">
-			<div class="main-row ">
+			<div class="main-row">
 				<c:if test="${match.type==1 }">
 				<span class="match-item s-chip white-bg">
 				축구
@@ -267,12 +267,6 @@
 </c:forEach>
 </ul>
 </c:if>
-<div class="mid-banner">
-	<ins class="kakao_ad_area" style="display:none;" 
-	 data-ad-unit    = "DAN-gCSwQUEFuriXnEOA" 
-	 data-ad-width   = "320" 
-	 data-ad-height  = "100"></ins>
-</div>
 <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 <div class="border-btm v-padding">
 	<span class="title-btw">지난 경기 상대팀 평점 작성</span>
@@ -386,10 +380,10 @@
 	<!-- Modal content -->
 	<div class="modals-content">
 		<span class="close_mod">&times;</span>
-	    <img src="${pageContext.request.contextPath }/resources/images/event.png" class="event"/>
+	    <img src="${pageContext.request.contextPath }/resources/images/event1.png" class="event"/>
 	    <input type="button" class="block black-bg" onclick="location.href='${pageContext.request.contextPath}/board/event.do'" value="이벤트 참여하러 가기">
 	    <span class="noseen">
-				오늘 일주일 동안 닫기
+				일주일 동안 닫기
 			  <input type="checkbox" name="noseen">
 	    </span>
 	</div>

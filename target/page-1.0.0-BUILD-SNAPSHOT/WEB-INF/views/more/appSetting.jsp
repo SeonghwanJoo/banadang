@@ -83,7 +83,7 @@
 				url:'unlink.do',
 				type:'post',
 				data:{
-					id: ${user_id},
+					id: '${user_id}',
 					reason : $('#reason').val(),
 				},
 				dataType:'json',

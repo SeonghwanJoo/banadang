@@ -24,6 +24,8 @@ public interface MemberMapper {
 	
 	public void updateMember_detail(MemberVO member);
 	
+	public void updateProfile(MemberVO member);
+	
 	public List<MatchVO> selectMyRecruitReq(String id);
 	
 	@Delete("delete from gentlepro.recruit_req where recruit_req_num=#{recruit_req_num}")

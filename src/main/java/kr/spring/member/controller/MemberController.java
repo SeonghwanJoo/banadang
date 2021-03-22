@@ -210,7 +210,7 @@ public class MemberController {
 		return "redirect:/match/recruitDetail.do?recruit_num="+values[0];
 	
 	}
-
+	
 	@RequestMapping("/member/invitedLogin.do")
 	public String invitedKakaoLogin(@RequestParam String code,
 									@RequestParam String state,
@@ -279,7 +279,34 @@ public class MemberController {
 		return "redirect:/club/inviteMember.do?club_num="+values[0];
    
 	}
-
+	
+	@RequestMapping("/member/editProfile.do")
+	public ModelAndView editProfile(HttpSession session) {
+		
+		ModelAndView mav= new ModelAndView();
+		String user_id=(String)session.getAttribute("user_id");
+		MemberVO member=memberService.getMember(user_id);
+		mav.addObject("member",member);
+		mav.addObject("title", "프로필 수정");
+		mav.setViewName("editProfile");
+		
+		return mav;
+		
+	}
+	@RequestMapping("/member/updateProfile.do")
+	public String updateProfile(MemberVO member) {
+		
+		try {
+			memberService.updateProfile(member);
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return "redirect:/member/myPage.do";
+	}
+	
+	
 	@RequestMapping("/member/agreement.do")
 	public ModelAndView agreement() {
 		

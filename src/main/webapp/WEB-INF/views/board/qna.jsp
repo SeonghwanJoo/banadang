@@ -19,7 +19,7 @@
 	<c:if test="${mem_auth==2 && empty fromUser}">
 	<div class="topnav-right">
 		<a id="write" href="${pageContext.request.contextPath }/board/writeQna.do">
-			<i class="fas fa-edit down"></i>
+			<i class="fas fa-pen down"></i>
 		</a>
 	</div>
 	</c:if>

@@ -12,7 +12,7 @@
 	<c:if test="${mem_auth==2 }">
 	<div class="topnav-right">
 		<a id="write" href="${pageContext.request.contextPath }/board/writeNotice.do">
-			<i class="fas fa-edit down"></i>
+			<i class="fas fa-pen down"></i>
 		</a>
 	</div>
 	</c:if>
