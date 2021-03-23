@@ -959,6 +959,7 @@ button:focus{
 	background-color:#00643c;
 	border-color:#00643c;
 }
+
 .noseen{
 	position:absolute;
 	bottom:-2rem;
@@ -1501,6 +1502,8 @@ btn-wrapper{
 .blue-bg{
 	background-color:#2997FF;
 	color:#fff;
+	border:none;
+	max-width: 17rem;
 }
 
 .float-left{
