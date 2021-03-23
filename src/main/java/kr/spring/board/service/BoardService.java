@@ -32,5 +32,6 @@ public interface BoardService {
 	public void updateVote_Answer(BoardVO board);
 	public String selectEventId(EventVO event);
 	public void insertEvent(EventVO event);
+	public List<BoardVO> selectQnaAsAdmin();
 
 }

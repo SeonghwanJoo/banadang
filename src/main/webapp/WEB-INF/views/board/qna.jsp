@@ -53,6 +53,9 @@
 		<div class="row">
 			<span class="span-link-reverse margin-btm align-center cursor" onclick="location.href='personalQna.do'">1:1 문의사항 답변 보러가기</span>
 		</div>
+		<c:if test="${mem_auth == 2 }">
+			<button class="round-btn white-bg centered margin-top" onclick="location.href='personQnaListAsAdmin.do'">개인 질문 보러가기</button>
+		</c:if>
 	</li>
 </ul>
 </c:if>

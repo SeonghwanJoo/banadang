@@ -40,17 +40,22 @@
 
 
 <c:if test="${not empty answers }">
+<div id="answer-wrapper" class="margin-top">
+<ul class="ul-list non-border-btm">
 <c:forEach items="${answers }" var="answer">
-<hr class="hr">
+<li class="li-list">
 <div class="main-row">
 	<span class="nickname">${answer.nickname }</span>
 	<span class="small-font bold gray">${answer.register_date }</span>
-	<span class="material-icons more cursor m-font gray" id="more" onclick="modifyAnswer(${answer.answer_num})" >more_vert</span>
+	<span class="material-icons more cursor m-font gray" onclick="modifyAnswer(${answer.answer_num})" >more_vert</span>
 </div>
 <p>
 ${answer.content }
 </p>
+</li>
 </c:forEach>
+</ul>
+</div>
 </c:if>
 
 <div id="reply-more_modal" class="confirm-modals">

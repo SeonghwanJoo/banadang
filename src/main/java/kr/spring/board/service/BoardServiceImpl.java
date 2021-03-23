@@ -167,6 +167,12 @@ public class BoardServiceImpl implements BoardService{
 		boardMapper.insertEvent(event);
 		
 	}
+
+	@Override
+	public List<BoardVO> selectQnaAsAdmin() {
+		
+		return boardMapper.selectQnaAsAdmin();
+	}
 	
 	
 	

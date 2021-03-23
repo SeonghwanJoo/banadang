@@ -56,6 +56,22 @@ public class BoardController {
 		return mav;
 		
 	}
+	
+	@RequestMapping("/board/personQnaListAsAdmin.do")
+	public ModelAndView personQnaListAsAdmin() {
+		
+		ModelAndView mav=new ModelAndView();
+		
+		List<BoardVO> boards= boardService.selectQnaAsAdmin();
+		mav.addObject("boards",boards);
+		mav.addObject("title","개인 질문");
+		mav.setViewName("qna");
+		
+		
+		return mav;
+		
+	}
+	
 	@RequestMapping("board/writeNotice.do")
 	public ModelAndView writeNotice() {
 		

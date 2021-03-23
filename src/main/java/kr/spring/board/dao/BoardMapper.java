@@ -30,6 +30,9 @@ public interface BoardMapper {
 	@Select("select * from gentlepro.qna where fromuser is null order by register_date desc")
 	public List<BoardVO> selectQna();
 	
+	@Select("select * from gentlepro.qna where fromuser is not null order by register_date desc")
+	public List<BoardVO> selectQnaAsAdmin();
+	
 	public void insertQna(BoardVO board);
 	
 	@Select("select * from gentlepro.qna where qna_num=#{qna_num}")
