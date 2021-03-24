@@ -10,7 +10,7 @@
 		</a>
 		</c:if>
 		<c:if test="${!isMain }">
-		<a href="${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}">
+		<a href="${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}&clubManageFrom=3">
 			<span class="material-icons" id="cancel" >close</span>
 		</a>
 		</c:if>

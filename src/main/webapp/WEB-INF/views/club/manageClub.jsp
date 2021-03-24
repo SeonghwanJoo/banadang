@@ -416,22 +416,261 @@
 		매치 작성
 	</button>
 </div>
-<c:if test="${empty match_list }">
-<div class="row">
-	<div class="empty-wrapper margin-btm">
-		<i class="far fa-grimace empty">
-		</i>
-		<span class=" small-font">예정된 경기가 없습니다.</span>
+	<ul class="ul-list">
+	<c:if test="${empty match_list }">
+		<li class="li-list">	
+			<div class="row">
+				<div class="empty-wrapper margin-btm">
+					<i class="far fa-grimace empty">
+					</i>
+					<span class=" small-font">예정된 경기가 없습니다.</span>
+				</div>
+			</div>
+		</li>
+	</c:if>
+	<c:if test="${not empty match_list }">
+	<c:forEach var="match" items="${match_list}">
+		<li class="li-list">
+			<div class="gray-border">	
+				<div class="match-info-wrapper">
+					<div class="main-row">
+						<c:if test="${match.type==1 }">
+						<span class="match-item s-chip white-bg">
+						축구
+						</span>	
+						</c:if>
+						<c:if test="${match.type==2 }">
+						<span class="match-item s-chip black-bg">
+						풋살
+						</span>	
+						</c:if>
+						<span class="match-item no-margin">${match.address}</span>
+						<a class="space-right" href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}">
+						<i class="fas fa-chevron-right margin-left"></i>
+						</a>
+						<c:if test="${empty match.cancel }">
+							<c:if test="${myClub.club_auth==4 }">
+							<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',false)">more_vert</span>
+							</c:if>
+							<c:if test="${myClub.club_auth==5 && (myClub.club_num==match.home || match.home==match.away)}">
+							<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',true)">more_vert</span>
+							</c:if>
+							<c:if test="${myClub.club_auth==5 && (myClub.club_num==match.away && match.home!=match.away) }">
+							<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',false)">more_vert</span>
+							</c:if>
+						</c:if>
+						<c:if test="${not empty match.cancel }">
+						<span class="cancel negative full">${match.cancel}팀에 의해 취소됨</span>
+						</c:if>
+					</div>
+					<div class="row ">
+						<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
+						<span class="match-item"><i class="far fa-clock margin-right"></i>${match.start_time }~${match.end_time }</span>
+					</div>
+				</div>
+				<div class="row small-font margin-top margin-btm">
+					<c:if test="${empty match.home_name }">
+					<div class="team-info col">
+						<div class="row margin-top margin-btm">
+							<div class="centered">
+								<div class="row padding-top">
+								<span class="material-icons">
+								error
+								</span>
+								<span class="disp-inbl margin-smtop">삭제된 팀</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					</c:if>
+					<c:if test="${not empty match.home_name }">
+					<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.home }'">
+						<div class="row margin-top margin-btm">
+							<div class="centered">
+								<c:if test="${ match.home_filename ne 'undefined' }">
+								<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.home}" alt="Avatar" class="avatar emblem">
+								</c:if>
+								<c:if test="${match.home_filename eq 'undefined'   }">
+								<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+								</c:if>
+								<span class="disp-inbl margin-top">${match.home_name}</span>
+							</div>
+						</div>
+						<div class="centered">
+							<span class="margin-right">매너</span> 
+							<span class="star-rating">
+								<span style="width:${match.home_manner*20}%"></span>
+							</span>
+							<span>${match.home_manner*2}</span>
+						</div>
+						<div class="centered">
+							<span class="margin-right">실력</span> 
+							<span class="star-rating">
+								<span style="width:${match.home_perform*20}%"></span>
+							</span>
+							${match.home_perform*2}
+						</div>
+					</div>
+					</c:if>
+					<span class="from-to">VS</span>
+					<c:if test="${ not empty match.club_loc}">
+					<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
+						<div class="row margin-top margin-btm">
+							<div class="centered">
+								<c:if test="${ not empty match.away_filename && match.away_filename ne 'undefined'  }">
+								<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}" alt="Avatar" class="avatar emblem">
+								</c:if>
+								<c:if test="${ empty match.away_filename || match.away_filename eq 'undefined'   }">
+								<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+								</c:if>
+								<span class="disp-inbl margin-top">${match.away_name}</span>
+							</div>
+						</div>
+						<div class="centered">
+							<span class="margin-right">매너</span> 
+							<span class="star-rating">
+								<span style="width:${match.away_manner*20}%"></span>
+							</span>
+							<span>${match.away_manner*2}</span>
+						</div>
+						<div class="centered">
+							<span class="margin-right">실력</span> 
+							<span class="star-rating">
+								<span style="width:${match.away_perform*20}%"></span>
+							</span>
+							${match.away_perform*2}
+						</div>
+					</div>
+					</c:if>
+					<c:if test="${empty match.club_loc}">
+					<div class="team-info col">
+						<div class="row margin-top margin-btm">
+							<div class="centered">
+								<c:if test="${match.away>0 }">
+								<div class="row padding-top">
+								<span class="material-icons">
+								error
+								</span>
+								<span class="disp-inbl margin-smtop">${match.away_name }</span>
+								</div>
+								</c:if>
+								<c:if test="${match.away==0 }">
+								<div class="row padding-top">
+								<span class="material-icons">
+								campaign
+								</span>
+								<span class="disp-inbl margin-smtop">${match.away_name }</span>
+								</div>
+								</c:if>
+								<c:if test="${ match.away==-1}">
+								<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+								<span class="disp-inbl margin-top">${match.away_name }</span>
+								</c:if>
+							</div>
+						</div>
+					</div>
+					</c:if>
+				</div>
+				<div class="cursor">
+					<div class="row">
+						<label class="vote_label">
+						<span class="vote-rating">
+							<span class="voted relative" id="voted-attend-${match.match_num }" style="width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%">
+								<span class="vote_txt">참석</span>
+								<input type="radio" name="vote_${match.match_num }" value="1" id="attend_radio_${match.match_num }" class="vote">
+								<span class="vote_checkmark"></span>
+							</span>
+						</span>
+						</label>
+						<span class="vote-wrapper" onclick="goToVoteDetail('${match.club_num}','${match.match_num }','${match.home_name }','${match.away_name}')">
+							<span class="person material-icons">person</span>
+							<span id="num_attend_${match.match_num }" class="vote_num">${match.attend}</span>
+						</span>
+					</div>	
+					<div class="row" >
+						<label class="vote_label">
+						<span class="vote-rating">
+							<span class="voted relative" id="voted-not_attend-${match.match_num }" style="width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%">
+								<span class="vote_txt">불참</span>
+								<input type="radio" name="vote_${match.match_num }" value="2" id="not_attend_radio_${match.match_num }" class="vote">
+								<span class="vote_checkmark"></span>
+							</span>
+						</span>
+						</label>
+						<span class="vote-wrapper" onclick="goToVoteDetail('${match.club_num}','${match.match_num }','${match.home_name }','${match.away_name}')">
+							<span class="person material-icons">person</span>
+							<span id="num_nattend_${match.match_num }" class="vote_num">${match.not_attend}</span>
+						</span>
+					</div>	
+					<div class="row">
+						<label class="vote_label">
+						<span class="vote-rating">
+							<span class="voted relative" id="voted-not_fixed-${match.match_num }" style="width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%">
+								<span class="vote_txt">미정</span>
+								<input type="radio" name="vote_${match.match_num }" value="3" id="undefined_radio_${match.match_num }" class="vote">
+								<span class="vote_checkmark"></span>
+							</span>
+						</span>
+						</label>
+						<span class="vote-wrapper" onclick="goToVoteDetail('${match.club_num}','${match.match_num }','${match.home_name }','${match.away_name}')">
+							<span class="person material-icons">person</span>
+							<span id="num_undefined_${match.match_num }" class="vote_num" >${match.undefined}</span>
+						</span>
+					</div>
+				</div>
+				<input type="hidden" id="isVoted_${match.match_num }" value="${match.status !=0 }">
+				<button class="block white-bg margin-top" id="vote_btn_${match.match_num }" onclick="toggleVote(${match.match_num})">투표하기</button>
+				<div class="total_wrapper margin-btm">
+					<span class="cursor" onclick="location.href='${pageContext.request.contextPath }/main/vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num}&home_name=${match.home_name}&away_name=${match.away_name}&isMain=false'">
+					<span class="total_person material-icons">person</span>
+					<span id="total_${match.match_num }" class="total blue">${match.attend+match.not_attend+match.undefined}</span><span class="unit"> 명 투표 </span>
+					<i class="total fas fa-chevron-right"></i>
+					</span>
+					<span class="share cursor" onclick="sendLinkForVote('${match.match_num}','${match.club_num}','${match.match_date}','${match.address}','${match.start_time}')">
+					투표 공유하기
+					<img class="kakaolink-share" src="${pageContext.request.contextPath }/resources/images/kakaolink_btn.png">
+					</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col centered">
+					<button class="black-bg block no-border" onclick="location.href='${pageContext.request.contextPath }/main/voteForm.do?match_num=${match.match_num}&club_num=${myClub.club_num }&isMain=false'">
+						<i class="fas fa-comment-dots m-margin-right"></i>댓글 보기
+					</button>
+				</div>
+				<span class="border-btw"></span>
+				<div class="col centered">
+					<button class="black-bg block no-border" onclick="location.href='${pageContext.request.contextPath }/main/replyToVote.do?match_num=${match.match_num}&club_num=${match.club_num }'">
+						<i class="fas fa-pen m-margin-right"></i>댓글 쓰기
+					</button>
+				</div>
+			</div>
+		</li>
+	</c:forEach>
+	</c:if>
+	</ul>
+	<div class="v-padding margin-m-top">
+		<span class="title-btw">지난 경기 상대팀 평점 작성</span>
 	</div>
-</div>
-</c:if>
-<c:if test="${not empty match_list }">
-<ul class="ul-list">
-<c:forEach var="match" items="${match_list}">
-	<li class="li-list">
-		<div class="gray-border">	
+	<ul class="ul-list non-border-btm">
+	<c:if test="${empty past_match }">
+		<li class="li-list">
+			<div class="row margin-btm">
+				<div class="empty-wrapper">
+					<i class="far fa-grimace empty">
+					</i>
+					<span class=" small-font">최근 2주간 경기 중 평가할 상대팀이 없습니다.</span>
+				</div>
+			</div>
+		</li>
+	</c:if>
+	<c:if test="${not empty past_match }">
+	
+	<c:forEach var="match" items="${past_match}">
+	<li class="li-list non-border-btm">
+		<div class="gray-border">
 			<div class="match-info-wrapper">
-				<div class="main-row">
+				<div class="main-row ">
 					<c:if test="${match.type==1 }">
 					<span class="match-item s-chip white-bg">
 					축구
@@ -442,319 +681,85 @@
 					풋살
 					</span>	
 					</c:if>
-					<span class="match-item no-margin">${match.address}</span>
-					<a class="space-right" href="https://map.kakao.com/link/to/${match.address },${match.address_y},${match.address_x}">
-					<i class="fas fa-chevron-right margin-left"></i>
-					</a>
-					<c:if test="${empty match.cancel }">
-						<c:if test="${myClub.club_auth==4 }">
-						<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',false)">more_vert</span>
-						</c:if>
-						<c:if test="${myClub.club_auth==5 && (myClub.club_num==match.home || match.home==match.away)}">
-						<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',true)">more_vert</span>
-						</c:if>
-						<c:if test="${myClub.club_auth==5 && (myClub.club_num==match.away && match.home!=match.away) }">
-						<span class="material-icons more cursor xl-font" id="more" onclick="openMore(${match.match_num},'${myClub.club_name }','${myClub.club_num }','${match.match_date }','${match.address }','${match.start_time }',false)">more_vert</span>
-						</c:if>
-					</c:if>
-					<c:if test="${not empty match.cancel }">
-					<span class="cancel negative full">${match.cancel}팀에 의해 취소됨</span>
-					</c:if>
+					<span class="match-item">${match.address}</span>
 				</div>
 				<div class="row ">
 					<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
 					<span class="match-item"><i class="far fa-clock margin-right"></i>${match.start_time }~${match.end_time }</span>
 				</div>
 			</div>
-			<div class="row small-font margin-top margin-btm">
-				<c:if test="${empty match.home_name }">
-				<div class="team-info col">
-					<div class="row margin-top margin-btm">
-						<div class="centered">
-							<div class="row padding-top">
-							<span class="material-icons">
-							error
-							</span>
-							<span class="disp-inbl margin-smtop">삭제된 팀</span>
+			<div class="match-info">
+				<div class="main-row small-font margin-top margin-btm">
+					<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.home }'">
+						<div class="row margin-top margin-btm">
+							<div class="centered">
+								<c:if test="${match.home_filename ne 'undefined'  }">
+								<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.home}" alt="Avatar" class="avatar emblem">
+								</c:if>
+								<c:if test="${match.home_filename eq 'undefined'   }">
+								<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+								</c:if>
+								<span class="disp-inbl margin-top">${match.home_name}</span>
 							</div>
 						</div>
-					</div>
-				</div>
-				</c:if>
-				<c:if test="${not empty match.home_name }">
-				<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.home }'">
-					<div class="row margin-top margin-btm">
 						<div class="centered">
-							<c:if test="${ match.home_filename ne 'undefined' }">
-							<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.home}" alt="Avatar" class="avatar emblem">
-							</c:if>
-							<c:if test="${match.home_filename eq 'undefined'   }">
-							<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
-							</c:if>
-							<span class="disp-inbl margin-top">${match.home_name}</span>
-						</div>
-					</div>
-					<div class="centered">
-						<span class="margin-right">매너</span> 
-						<span class="star-rating">
-							<span style="width:${match.home_manner*20}%"></span>
-						</span>
-						<span>${match.home_manner*2}</span>
-					</div>
-					<div class="centered">
-						<span class="margin-right">실력</span> 
-						<span class="star-rating">
-							<span style="width:${match.home_perform*20}%"></span>
-						</span>
-						${match.home_perform*2}
-					</div>
-				</div>
-				</c:if>
-				<span class="from-to">VS</span>
-				<c:if test="${ not empty match.club_loc}">
-				<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
-					<div class="row margin-top margin-btm">
-						<div class="centered">
-							<c:if test="${ not empty match.away_filename && match.away_filename ne 'undefined'  }">
-							<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}" alt="Avatar" class="avatar emblem">
-							</c:if>
-							<c:if test="${ empty match.away_filename || match.away_filename eq 'undefined'   }">
-							<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
-							</c:if>
-							<span class="disp-inbl margin-top">${match.away_name}</span>
-						</div>
-					</div>
-					<div class="centered">
-						<span class="margin-right">매너</span> 
-						<span class="star-rating">
-							<span style="width:${match.away_manner*20}%"></span>
-						</span>
-						<span>${match.away_manner*2}</span>
-					</div>
-					<div class="centered">
-						<span class="margin-right">실력</span> 
-						<span class="star-rating">
-							<span style="width:${match.away_perform*20}%"></span>
-						</span>
-						${match.away_perform*2}
-					</div>
-				</div>
-				</c:if>
-				<c:if test="${empty match.club_loc}">
-				<div class="team-info col">
-					<div class="row margin-top margin-btm">
-						<div class="centered">
-							<c:if test="${match.away>0 }">
-							<div class="row padding-top">
-							<span class="material-icons">
-							error
+							<span class="margin-right">매너</span> 
+							<span class="star-rating">
+								<span style="width:${match.home_manner*20}%"></span>
 							</span>
-							<span class="disp-inbl margin-smtop">${match.away_name }</span>
-							</div>
-							</c:if>
-							<c:if test="${match.away==0 }">
-							<div class="row padding-top">
-							<span class="material-icons">
-							campaign
+							<span>${match.home_manner*2}</span>
+						</div>
+						<div class="centered">
+							<span class="margin-right">실력</span> 
+							<span class="star-rating">
+								<span style="width:${match.home_perform*20}%"></span>
 							</span>
-							<span class="disp-inbl margin-smtop">${match.away_name }</span>
+							${match.home_perform*2}
+						</div>
+					</div>
+					<span class="from-to">VS</span>
+					<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
+						<div class="row margin-top margin-btm">
+							<div class="centered">
+								<c:if test="${match.away_filename ne 'undefined'}">
+								<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}" alt="Avatar" class="avatar emblem">
+								</c:if>
+								<c:if test="${match.away_filename eq 'undefined'}">
+								<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+								</c:if>
+								<span class="disp-inbl margin-top">${match.away_name}</span>
 							</div>
-							</c:if>
-							<c:if test="${ match.away==-1}">
-							<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
-							<span class="disp-inbl margin-top">${match.away_name }</span>
-							</c:if>
+						</div>
+						<div class="centered">
+							<span class="margin-right">매너</span> 
+							<span class="star-rating">
+								<span style="width:${match.away_manner*20}%"></span>
+							</span>
+							<span>${match.away_manner*2}</span>
+						</div>
+						<div class="centered">
+							<span class="margin-right">실력</span> 
+							<span class="star-rating">
+								<span style="width:${match.away_perform*20}%"></span>
+							</span>
+							<span>${match.away_perform*2}</span>
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="row">
+				<c:if test="${match.home==match.club_num}">
+				<button class="block white-bg margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }&isMain=false'">${match.away_name } 평점 작성 하기</button>
 				</c:if>
-			</div>
-			<div class="cursor">
-				<div class="row">
-					<label class="vote_label">
-					<span class="vote-rating">
-						<span class="voted relative" id="voted-attend-${match.match_num }" style="width:${match.attend/(match.attend+match.not_attend+match.undefined)*100}%">
-							<span class="vote_txt">참석</span>
-							<input type="radio" name="vote_${match.match_num }" value="1" id="attend_radio_${match.match_num }" class="vote">
-							<span class="vote_checkmark"></span>
-						</span>
-					</span>
-					</label>
-					<span class="vote-wrapper" onclick="goToVoteDetail('${match.club_num}','${match.match_num }','${match.home_name }','${match.away_name}')">
-						<span class="person material-icons">person</span>
-						<span id="num_attend_${match.match_num }" class="vote_num">${match.attend}</span>
-					</span>
-				</div>	
-				<div class="row" >
-					<label class="vote_label">
-					<span class="vote-rating">
-						<span class="voted relative" id="voted-not_attend-${match.match_num }" style="width:${match.not_attend/(match.attend+match.not_attend+match.undefined)*100}%">
-							<span class="vote_txt">불참</span>
-							<input type="radio" name="vote_${match.match_num }" value="2" id="not_attend_radio_${match.match_num }" class="vote">
-							<span class="vote_checkmark"></span>
-						</span>
-					</span>
-					</label>
-					<span class="vote-wrapper" onclick="goToVoteDetail('${match.club_num}','${match.match_num }','${match.home_name }','${match.away_name}')">
-						<span class="person material-icons">person</span>
-						<span id="num_nattend_${match.match_num }" class="vote_num">${match.not_attend}</span>
-					</span>
-				</div>	
-				<div class="row">
-					<label class="vote_label">
-					<span class="vote-rating">
-						<span class="voted relative" id="voted-not_fixed-${match.match_num }" style="width:${match.undefined/(match.attend+match.not_attend+match.undefined)*100}%">
-							<span class="vote_txt">미정</span>
-							<input type="radio" name="vote_${match.match_num }" value="3" id="undefined_radio_${match.match_num }" class="vote">
-							<span class="vote_checkmark"></span>
-						</span>
-					</span>
-					</label>
-					<span class="vote-wrapper" onclick="goToVoteDetail('${match.club_num}','${match.match_num }','${match.home_name }','${match.away_name}')">
-						<span class="person material-icons">person</span>
-						<span id="num_undefined_${match.match_num }" class="vote_num" >${match.undefined}</span>
-					</span>
-				</div>
-			</div>
-			<input type="hidden" id="isVoted_${match.match_num }" value="${match.status !=0 }">
-			<button class="block white-bg margin-top" id="vote_btn_${match.match_num }" onclick="toggleVote(${match.match_num})">투표하기</button>
-			<div class="total_wrapper margin-btm">
-				<span class="cursor" onclick="location.href='${pageContext.request.contextPath }/main/vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num}&home_name=${match.home_name}&away_name=${match.away_name}&isMain=false'">
-				<span class="total_person material-icons">person</span>
-				<span id="total_${match.match_num }" class="total blue">${match.attend+match.not_attend+match.undefined}</span><span class="unit"> 명 투표 </span>
-				<i class="total fas fa-chevron-right"></i>
-				</span>
-				<span class="share cursor" onclick="sendLinkForVote('${match.match_num}','${match.club_num}','${match.match_date}','${match.address}','${match.start_time}')">
-				투표 공유하기
-				<img class="kakaolink-share" src="${pageContext.request.contextPath }/resources/images/kakaolink_btn.png">
-				</span>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col centered">
-				<button class="black-bg block no-border" onclick="location.href='${pageContext.request.contextPath }/main/voteForm.do?match_num=${match.match_num}&club_num=${myClub.club_num }&isMain=false'">
-					<i class="fas fa-comment-dots m-margin-right"></i>댓글 보기
-				</button>
-			</div>
-			<span class="border-btw"></span>
-			<div class="col centered">
-				<button class="black-bg block no-border" onclick="location.href='${pageContext.request.contextPath }/main/replyToVote.do?match_num=${match.match_num}&club_num=${match.club_num }'">
-					<i class="fas fa-pen m-margin-right"></i>댓글 쓰기
-				</button>
+				<c:if test="${match.away==match.club_num }">
+				<button class="block white-bg margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }&isMain=false'">${match.home_name } 평점 작성 하기</button>
+				</c:if>
 			</div>
 		</div>
 	</li>
-</c:forEach>
-</ul>
-</c:if>
-<div class="v-padding margin-m-top">
-	<span class="title-btw">지난 경기 상대팀 평점 작성</span>
-</div>
-<c:if test="${empty past_match }">
-<div class="row margin-btm">
-	<div class="empty-wrapper">
-		<i class="far fa-grimace empty">
-		</i>
-		<span class=" small-font">최근 2주간 경기 중 평가할 상대팀이 없습니다.</span>
-	</div>
-</div>
-</c:if>
-<c:if test="${not empty past_match }">
-<ul class="ul-list non-border-btm">
-<c:forEach var="match" items="${past_match}">
-<li class="li-list non-border-btm">
-	<div class="gray-border">
-		<div class="match-info-wrapper">
-			<div class="main-row ">
-				<c:if test="${match.type==1 }">
-				<span class="match-item s-chip white-bg">
-				축구
-				</span>	
-				</c:if>
-				<c:if test="${match.type==2 }">
-				<span class="match-item s-chip black-bg">
-				풋살
-				</span>	
-				</c:if>
-				<span class="match-item">${match.address}</span>
-			</div>
-			<div class="row ">
-				<span class="match-item"><i class="far fa-calendar-alt margin-right"></i><fmt:formatDate value="${match.match_date}" pattern="MM월 dd일"/></span>
-				<span class="match-item"><i class="far fa-clock margin-right"></i>${match.start_time }~${match.end_time }</span>
-			</div>
-		</div>
-		<div class="match-info">
-			<div class="main-row small-font margin-top margin-btm">
-				<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.home }'">
-					<div class="row margin-top margin-btm">
-						<div class="centered">
-							<c:if test="${match.home_filename ne 'undefined'  }">
-							<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.home}" alt="Avatar" class="avatar emblem">
-							</c:if>
-							<c:if test="${match.home_filename eq 'undefined'   }">
-							<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
-							</c:if>
-							<span class="disp-inbl margin-top">${match.home_name}</span>
-						</div>
-					</div>
-					<div class="centered">
-						<span class="margin-right">매너</span> 
-						<span class="star-rating">
-							<span style="width:${match.home_manner*20}%"></span>
-						</span>
-						<span>${match.home_manner*2}</span>
-					</div>
-					<div class="centered">
-						<span class="margin-right">실력</span> 
-						<span class="star-rating">
-							<span style="width:${match.home_perform*20}%"></span>
-						</span>
-						${match.home_perform*2}
-					</div>
-				</div>
-				<span class="from-to">VS</span>
-				<div class="team-info col cursor" onclick="location.href='${pageContext.request.contextPath}/club/club_details.do?club_num=${match.away }'">
-					<div class="row margin-top margin-btm">
-						<div class="centered">
-							<c:if test="${match.away_filename ne 'undefined'}">
-							<img src="${pageContext.request.contextPath }/club/imageView.do?club_num=${match.away}" alt="Avatar" class="avatar emblem">
-							</c:if>
-							<c:if test="${match.away_filename eq 'undefined'}">
-							<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
-							</c:if>
-							<span class="disp-inbl margin-top">${match.away_name}</span>
-						</div>
-					</div>
-					<div class="centered">
-						<span class="margin-right">매너</span> 
-						<span class="star-rating">
-							<span style="width:${match.away_manner*20}%"></span>
-						</span>
-						<span>${match.away_manner*2}</span>
-					</div>
-					<div class="centered">
-						<span class="margin-right">실력</span> 
-						<span class="star-rating">
-							<span style="width:${match.away_perform*20}%"></span>
-						</span>
-						<span>${match.away_perform*2}</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<c:if test="${match.home==match.club_num}">
-			<button class="block white-bg margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }&isMain=false'">${match.away_name } 평점 작성 하기</button>
-			</c:if>
-			<c:if test="${match.away==match.club_num }">
-			<button class="block white-bg margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }&isMain=false'">${match.home_name } 평점 작성 하기</button>
-			</c:if>
-		</div>
-	</div>
-</li>
-</c:forEach>
-</ul>
-</c:if>
+	</c:forEach>
+	</c:if>
+	</ul>
 	</div>
 	<div class="tab_detail" id="manageMember" style="display: block">
 		<div class="main-row">

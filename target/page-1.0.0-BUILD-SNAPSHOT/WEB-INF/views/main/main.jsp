@@ -67,17 +67,20 @@
 		매치 작성
 	</button>
 </div>
+<ul class="ul-list">
 <c:if test="${empty match_list }">
-<div class="row">
-	<div class="empty-wrapper margin-btm">
-		<i class="far fa-grimace empty">
-		</i>
-		<span class=" small-font">예정된 경기가 없습니다.</span>
-	</div>
-</div>
+	<li class="li-list">
+		<div class="row">
+			<div class="empty-wrapper margin-btm">
+				<i class="far fa-grimace empty">
+				</i>
+				<span class=" small-font">예정된 경기가 없습니다.</span>
+			</div>
+		</div>
+	</li>
 </c:if>
 <c:if test="${not empty match_list }">
-<ul class="ul-list">
+
 <c:forEach var="match" items="${match_list}">
 	<li class="li-list">
 		<div class="gray-border">	
@@ -296,22 +299,25 @@
 		</div>
 	</li>
 </c:forEach>
-</ul>
 </c:if>
+</ul>
 <div class="v-padding margin-m-top">
 	<span class="title-btw">지난 경기 상대팀 평점 작성</span>
 </div>
+<ul class="ul-list non-border-btm">
 <c:if test="${empty past_match }">
-<div class="row margin-btm">
-	<div class="empty-wrapper">
-		<i class="far fa-grimace empty">
-		</i>
-		<span class=" small-font">최근 2주간 경기 중 평가할 상대팀이 없습니다.</span>
+<li class="li-list">
+	<div class="row margin-btm">
+		<div class="empty-wrapper">
+			<i class="far fa-grimace empty">
+			</i>
+			<span class=" small-font">최근 2주간 경기 중 평가할 상대팀이 없습니다.</span>
+		</div>
 	</div>
-</div>
+</li>
 </c:if>
 <c:if test="${not empty past_match }">
-<ul class="ul-list non-border-btm">
+
 <c:forEach var="match" items="${past_match}">
 <li class="li-list non-border-btm">
 	<div class="gray-border">
@@ -404,9 +410,10 @@
 	</div>
 </li>
 </c:forEach>
+</c:if>
 </ul>
 </c:if>
-</c:if>
+
 <!-- The Modal -->
 <div id="toast" class="submit_toast">
 

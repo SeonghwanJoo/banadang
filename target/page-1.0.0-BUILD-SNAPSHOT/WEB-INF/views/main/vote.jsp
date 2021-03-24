@@ -11,7 +11,7 @@
 		</a>
 		</c:if>
 		<c:if test="${isMain==false }">
-		<a href="${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}" >
+		<a href="${pageContext.request.contextPath}/club/manageClub.do?club_num=${myClub.club_num}&clubManageFrom=3" >
 		<span class="material-icons" id="chevron_left">chevron_left</span>
 		</a>
 		</c:if>
