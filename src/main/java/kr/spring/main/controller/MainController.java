@@ -56,7 +56,8 @@ public class MainController {
 				past_match.addAll(matchService.selectMyPastMatch(club.getClub_num()));
 			}
 			for (MatchVO match : matchVO) {
-
+				
+				match.setId(user_id);
 				addVoteResult(match, vote_status);
 				addRatingResult(match, clubs_rating);
 
@@ -244,19 +245,15 @@ public class MainController {
 
 		return "myClubCheck";
 	}
-	@RequestMapping("/main/push_fail.do")
-	public void printPushFailResult(HttpServletRequest request) {
-		
-		logger.info("request in push_fail : "+request.toString());
-	}
 
 	public void addVoteResult(MatchVO match, ArrayList<MatchVO> vote_status) {
+		
 		Integer myVote = matchService.selectMyVoteStatus(match);
-
-		if (myVote != null) {
+		
+		if (myVote!=null) {
 			match.setStatus(myVote);
 		}
-
+		
 		// matchVO에 해당 경기,해당 팀의 투표 현황을 받는다
 		vote_status = matchService.selectVoteStatusByGroup(match);
 		for (MatchVO vote_result : vote_status) {

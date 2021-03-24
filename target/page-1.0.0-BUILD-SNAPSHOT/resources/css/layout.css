@@ -260,7 +260,6 @@ div.team-info.cursor{
 }
 
 .vote-rating {
-	margin:0.2rem auto;
 	width:100%;
  }
 .vote-rating, .voted{
@@ -336,6 +335,7 @@ div.half_col{
 	right:0.7rem;
 	display:flex;
 	color:#999;
+	z-index:2;
 	
 }
 
@@ -959,6 +959,7 @@ button:focus{
 	background-color:#00643c;
 	border-color:#00643c;
 }
+
 .noseen{
 	position:absolute;
 	bottom:-2rem;
@@ -1241,12 +1242,18 @@ a.detail{
 	margin-right:0.3rem;
 }
 .m-margin-right{
-	margin-right:0.5rem;
+	margin-right:0.7rem;
 }
 .margin-lg-btm{
 	
 	margin-bottom:3rem;
 	
+}
+.border-btw{
+	width:0;
+	height:1.3rem;
+	border-right:2px solid #333;
+	margin-top:1rem;
 }
  
 
@@ -1280,12 +1287,17 @@ a.detail{
   background-color: #fff;
   color:#000;
   width: 16rem;
-  padding-top:1rem;
   -webkit-animation-name: fadeIn;
   -webkit-animation-duration: 0.4s;
   animation-name: fadeIn;
   animation-duration: 0.4s;
-
+}
+.submit_toast_content .margin-btm{
+	min-height:6rem;
+}
+.submit_toast_content .margin-btm span{
+	display:block;
+	margin:1rem 0;
 }
 .loader_toast_content{
 	border-radius:6px;
@@ -1306,7 +1318,6 @@ a.detail{
 	border:none;
 	border-top:1px solid #ccc;
 	background-color:transparent;
-	margin-top:2rem;
 	color:#2997FF;
 	font-weight:bold;
 	padding:0.8rem;
@@ -1496,12 +1507,27 @@ btn-wrapper{
 	font-size:0.9rem;
 	border-radius:0.3rem;
 	border:none;
-	padding:0 0.5rem;
+	padding:0.3rem 0.5rem;
+	
 }
 .blue-bg{
 	background-color:#2997FF;
 	color:#fff;
+	border:none;
+	max-width: 17rem;
 }
+.gray-border{
+	border:1px solid #333; 
+	padding:0.8rem;
+	border-radius:0.5rem;
+}
+.dark-bg{
+	background-color:#222;
+}
+.no-border{
+	border:none;
+}
+
 
 .float-left{
 	float:left;
@@ -2015,6 +2041,7 @@ button.chip-btn{
 .centered, .store-btns{
 	margin:0 auto;
 	display:flex;
+	align-items:center;
 	flex-direction:row;
 	justify-content:center;
 }
@@ -2072,6 +2099,16 @@ button.chip-btn{
   -ms-user-select: none;
   user-select: none;
 }
+.vote_label{
+	width:100%;
+	margin-bottom:0;
+}
+.vote_txt{
+	position:absolute;
+	top:0.5rem;
+	left:1rem;
+}
+
 
 .modals-content .chip{
 	background-color:#ddd;
@@ -2155,6 +2192,28 @@ input:checked ~ .checkmark, .chip input:checked ~ .checkmark,.modals .chip input
   transform: rotate(45deg);
   box-sizing:content-box;
 }
+.vote_checkmark {
+  position: absolute;
+  border-radius:50%;
+  top: 0.5rem;
+  left: 1rem;
+  height: 1.6rem;
+  width: 1.6rem;
+}
+input:checked ~ .vote_checkmark:after{
+  content: "";
+  position: absolute;
+  left: 2.5rem;
+  top: 0.2rem;
+  width: 0.3rem;
+  height: 0.6rem;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  box-sizing:content-box;
+}
 .chip .checkmark:after{
 	border-color:#fff;
 }
@@ -2176,7 +2235,8 @@ input:checked ~ .checkmark:after{
 .vert{margin: 1.1rem auto;}
 
 /* Hide the browser's default checkbox */
-.chip input, .custom input[type=radio],.custom input[type=checkbox],.login-label input[type=checkbox], .login-label input[type=radio] {
+.chip input, .custom input[type=radio],.custom input[type=checkbox],
+.login-label input[type=checkbox], .login-label input[type=radio], .voted input[type=radio] {
   position: absolute;
   opacity: 0;
   cursor: pointer;

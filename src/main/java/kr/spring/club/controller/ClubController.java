@@ -98,6 +98,7 @@ public class ClubController {
 		
 		for(MatchVO match : matchVO) {
 			
+			match.setId(user_id);
 			addVoteResult(match, vote_status);
 			addRatingResult(match, clubs_rating);
 			
