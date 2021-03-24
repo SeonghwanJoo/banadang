@@ -638,7 +638,7 @@
 			</div>
 			<span class="border-btw"></span>
 			<div class="col centered">
-				<button class="black-bg block no-border" onclick="${pageContext.request.contextPath }/main/location.href='replyToVote.do?match_num=${match.match_num}&club_num=${match.club_num }'">
+				<button class="black-bg block no-border" onclick="location.href='${pageContext.request.contextPath }/main/replyToVote.do?match_num=${match.match_num}&club_num=${match.club_num }'">
 					<i class="fas fa-pen m-margin-right"></i>댓글 쓰기
 				</button>
 			</div>

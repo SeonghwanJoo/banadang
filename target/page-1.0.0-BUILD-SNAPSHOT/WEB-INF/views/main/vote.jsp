@@ -419,15 +419,15 @@ function setVoteStyle(max,attend,not_attend,undefined){
 	
 	if (max==attend){
 		$('#attend').css('background-color','#00643c');
-		$('#not_attend').css('background-color','#bfbfbf');
-		$('#undefined').css('background-color','#bfbfbf');
+		$('#not_attend').css('background-color','#888');
+		$('#undefined').css('background-color','#888');
 	}else if(max==not_attend){
-		$('#attend').css('background-color','#bfbfbf');
+		$('#attend').css('background-color','#888');
 		$('#not_attend').css('background-color','#00643c');
-		$('#undefined').css('background-color','#bfbfbf')
+		$('#undefined').css('background-color','#888')
 	}else if(max==undefined){
-		$('#attend').css('background-color','#bfbfbf');
-		$('#not_attend').css('background-color','#bfbfbf');
+		$('#attend').css('background-color','#888');
+		$('#not_attend').css('background-color','#888');
 		$('#undefined').css('background-color','#00643c');
 	}
 
@@ -455,6 +455,7 @@ function setVoteStyle(max,attend,not_attend,undefined){
 			$('#toast').css('display','none');
 		});
 		
+		setVoteStyle(${match.max},${match.attend},${match.not_attend},${match.undefined});
 		//투표를 한 상태 일때
 		if(isVoted){
 			
@@ -469,9 +470,14 @@ function setVoteStyle(max,attend,not_attend,undefined){
 				$('#undefined_radio').prop('checked',true);
 			}
 			
+		}else{
+			$('#attend').css('background-color','#888');
+			$('#not_attend').css('background-color','#888');
+			$('#undefined').css('background-color','#888');
+			
 		}
 		
-		setVoteStyle(${match.max},${match.attend},${match.not_attend},${match.undefined});
+		
 		
 		
 	});

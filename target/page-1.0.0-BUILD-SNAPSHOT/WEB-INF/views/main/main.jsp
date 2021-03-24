@@ -272,7 +272,7 @@
 			<div class="total_wrapper margin-btm">
 				<span class="cursor" onclick="location.href='vote_detail.do?club_num=${match.club_num }&match_num=${match.match_num}&home_name=${match.home_name}&away_name=${match.away_name}&isMain=true'">
 				<span class="total_person material-icons">person</span>
-				<span id="total" class="total blue">${match.attend+match.not_attend+match.undefined}</span><span class="unit"> 명 투표 </span>
+				<span id="total_${match.match_num }" class="total blue">${match.attend+match.not_attend+match.undefined}</span><span class="unit"> 명 투표 </span>
 				<i class="total fas fa-chevron-right"></i>
 				</span>
 				<span class="share cursor" onclick="sendLinkForVote('${match.match_num}','${match.club_num}','${match.match_date}','${match.address}','${match.start_time}')">
@@ -599,7 +599,7 @@ function toggleVote(match_num){
 					$('#num_attend_'+match_num).text(data.attend);
 					$('#num_nattend_'+match_num).text(data.not_attend);
 					$('#num_undefined_'+match_num).text(data.undefined);
-					/* $('#total').text(total); */
+					$('#total_'+match_num).text(total); 
 					var max=Math.max(data.attend,data.not_attend,data.undefined);
 					setVoteStyle(max,data.attend,data.not_attend,data.undefined,match_num);
 					
@@ -740,7 +740,11 @@ function setVoteStyle(max,attend,not_attend,undefined,match_num){
 	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#00643c');
 	 	}
 	 	
-	 	if (status!=0){
+	 	if (status==0){
+	 		$('#voted-attend-'+matches[i].match_num).css('background-color','#888');
+	 		$('#voted-not_attend-'+matches[i].match_num).css('background-color','#888');
+	 		$('#voted-not_fixed-'+matches[i].match_num).css('background-color','#888');
+	 	}else{
 	 		$('input[name=vote_'+matches[i].match_num+']').attr('disabled','true');
 	 		$('#vote_btn_'+matches[i].match_num).text('다시 투표하기');
 	 		
