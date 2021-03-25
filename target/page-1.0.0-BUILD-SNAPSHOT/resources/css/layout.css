@@ -1590,6 +1590,11 @@ a.active.small-font{
 .point{
 	color:#00cd3c;
 }
+.group_em{
+	width:2.5rem;
+	height:2.5rem;
+	margin-right:1rem;
+}
 .relative{
 	position:relative;
 }

@@ -589,7 +589,7 @@ function toggleVote(match_num){
 			data:{
 				id:'${user_id}',
 				match_num:match_num,
-				club_num:${myClub.club_num},
+				club_num:'${myClub.club_num}',
 				status:$('input[name=vote_'+match_num+']:checked').val()
 				},
 				dataType:'json',

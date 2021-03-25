@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:if test="${not empty user_id }">
-<ul class="ul-list">
+<ul class="ul-list non-border-btm">
 	<li class="li-list">
 		<div class="row">
 			<div class="col nowrap">
@@ -34,6 +34,19 @@
 		</div>
 	</li>
 </ul>
+</c:if>
+
+<%-- <ul class="ul-list">
+	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/club/myRegion.do'">
+		<div class="row">
+			<div class="col">
+				<img class="group_em" src="${pageContext.request.contextPath }/resources/images/group_em.png"/>
+				<span>우리 지역 팀 보기</span>
+			</div>
+		</div>
+	</li>
+</ul> --%>
+<c:if test="${not empty user_id }">
 <ul class="ul-list ">
 	<li class="li-list cursor" onclick="location.href='myRecruitReq.do'">
 		<div class="row">
@@ -101,14 +114,6 @@
 </ul>
 </c:if>
 <ul class="ul-list non-border-btm ">
-	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/board/notice.do'">
-		<div class="row">
-			<div class="col">
-				<i class="fas fa-bullhorn"></i>
-				<span>공지 사항</span>
-			</div>
-		</div>
-	</li>
 	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/board/event.do'">
 		<div class="row">
 			<div class="col">
@@ -117,6 +122,14 @@
 					이벤트
 					<span class="new"></span>
 				</span>
+			</div>
+		</div>
+	</li>
+	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/board/notice.do'">
+		<div class="row">
+			<div class="col">
+				<i class="fas fa-bullhorn"></i>
+				<span>공지 사항</span>
 			</div>
 		</div>
 	</li>

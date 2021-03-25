@@ -378,8 +378,8 @@ function toggleVote(){
 			type:'post',
 			data:{
 				id:'${user_id}',
-				match_num:${match.match_num},
-				club_num:${match.club_num},
+				match_num:'${match.match_num}',
+				club_num:'${match.club_num}',
 				status:$('input[type=radio]:checked').val()
 				},
 				dataType:'json',
