@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.club.domain.ClubVO;
+import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
 
 public interface ClubMapper {
@@ -25,6 +26,7 @@ public interface ClubMapper {
 	public List<ClubVO> selectAwayDetailsForRequestedMatch(Integer club_num);
 	public List<ClubVO> selectHomeDetailsForRequestedMatch(Integer club_num);
 	
+	public List<MatchVO> selectClubListWithFilter(MatchVO match);
 	
 	@Select("select * from gentlepro.club")
 	public List<ClubVO> selectAllClubs();
@@ -111,5 +113,14 @@ public interface ClubMapper {
 	
 	@Select("select id from gentlepro.club_join where club_num=#{club_num} and club_auth=5")
 	public HashSet<String> selectClubExecutivesByClubNum(Integer club_num);
+	
+	@Insert("insert into gentlepro.club_like (club_num, id, updown) values (#{club_num},#{id},#{status})")
+	public void insertClubLike(MatchVO match);
+	
+	@Delete("delete from gentlepro.club_like where club_num = #{club_num} and id = #{id}")
+	public void deleteClubLike(MatchVO match);
+	
+	@Update("update gentlepro.club_lie set updown=#{status} where club_num = #{club_num} and id = #{id}")
+	public void updateClubLike(MatchVO match);
 	
 }

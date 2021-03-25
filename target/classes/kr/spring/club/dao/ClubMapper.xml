@@ -51,6 +51,19 @@
 		</if>
 		club_age=#{club_age},club_locX=#{club_locX},club_locY=#{club_locY},club_address=#{club_address} where club_num=#{club_num}
 	</update>
+	<select id="selectClubListWithFilter" resultType="matchVO">
+		select * from 
+			(select *, @rownum := @rownum+1 as rnum from
+				(SELECT 
+					*, getAvgRating(club_num, 1) manner, getAvgRating(club_num, 2) perform, getDistance(#{club_locY}, #{club_locX},club_locY, club_locX ) distance
+					,getTotalLike(club_num, 1) up, getTotalLike(club_num, 2) down, getMyUpDownForClub(club_num, #{id}) status, getMyLikeIdForClub(club_num, #{id}) id_like
+					FROM gentlepro.club, (select @rownum :=0) rownum order by distance) a) b where
+					
+					<![CDATA[
+					 (rnum>#{pageCount} and rnum<=#{pageCount}+30)
+					]]>  
+	
+	</select>
 	<select id="selectAwayDetailsForRequestedMatch" parameterType="integer" resultType="clubVO">
 	select * from (select e.manner,e.perform,d.club_num,d.request_num,d.match_req_cancel,d.cancel,d.match_num,d.acceptance,d.address,d.type,d.start_time,d.end_time,d.match_date,d.request_detail,d.match_detail from
     	(select a.request_num,a.match_num,a.club_num,a.acceptance,a.request_detail,a.match_req_cancel,b.type,b.home,b.start_time,b.end_time,b.address,b.match_detail,b.cost,b.match_date,b.cancel from

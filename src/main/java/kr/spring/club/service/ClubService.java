@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import kr.spring.club.domain.ClubVO;
+import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
 
 public interface ClubService {
@@ -44,5 +45,8 @@ public interface ClubService {
 	public HashSet<String> selectClubExecutivesByClubNum(Integer club_num);
 	public void setLoginCookie(Integer club_num, HttpServletResponse response, HttpServletRequest request, boolean isKakao);
 	public Map<String, String> getLoginCookie(HttpServletRequest request, boolean isKakao);
+	public List<MatchVO> selectClubListWithFilter(MatchVO match);
+	public void insertClubLike(MatchVO match);
+	public void updateClubLike(MatchVO match);
 	
 }

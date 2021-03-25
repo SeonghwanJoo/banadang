@@ -196,6 +196,19 @@ public class ClubController {
 	}
 	
 	
+	@RequestMapping("/club/myRegion.do")
+	public ModelAndView myRegion() {
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.setViewName("myRegion");
+		mav.addObject("title","우리 지역 팀 보기");
+		
+		return mav;
+	}
+	 
+	
+	
 	
 	
 	public void addVoteResult(MatchVO match,ArrayList<MatchVO> vote_status) {

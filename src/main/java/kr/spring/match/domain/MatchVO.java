@@ -521,7 +521,32 @@ public class MatchVO {
 	public void setDistance(double distance) {
 		this.distance = distance;
 	}
-	
+	public Integer getUp() {
+		return up;
+	}
+
+	public void setUp(Integer up) {
+		this.up = up;
+	}
+
+	public Integer getDown() {
+		return down;
+	}
+
+	public void setDown(Integer down) {
+		this.down = down;
+	}
+
+	public Integer getId_like() {
+		return id_like;
+	}
+
+	public void setId_like(Integer id_like) {
+		this.id_like = id_like;
+	}
+	private Integer up;
+	private Integer down;
+	private Integer id_like;
 	private int pageCount;
 	private Date start;
 	private Date end;
@@ -594,7 +619,7 @@ public class MatchVO {
 	private double club_locX;
 	private double club_locY;
 	private double distance;
-	
+
 
 
 	

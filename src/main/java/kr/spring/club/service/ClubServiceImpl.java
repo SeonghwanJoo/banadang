@@ -15,6 +15,7 @@ import org.springframework.web.util.WebUtils;
 
 import kr.spring.club.dao.ClubMapper;
 import kr.spring.club.domain.ClubVO;
+import kr.spring.match.domain.MatchVO;
 import kr.spring.member.domain.MemberVO;
 import kr.spring.member.service.LoginAPI;
 
@@ -223,6 +224,11 @@ public class ClubServiceImpl implements ClubService {
 		
 		return clubMapper.selectClubExecutivesByClubNum(club_num);
 	}
+	@Override
+	public List<MatchVO> selectClubListWithFilter(MatchVO match) {
+		
+		return clubMapper.selectClubListWithFilter(match);
+	}
 	
 	
 	public void setLoginCookie(Integer club_num, 
@@ -261,7 +267,21 @@ public class ClubServiceImpl implements ClubService {
 		
 		
 	}
-	
+
+	@Override
+	public void insertClubLike(MatchVO match) {
+		
+		clubMapper.insertClubLike(match);
+		
+	}
+
+	@Override
+	public void updateClubLike(MatchVO match) {
+		
+		clubMapper.updateClubLike(match);
+		
+	}
+
 
 
 }

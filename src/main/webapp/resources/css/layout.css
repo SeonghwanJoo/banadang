@@ -202,6 +202,9 @@ ul.carousel-indicators {
 .margin-left{
 	margin-left:0.5rem;
 }
+.margin-m-left{
+	margin-left:2rem;
+}
 .title-btw {
 	margin: 0.5rem;
 	display:inline-block;
@@ -941,12 +944,13 @@ button:focus{
 .white-bg{
 	color:#000;
 	background-color:#fff;
-	border-color:#000;
+	border:none;
 }
 .gray-bg{
 	color:#fff;
 	background-color:#333;
 	border-color:#fff;
+	padding:0 5px;
 }
 .black-bg{
 	color:#fff;
@@ -1559,7 +1563,7 @@ btn-wrapper{
 }
 
 .small-font, .main-row span.small-font,button.small-font, a.active.small-font{
-	font-size:0.9rem;
+	font-size:0.8rem;
 }
 a.active.small-font{
 	margin-top:0.3rem;
@@ -1589,6 +1593,11 @@ a.active.small-font{
 }
 .point{
 	color:#00cd3c;
+}
+.group_em{
+	width:2.5rem;
+	height:2.5rem;
+	margin-right:1rem;
 }
 .relative{
 	position:relative;
@@ -1766,6 +1775,38 @@ div.one-col{
 div.club_main, div.club_sub{
 	margin-top:0.2rem;
 	margin-bottom:0.2rem;
+}
+.club_cd{
+	background-color:#000;
+	border-top:1px solid #2997FF;
+	padding-top:2rem;
+	position:relative;
+	border-radius:8px;
+}
+.distance_cd{
+	position:absolute;
+	font-size:0.8rem;
+	right:1rem;
+	top:0.6rem;
+}
+.gray-bg .margin-m-top{
+	padding-right:5px;
+	padding-left:5px;
+}
+.dark-btn{
+	background-color:#222;
+	border:none;
+	border-top:1px solid #777;
+	width:100%;
+	color:#bbb;
+	padding:0.5rem;
+	border-radius:0 0 8px 8px;
+	
+}
+.center_emblem{
+	width: 4.5rem;
+ 	height: 4.5rem;
+ 	border-radius: 30%;
 }
 img.emblem{
 	float:left;
@@ -2044,6 +2085,10 @@ button.chip-btn{
 	flex-direction:row;
 	justify-content:center;
 }
+.club_cd .centered{
+	flex-direction:column;
+}
+
 .mid_title{
 	text-align:center;
 	font-weight:bold;
@@ -2078,6 +2123,9 @@ button.chip-btn{
 }
 .margin-smtop{
 	margin-top:0.1rem;
+}
+.padding-lg-btm{
+	padding-bottom:3rem;
 }
 .chip{
   display: flex;

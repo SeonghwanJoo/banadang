@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="fixed_top">
 	<a href="club.do" >
 	<span class="material-icons" id="cancel">close</span>
@@ -1359,7 +1359,7 @@ function toggleVote(match_num){
 			data:{
 				id:'${user_id}',
 				match_num:match_num,
-				club_num:${myClub.club_num},
+				club_num:'${myClub.club_num}',
 				status:$('input[name=vote_'+match_num+']:checked').val()
 				},
 				dataType:'json',

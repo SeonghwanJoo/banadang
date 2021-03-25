@@ -116,6 +116,56 @@ public class ClubAjaxController {
 		
 		return map;
 	}
+	@RequestMapping("/club/nextClubs.do")
+	@ResponseBody
+	public Map<String, Object> nextClubs(MatchVO match){
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		
+		try {
+			List<MatchVO> clubs=clubService.selectClubListWithFilter(match);
+			map.put("result", "success");
+			map.put("clubs", clubs);
+		}catch (Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		
+		return map;
+		
+	}
+	@RequestMapping("/club/updateLike.do")
+	@ResponseBody
+	public Map<String, Object> updateLike(MatchVO match){
+		
+		Map<String,Object> map=new HashMap<String,Object>();
+		try {
+			if(match.getId_like()==null) {
+				
+				clubService.insertClubLike(match);
+				
+			}else {
+				//update
+				if(match.getStatus()==0) {
+					
+				}else {
+					
+				}
+			}
+			
+			map.put("result", "success");
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			map.put("result", "errors");
+		}
+		
+		
+		return map;
+		
+	}
+	
+	
 	@RequestMapping("/club/cancelMatchReq.do")
 	@ResponseBody
 	public Map<String,Object> cancelMatchReq(@RequestParam Integer request_num,
