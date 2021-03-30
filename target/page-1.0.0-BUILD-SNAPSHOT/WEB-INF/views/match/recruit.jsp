@@ -122,10 +122,10 @@ function createListInHTML(matchs){
 					+"<div class='col club_main'>";
 		if(matchs[i].club_img ==""){
 		itemStr+=
-						"<img src='"+"${pageContext.request.contextPath}"+"/resources/images/blank_emblem.png' class='avatar emblem'>";
+						"<img src='${pageContext.request.contextPath}/resources/images/blank_emblem.png' class='avatar emblem'>";
 		}else if(matchs[i].club_img !=""){
 			itemStr+=
-				"<img src='"+"${pageContext.request.contextPath}"+"/club/imageView.do?club_num="+matchs[i].club_num+"' class='avatar emblem'>"
+				"<img src='${pageContext.request.contextPath}/club/imageView.do?club_num="+matchs[i].club_num+"' class='avatar emblem'>"
 		}
 		itemStr+=
 						"<span class='club_name'>"+matchs[i].club_name+"</span><br>"

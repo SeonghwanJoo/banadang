@@ -3,36 +3,47 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-	<div id="demo" class="carousel slide" data-ride="carousel">
-	
-	  <!-- Indicators -->
-	  <ul class="carousel-indicators" id="carousel-indicator">
-	    <li data-target="#demo" data-slide-to="0" class="active"></li>
-	    <li data-target="#demo" data-slide-to="1"></li>
-	    <li data-target="#demo" data-slide-to="2"></li>
-	  </ul>
-	  
-	  <!-- The slideshow -->
-	  <div class="carousel-inner">
-	    <div class="carousel-item active">
-	      <img class="slide-img" src="${pageContext.request.contextPath}/resources/images/1_1t-1.png">
-	    </div>
-	    <div class="carousel-item">
-	      <img class="slide-img" src="${pageContext.request.contextPath}/resources/images/2_1t-1.png">
-	    </div>
-	    <div class="carousel-item">
-	      <img class="slide-img" src="${pageContext.request.contextPath}/resources/images/3_1t-1.png">
-	    </div>
-	  </div>
-	  
-	  <!-- Left and right controls -->
-	  <!-- <a class="carousel-control-prev" href="#demo" data-slide="prev">
-	    <span class="carousel-control-prev-icon"></span>
-	  </a> -->
-	  <!-- <a class="carousel-control-next" href="#demo" data-slide="next">
-	    <span class="carousel-control-next-icon"></span>
-	  </a> -->
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators" id="carousel-indicator">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+  
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="slide-img" src="${pageContext.request.contextPath}/resources/images/1_1t-1.png">
+    </div>
+    <div class="carousel-item">
+      <img class="slide-img" src="${pageContext.request.contextPath}/resources/images/2_1t-1.png">
+    </div>
+    <div class="carousel-item">
+      <img class="slide-img" src="${pageContext.request.contextPath}/resources/images/3_1t-1.png">
+    </div>
+  </div>
+  
+  <!-- Left and right controls -->
+  <!-- <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a> -->
+  <!-- <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a> -->
+</div>
+<div class="upper-wrapper cursor" onclick="location.href='${pageContext.request.contextPath}/club/myRegion.do?isMain=true'">
+	<div class="row">
+		<div class="col">
+			<img class="group_em" src="${pageContext.request.contextPath }/resources/images/group_em.png"/>
+			<span class="relative">
+				우리 지역 팀 보기
+				<span class="new"></span>
+			</span>
+		</div>
 	</div>
+</div>
 
 <c:if test="${empty user_id }">
 <div class="main-row">

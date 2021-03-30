@@ -769,10 +769,7 @@ button:focus{
 	padding:0.1rem 0.5rem;
 	
 }
-.position-below-emblem{
-	margin:0 0 0 3rem;
-	
-}
+
 .margin-top, span.margin-top, li .margin-top{
 	margin-top:0.5rem;
 }
@@ -1563,7 +1560,7 @@ btn-wrapper{
 }
 
 .small-font, .main-row span.small-font,button.small-font, a.active.small-font{
-	font-size:0.8rem;
+	font-size:0.9rem;
 }
 a.active.small-font{
 	margin-top:0.3rem;
@@ -1752,6 +1749,10 @@ div.one-col{
 	float:right;
 	margin-left:0.5rem;
 }
+.half_col.m-smaller i{
+	top:0.2rem;
+	font-size:0.7rem;
+}
 .i-subtitle{
 	position:absolute;
 	font-size:0.6rem;
@@ -1803,9 +1804,12 @@ div.club_main, div.club_sub{
 	border-radius:0 0 8px 8px;
 	
 }
+.tab_detail h6{
+	margin:0.5rem 0;
+}
 .center_emblem{
-	width: 4.5rem;
- 	height: 4.5rem;
+	width: 6rem;
+ 	height: 6rem;
  	border-radius: 30%;
 }
 img.emblem{
@@ -1815,10 +1819,11 @@ img.emblem{
  	border-radius: 30%;
  	margin-right:1rem;
 }
-.list{
-	background-color:white;
-	border-top:1px solid #dddddd;
-	border-bottom:1px solid #dddddd;
+.upper-wrapper{
+	background-color:#222;
+	border-radius:0.5rem;
+	padding:1rem;
+	margin:1.5rem 1rem 1rem 1rem;
 }
 div.detail-item{
 	padding:8px;
@@ -1834,7 +1839,7 @@ div.detail-item{
 .sticky{
 	position:sticky;
 	z-index:95;
-	top:3rem;
+	top:2.8rem;
 	background-color:#000;
 }
 .sticky+tab_detail{
@@ -1864,7 +1869,7 @@ div.detail-item{
 ul.ul-list{
 	padding-inline-start: 0px;
 	width:100%;
-	border-bottom:10px solid #212121;
+	border-bottom:1px solid #fff;
 	margin-bottom:0;
 }
 ul.non-border-btm, li.li-list.non-border-btm{
@@ -1924,6 +1929,7 @@ li.li-list{
 	background-color:#2C2D30;
 	cursor:pointer;
 }
+
 div.bigger{
 	width:80%;
 }
@@ -1939,6 +1945,12 @@ div.x-smaller{
 }
 div.x-bigger{
 	width:84%;
+}
+div.m-bigger{
+	width:65%;
+}
+div.m-smaller{
+	width:30%;
 }
 .sync{
 	border:none;
@@ -2088,6 +2100,10 @@ button.chip-btn{
 .club_cd .centered{
 	flex-direction:column;
 }
+.centered.column{
+	flex-direction:column;
+}
+
 
 .mid_title{
 	text-align:center;

@@ -165,7 +165,7 @@ public class ClubController {
 	@RequestMapping("/club/imageView.do")
 	public String viewImage(@RequestParam Integer club_num,Model model) {
 		
-		ClubVO club=clubService.selectClubDetailWithClub_num(club_num);
+		ClubVO club=clubService.selectClubByClubNum(club_num);
 			
 		model.addAttribute("imageFile",club.getClub_img());
 		model.addAttribute("filename",club.getFilename());
@@ -178,7 +178,9 @@ public class ClubController {
 		
 		ModelAndView mav=new ModelAndView();
 		ClubVO club=clubService.selectClubDetailWithClub_num(club_num);
+		List<MemberVO> members=clubService.selectManagers(club_num);
 		List<ClubVO> ratings=clubService.selectRatings(club_num);
+		mav.addObject("members", members);
 		mav.addObject("club",club);
 		mav.addObject("ratings",ratings);
 		mav.addObject("title","팀 프로필");
@@ -197,10 +199,11 @@ public class ClubController {
 	
 	
 	@RequestMapping("/club/myRegion.do")
-	public ModelAndView myRegion() {
+	public ModelAndView myRegion(@RequestParam boolean isMain) {
 		
 		ModelAndView mav=new ModelAndView();
 		
+		mav.addObject("isMain", isMain);
 		mav.setViewName("myRegion");
 		mav.addObject("title","우리 지역 팀 보기");
 		

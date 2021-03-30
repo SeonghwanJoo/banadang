@@ -36,16 +36,19 @@
 </ul>
 </c:if>
 
-<%-- <ul class="ul-list">
-	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/club/myRegion.do'">
+<ul class="ul-list">
+	<li class="li-list cursor" onclick="location.href='${pageContext.request.contextPath}/club/myRegion.do?isMain=false'">
 		<div class="row">
 			<div class="col">
 				<img class="group_em" src="${pageContext.request.contextPath }/resources/images/group_em.png"/>
-				<span>우리 지역 팀 보기</span>
+				<span class="relative">
+					우리 지역 팀 보기
+					<span class="new"></span>
+				</span>
 			</div>
 		</div>
 	</li>
-</ul> --%>
+</ul>
 <c:if test="${not empty user_id }">
 <ul class="ul-list ">
 	<li class="li-list cursor" onclick="location.href='myRecruitReq.do'">

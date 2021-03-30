@@ -14,6 +14,15 @@
 	</div>
 </div>
 <div class="blank_div"></div>
+<c:if test="${empty matches }">
+<div class="row centered-padding">
+	<div class="empty-wrapper margin-btm">
+		<i class="far fa-grimace empty">
+		</i>
+		<span class=" small-font">진행 중인 용병 참가 신청이 없습니다.</span>
+	</div>
+</div>
+</c:if>
 <ul class="ul-list non-border-btm">
 	<c:if test="${not empty matches }">
 	<c:forEach items="${matches }" var="match">

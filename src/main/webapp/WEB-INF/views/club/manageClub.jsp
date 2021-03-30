@@ -72,20 +72,29 @@
 		</li>
 	</ul>
 	<div class="tab-row" id="tab-row">
-		<c:if test="${myClub.club_auth>4}">
-		<div class="tab-col">
-			<button class="tab-btn small-font bold " id="manageMatch-btn" onclick="openTap(event,'manageMatch')">매칭 현황</button>
-		</div>
-		</c:if>
 		<div class="tab-col">
 			<button class="tab-btn small-font bold " id="manageSchedule-btn" onclick="openTap(event,'manageSchedule')">경기 일정</button>
 		</div>
 		<div class="tab-col">
 			<button class="tab-btn small-font bold " id="manageMember-btn" onclick="openTap(event,'manageMember')">회원 관리</button>
 		</div>
+		<c:if test="${myClub.club_auth>4}">
+		<div class="tab-col">
+			<button class="tab-btn small-font bold " id="manageMatch-btn" onclick="openTap(event,'manageMatch')">매칭 현황</button>
+		</div>
+		</c:if>
 	</div>
 	<c:if test="${myClub.club_auth>4 }">
 	<div class="tab_detail" id="manageMatch" >
+		<c:if test="${empty away_club && empty home_club && empty recruits && empty clubRecruits }">
+		<div class="row centered-padding">
+			<div class="empty-wrapper margin-btm">
+				<i class="far fa-grimace empty">
+				</i>
+				<span class=" small-font">접수/신청된 매칭이 없습니다.</span>
+			</div>
+		</div>
+		</c:if>
 		<c:if test="${!empty away_club }">
 		<h6>초청한 경기(상대팀 선택)</h6>
 		<ul class="ul-list border-top">
@@ -149,7 +158,7 @@
 								&nbsp;미정
 							</c:if>
 						</span><br>
-						<span class="xs-chip position-below-emblem cursor" onclick="location.href='club_details.do?club_num=${away.club_num}'">팀 평가 조회</span>
+						<span class="xs-chip cursor" onclick="location.href='club_details.do?club_num=${away.club_num}'">팀 평가 조회</span>
 					</div>
 					<div class="col">
 						<div class="row">
@@ -237,7 +246,7 @@
 								&nbsp;미정
 							</c:if>
 						</span><br>
-						<span class="xs-chip position-below-emblem cursor" onclick="location.href='club_details.do?club_num=${home.club_num}'">팀 평가 조회</span>
+						<span class="xs-chip cursor" onclick="location.href='club_details.do?club_num=${home.club_num}'">팀 평가 조회</span>
 					</div>
 					<div class="col">
 						<div class="row">
@@ -777,10 +786,9 @@
 				</a>
 			</div>    
 		</div>
-		<div class="main-row">
+		<div class="row">
 		<c:forEach items="${members }" var="member">
-		<c:if test="${member.club_auth>3 }">
-			<div class="detail-item col-sm-12 col-lg-6" id="${member.id }-row">
+			<div class="detail-item col-12 col-lg-6" id="${member.id }-row">
 				<div class="half_col bigger nowrap">
 					<div class="relative disp-inbl float-left">
 						<c:if test="${empty member.thumbnail_image }">
@@ -820,7 +828,6 @@
 					</c:if>
 				</div>
 			</div>
-		</c:if>
 		</c:forEach>
 		</div>
 		<div class="mid-banner">

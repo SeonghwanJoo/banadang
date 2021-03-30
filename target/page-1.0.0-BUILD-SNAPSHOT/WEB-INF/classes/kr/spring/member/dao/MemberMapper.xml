@@ -92,21 +92,20 @@
        				 (select nickname,thumbnail_image,id,#{club_num} as club_num from gentlepro.member_detail where id=#{id})a left outer join gentlepro.club using(club_num))b left outer join gentlepro.match using(match_num)
 		</if>
 		<if test="match_num == null">
-    		select nickname,thumbnail_image,a.id,club_num,club_name,club_img,filename from
-       			(select nickname,thumbnail_image,id,#{club_num} as club_num from gentlepro.member_detail where id=#{id})a left outer join gentlepro.club using(club_num)
+       		select nickname,thumbnail_image,id from gentlepro.member_detail where id=#{id}
 		</if>
 	</select>
 	<insert id="insertMsg" parameterType="msgVO">
 		insert into gentlepro.msg (sender,receiver,content,match_num,club_num) 
 		values (#{sender},#{receiver},#{content},
 		<if test="match_num == null">
-		'',
+		null,
 		</if>
 		<if test="match_num != null">
 		#{match_num},
 		</if>
 		<if test="club_num == null">
-		''
+		null
 		</if>
 		<if test="club_num != null">
 		#{club_num}

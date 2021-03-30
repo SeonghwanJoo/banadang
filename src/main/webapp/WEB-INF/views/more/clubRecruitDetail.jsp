@@ -6,7 +6,7 @@
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
 		<a href="clubRecruit.do">
-		<span class="material-icons" id="cancel">close</span>
+		<span class="material-icons" id="chevron_left" >chevron_left</span>
 		</a>
 		<div class="topnav-centered">
 			<span class="active">${title }</span>
@@ -120,8 +120,8 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col">가입비 <span>${clubRecruit.register_cost }</span></div>
-				<div class="col">월 회비 <span>${clubRecruit.month_cost }</span></div>
+				<div class="col">가입비: <span>${clubRecruit.register_cost }</span></div>
+				<div class="col">월 회비: <span>${clubRecruit.month_cost }</span></div>
 			</div>
 		</li>
 		<li class="li-list non-border-btm">

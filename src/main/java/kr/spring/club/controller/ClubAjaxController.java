@@ -140,18 +140,27 @@ public class ClubAjaxController {
 		
 		Map<String,Object> map=new HashMap<String,Object>();
 		try {
+			logger.info("id_like in updateLike start : "+match.getId_like());
 			if(match.getId_like()==null) {
 				
+				logger.info("id_like in null : "+match.getId_like());
 				clubService.insertClubLike(match);
-				
+				logger.info("id_like after insert : "+match.getId_like());
+				map.put("id_like", match.getId_like());
 			}else {
 				//update
 				if(match.getStatus()==0) {
 					
+					clubService.deleteClubLike(match);
+					map.put("id_like", null);
 				}else {
+					logger.info("likeUpdate진입");
+					clubService.updateClubLike(match);
+					map.put("id_like", match.getId_like());
 					
 				}
 			}
+			
 			
 			map.put("result", "success");
 			

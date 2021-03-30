@@ -20,6 +20,9 @@ public interface ClubMapper {
 	@Select("select * from(select * from gentlepro.club where club_num=#{club_num}) a left outer join (select avg(manner) manner,avg(perform) perform, COUNT(*) rating_count,club_num from gentlepro.club_rating group by club_num) b on a.club_num=b.club_num")
 	public ClubVO selectClubDetailWithClub_num(Integer club_num);
 	
+	@Select("select * from gentlepro.club where club_num = #{club_num}")
+	public ClubVO selectClubByClubNum(Integer club_num);
+	
 	@Select("select club_auth from gentlepro.club_join where id=#{id} and club_num=#{club_num}")
 	public Integer selectClubAuth(ClubVO club);
 	
@@ -57,6 +60,8 @@ public interface ClubMapper {
 	@Select("select * from (select *, GETATTENDANCE(id, club_num, join_date) as attendance_rate from gentlepro.club_join where club_num=#{club_num}) a join gentlepro.member_detail b on a.id=b.id order by club_auth desc")
 	public List<MemberVO> selectClubMembers(Integer club_num);
 	
+	@Select("select * from (select * from gentlepro.club_join where club_num=#{club_num} and club_auth=5) a join member_detail using(id)")
+	public List<MemberVO> selectManagers(Integer club_num);
 	
 	@Update("update gentlepro.club_join set club_auth=#{club_auth} where id=#{id} and club_num=#{club_num}")
 	public void updateMemberAuth(MemberVO memberVO);
@@ -114,13 +119,12 @@ public interface ClubMapper {
 	@Select("select id from gentlepro.club_join where club_num=#{club_num} and club_auth=5")
 	public HashSet<String> selectClubExecutivesByClubNum(Integer club_num);
 	
-	@Insert("insert into gentlepro.club_like (club_num, id, updown) values (#{club_num},#{id},#{status})")
 	public void insertClubLike(MatchVO match);
 	
 	@Delete("delete from gentlepro.club_like where club_num = #{club_num} and id = #{id}")
 	public void deleteClubLike(MatchVO match);
 	
-	@Update("update gentlepro.club_lie set updown=#{status} where club_num = #{club_num} and id = #{id}")
+	@Update("update gentlepro.club_like set updown=#{status} where club_num = #{club_num} and id = #{id}")
 	public void updateClubLike(MatchVO match);
 	
 }

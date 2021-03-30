@@ -35,6 +35,12 @@
 		 	select max(club_num) as club_num from gentlepro.club
 		 </selectKey>
 	</insert>
+	<insert id="insertClubLike" parameterType="matchVO" useGeneratedKeys="true" keyProperty="id_like">
+		insert into gentlepro.club_like (club_num, id, updown) values (#{club_num},#{id},#{status})
+		<selectKey keyProperty="id_like" resultType="integer" order="AFTER">
+			select max(id_like) as id_like from gentlepro.club_like
+		</selectKey>
+	</insert>
 	<update id="updateClub" parameterType="clubVO">
 		update gentlepro.club set id=#{id}, club_loc=#{club_loc}, club_name=#{club_name},
 		<if test="club_detail !=''">

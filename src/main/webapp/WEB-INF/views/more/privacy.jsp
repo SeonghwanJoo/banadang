@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
-		<a onclick="back()">
+		<a onclick="javascript:history.go(-1);">
 			<span class="material-icons" id="chevron_left" >chevron_left</span>
 		</a>
 		<div class="topnav-centered">

@@ -4,9 +4,16 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="fixed_top">
-	<a href="${pageContext.request.contextPath }/member/myPage.do" >
+	<c:if test="${isMain==true }">
+	<a href="${pageContext.request.contextPath}/main/main.do" >
 	<span class="material-icons" id="cancel">close</span>
 	</a>
+	</c:if>
+	<c:if test="${isMain ==false }">
+	<a href="${pageContext.request.contextPath}/member/myPage.do" >
+	<span class="material-icons" id="cancel">close</span>
+	</a>
+	</c:if>
 	<div class="topnav-centered">
 		<span class="active cursor">${title }</span>
 	</div>
@@ -50,6 +57,10 @@
 	</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript">
 function createListInHTML(clubs){
 	
@@ -60,7 +71,7 @@ function createListInHTML(clubs){
 			'<div class="col-6 col-sm-4 col-lg-3 margin-m-top">'
 				+'<div class="club_cd">'
 					+'<div class="centered-padding centered">'
-						+'<span class="distance_cd gray">'+clubs[i].distance.toFixed(1)+' km</span>';
+						+'<span class="distance_cd gray nowrap">'+clubs[i].distance.toFixed(1)+' km</span>';
 		if(clubs[i].club_img == ''){
 			itemStr+=
 						'<img src="${pageContext.request.contextPath}/resources/images/blank_emblem.png" class="center_emblem">';
@@ -75,46 +86,82 @@ function createListInHTML(clubs){
 						+'<div class="main-row margin-top">';
 		if(clubs[i].status == 1){
 		itemStr+=				
-							'<span class="material-icons margin-right" onclick="toggleThumb('+clubs[i].club_num+','+clubs[i].id_like+', 1)">thumb_up</span>'+clubs[i].up
-							+'<span class="material-icons margin-right margin-m-left" onclick="toggleThumb('+clubs[i].club_num+','+clubs[i].id_like+', 2)">thumb_down_off_alt</span>'+clubs[i].down
+							'<span class="thumb material-icons margin-right cursor" style="color:#1976d2" id="like_icon_'+clubs[i].club_num+'" onclick="toggleThumb('+clubs[i].club_num+',1)">thumb_up_off_alt</span>'
+							+'<span id="like_sum_'+clubs[i].club_num+'">'+clubs[i].up+'</span>'
+							+'<span class="material-icons margin-right margin-m-left cursor" id="dislike_icon_'+clubs[i].club_num+'" onclick="toggleThumb('+clubs[i].club_num+',2)">thumb_down_off_alt</span>'
+							+'<span id="dislike_sum_'+clubs[i].club_num+'">'+clubs[i].down+'</span>'
 		}else if(clubs[i].status == 2){
 		itemStr+=				
-							'<span class="material-icons margin-right" onclick="toggleThumb('+clubs[i].club_num+','+clubs[i].id_like+', 1)">thumb_up_off_alt</span>'+clubs[i].up
-							+'<span class="material-icons margin-right margin-m-left" onclick="toggleThumb('+clubs[i].club_num+','+clubs[i].id_like+', 2)">thumb_down</span>'+clubs[i].down	
+							'<span class="thumb material-icons margin-right cursor" id="like_icon_'+clubs[i].club_num+'" onclick="toggleThumb('+clubs[i].club_num+' ,1)">thumb_up_off_alt</span>'
+							+'<span id="like_sum_'+clubs[i].club_num+'">'+clubs[i].up+'</span>'
+							+'<span class="thumb material-icons margin-right margin-m-left cursor" style="color:#e91e63" id="dislike_icon_'+clubs[i].club_num+'" onclick="toggleThumb('+clubs[i].club_num+',2)">thumb_down_off_alt</span>'
+							+'<span id="dislike_sum_'+clubs[i].club_num+'">'+clubs[i].down+'</span>'
 		}else{
 		itemStr+=				
-							'<span class="material-icons margin-right" onclick="toggleThumb('+clubs[i].club_num+','+clubs[i].id_like+', 1)">thumb_up_off_alt</span>'+clubs[i].up
-							+'<span class="material-icons margin-right margin-m-left" onclick="toggleThumb('+clubs[i].club_num+','+clubs[i].id_like+', 2)">thumb_down_off_alt</span>'+clubs[i].down		
+							'<span class="thumb material-icons margin-right cursor" id="like_icon_'+clubs[i].club_num+'" onclick="toggleThumb('+clubs[i].club_num+' ,1)">thumb_up_off_alt</span>'
+							+'<span id="like_sum_'+clubs[i].club_num+'">'+clubs[i].up+'</span>'
+							+'<span class="thumb  material-icons margin-right margin-m-left cursor" id="dislike_icon_'+clubs[i].club_num+'" onclick="toggleThumb('+clubs[i].club_num+',2)">thumb_down_off_alt</span>'
+							+'<span id="dislike_sum_'+clubs[i].club_num+'">'+clubs[i].down+'</span>'	
 		}
 		itemStr+=
 							
 						'</div>'
 					+'</div>'
+					+'<input type="hidden" id="hid_id_like_'+clubs[i].club_num+'" value="'+clubs[i].id_like+'">'
+					+'<input type="hidden" id="hid_like_sum_'+clubs[i].club_num+'" value="'+clubs[i].up+'">'
+					+'<input type="hidden" id="hid_dislike_sum_'+clubs[i].club_num+'" value="'+clubs[i].down+'">'
 					+'<input type="hidden" id="status_'+clubs[i].club_num+'" value="'+clubs[i].status+'">'
 					+'<button class="dark-btn margin-m-top" onclick="goToClubDetail('+clubs[i].club_num+')">팀 페이지</button>'
 				+'</div>'
 			+'</div>';
-		//status에 따라 thumb far/fas 처리 한다
-		//thumb를 누르면 club_num/user_id/id_like/updown 여부를 인자로 전달하고
-		//기존값이 있으면 업데이트/없으면 insert한다
-		//업데이트 완료 후
-		//아이콘의 클래스를 far로 초기화하고 updown에 맞추어 fas로 class를 수정한다
+		
 	}
 	
 	return itemStr;
 	
 	
 }
-function toggleThumb(club_num, id_like, status){
+
+function toggleThumb(club_num, status){
 	if(${empty user_id}){
 		
 		$('#toast').css('display','flex');
 		return
 	}
-	if($('#status_'+club_num).val()==status){
+	
+	var r_status = $('#status_'+club_num).val();
+	var like_sum = $('#hid_like_sum_'+club_num).val();
+	var dislike_sum = $('#hid_dislike_sum_'+club_num).val();
+	var id_like = $('#hid_id_like_'+club_num).val();
+	if (id_like=='null'){id_like=null}
+
+	
+	
+	if(r_status==status){
 		
-		status= 0;
+		status=0;
+		if(r_status==1){
+			like_sum--;
+		}else if(r_status==2){
+			dislike_sum--;
+		}
+		
+	}else{
+		
+		if(r_status==1){
+			like_sum--;
+		}else if(r_status==2){
+			dislike_sum--;
+		}
+		
+		if(status==1){
+			like_sum++;
+		}else if(status==2){
+			dislike_sum++;
+		}
 	}
+	
+
 	
 	$.ajax({
 		url:'updateLike.do',
@@ -131,13 +178,34 @@ function toggleThumb(club_num, id_like, status){
 		success:function(data){
 			if(data.result=='success'){
 				
-				alert("updated");
+				$('#like_icon_'+club_num).css('color','#fff');
+				$('#dislike_icon_'+club_num).css('color','#fff');
+				
+				if(status==1){
+					$('#like_icon_'+club_num).animate({
+						marginTop:'-20'
+			        }, 200).animate({
+			        	marginTop:'0'
+			        }, 200).css('color','#1976d2');
+				}else if(status==2){
+					$('#dislike_icon_'+club_num).animate({
+						marginTop:'20'
+			        }, 200).animate({
+			        	marginTop:'0'
+			        }, 200).css('color','#e91e63');
+				}
+				$('#like_sum_'+club_num).text(like_sum);
+				$('#dislike_sum_'+club_num).text(dislike_sum);
+				$('#hid_like_sum_'+club_num).val(like_sum);
+				$('#hid_dislike_sum_'+club_num).val(dislike_sum);
+				$('#hid_id_like_'+club_num).val(data.id_like);
+				$('#status_'+club_num).val(status);
 				
 			}	
 			if(data.result=='errors'){
 				
 				alert('오류 발생');
-			}
+			} 
 			
 		},
 		error:function(){
@@ -146,6 +214,7 @@ function toggleThumb(club_num, id_like, status){
 		}
 	});
 	
+		
 	
 	
 }
@@ -242,7 +311,8 @@ $(function(){
 		longitude=126.978656785931;
 		moreList();
 		
-	} 
+	}
+	
 	
 });
 

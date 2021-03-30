@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="row" id="top_wrap">
 	<div class="fixed_top">
-		<a onclick="back()">
-			<span class="material-icons" id="chevron_left" >close</span>
+		<a onclick="javascript:history.go(-1)">
+			<span class="material-icons" id="chevron_left" >chevron_left</span>
 		</a>
 		<div class="topnav-centered">
 			<span class="active">${title }</span>
@@ -15,15 +15,25 @@
 <div class="blank_div"></div>
 <div class="main-row margin-top centered-padding">
 	<div class="x-smaller">
-		<c:if test="${ msg.filename ne 'undefined'  }">
-		<img src="${pageContext.request.contextPath}/club/imageView.do?club_num=${msg.club_num}" alt="Avatar" class="avatar emblem">
+		<c:if test="${not empty msg.match_num }">
+			<c:if test="${ msg.filename ne 'undefined'  }">
+			<img src="${pageContext.request.contextPath}/club/imageView.do?club_num=${msg.club_num}" alt="Avatar" class="avatar emblem">
+			</c:if>
+			<c:if test="${ msg.filename eq 'undefined'  }">
+			<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+			</c:if>
 		</c:if>
-		<c:if test="${ msg.filename eq 'undefined'  }">
-		<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" alt="Avatar" class="avatar emblem">
+		<c:if test="${ empty msg.match_num }">
+			<c:if test="${not empty msg.thumbnail_image }">
+			<img src="${msg.thumbnail_image }" alt="Avatar" class="avatar align-center">
+			</c:if>
+			<c:if test="${empty msg.thumbnail_image }">
+			<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar align-center">
+			</c:if>
 		</c:if>
 	</div>
 	<div class="x-bigger">
-		<div class="row">
+		<div class="row" id="x-bigger-row">
 			<c:if test="${not empty msg.club_name }">
 			<span class="match-item">${msg.club_name }</span>
 			</c:if>
@@ -39,14 +49,8 @@
 		</c:if>
 	</div>
 </div>
-<div class="row margin-top padding-left">
-	<span class="gray m-margin-right">받는 사람 </span>
-	<c:if test="${not empty msg.nickname }">
-	<span class="blue bold">${msg.nickname }</span>
-	</c:if>
-	<c:if test="${empty msg.nickname }">
-	<span class="gray bold">탈퇴 회원</span>
-	</c:if>
+<div class="row margin-top padding-left" id="below-row">
+
 </div>
 <hr class="hr">
 <div class="row">
@@ -101,6 +105,27 @@ function submitContent(){
 }
 
 $(function(){
+	
+	var isMatchAvail = ${not empty msg.match_num};
+	var str='';
+	var nickname='${msg.nickname}';
+	
+	str+=
+		'<span class="gray m-margin-right">받는 사람 </span>';
+	if(nickname==''){
+		str+=
+			'<span class="gray bold">탈퇴 회원</span>';
+	}else{
+		str+=
+			'<span class="blue bold">'+nickname+'</span>'
+	}
+
+		
+	if(isMatchAvail){
+		$('#below-row').append(str);
+	}else{
+		$('#x-bigger-row').append(str);
+	}
 	
 	
 	$('#content').focus();

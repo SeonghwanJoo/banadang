@@ -232,6 +232,46 @@
         </div>
 	</div>
 </div>
+<!-- The Modal -->
+<div id="myModals" class="modals">
+	<!-- Modal content -->
+	<div class="modals-content">
+	    <span class="close_mod">&times;</span>
+		<div class="row margin-top centered-padding">
+			<div class="input-container col" id="search_modal">
+				<input type="text" placeholder="장소 키워드 입력" name="search" class="searchBar" id="keyword" autofocus="autofocus">
+		  		<button class="search_btn" id="search_btn"><i class="fa fa-search"></i></button>
+	  		</div>
+  		</div>
+  		<div class="row centered-padding">
+  			<div id="map" style="width:100%;height:10rem;"></div>
+  		</div>
+        <div id="menu_wrap" class="bg_white">
+        <hr>
+	        <ul id="placesList"></ul>
+	        <div id="pagination"></div>
+        </div>
+	</div>
+</div>
+<!-- The Modal -->
+<div id="toast" class="submit_toast">
+  <!-- Modal content -->
+    <div id="submit_toast_content" class="submit_toast_content">
+		<div class="row centered margin-btm centered-padding">
+			<span id="club_msg">
+				
+			</span>
+		</div>
+		<div class="row margin-top centered">
+			<div class="col">
+				<button class="alert-btn red border-right-gray" id="confirm">아니오</button>
+			</div>
+			<div class="col">
+				<button class="alert-btn" id="create">예</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
