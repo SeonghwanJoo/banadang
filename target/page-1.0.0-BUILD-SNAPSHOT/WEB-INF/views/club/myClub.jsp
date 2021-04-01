@@ -59,7 +59,7 @@
 				<button class="alert-btn border-right-gray" id="confirm">닫기</button>
 			</div>
 			<div class="col">
-				<button class="alert-btn red" id="create">팀 만들기</button>
+				<button class="alert-btn" id="create">팀 만들기</button>
 			</div>
 		</div>
 	</div>

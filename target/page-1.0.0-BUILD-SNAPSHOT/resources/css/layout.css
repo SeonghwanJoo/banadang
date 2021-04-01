@@ -444,18 +444,16 @@ div.daterangepicker{
 	border-radius:0;
 	width:100%;
 }
-p.detail {
+p {
 	white-space: pre-wrap;
 }
 p.padding{
 	padding:5px;
 }
 .collapsible-content .detail{
-	
 	min-height:0;
 	overflow:hidden;
 	padding:0;
-	white-space:pre-wrap;
 } 
 .detail.readonly{
 	background-color:#000;
@@ -1861,7 +1859,7 @@ div.detail-item{
 
 .collapsible-content{
 	max-height: 0;
-	transition: max-height 0.2s ease-out;
+	transition: max-height 0.5s ;
 	margin-top:1.5rem;
 	padding:0;
 	overflow: hidden;

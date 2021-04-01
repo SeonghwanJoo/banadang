@@ -232,6 +232,25 @@
         </div>
 	</div>
 </div>
+<!-- The Modal -->
+<div id="toast" class="submit_toast">
+  <!-- Modal content -->
+    <div id="submit_toast_content" class="submit_toast_content">
+		<div class="row centered margin-btm centered-padding">
+			<span id="club_msg">
+				
+			</span>
+		</div>
+		<div class="row margin-top centered">
+			<div class="col">
+				<button class="alert-btn red border-right-gray" id="not-agrd">아니오</button>
+			</div>
+			<div class="col">
+				<button class="alert-btn" id="agrd">예</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -641,6 +660,7 @@ $( function() {
 								/*close any already open lists of autocompleted values*/
 								closeAllLists();
 								$('#away_msg').text('');
+								document.getElementById('away').value = -1;
 								if (!val) {
 									return false;
 								}
@@ -693,14 +713,32 @@ $( function() {
 												.addEventListener(
 														"click",
 														function(e) {
-															/*insert the value for the autocomplete text field:*/
-															inp.value = this
-																	.getElementsByTagName("input")[0].value;
-															/*away input에 선택된 클럽의 번호 입력*/
-															document.getElementById('away').value=this
-																	.getElementsByTagName("input")[1].value;
+															var selectedTeam = this.getElementsByTagName("input")[0].value;
+															var selectedNum = this.getElementsByTagName("input")[1].value;
+															$('#club_msg').append(
+																	'반드시 매칭 협의된<br> 팀만 선택해야 합니다.<br><br><b>'
+																	+selectedTeam+'</b>팀과 매칭 <br>협의되었습니까?'
+															);
+															$('#toast').css('display','flex'); 
+															/* when the event occurred, alert will be showed up to confirm it the team agreed */
+																														
+																														
+															$('#not-agrd').click(function(){
+																
+																$('#toast').css('display','none');
+																$('#club_msg').text('');
+																inp.value = '';
+															});
+															$('#agrd').click(function(){
+																
+																inp.value = selectedTeam;
+																document.getElementById('away').value=selectedNum;
+																$('#toast').css('display','none');
+																$('#club_msg').text('');
+															}); 
 															/*close the list of autocompleted values,
 															(or any other open lists of autocompleted values:*/
+															
 															closeAllLists();
 														});
 										a.appendChild(b);
