@@ -281,7 +281,7 @@
 		$('#perform_valid').css('color','red').text('');
 		$('.perform_rating').css('color','#d6d6d6');
 		$('#perform_1').css('color','#FFC000'); 
-		$('#perform_msg').text('처음 시작하신 듯');
+		$('#perform_msg').text('하-초급');
 		$('#perform').val(1);
 	});
 	$('#perform_2').click(function(){
@@ -289,7 +289,7 @@
 		$('.perform_rating').css('color','#d6d6d6');
 		$('#perform_1').css('color','#FFC000'); 
 		$('#perform_2').css('color','#FFC000'); 
-		$('#perform_msg').text('아직 부족');
+		$('#perform_msg').text('중하-평균에 조금 못 미치는 수준');
 		$('#perform').val(2);
 	});
 	$('#perform_3').click(function(){
@@ -298,7 +298,7 @@
 		$('#perform_1').css('color','#FFC000'); 
 		$('#perform_2').css('color','#FFC000'); 
 		$('#perform_3').css('color','#FFC000');
-		$('#perform_msg').text('보통이에요');
+		$('#perform_msg').text('중-대다수 아마추어 팀 수준');
 		$('#perform').val(3);
 	});
 	$('#perform_4').click(function(){
@@ -308,20 +308,20 @@
 		$('#perform_2').css('color','#FFC000'); 
 		$('#perform_3').css('color','#FFC000');
 		$('#perform_4').css('color','#FFC000');
-		$('#perform_msg').text('잘하시네요');
+		$('#perform_msg').text('중상-부분 선출 수준');
 		$('#perform').val(4);
 	});
 	$('#perform_5').click(function(){
 		$('#perform_valid').css('color','red').text('');
 		$('.perform_rating').css('color','#FFC000');
-		$('#perform_msg').text('모두 선출 같아요');
+		$('#perform_msg').text('상-전원 선출 수준');
 		$('#perform').val(5);
 	});
 	$('#perform_1').hover(function(){
 		$('#perform_valid').css('color','red').text('');
 		$('.perform_rating').css('color','#d6d6d6');
 		$('#perform_1').css('color','#FFC000'); 
-		$('#perform_msg').text('처음 시작하신 듯');
+		$('#perform_msg').text('하-초급');
 		$('#perform').val(1);
 	});
 	$('#perform_2').hover(function(){
@@ -329,7 +329,7 @@
 		$('.perform_rating').css('color','#d6d6d6');
 		$('#perform_1').css('color','#FFC000'); 
 		$('#perform_2').css('color','#FFC000'); 
-		$('#perform_msg').text('아직 부족');
+		$('#perform_msg').text('중하-평균에 조금 못 미치는 수준');
 		$('#perform').val(2);
 	});
 	$('#perform_3').hover(function(){
@@ -338,7 +338,7 @@
 		$('#perform_1').css('color','#FFC000'); 
 		$('#perform_2').css('color','#FFC000'); 
 		$('#perform_3').css('color','#FFC000');
-		$('#perform_msg').text('보통이에요');
+		$('#perform_msg').text('중-대다수 아마추어 팀 수준');
 		$('#perform').val(3);
 	});
 	$('#perform_4').hover(function(){
@@ -348,13 +348,13 @@
 		$('#perform_2').css('color','#FFC000'); 
 		$('#perform_3').css('color','#FFC000');
 		$('#perform_4').css('color','#FFC000');
-		$('#perform_msg').text('잘하시네요');
+		$('#perform_msg').text('중상-부분 선출 수준');
 		$('#perform').val(4);
 	});
 	$('#perform_5').hover(function(){
 		$('#perform_valid').css('color','red').text('');
 		$('.perform_rating').css('color','#FFC000');
-		$('#perform_msg').text('모두 선출 같아요');
+		$('#perform_msg').text('상-전원 선출 수준');
 		$('#perform').val(5);
 	});
 	$('#submit').click(function(){

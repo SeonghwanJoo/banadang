@@ -977,7 +977,7 @@ function sendLinkForVote(match_num,club_num,match_date,address,start_time) {
  }
 function goToVoteDetail(club_num, match_num, home_name, away_name){
 	
-	location.href='${pageContext.request.contextPath}/main/vote_detail.do?club_num='+club_num+'&match_num='+match_num+'&home_name='+home_name+'&away_name='+away_name+'&isMain=true';
+	location.href='${pageContext.request.contextPath}/main/vote_detail.do?club_num='+club_num+'&match_num='+match_num+'&home_name='+home_name+'&away_name='+away_name+'&isMain=false';
 	
 }
 function openMore(match_num,club_name,club_num,match_date,address,start_time,modify){

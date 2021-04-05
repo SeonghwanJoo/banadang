@@ -44,7 +44,7 @@
 					<span class="xs-font gray right-date nowrap">
 						<fmt:formatDate value="${msg.register_date }" type="both" pattern="yy.MM.dd HH:mm"/>
 					</span>
-					<span class="material-icons more cursor m-font gray" id="more" onclick="openOption(${msg.msg_num},'${msg.match_num }','${msg.club_num }','${msg.sender }','${msg.content }','${msg.nickname }')" >more_vert</span>
+					<span class="material-icons more cursor m-font gray" id="more" onclick="openOption(${msg.msg_num},'${msg.match_num }','${msg.club_num }','${msg.sender }','${msg.nickname }')" >more_vert</span>
 				</div>
 				<p id="${msg.msg_num }" data-club="${msg.club_num }">${msg.content }</p>
 			</div>
@@ -113,7 +113,7 @@ window.onclick = function(event) {
 }
 
 
-function openOption(msg_num,match_num,club_num,sender,content,nickname){
+function openOption(msg_num,match_num,club_num,sender,nickname){
 	$('#more_modal').css('display','block');
 	$('#delete').click(function(){
 		$.ajax({
@@ -144,6 +144,7 @@ function openOption(msg_num,match_num,club_num,sender,content,nickname){
 		});
 		
 	});
+	var content=$('#'+msg_num).text();
 	$('#report').click(function(){
 		location.href='${pageContext.request.contextPath }/member/writeReport.do?source=4&'+'reported_id='+sender+'&reporting_id=${user_id}&write_num='+msg_num+'&content='+content+'&name='+nickname;
 	});
