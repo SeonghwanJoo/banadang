@@ -289,7 +289,7 @@
 		$('.perform_rating').css('color','#d6d6d6');
 		$('#perform_1').css('color','#FFC000'); 
 		$('#perform_2').css('color','#FFC000'); 
-		$('#perform_msg').text('중하-평균에 조금 못미치는 수준');
+		$('#perform_msg').text('중하-평균에 조금 못 미치는 수준');
 		$('#perform').val(2);
 	});
 	$('#perform_3').click(function(){
@@ -329,7 +329,7 @@
 		$('.perform_rating').css('color','#d6d6d6');
 		$('#perform_1').css('color','#FFC000'); 
 		$('#perform_2').css('color','#FFC000'); 
-		$('#perform_msg').text('중하-평균에 조금 못미치는 수준');
+		$('#perform_msg').text('중하-평균에 조금 못 미치는 수준');
 		$('#perform').val(2);
 	});
 	$('#perform_3').hover(function(){

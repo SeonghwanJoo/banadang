@@ -63,7 +63,10 @@
 		$.ajax({
 			url:'${pageContext.request.contextPath}/club/setMyClub.do',
 			type:'post',
-			data:{club_num:myClub_num},
+			data:{
+				club_num:myClub_num,
+				user_id:'${user_id}'
+			},
 			dataType:'json',
 			cache:false,
 			timeout:30000,

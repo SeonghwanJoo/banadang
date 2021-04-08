@@ -91,11 +91,11 @@ public class ClubAjaxController {
 	@RequestMapping("/club/setMyClub.do")
 	@ResponseBody
 	public Map<String,String> setMyClub(@RequestParam Integer club_num,
+										@RequestParam String user_id,
 										HttpSession session,
 										HttpServletResponse response,
 										HttpServletRequest request){
 		Map<String,String> map=new HashMap<String,String>();
-		String user_id=(String)session.getAttribute("user_id");
 		ClubVO club=new ClubVO();
 		club.setId(user_id);
 		club.setClub_num(club_num);

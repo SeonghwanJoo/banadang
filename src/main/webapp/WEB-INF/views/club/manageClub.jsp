@@ -758,10 +758,10 @@
 			</div>
 			<div class="row">
 				<c:if test="${match.home==match.club_num}">
-				<button class="block white-bg margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.away }&isMain=false'">${match.away_name } 평점 작성 하기</button>
+				<button class="block white-bg margin-top" onclick="location.href='${pageContext.request.contextPath }/main/ratingForm.do?match_num=${match.match_num}&club_num=${match.away }&isMain=false'">${match.away_name } 평점 작성 하기</button>
 				</c:if>
 				<c:if test="${match.away==match.club_num }">
-				<button class="block white-bg margin-top" onclick="location.href='ratingForm.do?match_num=${match.match_num}&club_num=${match.home }&isMain=false'">${match.home_name } 평점 작성 하기</button>
+				<button class="block white-bg margin-top" onclick="location.href='${pageContext.request.contextPath }/main/ratingForm.do?match_num=${match.match_num}&club_num=${match.home }&isMain=false'">${match.home_name } 평점 작성 하기</button>
 				</c:if>
 			</div>
 		</div>
