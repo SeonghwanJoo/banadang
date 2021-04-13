@@ -90,7 +90,6 @@
 			<mapping path="/club/manageClub.do"/>
 			<mapping path="/club/modifyClub.do"/>
 			<mapping path="/match/deleteMatch.do"/>
-			<mapping path="/match/invite_detail.do"/>	
 			<mapping path="/match/deleteRecruit.do"/>
 			<mapping path="/match/modifyMatch.do"/>
 			<mapping path="/match/modifyRecruit.do"/>

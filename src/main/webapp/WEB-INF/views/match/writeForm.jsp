@@ -199,7 +199,7 @@
 		<div class="row" id="cost-wrapper" style="display:none">
 			<div class="autocomplete input-container col">
 				<i class="fas fa-won-sign"></i> <input class="input-field"
-					type="text" name="cost" id="cost" placeholder="구장 비용 입력">
+					type="text" name="cost" id="cost" placeholder="(상대팀이 지불해야할)구장 비용 입력">
 			</div>
 			<hr class="hr">
 		</div>

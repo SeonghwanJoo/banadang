@@ -52,6 +52,8 @@ public class LoginAPI {
 				sb.append("&redirect_uri=" + uri + "/member/login.do");
 			} else if (invited == 2) {
 				sb.append("&redirect_uri=" + uri + "/member/recruitLogin.do");
+			} else if (invited == 3) {
+				sb.append("&redirect_uri=" + uri + "/member/matchLogin.do");
 			}
 
 			sb.append("&code=" + authorize_code);

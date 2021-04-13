@@ -2342,6 +2342,9 @@ input:checked ~ .checkmark:after{
 .agreement-content{
 	padding:3rem 0.5rem;
 }
+.agreement-content p{
+	white-space: normal;
+}
 /* color options */
 .color_opt{
 	text-align:center;

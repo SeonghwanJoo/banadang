@@ -20,6 +20,56 @@
 	</div>
 </div>
 <div class="blank_div"></div>
+<c:if test="${empty user_id }">
+<div class="confirm-modals" style="display:block">
+	<div class="confirm-modal-content">
+		<div class="login">
+			<div class="login-wrapper">
+				<p class="black-bg-op bold">로그인이 필요한 페이지 입니다</p>
+				<button class="signin-button kakao-btn" onclick="login(true)">
+					<img src="${pageContext.request.contextPath }/resources/images/kakao-logo.jpg">
+					<span>카카오톡으로 간편 로그인</span>
+				</button>
+				<button class="signin-button kakao-btn" onclick="login(false)">
+					<img class="round" src="${pageContext.request.contextPath }/resources/images/kakao_account.png">
+					<span>다른 카카오 계정으로 로그인</span>
+				</button>
+				<div id="appleid-signin" class="signin-button" data-color="white" data-border="false" data-type="sign-in"></div>
+				<div class="row margin-top" style="display:none" id="sel_login">
+					<label class="login-label">
+						로그인 상태 유지
+					  <input type="checkbox" checked="checked">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</c:if>
+<c:if test="${not empty user_id && empty myClub }">
+<!-- The Modal -->
+<div id="emptyClub_toast" class="submit_toast" style="display:flex">
+  <!-- Modal content -->
+    <div id="emptyClub_submit_toast_content" class="submit_toast_content">
+		<div class="row centered margin-btm centered-padding">
+			<span id="club_msg">
+				소속팀이 없습니다.<br><br>
+				<b>팀을 만들고 <br>
+				매치 신청해주세요.</b>
+			</span>
+		</div>
+		<div class="row margin-top centered">
+			<div class="col">
+				<button class="alert-btn border-right-gray" id="emptyClub_confirm">목록</button>
+			</div>
+			<div class="col">
+				<button class="alert-btn" id="create">팀 만들기</button>
+			</div>
+		</div>
+	</div>
+</div>
+</c:if>
 <div class="invite-wrapper" id="invite-wrapper">
  	<ul class="ul-list non-border-btm">
 		<li class="li-list">
@@ -154,7 +204,24 @@
 	</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
+	
+	Kakao.init('32776969383e4a77d92f6e18dd233bc5');
+	
+	var state='';
+	if($('input:checkbox').is(':checked')){
+	 	state=true;
+	}
+	function login(throughTalk){
+		
+		Kakao.Auth.authorize({
+			  redirectUri: $(location).attr('protocol')+"//"+"${pageContext.request.serverName }${pageContext.request.contextPath}/member/matchLogin.do"
+			  ,state: '${match.match_num}' + '-' + state
+			  ,throughTalk: throughTalk
+		});
+		
+	 }
 
 	//이미지 지도에서 마커가 표시될 위치입니다 
 	var markerPosition  = new kakao.maps.LatLng(${match.address_y}, ${match.address_x}); 
@@ -198,6 +265,13 @@
 			$('#report_more_modal').css('display','none');
 		});
 		
+		$("#emptyClub_confirm").click(function(){
+			location.href='${pageContext.request.contextPath}/match/match_toInvite.do';
+		});
+		$('#create').click(function(){
+			location.href='${pageContext.request.contextPath}/club/createClubForm.do';
+		});
+		
 		$('#submit').click(function(){
 		
 			postMatchRequest( ${match.match_num}, '${user_id}', '${myClub.club_num}', $('#request_detail').val(),'${match.id}','${match.club_num}','${match.club_name}');
@@ -232,7 +306,7 @@
 			success:function(data){
 				$('#toast').css('display','flex');
 				if(data.result=='requested'){
-					$('#matchRequest_msg').text('경기 신청  완료');
+					$('#matchRequest_msg').text('홈팀 '+g+'에게 어웨이 ${myClub.club_name}팀이 경기 신청했습니다.');
 				}else if(data.result=='duplicated'){
 					$('#matchRequest_msg').text('이미 경기 신청하셨습니다');
 				}else{

@@ -132,6 +132,84 @@ public class MemberController {
         }
 		return "redirect:/main/main.do";
 	}
+	@RequestMapping("/member/matchLogin.do")
+	public String matchLogin(@RequestParam String code,
+									@RequestParam String state,
+									HttpSession session,
+									HttpServletRequest request,
+									HttpServletResponse response,
+									Model model)throws IOException {	
+						
+		String uri= getUri(request);
+		
+		Map<String, String> map = loginAPI.getAccessToken(code,3,uri);
+		if(map.get("result")!=null && map.get("result").equals("errors")) {
+			return "redirect:/main/loginFailure.do";
+		}
+		String[] values=state.split("-");
+		String access_token=map.get("access_token");
+		String refresh_token=map.get("refresh_token");
+		MemberVO memberVO=new MemberVO();
+		memberVO = loginAPI.getUserInfo(access_token);
+		session.setAttribute("access_token", access_token);
+		if(values.length>1) {
+		
+			Cookie loginCookie=new Cookie("GpFHzB",refresh_token);
+			loginCookie.setPath("/");
+			loginCookie.setMaxAge(60*60*24*60);
+			response.addCookie(loginCookie);
+		}
+		String user_id=memberVO.getId();
+		
+		//    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
+		try{
+		
+			if (memberVO != null) {
+		
+				//memberVO의 아이디가 DB에 기 등록된 id인지 확인
+				MemberVO existingMember=memberService.getMember(user_id);
+				//등록되어 있으면 session setting
+				if(existingMember !=null && existingMember.getMem_auth()!=3)  {
+					session.setAttribute("mem_auth", existingMember.getMem_auth());
+				}else{
+				
+					int loginType;
+					
+					if(existingMember==null) {loginType=7;}
+					else {loginType=8;}
+					
+					logger.info("loginType : "+loginType);
+					session.setAttribute("member", memberVO);
+					session.setAttribute("loginType", loginType);
+					session.setAttribute("match_num", values[0]);
+					
+					return "redirect:/member/agreement.do";
+				}
+			
+				List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
+				session.setAttribute("user_id", user_id);
+				session.setAttribute("myClubs", myClubs);
+				
+				if(myClubs.size()>0) {
+	            	ClubVO club=new ClubVO();
+	                club.setId(user_id);
+	                club.setClub_num(myClubs.get(0).getClub_num());
+	            	session.setAttribute("myClub", clubService.selectMyClubDetails(club));
+	            }
+		
+			}
+		
+		
+		}catch(Exception e) {
+		
+		return "redirect:/main/loginFailure.do";
+		
+		}
+		
+		
+		return "redirect:/match/invite_detail.do?match_num="+values[0];
+	
+	}
 	@RequestMapping("/member/recruitLogin.do")
 	public String recruitLogin(@RequestParam String code,
 									@RequestParam String state,
