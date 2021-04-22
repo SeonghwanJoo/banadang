@@ -8,10 +8,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
 <meta name="naver-site-verification" content="5deee65b5c8cbc143af6b0f06b83ee7e886bfda4" />
-<meta property="og:title" content="Gentlepro:축구/풋살 매칭 플랫폼">
+<meta property="og:title" content="Gentlepro:젠틀맨들의 축구/풋살 매칭">
 <meta property="og:image" content="https://gentlepro.net/favicon-96x96.png">
-<meta property="og:description" content="아마추어 축구/풋살팀 회원 관리, 매칭 서비스">
-<meta name="description" content="우리 축구/풋살팀을 이제 간편하게 관리하자!" />
+<meta property="og:description" content="매너 좋은 젠틀맨들의 축구 풋살 매칭 서비스">
+<meta name="description" content="실력 속이기? NO! 매너 좋은 팀끼리 매칭하자!" />
 <meta name="appleid-signin-client-id" content="com.gentlepro.services">
 <meta name="appleid-signin-redirect-uri" content="https://gentlepro.net/member/appleLogin.do">
 <meta name="appleid-signin-scope" content="name email">

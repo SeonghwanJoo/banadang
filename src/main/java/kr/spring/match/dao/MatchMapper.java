@@ -17,7 +17,7 @@ public interface MatchMapper {
 	
 	public void insertMatch(MatchVO matchVO);
 	
-	@Select("select* from (select match_num,id,type,home,away,away_name,start_time,end_time,cancel,address,address_x,address_y,match_detail,match_date,#{club_num} club_num from gentlepro.match where home=#{club_num} or away=#{club_num})a where match_date>date_sub(now(), interval 1 day) order by cancel is not null, match_date ")
+	@Select("select* from (select match_num,id,type,home,away,away_name,start_time,end_time,cancel,address,address_x,address_y,match_detail,match_date,#{club_num} club_num from gentlepro.match where home=#{club_num} or away=#{club_num})a where match_date>date_sub(now(), interval 1 day) and away !=-2 order by cancel is not null, match_date ")
 	public List<MatchVO> selectMyMatch(Integer club_num);
 	
 	@Select("select * from (select match_num,id,type,home,away,away_name,start_time,end_time,address,match_detail,cancel,match_date,#{club_num} club_num from gentlepro.match where (home=#{club_num} or away=#{club_num}) and away not in (0,-1) and home!=away)a where match_date <date_sub(now(), interval 1 day) and match_date>date_sub(now(), interval 14 day) and cancel is null")

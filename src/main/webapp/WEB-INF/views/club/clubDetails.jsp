@@ -113,36 +113,38 @@
 		<div class="row margin-m-top">
 		<c:forEach items="${members }" var="member">
 			
-				<div class="detail-item col-12 col-lg-6 centered">
-					<div class="half_col m-bigger nowrap">
-						<div class="relative disp-inbl float-left">
-							<c:if test="${empty member.thumbnail_image }">
-							<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
+				<div class="detail-item col-12 col-lg-6">
+					<div class="row">
+						<div class="half_col m-bigger nowrap">
+							<div class="relative disp-inbl float-left">
+								<c:if test="${empty member.thumbnail_image }">
+								<img src="${pageContext.request.contextPath }/resources/images/profile.png" alt="Avatar" class="avatar">
+								</c:if>
+								<c:if test="${not empty member.thumbnail_image }">
+								<img src="${member.thumbnail_image }" alt="Avatar" class="avatar">
+								</c:if>
+								<i class="fas fa-crown admin visible" id="${member.id}"></i>
+							</div>
+							<span>
+							${member.nickname} | <span class="gray small-font">가입일 <fmt:formatDate value="${member.join_date}" pattern="yy.MM.dd"/> </span>
+							</span>
+							<br>
+							<c:if test="${not empty member.age_range }">
+							<span class="gray small-font">${fn:substring(member.age_range,0,1)}0대</span>
 							</c:if>
-							<c:if test="${not empty member.thumbnail_image }">
-							<img src="${member.thumbnail_image }" alt="Avatar" class="avatar">
+							<c:if test="${empty member.age_range }">
+							<span class="gray small-font">비공개</span>
 							</c:if>
-							<i class="fas fa-crown admin visible" id="${member.id}"></i>
 						</div>
-						<span>
-						${member.nickname} | <span class="gray small-font">가입일 <fmt:formatDate value="${member.join_date}" pattern="yy.MM.dd"/> </span>
-						</span>
-						<br>
-						<c:if test="${not empty member.age_range }">
-						<span class="gray small-font">${fn:substring(member.age_range,0,1)}0대</span>
-						</c:if>
-						<c:if test="${empty member.age_range }">
-						<span class="gray small-font">비공개</span>
-						</c:if>
-					</div>
-					<div class="half_col m-smaller">
-						<div class="centered column cursor" onclick="location.href='${pageContext.request.contextPath}/member/writeMsg.do?&club_num=${club.club_num }&id=${member.id}'">
-							<span class="blue material-icons disp-bl">
-							forum
-							</span>
-							<span class="xs-font gray disp-bl">
-								1:1 메시지
-							</span>
+						<div class="half_col m-smaller">
+							<div class="centered column cursor" onclick="location.href='${pageContext.request.contextPath}/member/writeMsg.do?&club_num=${club.club_num }&id=${member.id}'">
+								<span class="blue material-icons disp-bl">
+								forum
+								</span>
+								<span class="xs-font gray disp-bl">
+									1:1 메시지
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>

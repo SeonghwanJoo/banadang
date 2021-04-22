@@ -84,7 +84,16 @@
 				 		(match_date>=#{start} and match_date<=#{end}) 
 					]]>
 					</if>
-					and away=0
+					and 
+					<if test="away == 0 or away == null">
+					(away=0 or away=-2)
+					</if>
+					<if test="away == 1">
+					away=0
+					</if>
+					<if test="away == 2">
+					away=-2
+					</if>
 					<if test="type !=3 and type!=0">
 					and	type=#{type}
 					</if>

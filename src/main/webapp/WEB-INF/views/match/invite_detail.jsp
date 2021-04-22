@@ -134,8 +134,15 @@
 			</div>
 		</li>
 		<li class="li-list">
-			<span>${match.address}</span>
-			<span class="cost">(구장 비용 : ${match.cost })</span>
+			<span>${match.address} 
+				<c:if test="${match.away == 0 }">
+				(으)로 초청합니다
+				</c:if>
+				<c:if test="${match.away == -2 }">
+				 주변 지역으로 초청해주세요
+				</c:if>
+			</span><br>
+			<span class="cost">구장 비용 : ${match.cost }</span>
 			<div id="map"></div>
 		</li>
 		<c:if test="${!empty match.match_detail }">

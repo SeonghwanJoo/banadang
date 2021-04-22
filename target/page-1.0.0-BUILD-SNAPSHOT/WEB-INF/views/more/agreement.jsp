@@ -487,6 +487,8 @@
 								location.href='${pageContext.request.contextPath}/club/inviteMember.do?club_num=${club_num}';
 							} else if (${loginType==5 || loginType ==6}){
 								location.href='${pageContext.request.contextPath}/match/recruitDetail.do?recruit_num=${recruit_num}';
+							} else if (${loginType==7 || loginType ==8}){
+								location.href='${pageContext.request.contextPath}/match/invite_detail.do?match_num=${match_num}';
 							}
 						});
 						

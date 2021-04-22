@@ -5,7 +5,7 @@
 	overflow:hidden;
 	text-overflow: ellipsis;
 }
-.match-item.no-margin{
+.match-item.no-margin, .login-label.no-margin{
 	margin-right:0;
 }
 .team-info.col span{
@@ -449,6 +449,9 @@ p {
 }
 p.padding{
 	padding:5px;
+}
+.small-font.padding-top{
+	padding-top:0.2rem;
 }
 .collapsible-content .detail{
 	min-height:0;
@@ -1557,7 +1560,7 @@ btn-wrapper{
 	cursor:pointer;
 }
 
-.small-font, .main-row span.small-font,button.small-font, a.active.small-font{
+.small-font, .main-row span.small-font,button.small-font, a.active.small-font,label.small-font{
 	font-size:0.8rem;
 }
 a.active.small-font{
@@ -1826,6 +1829,7 @@ img.emblem{
 div.detail-item{
 	padding:8px;
 	min-height:3em;
+	align-items:flex-start;
 }
 .tab_detail{
 	display:none;	
@@ -1987,10 +1991,12 @@ div.m-smaller{
 	width: 230px;
 	margin:0 auto
 }
+
 .login-label {
   display: block;
   position: relative;
   padding-left: 2.5rem;
+  margin-right:0.5rem;
   margin-bottom: 12px;
   cursor: pointer;
   text-align:left;
@@ -2053,9 +2059,13 @@ button.chip-btn{
 }
 /* chip-checkbox */
 .input-label{
-	padding-left:1rem;
+	padding-left:0.5rem;
 	display:block;
 	margin-top:1rem;
+}
+.label-txt{
+	position:relative;
+	left:-0.5rem;
 }
 .margin-n-v{
 	margin:0.3rem 0;
@@ -2128,6 +2138,9 @@ button.chip-btn{
 }
 .padding-btm{
 	padding-bottom:0.5rem;
+}
+.login-label.padding-top{
+	padding-top:0.3rem;
 }
 .padding-right{
 	padding-right:0.5rem;
@@ -2235,7 +2248,8 @@ label.chip.m-wider{
 .certify-modal-content .checkmark{
 	background-color:#fff;
 }
-input:checked ~ .checkmark, .chip input:checked ~ .checkmark,.modals .chip input:checked ~ .checkmark {
+input:checked ~ .checkmark, .chip input:checked ~ .checkmark,.modals .chip input:checked ~ .checkmark
+,.modals .login-label input:checked ~ .checkmark {
   background-color: #00CD3C;
   border-color:#00CD3C;
 }
@@ -2278,7 +2292,7 @@ input:checked ~ .vote_checkmark:after{
 .chip .checkmark:after{
 	border-color:#fff;
 }
-input:checked ~ .checkmark:after{
+input:checked ~ .checkmark:after,.login-label input:checked ~ .checkmark:after{
 	border-color:#fff;
 }
 
@@ -2317,6 +2331,14 @@ input:checked ~ .checkmark:after{
   	background-color: #999;
   	border-color:#999;
 }
+.modals .login-label input ~ .checkmark{
+	background-color: #fff;
+  	border-color:#ccc;
+}
+.login-label input ~ .checkmark:after{
+	border-color:#ccc;
+}
+
 /* When the checkbox is checked, add a blue background */
 
  .chip input:disabled:checked ~.checkmark,.custom input:disabled:checked ~ .checkmark,

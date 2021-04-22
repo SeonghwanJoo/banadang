@@ -281,7 +281,8 @@ public class MainController {
 		
 		for (MatchVO club_rating : clubs_rating) {
 			
-			if (match.getHome() == club_rating.getClub_num()) {//if문으로 들어가지 못함
+			
+			if (match.getHome().equals(club_rating.getClub_num())) {//if문으로 들어가지 못함
 				match.setHome_manner(club_rating.getManner());
 				match.setHome_name(club_rating.getClub_name());
 				match.setHome_perform(club_rating.getPerform());
@@ -289,7 +290,7 @@ public class MainController {
 				home_count++;
 			}
 			
-			if (match.getAway() == club_rating.getClub_num()) {
+			if (match.getAway().equals(club_rating.getClub_num())) {
 				
 				match.setAway_manner(club_rating.getManner());
 				match.setAway_name(club_rating.getClub_name());

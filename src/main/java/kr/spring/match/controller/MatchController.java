@@ -63,11 +63,11 @@ public class MatchController {
 		matchService.insertMatch(matchVO);  
 		HashSet<String> uid_list=matchService.selectMembersForPostedMatch(matchVO);
 		
-		if(!uid_list.isEmpty()) {
+		if(!uid_list.isEmpty() && matchVO.getAway()!=-2) {
 			loginAPI.sendMessage(uid_list, "경기 일정("+matchVO.getClub_name()+" Vs "+matchVO.getAway_name()+")이 게시되었습니다. 참석 투표하러 가볼까요?");
 		}
 		
-		if(matchVO.getAway()==0) {
+		if(matchVO.getAway()==0 || matchVO.getAway()==-2) {
 			return "redirect:/match/match_toInvite.do";
 		}
 		
@@ -77,7 +77,6 @@ public class MatchController {
 	public ModelAndView inviteList(MatchVO match) {
 		
 		ModelAndView mav=new ModelAndView();
-		
 		mav.setViewName("invite_match");
 		mav.addObject("title","경기 매치");
 		mav.addObject("match", match);

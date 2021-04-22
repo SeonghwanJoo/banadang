@@ -15,10 +15,10 @@
   <!-- The slideshow -->
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="slide-img" src="${pageContext.request.contextPath}/resources/images/1_1t-1.png">
+      <img class="slide-img" src="${pageContext.request.contextPath}/resources/images/1_2t-1.png">
     </div>
     <div class="carousel-item">
-      <img class="slide-img" src="${pageContext.request.contextPath}/resources/images/2_1t-1.png">
+      <img class="slide-img" src="${pageContext.request.contextPath}/resources/images/2_2t-1.png">
     </div>
     <div class="carousel-item">
       <img class="slide-img" src="${pageContext.request.contextPath}/resources/images/3_1t-1.png">

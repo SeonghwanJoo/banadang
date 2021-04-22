@@ -30,7 +30,7 @@ public class AwayCheckInterceptor extends HandlerInterceptorAdapter{
 		Integer match_num=Integer.parseInt(request.getParameter("match_num"));
 		MatchVO match=matchService.selectMatchByMatch_num(match_num);
 		try {
-			if(match.getAway()!=0) {
+			if(match.getAway()!=0 && match.getAway()!=-2) {
 				
 				//상대팀 모집중인 경기가 아니면 redirect
 				response.sendRedirect(request.getContextPath()+"/main/posterCheck.do");
