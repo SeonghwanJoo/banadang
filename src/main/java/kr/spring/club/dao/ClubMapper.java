@@ -27,6 +27,8 @@ public interface ClubMapper {
 	public Integer selectClubAuth(ClubVO club);
 	
 	public List<ClubVO> selectAwayDetailsForRequestedMatch(Integer club_num);
+	public List<ClubVO> selectAwayDetailsForInvitedMatch(Integer club_num);
+	
 	public List<ClubVO> selectHomeDetailsForRequestedMatch(Integer club_num);
 	
 	public List<MatchVO> selectClubListWithFilter(MatchVO match);
@@ -54,7 +56,7 @@ public interface ClubMapper {
 	@Update("update gentlepro.match_request set acceptance=3 where match_num=#{match_num} and away not in (#{club_num})")
 	public void rejectOthers(ClubVO club);
 	
-	@Update("update gentlepro.match set away=#{club_num}, away_name=#{club_name} where match_num=#{match_num}")
+	@Update("update gentlepro.match set away=#{club_num}, away_name=#{club_name},address=#{address},start_time=#{start_time},end_time=#{end_time} where match_num=#{match_num}")
 	public void updateAwayforMatch(ClubVO club);
 	
 	@Select("select * from (select *, GETATTENDANCE(id, club_num, join_date) as attendance_rate from gentlepro.club_join where club_num=#{club_num}) a join gentlepro.member_detail b on a.id=b.id order by club_auth desc")

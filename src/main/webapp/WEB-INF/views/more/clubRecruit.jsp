@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="filter-wrapper sticky padding-btm padding-top">
 	<div class="row filter cursor"  id="filter">
-		<span class="material-icons l-font  filter-icon">filter_alt</span>
+		<span class="material-icons l-font  filter-icon">filter_list</span>
 		<c:if test="${match.type==1 }">
 		<span class="filter-txt">축구</span>
 		</c:if>

@@ -96,7 +96,7 @@
 		</div>
 		</c:if>
 		<c:if test="${!empty away_club }">
-		<h6>초청한 경기(상대팀 선택)</h6>
+		<h6>신청 받은 경기(수락/거절 선택)</h6>
 		<ul class="ul-list border-top">
 			<c:forEach items="${away_club }" var="away">
 			<li class="li-list">
@@ -177,7 +177,7 @@
 					</div>
 				</div>
 				<span class="material-icons collapsible">add_circle_outline</span>
-				<div class="collapsible-content"><p class="detail" >${away.request_detail}</p><c:if test="${away.acceptance==1 && empty away.cancel }"><div class="row" id="match-btn-${away.request_num }"><div class="col"><button class="first-btn" onclick="answerForMatchReq(${away.request_num},'${away.club_name }',3,${away.club_num },${away.match_num })">거절</button></div><div class="col"><button class="second-btn" onclick="answerForMatchReq(${away.request_num},'${away.club_name }',2,${away.club_num },${away.match_num })">수락</button></div></div></c:if></div>
+				<div class="collapsible-content"><p class="detail" >${away.request_detail}</p><c:if test="${away.acceptance==1 && empty away.cancel }"><div class="row" id="match-btn-${away.request_num }"><div class="col"><button class="first-btn" onclick="answerForMatchReq(${away.request_num},'${away.club_name }',3,${away.club_num },${away.match_num },'','','')">거절</button></div><div class="col"><button class="second-btn" onclick="answerForMatchReq(${away.request_num},'${away.club_name }',2,${away.club_num },${away.match_num },'${away.address }','${away.start_time }','${away.end_time }')">수락</button></div></div></c:if></div>
 			</li>
 			</c:forEach>
 		</ul>
@@ -1423,7 +1423,7 @@ function toggleVote(match_num){
 	$('#total').text("총 회원 "+total+"명");
 } */
 
-function answerForMatchReq(request_num,club_name,acceptance,club_num,match_num){
+function answerForMatchReq(request_num,club_name,acceptance,club_num,match_num,address,start_time,end_time){
 	if(acceptance==2){
 		$('#answer_msg').text(club_name+'의 경기 신청을 수락하겠습니까?');
 		var info='<br>(해당 경기에 '+club_name+'외 나머지 팀의 신청은 거절합니다)'
@@ -1445,7 +1445,10 @@ function answerForMatchReq(request_num,club_name,acceptance,club_num,match_num){
 				club_name:club_name,
 				match_num:match_num,
 				home_name:'${myClub.club_name}',
-				home:${myClub.club_num}
+				home:${myClub.club_num},
+				address:address,
+				start_time:start_time,
+				end_time:end_time
 				},
 			dataType:'json',
 			cache:false,

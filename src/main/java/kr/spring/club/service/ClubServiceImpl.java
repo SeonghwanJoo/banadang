@@ -62,7 +62,11 @@ public class ClubServiceImpl implements ClubService {
 
 	@Override
 	public List<ClubVO> selectAwayDetailsForRequestedMatch(Integer club_num) {
-		return clubMapper.selectAwayDetailsForRequestedMatch(club_num);
+		
+		List<ClubVO> away_list = clubMapper.selectAwayDetailsForRequestedMatch(club_num);
+		away_list.addAll(clubMapper.selectAwayDetailsForInvitedMatch(club_num));
+		
+		return away_list;
 	}
 
 	@Override

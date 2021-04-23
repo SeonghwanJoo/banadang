@@ -79,6 +79,15 @@
     	(select avg(manner) manner,avg(perform) perform,club_num from gentlepro.club_rating group by club_num)e
     		 using(club_num)) f join club using(club_num) order by cancel is not null, match_req_cancel is not null
 	</select>
+	<select id="selectAwayDetailsForInvitedMatch" parameterType="integer" resultType="clubVO">
+	select * from (select * from
+    	(select type,match_date,request_num,match_num,club_num,cancel,acceptance,request_detail,match_req_cancel,a.address,a.start_time,a.end_time from
+    		(select request_num,match_num,away club_num,acceptance,request_detail,match_req_cancel,address,start_time,end_time from gentlepro.match_request ) a
+    		join gentlepro.match using(match_num) where match_date>date_sub(now(), interval 1 day) and home=#{club_num} and away =-2)d
+    left outer join 
+    	(select avg(manner) manner,avg(perform) perform,club_num from gentlepro.club_rating group by club_num)e
+    		 using(club_num)) f join club using(club_num) order by cancel is not null, match_req_cancel is not null;
+	</select>
 	<select id="selectHomeDetailsForRequestedMatch" parameterType="integer" resultType="clubVO">
 	select request_num,match_num,c.club_num,acceptance,request_detail,match_req_cancel,match_date,start_time,end_time,address,cancel,type,home,match_detail,manner,perform,club_name,filename,club_color,club_age,club_address from
 	(select * from

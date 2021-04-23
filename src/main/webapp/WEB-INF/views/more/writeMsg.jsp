@@ -80,8 +80,8 @@ function submitContent(){
 		url:'sendMsg.do',
 		type:'post',
 		data:{
-			sender:${user_id},
-			receiver:${msg.id},
+			sender:'${user_id}',
+			receiver:'${msg.id}',
 			match_num:'${msg.match_num}',
 			club_num:'${msg.club_num}',
 			content:$('#content').val()

@@ -3,17 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="filter-wrapper sticky padding-btm padding-top">
 	<div class="row filter cursor"  id="filter">
-		<span class="material-icons l-font  filter-icon">filter_alt</span>
+		<span class="material-icons l-font  filter-icon">filter_list</span>
 		<c:if test="${match.type==1 }">
 		<span class="filter-txt">축구</span>
 		</c:if>
 		<c:if test="${match.type==2 }">
 		<span class="filter-txt">풋살</span>
 		</c:if>
+		<c:if test="${match.away == 1 }">
+		<span class="filter-txt">초청합니다</span>
+		</c:if>
+		<c:if test="${match.away == 2 }">
+		<span class="filter-txt">초청해주세요</span>
+		</c:if>
 		<c:if test="${not empty match.period }">
-		<span class="filter-txt"><i class="far fa-calendar-alt margin-right"></i>${match.period}</span>
+		<span class="filter-txt"><i class="far fa-calendar-alt margin-right"></i>
+		${fn:substring(match.period,5,7)}.${fn:substring(match.period,8,10)}~${fn:substring(match.period,18,20)}.${fn:substring(match.period,21,23)}
+		</span>
 		</c:if>
 	</div>
 </div>
