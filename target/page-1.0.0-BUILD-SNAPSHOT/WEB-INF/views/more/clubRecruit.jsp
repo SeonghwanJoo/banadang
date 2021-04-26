@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="filter-wrapper sticky padding-btm padding-top">
 	<div class="row filter cursor"  id="filter">
-		<span class="material-icons l-font  filter-icon">filter_alt</span>
+		<span class="material-icons l-font  filter-icon">filter_list</span>
 		<c:if test="${match.type==1 }">
 		<span class="filter-txt">축구</span>
 		</c:if>
@@ -28,19 +28,19 @@
 	<div class="modals-content">
 		<span id="close_mod" class="close_mod">&times;</span>
 		<span class="input-label">경기 유형(축구/풋살) 선택</span>
-		<div class="row centered-padding">
-			<label class="chip">
-				<span class="chip-txt small-font">전체</span>
+		<div class="row centered-padding margin-m-top">
+			<label class="login-label">
+				<span class="label-txt">전체</span>
 				<input type="radio" name="type" id="soccer" value="3" checked="checked">
 				<span class="checkmark"></span>
 			</label> 
-			<label class="chip">
-				<span class="chip-txt small-font">축구</span>
+			<label class="login-label">
+				<span class="label-txt">축구</span>
 				<input type="radio" name="type" id="soccer" value="1">
 				<span class="checkmark"></span>
 			</label> 
-			<label class="chip">
-				<span class="chip-txt small-font">풋살</span>
+			<label class="login-label">
+				<span class="label-txt">풋살</span>
 				<input type="radio" name="type" id="futsal" value="2">
 				<span class="checkmark"></span>
 			</label>

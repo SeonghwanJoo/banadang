@@ -84,7 +84,16 @@
 				 		(match_date>=#{start} and match_date<=#{end}) 
 					]]>
 					</if>
-					and away=0
+					and 
+					<if test="away == 0 or away == null">
+					(away=0 or away=-2)
+					</if>
+					<if test="away == 1">
+					away=0
+					</if>
+					<if test="away == 2">
+					away=-2
+					</if>
 					<if test="type !=3 and type!=0">
 					and	type=#{type}
 					</if>
@@ -130,15 +139,35 @@
 	</select>
 	<insert id="insertMyRequestForMatchToInvite" parameterType="matchVO">
 		insert into gentlepro.match_request
-			(match_num,id,away,acceptance,request_detail)
+			(match_num,id,away,acceptance,request_detail,address,start_time,end_time)
 		values
 			(#{match_num},#{id},#{away},1,
 		<if test="request_detail !=''">
-			#{request_detail})
+			#{request_detail},
 		</if>
 		<if test="request_detail ==''">
-			'')
+			'',
 		</if>
+		<if test="address !=''">
+			#{address},
+		</if>
+		<if test="address ==''">
+			'',
+		</if>
+		<if test="start_time !=''">
+			#{start_time},
+		</if>
+		<if test="start_time ==''">
+			'',
+		</if>
+		<if test="end_time !=''">
+			#{end_time}
+		</if>
+		<if test="end_time ==''">
+			''
+		</if>
+		
+		)
 	</insert>
 	<select id="selectRecruitDetail" parameterType="integer" resultType="matchVO">
 		select * from 

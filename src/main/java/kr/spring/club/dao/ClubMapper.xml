@@ -93,7 +93,17 @@
 	(select * from
     	(select  request_num,a.match_num,acceptance,request_detail,match_req_cancel,match_date,a.away,start_time,end_time,address,cancel,type,home,match_detail from
     		(select request_num,match_num,away,acceptance,request_detail,match_req_cancel from gentlepro.match_request where away=#{club_num} ) a 
-    		join gentlepro.match b on a.match_num=b.match_num where b.match_date>date_sub(now(), interval 1 day))d
+    		join gentlepro.match b on a.match_num=b.match_num where b.match_date>date_sub(now(), interval 1 day) and b.away!=-2)d
+    left outer join 
+    	(select avg(manner) manner,avg(perform) perform,count(*) rating_count,club_num from gentlepro.club_rating group by club_num)e 
+    	on d.home=e.club_num) f join club c on f.home=c.club_num order by cancel is not null, match_req_cancel is not null
+	</select>
+	<select id="selectHomeDetailsForSuggestedMatch" parameterType="integer" resultType="clubVO">
+	select request_num,match_num,c.club_num,acceptance,request_detail,match_req_cancel,match_date,start_time,end_time,address,cancel,type,home,match_detail,manner,perform,club_name,filename,club_color,club_age,club_address from
+	(select * from
+    	(select  request_num,a.match_num,acceptance,request_detail,match_req_cancel,match_date,a.away,a.start_time,a.end_time,a.address,cancel,type,home,match_detail from
+    		(select request_num,match_num,away,acceptance,request_detail,match_req_cancel,address,start_time,end_time from gentlepro.match_request where away=#{club_num} ) a 
+    		join gentlepro.match b on a.match_num=b.match_num where b.match_date>date_sub(now(), interval 1 day) and b.away=-2)d
     left outer join 
     	(select avg(manner) manner,avg(perform) perform,count(*) rating_count,club_num from gentlepro.club_rating group by club_num)e 
     	on d.home=e.club_num) f join club c on f.home=c.club_num order by cancel is not null, match_req_cancel is not null

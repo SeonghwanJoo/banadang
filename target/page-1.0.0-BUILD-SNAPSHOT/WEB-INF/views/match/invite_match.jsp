@@ -3,17 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<div class="filter-wrapper sticky padding-btm padding-top">
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<div class="sticky padding-btm padding-top">
 	<div class="row filter cursor"  id="filter">
-		<span class="material-icons l-font  filter-icon">filter_alt</span>
+		<span class="material-icons l-font  filter-icon">filter_list</span>
 		<c:if test="${match.type==1 }">
 		<span class="filter-txt">축구</span>
 		</c:if>
 		<c:if test="${match.type==2 }">
 		<span class="filter-txt">풋살</span>
 		</c:if>
+		<c:if test="${match.away == 1 }">
+		<span class="filter-txt">초청합니다</span>
+		</c:if>
+		<c:if test="${match.away == 2 }">
+		<span class="filter-txt">초청해주세요</span>
+		</c:if>
 		<c:if test="${not empty match.period }">
-		<span class="filter-txt"><i class="far fa-calendar-alt margin-right"></i>${match.period}</span>
+		<span class="filter-txt nowrap"><i class="far fa-calendar-alt margin-right"></i>
+		${fn:substring(match.period,5,7)}.${fn:substring(match.period,8,10)}~${fn:substring(match.period,18,20)}.${fn:substring(match.period,21,23)}
+		</span>
 		</c:if>
 	</div>
 </div>
@@ -36,33 +45,52 @@
 	<div class="modals-content">
 		<span id="close_mod" class="close_mod">&times;</span>
 		<span class="input-label">경기 유형(축구/풋살) 선택</span>
-		<div class="row centered-padding">
-			<label class="chip">
-				<span class="small-font">전체</span>
+		<div class="row centered-padding margin-m-top">
+			<label class="login-label">
+				<span class="label-txt">전체</span>
 				<input type="radio" name="type" id="soccer" value="3" checked="checked">
 				<span class="checkmark"></span>
 			</label> 
-			<label class="chip">
-				<span class="small-font">축구</span>
+			<label class="login-label">
+				<span class="label-txt">축구</span>
 				<input type="radio" name="type" id="soccer" value="1">
 				<span class="checkmark"></span>
 			</label> 
-			<label class="chip">
-				<span class="small-font">풋살</span>
+			<label class="login-label">
+				<span class="label-txt">풋살</span>
 				<input type="radio" name="type" id="futsal" value="2">
 				<span class="checkmark"></span>
 			</label>
 		</div>
 		<hr class="hr">
-		<span class="input-label margin-btm">검색 기간 설정</span>
-		<div class="row centered-padding">
-			<label class="chip wider">
-					<span>전체</span>
-					<input type="radio" name="period-opt" id="entire-pr" checked="checked">
-					<span class="checkmark"></span>
+		<span class="input-label">초청 여부 선택</span>
+		<div class="row centered-padding margin-m-top">
+			<label class="login-label">
+				<span class="label-txt small-font">전체</span>
+				<input type="radio" name="away" value="0" checked="checked">
+				<span class="checkmark"></span>
 			</label> 
-			<label class="chip wider">
-				<span>특정 기간</span>
+			<label class="login-label">
+				<span class="label-txt small-font">초청합니다</span>
+				<input type="radio" name="away" value="1">
+				<span class="checkmark"></span>
+			</label> 
+			<label class="login-label">
+				<span class="label-txt small-font">초청해주세요</span>
+				<input type="radio" name="away" value="2">
+				<span class="checkmark"></span>
+			</label>
+		</div>
+		<hr class="hr">
+		<span class="input-label margin-btm">검색 기간 설정</span>
+		<div class="row centered-padding  margin-m-top">
+			<label class="login-label">
+				<span class="label-txt">전체</span>
+				<input type="radio" name="period-opt" id="entire-pr" checked="checked">
+				<span class="checkmark"></span>
+			</label> 
+			<label class="login-label">
+				<span class="label-txt">특정 기간</span>
 				<input type="radio" name="period-opt" id="specific-pr">
 				<span class="checkmark"></span>
 			</label>
@@ -115,8 +143,14 @@ function createListInHTML(matchs){
 				+"</div>"
 				+"<div class='row'>"
 					+"<span class='match-item'><i class='far fa-calendar-alt margin-right'></i>"+new Date(matchs[i].match_date).format('yy.MM.dd')+"</span>"
-					+"<span class='match-item'><i class='far fa-clock margin-right'></i>"+matchs[i].start_time+"~"+matchs[i].end_time+"</span>"
-				+"</div>"
+					+"<span class='match-item'><i class='far fa-clock margin-right'></i>"+matchs[i].start_time+"~"+matchs[i].end_time+"</span>";
+		if(matchs[i].away==0){
+			itemStr+="<span class='material-icons blue'>arrow_right</span><span class='small-font gray padding-top'>초청합니다</span>";
+		}else{
+			itemStr+="<span class='material-icons red'>arrow_right</span><span class='small-font gray padding-top'>초청해주세요</span>";
+		}
+		itemStr+=
+				"</div>"
 				+"</div>"
 				+"<div class='row small-font margin-top margin-btm'>"
 					+"<div class='col club_main'>";
@@ -179,6 +213,7 @@ function moreList(){
 		type:'post',
 		data:{
 			type: ${match.type},
+			away: '${match.away}',
 			period: '${match.period}',
 			pageCount: pageCount*30,
 			club_locY:latitude,

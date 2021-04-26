@@ -4,84 +4,107 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<div class="row">
-	<form:form class="col s12" id="form" action="write.do" commandName="matchVO" autocomplete="off">
-		<input type="hidden" name="id" value="${user_id }">
-		<div class="row" id="top_wrap">
-			<div class="fixed_top">
-				<a href="#" onclick="back()">
-				<span class="material-icons" id="cancel">close</span>
-				</a>
-				<div class="topnav-centered">
-					<span class="active">${title }</span>
-				</div>
-				<input type="submit" id="submit" value="완료">
+<form:form class="col s12" id="form" action="write.do" commandName="matchVO" autocomplete="off">
+	<input type="hidden" name="id" value="${user_id }">
+	<input type="hidden" id="home" name="home" value="${myClub.club_num}">
+	<input type="hidden" id="club_name" name="club_name" value="${myClub.club_name}">
+	<input type="hidden" name="away" id="away" value="-1">
+	<div class="row" id="top_wrap">
+		<div class="fixed_top">
+			<a href="#" onclick="back()">
+			<span class="material-icons" id="cancel">close</span>
+			</a>
+			<div class="topnav-centered">
+				<span class="active">${title }</span>
 			</div>
+			<input type="submit" id="submit" value="완료">
 		</div>
-		<div class="blank_div"></div>
-		<span class="input-label">경기 유형(축구/풋살) 선택</span>
-		<div class="row centered-padding">
-			<label class="chip">
-				<span class="chip-txt">축구</span>
-				<input type="radio" name="type" id="soccer" value="1" checked="checked">
-				<span class="checkmark"></span>
-			</label> 
-			<label class="chip">
-				<span class="chip-txt">풋살</span>
-				<input type="radio" name="type" id="futsal" value="2">
-				<span class="checkmark"></span>
-			</label>
-		</div>
-		<hr>
-		<span class="input-label">예정된 상대팀 있음/상대팀 초청 선택</span>
-		<div class="row centered-padding">
-			<label class="chip wider">
-				<span class="chip-txt small-font">상대팀 있음</span>
-				<input type="radio" name="opponent" id="exist" value="1" checked="checked">
-				<span class="checkmark"></span>
-			</label> 
-			<label class="chip wider">
-				<span class="chip-txt small-font">상대팀 초청</span>
-				<input type="radio" name="opponent" id="non-exist" value="2">
-				<span class="checkmark"></span>
-			</label>
-		</div>
-		<div class="row"><div class="col"><span class="msg" id="type_msg"></span></div></div>
-		<hr class="hr">
-		<input type="hidden" id="home" name="home" value="${myClub.club_num}">
-		<input type="hidden" id="club_name" name="club_name" value="${myClub.club_name}">
-		<input type="hidden" name="away" id="away" value="-1">
-		<div id="away-wrapper">
+	</div>
+	<div class="blank_div"></div>
+	<ul class="ul-list non-border-btm">
+		<li class="li-list">
+			<span class="input-label">경기 유형(축구/풋살) 선택</span>
+			<div class="row centered-padding  margin-m-top">
+				<label class="login-label">
+					<span class="label-txt">축구</span>
+					<input type="radio" name="type" id="soccer" value="1" checked="checked">
+					<span class="checkmark"></span>
+				</label> 
+				<label class="login-label">
+					<span class="label-txt">풋살</span>
+					<input type="radio" name="type" id="futsal" value="2">
+					<span class="checkmark"></span>
+				</label>
+			</div>
+		</li>
+		<li class="li-list">
+			<span class="input-label">예정된 상대팀 있음/상대팀 초청 선택</span>
+			<div class="row centered-padding margin-m-top">
+				<label class="small-font login-label padding-top">
+					<input type="radio" name="opponent" id="exist" checked="checked">
+					<span class="checkmark"></span>
+					<span class="label-txt">상대팀 있음</span>
+				</label>
+				<label class="small-font login-label padding-top">
+					<input type="radio" name="opponent" id="non-exist">
+					<span class="checkmark"></span>
+					<span class="label-txt">초청합니다</span>
+				</label>
+				<label class="small-font login-label padding-top no-margin">
+					<input type="radio" name="opponent" id="invite_me">
+					<span class="checkmark"></span>
+					<span class="label-txt">초청해주세요</span>
+				</label>
+				<!-- <label class="chip wider">
+					<span class="chip-txt small-font">상대팀 있음</span>
+					<input type="radio" name="opponent" id="exist" value="1" checked="checked">
+					<span class="checkmark"></span>
+				</label> 
+				<label class="chip wider">
+					<span class="chip-txt small-font">상대팀 초청</span>
+					<input type="radio" name="opponent" id="non-exist" value="2">
+					<span class="checkmark"></span>
+				</label>
+				<label class="chip wider">
+					<span class="chip-txt small-font">초청해주세요</span>
+					<input type="radio" name="opponent" id="non-exist" value="2">
+					<span class="checkmark"></span>
+				</label> -->
+			</div>
+		</li>
+		<li class="li-list" id="away-wrapper">	
 			<div class="row">
 				<div class="autocomplete input-container col">
 					<i class="fa fa-users icon"></i> <input class="input-field"
 						type="text" placeholder="상대팀명 입력 (목록에서 선택)" name="away_name" id="away_name">
 				</div>
 			</div>
-		<div class="row"><div class="col"><span class="msg" id="away_msg"></span></div></div>
-		<hr class="hr">
-		</div>
-		<div class="row">
-			<div class="autocomplete input-container col">
-				<i class="fas fa-map-marked-alt icon"></i> <input class="input-field"
-					type="text" name="address" id="address" placeholder="경기 장소 지도 검색" readonly="readonly">
+			<div class="row"><div class="col"><span class="msg" id="away_msg"></span></div></div>
+		</li>
+		<li class="li-list">	
+			<div class="row">
+				<div class="autocomplete input-container col">
+					<i class="fas fa-map-marked-alt icon"></i> <input class="input-field"
+						type="text" name="address" id="address" placeholder="경기 장소 지도 검색" readonly="readonly">
+				</div>
+				<input type="hidden" name="address_x" id="address_x">
+				<input type="hidden" name="address_y" id="address_y">
 			</div>
-			<input type="hidden" name="address_x" id="address_x">
-			<input type="hidden" name="address_y" id="address_y">
-		</div>
-		<div class="row"><div class="col"><span class="msg" id="address_msg"></span></div></div>
-		<hr class="hr">
-		<div class="row">
-			<div class="input-container col">
-				<i class="fas fa-calendar-alt icon"></i>
-				<input class="input-field"
-					type="text" id="datepicker" placeholder="경기 날짜 선택" name="match_date" readonly="readonly">
+			<div class="row"><div class="col"><span class="msg" id="address_msg"></span></div></div>
+		</li>
+		<li class="li-list">
+			<div class="row">
+				<div class="input-container col">
+					<i class="fas fa-calendar-alt icon"></i>
+					<input class="input-field"
+						type="text" id="datepicker" placeholder="경기 날짜 선택" name="match_date" readonly="readonly">
+				</div>
 			</div>
-		</div>
-		<div class="row"><div class="col"><span class="msg" id="date_msg"></span></div></div>
-		<hr class="hr">
-		<div class="row centered-padding">
-			<div class="input-container col selectbox margin-top">
+			<div class="row"><div class="col"><span class="msg" id="date_msg"></span></div></div>
+		</li>
+		<li class="li-list">	
+		<div class="row centered-padding margin">
+			<div class="input-container col selectbox">
 				<label for="start_time">시작 시간 선택</label>
 				<select class="time input-field" id="start_time" name="start_time">
 					<option value="" selected>시작 시간 선택</option>
@@ -136,7 +159,7 @@
 				</select>
 			</div>
 			<span class="from-to">~</span>
-			<div class="input-container col selectbox margin-top">
+			<div class="input-container col selectbox">
 				<label for="end_time">종료 시간 선택</label>
 				<select class="time input-field" id="end_time" name="end_time">
 					<option class="placeholder" value="">종료 시간 선택</option>
@@ -191,25 +214,28 @@
 				</select>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row padding-left">
 			<div class="col"><span class="msg no-margin" id="start_msg"></span></div>
 			<div class="col"><span class="msg no-margin" id="end_msg"></span></div>
 		</div>
-		<hr class="hr">
-		<div class="row" id="cost-wrapper" style="display:none">
+		</li>
+		<li class="li-list"  id="cost-wrapper" style="display:none">	
+		<div class="row">
 			<div class="autocomplete input-container col">
 				<i class="fas fa-won-sign"></i> <input class="input-field"
-					type="text" name="cost" id="cost" placeholder="(상대팀이 지불해야할)구장 비용 입력">
+					type="text" name="cost" id="cost" placeholder="(상대팀이 부담할)구장 비용 입력">
 			</div>
-			<hr class="hr">
 		</div>
+		</li>
+		<li class="li-list non-border-btm">	
 		<div class="row">
 			<div class="text input-container col">
 				<textarea class="detail input-field" id="match_detail" name="match_detail" placeholder="추가적으로 공유할 내용이 있으면 입력해주세요.(매너/실력은 자동 계산되어 보여집니다)"></textarea>
 			</div>
 		</div>
-	</form:form>
-</div>
+		</li>
+	</ul>
+</form:form>
 
 <!-- The Modal -->
 <div id="myModals" class="modals">
@@ -280,22 +306,32 @@ $( function() {
 	$('#exist').click(function(){
 		$('#away-wrapper').css('display','block');
 		$('#cost-wrapper').css('display','none');
+		$('#address').attr('placeholder','경기 장소 지도 검색');
 		$('#away').val('-1');
 		$('#away_name').val('');
 	});
 	$('#non-exist').click(function(){
 		$('#away-wrapper').css('display','none');
 		$('#cost-wrapper').css('display','block');
+		$('#address').attr('placeholder','경기 장소 지도 검색');
+		$('#cost').attr('placeholder','(상대팀이 부담할)구장 비용 입력');
 		$('#away').val('0');
 		$('#away_name').val('모집 중');
 		
 	});
+	$('#invite_me').click(function(){
+		$('#away-wrapper').css('display','none');
+		$('#cost-wrapper').css('display','block');
+		$('#address').attr('placeholder','희망 경기 장소 지도 검색');
+		$('#cost').attr('placeholder','구장비 관련 요청 사항 입력');
+		$('#away').val('-2');
+		$('#away_name').val('모집 중');
+		
+	});
 	$('#soccer').click(function(){
-		$('#type_msg').text('');
 		$('#type').val(1);
 	});
 	$('#futsal').click(function(){
-		$('#type_msg').text('');
 		$('#type').val(2);
 	});
 	$('#away_name').click(function(){
@@ -317,10 +353,6 @@ $( function() {
 	
 	$('#form').submit(function(){
 		
-		if($('#type').val()==''){
-			$('#type_msg').css('color','red').text('축구/풋살을 선택해주세요');
-			return false;
-		}
 		if(!$('#away_name').val().replace(/^\s+|\s+$/g, '')){
 			$('#away_msg').css('color','red').text('상대팀을 입력해주세요');
 			return false;

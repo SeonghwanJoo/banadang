@@ -30,6 +30,7 @@ public interface ClubMapper {
 	public List<ClubVO> selectAwayDetailsForInvitedMatch(Integer club_num);
 	
 	public List<ClubVO> selectHomeDetailsForRequestedMatch(Integer club_num);
+	public List<ClubVO> selectHomeDetailsForSuggestedMatch(Integer club_num);
 	
 	public List<MatchVO> selectClubListWithFilter(MatchVO match);
 	

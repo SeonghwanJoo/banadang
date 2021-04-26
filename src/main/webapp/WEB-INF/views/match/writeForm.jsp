@@ -41,17 +41,17 @@
 			<span class="input-label">예정된 상대팀 있음/상대팀 초청 선택</span>
 			<div class="row centered-padding margin-m-top">
 				<label class="small-font login-label padding-top">
-					<input type="radio" name="opponent" id="exist" value="1" checked="checked">
+					<input type="radio" name="opponent" id="exist" checked="checked">
 					<span class="checkmark"></span>
 					<span class="label-txt">상대팀 있음</span>
 				</label>
 				<label class="small-font login-label padding-top">
-					<input type="radio" name="opponent" id="non-exist" value="2">
+					<input type="radio" name="opponent" id="non-exist">
 					<span class="checkmark"></span>
 					<span class="label-txt">초청합니다</span>
 				</label>
 				<label class="small-font login-label padding-top no-margin">
-					<input type="radio" name="opponent" id="invite_me" value="2">
+					<input type="radio" name="opponent" id="invite_me">
 					<span class="checkmark"></span>
 					<span class="label-txt">초청해주세요</span>
 				</label>
@@ -71,7 +71,6 @@
 					<span class="checkmark"></span>
 				</label> -->
 			</div>
-			<div class="row"><div class="col"><span class="msg" id="type_msg"></span></div></div>
 		</li>
 		<li class="li-list" id="away-wrapper">	
 			<div class="row">
@@ -215,7 +214,7 @@
 				</select>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row padding-left">
 			<div class="col"><span class="msg no-margin" id="start_msg"></span></div>
 			<div class="col"><span class="msg no-margin" id="end_msg"></span></div>
 		</div>
@@ -330,11 +329,9 @@ $( function() {
 		
 	});
 	$('#soccer').click(function(){
-		$('#type_msg').text('');
 		$('#type').val(1);
 	});
 	$('#futsal').click(function(){
-		$('#type_msg').text('');
 		$('#type').val(2);
 	});
 	$('#away_name').click(function(){
@@ -356,10 +353,6 @@ $( function() {
 	
 	$('#form').submit(function(){
 		
-		if($('#type').val()==''){
-			$('#type_msg').css('color','red').text('축구/풋살을 선택해주세요');
-			return false;
-		}
 		if(!$('#away_name').val().replace(/^\s+|\s+$/g, '')){
 			$('#away_msg').css('color','red').text('상대팀을 입력해주세요');
 			return false;

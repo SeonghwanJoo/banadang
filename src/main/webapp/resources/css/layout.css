@@ -100,7 +100,7 @@ div.row{
 	
 }
 .fixed_top .topnav-right a:hover, .fixed_top a:hover{
-	background-color:#000;
+	background-color:#121212;
 	color:#fff;
 }
 
@@ -409,7 +409,7 @@ div.daterangepicker{
 /* Style the input fields */
 .input-field {
 	border:none;
-	background-color:#000;
+	background-color:#121212;
 	color:#fff;
 	width: 85%;
 	padding: 10px;
@@ -459,7 +459,7 @@ p.padding{
 	padding:0;
 } 
 .detail.readonly{
-	background-color:#000;
+	background-color:#121212;
 }
 .distance{
 	position:absolute;
@@ -549,9 +549,12 @@ body.body, body.body btn{
     word-wrap:break-word;
 }
 /*  */
-body.body, .filter-wrapper{
-	background-color:#000;
+body.body{
+	background-color:#121212;
 	color:#fff;
+}
+div .row.filter{
+	flex-wrap: nowrap;
 }
 
 
@@ -792,8 +795,8 @@ button:focus{
 .neutral{background-color:#878787;}
 .positive{background-color:#00643c;}
 .positive-color{color:#00643c;}
-.negative{background-color:#000; color:#fff; border:1px solid #fff}
-.negative-color{background-color:#000;}
+.negative{background-color:#121212; color:#fff; border:1px solid #fff}
+.negative-color{background-color:#121212;}
 .full{
 	width:95%;
 	margin: 0 auto;
@@ -957,7 +960,7 @@ button:focus{
 }
 .black-bg{
 	color:#fff;
-	background-color:#000;
+	background-color:#121212;
 	border:1px solid #fff;
 }
 .green-bg, #myTopnav{
@@ -997,7 +1000,7 @@ button:focus{
   color:#fff;
   position:fixed;
   white-space: nowrap;
-  background-color:#000;
+  background-color:#121212;
   z-index:50;
   height:3rem;
   left: 0;
@@ -1364,7 +1367,7 @@ a.detail{
 	color:#555;
 }
 #close, button.first-btn{
-	background-color:#000;
+	background-color:#121212;
 	color:#fff;
 	border:1px solid #fff;
 	width:95%;
@@ -1630,7 +1633,7 @@ a.active.small-font{
 	text-align:center;
 	position:fixed;
 	bottom:0;
-	background-color:#000;
+	background-color:#121212;
 	border-top:1px solid #333;
 	left:0;
   	right:0;
@@ -1783,7 +1786,7 @@ div.club_main, div.club_sub{
 	margin-bottom:0.2rem;
 }
 .club_cd{
-	background-color:#000;
+	background-color:#121212;
 	border-top:1px solid #2997FF;
 	padding-top:2rem;
 	position:relative;
@@ -1846,7 +1849,7 @@ div.detail-item{
 	position:sticky;
 	z-index:95;
 	top:2.8rem;
-	background-color:#000;
+	background-color:#121212;
 }
 .sticky+tab_detail{
 	padding-top: 160px;

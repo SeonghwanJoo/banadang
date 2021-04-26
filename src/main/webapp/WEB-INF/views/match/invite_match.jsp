@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<div class="filter-wrapper sticky padding-btm padding-top">
+<div class="sticky padding-btm padding-top">
 	<div class="row filter cursor"  id="filter">
 		<span class="material-icons l-font  filter-icon">filter_list</span>
 		<c:if test="${match.type==1 }">
@@ -20,7 +20,7 @@
 		<span class="filter-txt">초청해주세요</span>
 		</c:if>
 		<c:if test="${not empty match.period }">
-		<span class="filter-txt"><i class="far fa-calendar-alt margin-right"></i>
+		<span class="filter-txt nowrap"><i class="far fa-calendar-alt margin-right"></i>
 		${fn:substring(match.period,5,7)}.${fn:substring(match.period,8,10)}~${fn:substring(match.period,18,20)}.${fn:substring(match.period,21,23)}
 		</span>
 		</c:if>
@@ -145,9 +145,9 @@ function createListInHTML(matchs){
 					+"<span class='match-item'><i class='far fa-calendar-alt margin-right'></i>"+new Date(matchs[i].match_date).format('yy.MM.dd')+"</span>"
 					+"<span class='match-item'><i class='far fa-clock margin-right'></i>"+matchs[i].start_time+"~"+matchs[i].end_time+"</span>";
 		if(matchs[i].away==0){
-			itemStr+="<span class='material-icons'>arrow_right</span><span class='small-font gray padding-top'>초청합니다</span>";
+			itemStr+="<span class='material-icons blue'>arrow_right</span><span class='small-font gray padding-top'>초청합니다</span>";
 		}else{
-			itemStr+="<span class='material-icons'>arrow_right</span><span class='small-font gray padding-top'>초청해주세요</span>";
+			itemStr+="<span class='material-icons red'>arrow_right</span><span class='small-font gray padding-top'>초청해주세요</span>";
 		}
 		itemStr+=
 				"</div>"

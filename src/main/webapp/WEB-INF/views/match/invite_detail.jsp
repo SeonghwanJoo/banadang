@@ -227,7 +227,7 @@
 		<div class="row margin-m-top">
 			<div class="autocomplete input-container col">
 				<i class="fas fa-map-marked-alt icon"></i> <input class="input-field radius"
-					type="text" name="address" id="address" placeholder="경기 장소 지도 검색" readonly="readonly">
+					type="text" name="address" id="address" placeholder="경기 제안 장소 지도 검색" readonly="readonly">
 			</div>
 			<input type="hidden" name="address_x" id="address_x">
 			<input type="hidden" name="address_y" id="address_y">

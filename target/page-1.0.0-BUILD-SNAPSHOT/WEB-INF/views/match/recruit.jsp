@@ -3,9 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="filter-wrapper sticky padding-btm padding-top">
 	<div class="row filter cursor"  id="filter">
-		<span class="material-icons l-font  filter-icon">filter_alt</span>
+		<span class="material-icons l-font  filter-icon">filter_list</span>
 		<c:if test="${match.type==1 }">
 		<span class="filter-txt">축구</span>
 		</c:if>
@@ -13,7 +14,9 @@
 		<span class="filter-txt">풋살</span>
 		</c:if>
 		<c:if test="${not empty match.period }">
-		<span class="filter-txt"><i class="far fa-calendar-alt margin-right"></i>${match.period}</span>
+		<span class="filter-txt"><i class="far fa-calendar-alt margin-right"></i>
+		${fn:substring(match.period,5,7)}.${fn:substring(match.period,8,10)}~${fn:substring(match.period,18,20)}.${fn:substring(match.period,21,23)}
+		</span>
 		</c:if>
 	</div>
 </div>
@@ -36,19 +39,19 @@
 	<div class="modals-content">
 		<span id="close_mod" class="close_mod">&times;</span>
 		<span class="input-label">경기 유형(축구/풋살) 선택</span>
-		<div class="row centered-padding">
-			<label class="chip">
-				<span class="chip-txt small-font">전체</span>
+		<div class="row centered-padding margin-m-top">
+			<label class="login-label">
+				<span class="label-txt">전체</span>
 				<input type="radio" name="type" id="soccer" value="3" checked="checked">
 				<span class="checkmark"></span>
 			</label> 
-			<label class="chip">
-				<span class="chip-txt small-font">축구</span>
+			<label class="login-label">
+				<span class="label-txt">축구</span>
 				<input type="radio" name="type" id="soccer" value="1">
 				<span class="checkmark"></span>
 			</label> 
-			<label class="chip">
-				<span class="chip-txt small-font">풋살</span>
+			<label class="login-label">
+				<span class="label-txt">풋살</span>
 				<input type="radio" name="type" id="futsal" value="2">
 				<span class="checkmark"></span>
 			</label>
@@ -56,16 +59,18 @@
 		<hr class="hr">
 		<span class="input-label margin-btm">검색 기간 설정</span>
 		<div class="row centered-padding">
-			<label class="chip wider">
-					<span class="chip-txt">전체</span>
+			<div class="row centered-padding  margin-m-top">
+				<label class="login-label">
+					<span class="label-txt">전체</span>
 					<input type="radio" name="period-opt" id="entire-pr" checked="checked">
 					<span class="checkmark"></span>
-			</label> 
-			<label class="chip wider">
-				<span class="chip-txt">특정 기간</span>
-				<input type="radio" name="period-opt" id="specific-pr">
-				<span class="checkmark"></span>
-			</label>
+				</label> 
+				<label class="login-label">
+					<span class="label-txt">특정 기간</span>
+					<input type="radio" name="period-opt" id="specific-pr">
+					<span class="checkmark"></span>
+				</label>
+			</div>
 		</div>
 		<div class="row margin-top" id="period-filter" style="display:none">
 			<div class="input-container col">
