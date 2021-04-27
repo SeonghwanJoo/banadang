@@ -28,27 +28,27 @@
 			<span class="input-label">경기 유형(축구/풋살) 선택</span>
 			<div class="row centered-padding  margin-m-top">
 				<c:if test="${match.type==1 }">
-				<label class="login-label">
+				<label class="label-sq">
 					<span class="label-txt">축구</span>
 					<input type="radio" name="type" id="soccer" value="1" checked="checked">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 				</label> 
-				<label class="login-label">
+				<label class="label-sq">
 					<span class="label-txt">풋살</span>
 					<input type="radio" name="type" id="futsal" value="2">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 				</label>
 				</c:if>
 				<c:if test="${match.type==2 }">
-				<label class="login-label">
+				<label class="label-sq">
 					<span class="label-txt">축구</span>
 					<input type="radio" name="type" id="soccer" value="1" >
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 				</label> 
-				<label class="login-label">
+				<label class="label-sq">
 					<span class="label-txt">풋살</span>
 					<input type="radio" name="type" id="futsal" value="2" checked="checked">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 				</label>
 				</c:if>
 			</div>
@@ -57,53 +57,53 @@
 			<span class="input-label">예정된 상대팀 있음/상대팀 초청 선택</span>
 			<div class="row centered-padding margin-m-top">
 				<c:if test="${match.away==0 }">
-				<label class="small-font login-label padding-top">
+				<label class="small-font label-sq padding-top">
 					<input type="radio" name="opponent" id="exist">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 					<span class="label-txt">상대팀 있음</span>
 				</label>
-				<label class="small-font login-label padding-top">
+				<label class="small-font label-sq padding-top">
 					<input type="radio" name="opponent" id="non-exist" checked="checked">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 					<span class="label-txt">초청합니다</span>
 				</label>
-				<label class="small-font login-label padding-top no-margin">
+				<label class="small-font label-sq padding-top no-margin">
 					<input type="radio" name="opponent" id="invite_me">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 					<span class="label-txt">초청해주세요</span>
 				</label>
 				</c:if>
 				<c:if test="${match.away==-2 }">
-				<label class="small-font login-label padding-top">
+				<label class="small-font label-sq padding-top">
 					<input type="radio" name="opponent" id="exist">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 					<span class="label-txt">상대팀 있음</span>
 				</label>
-				<label class="small-font login-label padding-top">
+				<label class="small-font label-sq padding-top">
 					<input type="radio" name="opponent" id="non-exist">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 					<span class="label-txt">초청합니다</span>
 				</label>
-				<label class="small-font login-label padding-top no-margin">
+				<label class="small-font label-sq padding-top no-margin">
 					<input type="radio" name="opponent" id="invite_me" checked="checked">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 					<span class="label-txt">초청해주세요</span>
 				</label>
 				</c:if>
 				<c:if test="${match.away!=-2 && match.away !=0 }">
-				<label class="small-font login-label padding-top">
+				<label class="small-font label-sq padding-top">
 					<input type="radio" name="opponent" id="exist"  checked="checked">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 					<span class="label-txt">상대팀 있음</span>
 				</label>
-				<label class="small-font login-label padding-top">
+				<label class="small-font label-sq padding-top">
 					<input type="radio" name="opponent" id="non-exist">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 					<span class="label-txt">초청합니다</span>
 				</label>
-				<label class="small-font login-label padding-top no-margin">
+				<label class="small-font label-sq padding-top no-margin">
 					<input type="radio" name="opponent" id="invite_me">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 					<span class="label-txt">초청해주세요</span>
 				</label>
 				</c:if>
@@ -356,13 +356,24 @@ $( function() {
 	$('#exist').click(function(){
 		$('#away-wrapper').css('display','block');
 		$('#cost-wrapper').css('display','none');
+		$('#address').attr('placeholder','경기 장소 지도 검색');
 		$('#away').val('-1');
 		$('#away_name').val('');
 	});
 	$('#non-exist').click(function(){
 		$('#away-wrapper').css('display','none');
 		$('#cost-wrapper').css('display','block');
+		$('#address').attr('placeholder','경기 장소 지도 검색');
+		$('#cost').attr('placeholder','(상대팀이 부담할)구장 비용 입력');
 		$('#away').val('0');
+		$('#away_name').val('모집 중');
+	});
+	$('#invite_me').click(function(){
+		$('#away-wrapper').css('display','none');
+		$('#cost-wrapper').css('display','block');
+		$('#address').attr('placeholder','희망 경기 장소 지도 검색');
+		$('#cost').attr('placeholder','구장비 관련 요청 사항 입력');
+		$('#away').val('-2');
 		$('#away_name').val('모집 중');
 		
 	});

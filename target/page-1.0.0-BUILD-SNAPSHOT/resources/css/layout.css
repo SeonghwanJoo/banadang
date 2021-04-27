@@ -5,7 +5,7 @@
 	overflow:hidden;
 	text-overflow: ellipsis;
 }
-.match-item.no-margin, .login-label.no-margin{
+.match-item.no-margin, .label-sq.no-margin{
 	margin-right:0;
 }
 .team-info.col span{
@@ -100,7 +100,7 @@ div.row{
 	
 }
 .fixed_top .topnav-right a:hover, .fixed_top a:hover{
-	background-color:#000;
+	background-color:#121212;
 	color:#fff;
 }
 
@@ -397,7 +397,7 @@ div.daterangepicker{
 .icon, .fa-won-sign {
 	padding-top: 0.5rem;
 	font-size:1.5rem;
-	background: #000;
+	background: #121212;
 	color: #bbb;
 	min-width: 50px;
 	text-align: center;
@@ -409,7 +409,7 @@ div.daterangepicker{
 /* Style the input fields */
 .input-field {
 	border:none;
-	background-color:#000;
+	background-color:#121212;
 	color:#fff;
 	width: 85%;
 	padding: 10px;
@@ -459,7 +459,7 @@ p.padding{
 	padding:0;
 } 
 .detail.readonly{
-	background-color:#000;
+	background-color:#121212;
 }
 .distance{
 	position:absolute;
@@ -541,7 +541,7 @@ input[type=text]:focus, select:focus{
 	opacity:0.95;
 	border-radius:0.5rem;
 	width: 85%;
-	max-width: 370px;
+	max-width: 380px;
 }
 body.body, body.body btn{
     font-family: Noto Sans KR,sans-serif;
@@ -795,8 +795,8 @@ button:focus{
 .neutral{background-color:#878787;}
 .positive{background-color:#00643c;}
 .positive-color{color:#00643c;}
-.negative{background-color:#000; color:#fff; border:1px solid #fff}
-.negative-color{background-color:#000;}
+.negative{background-color:#121212; color:#fff; border:1px solid #fff}
+.negative-color{background-color:#121212;}
 .full{
 	width:95%;
 	margin: 0 auto;
@@ -960,7 +960,7 @@ button:focus{
 }
 .black-bg{
 	color:#fff;
-	background-color:#000;
+	background-color:#121212;
 	border:1px solid #fff;
 }
 .green-bg, #myTopnav{
@@ -1000,7 +1000,7 @@ button:focus{
   color:#fff;
   position:fixed;
   white-space: nowrap;
-  background-color:#000;
+  background-color:#121212;
   z-index:50;
   height:3rem;
   left: 0;
@@ -1249,13 +1249,14 @@ a.detail{
 .margin-right{
 	margin-right:0.3rem;
 }
+.label-sq.m-margin-right{
+	margin-right:1rem;
+}
 .m-margin-right{
 	margin-right:0.7rem;
 }
 .margin-lg-btm{
-	
 	margin-bottom:3rem;
-	
 }
 .border-btw{
 	width:0;
@@ -1263,7 +1264,9 @@ a.detail{
 	border-right:2px solid #333;
 	margin-top:1rem;
 }
- 
+.height-m{
+	height:2.5rem;
+}
 
 
 /* The toast (background) */
@@ -1367,7 +1370,7 @@ a.detail{
 	color:#555;
 }
 #close, button.first-btn{
-	background-color:#000;
+	background-color:#121212;
 	color:#fff;
 	border:1px solid #fff;
 	width:95%;
@@ -1633,7 +1636,7 @@ a.active.small-font{
 	text-align:center;
 	position:fixed;
 	bottom:0;
-	background-color:#000;
+	background-color:#121212;
 	border-top:1px solid #333;
 	left:0;
   	right:0;
@@ -1786,7 +1789,7 @@ div.club_main, div.club_sub{
 	margin-bottom:0.2rem;
 }
 .club_cd{
-	background-color:#000;
+	background-color:#121212;
 	border-top:1px solid #2997FF;
 	padding-top:2rem;
 	position:relative;
@@ -1849,7 +1852,7 @@ div.detail-item{
 	position:sticky;
 	z-index:95;
 	top:2.8rem;
-	background-color:#000;
+	background-color:#121212;
 }
 .sticky+tab_detail{
 	padding-top: 160px;
@@ -1999,7 +2002,7 @@ div.m-smaller{
 	margin:0 auto
 }
 
-.login-label {
+.login-label, .label-sq {
   display: block;
   position: relative;
   padding-left: 2.5rem;
@@ -2014,6 +2017,7 @@ div.m-smaller{
   user-select: none;
   white-space: nowrap;
 }
+
 .signin-button {
 	
 	width:300px;
@@ -2242,7 +2246,7 @@ label.chip.m-wider{
 	display:none;
 }
 
-.checkmark {
+.checkmark,.checkmark-sq {
   position: absolute;
   border-radius:50%;
   top: 0;
@@ -2252,13 +2256,13 @@ label.chip.m-wider{
   background-color: #000;
   border: 2px solid #999;
 }
-.certify-modal-content .checkmark{
-	background-color:#fff;
-}
-input:checked ~ .checkmark, .chip input:checked ~ .checkmark,.modals .chip input:checked ~ .checkmark
-,.modals .login-label input:checked ~ .checkmark {
-  background-color: #00CD3C;
-  border-color:#00CD3C;
+span.checkmark-sq {
+  top: 0.2rem;
+  border-radius:2px;
+  left: 0;
+  height: 1.2rem;
+  width: 1.2rem;
+  border: 1px solid #999;
 }
 .checkmark:after{
   content: "";
@@ -2274,6 +2278,21 @@ input:checked ~ .checkmark, .chip input:checked ~ .checkmark,.modals .chip input
   transform: rotate(45deg);
   box-sizing:content-box;
 }
+
+.certify-modal-content .checkmark, .modals-content .checkmark-sq{
+	background-color:#fff;
+}
+input:checked ~ .checkmark, .chip input:checked ~ .checkmark,.modals .chip input:checked ~ .checkmark
+,.modals .login-label input:checked ~ .checkmark {
+  background-color: #00CD3C;
+  border-color:#00CD3C;
+}
+.label-sq input:checked ~ .checkmark-sq{
+	background-color:#2997FF;
+	border-color:#2997FF;
+} 
+
+
 .vote_checkmark {
   position: absolute;
   border-radius:50%;
@@ -2295,6 +2314,8 @@ input:checked ~ .vote_checkmark:after{
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
   box-sizing:content-box;
+  
+  
 }
 .chip .checkmark:after{
 	border-color:#fff;
@@ -2303,22 +2324,38 @@ input:checked ~ .checkmark:after,.login-label input:checked ~ .checkmark:after{
 	border-color:#fff;
 }
 
+.label-sq input:checked ~ .checkmark-sq:after{
+	content: "";
+	position: absolute;
+	top:0.1rem;
+	left:0.3rem;
+	width: 0.3rem;
+	height: 0.6rem;
+	border: solid #fff;
+	border-width: 0 2px 2px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	box-sizing:content-box;
+}
+
 
 /* login-custom end */
 .custom {
 	float:left;
-	margin: 0.5rem 1rem;
+	margin: 1rem 0 1rem 0.5rem;
 	position: relative;
-	height: 30px;
- 	width: 30px;
+	height: 2.5rem;
+ 	width: 2rem;
  	cursor: pointer;
  	border-radius:50%;
 } 
 .vert{margin: 1.1rem auto;}
 
 /* Hide the browser's default checkbox */
-.chip input, .custom input[type=radio],.custom input[type=checkbox],
-.login-label input[type=checkbox], .login-label input[type=radio], .voted input[type=radio] {
+.chip input, .label-sq input[type=radio],
+.login-label input[type=checkbox], .login-label input[type=radio], .voted input[type=radio],
+.label-sq input[type=checkbox] {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -2348,8 +2385,8 @@ input:checked ~ .checkmark:after,.login-label input:checked ~ .checkmark:after{
 
 /* When the checkbox is checked, add a blue background */
 
- .chip input:disabled:checked ~.checkmark,.custom input:disabled:checked ~ .checkmark,
-  .chip:hover input:disabled:checked ~.checkmark,.custom:hover input:disabled:checked ~ .checkmark{
+ .chip input:disabled:checked ~.checkmark,
+  .chip:hover input:disabled:checked ~.checkmark{
 	background-color: #777;
 	border-color:#777;
 }
@@ -2414,6 +2451,9 @@ input:checked ~ .checkmark:after,.login-label input:checked ~ .checkmark:after{
     color: #bbb;
     z-index: -1; 
     margin-bottom:0; 
+}
+.selectbox label.recruit_count{
+	left: 3rem;
 }
 
 .selectbox select {

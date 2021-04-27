@@ -25,34 +25,34 @@
 		<li class="li-list">
 			<span class="input-label">경기 유형(축구/풋살) 선택</span>
 			<div class="row centered-padding  margin-m-top">
-				<label class="login-label">
+				<label class="label-sq">
 					<span class="label-txt">축구</span>
 					<input type="radio" name="type" id="soccer" value="1" checked="checked">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 				</label> 
-				<label class="login-label">
+				<label class="label-sq">
 					<span class="label-txt">풋살</span>
 					<input type="radio" name="type" id="futsal" value="2">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 				</label>
 			</div>
 		</li>
 		<li class="li-list">
 			<span class="input-label">예정된 상대팀 있음/상대팀 초청 선택</span>
 			<div class="row centered-padding margin-m-top">
-				<label class="small-font login-label padding-top">
+				<label class="small-font label-sq padding-top">
 					<input type="radio" name="opponent" id="exist" checked="checked">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 					<span class="label-txt">상대팀 있음</span>
 				</label>
-				<label class="small-font login-label padding-top">
+				<label class="small-font label-sq padding-top">
 					<input type="radio" name="opponent" id="non-exist">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 					<span class="label-txt">초청합니다</span>
 				</label>
-				<label class="small-font login-label padding-top no-margin">
+				<label class="small-font label-sq padding-top no-margin">
 					<input type="radio" name="opponent" id="invite_me">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 					<span class="label-txt">초청해주세요</span>
 				</label>
 				<!-- <label class="chip wider">

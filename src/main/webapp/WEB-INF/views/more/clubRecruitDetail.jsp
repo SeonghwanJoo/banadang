@@ -89,7 +89,7 @@
 		</li>
 		<c:if test="${!empty clubRecruit.clubRecruit_detail }">
 		<li class="li-list">
-			<p class="detail readonly">${clubRecruit.clubRecruit_detail }</p>
+			<p class="detail readonly" id="clubRecruit_detail">${clubRecruit.clubRecruit_detail }</p>
 		</li>
 		</c:if>
 		<li class="li-list">
@@ -194,7 +194,7 @@
 	<!-- Modal content -->
 	<div class="confirm-modal-content">
 		<div class="sub-content">
-			<button id="report" class="pos-btn" onclick="location.href='${pageContext.request.contextPath }/member/writeReport.do?source=3&reported_id=${clubRecruit.id}&reporting_id=${user_id}&write_num=${clubRecruit.clubRecruit_num}&content=${clubRecruit.clubRecruit_detail }&name=${clubRecruit.club_name }'">신고하기</button>
+			<button id="report" class="pos-btn">신고하기</button>
 		</div>
 		<div class="sub-content">
 			<button id="report-more-cancel-btn" class="neg-btn">닫기</button>
@@ -222,6 +222,10 @@
 	marker.setMap(map); 
 	$(function(){
 		
+		var content=$('#clubRecruit_detail').text();
+		$('#report').click(function(){
+			location.href='${pageContext.request.contextPath }/member/writeReport.do?source=3&reported_id='+'${clubRecruit.id}'+'&reporting_id='+'${user_id}'+'&write_num=${clubRecruit.clubRecruit_num}&content='+content+'&name='+'${clubRecruit.club_name}';
+		});
 		
 		if (${clubRecruit.club_color eq 'rgb(0, 0, 0)'}){
 			$(".color").css("border","1px solid #fff");

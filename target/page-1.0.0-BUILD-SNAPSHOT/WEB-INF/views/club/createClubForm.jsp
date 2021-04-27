@@ -40,36 +40,36 @@
 
 <!-- 연령대 -->
 <span class="input-label">주 연령대 선택(복수 선택 가능)</span>
-<div class="row centered-padding">
-	<label class="chip">
-		<span class="chip-txt">20대</span>
+<div class="row centered-padding margin-m-top">
+	<label class="label-sq">
+		<span class="label-txt">20대</span>
 		<input type="checkbox" value="20대" name="club_ages" checked="checked">
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label>
-	<label class="chip">
-		<span class="chip-txt">30대</span>
+	<label class="label-sq">
+		<span class="label-txt">30대</span>
 		<input type="checkbox" value="30대" name="club_ages">
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label>
-	<label class="chip">
-		<span class="chip-txt">40대</span>
+	<label class="label-sq">
+		<span class="label-txt">40대</span>
 		<input type="checkbox" value="40대" name="club_ages">
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label> 
-	<label class="chip">
-		<span class="chip-txt">50대</span>
+	<label class="label-sq">
+		<span class="label-txt">50대</span>
 		<input type="checkbox" value="50대" name="club_ages">
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label>
-	<label class="chip">
-		<span class="chip-txt">60대</span>
+	<label class="label-sq">
+		<span class="label-txt">60대</span>
 		<input type="checkbox" value="60대" name="club_ages">
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label>
-	<label class="chip">
-		<span class="chip-txt">70대</span>
+	<label class="label-sq">
+		<span class="label-txt">70대</span>
 		<input type="checkbox" value="70대" name="club_ages">
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label>
 </div>
 <div class="row"><div class="col"><span class="msg" id="club_ages_msg"></span></div></div>

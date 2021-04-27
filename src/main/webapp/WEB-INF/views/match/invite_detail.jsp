@@ -147,7 +147,7 @@
 		</li>
 		<c:if test="${!empty match.match_detail }">
 		<li class="li-list">
-			<p class="detail readonly">${match.match_detail }</p>
+			<p class="detail readonly" id="match_detail">${match.match_detail }</p>
 		</li>
 		</c:if>
 		<li class="li-list non-border-btm">
@@ -421,6 +421,11 @@
 	
 	
 	$(function(){
+		
+		var content=$('#match_detail').text();
+		$('#report').click(function(){
+			location.href='${pageContext.request.contextPath }/member/writeReport.do?source=1&'+'reported_id='+'${match.id}'+'&reporting_id=${user_id}&write_num='+'${match.match_num}'+'&content='+content+'&name='+'${match.club_name}';
+		});
 		
 		var selectTarget = $('.selectbox select');
 

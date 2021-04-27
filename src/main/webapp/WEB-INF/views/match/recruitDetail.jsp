@@ -131,7 +131,7 @@
 		</li>
 		<c:if test="${!empty match.recruit_detail }">
 		<li class="li-list">
-			<p class="detail readonly">${match.recruit_detail }</p>
+			<p class="detail readonly" id="request_detail">${match.recruit_detail }</p>
 		</li>
 		</c:if>
 		<li class="li-list">
@@ -241,7 +241,7 @@
 			<img class="kakaolink-share" src="${pageContext.request.contextPath }/resources/images/kakaolink_btn.png">
 			</button>
 			<hr>
-			<button id="report" class="pos-btn red" onclick="location.href='${pageContext.request.contextPath }/member/writeReport.do?source=2&reported_id=${match.id}&reporting_id=${user_id}&write_num=${match.recruit_num}&content=${match.recruit_detail }&name=${match.club_name }'">신고하기</button>
+			<button id="report" class="pos-btn red" >신고하기</button>
 		</div>
 		<div class="sub-content">
 			<button id="report-more-cancel-btn" class="neg-btn">닫기</button>
@@ -309,6 +309,10 @@
 	marker.setMap(map); 
 	$(function(){
 		
+		var content=$('#request_detail').text();
+		$('#report').click(function(){
+			location.href=location.href='${pageContext.request.contextPath }/member/writeReport.do?source=2&reported_id='+'${match.id}'+'&reporting_id='+'${user_id}'+'&write_num=${match.recruit_num}&content='+content+'&name=${match.club_name }';
+		});
 		var userAgent=navigator.userAgent.toLowerCase();
 
 		if (userAgent.indexOf('android')==-1 && userAgent.indexOf('iphone')==-1) {

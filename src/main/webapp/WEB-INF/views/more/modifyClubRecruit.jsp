@@ -18,214 +18,225 @@
 	</div>
 </div>
 <div class="blank_div"></div>
-<span class="input-label">주 종목 (축구/풋살) 선택</span>
-<div class="row centered-padding">
-	<label class="chip">
-		<span class="chip-txt">축구</span>
-		<c:if test="${match.type==1 }">
-		<input type="radio" name="type" id="soccer" value="1" checked="checked">
-		</c:if>
-		<c:if test="${match.type!=1 }">
-		<input type="radio" name="type" id="soccer" value="1" >
-		</c:if>
-		<span class="checkmark"></span>
-	</label> 
-	<label class="chip">
-		<span class="chip-txt">풋살</span>
-		<c:if test="${match.type==2 }">
-		<input type="radio" name="type" id="futsal" value="2" checked="checked">
-		</c:if>
-		<c:if test="${match.type!=2 }">
-		<input type="radio" name="type" id="futsal" value="2" >
-		</c:if>
-		<span class="checkmark"></span>
-	</label>
-</div>
-<div class="row"><div class="col"><span class="msg" id="type_msg"></span></div></div>
-<hr>
-<span class="input-label">주 활동 요일 선택</span>
-<div class="row centered-padding">
-	<label class="chip">
-		<span class="chip-txt small-font">월</span>
-		<c:if test="${fn:contains(match.act_day,'월') }">
-		<input type="checkbox" name="act_day" value="월" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(match.act_day,'월') }">
-		<input type="checkbox" name="act_day" value="월">
-		</c:if>
-		<span class="checkmark"></span>
-	</label>
-	<label class="chip">
-		<span class="chip-txt small-font">화</span>
-		<c:if test="${fn:contains(match.act_day,'화') }">
-		<input type="checkbox" name="act_day" value="화" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(match.act_day,'화') }">
-		<input type="checkbox" name="act_day" value="화">
-		</c:if>
-		<span class="checkmark"></span>
-	</label> 
-	<label class="chip">
-		<span class="chip-txt small-font">수</span>
-		<c:if test="${fn:contains(match.act_day,'수') }">
-		<input type="checkbox" name="act_day" value="수" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(match.act_day,'수') }">
-		<input type="checkbox" name="act_day" value="수">
-		</c:if>
-		<span class="checkmark"></span>
-	</label> 
-	<label class="chip">
-		<span class="chip-txt small-font">목</span>
-		<c:if test="${fn:contains(match.act_day,'목') }">
-		<input type="checkbox" name="act_day" value="목" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(match.act_day,'목') }">
-		<input type="checkbox" name="act_day" value="목">
-		</c:if>
-		<span class="checkmark"></span>
-	</label> 
-	<label class="chip">
-		<span class="chip-txt small-font">금</span>
-		<c:if test="${fn:contains(match.act_day,'금') }">
-		<input type="checkbox" name="act_day" value="금" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(match.act_day,'금') }">
-		<input type="checkbox" name="act_day" value="금">
-		</c:if>
-		<span class="checkmark"></span>
-	</label> 
-	<label class="chip">
-		<span class="chip-txt small-font">토</span>
-		<c:if test="${fn:contains(match.act_day,'토') }">
-		<input type="checkbox" name="act_day" value="토" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(match.act_day,'토') }">
-		<input type="checkbox" name="act_day" value="토">
-		</c:if>
-		<span class="checkmark"></span>
-	</label> 
-	<label class="chip">
-		<span class="chip-txt small-font">일</span>
-		<c:if test="${fn:contains(match.act_day,'일') }">
-		<input type="checkbox" name="act_day" value="일" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(match.act_day,'일') }">
-		<input type="checkbox" name="act_day" value="일">
-		</c:if>
-		<span class="checkmark"></span>
-	</label> 
-</div>
-<div class="row"><div class="col"><span class="msg" id="day_msg"></span></div></div>
-<hr class="hr">
-<span class="input-label">주 활동 시간대 선택</span>
-<div class="row centered-padding">
-	<label class="chip wider">
-		<span class="chip-txt small-font">오전 06~12</span>
-		<c:if test="${fn:contains(match.act_time,'전') }">
-		<input type="checkbox" name="act_time" value="오전" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(match.act_time,'전') }">
-		<input type="checkbox" name="act_time" value="오전">
-		</c:if>
-		<span class="checkmark"></span>
-	</label> 
-	<label class="chip wider">
-		<span class="chip-txt small-font">오후 12~18</span>
-		<c:if test="${fn:contains(match.act_time,'후') }">
-		<input type="checkbox" name="act_time" value="오후" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(match.act_time,'후') }">
-		<input type="checkbox" name="act_time" value="오후">
-		</c:if>
-		<span class="checkmark"></span>
-	</label>
-	<label class="chip wider">
-		<span class="chip-txt small-font">야간 18~24</span>
-		<c:if test="${fn:contains(match.act_time,'야') }">
-		<input type="checkbox" name="act_time" value="야간" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(match.act_time,'야') }">
-		<input type="checkbox" name="act_time" value="야간">
-		</c:if>
-		<span class="checkmark"></span>
-	</label>
-</div>
-<div class="row"><div class="col"><span class="msg" id="time_msg"></span></div></div>
-<hr class="hr">
-<span class="input-label">모집하는 포지션 선택</span>
-<div class="row centered-padding">
-	<label class="chip">
-		<span class="chip-txt">GK</span>
-		<c:if test="${fn:contains(match.recruit_position,'G') }">
-		<input type="checkbox" value="GK" name="recruit_positions" class="recruit_positions" id="GK" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(match.recruit_position,'G') }">
-		<input type="checkbox" value="GK" name="recruit_positions" class="recruit_positions" id="GK">
-		</c:if>
-		<span class="checkmark"></span>
-	</label>
-	<label class="chip">
-		<span class="chip-txt">DF</span>
-		<c:if test="${fn:contains(match.recruit_position,'D') }">
-		<input type="checkbox" value="DF" name="recruit_positions" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(match.recruit_position,'D') }">
-		<input type="checkbox" value="DF" name="recruit_positions">
-		</c:if>
-		<span class="checkmark"></span>
-	</label>
-	<label class="chip">
-		<span class="chip-txt">MF</span>
-		<c:if test="${fn:contains(match.recruit_position,'M') }">
-		<input type="checkbox" value="MF" name="recruit_positions" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(match.recruit_position,'M') }">
-		<input type="checkbox" value="MF" name="recruit_positions">
-		</c:if>
-		<span class="checkmark"></span>
-	</label> 
-	<label class="chip">
-		<span class="chip-txt">FW</span>
-		<c:if test="${fn:contains(match.recruit_position,'W') }">
-		<input type="checkbox" value="FW" name="recruit_positions" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(match.recruit_position,'W') }">
-		<input type="checkbox" value="FW" name="recruit_positions">
-		</c:if>
-		<span class="checkmark"></span>
-	</label>
-</div>
-<div class="row"><div class="col"><span class="msg" id="position_msg"></span></div></div>
-<hr>
-<div class="row">
-	<div class="autocomplete input-container col">
-		<span class="icon material-icons">money</span>
-		<input class="input-field" type="text" name="register_cost" id="register_cost" value="${match.register_cost }" placeholder="가입비(상세 설명) 입력">
-	</div>
-</div>
-<div class="row"><div class="col"><span class="msg" id="register_msg"></span></div></div>
-<hr class="hr">
-<div class="row">
-	<div class="autocomplete input-container col">
-		<span class="icon material-icons">money</span>
-		<input class="input-field" type="text" name="month_cost" id="month_cost" value="${match.month_cost }" placeholder="월 회비 입력">
-	</div>
-</div>
-<div class="row"><div class="col"><span class="msg" id="month_msg"></span></div></div>
-<hr class="hr">
-<div class="row">
-	<div class="input-container col">
-		<i class="fas fa-calendar-alt icon"></i> <input class="input-field"
-			type="text" id="datepicker" placeholder="모집 마감 날짜 선택" name="recruit_due" value="${match.recruit_due }">
-	</div>
-</div>
-<div class="row"><div class="col"><span class="msg" id="due_msg"></span></div></div>
-<div class="row">
-	<div class="text input-container col">
-		<textarea class="detail input-field" name="clubRecruit_detail" id="clubRecruit_detail" placeholder="추가적으로 공유할 내용이 있으면 입력해주세요.">${match.clubRecruit_detail}</textarea>
-	</div>
-</div>
+<ul class="ul-list non-border-btm">
+	<li class="li-list">
+		<span class="input-label">주 종목 (축구/풋살) 선택</span>
+		<div class="row centered-padding margin-m-top">
+			<label class="label-sq">
+				<span class="label-txt">축구</span>
+				<c:if test="${match.type==1 }">
+				<input type="radio" name="type" id="soccer" value="1" checked="checked">
+				</c:if>
+				<c:if test="${match.type!=1 }">
+				<input type="radio" name="type" id="soccer" value="1" >
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label> 
+			<label class="label-sq">
+				<span class="label-txt">풋살</span>
+				<c:if test="${match.type==2 }">
+				<input type="radio" name="type" id="futsal" value="2" checked="checked">
+				</c:if>
+				<c:if test="${match.type!=2 }">
+				<input type="radio" name="type" id="futsal" value="2" >
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label>
+		</div>
+		<div class="row"><div class="col"><span class="msg" id="type_msg"></span></div></div>
+	</li>
+	<li class="li-list">
+		<span class="input-label">주 활동 요일 선택</span>
+		<div class="row centered-padding margin-m-top">
+			<label class="label-sq">
+				<span class="label-txt small-font">월</span>
+				<c:if test="${fn:contains(match.act_day,'월') }">
+				<input type="checkbox" name="act_day" value="월" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(match.act_day,'월') }">
+				<input type="checkbox" name="act_day" value="월">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label>
+			<label class="label-sq">
+				<span class="label-txt small-font">화</span>
+				<c:if test="${fn:contains(match.act_day,'화') }">
+				<input type="checkbox" name="act_day" value="화" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(match.act_day,'화') }">
+				<input type="checkbox" name="act_day" value="화">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label> 
+			<label class="label-sq">
+				<span class="label-txt small-font">수</span>
+				<c:if test="${fn:contains(match.act_day,'수') }">
+				<input type="checkbox" name="act_day" value="수" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(match.act_day,'수') }">
+				<input type="checkbox" name="act_day" value="수">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label> 
+			<label class="label-sq">
+				<span class="label-txt small-font">목</span>
+				<c:if test="${fn:contains(match.act_day,'목') }">
+				<input type="checkbox" name="act_day" value="목" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(match.act_day,'목') }">
+				<input type="checkbox" name="act_day" value="목">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label> 
+			<label class="label-sq">
+				<span class="label-txt small-font">금</span>
+				<c:if test="${fn:contains(match.act_day,'금') }">
+				<input type="checkbox" name="act_day" value="금" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(match.act_day,'금') }">
+				<input type="checkbox" name="act_day" value="금">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label> 
+			<label class="label-sq">
+				<span class="label-txt small-font">토</span>
+				<c:if test="${fn:contains(match.act_day,'토') }">
+				<input type="checkbox" name="act_day" value="토" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(match.act_day,'토') }">
+				<input type="checkbox" name="act_day" value="토">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label> 
+			<label class="label-sq">
+				<span class="label-txt small-font">일</span>
+				<c:if test="${fn:contains(match.act_day,'일') }">
+				<input type="checkbox" name="act_day" value="일" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(match.act_day,'일') }">
+				<input type="checkbox" name="act_day" value="일">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label> 
+		</div>
+		<div class="row"><div class="col"><span class="msg" id="day_msg"></span></div></div>
+	</li>
+	<li class="li-list">
+		<span class="input-label">주 활동 시간대 선택</span>
+		<div class="row centered-padding margin-m-top">
+			<label class="label-sq">
+				<span class="label-txt small-font">오전 06~12</span>
+				<c:if test="${fn:contains(match.act_time,'전') }">
+				<input type="checkbox" name="act_time" value="오전" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(match.act_time,'전') }">
+				<input type="checkbox" name="act_time" value="오전">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label> 
+			<label class="label-sq">
+				<span class="label-txt small-font">오후 12~18</span>
+				<c:if test="${fn:contains(match.act_time,'후') }">
+				<input type="checkbox" name="act_time" value="오후" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(match.act_time,'후') }">
+				<input type="checkbox" name="act_time" value="오후">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label>
+			<label class="label-sq">
+				<span class="label-txt small-font">야간 18~24</span>
+				<c:if test="${fn:contains(match.act_time,'야') }">
+				<input type="checkbox" name="act_time" value="야간" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(match.act_time,'야') }">
+				<input type="checkbox" name="act_time" value="야간">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label>
+		</div>
+		<div class="row"><div class="col"><span class="msg" id="time_msg"></span></div></div>
+		<hr class="hr">
+		<span class="input-label">모집하는 포지션 선택</span>
+		<div class="row centered-padding margin-m-top">
+			<label class="label-sq">
+				<span class="label-txt">GK</span>
+				<c:if test="${fn:contains(match.recruit_position,'G') }">
+				<input type="checkbox" value="GK" name="recruit_positions" class="recruit_positions" id="GK" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(match.recruit_position,'G') }">
+				<input type="checkbox" value="GK" name="recruit_positions" class="recruit_positions" id="GK">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label>
+			<label class="label-sq">
+				<span class="label-txt">DF</span>
+				<c:if test="${fn:contains(match.recruit_position,'D') }">
+				<input type="checkbox" value="DF" name="recruit_positions" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(match.recruit_position,'D') }">
+				<input type="checkbox" value="DF" name="recruit_positions">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label>
+			<label class="label-sq">
+				<span class="label-txt">MF</span>
+				<c:if test="${fn:contains(match.recruit_position,'M') }">
+				<input type="checkbox" value="MF" name="recruit_positions" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(match.recruit_position,'M') }">
+				<input type="checkbox" value="MF" name="recruit_positions">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label> 
+			<label class="label-sq">
+				<span class="label-txt">FW</span>
+				<c:if test="${fn:contains(match.recruit_position,'W') }">
+				<input type="checkbox" value="FW" name="recruit_positions" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(match.recruit_position,'W') }">
+				<input type="checkbox" value="FW" name="recruit_positions">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label>
+		</div>
+		<div class="row"><div class="col"><span class="msg" id="position_msg"></span></div></div>
+	</li>
+	<li class="li-list">
+		<div class="row">
+			<div class="autocomplete input-container col">
+				<span class="icon material-icons">money</span>
+				<input class="input-field" type="text" name="register_cost" id="register_cost" value="${match.register_cost }" placeholder="가입비(상세 설명) 입력">
+			</div>
+		</div>
+		<div class="row"><div class="col"><span class="msg" id="register_msg"></span></div></div>
+	</li>
+	<li class="li-list">
+		<div class="row">
+			<div class="autocomplete input-container col">
+				<span class="icon material-icons">money</span>
+				<input class="input-field" type="text" name="month_cost" id="month_cost" value="${match.month_cost }" placeholder="월 회비 입력">
+			</div>
+		</div>
+		<div class="row"><div class="col"><span class="msg" id="month_msg"></span></div></div>
+	</li>
+	<li class="li-list">
+		<div class="row">
+			<div class="input-container col">
+				<i class="fas fa-calendar-alt icon"></i> <input class="input-field"
+					type="text" id="datepicker" placeholder="모집 마감 날짜 선택" name="recruit_due" value="${match.recruit_due }">
+			</div>
+		</div>
+		<div class="row"><div class="col"><span class="msg" id="due_msg"></span></div></div>
+	</li>
+	<li class="li-list">	
+		<div class="row">
+			<div class="text input-container col">
+				<textarea class="detail input-field" name="clubRecruit_detail" id="clubRecruit_detail" placeholder="추가적으로 공유할 내용이 있으면 입력해주세요.">${match.clubRecruit_detail}</textarea>
+			</div>
+		</div>
+	</li>
+</ul>
 </form:form>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

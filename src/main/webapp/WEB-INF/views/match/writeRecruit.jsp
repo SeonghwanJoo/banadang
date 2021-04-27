@@ -19,16 +19,18 @@
 	</div>
 </div>
 <div class="blank_div"></div>
-<span class="input-label" style="margin-top:0">용병을 모집하려는 경기를 선택하세요</span>
 <ul class="ul-list">
+	<li class="li-list non-border-btm">
+		<span class="input-label">용병을 모집하려는 경기를 선택하세요</span>
+	</li>
 	<c:forEach items="${matches }" var="match">
 	<c:if test="${empty match.cancel }">
 	<li class="li-list">
 		<div class="row">
 			<div class="col">
-				<label class="custom">
+				<label class="label-sq custom">
 					<input type="radio" value="${match.match_num }" name="match_num" checked="checked">
-					<span class="checkmark"></span>
+					<span class="checkmark-sq"></span>
 				</label>
 				<div class="main-row margin-btm">
 					<c:if test="${match.type==1 }">
@@ -53,59 +55,67 @@
 	</c:if>
 	</c:forEach>
 </ul>
-<span class="input-label">모집하는 포지션 선택(복수 선택 가능)</span>
-<div class="row centered-padding">
-	<label class="chip">
-		<span class="chip-txt">GK</span>
-		<input type="checkbox" value="GK" name="recruit_positions" class="recruit_position" id="GK" checked="checked">
-		<span class="checkmark"></span>
-	</label>
-	<label class="chip">
-		<span class="chip-txt">DF</span>
-		<input type="checkbox" value="DF" name="recruit_positions">
-		<span class="checkmark"></span>
-	</label>
-	<label class="chip">
-		<span class="chip-txt">MF</span>
-		<input type="checkbox" value="MF" name="recruit_positions">
-		<span class="checkmark"></span>
-	</label> 
-	<label class="chip">
-		<span class="chip-txt">FW</span>
-		<input type="checkbox" value="FW" name="recruit_positions">
-		<span class="checkmark"></span>
-	</label>
-</div>
-<div class="row"><div class="col"><span class="msg" id="position_msg"></span></div></div>
-<hr>
-<div class="row  centered-padding">
-	<div class="input-container col selectbox margin-top">
-		<label for="recruit_count">필요 용병 인원 선택</label>
-		<select class="input-field" name="recruit_count" id="recruit_count">
-			<option class="placeholder" value="">필요 용병 인원 선택</option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-		</select>
-	</div>
-</div>
-<div class="row"><div class="col"><span class="msg" id="count_msg"></span></div></div>
-<hr>
-<div class="row">
-	<div class="autocomplete input-container col centered-padding">
-		<span class="icon material-icons">money</span>
-		<input class="input-field" type="text" name="recruit_cost" id="recruit_cost" placeholder="용병 참가 비용 입력">
-	</div>
-</div>
-<div class="row"><div class="col"><span class="msg" id="cost_msg"></span></div></div>
-<hr class="hr">
-<div class="row">
-	<div class="text input-container col">
-		<textarea class="detail input-field" id="recruit_detail" name="recruit_detail" placeholder="추가적으로 공유할 내용이 있으면 입력해주세요."></textarea>
-	</div>
-</div>
+<ul class="ul-list non-border-btm">
+	<li class="li-list">
+		<span class="input-label">모집하는 포지션 선택(복수 선택 가능)</span>
+		<div class="row centered-padding margin-m-top">
+			<label class="label-sq m-margin-right">
+				<span class="label-txt">GK</span>
+				<input type="checkbox" value="GK" name="recruit_positions" class="recruit_position" id="GK" checked="checked">
+				<span class="checkmark-sq"></span>
+			</label>
+			<label class="label-sq m-margin-right">
+				<span class="label-txt">DF</span>
+				<input type="checkbox" value="DF" name="recruit_positions">
+				<span class="checkmark-sq"></span>
+			</label>
+			<label class="label-sq m-margin-right">
+				<span class="label-txt">MF</span>
+				<input type="checkbox" value="MF" name="recruit_positions">
+				<span class="checkmark-sq"></span>
+			</label> 
+			<label class="label-sq m-margin-right">
+				<span class="label-txt">FW</span>
+				<input type="checkbox" value="FW" name="recruit_positions">
+				<span class="checkmark-sq"></span>
+			</label>
+		</div>
+		<div class="row"><div class="col"><span class="msg" id="position_msg"></span></div></div>
+	</li>
+	<li class="li-list">	
+		<div class="row centered-padding margin">
+			<div class="input-container selectbox height-m">
+				<span class="icon material-icons">groups</span>
+				<label for="recruit_count" class="recruit_count">필요 용병 인원수 선택</label>
+				<select class="input-field" name="recruit_count" id="recruit_count">
+					<option class="placeholder" value="" selected>필요 용병 인원 선택</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+			</div>
+		</div>
+		<div class="row"><div class="col"><span class="msg" id="count_msg"></span></div></div>
+	</li>
+	<li class="li-list">
+		<div class="row">
+			<div class="autocomplete input-container col centered-padding">
+				<span class="icon material-icons">money</span>
+				<input class="input-field" type="text" name="recruit_cost" id="recruit_cost" placeholder="용병 참가 비용 입력">
+			</div>
+		</div>
+		<div class="row"><div class="col"><span class="msg" id="cost_msg"></span></div></div>
+	</li>
+	<li class="li-list">
+		<div class="row">
+			<div class="text input-container col">
+				<textarea class="detail input-field" id="recruit_detail" name="recruit_detail" placeholder="추가적으로 공유할 내용이 있으면 입력해주세요."></textarea>
+			</div>
+		</div>
+	</li>
+</ul>
 </form:form>
 <!-- The Modal -->
 <div id="toast" class="submit_toast">
@@ -176,7 +186,7 @@ $(function(){
 				$('#position_msg').focus();
 				return false;
 			}else if($('#recruit_count').val()==''){
-				$('#count_msg').css('color','red').text('용병 필요 인원을 선택해주세요');
+				$('#count_msg').css('color','red').text('용병 필요 인원수를 선택해주세요');
 				$('#recruit_count').focus();
 				return false;
 			}else if($('#recruit_cost').val()==''){

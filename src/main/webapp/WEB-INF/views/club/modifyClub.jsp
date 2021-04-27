@@ -42,8 +42,8 @@
 
 <!-- 연령대 -->
 <span class="input-label">주 연령대 선택(복수 선택 가능)</span>
-<div class="row centered-padding">
-	<label class="chip">
+<div class="row centered-padding margin-m-top">
+	<label class="label-sq">
 		<span class="chip-txt">20대</span>
 		<c:if test="${fn:contains(myClub.club_age,'2') }">
 		<input type="checkbox" value="20대" name="club_ages" checked="checked">
@@ -51,9 +51,9 @@
 		<c:if test="${!fn:contains(myClub.club_age,'2') }">
 		<input type="checkbox" value="20대" name="club_ages">
 		</c:if>
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label>
-	<label class="chip">
+	<label class="label-sq">
 		<span class="chip-txt">30대</span>
 		<c:if test="${fn:contains(myClub.club_age,'3') }">
 		<input type="checkbox" value="30대" name="club_ages" checked="checked">
@@ -61,9 +61,9 @@
 		<c:if test="${!fn:contains(myClub.club_age,'3') }">
 		<input type="checkbox" value="30대" name="club_ages">
 		</c:if>
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label>
-	<label class="chip">
+	<label class="label-sq">
 		<span class="chip-txt">40대</span>
 		<c:if test="${fn:contains(myClub.club_age,'4') }">
 		<input type="checkbox" value="40대" name="club_ages" checked="checked">
@@ -71,9 +71,9 @@
 		<c:if test="${!fn:contains(myClub.club_age,'4') }">
 		<input type="checkbox" value="40대" name="club_ages">
 		</c:if>
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label>
-	<label class="chip">
+	<label class="label-sq">
 		<span class="chip-txt">50대</span>
 		<c:if test="${fn:contains(myClub.club_age,'5') }">
 		<input type="checkbox" value="50대" name="club_ages" checked="checked">
@@ -81,9 +81,9 @@
 		<c:if test="${!fn:contains(myClub.club_age,'5') }">
 		<input type="checkbox" value="50대" name="club_ages">
 		</c:if>
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label>
-	<label class="chip">
+	<label class="label-sq">
 		<span class="chip-txt">60대</span>
 		<c:if test="${fn:contains(myClub.club_age,'6') }">
 		<input type="checkbox" value="60대" name="club_ages" checked="checked">
@@ -91,9 +91,9 @@
 		<c:if test="${!fn:contains(myClub.club_age,'6') }">
 		<input type="checkbox" value="60대" name="club_ages">
 		</c:if>
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label>
-	<label class="chip">
+	<label class="label-sq">
 		<span class="chip-txt">70대</span>
 		<c:if test="${fn:contains(myClub.club_age,'7') }">
 		<input type="checkbox" value="70대" name="club_ages" checked="checked">
@@ -101,7 +101,7 @@
 		<c:if test="${!fn:contains(myClub.club_age,'7') }">
 		<input type="checkbox" value="70대" name="club_ages">
 		</c:if>
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label>
 </div>
 <hr>

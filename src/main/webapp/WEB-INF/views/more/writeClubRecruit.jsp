@@ -19,134 +19,146 @@
 	</div>
 </div>
 <div class="blank_div"></div>
-<span class="input-label">주 종목 (축구/풋살) 선택</span>
-<div class="row centered-padding">
-	<label class="chip">
-		<span class="chip-txt">축구</span>
-		<input type="radio" name="type" id="soccer" value="1" checked="checked">
-		<span class="checkmark"></span>
-	</label> 
-	<label class="chip">
-		<span class="chip-txt">풋살</span>
-		<input type="radio" name="type" id="futsal" value="2">
-		<span class="checkmark"></span>
-	</label>
-</div>
-<div class="row"><div class="col"><span class="msg" id="type_msg"></span></div></div>
-<hr>
-<span class="input-label">주 활동 요일 선택</span>
-<div class="row centered-padding">
-	<label class="chip">
-		<span class="chip-txt">월</span>
-		<input type="checkbox" name="act_days" value="월" checked="checked">
-		<span class="checkmark"></span>
-	</label> 
-	<label class="chip">
-		<span class="chip-txt">화</span>
-		<input type="checkbox" name="act_days" value="화">
-		<span class="checkmark"></span>
-	</label>
-	<label class="chip">
-		<span class="chip-txt">수</span>
-		<input type="checkbox" name="act_days" value="수">
-		<span class="checkmark"></span>
-	</label>
-	<label class="chip">
-		<span class="chip-txt">목</span>
-		<input type="checkbox" name="act_days" value="목">
-		<span class="checkmark"></span>
-	</label>
-	<label class="chip">
-		<span class="chip-txt">금</span>
-		<input type="checkbox" name="act_dayss" value="금">
-		<span class="checkmark"></span>
-	</label>
-	<label class="chip">
-		<span class="chip-txt">토</span>
-		<input type="checkbox" name="act_days" value="토">
-		<span class="checkmark"></span>
-	</label>
-	<label class="chip">
-		<span class="chip-txt">일</span>
-		<input type="checkbox" name="act_days" value="일">
-		<span class="checkmark"></span>
-	</label>
-</div>
-<div class="row"><div class="col"><span class="msg" id="day_msg"></span></div></div>
-<hr class="hr">
-<span class="input-label">주 활동 시간대 선택</span>
-<div class="row centered-padding">
-	<label class="chip wider">
-		<span class="chip-txt small-font">오전 06~12</span>
-		<input type="checkbox" name="act_times" value="오전" checked="checked">
-		<span class="checkmark"></span>
-	</label> 
-	<label class="chip wider">
-		<span class="chip-txt small-font">오후 12~18</span>
-		<input type="checkbox" name="act_times" value="오후">
-		<span class="checkmark"></span>
-	</label>
-	<label class="chip wider">
-		<span class="chip-txt small-font">야간 18~24</span>
-		<input type="checkbox" name="act_times" value="야간">
-		<span class="checkmark"></span>
-	</label>
-</div>
-<div class="row"><div class="col"><span class="msg" id="time_msg"></span></div></div>
-<hr class="hr">
-<span class="input-label">모집하는 포지션 선택</span>
-<div class="row centered-padding">
-	<label class="chip">
-		<span class="chip-txt">GK</span>
-		<input type="checkbox" value="GK" name="recruit_positions" class="recruit_positions" id="GK" checked="checked">
-		<span class="checkmark"></span>
-	</label>
-	<label class="chip">
-		<span class="chip-txt">DF</span>
-		<input type="checkbox" value="DF" name="recruit_positions">
-		<span class="checkmark"></span>
-	</label>
-	<label class="chip">
-		<span class="chip-txt">MF</span>
-		<input type="checkbox" value="MF" name="recruit_positions">
-		<span class="checkmark"></span>
-	</label> 
-	<label class="chip">
-		<span class="chip-txt">FW</span>
-		<input type="checkbox" value="FW" name="recruit_positions">
-		<span class="checkmark"></span>
-	</label>
-</div>
-<div class="row"><div class="col"><span class="msg" id="position_msg"></span></div></div>
-<hr>
-<div class="row">
-	<div class="autocomplete input-container col">
-		<span class="icon material-icons">money</span>
-		<input class="input-field" type="text" name="register_cost" id="register_cost" placeholder="가입비(상세 설명) 입력">
+<ul class="ul-list non-border-btm">
+	<li class="li-list">
+		<span class="input-label">주 종목 (축구/풋살) 선택</span>
+		<div class="row centered-padding margin-m-top">
+			<label class="label-sq">
+				<span class="label-txt">축구</span>
+				<input type="radio" name="type" id="soccer" value="1" checked="checked">
+				<span class="checkmark-sq"></span>
+			</label> 
+			<label class="label-sq">
+				<span class="label-txt">풋살</span>
+				<input type="radio" name="type" id="futsal" value="2">
+				<span class="checkmark-sq"></span>
+			</label>
+		</div>
+		<div class="row"><div class="col"><span class="msg" id="type_msg"></span></div></div>
+	</li>
+	<li class="li-list">
+	<span class="input-label">주 활동 요일 선택</span>
+	<div class="row centered-padding margin-m-top">
+		<label class="label-sq">
+			<span class="label-txt">월</span>
+			<input type="checkbox" name="act_days" value="월" checked="checked">
+			<span class="checkmark-sq"></span>
+		</label> 
+		<label class="label-sq">
+			<span class="label-txt">화</span>
+			<input type="checkbox" name="act_days" value="화">
+			<span class="checkmark-sq"></span>
+		</label>
+		<label class="label-sq">
+			<span class="label-txt">수</span>
+			<input type="checkbox" name="act_days" value="수">
+			<span class="checkmark-sq"></span>
+		</label>
+		<label class="label-sq">
+			<span class="label-txt">목</span>
+			<input type="checkbox" name="act_days" value="목">
+			<span class="checkmark-sq"></span>
+		</label>
+		<label class="label-sq">
+			<span class="label-txt">금</span>
+			<input type="checkbox" name="act_dayss" value="금">
+			<span class="checkmark-sq"></span>
+		</label>
+		<label class="label-sq">
+			<span class="label-txt">토</span>
+			<input type="checkbox" name="act_days" value="토">
+			<span class="checkmark-sq"></span>
+		</label>
+		<label class="label-sq">
+			<span class="label-txt">일</span>
+			<input type="checkbox" name="act_days" value="일">
+			<span class="checkmark-sq"></span>
+		</label>
 	</div>
-</div>
-<div class="row"><div class="col"><span class="msg" id="register_msg"></span></div></div>
-<hr class="hr">
-<div class="row">
-	<div class="autocomplete input-container col">
-		<span class="icon material-icons">money</span>
-		<input class="input-field" type="text" name="month_cost" id="month_cost" placeholder="월 회비 입력">
+	<div class="row"><div class="col"><span class="msg" id="day_msg"></span></div></div>
+	</li>
+	<li class="li-list">
+	<span class="input-label">주 활동 시간대 선택</span>
+	<div class="row centered-padding margin-m-top">
+		<label class="label-sq">
+			<span class="label-txt small-font">오전 06~12</span>
+			<input type="checkbox" name="act_times" value="오전" checked="checked">
+			<span class="checkmark-sq"></span>
+		</label> 
+		<label class="label-sq">
+			<span class="label-txt small-font">오후 12~18</span>
+			<input type="checkbox" name="act_times" value="오후">
+			<span class="checkmark-sq"></span>
+		</label>
+		<label class="label-sq">
+			<span class="label-txt small-font">야간 18~24</span>
+			<input type="checkbox" name="act_times" value="야간">
+			<span class="checkmark-sq"></span>
+		</label>
 	</div>
-</div>
-<div class="row"><div class="col"><span class="msg" id="month_msg"></span></div></div>
-<hr class="hr">
-<div class="row">
-	<div class="input-container col">
-		<i class="fas fa-calendar-alt icon"></i> <input class="input-field"
-			type="text" id="datepicker" placeholder="모집 마감 날짜 선택" name="recruit_due">
+	<div class="row"><div class="col"><span class="msg" id="time_msg"></span></div></div>
+	</li>
+	<li class="li-list">
+		<span class="input-label">모집하는 포지션 선택</span>
+		<div class="row centered-padding margin-m-top">
+			<label class="label-sq">
+				<span class="label-txt">GK</span>
+				<input type="checkbox" value="GK" name="recruit_positions" class="recruit_positions" id="GK" checked="checked">
+				<span class="checkmark-sq"></span>
+			</label>
+			<label class="label-sq">
+				<span class="label-txt">DF</span>
+				<input type="checkbox" value="DF" name="recruit_positions">
+				<span class="checkmark-sq"></span>
+			</label>
+			<label class="label-sq">
+				<span class="label-txt">MF</span>
+				<input type="checkbox" value="MF" name="recruit_positions">
+				<span class="checkmark-sq"></span>
+			</label> 
+			<label class="label-sq">
+				<span class="label-txt">FW</span>
+				<input type="checkbox" value="FW" name="recruit_positions">
+				<span class="checkmark-sq"></span>
+			</label>
+		</div>
+		<div class="row"><div class="col"><span class="msg" id="position_msg"></span></div></div>
+	</li>
+	<li class="li-list">
+		<div class="row">
+			<div class="autocomplete input-container col">
+				<span class="icon material-icons">money</span>
+				<input class="input-field" type="text" name="register_cost" id="register_cost" placeholder="가입비(상세 설명) 입력">
+			</div>
+		</div>
+		<div class="row"><div class="col"><span class="msg" id="register_msg"></span></div></div>
+	</li>
+	<li class="li-list">
+		<div class="row">
+			<div class="autocomplete input-container col">
+				<span class="icon material-icons">money</span>
+				<input class="input-field" type="text" name="month_cost" id="month_cost" placeholder="월 회비 입력">
+			</div>
+		</div>
+		<div class="row"><div class="col"><span class="msg" id="month_msg"></span></div></div>
+	</li>
+	<li class="li-list">
+	<div class="row">
+		<div class="input-container col">
+			<i class="fas fa-calendar-alt icon"></i> <input class="input-field"
+				type="text" id="datepicker" placeholder="모집 마감 날짜 선택" name="recruit_due">
+		</div>
 	</div>
-</div>
-<div class="row"><div class="col"><span class="msg" id="due_msg"></span></div></div>
-<div class="row">
-	<div class="text input-container col">
-		<textarea class="detail input-field" name="clubRecruit_detail" id="clubRecruit_detail" placeholder="추가적으로 공유할 내용이 있으면 입력해주세요."></textarea>
+	<div class="row"><div class="col"><span class="msg" id="due_msg"></span></div></div>
+	</li>
+	<li class="li-list">
+	<div class="row">
+		<div class="text input-container col">
+			<textarea class="detail input-field" name="clubRecruit_detail" id="clubRecruit_detail" placeholder="추가적으로 공유할 내용이 있으면 입력해주세요."></textarea>
+		</div>
 	</div>
-</div>
+	</li>
+</ul>
 </form:form>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
