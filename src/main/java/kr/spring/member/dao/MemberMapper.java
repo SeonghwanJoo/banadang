@@ -83,7 +83,7 @@ public interface MemberMapper {
 	public void deleteMsg(Integer msg_num);
 	
 	@Update("update gentlepro.msg set status=2 where receiver=#{receiver}")
-	public void updateMsgStatus(Integer receiver);
+	public void updateMsgStatus(String receiver);
 	
 	@Delete("delete from gentlepro.club_join where id=#{id}")
 	public void deleteIDFromclub_join(MemberVO member);

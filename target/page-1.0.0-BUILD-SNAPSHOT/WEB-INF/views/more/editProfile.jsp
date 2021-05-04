@@ -28,36 +28,36 @@
 <div class="row"><div class="col"><span class="msg" id="nickname_msg"></span></div></div>
 <hr class="hr">
 <span class="input-label">연령대 선택</span>
-<div class="row centered-padding">
-	<label class="chip">
-		<span class="chip-txt">20대</span>
+<div class="row centered-padding margin-m-top">
+	<label class="label-sq">
+		<span class="label-txt">20대</span>
 		<input type="radio" value="20~29" name="age_range" id="2">
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label>
-	<label class="chip">
-		<span class="chip-txt">30대</span>
+	<label class="label-sq">
+		<span class="label-txt">30대</span>
 		<input type="radio" value="30~39" name="age_range" id="3">
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label>
-	<label class="chip">
-		<span class="chip-txt">40대</span>
+	<label class="label-sq">
+		<span class="label-txt">40대</span>
 		<input type="radio" value="40~49" name="age_range" id="4">
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label>
-	<label class="chip">
-		<span class="chip-txt">50대</span>
+	<label class="label-sq">
+		<span class="label-txt">50대</span>
 		<input type="radio" value="50~59" name="age_range" id="5">
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label>
-	<label class="chip">
-		<span class="chip-txt">60대</span>
+	<label class="label-sq">
+		<span class="label-txt">60대</span>
 		<input type="radio" value="60~69" name="age_range" id="6">
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label>
-	<label class="chip">
-		<span class="chip-txt">70대</span>
+	<label class="label-sq">
+		<span class="label-txt">70대</span>
 		<input type="radio" value="70~79" name="age_range" id="7">
-		<span class="checkmark"></span>
+		<span class="checkmark-sq"></span>
 	</label>
 </div>
 <div class="row"><div class="col"><span class="msg" id="age_msg"></span></div></div>

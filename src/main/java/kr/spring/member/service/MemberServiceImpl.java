@@ -187,7 +187,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void updateMsgStatus(Integer receiver) {
+	public void updateMsgStatus(String receiver) {
 		
 		memberMapper.updateMsgStatus(receiver);
 		

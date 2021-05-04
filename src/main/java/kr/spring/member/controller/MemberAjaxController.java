@@ -200,7 +200,7 @@ public class MemberAjaxController {
 
 	@RequestMapping("/member/updateMsgStatus.do")
 	@ResponseBody
-	public Map<String, Object> updateMsgStatus(Integer receiver, HttpSession session) {
+	public Map<String, Object> updateMsgStatus(String receiver, HttpSession session) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
