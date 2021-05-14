@@ -185,7 +185,7 @@ public class MemberAjaxController {
 		try {
 			Integer r_del = memberService.selectR_Del(msg_num);
 			if (r_del == 1) {
-				memberService.deleteMsgFromReceiver(msg_num);
+				memberService.deleteMsgFromSender(msg_num);
 			} else if (r_del == 2) {
 				memberService.deleteMsg(msg_num);
 			}
