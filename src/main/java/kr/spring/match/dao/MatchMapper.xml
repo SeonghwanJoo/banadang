@@ -3,7 +3,7 @@
 <mapper  namespace="kr.spring.match.dao.MatchMapper">
 	<insert id="insertMatch" parameterType="matchVO">
 		insert into gentlepro.match
-			(id,type,home,away,away_name,address,address_x,address_y,match_date,start_time,end_time,match_detail,cost)
+			(id,type,home,away,away_name,address,address_x,address_y,match_date,start_time,end_time,match_detail,cost,phone)
 		values
 			(#{id},#{type},#{home},#{away},#{away_name},#{address},#{address_x},#{address_y},#{match_date},#{start_time},#{end_time},
 		<if test="match_detail != ''">
@@ -13,22 +13,34 @@
 			'',
 		</if>
 		<if test="cost != ''">
-			#{cost})
+			#{cost},
 		</if>
 		<if test="cost == ''">
+			'',
+		</if>
+		<if test="phone != ''">
+			#{phone})
+		</if>
+		<if test="phone == ''">
 			'')
 		</if>
 	</insert>
 	<insert id="insertRecruit" parameterType="matchVO" useGeneratedKeys="true" keyProperty="recruit_num">
 		insert into gentlepro.match_recruit
-			(match_num,id,club_num,recruit_position,recruit_count,recruit_cost,recruit_detail)
+			(match_num,id,club_num,recruit_position,recruit_count,recruit_cost,recruit_detail,phone)
 		values
 			(#{match_num},#{id},#{club_num},#{recruit_position},#{recruit_count},#{recruit_cost},
 			<if test="recruit_detail != ''">
-			#{recruit_detail})
+				#{recruit_detail}
 			</if>
 			<if test="recruit_detail == ''">
-				'')
+				''
+			</if>
+			<if test="phone != ''">
+				,#{phone})
+			</if>
+			<if test="phone == ''">
+				,'')
 			</if>
 			<selectKey keyProperty="recruit_num" resultType="integer" order="AFTER">
 				select max(recruit_num) as recruit_num from match_recruit
@@ -132,7 +144,7 @@
 	</select>
 	<select id="selectMatchToInviteByMatch_num" parameterType="Integer" resultType="matchVO">
 		select * from 
-				(select match_num,match_date,a.id,away_name,away,start_time,end_time,address,cost,type,address_x,address_y,match_detail,club_name,filename,club_color,club_num,club_age from
+				(select match_num,match_date,a.id,away_name,away,start_time,end_time,address,cost,phone,type,address_x,address_y,match_detail,club_name,filename,club_color,club_num,club_age from
                     (select * from gentlepro.match where match_num=#{match_num})a join club b on a.home=b.club_num) d
 				left outer join
 				(select avg(manner) manner,avg(perform) perform,club_num,count(*) count from gentlepro.club_rating group by club_num) e using(club_num)
@@ -171,8 +183,8 @@
 	</insert>
 	<select id="selectRecruitDetail" parameterType="integer" resultType="matchVO">
 		select * from 
-    (select recruit_num,c.id,c.match_num,c.club_num,recruit_position, recruit_count, recruit_cost,recruit_detail,type,start_time,end_time,address,match_date,address_x,address_y,club_name,filename,club_color,club_age from
-        (select recruit_num,a.match_num,a.id,club_num,recruit_position,recruit_count,recruit_cost,recruit_detail,type,start_time,end_time,address,match_date,address_x,address_y from
+    (select recruit_num,c.id,c.match_num,c.club_num,recruit_position, recruit_count, recruit_cost,recruit_detail,type,phone,start_time,end_time,address,match_date,address_x,address_y,club_name,filename,club_color,club_age from
+        (select recruit_num,a.match_num,a.id,club_num,recruit_position,recruit_count,recruit_cost,recruit_detail,a.phone,type,start_time,end_time,address,match_date,address_x,address_y from
             (select * from gentlepro.match_recruit where recruit_num=#{recruit_num}) a join gentlepro.match b on a.match_num=b.match_num)c join gentlepro.club d on c.club_num=d.club_num) e left outer join
     (select avg(manner) manner,avg(perform) perform,club_num,count(*) count from gentlepro.club_rating group by club_num) f using(club_num)
 	</select>
@@ -206,6 +218,9 @@
 		<if test="recruit_detail!=''">
 		,recruit_detail=#{recruit_detail}
 		</if>
+		<if test="phone!=''">
+		,phone=#{phone}
+		</if>
 		where recruit_num=#{recruit_num}
 	</update>
 	<select id="selectPKsforMatch" parameterType="matchVO" resultType="matchVO">
@@ -224,6 +239,9 @@
 			</if>
 			<if test="type != null">
 			,type = #{type}
+			</if>
+			<if test="phone != null">
+			,phone = #{phone}
 			</if>
 			,away = #{away}
 			,address_x = #{address_x}

@@ -102,11 +102,19 @@
 	<li class="li-list">
 		<div class="row">
 			<div class="autocomplete input-container col centered-padding">
-				<span class="icon material-icons">money</span>
-				<input class="input-field" type="text" name="recruit_cost" id="recruit_cost" placeholder="용병 참가 비용 입력">
+				<i class="fas fa-won-sign icon"></i>
+				<input class="input-field" type="text" name="recruit_cost" maxlength="45" id="recruit_cost" placeholder="용병 참가 비용 입력">
 			</div>
 		</div>
 		<div class="row"><div class="col"><span class="msg" id="cost_msg"></span></div></div>
+	</li>
+	<li class="li-list"  id="phone-wrapper">	
+		<div class="row">
+			<div class="autocomplete input-container col">
+				<i class="fas fa-phone-square icon"></i> <input class="input-field"
+					type="text" name="phone" id="phone" maxlength="100" placeholder="연락처 입력(앱 알림 허용 미설정 시 필수)">
+			</div>
+		</div>
 	</li>
 	<li class="li-list">
 		<div class="row">

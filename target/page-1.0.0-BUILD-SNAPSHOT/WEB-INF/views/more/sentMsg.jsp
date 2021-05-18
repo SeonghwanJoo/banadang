@@ -19,8 +19,8 @@
 	</div>
 </div>
 <div class="blank_div"></div>
-<c:if test="${not empty msgs}">
 <ul class="ul-list non-border-btm">
+<c:if test="${not empty msgs}">
 	<c:forEach items="${msgs }" var="msg">
 	<li class="li-list">
 		<div class="main-row">
@@ -54,8 +54,19 @@
 		</div>
 	</li>
 	</c:forEach>
-</ul>
 </c:if>
+<c:if test="${empty msgs}">
+	<li class="li-list non-border-btm">
+		<div class="row">
+			<div class="empty-wrapper">
+				<i class="far fa-grimace empty">
+				</i>
+				<span class=" small-font">보낸 메시지가 없습니다.</span>
+			</div>
+		</div>
+	</li>
+</c:if>
+</ul>
 <!-- The Modal -->
 <div id="sel-modal" class="modals">
   <!-- Modal content -->

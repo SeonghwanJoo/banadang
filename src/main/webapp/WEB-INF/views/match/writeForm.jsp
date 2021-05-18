@@ -55,21 +55,6 @@
 					<span class="checkmark-sq"></span>
 					<span class="label-txt">초청해주세요</span>
 				</label>
-				<!-- <label class="chip wider">
-					<span class="chip-txt small-font">상대팀 있음</span>
-					<input type="radio" name="opponent" id="exist" value="1" checked="checked">
-					<span class="checkmark"></span>
-				</label> 
-				<label class="chip wider">
-					<span class="chip-txt small-font">상대팀 초청</span>
-					<input type="radio" name="opponent" id="non-exist" value="2">
-					<span class="checkmark"></span>
-				</label>
-				<label class="chip wider">
-					<span class="chip-txt small-font">초청해주세요</span>
-					<input type="radio" name="opponent" id="non-exist" value="2">
-					<span class="checkmark"></span>
-				</label> -->
 			</div>
 		</li>
 		<li class="li-list" id="away-wrapper">	
@@ -222,8 +207,16 @@
 		<li class="li-list"  id="cost-wrapper" style="display:none">	
 		<div class="row">
 			<div class="autocomplete input-container col">
-				<i class="fas fa-won-sign"></i> <input class="input-field"
-					type="text" name="cost" id="cost" placeholder="(상대팀이 부담할)구장 비용 입력">
+				<i class="fas fa-won-sign icon"></i> <input class="input-field"
+					type="text" name="cost" id="cost" maxlength="45" placeholder="(상대팀이 부담할)구장 비용 입력">
+			</div>
+		</div>
+		</li>
+		<li class="li-list"  id="phone-wrapper" style="display:none">	
+		<div class="row">
+			<div class="autocomplete input-container col">
+				<i class="fas fa-phone-square icon"></i> <input class="input-field"
+					type="text" name="phone" id="phone" maxlength="100" placeholder="연락처 입력(앱 알림 허용 미설정 시 필수)">
 			</div>
 		</div>
 		</li>
@@ -306,14 +299,16 @@ $( function() {
 	$('#exist').click(function(){
 		$('#away-wrapper').css('display','block');
 		$('#cost-wrapper').css('display','none');
-		$('#address').attr('placeholder','경기 장소 지도 검색');
+		$('#phone-wrapper').css('display','none');
+		$('#address').attr('placeholder','경기 예정 장소 지도 검색');
 		$('#away').val('-1');
 		$('#away_name').val('');
 	});
 	$('#non-exist').click(function(){
 		$('#away-wrapper').css('display','none');
 		$('#cost-wrapper').css('display','block');
-		$('#address').attr('placeholder','경기 장소 지도 검색');
+		$('#phone-wrapper').css('display','block');
+		$('#address').attr('placeholder','경기 예정 장소 지도 검색');
 		$('#cost').attr('placeholder','(상대팀이 부담할)구장 비용 입력');
 		$('#away').val('0');
 		$('#away_name').val('모집 중');
@@ -322,6 +317,7 @@ $( function() {
 	$('#invite_me').click(function(){
 		$('#away-wrapper').css('display','none');
 		$('#cost-wrapper').css('display','block');
+		$('#phone-wrapper').css('display','block');
 		$('#address').attr('placeholder','희망 경기 장소 지도 검색');
 		$('#cost').attr('placeholder','구장비 관련 요청 사항 입력');
 		$('#away').val('-2');

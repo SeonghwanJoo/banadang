@@ -32,9 +32,9 @@
 			<div class="col" id="myPage">
 				<a class="menu-item" href="${pageContext.request.contextPath }/member/myPage.do">
 				<i class="myPage margin-top fas fa-ellipsis-h more-icon">
-				<c:if test="${count_msg!=0 && not empty count_msg }">
+				<%-- <c:if test="${count_msg!=0 && not empty count_msg }">
 				<span class="count-msg">${count_msg }</span>
-				</c:if>
+				</c:if> --%>
 				</i>
 				
 				<!-- <span class="myPage material-icons bottom-icon relative">more_horiz

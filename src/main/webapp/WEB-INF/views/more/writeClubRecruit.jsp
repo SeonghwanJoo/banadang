@@ -124,11 +124,19 @@
 		</div>
 		<div class="row"><div class="col"><span class="msg" id="position_msg"></span></div></div>
 	</li>
+	<li class="li-list"  id="phone-wrapper">	
+		<div class="row">
+			<div class="autocomplete input-container col">
+				<i class="fas fa-phone-square icon"></i> <input class="input-field"
+					type="text" name="phone" id="phone" maxlength="100" placeholder="연락처 입력(앱 알림 허용 미설정 시 필수)">
+			</div>
+		</div>
+	</li>
 	<li class="li-list">
 		<div class="row">
 			<div class="autocomplete input-container col">
 				<span class="icon material-icons">money</span>
-				<input class="input-field" type="text" name="register_cost" id="register_cost" placeholder="가입비(상세 설명) 입력">
+				<input class="input-field" type="text" maxlength="200" name="register_cost" id="register_cost" placeholder="가입비(상세 설명) 입력">
 			</div>
 		</div>
 		<div class="row"><div class="col"><span class="msg" id="register_msg"></span></div></div>
@@ -136,8 +144,8 @@
 	<li class="li-list">
 		<div class="row">
 			<div class="autocomplete input-container col">
-				<span class="icon material-icons">money</span>
-				<input class="input-field" type="text" name="month_cost" id="month_cost" placeholder="월 회비 입력">
+				<i class="fas fa-won-sign icon"></i>
+				<input class="input-field" type="text" maxlength="100" name="month_cost" id="month_cost" placeholder="월 회비 입력">
 			</div>
 		</div>
 		<div class="row"><div class="col"><span class="msg" id="month_msg"></span></div></div>

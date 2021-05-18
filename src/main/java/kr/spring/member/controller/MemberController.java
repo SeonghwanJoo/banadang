@@ -524,6 +524,7 @@ public class MemberController {
 	@RequestMapping("/member/postUpdatedClubRecruit.do")
 	public ModelAndView postUpdatedClubRecruit(MatchVO match) {
 		
+		logger.info("phone in postUpdatedClubRecruit : "+match.getPhone());
 		memberService.updateClubRecruit(match);
 		
 		

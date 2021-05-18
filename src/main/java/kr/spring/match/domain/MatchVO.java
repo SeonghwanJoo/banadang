@@ -544,6 +544,14 @@ public class MatchVO {
 	public void setId_like(Integer id_like) {
 		this.id_like = id_like;
 	}
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	private String phone;
 	private Integer up;
 	private Integer down;
 	private Integer id_like;

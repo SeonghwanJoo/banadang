@@ -202,6 +202,14 @@
 		</div>
 		<div class="row"><div class="col"><span class="msg" id="position_msg"></span></div></div>
 	</li>
+	<li class="li-list"  id="phone-wrapper">	
+		<div class="row">
+			<div class="autocomplete input-container col">
+				<i class="fas fa-phone-square icon"></i> <input class="input-field"
+					type="text" name="phone" id="phone" maxlength="100" placeholder="연락처 입력(앱 알림 허용 미설정 시 필수)" value="${match.phone }">
+			</div>
+		</div>
+	</li>
 	<li class="li-list">
 		<div class="row">
 			<div class="autocomplete input-container col">
@@ -214,7 +222,7 @@
 	<li class="li-list">
 		<div class="row">
 			<div class="autocomplete input-container col">
-				<span class="icon material-icons">money</span>
+				<i class="fas fa-won-sign icon"></i>
 				<input class="input-field" type="text" name="month_cost" id="month_cost" value="${match.month_cost }" placeholder="월 회비 입력">
 			</div>
 		</div>

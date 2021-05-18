@@ -142,7 +142,8 @@
 				 주변 지역으로 초청해주세요
 				</c:if>
 			</span><br>
-			<span class="cost">구장 비용 : ${match.cost }</span>
+			<span>구장 비용 : ${match.cost }</span><br>
+			<span>연락처 : ${match.phone }</span>
 			<div id="map"></div>
 		</li>
 		<c:if test="${!empty match.match_detail }">

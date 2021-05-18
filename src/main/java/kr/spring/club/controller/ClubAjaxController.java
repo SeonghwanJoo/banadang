@@ -338,10 +338,20 @@ public class ClubAjaxController {
 	}
 	@RequestMapping("/club/deleteClub.do")
 	@ResponseBody
-	public Map<String,Object> deleteClub(@RequestParam Integer club_num){
+	public Map<String,Object> deleteClub(@RequestParam Integer club_num,HttpSession session){
 		Map<String,Object> map=new HashMap<String,Object>();
+		String user_id=(String)session.getAttribute("user_id");
 		try {
 			clubService.deleteClubFromClub(club_num);
+			List<ClubVO> myClubs=clubService.selectMyClubs(user_id);
+            session.setAttribute("myClubs", myClubs);
+            
+            if(myClubs.size()>0) {
+            	ClubVO club=new ClubVO();
+                club.setId(user_id);
+                club.setClub_num(myClubs.get(0).getClub_num());
+            	session.setAttribute("myClub", clubService.selectMyClubDetails(club));
+            }
 			map.put("result", "success");
 		}catch(Exception e){
 			e.printStackTrace();

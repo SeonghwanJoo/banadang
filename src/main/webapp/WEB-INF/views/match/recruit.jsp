@@ -59,7 +59,7 @@
 		<hr class="hr">
 		<span class="input-label margin-btm">검색 기간 설정</span>
 		<div class="row centered-padding">
-			<div class="row centered-padding  margin-m-top">
+			<div class="row margin-m-top">
 				<label class="label-sq">
 					<span class="label-txt">전체</span>
 					<input type="radio" name="period-opt" id="entire-pr" checked="checked">

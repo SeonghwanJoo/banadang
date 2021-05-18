@@ -56,7 +56,6 @@ public class MatchAjaxController {
 	public Map<String,Object> postRecruit(MatchVO match) {
 		
 		Map<String,Object> map=new HashMap<String,Object>();
-		
 		try {
 			Integer recruit_num=matchService.selectRecruit_num(match);
 			if(recruit_num!=null) {
@@ -101,7 +100,7 @@ public class MatchAjaxController {
 			matchService.updateMatch(match);
 			HashSet<String> uid_list=matchService.selectMembersForPostedMatch(match);
 			
-			if(!uid_list.isEmpty()) {
+			if(!uid_list.isEmpty() && match.getAway()!=-2) {
 				loginAPI.sendMessage(uid_list, "예정된 경기("+match.getHome_name()+" Vs "+match.getAway_name()+")가 일부 수정되었습니다.");
 			}
 			map.put("result", "updated");

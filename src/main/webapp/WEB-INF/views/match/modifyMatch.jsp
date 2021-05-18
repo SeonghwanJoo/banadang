@@ -260,10 +260,18 @@
 		<li class="li-list"  id="cost-wrapper" style="display:none">	
 			<div class="row">
 				<div class="autocomplete input-container col">
-					<i class="fas fa-won-sign"></i> <input class="input-field"
-						type="text" name="cost" id="cost" placeholder="구장 비용 입력" value="${match.cost }">
+					<i class="fas fa-won-sign icon"></i> <input class="input-field"
+						type="text" name="cost" id="cost" maxlength="45" placeholder="(상대팀이 부담할)구장 비용 입력" value="${match.cost }">
 				</div>
 			</div>
+		</li>
+		<li class="li-list"  id="phone-wrapper" style="display:none">	
+		<div class="row">
+			<div class="autocomplete input-container col">
+				<i class="fas fa-phone-square icon"></i> <input class="input-field"
+					type="text" name="phone" id="phone" maxlength="100" placeholder="연락처 입력(앱 알림 허용 미설정 시 필수)" value="${match.phone}">
+			</div>
+		</div>
 		</li>
 		<li class="li-list non-border-btm">	
 		<div class="row">
@@ -343,9 +351,10 @@ $( function() {
     	$('#invite_me').attr('disabled',true);
     	$('#disabled-txt').text('상대팀이 확정된 경기는 상대팀 수정이 불가능합니다.')
     	$('#away_name').attr('readonly', true).css('color','#888');
-    }else if(${match.away == 0}){
+    }else if(${match.away == 0 || match.away == -2}){
     	$('#away-wrapper').css('display','none');
 		$('#cost-wrapper').css('display','block');
+		$('#phone-wrapper').css('display','block');
     }else{
     	$('#away-wrapper').css('display','block');
 		$('#cost-wrapper').css('display','none');
@@ -356,6 +365,7 @@ $( function() {
 	$('#exist').click(function(){
 		$('#away-wrapper').css('display','block');
 		$('#cost-wrapper').css('display','none');
+		$('#phone-wrapper').css('display','none');
 		$('#address').attr('placeholder','경기 장소 지도 검색');
 		$('#away').val('-1');
 		$('#away_name').val('');
@@ -363,6 +373,7 @@ $( function() {
 	$('#non-exist').click(function(){
 		$('#away-wrapper').css('display','none');
 		$('#cost-wrapper').css('display','block');
+		$('#phone-wrapper').css('display','block');
 		$('#address').attr('placeholder','경기 장소 지도 검색');
 		$('#cost').attr('placeholder','(상대팀이 부담할)구장 비용 입력');
 		$('#away').val('0');
@@ -371,6 +382,7 @@ $( function() {
 	$('#invite_me').click(function(){
 		$('#away-wrapper').css('display','none');
 		$('#cost-wrapper').css('display','block');
+		$('#phone-wrapper').css('display','block');
 		$('#address').attr('placeholder','희망 경기 장소 지도 검색');
 		$('#cost').attr('placeholder','구장비 관련 요청 사항 입력');
 		$('#away').val('-2');

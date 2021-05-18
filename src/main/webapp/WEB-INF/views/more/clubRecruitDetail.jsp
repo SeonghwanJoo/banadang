@@ -87,11 +87,6 @@
 			<span>${clubRecruit.club_address}(주 활동 경기장 : ${clubRecruit.club_loc })</span>
 			<div id="map"></div>
 		</li>
-		<c:if test="${!empty clubRecruit.clubRecruit_detail }">
-		<li class="li-list">
-			<p class="detail readonly" id="clubRecruit_detail">${clubRecruit.clubRecruit_detail }</p>
-		</li>
-		</c:if>
 		<li class="li-list">
 			<!-- 포지션 -->
 			<div class="row">
@@ -119,11 +114,15 @@
 					</c:if>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col">가입비: <span>${clubRecruit.register_cost }</span></div>
-				<div class="col">월 회비: <span>${clubRecruit.month_cost }</span></div>
-			</div>
+			<span>연락처 : ${clubRecruit.phone }</span><br>
+			<span>가입비 : ${clubRecruit.register_cost }</span><br>
+			<span>월 회비 : ${clubRecruit.month_cost }</span>
 		</li>
+		<c:if test="${!empty clubRecruit.clubRecruit_detail }">
+		<li class="li-list">
+			<p class="detail readonly" id="clubRecruit_detail">${clubRecruit.clubRecruit_detail }</p>
+		</li>
+		</c:if>
 		<li class="li-list non-border-btm">
 			<textarea class="detail input-field" id="clubRecruit_req_detail" name="clubRecruit_req_detail" placeholder="가입 신청 시 ${clubRecruit.club_name } 팀에 추가적으로 전달할 내용 입력"></textarea>
 		</li>

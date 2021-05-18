@@ -161,10 +161,9 @@
 					</c:if>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col">참가 비용 &nbsp; <span class="underline">${match.recruit_cost }</span></div>
-				<div class="col">필요 인원 &nbsp; <span class="underline">${match.recruit_count }</span></div>
-			</div>
+			<span>연락처 : ${match.phone }</span><br>	
+			<span>참가 비용 : ${match.recruit_cost }</span><br>
+			<span>필요 인원 : ${match.recruit_count }</span>
 		</li>
 		<li class="li-list non-border-btm">
 			<textarea class="detail input-field" id="recruit_req_detail" name="recruit_req_detail" placeholder="용병 신청 시 ${match.club_name } 팀에 추가적으로 전달할 내용 입력"></textarea>

@@ -29,20 +29,20 @@
 		<span id="close_mod" class="close_mod">&times;</span>
 		<span class="input-label">경기 유형(축구/풋살) 선택</span>
 		<div class="row centered-padding margin-m-top">
-			<label class="login-label">
+			<label class="label-sq">
 				<span class="label-txt">전체</span>
 				<input type="radio" name="type" id="soccer" value="3" checked="checked">
-				<span class="checkmark"></span>
+				<span class="checkmark-sq"></span>
 			</label> 
-			<label class="login-label">
+			<label class="label-sq">
 				<span class="label-txt">축구</span>
 				<input type="radio" name="type" id="soccer" value="1">
-				<span class="checkmark"></span>
+				<span class="checkmark-sq"></span>
 			</label> 
-			<label class="login-label">
+			<label class="label-sq">
 				<span class="label-txt">풋살</span>
 				<input type="radio" name="type" id="futsal" value="2">
-				<span class="checkmark"></span>
+				<span class="checkmark-sq"></span>
 			</label>
 		</div>
 		<hr class="hr">
