@@ -395,15 +395,17 @@ div.daterangepicker{
 
 /* Style the form icons */
 .icon{
-	padding-top: 0.5rem;
-	font-size:1.3rem;
 	background: #121212;
 	color: #bbb;
-	min-width: 50px;
 	text-align: center;
+	padding-top:0.2rem;
+	font-size:1rem;
 }
-i.fa-phone-square{
-	font-size:1.6rem;
+span.material-icons.icon{
+	font-size:1.3rem;
+}
+.selectbox .icon.material-icons{
+	padding:0.5rem 0.8rem;
 }
 #uniform_div{
 	border-right: 1px solid rgba(0,0,0,0.1);
@@ -415,7 +417,7 @@ i.fa-phone-square{
 	background-color:#121212;
 	color:#fff;
 	width: 85%;
-	padding: 10px;
+	padding: 0 1rem;
 }
 
 
@@ -2434,14 +2436,14 @@ input:checked ~ .checkmark:after,.login-label input:checked ~ .checkmark:after{
 .selectbox {
     position: relative;
     z-index: 1;
-    border: 1px solid #777;
+    border: 2px solid #777;
     border-radius:0.3rem;
 }
 
 .selectbox:before {
     content: "";
     position: absolute;
-    top: 50%;
+    top: 45%;
     right: 15px;
     width: 0;
     height: 0;
@@ -2455,7 +2457,7 @@ input:checked ~ .checkmark:after,.login-label input:checked ~ .checkmark:after{
     position: absolute;
     top: 1px; 
     left: 5px; 
-    padding: .4rem .3rem;  
+    padding: .3rem;  
     color: #bbb;
     z-index: -1; 
     margin-bottom:0; 
@@ -2479,8 +2481,8 @@ input:checked ~ .checkmark:after,.login-label input:checked ~ .checkmark:after{
 }
 .selectbox {
 
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, .075);
     -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
@@ -2488,8 +2490,8 @@ input:checked ~ .checkmark:after,.login-label input:checked ~ .checkmark:after{
 
 .selectbox.focus {
     border-color: #00643c;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(165, 214, 167, .6);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+    -webkit-box-shadow: inset 1px 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(165, 214, 167, .6);
+    box-shadow: inset 1px 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
 }
 
 @media (min-width: 576px){

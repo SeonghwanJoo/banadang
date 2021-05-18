@@ -206,7 +206,7 @@
 		<div class="row">
 			<div class="autocomplete input-container col">
 				<i class="fas fa-phone-square icon"></i> <input class="input-field"
-					type="text" name="phone" id="phone" maxlength="100" placeholder="연락처 입력(앱 알림 허용 미설정 시 필수)" value="${match.phone }">
+					type="text" name="phone" id="phone" maxlength="100" placeholder="연락처 입력(앱 알림 미설정 시 필수)" value="${match.phone }">
 			</div>
 		</div>
 	</li>

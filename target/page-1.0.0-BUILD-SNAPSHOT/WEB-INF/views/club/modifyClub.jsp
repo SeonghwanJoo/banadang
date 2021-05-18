@@ -19,129 +19,133 @@
 	</div>
 </div>
 <div class="blank_div"></div>
-<div class="row">
-	<div class="autocomplete input-container col">
-		<span class="icon material-icons">sports_soccer</span>
-		<input class="input-field" type="text" name="club_name" id="club_name" placeholder="팀 이름 입력" autocomplete="off" value="${myClub.club_name }" onkeyup="removeWhiteSpace(this)">
-	</div>
-</div>
-<div class="row"><div class="col"><span class="msg" id="club_name_msg"></span></div></div>
-<hr class="hr">
-<div class="row">
-	<div class="autocomplete input-container col">
-		<i class="fas fa-map-marked-alt icon"></i>
-		<input class="input-field" type="text" name="club_loc" id="club_loc" value="${myClub.club_loc }"placeholder="주 활동 구장 검색" autocomplete="off">
-	</div>
-	<input type="hidden" name="club_locX" id="club_locX" value="${myClub.club_locX }">
-	<input type="hidden" name="club_locY" id="club_locY" value="${myClub.club_locY }">
-	<input type="hidden" name="club_address" id="club_address" value="${myClub.club_address }">
-</div>
-<div class="row"><div class="col"><span class="msg" id="club_loc_msg"></span></div></div>
-<hr class="hr">
-
-
-<!-- 연령대 -->
-<span class="input-label">주 연령대 선택(복수 선택 가능)</span>
-<div class="row centered-padding margin-m-top">
-	<label class="label-sq">
-		<span class="chip-txt">20대</span>
-		<c:if test="${fn:contains(myClub.club_age,'2') }">
-		<input type="checkbox" value="20대" name="club_ages" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(myClub.club_age,'2') }">
-		<input type="checkbox" value="20대" name="club_ages">
-		</c:if>
-		<span class="checkmark-sq"></span>
-	</label>
-	<label class="label-sq">
-		<span class="chip-txt">30대</span>
-		<c:if test="${fn:contains(myClub.club_age,'3') }">
-		<input type="checkbox" value="30대" name="club_ages" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(myClub.club_age,'3') }">
-		<input type="checkbox" value="30대" name="club_ages">
-		</c:if>
-		<span class="checkmark-sq"></span>
-	</label>
-	<label class="label-sq">
-		<span class="chip-txt">40대</span>
-		<c:if test="${fn:contains(myClub.club_age,'4') }">
-		<input type="checkbox" value="40대" name="club_ages" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(myClub.club_age,'4') }">
-		<input type="checkbox" value="40대" name="club_ages">
-		</c:if>
-		<span class="checkmark-sq"></span>
-	</label>
-	<label class="label-sq">
-		<span class="chip-txt">50대</span>
-		<c:if test="${fn:contains(myClub.club_age,'5') }">
-		<input type="checkbox" value="50대" name="club_ages" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(myClub.club_age,'5') }">
-		<input type="checkbox" value="50대" name="club_ages">
-		</c:if>
-		<span class="checkmark-sq"></span>
-	</label>
-	<label class="label-sq">
-		<span class="chip-txt">60대</span>
-		<c:if test="${fn:contains(myClub.club_age,'6') }">
-		<input type="checkbox" value="60대" name="club_ages" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(myClub.club_age,'6') }">
-		<input type="checkbox" value="60대" name="club_ages">
-		</c:if>
-		<span class="checkmark-sq"></span>
-	</label>
-	<label class="label-sq">
-		<span class="chip-txt">70대</span>
-		<c:if test="${fn:contains(myClub.club_age,'7') }">
-		<input type="checkbox" value="70대" name="club_ages" checked="checked">
-		</c:if>
-		<c:if test="${!fn:contains(myClub.club_age,'7') }">
-		<input type="checkbox" value="70대" name="club_ages">
-		</c:if>
-		<span class="checkmark-sq"></span>
-	</label>
-</div>
-<hr>
-
-<div class="row uni-em">
-	<!-- 유니폼 색상 -->
-	<div class="half_col" id="uniform_div">
-		<div class="row color-view">
-			<i class="fas fa-tshirt uni-view" style="color:${myClub.club_color}"></i>
-		</div>
+<ul class="ul-list non-border-btm">
+	<li class="li-list">
 		<div class="row">
-			<button class="chip-btn" id="color-btn" >색상 선택</button>
-			<input class="input-field" type="text" name="club_color" id="club_color" value="${myClub.club_color }" placeholder="유니폼 색상 선택" style="display:none">
+			<div class="autocomplete input-container col">
+				<span class="icon material-icons">sports_soccer</span>
+				<input class="input-field" type="text" name="club_name" id="club_name" placeholder="팀 이름 입력" autocomplete="off" value="${myClub.club_name }" onkeyup="removeWhiteSpace(this)">
+			</div>
 		</div>
-	</div>
-	<!-- 엠블럼 -->
-	<div class="half_col">
-		<div class="row">
-			<c:if test="${ myClub.filename eq 'undefined' }">
-			<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" id="img-pre">
-			</c:if>
-			<c:if test="${ myClub.filename ne 'undefined' }">
-			<img src="imageView.do?club_num=${myClub.club_num}" alt="${myClub.filename }"id="img-pre">
-			</c:if>
+		<div class="row"><div class="col"><span class="msg" id="club_name_msg"></span></div></div>
+	</li>
+	<li class="li-list">
+	<div class="row">
+		<div class="autocomplete input-container col">
+			<i class="fas fa-map-marked-alt icon"></i>
+			<input class="input-field" type="text" name="club_loc" id="club_loc" value="${myClub.club_loc }"placeholder="주 활동 구장 검색" autocomplete="off">
 		</div>
-		<div class="row">
-			<label for="club_img" class="file-label">
-				<span id="emblem-btn">엠블럼 설정</span>
-				<input type="file" accept="image/*" class="input-field" name="club_img" id="club_img" alt="" style="display:none">
+			<input type="hidden" name="club_locX" id="club_locX" value="${myClub.club_locX }">
+			<input type="hidden" name="club_locY" id="club_locY" value="${myClub.club_locY }">
+			<input type="hidden" name="club_address" id="club_address" value="${myClub.club_address }">
+		</div>
+		<div class="row"><div class="col"><span class="msg" id="club_loc_msg"></span></div></div>
+	</li>
+	<li class="li-list">
+		<span class="input-label">주 연령대 선택(복수 선택 가능)</span>
+		<div class="row centered-padding margin-m-top">
+			<label class="label-sq">
+				<span class="chip-txt">20대</span>
+				<c:if test="${fn:contains(myClub.club_age,'2') }">
+				<input type="checkbox" value="20대" name="club_ages" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(myClub.club_age,'2') }">
+				<input type="checkbox" value="20대" name="club_ages">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label>
+			<label class="label-sq">
+				<span class="chip-txt">30대</span>
+				<c:if test="${fn:contains(myClub.club_age,'3') }">
+				<input type="checkbox" value="30대" name="club_ages" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(myClub.club_age,'3') }">
+				<input type="checkbox" value="30대" name="club_ages">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label>
+			<label class="label-sq">
+				<span class="chip-txt">40대</span>
+				<c:if test="${fn:contains(myClub.club_age,'4') }">
+				<input type="checkbox" value="40대" name="club_ages" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(myClub.club_age,'4') }">
+				<input type="checkbox" value="40대" name="club_ages">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label>
+			<label class="label-sq">
+				<span class="chip-txt">50대</span>
+				<c:if test="${fn:contains(myClub.club_age,'5') }">
+				<input type="checkbox" value="50대" name="club_ages" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(myClub.club_age,'5') }">
+				<input type="checkbox" value="50대" name="club_ages">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label>
+			<label class="label-sq">
+				<span class="chip-txt">60대</span>
+				<c:if test="${fn:contains(myClub.club_age,'6') }">
+				<input type="checkbox" value="60대" name="club_ages" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(myClub.club_age,'6') }">
+				<input type="checkbox" value="60대" name="club_ages">
+				</c:if>
+				<span class="checkmark-sq"></span>
+			</label>
+			<label class="label-sq">
+				<span class="chip-txt">70대</span>
+				<c:if test="${fn:contains(myClub.club_age,'7') }">
+				<input type="checkbox" value="70대" name="club_ages" checked="checked">
+				</c:if>
+				<c:if test="${!fn:contains(myClub.club_age,'7') }">
+				<input type="checkbox" value="70대" name="club_ages">
+				</c:if>
+				<span class="checkmark-sq"></span>
 			</label>
 		</div>
-	</div>
-</div>
-<hr class="hr">
-<div class="row centered-padding">
-	<div class="text input-container col">
-		<textarea class="detail" id="club_detail" name="club_detail" placeholder="팀 소개글 입력">${myClub.club_detail }</textarea>
-	</div>
-</div>
-<hr class="hr">
+	</li>
+	<li class="li-list">
+		<div class="row uni-em">
+			<!-- 유니폼 색상 -->
+			<div class="half_col" id="uniform_div">
+				<div class="row color-view">
+					<i class="fas fa-tshirt uni-view" style="color:${myClub.club_color}"></i>
+				</div>
+				<div class="row">
+					<button class="chip-btn" id="color-btn" >색상 선택</button>
+					<input class="input-field" type="text" name="club_color" id="club_color" value="${myClub.club_color }" placeholder="유니폼 색상 선택" style="display:none">
+				</div>
+			</div>
+			<!-- 엠블럼 -->
+			<div class="half_col">
+				<div class="row">
+					<c:if test="${ myClub.filename eq 'undefined' }">
+					<img src="${pageContext.request.contextPath }/resources/images/blank_emblem.png" id="img-pre">
+					</c:if>
+					<c:if test="${ myClub.filename ne 'undefined' }">
+					<img src="imageView.do?club_num=${myClub.club_num}" alt="${myClub.filename }"id="img-pre">
+					</c:if>
+				</div>
+				<div class="row">
+					<label for="club_img" class="file-label">
+						<span id="emblem-btn">엠블럼 설정</span>
+						<input type="file" accept="image/*" class="input-field" name="club_img" id="club_img" alt="" style="display:none">
+					</label>
+				</div>
+			</div>
+		</div>
+	</li>
+	<li class="li-list">
+		<div class="row centered-padding">
+			<div class="text input-container col">
+				<textarea class="detail" id="club_detail" name="club_detail" placeholder="팀 소개글 입력">${myClub.club_detail }</textarea>
+			</div>
+		</div>
+	</li>
+</ul>
+
 </form:form>
 
 <!-- The Modal -->
